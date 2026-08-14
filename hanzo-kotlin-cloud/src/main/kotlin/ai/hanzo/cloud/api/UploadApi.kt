@@ -56,8 +56,8 @@ class UploadApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Upload() : Unit {
-        val localVarResponse = postV1UploadWithHttpInfo()
+    fun postUpload() : Unit {
+        val localVarResponse = postUploadWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class UploadApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1UploadWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1UploadRequestConfig()
+    fun postUploadWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postUploadRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class UploadApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Upload
+     * To obtain the request config of the operation postUpload
      *
      * @return RequestConfig
      */
-    fun postV1UploadRequestConfig() : RequestConfig<Unit> {
+    fun postUploadRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

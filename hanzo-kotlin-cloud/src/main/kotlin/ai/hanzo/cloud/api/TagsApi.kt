@@ -58,8 +58,8 @@ class TagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Tags() : TagConfig {
-        val localVarResponse = getV1TagsWithHttpInfo()
+    fun getTags() : TagConfig {
+        val localVarResponse = getTagsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TagConfig
@@ -86,8 +86,8 @@ class TagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TagsWithHttpInfo() : ApiResponse<TagConfig?> {
-        val localVariableConfig = getV1TagsRequestConfig()
+    fun getTagsWithHttpInfo() : ApiResponse<TagConfig?> {
+        val localVariableConfig = getTagsRequestConfig()
 
         return request<Unit, TagConfig>(
             localVariableConfig
@@ -95,11 +95,11 @@ class TagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1Tags
+     * To obtain the request config of the operation getTags
      *
      * @return RequestConfig
      */
-    fun getV1TagsRequestConfig() : RequestConfig<Unit> {
+    fun getTagsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

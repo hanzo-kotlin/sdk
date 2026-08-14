@@ -61,8 +61,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1S3BucketsByBucket(bucket: kotlin.String) : Unit {
-        val localVarResponse = deleteV1S3BucketsByBucketWithHttpInfo(bucket = bucket)
+    fun deleteS3BucketsByBucket(bucket: kotlin.String) : Unit {
+        val localVarResponse = deleteS3BucketsByBucketWithHttpInfo(bucket = bucket)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -89,8 +89,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1S3BucketsByBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1S3BucketsByBucketRequestConfig(bucket = bucket)
+    fun deleteS3BucketsByBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteS3BucketsByBucketRequestConfig(bucket = bucket)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +98,12 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1S3BucketsByBucket
+     * To obtain the request config of the operation deleteS3BucketsByBucket
      *
      * @param bucket 
      * @return RequestConfig
      */
-    fun deleteV1S3BucketsByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
+    fun deleteS3BucketsByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -132,8 +132,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1S3BucketsByBucketObjectsByWildcard1(bucket: kotlin.String, wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteV1S3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket = bucket, wildcard1 = wildcard1)
+    fun deleteS3BucketsByBucketObjectsByWildcard1(bucket: kotlin.String, wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteS3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket = bucket, wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -161,8 +161,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1S3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket: kotlin.String, wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1S3BucketsByBucketObjectsByWildcard1RequestConfig(bucket = bucket, wildcard1 = wildcard1)
+    fun deleteS3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket: kotlin.String, wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteS3BucketsByBucketObjectsByWildcard1RequestConfig(bucket = bucket, wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -170,13 +170,13 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1S3BucketsByBucketObjectsByWildcard1
+     * To obtain the request config of the operation deleteS3BucketsByBucketObjectsByWildcard1
      *
      * @param bucket 
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteV1S3BucketsByBucketObjectsByWildcard1RequestConfig(bucket: kotlin.String, wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteS3BucketsByBucketObjectsByWildcard1RequestConfig(bucket: kotlin.String, wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -204,8 +204,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1S3ByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1S3ByNameWithHttpInfo(name = name)
+    fun deleteS3ByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteS3ByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -232,8 +232,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1S3ByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1S3ByNameRequestConfig(name = name)
+    fun deleteS3ByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteS3ByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -241,12 +241,12 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1S3ByName
+     * To obtain the request config of the operation deleteS3ByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun deleteV1S3ByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteS3ByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -274,8 +274,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1S3() : kotlin.collections.List<ProvisionedSummary> {
-        val localVarResponse = getV1S3WithHttpInfo()
+    fun getS3() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getS3WithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
@@ -302,8 +302,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1S3WithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
-        val localVariableConfig = getV1S3RequestConfig()
+    fun getS3WithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getS3RequestConfig()
 
         return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
@@ -311,11 +311,11 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1S3
+     * To obtain the request config of the operation getS3
      *
      * @return RequestConfig
      */
-    fun getV1S3RequestConfig() : RequestConfig<Unit> {
+    fun getS3RequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -343,8 +343,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1S3Buckets() : Unit {
-        val localVarResponse = getV1S3BucketsWithHttpInfo()
+    fun getS3Buckets() : Unit {
+        val localVarResponse = getS3BucketsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -370,8 +370,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1S3BucketsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1S3BucketsRequestConfig()
+    fun getS3BucketsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getS3BucketsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -379,11 +379,11 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1S3Buckets
+     * To obtain the request config of the operation getS3Buckets
      *
      * @return RequestConfig
      */
-    fun getV1S3BucketsRequestConfig() : RequestConfig<Unit> {
+    fun getS3BucketsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -411,8 +411,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1S3BucketsByBucketObjects(bucket: kotlin.String) : Unit {
-        val localVarResponse = getV1S3BucketsByBucketObjectsWithHttpInfo(bucket = bucket)
+    fun getS3BucketsByBucketObjects(bucket: kotlin.String) : Unit {
+        val localVarResponse = getS3BucketsByBucketObjectsWithHttpInfo(bucket = bucket)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -439,8 +439,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1S3BucketsByBucketObjectsWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1S3BucketsByBucketObjectsRequestConfig(bucket = bucket)
+    fun getS3BucketsByBucketObjectsWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getS3BucketsByBucketObjectsRequestConfig(bucket = bucket)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -448,12 +448,12 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1S3BucketsByBucketObjects
+     * To obtain the request config of the operation getS3BucketsByBucketObjects
      *
      * @param bucket 
      * @return RequestConfig
      */
-    fun getV1S3BucketsByBucketObjectsRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
+    fun getS3BucketsByBucketObjectsRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -482,8 +482,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1S3BucketsByBucketObjectsByWildcard1(bucket: kotlin.String, wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1S3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket = bucket, wildcard1 = wildcard1)
+    fun getS3BucketsByBucketObjectsByWildcard1(bucket: kotlin.String, wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getS3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket = bucket, wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -511,8 +511,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1S3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket: kotlin.String, wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1S3BucketsByBucketObjectsByWildcard1RequestConfig(bucket = bucket, wildcard1 = wildcard1)
+    fun getS3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket: kotlin.String, wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getS3BucketsByBucketObjectsByWildcard1RequestConfig(bucket = bucket, wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -520,13 +520,13 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1S3BucketsByBucketObjectsByWildcard1
+     * To obtain the request config of the operation getS3BucketsByBucketObjectsByWildcard1
      *
      * @param bucket 
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1S3BucketsByBucketObjectsByWildcard1RequestConfig(bucket: kotlin.String, wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getS3BucketsByBucketObjectsByWildcard1RequestConfig(bucket: kotlin.String, wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -555,8 +555,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1S3ByName(name: kotlin.String) : ProvisionedResource {
-        val localVarResponse = getV1S3ByNameWithHttpInfo(name = name)
+    fun getS3ByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getS3ByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
@@ -584,8 +584,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1S3ByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
-        val localVariableConfig = getV1S3ByNameRequestConfig(name = name)
+    fun getS3ByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getS3ByNameRequestConfig(name = name)
 
         return request<Unit, ProvisionedResource>(
             localVariableConfig
@@ -593,12 +593,12 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1S3ByName
+     * To obtain the request config of the operation getS3ByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun getV1S3ByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getS3ByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -626,8 +626,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1S3Health() : Unit {
-        val localVarResponse = getV1S3HealthWithHttpInfo()
+    fun getS3Health() : Unit {
+        val localVarResponse = getS3HealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -653,8 +653,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1S3HealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1S3HealthRequestConfig()
+    fun getS3HealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getS3HealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -662,11 +662,11 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1S3Health
+     * To obtain the request config of the operation getS3Health
      *
      * @return RequestConfig
      */
-    fun getV1S3HealthRequestConfig() : RequestConfig<Unit> {
+    fun getS3HealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -695,8 +695,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1S3(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
-        val localVarResponse = postV1S3WithHttpInfo(provisionRequest = provisionRequest)
+    fun postS3(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postS3WithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
@@ -724,8 +724,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1S3WithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
-        val localVariableConfig = postV1S3RequestConfig(provisionRequest = provisionRequest)
+    fun postS3WithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postS3RequestConfig(provisionRequest = provisionRequest)
 
         return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
@@ -733,12 +733,12 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1S3
+     * To obtain the request config of the operation postS3
      *
      * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun postV1S3RequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+    fun postS3RequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
         val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -767,8 +767,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1S3Buckets() : Unit {
-        val localVarResponse = postV1S3BucketsWithHttpInfo()
+    fun postS3Buckets() : Unit {
+        val localVarResponse = postS3BucketsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -794,8 +794,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1S3BucketsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1S3BucketsRequestConfig()
+    fun postS3BucketsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postS3BucketsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -803,11 +803,11 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1S3Buckets
+     * To obtain the request config of the operation postS3Buckets
      *
      * @return RequestConfig
      */
-    fun postV1S3BucketsRequestConfig() : RequestConfig<Unit> {
+    fun postS3BucketsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -835,8 +835,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1S3BucketsByBucketObjects(bucket: kotlin.String) : Unit {
-        val localVarResponse = postV1S3BucketsByBucketObjectsWithHttpInfo(bucket = bucket)
+    fun postS3BucketsByBucketObjects(bucket: kotlin.String) : Unit {
+        val localVarResponse = postS3BucketsByBucketObjectsWithHttpInfo(bucket = bucket)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -863,8 +863,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1S3BucketsByBucketObjectsWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1S3BucketsByBucketObjectsRequestConfig(bucket = bucket)
+    fun postS3BucketsByBucketObjectsWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postS3BucketsByBucketObjectsRequestConfig(bucket = bucket)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -872,12 +872,12 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1S3BucketsByBucketObjects
+     * To obtain the request config of the operation postS3BucketsByBucketObjects
      *
      * @param bucket 
      * @return RequestConfig
      */
-    fun postV1S3BucketsByBucketObjectsRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
+    fun postS3BucketsByBucketObjectsRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

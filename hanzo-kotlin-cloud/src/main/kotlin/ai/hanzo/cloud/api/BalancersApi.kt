@@ -60,8 +60,8 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1BalancersById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1BalancersByIdWithHttpInfo(id = id)
+    fun deleteBalancersById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteBalancersByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -88,8 +88,8 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1BalancersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1BalancersByIdRequestConfig(id = id)
+    fun deleteBalancersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteBalancersByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -97,12 +97,12 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1BalancersById
+     * To obtain the request config of the operation deleteBalancersById
      *
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
      * @return RequestConfig
      */
-    fun deleteV1BalancersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteBalancersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -130,8 +130,8 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Balancers() : LbList {
-        val localVarResponse = getV1BalancersWithHttpInfo()
+    fun getBalancers() : LbList {
+        val localVarResponse = getBalancersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LbList
@@ -158,8 +158,8 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BalancersWithHttpInfo() : ApiResponse<LbList?> {
-        val localVariableConfig = getV1BalancersRequestConfig()
+    fun getBalancersWithHttpInfo() : ApiResponse<LbList?> {
+        val localVariableConfig = getBalancersRequestConfig()
 
         return request<Unit, LbList>(
             localVariableConfig
@@ -167,11 +167,11 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1Balancers
+     * To obtain the request config of the operation getBalancers
      *
      * @return RequestConfig
      */
-    fun getV1BalancersRequestConfig() : RequestConfig<Unit> {
+    fun getBalancersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -201,8 +201,8 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BalancersById(id: kotlin.String) : LbView {
-        val localVarResponse = getV1BalancersByIdWithHttpInfo(id = id)
+    fun getBalancersById(id: kotlin.String) : LbView {
+        val localVarResponse = getBalancersByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LbView
@@ -230,8 +230,8 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BalancersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<LbView?> {
-        val localVariableConfig = getV1BalancersByIdRequestConfig(id = id)
+    fun getBalancersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<LbView?> {
+        val localVariableConfig = getBalancersByIdRequestConfig(id = id)
 
         return request<Unit, LbView>(
             localVariableConfig
@@ -239,12 +239,12 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1BalancersById
+     * To obtain the request config of the operation getBalancersById
      *
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
      * @return RequestConfig
      */
-    fun getV1BalancersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getBalancersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -274,8 +274,8 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Balancers(createLBReq: CreateLBReq) : LbView {
-        val localVarResponse = postV1BalancersWithHttpInfo(createLBReq = createLBReq)
+    fun postBalancers(createLBReq: CreateLBReq) : LbView {
+        val localVarResponse = postBalancersWithHttpInfo(createLBReq = createLBReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LbView
@@ -303,8 +303,8 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BalancersWithHttpInfo(createLBReq: CreateLBReq) : ApiResponse<LbView?> {
-        val localVariableConfig = postV1BalancersRequestConfig(createLBReq = createLBReq)
+    fun postBalancersWithHttpInfo(createLBReq: CreateLBReq) : ApiResponse<LbView?> {
+        val localVariableConfig = postBalancersRequestConfig(createLBReq = createLBReq)
 
         return request<CreateLBReq, LbView>(
             localVariableConfig
@@ -312,12 +312,12 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1Balancers
+     * To obtain the request config of the operation postBalancers
      *
      * @param createLBReq 
      * @return RequestConfig
      */
-    fun postV1BalancersRequestConfig(createLBReq: CreateLBReq) : RequestConfig<CreateLBReq> {
+    fun postBalancersRequestConfig(createLBReq: CreateLBReq) : RequestConfig<CreateLBReq> {
         val localVariableBody = createLBReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

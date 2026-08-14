@@ -59,8 +59,8 @@ class X402Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1X402SettlementsById(id: kotlin.String) : Receipt {
-        val localVarResponse = getV1X402SettlementsByIdWithHttpInfo(id = id)
+    fun getX402SettlementsById(id: kotlin.String) : Receipt {
+        val localVarResponse = getX402SettlementsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Receipt
@@ -88,8 +88,8 @@ class X402Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1X402SettlementsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Receipt?> {
-        val localVariableConfig = getV1X402SettlementsByIdRequestConfig(id = id)
+    fun getX402SettlementsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Receipt?> {
+        val localVariableConfig = getX402SettlementsByIdRequestConfig(id = id)
 
         return request<Unit, Receipt>(
             localVariableConfig
@@ -97,12 +97,12 @@ class X402Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1X402SettlementsById
+     * To obtain the request config of the operation getX402SettlementsById
      *
      * @param id ID is the settlement id from the URL — the deterministic keccak(from|nonce) key an x402 receipt is issued under (the &#x60;id&#x60; field of a Receipt, and the &#x60;transaction&#x60; of the SettlementResponse on the PAYMENT-RESPONSE header a paid request answers with).
      * @return RequestConfig
      */
-    fun getV1X402SettlementsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getX402SettlementsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

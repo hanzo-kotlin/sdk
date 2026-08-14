@@ -62,8 +62,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1SyncById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1SyncByIdWithHttpInfo(id = id)
+    fun deleteSyncById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteSyncByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -90,8 +90,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1SyncByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1SyncByIdRequestConfig(id = id)
+    fun deleteSyncByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteSyncByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -99,12 +99,12 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1SyncById
+     * To obtain the request config of the operation deleteSyncById
      *
      * @param id ID is the sync to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1SyncByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteSyncByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -132,8 +132,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Sync() : SyncList {
-        val localVarResponse = getV1SyncWithHttpInfo()
+    fun getSync() : SyncList {
+        val localVarResponse = getSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SyncList
@@ -160,8 +160,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SyncWithHttpInfo() : ApiResponse<SyncList?> {
-        val localVariableConfig = getV1SyncRequestConfig()
+    fun getSyncWithHttpInfo() : ApiResponse<SyncList?> {
+        val localVariableConfig = getSyncRequestConfig()
 
         return request<Unit, SyncList>(
             localVariableConfig
@@ -169,11 +169,11 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1Sync
+     * To obtain the request config of the operation getSync
      *
      * @return RequestConfig
      */
-    fun getV1SyncRequestConfig() : RequestConfig<Unit> {
+    fun getSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -203,8 +203,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SyncById(id: kotlin.String) : SyncView {
-        val localVarResponse = getV1SyncByIdWithHttpInfo(id = id)
+    fun getSyncById(id: kotlin.String) : SyncView {
+        val localVarResponse = getSyncByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SyncView
@@ -232,8 +232,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SyncByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SyncView?> {
-        val localVariableConfig = getV1SyncByIdRequestConfig(id = id)
+    fun getSyncByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SyncView?> {
+        val localVariableConfig = getSyncByIdRequestConfig(id = id)
 
         return request<Unit, SyncView>(
             localVariableConfig
@@ -241,12 +241,12 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1SyncById
+     * To obtain the request config of the operation getSyncById
      *
      * @param id ID is the sync to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1SyncByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSyncByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -277,8 +277,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1SyncById(id: kotlin.String, patchSyncIn: PatchSyncIn) : SyncView {
-        val localVarResponse = patchV1SyncByIdWithHttpInfo(id = id, patchSyncIn = patchSyncIn)
+    fun patchSyncById(id: kotlin.String, patchSyncIn: PatchSyncIn) : SyncView {
+        val localVarResponse = patchSyncByIdWithHttpInfo(id = id, patchSyncIn = patchSyncIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SyncView
@@ -307,8 +307,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1SyncByIdWithHttpInfo(id: kotlin.String, patchSyncIn: PatchSyncIn) : ApiResponse<SyncView?> {
-        val localVariableConfig = patchV1SyncByIdRequestConfig(id = id, patchSyncIn = patchSyncIn)
+    fun patchSyncByIdWithHttpInfo(id: kotlin.String, patchSyncIn: PatchSyncIn) : ApiResponse<SyncView?> {
+        val localVariableConfig = patchSyncByIdRequestConfig(id = id, patchSyncIn = patchSyncIn)
 
         return request<PatchSyncIn, SyncView>(
             localVariableConfig
@@ -316,13 +316,13 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation patchV1SyncById
+     * To obtain the request config of the operation patchSyncById
      *
      * @param id ID is the sync to update, from the path.
      * @param patchSyncIn 
      * @return RequestConfig
      */
-    fun patchV1SyncByIdRequestConfig(id: kotlin.String, patchSyncIn: PatchSyncIn) : RequestConfig<PatchSyncIn> {
+    fun patchSyncByIdRequestConfig(id: kotlin.String, patchSyncIn: PatchSyncIn) : RequestConfig<PatchSyncIn> {
         val localVariableBody = patchSyncIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -353,8 +353,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Sync(syncReq: SyncReq) : SyncView {
-        val localVarResponse = postV1SyncWithHttpInfo(syncReq = syncReq)
+    fun postSync(syncReq: SyncReq) : SyncView {
+        val localVarResponse = postSyncWithHttpInfo(syncReq = syncReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SyncView
@@ -382,8 +382,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SyncWithHttpInfo(syncReq: SyncReq) : ApiResponse<SyncView?> {
-        val localVariableConfig = postV1SyncRequestConfig(syncReq = syncReq)
+    fun postSyncWithHttpInfo(syncReq: SyncReq) : ApiResponse<SyncView?> {
+        val localVariableConfig = postSyncRequestConfig(syncReq = syncReq)
 
         return request<SyncReq, SyncView>(
             localVariableConfig
@@ -391,12 +391,12 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1Sync
+     * To obtain the request config of the operation postSync
      *
      * @param syncReq 
      * @return RequestConfig
      */
-    fun postV1SyncRequestConfig(syncReq: SyncReq) : RequestConfig<SyncReq> {
+    fun postSyncRequestConfig(syncReq: SyncReq) : RequestConfig<SyncReq> {
         val localVariableBody = syncReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -427,8 +427,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SyncByIdRun(id: kotlin.String) : SyncQueued {
-        val localVarResponse = postV1SyncByIdRunWithHttpInfo(id = id)
+    fun postSyncByIdRun(id: kotlin.String) : SyncQueued {
+        val localVarResponse = postSyncByIdRunWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SyncQueued
@@ -456,8 +456,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SyncByIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<SyncQueued?> {
-        val localVariableConfig = postV1SyncByIdRunRequestConfig(id = id)
+    fun postSyncByIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<SyncQueued?> {
+        val localVariableConfig = postSyncByIdRunRequestConfig(id = id)
 
         return request<Unit, SyncQueued>(
             localVariableConfig
@@ -465,12 +465,12 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1SyncByIdRun
+     * To obtain the request config of the operation postSyncByIdRun
      *
      * @param id ID is the sync to act on, from the path.
      * @return RequestConfig
      */
-    fun postV1SyncByIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postSyncByIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

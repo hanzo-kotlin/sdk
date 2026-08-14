@@ -64,8 +64,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1HelpArticles(category: kotlin.String? = null, limit: kotlin.Int? = null) : HelpArticleList {
-        val localVarResponse = getV1HelpArticlesWithHttpInfo(category = category, limit = limit)
+    fun getHelpArticles(category: kotlin.String? = null, limit: kotlin.Int? = null) : HelpArticleList {
+        val localVarResponse = getHelpArticlesWithHttpInfo(category = category, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as HelpArticleList
@@ -94,8 +94,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1HelpArticlesWithHttpInfo(category: kotlin.String?, limit: kotlin.Int?) : ApiResponse<HelpArticleList?> {
-        val localVariableConfig = getV1HelpArticlesRequestConfig(category = category, limit = limit)
+    fun getHelpArticlesWithHttpInfo(category: kotlin.String?, limit: kotlin.Int?) : ApiResponse<HelpArticleList?> {
+        val localVariableConfig = getHelpArticlesRequestConfig(category = category, limit = limit)
 
         return request<Unit, HelpArticleList>(
             localVariableConfig
@@ -103,13 +103,13 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1HelpArticles
+     * To obtain the request config of the operation getHelpArticles
      *
      * @param category Category narrows the list to one knowledge-base section, matched against the article&#39;s category by exact name. Empty lists every section. (optional)
      * @param limit Limit caps how many articles are returned. Anything that is not a positive integer uses 50, and values above 200 are clamped to 200. (optional)
      * @return RequestConfig
      */
-    fun getV1HelpArticlesRequestConfig(category: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getHelpArticlesRequestConfig(category: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -147,8 +147,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1HelpArticlesBySlug(slug: kotlin.String) : HelpArticle {
-        val localVarResponse = getV1HelpArticlesBySlugWithHttpInfo(slug = slug)
+    fun getHelpArticlesBySlug(slug: kotlin.String) : HelpArticle {
+        val localVarResponse = getHelpArticlesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as HelpArticle
@@ -176,8 +176,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1HelpArticlesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<HelpArticle?> {
-        val localVariableConfig = getV1HelpArticlesBySlugRequestConfig(slug = slug)
+    fun getHelpArticlesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<HelpArticle?> {
+        val localVariableConfig = getHelpArticlesBySlugRequestConfig(slug = slug)
 
         return request<Unit, HelpArticle>(
             localVariableConfig
@@ -185,12 +185,12 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1HelpArticlesBySlug
+     * To obtain the request config of the operation getHelpArticlesBySlug
      *
      * @param slug Slug is the article&#39;s public identifier, from the path. It IS the document name in the help center&#39;s store.
      * @return RequestConfig
      */
-    fun getV1HelpArticlesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getHelpArticlesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -219,8 +219,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1HelpCategories() : HelpCategoryList {
-        val localVarResponse = getV1HelpCategoriesWithHttpInfo()
+    fun getHelpCategories() : HelpCategoryList {
+        val localVarResponse = getHelpCategoriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as HelpCategoryList
@@ -247,8 +247,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1HelpCategoriesWithHttpInfo() : ApiResponse<HelpCategoryList?> {
-        val localVariableConfig = getV1HelpCategoriesRequestConfig()
+    fun getHelpCategoriesWithHttpInfo() : ApiResponse<HelpCategoryList?> {
+        val localVariableConfig = getHelpCategoriesRequestConfig()
 
         return request<Unit, HelpCategoryList>(
             localVariableConfig
@@ -256,11 +256,11 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1HelpCategories
+     * To obtain the request config of the operation getHelpCategories
      *
      * @return RequestConfig
      */
-    fun getV1HelpCategoriesRequestConfig() : RequestConfig<Unit> {
+    fun getHelpCategoriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -290,8 +290,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1HelpTickets(helpTicketIntake: HelpTicketIntake) : HelpTicketFiled {
-        val localVarResponse = postV1HelpTicketsWithHttpInfo(helpTicketIntake = helpTicketIntake)
+    fun postHelpTickets(helpTicketIntake: HelpTicketIntake) : HelpTicketFiled {
+        val localVarResponse = postHelpTicketsWithHttpInfo(helpTicketIntake = helpTicketIntake)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as HelpTicketFiled
@@ -319,8 +319,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1HelpTicketsWithHttpInfo(helpTicketIntake: HelpTicketIntake) : ApiResponse<HelpTicketFiled?> {
-        val localVariableConfig = postV1HelpTicketsRequestConfig(helpTicketIntake = helpTicketIntake)
+    fun postHelpTicketsWithHttpInfo(helpTicketIntake: HelpTicketIntake) : ApiResponse<HelpTicketFiled?> {
+        val localVariableConfig = postHelpTicketsRequestConfig(helpTicketIntake = helpTicketIntake)
 
         return request<HelpTicketIntake, HelpTicketFiled>(
             localVariableConfig
@@ -328,12 +328,12 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1HelpTickets
+     * To obtain the request config of the operation postHelpTickets
      *
      * @param helpTicketIntake 
      * @return RequestConfig
      */
-    fun postV1HelpTicketsRequestConfig(helpTicketIntake: HelpTicketIntake) : RequestConfig<HelpTicketIntake> {
+    fun postHelpTicketsRequestConfig(helpTicketIntake: HelpTicketIntake) : RequestConfig<HelpTicketIntake> {
         val localVariableBody = helpTicketIntake
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

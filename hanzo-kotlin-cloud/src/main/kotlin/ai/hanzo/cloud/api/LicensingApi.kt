@@ -19,19 +19,19 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.Artifact
-import ai.hanzo.cloud.model.FingerprintRequest
-import ai.hanzo.cloud.model.FingerprintResponse
-import ai.hanzo.cloud.model.HealthView
-import ai.hanzo.cloud.model.IssueRequest
-import ai.hanzo.cloud.model.IssueResponse
-import ai.hanzo.cloud.model.PubkeyView
-import ai.hanzo.cloud.model.Release
-import ai.hanzo.cloud.model.ReleaseList
-import ai.hanzo.cloud.model.RevokeRequest
-import ai.hanzo.cloud.model.RevokeResponse
-import ai.hanzo.cloud.model.VerifyRequest
-import ai.hanzo.cloud.model.VerifyResponse
+import ai.hanzo.cloud.model.LicensingFingerprintRequest
+import ai.hanzo.cloud.model.LicensingFingerprintResponse
+import ai.hanzo.cloud.model.LicensingHealthView
+import ai.hanzo.cloud.model.LicensingIssueRequest
+import ai.hanzo.cloud.model.LicensingIssueResponse
+import ai.hanzo.cloud.model.LicensingPubkeyView
+import ai.hanzo.cloud.model.LicensingRelease
+import ai.hanzo.cloud.model.LicensingReleaseAsset
+import ai.hanzo.cloud.model.LicensingReleaseList
+import ai.hanzo.cloud.model.LicensingRevokeRequest
+import ai.hanzo.cloud.model.LicensingRevokeResponse
+import ai.hanzo.cloud.model.LicensingVerifyRequest
+import ai.hanzo.cloud.model.LicensingVerifyResponse
 
 import com.google.gson.annotations.SerializedName
 
@@ -62,8 +62,9 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Download resolves a release to its artifact, gated on a valid license.
      * Download resolves a release to its artifact, gated on a valid license.  The gate is the LICENSE token, not the IAM bearer: being signed in is not permission to download a paid binary — holding a good license for it is. The token must verify against this deployment&#39;s public key, be unrevoked, be scoped to the release&#39;s app, and carry every feature the release requires. Present it as the &#x60;X-License-Token&#x60; header (preferred, since a header does not land in proxy logs) or as &#x60;?token&#x3D;&#x60;.  The response pairs the artifact URL with its cosign signature so the client verifies the binary BEFORE trusting it: a signed URL alone proves where the bytes came from, not what they are. A yanked release is 410 Gone.
      * @param release 
+     * @param xLicenseToken  (optional)
      * @param token  (optional)
-     * @return Artifact
+     * @return LicensingReleaseAsset
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -72,11 +73,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LicensingDownloadByRelease(release: kotlin.String, token: kotlin.String? = null) : Artifact {
-        val localVarResponse = getV1LicensingDownloadByReleaseWithHttpInfo(release = release, token = token)
+    fun getLicensingDownloadByRelease(release: kotlin.String, xLicenseToken: kotlin.String? = null, token: kotlin.String? = null) : LicensingReleaseAsset {
+        val localVarResponse = getLicensingDownloadByReleaseWithHttpInfo(release = release, xLicenseToken = xLicenseToken, token = token)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as Artifact
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingReleaseAsset
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -95,29 +96,31 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Download resolves a release to its artifact, gated on a valid license.
      * Download resolves a release to its artifact, gated on a valid license.  The gate is the LICENSE token, not the IAM bearer: being signed in is not permission to download a paid binary — holding a good license for it is. The token must verify against this deployment&#39;s public key, be unrevoked, be scoped to the release&#39;s app, and carry every feature the release requires. Present it as the &#x60;X-License-Token&#x60; header (preferred, since a header does not land in proxy logs) or as &#x60;?token&#x3D;&#x60;.  The response pairs the artifact URL with its cosign signature so the client verifies the binary BEFORE trusting it: a signed URL alone proves where the bytes came from, not what they are. A yanked release is 410 Gone.
      * @param release 
+     * @param xLicenseToken  (optional)
      * @param token  (optional)
-     * @return ApiResponse<Artifact?>
+     * @return ApiResponse<LicensingReleaseAsset?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LicensingDownloadByReleaseWithHttpInfo(release: kotlin.String, token: kotlin.String?) : ApiResponse<Artifact?> {
-        val localVariableConfig = getV1LicensingDownloadByReleaseRequestConfig(release = release, token = token)
+    fun getLicensingDownloadByReleaseWithHttpInfo(release: kotlin.String, xLicenseToken: kotlin.String?, token: kotlin.String?) : ApiResponse<LicensingReleaseAsset?> {
+        val localVariableConfig = getLicensingDownloadByReleaseRequestConfig(release = release, xLicenseToken = xLicenseToken, token = token)
 
-        return request<Unit, Artifact>(
+        return request<Unit, LicensingReleaseAsset>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1LicensingDownloadByRelease
+     * To obtain the request config of the operation getLicensingDownloadByRelease
      *
      * @param release 
+     * @param xLicenseToken  (optional)
      * @param token  (optional)
      * @return RequestConfig
      */
-    fun getV1LicensingDownloadByReleaseRequestConfig(release: kotlin.String, token: kotlin.String?) : RequestConfig<Unit> {
+    fun getLicensingDownloadByReleaseRequestConfig(release: kotlin.String, xLicenseToken: kotlin.String?, token: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -126,6 +129,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        xLicenseToken?.apply { localVariableHeaders["X-License-Token"] = this.toString() }
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
@@ -142,7 +146,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/licensing/healthz
      * Health reports which signer this deployment mints with, and in which env.
      * Health reports which signer this deployment mints with, and in which env.  It answers 200 whenever the process is up: there is nothing downstream to probe, since the KMS is reached only when a token is actually minted. Its value is the &#x60;signer&#x60; field — &#x60;\&quot;signer\&quot;:\&quot;local\&quot;&#x60; on a production host says that deployment is signing licenses with a development key, which is a misconfiguration worth paging on rather than a healthy 200.
-     * @return HealthView
+     * @return LicensingHealthView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -151,11 +155,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LicensingHealthz() : HealthView {
-        val localVarResponse = getV1LicensingHealthzWithHttpInfo()
+    fun getLicensingHealthz() : LicensingHealthView {
+        val localVarResponse = getLicensingHealthzWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as HealthView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingHealthView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -173,26 +177,26 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/licensing/healthz
      * Health reports which signer this deployment mints with, and in which env.
      * Health reports which signer this deployment mints with, and in which env.  It answers 200 whenever the process is up: there is nothing downstream to probe, since the KMS is reached only when a token is actually minted. Its value is the &#x60;signer&#x60; field — &#x60;\&quot;signer\&quot;:\&quot;local\&quot;&#x60; on a production host says that deployment is signing licenses with a development key, which is a misconfiguration worth paging on rather than a healthy 200.
-     * @return ApiResponse<HealthView?>
+     * @return ApiResponse<LicensingHealthView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LicensingHealthzWithHttpInfo() : ApiResponse<HealthView?> {
-        val localVariableConfig = getV1LicensingHealthzRequestConfig()
+    fun getLicensingHealthzWithHttpInfo() : ApiResponse<LicensingHealthView?> {
+        val localVariableConfig = getLicensingHealthzRequestConfig()
 
-        return request<Unit, HealthView>(
+        return request<Unit, LicensingHealthView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1LicensingHealthz
+     * To obtain the request config of the operation getLicensingHealthz
      *
      * @return RequestConfig
      */
-    fun getV1LicensingHealthzRequestConfig() : RequestConfig<Unit> {
+    fun getLicensingHealthzRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -212,7 +216,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/licensing/jwks
      * Pubkey publishes the Ed25519 PUBLIC verification key, at both /pubkey and /jwks.
      * Pubkey publishes the Ed25519 PUBLIC verification key, at both /pubkey and /jwks.  This is the only public-safe surface here and the reason the whole scheme works offline: the engine embeds or fetches this key once and then verifies every license itself, with no call home per launch. The private half never enters this process — it lives in the KMS — so nothing served here is a secret. &#x60;provider&#x60; names the KMS holding that half; &#x60;\&quot;local\&quot;&#x60; means a development key, and a token signed by one is not a production credential.
-     * @return PubkeyView
+     * @return LicensingPubkeyView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -221,11 +225,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LicensingJwks() : PubkeyView {
-        val localVarResponse = getV1LicensingJwksWithHttpInfo()
+    fun getLicensingJwks() : LicensingPubkeyView {
+        val localVarResponse = getLicensingJwksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PubkeyView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingPubkeyView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -243,26 +247,26 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/licensing/jwks
      * Pubkey publishes the Ed25519 PUBLIC verification key, at both /pubkey and /jwks.
      * Pubkey publishes the Ed25519 PUBLIC verification key, at both /pubkey and /jwks.  This is the only public-safe surface here and the reason the whole scheme works offline: the engine embeds or fetches this key once and then verifies every license itself, with no call home per launch. The private half never enters this process — it lives in the KMS — so nothing served here is a secret. &#x60;provider&#x60; names the KMS holding that half; &#x60;\&quot;local\&quot;&#x60; means a development key, and a token signed by one is not a production credential.
-     * @return ApiResponse<PubkeyView?>
+     * @return ApiResponse<LicensingPubkeyView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LicensingJwksWithHttpInfo() : ApiResponse<PubkeyView?> {
-        val localVariableConfig = getV1LicensingJwksRequestConfig()
+    fun getLicensingJwksWithHttpInfo() : ApiResponse<LicensingPubkeyView?> {
+        val localVariableConfig = getLicensingJwksRequestConfig()
 
-        return request<Unit, PubkeyView>(
+        return request<Unit, LicensingPubkeyView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1LicensingJwks
+     * To obtain the request config of the operation getLicensingJwks
      *
      * @return RequestConfig
      */
-    fun getV1LicensingJwksRequestConfig() : RequestConfig<Unit> {
+    fun getLicensingJwksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -282,7 +286,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/licensing/pubkey
      * Pubkey publishes the Ed25519 PUBLIC verification key, at both /pubkey and /jwks.
      * Pubkey publishes the Ed25519 PUBLIC verification key, at both /pubkey and /jwks.  This is the only public-safe surface here and the reason the whole scheme works offline: the engine embeds or fetches this key once and then verifies every license itself, with no call home per launch. The private half never enters this process — it lives in the KMS — so nothing served here is a secret. &#x60;provider&#x60; names the KMS holding that half; &#x60;\&quot;local\&quot;&#x60; means a development key, and a token signed by one is not a production credential.
-     * @return PubkeyView
+     * @return LicensingPubkeyView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -291,11 +295,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LicensingPubkey() : PubkeyView {
-        val localVarResponse = getV1LicensingPubkeyWithHttpInfo()
+    fun getLicensingPubkey() : LicensingPubkeyView {
+        val localVarResponse = getLicensingPubkeyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PubkeyView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingPubkeyView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -313,26 +317,26 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/licensing/pubkey
      * Pubkey publishes the Ed25519 PUBLIC verification key, at both /pubkey and /jwks.
      * Pubkey publishes the Ed25519 PUBLIC verification key, at both /pubkey and /jwks.  This is the only public-safe surface here and the reason the whole scheme works offline: the engine embeds or fetches this key once and then verifies every license itself, with no call home per launch. The private half never enters this process — it lives in the KMS — so nothing served here is a secret. &#x60;provider&#x60; names the KMS holding that half; &#x60;\&quot;local\&quot;&#x60; means a development key, and a token signed by one is not a production credential.
-     * @return ApiResponse<PubkeyView?>
+     * @return ApiResponse<LicensingPubkeyView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LicensingPubkeyWithHttpInfo() : ApiResponse<PubkeyView?> {
-        val localVariableConfig = getV1LicensingPubkeyRequestConfig()
+    fun getLicensingPubkeyWithHttpInfo() : ApiResponse<LicensingPubkeyView?> {
+        val localVariableConfig = getLicensingPubkeyRequestConfig()
 
-        return request<Unit, PubkeyView>(
+        return request<Unit, LicensingPubkeyView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1LicensingPubkey
+     * To obtain the request config of the operation getLicensingPubkey
      *
      * @return RequestConfig
      */
-    fun getV1LicensingPubkeyRequestConfig() : RequestConfig<Unit> {
+    fun getLicensingPubkeyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -352,7 +356,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/licensing/releases
      * Lists the signed binary releases this deployment can serve.
      * Lists the signed binary releases this deployment can serve.  Metadata only, and no download URL: the artifact is behind GET /v1/licensing/download/{release}, which is gated on a valid license token. Knowing that a release exists is not permission to run it, which is why this list needs no license of its own.
-     * @return ReleaseList
+     * @return LicensingReleaseList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -361,11 +365,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LicensingReleases() : ReleaseList {
-        val localVarResponse = getV1LicensingReleasesWithHttpInfo()
+    fun getLicensingReleases() : LicensingReleaseList {
+        val localVarResponse = getLicensingReleasesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ReleaseList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingReleaseList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -383,26 +387,26 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/licensing/releases
      * Lists the signed binary releases this deployment can serve.
      * Lists the signed binary releases this deployment can serve.  Metadata only, and no download URL: the artifact is behind GET /v1/licensing/download/{release}, which is gated on a valid license token. Knowing that a release exists is not permission to run it, which is why this list needs no license of its own.
-     * @return ApiResponse<ReleaseList?>
+     * @return ApiResponse<LicensingReleaseList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LicensingReleasesWithHttpInfo() : ApiResponse<ReleaseList?> {
-        val localVariableConfig = getV1LicensingReleasesRequestConfig()
+    fun getLicensingReleasesWithHttpInfo() : ApiResponse<LicensingReleaseList?> {
+        val localVariableConfig = getLicensingReleasesRequestConfig()
 
-        return request<Unit, ReleaseList>(
+        return request<Unit, LicensingReleaseList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1LicensingReleases
+     * To obtain the request config of the operation getLicensingReleases
      *
      * @return RequestConfig
      */
-    fun getV1LicensingReleasesRequestConfig() : RequestConfig<Unit> {
+    fun getLicensingReleasesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -423,7 +427,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Reads one release&#39;s metadata: its product, version, platform and the cosign material a client verifies the binary against.
      * Reads one release&#39;s metadata: its product, version, platform and the cosign material a client verifies the binary against.  An unknown id is 404. Like the list, this is metadata only — the bytes are behind the license-gated download.
      * @param release 
-     * @return Release
+     * @return LicensingRelease
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -432,11 +436,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LicensingReleasesByRelease(release: kotlin.String) : Release {
-        val localVarResponse = getV1LicensingReleasesByReleaseWithHttpInfo(release = release)
+    fun getLicensingReleasesByRelease(release: kotlin.String) : LicensingRelease {
+        val localVarResponse = getLicensingReleasesByReleaseWithHttpInfo(release = release)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as Release
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingRelease
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -455,27 +459,27 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Reads one release&#39;s metadata: its product, version, platform and the cosign material a client verifies the binary against.
      * Reads one release&#39;s metadata: its product, version, platform and the cosign material a client verifies the binary against.  An unknown id is 404. Like the list, this is metadata only — the bytes are behind the license-gated download.
      * @param release 
-     * @return ApiResponse<Release?>
+     * @return ApiResponse<LicensingRelease?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LicensingReleasesByReleaseWithHttpInfo(release: kotlin.String) : ApiResponse<Release?> {
-        val localVariableConfig = getV1LicensingReleasesByReleaseRequestConfig(release = release)
+    fun getLicensingReleasesByReleaseWithHttpInfo(release: kotlin.String) : ApiResponse<LicensingRelease?> {
+        val localVariableConfig = getLicensingReleasesByReleaseRequestConfig(release = release)
 
-        return request<Unit, Release>(
+        return request<Unit, LicensingRelease>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1LicensingReleasesByRelease
+     * To obtain the request config of the operation getLicensingReleasesByRelease
      *
      * @param release 
      * @return RequestConfig
      */
-    fun getV1LicensingReleasesByReleaseRequestConfig(release: kotlin.String) : RequestConfig<Unit> {
+    fun getLicensingReleasesByReleaseRequestConfig(release: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -495,8 +499,8 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/fingerprint
      * Fingerprint turns raw device signals into the opaque value that binds a license to one machine.
      * Fingerprint turns raw device signals into the opaque value that binds a license to one machine.  This is the anti-copy step: the value returned here is folded into the signed token, so a token minted with it runs only on the device it was bound to. The derivation is one-way and salted — the signals are never stored and never echoed back — so the response is safe to persist client-side and pass to issue. Signals too weak to identify a machine (a hostname alone) are refused rather than turned into a binding that would collide with other machines.
-     * @param fingerprintRequest 
-     * @return FingerprintResponse
+     * @param licensingFingerprintRequest 
+     * @return LicensingFingerprintResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -505,11 +509,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LicensingFingerprint(fingerprintRequest: FingerprintRequest) : FingerprintResponse {
-        val localVarResponse = postV1LicensingFingerprintWithHttpInfo(fingerprintRequest = fingerprintRequest)
+    fun postLicensingFingerprint(licensingFingerprintRequest: LicensingFingerprintRequest) : LicensingFingerprintResponse {
+        val localVarResponse = postLicensingFingerprintWithHttpInfo(licensingFingerprintRequest = licensingFingerprintRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as FingerprintResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingFingerprintResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -527,29 +531,29 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/fingerprint
      * Fingerprint turns raw device signals into the opaque value that binds a license to one machine.
      * Fingerprint turns raw device signals into the opaque value that binds a license to one machine.  This is the anti-copy step: the value returned here is folded into the signed token, so a token minted with it runs only on the device it was bound to. The derivation is one-way and salted — the signals are never stored and never echoed back — so the response is safe to persist client-side and pass to issue. Signals too weak to identify a machine (a hostname alone) are refused rather than turned into a binding that would collide with other machines.
-     * @param fingerprintRequest 
-     * @return ApiResponse<FingerprintResponse?>
+     * @param licensingFingerprintRequest 
+     * @return ApiResponse<LicensingFingerprintResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LicensingFingerprintWithHttpInfo(fingerprintRequest: FingerprintRequest) : ApiResponse<FingerprintResponse?> {
-        val localVariableConfig = postV1LicensingFingerprintRequestConfig(fingerprintRequest = fingerprintRequest)
+    fun postLicensingFingerprintWithHttpInfo(licensingFingerprintRequest: LicensingFingerprintRequest) : ApiResponse<LicensingFingerprintResponse?> {
+        val localVariableConfig = postLicensingFingerprintRequestConfig(licensingFingerprintRequest = licensingFingerprintRequest)
 
-        return request<FingerprintRequest, FingerprintResponse>(
+        return request<LicensingFingerprintRequest, LicensingFingerprintResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1LicensingFingerprint
+     * To obtain the request config of the operation postLicensingFingerprint
      *
-     * @param fingerprintRequest 
+     * @param licensingFingerprintRequest 
      * @return RequestConfig
      */
-    fun postV1LicensingFingerprintRequestConfig(fingerprintRequest: FingerprintRequest) : RequestConfig<FingerprintRequest> {
-        val localVariableBody = fingerprintRequest
+    fun postLicensingFingerprintRequestConfig(licensingFingerprintRequest: LicensingFingerprintRequest) : RequestConfig<LicensingFingerprintRequest> {
+        val localVariableBody = licensingFingerprintRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -569,8 +573,8 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/issue
      * Issue mints a signed license token for a product the caller&#39;s org already pays for.
      * Issue mints a signed license token for a product the caller&#39;s org already pays for.  The order is the whole security argument: the caller is an IAM-validated principal, commerce is then asked whether that principal&#39;s ORG holds an ACTIVE entitlement for the product, and only then is a token signed — by the KMS, never by key material in this process. A product the org does not own answers 403 and no token. The signed features are the plan&#39;s features verbatim, so the engine enforces exactly what was bought, and the expiry is clamped to the entitlement&#39;s so a token cannot outlive the subscription that paid for it.  The token is the credential the engine runs on. Treat it as a secret.
-     * @param issueRequest 
-     * @return IssueResponse
+     * @param licensingIssueRequest 
+     * @return LicensingIssueResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -579,11 +583,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LicensingIssue(issueRequest: IssueRequest) : IssueResponse {
-        val localVarResponse = postV1LicensingIssueWithHttpInfo(issueRequest = issueRequest)
+    fun postLicensingIssue(licensingIssueRequest: LicensingIssueRequest) : LicensingIssueResponse {
+        val localVarResponse = postLicensingIssueWithHttpInfo(licensingIssueRequest = licensingIssueRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IssueResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingIssueResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -601,29 +605,29 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/issue
      * Issue mints a signed license token for a product the caller&#39;s org already pays for.
      * Issue mints a signed license token for a product the caller&#39;s org already pays for.  The order is the whole security argument: the caller is an IAM-validated principal, commerce is then asked whether that principal&#39;s ORG holds an ACTIVE entitlement for the product, and only then is a token signed — by the KMS, never by key material in this process. A product the org does not own answers 403 and no token. The signed features are the plan&#39;s features verbatim, so the engine enforces exactly what was bought, and the expiry is clamped to the entitlement&#39;s so a token cannot outlive the subscription that paid for it.  The token is the credential the engine runs on. Treat it as a secret.
-     * @param issueRequest 
-     * @return ApiResponse<IssueResponse?>
+     * @param licensingIssueRequest 
+     * @return ApiResponse<LicensingIssueResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LicensingIssueWithHttpInfo(issueRequest: IssueRequest) : ApiResponse<IssueResponse?> {
-        val localVariableConfig = postV1LicensingIssueRequestConfig(issueRequest = issueRequest)
+    fun postLicensingIssueWithHttpInfo(licensingIssueRequest: LicensingIssueRequest) : ApiResponse<LicensingIssueResponse?> {
+        val localVariableConfig = postLicensingIssueRequestConfig(licensingIssueRequest = licensingIssueRequest)
 
-        return request<IssueRequest, IssueResponse>(
+        return request<LicensingIssueRequest, LicensingIssueResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1LicensingIssue
+     * To obtain the request config of the operation postLicensingIssue
      *
-     * @param issueRequest 
+     * @param licensingIssueRequest 
      * @return RequestConfig
      */
-    fun postV1LicensingIssueRequestConfig(issueRequest: IssueRequest) : RequestConfig<IssueRequest> {
-        val localVariableBody = issueRequest
+    fun postLicensingIssueRequestConfig(licensingIssueRequest: LicensingIssueRequest) : RequestConfig<LicensingIssueRequest> {
+        val localVariableBody = licensingIssueRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -643,8 +647,8 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/releases
      * Publishes a signed binary release, answering 201 Created.
      * Publishes a signed binary release, answering 201 Created.  Outside dev a release MUST carry its cosign signature: this is how a binary becomes downloadable, so accepting an unsigned one would let an unverifiable artifact into the distribution path. Org-admin only — publishing is an operator action, not something a licensee does.
-     * @param release 
-     * @return Release
+     * @param licensingRelease 
+     * @return LicensingRelease
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -653,11 +657,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LicensingReleases(release: Release) : Release {
-        val localVarResponse = postV1LicensingReleasesWithHttpInfo(release = release)
+    fun postLicensingReleases(licensingRelease: LicensingRelease) : LicensingRelease {
+        val localVarResponse = postLicensingReleasesWithHttpInfo(licensingRelease = licensingRelease)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as Release
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingRelease
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -675,29 +679,29 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/releases
      * Publishes a signed binary release, answering 201 Created.
      * Publishes a signed binary release, answering 201 Created.  Outside dev a release MUST carry its cosign signature: this is how a binary becomes downloadable, so accepting an unsigned one would let an unverifiable artifact into the distribution path. Org-admin only — publishing is an operator action, not something a licensee does.
-     * @param release 
-     * @return ApiResponse<Release?>
+     * @param licensingRelease 
+     * @return ApiResponse<LicensingRelease?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LicensingReleasesWithHttpInfo(release: Release) : ApiResponse<Release?> {
-        val localVariableConfig = postV1LicensingReleasesRequestConfig(release = release)
+    fun postLicensingReleasesWithHttpInfo(licensingRelease: LicensingRelease) : ApiResponse<LicensingRelease?> {
+        val localVariableConfig = postLicensingReleasesRequestConfig(licensingRelease = licensingRelease)
 
-        return request<Release, Release>(
+        return request<LicensingRelease, LicensingRelease>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1LicensingReleases
+     * To obtain the request config of the operation postLicensingReleases
      *
-     * @param release 
+     * @param licensingRelease 
      * @return RequestConfig
      */
-    fun postV1LicensingReleasesRequestConfig(release: Release) : RequestConfig<Release> {
-        val localVariableBody = release
+    fun postLicensingReleasesRequestConfig(licensingRelease: LicensingRelease) : RequestConfig<LicensingRelease> {
+        val localVariableBody = licensingRelease
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -717,8 +721,8 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/revoke
      * Revoke turns off tokens that have already been issued.
      * Revoke turns off tokens that have already been issued.  A signed token cannot be un-signed, so revocation is the only way to withdraw one: this appends an entry that verify and the license-gated download both consult. It is a POST rather than a DELETE because it APPENDS a durable, attributed record — the entry names the admin who recorded it and when — rather than removing one.  Org-admin only. Scope it as narrowly as the incident allows: \&quot;nonce\&quot; for one leaked token, \&quot;holder\&quot; for one compromised account, \&quot;fingerprint\&quot; for one stolen machine, \&quot;release\&quot; when a whole build is bad.
-     * @param revokeRequest 
-     * @return RevokeResponse
+     * @param licensingRevokeRequest 
+     * @return LicensingRevokeResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -727,11 +731,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LicensingRevoke(revokeRequest: RevokeRequest) : RevokeResponse {
-        val localVarResponse = postV1LicensingRevokeWithHttpInfo(revokeRequest = revokeRequest)
+    fun postLicensingRevoke(licensingRevokeRequest: LicensingRevokeRequest) : LicensingRevokeResponse {
+        val localVarResponse = postLicensingRevokeWithHttpInfo(licensingRevokeRequest = licensingRevokeRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as RevokeResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingRevokeResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -749,29 +753,29 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/revoke
      * Revoke turns off tokens that have already been issued.
      * Revoke turns off tokens that have already been issued.  A signed token cannot be un-signed, so revocation is the only way to withdraw one: this appends an entry that verify and the license-gated download both consult. It is a POST rather than a DELETE because it APPENDS a durable, attributed record — the entry names the admin who recorded it and when — rather than removing one.  Org-admin only. Scope it as narrowly as the incident allows: \&quot;nonce\&quot; for one leaked token, \&quot;holder\&quot; for one compromised account, \&quot;fingerprint\&quot; for one stolen machine, \&quot;release\&quot; when a whole build is bad.
-     * @param revokeRequest 
-     * @return ApiResponse<RevokeResponse?>
+     * @param licensingRevokeRequest 
+     * @return ApiResponse<LicensingRevokeResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LicensingRevokeWithHttpInfo(revokeRequest: RevokeRequest) : ApiResponse<RevokeResponse?> {
-        val localVariableConfig = postV1LicensingRevokeRequestConfig(revokeRequest = revokeRequest)
+    fun postLicensingRevokeWithHttpInfo(licensingRevokeRequest: LicensingRevokeRequest) : ApiResponse<LicensingRevokeResponse?> {
+        val localVariableConfig = postLicensingRevokeRequestConfig(licensingRevokeRequest = licensingRevokeRequest)
 
-        return request<RevokeRequest, RevokeResponse>(
+        return request<LicensingRevokeRequest, LicensingRevokeResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1LicensingRevoke
+     * To obtain the request config of the operation postLicensingRevoke
      *
-     * @param revokeRequest 
+     * @param licensingRevokeRequest 
      * @return RequestConfig
      */
-    fun postV1LicensingRevokeRequestConfig(revokeRequest: RevokeRequest) : RequestConfig<RevokeRequest> {
-        val localVariableBody = revokeRequest
+    fun postLicensingRevokeRequestConfig(licensingRevokeRequest: LicensingRevokeRequest) : RequestConfig<LicensingRevokeRequest> {
+        val localVariableBody = licensingRevokeRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -791,8 +795,8 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/verify
      * Verify checks a license token online: signature, schema, expiry, app_id and the revocation list.
      * Verify checks a license token online: signature, schema, expiry, app_id and the revocation list.  It is UNAUTHENTICATED and always answers 200 — a bad token is &#x60;valid:false&#x60; with a reason rather than an error status, because \&quot;is this token good\&quot; is a question anyone may ask about a credential they already hold and the answer is the same either way. It is also OPTIONAL: the engine verifies OFFLINE against the published public key (GET /v1/licensing/pubkey) and needs this endpoint only to learn about revocation, so an outage here never stops a paid customer working.
-     * @param verifyRequest 
-     * @return VerifyResponse
+     * @param licensingVerifyRequest 
+     * @return LicensingVerifyResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -801,11 +805,11 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LicensingVerify(verifyRequest: VerifyRequest) : VerifyResponse {
-        val localVarResponse = postV1LicensingVerifyWithHttpInfo(verifyRequest = verifyRequest)
+    fun postLicensingVerify(licensingVerifyRequest: LicensingVerifyRequest) : LicensingVerifyResponse {
+        val localVarResponse = postLicensingVerifyWithHttpInfo(licensingVerifyRequest = licensingVerifyRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as VerifyResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LicensingVerifyResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -823,29 +827,29 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/licensing/verify
      * Verify checks a license token online: signature, schema, expiry, app_id and the revocation list.
      * Verify checks a license token online: signature, schema, expiry, app_id and the revocation list.  It is UNAUTHENTICATED and always answers 200 — a bad token is &#x60;valid:false&#x60; with a reason rather than an error status, because \&quot;is this token good\&quot; is a question anyone may ask about a credential they already hold and the answer is the same either way. It is also OPTIONAL: the engine verifies OFFLINE against the published public key (GET /v1/licensing/pubkey) and needs this endpoint only to learn about revocation, so an outage here never stops a paid customer working.
-     * @param verifyRequest 
-     * @return ApiResponse<VerifyResponse?>
+     * @param licensingVerifyRequest 
+     * @return ApiResponse<LicensingVerifyResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LicensingVerifyWithHttpInfo(verifyRequest: VerifyRequest) : ApiResponse<VerifyResponse?> {
-        val localVariableConfig = postV1LicensingVerifyRequestConfig(verifyRequest = verifyRequest)
+    fun postLicensingVerifyWithHttpInfo(licensingVerifyRequest: LicensingVerifyRequest) : ApiResponse<LicensingVerifyResponse?> {
+        val localVariableConfig = postLicensingVerifyRequestConfig(licensingVerifyRequest = licensingVerifyRequest)
 
-        return request<VerifyRequest, VerifyResponse>(
+        return request<LicensingVerifyRequest, LicensingVerifyResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1LicensingVerify
+     * To obtain the request config of the operation postLicensingVerify
      *
-     * @param verifyRequest 
+     * @param licensingVerifyRequest 
      * @return RequestConfig
      */
-    fun postV1LicensingVerifyRequestConfig(verifyRequest: VerifyRequest) : RequestConfig<VerifyRequest> {
-        val localVariableBody = verifyRequest
+    fun postLicensingVerifyRequestConfig(licensingVerifyRequest: LicensingVerifyRequest) : RequestConfig<LicensingVerifyRequest> {
+        val localVariableBody = licensingVerifyRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"

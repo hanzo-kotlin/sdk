@@ -15,25 +15,44 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.DriftFlag
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param flags 
- * @param severity 
+ * @param builds 
+ * @param commit 
+ * @param fired 
+ * @param org 
+ * @param reason 
+ * @param ref 
+ * @param repo 
  */
 
 
 data class Verdict (
 
-    @SerializedName("flags")
-    val flags: kotlin.collections.List<DriftFlag>? = null,
+    @SerializedName("builds")
+    val builds: kotlin.Int? = null,
 
-    @SerializedName("severity")
-    val severity: kotlin.String? = null
+    @SerializedName("commit")
+    val commit: kotlin.String? = null,
+
+    @SerializedName("fired")
+    val fired: kotlin.Boolean? = null,
+
+    @SerializedName("org")
+    val org: kotlin.String? = null,
+
+    @SerializedName("reason")
+    val reason: kotlin.String? = null,
+
+    @SerializedName("ref")
+    val ref: kotlin.String? = null,
+
+    @SerializedName("repo")
+    val repo: kotlin.String? = null
 
 ) {
 

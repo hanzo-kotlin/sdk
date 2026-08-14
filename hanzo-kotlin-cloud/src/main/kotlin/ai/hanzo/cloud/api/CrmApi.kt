@@ -70,8 +70,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CrmCompaniesById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CrmCompaniesByIdWithHttpInfo(id = id)
+    fun deleteCrmCompaniesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteCrmCompaniesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -98,8 +98,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CrmCompaniesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CrmCompaniesByIdRequestConfig(id = id)
+    fun deleteCrmCompaniesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCrmCompaniesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -107,12 +107,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CrmCompaniesById
+     * To obtain the request config of the operation deleteCrmCompaniesById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1CrmCompaniesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCrmCompaniesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -140,8 +140,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CrmContactsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CrmContactsByIdWithHttpInfo(id = id)
+    fun deleteCrmContactsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteCrmContactsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -168,8 +168,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CrmContactsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CrmContactsByIdRequestConfig(id = id)
+    fun deleteCrmContactsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCrmContactsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -177,12 +177,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CrmContactsById
+     * To obtain the request config of the operation deleteCrmContactsById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1CrmContactsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCrmContactsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -210,8 +210,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CrmOpportunitiesById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CrmOpportunitiesByIdWithHttpInfo(id = id)
+    fun deleteCrmOpportunitiesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteCrmOpportunitiesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -238,8 +238,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CrmOpportunitiesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CrmOpportunitiesByIdRequestConfig(id = id)
+    fun deleteCrmOpportunitiesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCrmOpportunitiesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -247,12 +247,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CrmOpportunitiesById
+     * To obtain the request config of the operation deleteCrmOpportunitiesById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1CrmOpportunitiesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCrmOpportunitiesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -282,8 +282,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmApplications(stage: kotlin.String? = null, limit: kotlin.Int? = null) : ApplicationList {
-        val localVarResponse = getV1CrmApplicationsWithHttpInfo(stage = stage, limit = limit)
+    fun getCrmApplications(stage: kotlin.String? = null, limit: kotlin.Int? = null) : ApplicationList {
+        val localVarResponse = getCrmApplicationsWithHttpInfo(stage = stage, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ApplicationList
@@ -312,8 +312,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmApplicationsWithHttpInfo(stage: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ApplicationList?> {
-        val localVariableConfig = getV1CrmApplicationsRequestConfig(stage = stage, limit = limit)
+    fun getCrmApplicationsWithHttpInfo(stage: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ApplicationList?> {
+        val localVariableConfig = getCrmApplicationsRequestConfig(stage = stage, limit = limit)
 
         return request<Unit, ApplicationList>(
             localVariableConfig
@@ -321,13 +321,13 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmApplications
+     * To obtain the request config of the operation getCrmApplications
      *
      * @param stage Stage returns only the applications at that pipeline stage when set: applied, screened, qualified, credits-offered, onboarded or rejected. (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
      * @return RequestConfig
      */
-    fun getV1CrmApplicationsRequestConfig(stage: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getCrmApplicationsRequestConfig(stage: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -365,8 +365,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmApplicationsById(id: kotlin.String) : ProgramApplication {
-        val localVarResponse = getV1CrmApplicationsByIdWithHttpInfo(id = id)
+    fun getCrmApplicationsById(id: kotlin.String) : ProgramApplication {
+        val localVarResponse = getCrmApplicationsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProgramApplication
@@ -394,8 +394,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmApplicationsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ProgramApplication?> {
-        val localVariableConfig = getV1CrmApplicationsByIdRequestConfig(id = id)
+    fun getCrmApplicationsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ProgramApplication?> {
+        val localVariableConfig = getCrmApplicationsByIdRequestConfig(id = id)
 
         return request<Unit, ProgramApplication>(
             localVariableConfig
@@ -403,12 +403,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmApplicationsById
+     * To obtain the request config of the operation getCrmApplicationsById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1CrmApplicationsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getCrmApplicationsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -438,8 +438,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmCompanies(limit: kotlin.Int? = null) : CompanyList {
-        val localVarResponse = getV1CrmCompaniesWithHttpInfo(limit = limit)
+    fun getCrmCompanies(limit: kotlin.Int? = null) : CompanyList {
+        val localVarResponse = getCrmCompaniesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CompanyList
@@ -467,8 +467,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmCompaniesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CompanyList?> {
-        val localVariableConfig = getV1CrmCompaniesRequestConfig(limit = limit)
+    fun getCrmCompaniesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CompanyList?> {
+        val localVariableConfig = getCrmCompaniesRequestConfig(limit = limit)
 
         return request<Unit, CompanyList>(
             localVariableConfig
@@ -476,12 +476,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmCompanies
+     * To obtain the request config of the operation getCrmCompanies
      *
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
      * @return RequestConfig
      */
-    fun getV1CrmCompaniesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getCrmCompaniesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -516,8 +516,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmCompaniesById(id: kotlin.String) : Company {
-        val localVarResponse = getV1CrmCompaniesByIdWithHttpInfo(id = id)
+    fun getCrmCompaniesById(id: kotlin.String) : Company {
+        val localVarResponse = getCrmCompaniesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Company
@@ -545,8 +545,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmCompaniesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Company?> {
-        val localVariableConfig = getV1CrmCompaniesByIdRequestConfig(id = id)
+    fun getCrmCompaniesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Company?> {
+        val localVariableConfig = getCrmCompaniesByIdRequestConfig(id = id)
 
         return request<Unit, Company>(
             localVariableConfig
@@ -554,12 +554,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmCompaniesById
+     * To obtain the request config of the operation getCrmCompaniesById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1CrmCompaniesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getCrmCompaniesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -590,8 +590,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmContacts(companyId: kotlin.String? = null, limit: kotlin.Int? = null) : ContactList {
-        val localVarResponse = getV1CrmContactsWithHttpInfo(companyId = companyId, limit = limit)
+    fun getCrmContacts(companyId: kotlin.String? = null, limit: kotlin.Int? = null) : ContactList {
+        val localVarResponse = getCrmContactsWithHttpInfo(companyId = companyId, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ContactList
@@ -620,8 +620,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmContactsWithHttpInfo(companyId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ContactList?> {
-        val localVariableConfig = getV1CrmContactsRequestConfig(companyId = companyId, limit = limit)
+    fun getCrmContactsWithHttpInfo(companyId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ContactList?> {
+        val localVariableConfig = getCrmContactsRequestConfig(companyId = companyId, limit = limit)
 
         return request<Unit, ContactList>(
             localVariableConfig
@@ -629,13 +629,13 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmContacts
+     * To obtain the request config of the operation getCrmContacts
      *
      * @param companyId CompanyID returns only the contacts at that company when set. (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
      * @return RequestConfig
      */
-    fun getV1CrmContactsRequestConfig(companyId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getCrmContactsRequestConfig(companyId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -673,8 +673,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmContactsById(id: kotlin.String) : Contact {
-        val localVarResponse = getV1CrmContactsByIdWithHttpInfo(id = id)
+    fun getCrmContactsById(id: kotlin.String) : Contact {
+        val localVarResponse = getCrmContactsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Contact
@@ -702,8 +702,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmContactsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Contact?> {
-        val localVariableConfig = getV1CrmContactsByIdRequestConfig(id = id)
+    fun getCrmContactsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Contact?> {
+        val localVariableConfig = getCrmContactsByIdRequestConfig(id = id)
 
         return request<Unit, Contact>(
             localVariableConfig
@@ -711,12 +711,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmContactsById
+     * To obtain the request config of the operation getCrmContactsById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1CrmContactsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getCrmContactsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -747,8 +747,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmOpportunities(stage: kotlin.String? = null, limit: kotlin.Int? = null) : OppList {
-        val localVarResponse = getV1CrmOpportunitiesWithHttpInfo(stage = stage, limit = limit)
+    fun getCrmOpportunities(stage: kotlin.String? = null, limit: kotlin.Int? = null) : OppList {
+        val localVarResponse = getCrmOpportunitiesWithHttpInfo(stage = stage, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OppList
@@ -777,8 +777,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmOpportunitiesWithHttpInfo(stage: kotlin.String?, limit: kotlin.Int?) : ApiResponse<OppList?> {
-        val localVariableConfig = getV1CrmOpportunitiesRequestConfig(stage = stage, limit = limit)
+    fun getCrmOpportunitiesWithHttpInfo(stage: kotlin.String?, limit: kotlin.Int?) : ApiResponse<OppList?> {
+        val localVariableConfig = getCrmOpportunitiesRequestConfig(stage = stage, limit = limit)
 
         return request<Unit, OppList>(
             localVariableConfig
@@ -786,13 +786,13 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmOpportunities
+     * To obtain the request config of the operation getCrmOpportunities
      *
      * @param stage Stage returns only the opportunities at that pipeline stage when set (NEW, SCREENING, MEETING, PROPOSAL or CUSTOMER; case-insensitive). (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
      * @return RequestConfig
      */
-    fun getV1CrmOpportunitiesRequestConfig(stage: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getCrmOpportunitiesRequestConfig(stage: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -830,8 +830,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmOpportunitiesById(id: kotlin.String) : Opportunity {
-        val localVarResponse = getV1CrmOpportunitiesByIdWithHttpInfo(id = id)
+    fun getCrmOpportunitiesById(id: kotlin.String) : Opportunity {
+        val localVarResponse = getCrmOpportunitiesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Opportunity
@@ -859,8 +859,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmOpportunitiesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Opportunity?> {
-        val localVariableConfig = getV1CrmOpportunitiesByIdRequestConfig(id = id)
+    fun getCrmOpportunitiesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Opportunity?> {
+        val localVariableConfig = getCrmOpportunitiesByIdRequestConfig(id = id)
 
         return request<Unit, Opportunity>(
             localVariableConfig
@@ -868,12 +868,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmOpportunitiesById
+     * To obtain the request config of the operation getCrmOpportunitiesById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1CrmOpportunitiesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getCrmOpportunitiesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -902,8 +902,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CrmSummary() : CrmSummary {
-        val localVarResponse = getV1CrmSummaryWithHttpInfo()
+    fun getCrmSummary() : CrmSummary {
+        val localVarResponse = getCrmSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CrmSummary
@@ -930,8 +930,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CrmSummaryWithHttpInfo() : ApiResponse<CrmSummary?> {
-        val localVariableConfig = getV1CrmSummaryRequestConfig()
+    fun getCrmSummaryWithHttpInfo() : ApiResponse<CrmSummary?> {
+        val localVariableConfig = getCrmSummaryRequestConfig()
 
         return request<Unit, CrmSummary>(
             localVariableConfig
@@ -939,11 +939,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1CrmSummary
+     * To obtain the request config of the operation getCrmSummary
      *
      * @return RequestConfig
      */
-    fun getV1CrmSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getCrmSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -974,8 +974,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CrmApplicationsById(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : ProgramApplication {
-        val localVarResponse = patchV1CrmApplicationsByIdWithHttpInfo(id = id, patchApplicationIn = patchApplicationIn)
+    fun patchCrmApplicationsById(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : ProgramApplication {
+        val localVarResponse = patchCrmApplicationsByIdWithHttpInfo(id = id, patchApplicationIn = patchApplicationIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProgramApplication
@@ -1004,8 +1004,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CrmApplicationsByIdWithHttpInfo(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : ApiResponse<ProgramApplication?> {
-        val localVariableConfig = patchV1CrmApplicationsByIdRequestConfig(id = id, patchApplicationIn = patchApplicationIn)
+    fun patchCrmApplicationsByIdWithHttpInfo(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : ApiResponse<ProgramApplication?> {
+        val localVariableConfig = patchCrmApplicationsByIdRequestConfig(id = id, patchApplicationIn = patchApplicationIn)
 
         return request<PatchApplicationIn, ProgramApplication>(
             localVariableConfig
@@ -1013,13 +1013,13 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation patchV1CrmApplicationsById
+     * To obtain the request config of the operation patchCrmApplicationsById
      *
      * @param id ID is the application to move, from the path.
      * @param patchApplicationIn 
      * @return RequestConfig
      */
-    fun patchV1CrmApplicationsByIdRequestConfig(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : RequestConfig<PatchApplicationIn> {
+    fun patchCrmApplicationsByIdRequestConfig(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : RequestConfig<PatchApplicationIn> {
         val localVariableBody = patchApplicationIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1048,8 +1048,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CrmApplications() : Unit {
-        val localVarResponse = postV1CrmApplicationsWithHttpInfo()
+    fun postCrmApplications() : Unit {
+        val localVarResponse = postCrmApplicationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1075,8 +1075,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CrmApplicationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CrmApplicationsRequestConfig()
+    fun postCrmApplicationsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCrmApplicationsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1084,11 +1084,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1CrmApplications
+     * To obtain the request config of the operation postCrmApplications
      *
      * @return RequestConfig
      */
-    fun postV1CrmApplicationsRequestConfig() : RequestConfig<Unit> {
+    fun postCrmApplicationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1117,8 +1117,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CrmCompanies(companyReq: CompanyReq) : Company {
-        val localVarResponse = postV1CrmCompaniesWithHttpInfo(companyReq = companyReq)
+    fun postCrmCompanies(companyReq: CompanyReq) : Company {
+        val localVarResponse = postCrmCompaniesWithHttpInfo(companyReq = companyReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Company
@@ -1146,8 +1146,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CrmCompaniesWithHttpInfo(companyReq: CompanyReq) : ApiResponse<Company?> {
-        val localVariableConfig = postV1CrmCompaniesRequestConfig(companyReq = companyReq)
+    fun postCrmCompaniesWithHttpInfo(companyReq: CompanyReq) : ApiResponse<Company?> {
+        val localVariableConfig = postCrmCompaniesRequestConfig(companyReq = companyReq)
 
         return request<CompanyReq, Company>(
             localVariableConfig
@@ -1155,12 +1155,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1CrmCompanies
+     * To obtain the request config of the operation postCrmCompanies
      *
      * @param companyReq 
      * @return RequestConfig
      */
-    fun postV1CrmCompaniesRequestConfig(companyReq: CompanyReq) : RequestConfig<CompanyReq> {
+    fun postCrmCompaniesRequestConfig(companyReq: CompanyReq) : RequestConfig<CompanyReq> {
         val localVariableBody = companyReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1191,8 +1191,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CrmContacts(contactReq: ContactReq) : Contact {
-        val localVarResponse = postV1CrmContactsWithHttpInfo(contactReq = contactReq)
+    fun postCrmContacts(contactReq: ContactReq) : Contact {
+        val localVarResponse = postCrmContactsWithHttpInfo(contactReq = contactReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Contact
@@ -1220,8 +1220,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CrmContactsWithHttpInfo(contactReq: ContactReq) : ApiResponse<Contact?> {
-        val localVariableConfig = postV1CrmContactsRequestConfig(contactReq = contactReq)
+    fun postCrmContactsWithHttpInfo(contactReq: ContactReq) : ApiResponse<Contact?> {
+        val localVariableConfig = postCrmContactsRequestConfig(contactReq = contactReq)
 
         return request<ContactReq, Contact>(
             localVariableConfig
@@ -1229,12 +1229,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1CrmContacts
+     * To obtain the request config of the operation postCrmContacts
      *
      * @param contactReq 
      * @return RequestConfig
      */
-    fun postV1CrmContactsRequestConfig(contactReq: ContactReq) : RequestConfig<ContactReq> {
+    fun postCrmContactsRequestConfig(contactReq: ContactReq) : RequestConfig<ContactReq> {
         val localVariableBody = contactReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1265,8 +1265,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CrmOpportunities(oppReq: OppReq) : Opportunity {
-        val localVarResponse = postV1CrmOpportunitiesWithHttpInfo(oppReq = oppReq)
+    fun postCrmOpportunities(oppReq: OppReq) : Opportunity {
+        val localVarResponse = postCrmOpportunitiesWithHttpInfo(oppReq = oppReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Opportunity
@@ -1294,8 +1294,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CrmOpportunitiesWithHttpInfo(oppReq: OppReq) : ApiResponse<Opportunity?> {
-        val localVariableConfig = postV1CrmOpportunitiesRequestConfig(oppReq = oppReq)
+    fun postCrmOpportunitiesWithHttpInfo(oppReq: OppReq) : ApiResponse<Opportunity?> {
+        val localVariableConfig = postCrmOpportunitiesRequestConfig(oppReq = oppReq)
 
         return request<OppReq, Opportunity>(
             localVariableConfig
@@ -1303,12 +1303,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1CrmOpportunities
+     * To obtain the request config of the operation postCrmOpportunities
      *
      * @param oppReq 
      * @return RequestConfig
      */
-    fun postV1CrmOpportunitiesRequestConfig(oppReq: OppReq) : RequestConfig<OppReq> {
+    fun postCrmOpportunitiesRequestConfig(oppReq: OppReq) : RequestConfig<OppReq> {
         val localVariableBody = oppReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1340,8 +1340,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CrmCompaniesById(id: kotlin.String, companyReq: CompanyReq) : Company {
-        val localVarResponse = putV1CrmCompaniesByIdWithHttpInfo(id = id, companyReq = companyReq)
+    fun putCrmCompaniesById(id: kotlin.String, companyReq: CompanyReq) : Company {
+        val localVarResponse = putCrmCompaniesByIdWithHttpInfo(id = id, companyReq = companyReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Company
@@ -1370,8 +1370,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CrmCompaniesByIdWithHttpInfo(id: kotlin.String, companyReq: CompanyReq) : ApiResponse<Company?> {
-        val localVariableConfig = putV1CrmCompaniesByIdRequestConfig(id = id, companyReq = companyReq)
+    fun putCrmCompaniesByIdWithHttpInfo(id: kotlin.String, companyReq: CompanyReq) : ApiResponse<Company?> {
+        val localVariableConfig = putCrmCompaniesByIdRequestConfig(id = id, companyReq = companyReq)
 
         return request<CompanyReq, Company>(
             localVariableConfig
@@ -1379,13 +1379,13 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putV1CrmCompaniesById
+     * To obtain the request config of the operation putCrmCompaniesById
      *
      * @param id ID names the company to update and comes from the path. A create ignores it: the server mints the id.
      * @param companyReq 
      * @return RequestConfig
      */
-    fun putV1CrmCompaniesByIdRequestConfig(id: kotlin.String, companyReq: CompanyReq) : RequestConfig<CompanyReq> {
+    fun putCrmCompaniesByIdRequestConfig(id: kotlin.String, companyReq: CompanyReq) : RequestConfig<CompanyReq> {
         val localVariableBody = companyReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1417,8 +1417,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CrmContactsById(id: kotlin.String, contactReq: ContactReq) : Contact {
-        val localVarResponse = putV1CrmContactsByIdWithHttpInfo(id = id, contactReq = contactReq)
+    fun putCrmContactsById(id: kotlin.String, contactReq: ContactReq) : Contact {
+        val localVarResponse = putCrmContactsByIdWithHttpInfo(id = id, contactReq = contactReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Contact
@@ -1447,8 +1447,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CrmContactsByIdWithHttpInfo(id: kotlin.String, contactReq: ContactReq) : ApiResponse<Contact?> {
-        val localVariableConfig = putV1CrmContactsByIdRequestConfig(id = id, contactReq = contactReq)
+    fun putCrmContactsByIdWithHttpInfo(id: kotlin.String, contactReq: ContactReq) : ApiResponse<Contact?> {
+        val localVariableConfig = putCrmContactsByIdRequestConfig(id = id, contactReq = contactReq)
 
         return request<ContactReq, Contact>(
             localVariableConfig
@@ -1456,13 +1456,13 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putV1CrmContactsById
+     * To obtain the request config of the operation putCrmContactsById
      *
      * @param id ID names the contact to update and comes from the path. A create ignores it: the server mints the id.
      * @param contactReq 
      * @return RequestConfig
      */
-    fun putV1CrmContactsByIdRequestConfig(id: kotlin.String, contactReq: ContactReq) : RequestConfig<ContactReq> {
+    fun putCrmContactsByIdRequestConfig(id: kotlin.String, contactReq: ContactReq) : RequestConfig<ContactReq> {
         val localVariableBody = contactReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1494,8 +1494,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CrmOpportunitiesById(id: kotlin.String, oppReq: OppReq) : Opportunity {
-        val localVarResponse = putV1CrmOpportunitiesByIdWithHttpInfo(id = id, oppReq = oppReq)
+    fun putCrmOpportunitiesById(id: kotlin.String, oppReq: OppReq) : Opportunity {
+        val localVarResponse = putCrmOpportunitiesByIdWithHttpInfo(id = id, oppReq = oppReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Opportunity
@@ -1524,8 +1524,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CrmOpportunitiesByIdWithHttpInfo(id: kotlin.String, oppReq: OppReq) : ApiResponse<Opportunity?> {
-        val localVariableConfig = putV1CrmOpportunitiesByIdRequestConfig(id = id, oppReq = oppReq)
+    fun putCrmOpportunitiesByIdWithHttpInfo(id: kotlin.String, oppReq: OppReq) : ApiResponse<Opportunity?> {
+        val localVariableConfig = putCrmOpportunitiesByIdRequestConfig(id = id, oppReq = oppReq)
 
         return request<OppReq, Opportunity>(
             localVariableConfig
@@ -1533,13 +1533,13 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putV1CrmOpportunitiesById
+     * To obtain the request config of the operation putCrmOpportunitiesById
      *
      * @param id ID names the opportunity to update and comes from the path. A create ignores it: the server mints the id.
      * @param oppReq 
      * @return RequestConfig
      */
-    fun putV1CrmOpportunitiesByIdRequestConfig(id: kotlin.String, oppReq: OppReq) : RequestConfig<OppReq> {
+    fun putCrmOpportunitiesByIdRequestConfig(id: kotlin.String, oppReq: OppReq) : RequestConfig<OppReq> {
         val localVariableBody = oppReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

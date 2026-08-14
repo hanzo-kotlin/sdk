@@ -64,8 +64,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudByProviderAccountsByLabel(provider: kotlin.String, label: kotlin.String) : UnlinkedView {
-        val localVarResponse = deleteV1CloudByProviderAccountsByLabelWithHttpInfo(provider = provider, label = label)
+    fun deleteCloudByProviderAccountsByLabel(provider: kotlin.String, label: kotlin.String) : UnlinkedView {
+        val localVarResponse = deleteCloudByProviderAccountsByLabelWithHttpInfo(provider = provider, label = label)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UnlinkedView
@@ -94,8 +94,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudByProviderAccountsByLabelWithHttpInfo(provider: kotlin.String, label: kotlin.String) : ApiResponse<UnlinkedView?> {
-        val localVariableConfig = deleteV1CloudByProviderAccountsByLabelRequestConfig(provider = provider, label = label)
+    fun deleteCloudByProviderAccountsByLabelWithHttpInfo(provider: kotlin.String, label: kotlin.String) : ApiResponse<UnlinkedView?> {
+        val localVariableConfig = deleteCloudByProviderAccountsByLabelRequestConfig(provider = provider, label = label)
 
         return request<Unit, UnlinkedView>(
             localVariableConfig
@@ -103,13 +103,13 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudByProviderAccountsByLabel
+     * To obtain the request config of the operation deleteCloudByProviderAccountsByLabel
      *
      * @param provider Provider is the cloud the account belongs to: digitalocean, aws, gcp or azure. An unknown provider is not found.
      * @param label Label is the org-chosen name of the account within that provider. Empty means \&quot;default\&quot;; anything outside 1–64 of [A-Za-z0-9._-] is refused.
      * @return RequestConfig
      */
-    fun deleteV1CloudByProviderAccountsByLabelRequestConfig(provider: kotlin.String, label: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudByProviderAccountsByLabelRequestConfig(provider: kotlin.String, label: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -138,8 +138,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Cloud() : ProvidersView {
-        val localVarResponse = getV1CloudWithHttpInfo()
+    fun getCloud() : ProvidersView {
+        val localVarResponse = getCloudWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvidersView
@@ -166,8 +166,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudWithHttpInfo() : ApiResponse<ProvidersView?> {
-        val localVariableConfig = getV1CloudRequestConfig()
+    fun getCloudWithHttpInfo() : ApiResponse<ProvidersView?> {
+        val localVariableConfig = getCloudRequestConfig()
 
         return request<Unit, ProvidersView>(
             localVariableConfig
@@ -175,11 +175,11 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Cloud
+     * To obtain the request config of the operation getCloud
      *
      * @return RequestConfig
      */
-    fun getV1CloudRequestConfig() : RequestConfig<Unit> {
+    fun getCloudRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -208,8 +208,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudAccounts() : CloudAccountsView {
-        val localVarResponse = getV1CloudAccountsWithHttpInfo()
+    fun getCloudAccounts() : CloudAccountsView {
+        val localVarResponse = getCloudAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccountsView
@@ -236,8 +236,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudAccountsWithHttpInfo() : ApiResponse<CloudAccountsView?> {
-        val localVariableConfig = getV1CloudAccountsRequestConfig()
+    fun getCloudAccountsWithHttpInfo() : ApiResponse<CloudAccountsView?> {
+        val localVariableConfig = getCloudAccountsRequestConfig()
 
         return request<Unit, CloudAccountsView>(
             localVariableConfig
@@ -245,11 +245,11 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudAccounts
+     * To obtain the request config of the operation getCloudAccounts
      *
      * @return RequestConfig
      */
-    fun getV1CloudAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getCloudAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -280,8 +280,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudByProviderAccounts(provider: kotlin.String, venueLinkRequest: VenueLinkRequest) : AccountFoldView {
-        val localVarResponse = postV1CloudByProviderAccountsWithHttpInfo(provider = provider, venueLinkRequest = venueLinkRequest)
+    fun postCloudByProviderAccounts(provider: kotlin.String, venueLinkRequest: VenueLinkRequest) : AccountFoldView {
+        val localVarResponse = postCloudByProviderAccountsWithHttpInfo(provider = provider, venueLinkRequest = venueLinkRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccountFoldView
@@ -310,8 +310,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudByProviderAccountsWithHttpInfo(provider: kotlin.String, venueLinkRequest: VenueLinkRequest) : ApiResponse<AccountFoldView?> {
-        val localVariableConfig = postV1CloudByProviderAccountsRequestConfig(provider = provider, venueLinkRequest = venueLinkRequest)
+    fun postCloudByProviderAccountsWithHttpInfo(provider: kotlin.String, venueLinkRequest: VenueLinkRequest) : ApiResponse<AccountFoldView?> {
+        val localVariableConfig = postCloudByProviderAccountsRequestConfig(provider = provider, venueLinkRequest = venueLinkRequest)
 
         return request<VenueLinkRequest, AccountFoldView>(
             localVariableConfig
@@ -319,13 +319,13 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudByProviderAccounts
+     * To obtain the request config of the operation postCloudByProviderAccounts
      *
      * @param provider Provider is the cloud being linked, from the path: digitalocean, aws, gcp or azure.
      * @param venueLinkRequest 
      * @return RequestConfig
      */
-    fun postV1CloudByProviderAccountsRequestConfig(provider: kotlin.String, venueLinkRequest: VenueLinkRequest) : RequestConfig<VenueLinkRequest> {
+    fun postCloudByProviderAccountsRequestConfig(provider: kotlin.String, venueLinkRequest: VenueLinkRequest) : RequestConfig<VenueLinkRequest> {
         val localVariableBody = venueLinkRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -357,8 +357,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudByProviderAccountsByLabelSync(provider: kotlin.String, label: kotlin.String) : AccountFoldView {
-        val localVarResponse = postV1CloudByProviderAccountsByLabelSyncWithHttpInfo(provider = provider, label = label)
+    fun postCloudByProviderAccountsByLabelSync(provider: kotlin.String, label: kotlin.String) : AccountFoldView {
+        val localVarResponse = postCloudByProviderAccountsByLabelSyncWithHttpInfo(provider = provider, label = label)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccountFoldView
@@ -387,8 +387,8 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudByProviderAccountsByLabelSyncWithHttpInfo(provider: kotlin.String, label: kotlin.String) : ApiResponse<AccountFoldView?> {
-        val localVariableConfig = postV1CloudByProviderAccountsByLabelSyncRequestConfig(provider = provider, label = label)
+    fun postCloudByProviderAccountsByLabelSyncWithHttpInfo(provider: kotlin.String, label: kotlin.String) : ApiResponse<AccountFoldView?> {
+        val localVariableConfig = postCloudByProviderAccountsByLabelSyncRequestConfig(provider = provider, label = label)
 
         return request<Unit, AccountFoldView>(
             localVariableConfig
@@ -396,13 +396,13 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudByProviderAccountsByLabelSync
+     * To obtain the request config of the operation postCloudByProviderAccountsByLabelSync
      *
      * @param provider Provider is the cloud the account belongs to: digitalocean, aws, gcp or azure. An unknown provider is not found.
      * @param label Label is the org-chosen name of the account within that provider. Empty means \&quot;default\&quot;; anything outside 1–64 of [A-Za-z0-9._-] is refused.
      * @return RequestConfig
      */
-    fun postV1CloudByProviderAccountsByLabelSyncRequestConfig(provider: kotlin.String, label: kotlin.String) : RequestConfig<Unit> {
+    fun postCloudByProviderAccountsByLabelSyncRequestConfig(provider: kotlin.String, label: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

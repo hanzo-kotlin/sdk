@@ -59,8 +59,8 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1NotifyHealth() : NotifyHealth {
-        val localVarResponse = getV1NotifyHealthWithHttpInfo()
+    fun getNotifyHealth() : NotifyHealth {
+        val localVarResponse = getNotifyHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as NotifyHealth
@@ -87,8 +87,8 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1NotifyHealthWithHttpInfo() : ApiResponse<NotifyHealth?> {
-        val localVariableConfig = getV1NotifyHealthRequestConfig()
+    fun getNotifyHealthWithHttpInfo() : ApiResponse<NotifyHealth?> {
+        val localVariableConfig = getNotifyHealthRequestConfig()
 
         return request<Unit, NotifyHealth>(
             localVariableConfig
@@ -96,11 +96,11 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1NotifyHealth
+     * To obtain the request config of the operation getNotifyHealth
      *
      * @return RequestConfig
      */
-    fun getV1NotifyHealthRequestConfig() : RequestConfig<Unit> {
+    fun getNotifyHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -130,8 +130,8 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1NotifySend(notifySend: NotifySend) : kotlin.Any {
-        val localVarResponse = postV1NotifySendWithHttpInfo(notifySend = notifySend)
+    fun postNotifySend(notifySend: NotifySend) : kotlin.Any {
+        val localVarResponse = postNotifySendWithHttpInfo(notifySend = notifySend)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -159,8 +159,8 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1NotifySendWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1NotifySendRequestConfig(notifySend = notifySend)
+    fun postNotifySendWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postNotifySendRequestConfig(notifySend = notifySend)
 
         return request<NotifySend, kotlin.Any>(
             localVariableConfig
@@ -168,12 +168,12 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1NotifySend
+     * To obtain the request config of the operation postNotifySend
      *
      * @param notifySend 
      * @return RequestConfig
      */
-    fun postV1NotifySendRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
+    fun postNotifySendRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
         val localVariableBody = notifySend
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -204,8 +204,8 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1NotifySendEmail(notifySend: NotifySend) : kotlin.Any {
-        val localVarResponse = postV1NotifySendEmailWithHttpInfo(notifySend = notifySend)
+    fun postNotifySendEmail(notifySend: NotifySend) : kotlin.Any {
+        val localVarResponse = postNotifySendEmailWithHttpInfo(notifySend = notifySend)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -233,8 +233,8 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1NotifySendEmailWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1NotifySendEmailRequestConfig(notifySend = notifySend)
+    fun postNotifySendEmailWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postNotifySendEmailRequestConfig(notifySend = notifySend)
 
         return request<NotifySend, kotlin.Any>(
             localVariableConfig
@@ -242,12 +242,12 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1NotifySendEmail
+     * To obtain the request config of the operation postNotifySendEmail
      *
      * @param notifySend 
      * @return RequestConfig
      */
-    fun postV1NotifySendEmailRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
+    fun postNotifySendEmailRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
         val localVariableBody = notifySend
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -278,8 +278,8 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1NotifySendSms(notifySend: NotifySend) : kotlin.Any {
-        val localVarResponse = postV1NotifySendSmsWithHttpInfo(notifySend = notifySend)
+    fun postNotifySendSms(notifySend: NotifySend) : kotlin.Any {
+        val localVarResponse = postNotifySendSmsWithHttpInfo(notifySend = notifySend)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -307,8 +307,8 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1NotifySendSmsWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1NotifySendSmsRequestConfig(notifySend = notifySend)
+    fun postNotifySendSmsWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postNotifySendSmsRequestConfig(notifySend = notifySend)
 
         return request<NotifySend, kotlin.Any>(
             localVariableConfig
@@ -316,12 +316,12 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1NotifySendSms
+     * To obtain the request config of the operation postNotifySendSms
      *
      * @param notifySend 
      * @return RequestConfig
      */
-    fun postV1NotifySendSmsRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
+    fun postNotifySendSmsRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
         val localVariableBody = notifySend
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

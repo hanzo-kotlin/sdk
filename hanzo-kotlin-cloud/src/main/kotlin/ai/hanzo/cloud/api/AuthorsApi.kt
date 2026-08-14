@@ -63,8 +63,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Authors() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1AuthorsWithHttpInfo()
+    fun getAuthors() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getAuthorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -91,8 +91,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AuthorsWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1AuthorsRequestConfig()
+    fun getAuthorsWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getAuthorsRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -100,11 +100,11 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Authors
+     * To obtain the request config of the operation getAuthors
      *
      * @return RequestConfig
      */
-    fun getV1AuthorsRequestConfig() : RequestConfig<Unit> {
+    fun getAuthorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -134,8 +134,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AuthorsBasis(period: kotlin.String? = null) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1AuthorsBasisWithHttpInfo(period = period)
+    fun getAuthorsBasis(period: kotlin.String? = null) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getAuthorsBasisWithHttpInfo(period = period)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -163,8 +163,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AuthorsBasisWithHttpInfo(period: kotlin.String?) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1AuthorsBasisRequestConfig(period = period)
+    fun getAuthorsBasisWithHttpInfo(period: kotlin.String?) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getAuthorsBasisRequestConfig(period = period)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -172,12 +172,12 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1AuthorsBasis
+     * To obtain the request config of the operation getAuthorsBasis
      *
      * @param period Period is the UTC accrual month, YYYY-MM. Empty means every period; any other shape is refused with 400, because the period is echoed back and used as a SQL filter and is only ever accepted in the one form the accrual latch mints. (optional)
      * @return RequestConfig
      */
-    fun getV1AuthorsBasisRequestConfig(period: kotlin.String?) : RequestConfig<Unit> {
+    fun getAuthorsBasisRequestConfig(period: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -212,8 +212,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AuthorsConnect(connectRequest: ConnectRequest) : Enrolment {
-        val localVarResponse = postV1AuthorsConnectWithHttpInfo(connectRequest = connectRequest)
+    fun postAuthorsConnect(connectRequest: ConnectRequest) : Enrolment {
+        val localVarResponse = postAuthorsConnectWithHttpInfo(connectRequest = connectRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Enrolment
@@ -241,8 +241,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AuthorsConnectWithHttpInfo(connectRequest: ConnectRequest) : ApiResponse<Enrolment?> {
-        val localVariableConfig = postV1AuthorsConnectRequestConfig(connectRequest = connectRequest)
+    fun postAuthorsConnectWithHttpInfo(connectRequest: ConnectRequest) : ApiResponse<Enrolment?> {
+        val localVariableConfig = postAuthorsConnectRequestConfig(connectRequest = connectRequest)
 
         return request<ConnectRequest, Enrolment>(
             localVariableConfig
@@ -250,12 +250,12 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1AuthorsConnect
+     * To obtain the request config of the operation postAuthorsConnect
      *
      * @param connectRequest 
      * @return RequestConfig
      */
-    fun postV1AuthorsConnectRequestConfig(connectRequest: ConnectRequest) : RequestConfig<ConnectRequest> {
+    fun postAuthorsConnectRequestConfig(connectRequest: ConnectRequest) : RequestConfig<ConnectRequest> {
         val localVariableBody = connectRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -286,8 +286,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AuthorsDeploysRecord(deployRequest: DeployRequest) : DeployRecord {
-        val localVarResponse = postV1AuthorsDeploysRecordWithHttpInfo(deployRequest = deployRequest)
+    fun postAuthorsDeploysRecord(deployRequest: DeployRequest) : DeployRecord {
+        val localVarResponse = postAuthorsDeploysRecordWithHttpInfo(deployRequest = deployRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeployRecord
@@ -315,8 +315,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AuthorsDeploysRecordWithHttpInfo(deployRequest: DeployRequest) : ApiResponse<DeployRecord?> {
-        val localVariableConfig = postV1AuthorsDeploysRecordRequestConfig(deployRequest = deployRequest)
+    fun postAuthorsDeploysRecordWithHttpInfo(deployRequest: DeployRequest) : ApiResponse<DeployRecord?> {
+        val localVariableConfig = postAuthorsDeploysRecordRequestConfig(deployRequest = deployRequest)
 
         return request<DeployRequest, DeployRecord>(
             localVariableConfig
@@ -324,12 +324,12 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1AuthorsDeploysRecord
+     * To obtain the request config of the operation postAuthorsDeploysRecord
      *
      * @param deployRequest 
      * @return RequestConfig
      */
-    fun postV1AuthorsDeploysRecordRequestConfig(deployRequest: DeployRequest) : RequestConfig<DeployRequest> {
+    fun postAuthorsDeploysRecordRequestConfig(deployRequest: DeployRequest) : RequestConfig<DeployRequest> {
         val localVariableBody = deployRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -360,8 +360,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AuthorsReposVerify(verifyRequest: VerifyRequest) : Claim {
-        val localVarResponse = postV1AuthorsReposVerifyWithHttpInfo(verifyRequest = verifyRequest)
+    fun postAuthorsReposVerify(verifyRequest: VerifyRequest) : Claim {
+        val localVarResponse = postAuthorsReposVerifyWithHttpInfo(verifyRequest = verifyRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Claim
@@ -389,8 +389,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AuthorsReposVerifyWithHttpInfo(verifyRequest: VerifyRequest) : ApiResponse<Claim?> {
-        val localVariableConfig = postV1AuthorsReposVerifyRequestConfig(verifyRequest = verifyRequest)
+    fun postAuthorsReposVerifyWithHttpInfo(verifyRequest: VerifyRequest) : ApiResponse<Claim?> {
+        val localVariableConfig = postAuthorsReposVerifyRequestConfig(verifyRequest = verifyRequest)
 
         return request<VerifyRequest, Claim>(
             localVariableConfig
@@ -398,12 +398,12 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1AuthorsReposVerify
+     * To obtain the request config of the operation postAuthorsReposVerify
      *
      * @param verifyRequest 
      * @return RequestConfig
      */
-    fun postV1AuthorsReposVerifyRequestConfig(verifyRequest: VerifyRequest) : RequestConfig<VerifyRequest> {
+    fun postAuthorsReposVerifyRequestConfig(verifyRequest: VerifyRequest) : RequestConfig<VerifyRequest> {
         val localVariableBody = verifyRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

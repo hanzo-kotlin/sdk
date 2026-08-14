@@ -17,7 +17,7 @@ import ai.hanzo.Hanzo
 import ai.hanzo.cloud.api.ToolsApi
 
 fun main() {
-    val tools = Hanzo().api(::ToolsApi).getV1Tools().tools.orEmpty()
+    val tools = Hanzo().api(::ToolsApi).getTools().tools.orEmpty()
     check(tools.isNotEmpty()) { "no tools are reachable for this key" }
 
     println("tools    ${tools.size}")

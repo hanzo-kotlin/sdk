@@ -58,8 +58,8 @@ class IndexersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Indexers() : IndexersOut {
-        val localVarResponse = getV1IndexersWithHttpInfo()
+    fun getIndexers() : IndexersOut {
+        val localVarResponse = getIndexersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IndexersOut
@@ -86,8 +86,8 @@ class IndexersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexersWithHttpInfo() : ApiResponse<IndexersOut?> {
-        val localVariableConfig = getV1IndexersRequestConfig()
+    fun getIndexersWithHttpInfo() : ApiResponse<IndexersOut?> {
+        val localVariableConfig = getIndexersRequestConfig()
 
         return request<Unit, IndexersOut>(
             localVariableConfig
@@ -95,11 +95,11 @@ class IndexersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1Indexers
+     * To obtain the request config of the operation getIndexers
      *
      * @return RequestConfig
      */
-    fun getV1IndexersRequestConfig() : RequestConfig<Unit> {
+    fun getIndexersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

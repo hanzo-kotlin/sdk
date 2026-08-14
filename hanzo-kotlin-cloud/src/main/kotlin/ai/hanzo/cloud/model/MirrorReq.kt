@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param name Name is the local repo to mirror into, from the :name path segment. It is CREATED on first use.
  * @param project Project is the sub-scope to land the repo in; empty uses the caller's own, exactly as a create would.
- * @param source Source is the http(s) git URL to fetch from. The host is SSRF-guarded and the shared mirror credential is only sent to allowlisted hosts.
+ * @param source Source is the http(s) git URL to fetch from. The host is SSRF-guarded, and a credential is sent only if we hold one NAMED FOR that host — so a tenant-supplied URL to anywhere else fetches anonymously.
  */
 
 
@@ -37,7 +37,7 @@ data class MirrorReq (
     @SerializedName("project")
     val project: kotlin.String? = null,
 
-    /* Source is the http(s) git URL to fetch from. The host is SSRF-guarded and the shared mirror credential is only sent to allowlisted hosts. */
+    /* Source is the http(s) git URL to fetch from. The host is SSRF-guarded, and a credential is sent only if we hold one NAMED FOR that host — so a tenant-supplied URL to anywhere else fetches anonymously. */
     @SerializedName("source")
     val source: kotlin.String? = null
 

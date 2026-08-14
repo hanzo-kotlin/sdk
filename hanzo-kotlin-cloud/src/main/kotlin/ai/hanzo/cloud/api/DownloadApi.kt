@@ -57,8 +57,8 @@ class DownloadApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DownloadByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1DownloadByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getDownloadByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getDownloadByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -85,8 +85,8 @@ class DownloadApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DownloadByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DownloadByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getDownloadByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getDownloadByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class DownloadApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DownloadByWildcard1
+     * To obtain the request config of the operation getDownloadByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1DownloadByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getDownloadByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

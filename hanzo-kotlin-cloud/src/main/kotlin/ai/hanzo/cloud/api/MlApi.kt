@@ -59,8 +59,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1MlModelsByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1MlModelsByNameWithHttpInfo(name = name)
+    fun deleteMlModelsByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteMlModelsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -87,8 +87,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1MlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1MlModelsByNameRequestConfig(name = name)
+    fun deleteMlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMlModelsByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -96,12 +96,12 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1MlModelsByName
+     * To obtain the request config of the operation deleteMlModelsByName
      *
      * @param name Name is the resource to act on, taken from the path. Lower-cased and trimmed to the DNS-1123 label a CustomResource&#39;s metadata.name must be.
      * @return RequestConfig
      */
-    fun deleteV1MlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -128,8 +128,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MlHealth() : Unit {
-        val localVarResponse = getV1MlHealthWithHttpInfo()
+    fun getMlHealth() : Unit {
+        val localVarResponse = getMlHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -155,8 +155,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MlHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1MlHealthRequestConfig()
+    fun getMlHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMlHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,11 +164,11 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1MlHealth
+     * To obtain the request config of the operation getMlHealth
      *
      * @return RequestConfig
      */
-    fun getV1MlHealthRequestConfig() : RequestConfig<Unit> {
+    fun getMlHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -196,8 +196,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MlModels() : MlResourceList {
-        val localVarResponse = getV1MlModelsWithHttpInfo()
+    fun getMlModels() : MlResourceList {
+        val localVarResponse = getMlModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MlResourceList
@@ -224,8 +224,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MlModelsWithHttpInfo() : ApiResponse<MlResourceList?> {
-        val localVariableConfig = getV1MlModelsRequestConfig()
+    fun getMlModelsWithHttpInfo() : ApiResponse<MlResourceList?> {
+        val localVariableConfig = getMlModelsRequestConfig()
 
         return request<Unit, MlResourceList>(
             localVariableConfig
@@ -233,11 +233,11 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1MlModels
+     * To obtain the request config of the operation getMlModels
      *
      * @return RequestConfig
      */
-    fun getV1MlModelsRequestConfig() : RequestConfig<Unit> {
+    fun getMlModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -267,8 +267,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MlModelsByName(name: kotlin.String) : MlResource {
-        val localVarResponse = getV1MlModelsByNameWithHttpInfo(name = name)
+    fun getMlModelsByName(name: kotlin.String) : MlResource {
+        val localVarResponse = getMlModelsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MlResource
@@ -296,8 +296,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<MlResource?> {
-        val localVariableConfig = getV1MlModelsByNameRequestConfig(name = name)
+    fun getMlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<MlResource?> {
+        val localVariableConfig = getMlModelsByNameRequestConfig(name = name)
 
         return request<Unit, MlResource>(
             localVariableConfig
@@ -305,12 +305,12 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1MlModelsByName
+     * To obtain the request config of the operation getMlModelsByName
      *
      * @param name Name is the resource to act on, taken from the path. Lower-cased and trimmed to the DNS-1123 label a CustomResource&#39;s metadata.name must be.
      * @return RequestConfig
      */
-    fun getV1MlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getMlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -339,8 +339,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1MlModelsByName(name: kotlin.String) : Unit {
-        val localVarResponse = patchV1MlModelsByNameWithHttpInfo(name = name)
+    fun patchMlModelsByName(name: kotlin.String) : Unit {
+        val localVarResponse = patchMlModelsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -367,8 +367,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1MlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1MlModelsByNameRequestConfig(name = name)
+    fun patchMlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchMlModelsByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -376,12 +376,12 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation patchV1MlModelsByName
+     * To obtain the request config of the operation patchMlModelsByName
      *
      * @param name 
      * @return RequestConfig
      */
-    fun patchV1MlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun patchMlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -408,8 +408,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MlModels() : Unit {
-        val localVarResponse = postV1MlModelsWithHttpInfo()
+    fun postMlModels() : Unit {
+        val localVarResponse = postMlModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -435,8 +435,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MlModelsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MlModelsRequestConfig()
+    fun postMlModelsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMlModelsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -444,11 +444,11 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1MlModels
+     * To obtain the request config of the operation postMlModels
      *
      * @return RequestConfig
      */
-    fun postV1MlModelsRequestConfig() : RequestConfig<Unit> {
+    fun postMlModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -476,8 +476,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MlModelsByNamePredict(name: kotlin.String) : Unit {
-        val localVarResponse = postV1MlModelsByNamePredictWithHttpInfo(name = name)
+    fun postMlModelsByNamePredict(name: kotlin.String) : Unit {
+        val localVarResponse = postMlModelsByNamePredictWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -504,8 +504,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MlModelsByNamePredictWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MlModelsByNamePredictRequestConfig(name = name)
+    fun postMlModelsByNamePredictWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postMlModelsByNamePredictRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -513,12 +513,12 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1MlModelsByNamePredict
+     * To obtain the request config of the operation postMlModelsByNamePredict
      *
      * @param name 
      * @return RequestConfig
      */
-    fun postV1MlModelsByNamePredictRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun postMlModelsByNamePredictRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

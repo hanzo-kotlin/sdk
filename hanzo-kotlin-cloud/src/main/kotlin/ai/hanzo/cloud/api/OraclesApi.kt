@@ -58,8 +58,8 @@ class OraclesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Oracles() : OraclesOut {
-        val localVarResponse = getV1OraclesWithHttpInfo()
+    fun getOracles() : OraclesOut {
+        val localVarResponse = getOraclesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OraclesOut
@@ -86,8 +86,8 @@ class OraclesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1OraclesWithHttpInfo() : ApiResponse<OraclesOut?> {
-        val localVariableConfig = getV1OraclesRequestConfig()
+    fun getOraclesWithHttpInfo() : ApiResponse<OraclesOut?> {
+        val localVariableConfig = getOraclesRequestConfig()
 
         return request<Unit, OraclesOut>(
             localVariableConfig
@@ -95,11 +95,11 @@ class OraclesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Oracles
+     * To obtain the request config of the operation getOracles
      *
      * @return RequestConfig
      */
-    fun getV1OraclesRequestConfig() : RequestConfig<Unit> {
+    fun getOraclesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

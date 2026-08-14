@@ -56,8 +56,8 @@ class RerankApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Rerank() : Unit {
-        val localVarResponse = postV1RerankWithHttpInfo()
+    fun postRerank() : Unit {
+        val localVarResponse = postRerankWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class RerankApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RerankWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RerankRequestConfig()
+    fun postRerankWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRerankRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class RerankApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Rerank
+     * To obtain the request config of the operation postRerank
      *
      * @return RequestConfig
      */
-    fun postV1RerankRequestConfig() : RequestConfig<Unit> {
+    fun postRerankRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

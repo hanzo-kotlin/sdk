@@ -66,8 +66,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DomainAvailability(domain: kotlin.String) : QuoteList {
-        val localVarResponse = getV1DomainAvailabilityWithHttpInfo(domain = domain)
+    fun getDomainAvailability(domain: kotlin.String) : QuoteList {
+        val localVarResponse = getDomainAvailabilityWithHttpInfo(domain = domain)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as QuoteList
@@ -95,8 +95,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DomainAvailabilityWithHttpInfo(domain: kotlin.String) : ApiResponse<QuoteList?> {
-        val localVariableConfig = getV1DomainAvailabilityRequestConfig(domain = domain)
+    fun getDomainAvailabilityWithHttpInfo(domain: kotlin.String) : ApiResponse<QuoteList?> {
+        val localVariableConfig = getDomainAvailabilityRequestConfig(domain = domain)
 
         return request<Unit, QuoteList>(
             localVariableConfig
@@ -104,12 +104,12 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DomainAvailability
+     * To obtain the request config of the operation getDomainAvailability
      *
      * @param domain Domain is one name, or several comma-separated, to check in one call. Names are lowercased. It is required.
      * @return RequestConfig
      */
-    fun getV1DomainAvailabilityRequestConfig(domain: kotlin.String) : RequestConfig<Unit> {
+    fun getDomainAvailabilityRequestConfig(domain: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -141,8 +141,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DomainDomains() : Holdings {
-        val localVarResponse = getV1DomainDomainsWithHttpInfo()
+    fun getDomainDomains() : Holdings {
+        val localVarResponse = getDomainDomainsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Holdings
@@ -169,8 +169,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DomainDomainsWithHttpInfo() : ApiResponse<Holdings?> {
-        val localVariableConfig = getV1DomainDomainsRequestConfig()
+    fun getDomainDomainsWithHttpInfo() : ApiResponse<Holdings?> {
+        val localVariableConfig = getDomainDomainsRequestConfig()
 
         return request<Unit, Holdings>(
             localVariableConfig
@@ -178,11 +178,11 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DomainDomains
+     * To obtain the request config of the operation getDomainDomains
      *
      * @return RequestConfig
      */
-    fun getV1DomainDomainsRequestConfig() : RequestConfig<Unit> {
+    fun getDomainDomainsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -211,8 +211,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DomainHealth() : Reachability {
-        val localVarResponse = getV1DomainHealthWithHttpInfo()
+    fun getDomainHealth() : Reachability {
+        val localVarResponse = getDomainHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Reachability
@@ -239,8 +239,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DomainHealthWithHttpInfo() : ApiResponse<Reachability?> {
-        val localVariableConfig = getV1DomainHealthRequestConfig()
+    fun getDomainHealthWithHttpInfo() : ApiResponse<Reachability?> {
+        val localVariableConfig = getDomainHealthRequestConfig()
 
         return request<Unit, Reachability>(
             localVariableConfig
@@ -248,11 +248,11 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DomainHealth
+     * To obtain the request config of the operation getDomainHealth
      *
      * @return RequestConfig
      */
-    fun getV1DomainHealthRequestConfig() : RequestConfig<Unit> {
+    fun getDomainHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -283,8 +283,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DomainSearch(q: kotlin.String, tld: kotlin.String? = null) : QuoteList {
-        val localVarResponse = getV1DomainSearchWithHttpInfo(q = q, tld = tld)
+    fun getDomainSearch(q: kotlin.String, tld: kotlin.String? = null) : QuoteList {
+        val localVarResponse = getDomainSearchWithHttpInfo(q = q, tld = tld)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as QuoteList
@@ -313,8 +313,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DomainSearchWithHttpInfo(q: kotlin.String, tld: kotlin.String?) : ApiResponse<QuoteList?> {
-        val localVariableConfig = getV1DomainSearchRequestConfig(q = q, tld = tld)
+    fun getDomainSearchWithHttpInfo(q: kotlin.String, tld: kotlin.String?) : ApiResponse<QuoteList?> {
+        val localVariableConfig = getDomainSearchRequestConfig(q = q, tld = tld)
 
         return request<Unit, QuoteList>(
             localVariableConfig
@@ -322,13 +322,13 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DomainSearch
+     * To obtain the request config of the operation getDomainSearch
      *
      * @param q Q is the keyword to build names from. It is required.
      * @param tld TLD narrows the search to a comma-separated set of top-level domains. (optional)
      * @return RequestConfig
      */
-    fun getV1DomainSearchRequestConfig(q: kotlin.String, tld: kotlin.String?) : RequestConfig<Unit> {
+    fun getDomainSearchRequestConfig(q: kotlin.String, tld: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -364,8 +364,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DomainRegister(order: Order) : RegisterResult {
-        val localVarResponse = postV1DomainRegisterWithHttpInfo(order = order)
+    fun postDomainRegister(order: Order) : RegisterResult {
+        val localVarResponse = postDomainRegisterWithHttpInfo(order = order)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterResult
@@ -393,8 +393,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DomainRegisterWithHttpInfo(order: Order) : ApiResponse<RegisterResult?> {
-        val localVariableConfig = postV1DomainRegisterRequestConfig(order = order)
+    fun postDomainRegisterWithHttpInfo(order: Order) : ApiResponse<RegisterResult?> {
+        val localVariableConfig = postDomainRegisterRequestConfig(order = order)
 
         return request<Order, RegisterResult>(
             localVariableConfig
@@ -402,12 +402,12 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1DomainRegister
+     * To obtain the request config of the operation postDomainRegister
      *
      * @param order 
      * @return RequestConfig
      */
-    fun postV1DomainRegisterRequestConfig(order: Order) : RequestConfig<Order> {
+    fun postDomainRegisterRequestConfig(order: Order) : RequestConfig<Order> {
         val localVariableBody = order
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -438,8 +438,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DomainRenew(renewReq: RenewReq) : RenewResult {
-        val localVarResponse = postV1DomainRenewWithHttpInfo(renewReq = renewReq)
+    fun postDomainRenew(renewReq: RenewReq) : RenewResult {
+        val localVarResponse = postDomainRenewWithHttpInfo(renewReq = renewReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RenewResult
@@ -467,8 +467,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DomainRenewWithHttpInfo(renewReq: RenewReq) : ApiResponse<RenewResult?> {
-        val localVariableConfig = postV1DomainRenewRequestConfig(renewReq = renewReq)
+    fun postDomainRenewWithHttpInfo(renewReq: RenewReq) : ApiResponse<RenewResult?> {
+        val localVariableConfig = postDomainRenewRequestConfig(renewReq = renewReq)
 
         return request<RenewReq, RenewResult>(
             localVariableConfig
@@ -476,12 +476,12 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1DomainRenew
+     * To obtain the request config of the operation postDomainRenew
      *
      * @param renewReq 
      * @return RequestConfig
      */
-    fun postV1DomainRenewRequestConfig(renewReq: RenewReq) : RequestConfig<RenewReq> {
+    fun postDomainRenewRequestConfig(renewReq: RenewReq) : RequestConfig<RenewReq> {
         val localVariableBody = renewReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -512,8 +512,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DomainTransfer(transferReq: TransferReq) : RegisterResult {
-        val localVarResponse = postV1DomainTransferWithHttpInfo(transferReq = transferReq)
+    fun postDomainTransfer(transferReq: TransferReq) : RegisterResult {
+        val localVarResponse = postDomainTransferWithHttpInfo(transferReq = transferReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterResult
@@ -541,8 +541,8 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DomainTransferWithHttpInfo(transferReq: TransferReq) : ApiResponse<RegisterResult?> {
-        val localVariableConfig = postV1DomainTransferRequestConfig(transferReq = transferReq)
+    fun postDomainTransferWithHttpInfo(transferReq: TransferReq) : ApiResponse<RegisterResult?> {
+        val localVariableConfig = postDomainTransferRequestConfig(transferReq = transferReq)
 
         return request<TransferReq, RegisterResult>(
             localVariableConfig
@@ -550,12 +550,12 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1DomainTransfer
+     * To obtain the request config of the operation postDomainTransfer
      *
      * @param transferReq 
      * @return RequestConfig
      */
-    fun postV1DomainTransferRequestConfig(transferReq: TransferReq) : RequestConfig<TransferReq> {
+    fun postDomainTransferRequestConfig(transferReq: TransferReq) : RequestConfig<TransferReq> {
         val localVariableBody = transferReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

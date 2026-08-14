@@ -59,8 +59,8 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Blueprint() : BlueprintIndex {
-        val localVarResponse = getV1BlueprintWithHttpInfo()
+    fun getBlueprint() : BlueprintIndex {
+        val localVarResponse = getBlueprintWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BlueprintIndex
@@ -87,8 +87,8 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BlueprintWithHttpInfo() : ApiResponse<BlueprintIndex?> {
-        val localVariableConfig = getV1BlueprintRequestConfig()
+    fun getBlueprintWithHttpInfo() : ApiResponse<BlueprintIndex?> {
+        val localVariableConfig = getBlueprintRequestConfig()
 
         return request<Unit, BlueprintIndex>(
             localVariableConfig
@@ -96,11 +96,11 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1Blueprint
+     * To obtain the request config of the operation getBlueprint
      *
      * @return RequestConfig
      */
-    fun getV1BlueprintRequestConfig() : RequestConfig<Unit> {
+    fun getBlueprintRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -129,8 +129,8 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BlueprintHealth() : BlueprintHealth {
-        val localVarResponse = getV1BlueprintHealthWithHttpInfo()
+    fun getBlueprintHealth() : BlueprintHealth {
+        val localVarResponse = getBlueprintHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BlueprintHealth
@@ -157,8 +157,8 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BlueprintHealthWithHttpInfo() : ApiResponse<BlueprintHealth?> {
-        val localVariableConfig = getV1BlueprintHealthRequestConfig()
+    fun getBlueprintHealthWithHttpInfo() : ApiResponse<BlueprintHealth?> {
+        val localVariableConfig = getBlueprintHealthRequestConfig()
 
         return request<Unit, BlueprintHealth>(
             localVariableConfig
@@ -166,11 +166,11 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1BlueprintHealth
+     * To obtain the request config of the operation getBlueprintHealth
      *
      * @return RequestConfig
      */
-    fun getV1BlueprintHealthRequestConfig() : RequestConfig<Unit> {
+    fun getBlueprintHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -198,8 +198,8 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BlueprintSbom() : Unit {
-        val localVarResponse = getV1BlueprintSbomWithHttpInfo()
+    fun getBlueprintSbom() : Unit {
+        val localVarResponse = getBlueprintSbomWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -225,8 +225,8 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BlueprintSbomWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1BlueprintSbomRequestConfig()
+    fun getBlueprintSbomWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getBlueprintSbomRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -234,11 +234,11 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1BlueprintSbom
+     * To obtain the request config of the operation getBlueprintSbom
      *
      * @return RequestConfig
      */
-    fun getV1BlueprintSbomRequestConfig() : RequestConfig<Unit> {
+    fun getBlueprintSbomRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

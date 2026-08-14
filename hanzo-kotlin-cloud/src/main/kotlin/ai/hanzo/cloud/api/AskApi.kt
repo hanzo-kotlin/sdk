@@ -60,8 +60,8 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Ask(askRequest: AskRequest? = null) : Unit {
-        val localVarResponse = postV1AskWithHttpInfo(askRequest = askRequest)
+    fun postAsk(askRequest: AskRequest? = null) : Unit {
+        val localVarResponse = postAskWithHttpInfo(askRequest = askRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -88,8 +88,8 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AskWithHttpInfo(askRequest: AskRequest?) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AskRequestConfig(askRequest = askRequest)
+    fun postAskWithHttpInfo(askRequest: AskRequest?) : ApiResponse<Unit?> {
+        val localVariableConfig = postAskRequestConfig(askRequest = askRequest)
 
         return request<AskRequest, Unit>(
             localVariableConfig
@@ -97,12 +97,12 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1Ask
+     * To obtain the request config of the operation postAsk
      *
      * @param askRequest  (optional)
      * @return RequestConfig
      */
-    fun postV1AskRequestConfig(askRequest: AskRequest?) : RequestConfig<AskRequest> {
+    fun postAskRequestConfig(askRequest: AskRequest?) : RequestConfig<AskRequest> {
         val localVariableBody = askRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

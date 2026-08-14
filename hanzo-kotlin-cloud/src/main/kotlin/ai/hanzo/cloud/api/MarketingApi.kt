@@ -84,8 +84,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1MarketingAudiencesById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1MarketingAudiencesByIdWithHttpInfo(id = id)
+    fun deleteMarketingAudiencesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteMarketingAudiencesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -112,8 +112,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1MarketingAudiencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1MarketingAudiencesByIdRequestConfig(id = id)
+    fun deleteMarketingAudiencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMarketingAudiencesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -121,12 +121,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1MarketingAudiencesById
+     * To obtain the request config of the operation deleteMarketingAudiencesById
      *
      * @param id ID is the audience id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun deleteV1MarketingAudiencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMarketingAudiencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -154,8 +154,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1MarketingCalendarById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1MarketingCalendarByIdWithHttpInfo(id = id)
+    fun deleteMarketingCalendarById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteMarketingCalendarByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -182,8 +182,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1MarketingCalendarByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1MarketingCalendarByIdRequestConfig(id = id)
+    fun deleteMarketingCalendarByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMarketingCalendarByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -191,12 +191,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1MarketingCalendarById
+     * To obtain the request config of the operation deleteMarketingCalendarById
      *
      * @param id ID is the post id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun deleteV1MarketingCalendarByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMarketingCalendarByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -224,8 +224,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1MarketingCampaignsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1MarketingCampaignsByIdWithHttpInfo(id = id)
+    fun deleteMarketingCampaignsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteMarketingCampaignsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -252,8 +252,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1MarketingCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1MarketingCampaignsByIdRequestConfig(id = id)
+    fun deleteMarketingCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMarketingCampaignsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -261,12 +261,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1MarketingCampaignsById
+     * To obtain the request config of the operation deleteMarketingCampaignsById
      *
      * @param id ID is the campaign id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun deleteV1MarketingCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMarketingCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -297,8 +297,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1MarketingSuppressions(channel: kotlin.String? = null, address: kotlin.String? = null, reason: kotlin.String? = null, createdAt: kotlin.Int? = null) : Unit {
-        val localVarResponse = deleteV1MarketingSuppressionsWithHttpInfo(channel = channel, address = address, reason = reason, createdAt = createdAt)
+    fun deleteMarketingSuppressions(channel: kotlin.String? = null, address: kotlin.String? = null, reason: kotlin.String? = null, createdAt: kotlin.Int? = null) : Unit {
+        val localVarResponse = deleteMarketingSuppressionsWithHttpInfo(channel = channel, address = address, reason = reason, createdAt = createdAt)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -328,8 +328,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1MarketingSuppressionsWithHttpInfo(channel: kotlin.String?, address: kotlin.String?, reason: kotlin.String?, createdAt: kotlin.Int?) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1MarketingSuppressionsRequestConfig(channel = channel, address = address, reason = reason, createdAt = createdAt)
+    fun deleteMarketingSuppressionsWithHttpInfo(channel: kotlin.String?, address: kotlin.String?, reason: kotlin.String?, createdAt: kotlin.Int?) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMarketingSuppressionsRequestConfig(channel = channel, address = address, reason = reason, createdAt = createdAt)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -337,7 +337,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1MarketingSuppressions
+     * To obtain the request config of the operation deleteMarketingSuppressions
      *
      * @param channel Channel is the surface opted out of: email, sms, social, meta, google or tiktok. Empty means email. Opting out of one leaves the others reachable. (optional)
      * @param address Address is the recipient, normalized (lower-cased, trimmed) so an opt-out cannot be slipped past on a case or whitespace difference. Required. (optional)
@@ -345,7 +345,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param createdAt CreatedAt is unix seconds, server-assigned. (optional)
      * @return RequestConfig
      */
-    fun deleteV1MarketingSuppressionsRequestConfig(channel: kotlin.String?, address: kotlin.String?, reason: kotlin.String?, createdAt: kotlin.Int?) : RequestConfig<Unit> {
+    fun deleteMarketingSuppressionsRequestConfig(channel: kotlin.String?, address: kotlin.String?, reason: kotlin.String?, createdAt: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -388,8 +388,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingAudiences(limit: kotlin.Int? = null) : AudienceList {
-        val localVarResponse = getV1MarketingAudiencesWithHttpInfo(limit = limit)
+    fun getMarketingAudiences(limit: kotlin.Int? = null) : AudienceList {
+        val localVarResponse = getMarketingAudiencesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AudienceList
@@ -417,8 +417,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingAudiencesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AudienceList?> {
-        val localVariableConfig = getV1MarketingAudiencesRequestConfig(limit = limit)
+    fun getMarketingAudiencesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AudienceList?> {
+        val localVariableConfig = getMarketingAudiencesRequestConfig(limit = limit)
 
         return request<Unit, AudienceList>(
             localVariableConfig
@@ -426,12 +426,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingAudiences
+     * To obtain the request config of the operation getMarketingAudiences
      *
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun getV1MarketingAudiencesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMarketingAudiencesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -466,8 +466,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingAudiencesById(id: kotlin.String) : Audience {
-        val localVarResponse = getV1MarketingAudiencesByIdWithHttpInfo(id = id)
+    fun getMarketingAudiencesById(id: kotlin.String) : Audience {
+        val localVarResponse = getMarketingAudiencesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Audience
@@ -495,8 +495,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingAudiencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Audience?> {
-        val localVariableConfig = getV1MarketingAudiencesByIdRequestConfig(id = id)
+    fun getMarketingAudiencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Audience?> {
+        val localVariableConfig = getMarketingAudiencesByIdRequestConfig(id = id)
 
         return request<Unit, Audience>(
             localVariableConfig
@@ -504,12 +504,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingAudiencesById
+     * To obtain the request config of the operation getMarketingAudiencesById
      *
      * @param id ID is the audience id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun getV1MarketingAudiencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getMarketingAudiencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -539,8 +539,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingAudiencesByIdPreview(id: kotlin.String) : AudiencePreview {
-        val localVarResponse = getV1MarketingAudiencesByIdPreviewWithHttpInfo(id = id)
+    fun getMarketingAudiencesByIdPreview(id: kotlin.String) : AudiencePreview {
+        val localVarResponse = getMarketingAudiencesByIdPreviewWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AudiencePreview
@@ -568,8 +568,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingAudiencesByIdPreviewWithHttpInfo(id: kotlin.String) : ApiResponse<AudiencePreview?> {
-        val localVariableConfig = getV1MarketingAudiencesByIdPreviewRequestConfig(id = id)
+    fun getMarketingAudiencesByIdPreviewWithHttpInfo(id: kotlin.String) : ApiResponse<AudiencePreview?> {
+        val localVariableConfig = getMarketingAudiencesByIdPreviewRequestConfig(id = id)
 
         return request<Unit, AudiencePreview>(
             localVariableConfig
@@ -577,12 +577,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingAudiencesByIdPreview
+     * To obtain the request config of the operation getMarketingAudiencesByIdPreview
      *
      * @param id ID is the audience id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun getV1MarketingAudiencesByIdPreviewRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getMarketingAudiencesByIdPreviewRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -613,8 +613,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingCalendar(status: kotlin.String? = null, limit: kotlin.Int? = null) : PostList {
-        val localVarResponse = getV1MarketingCalendarWithHttpInfo(status = status, limit = limit)
+    fun getMarketingCalendar(status: kotlin.String? = null, limit: kotlin.Int? = null) : PostList {
+        val localVarResponse = getMarketingCalendarWithHttpInfo(status = status, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PostList
@@ -643,8 +643,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingCalendarWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<PostList?> {
-        val localVariableConfig = getV1MarketingCalendarRequestConfig(status = status, limit = limit)
+    fun getMarketingCalendarWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<PostList?> {
+        val localVariableConfig = getMarketingCalendarRequestConfig(status = status, limit = limit)
 
         return request<Unit, PostList>(
             localVariableConfig
@@ -652,13 +652,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingCalendar
+     * To obtain the request config of the operation getMarketingCalendar
      *
      * @param status Status keeps only posts in that state (draft, scheduled, published, failed, canceled). Empty means every post. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun getV1MarketingCalendarRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMarketingCalendarRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -696,8 +696,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingCalendarById(id: kotlin.String) : CalendarPost {
-        val localVarResponse = getV1MarketingCalendarByIdWithHttpInfo(id = id)
+    fun getMarketingCalendarById(id: kotlin.String) : CalendarPost {
+        val localVarResponse = getMarketingCalendarByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CalendarPost
@@ -725,8 +725,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingCalendarByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CalendarPost?> {
-        val localVariableConfig = getV1MarketingCalendarByIdRequestConfig(id = id)
+    fun getMarketingCalendarByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CalendarPost?> {
+        val localVariableConfig = getMarketingCalendarByIdRequestConfig(id = id)
 
         return request<Unit, CalendarPost>(
             localVariableConfig
@@ -734,12 +734,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingCalendarById
+     * To obtain the request config of the operation getMarketingCalendarById
      *
      * @param id ID is the post id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun getV1MarketingCalendarByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getMarketingCalendarByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -770,8 +770,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingCampaigns(status: kotlin.String? = null, limit: kotlin.Int? = null) : CampaignList {
-        val localVarResponse = getV1MarketingCampaignsWithHttpInfo(status = status, limit = limit)
+    fun getMarketingCampaigns(status: kotlin.String? = null, limit: kotlin.Int? = null) : CampaignList {
+        val localVarResponse = getMarketingCampaignsWithHttpInfo(status = status, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignList
@@ -800,8 +800,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingCampaignsWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CampaignList?> {
-        val localVariableConfig = getV1MarketingCampaignsRequestConfig(status = status, limit = limit)
+    fun getMarketingCampaignsWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CampaignList?> {
+        val localVariableConfig = getMarketingCampaignsRequestConfig(status = status, limit = limit)
 
         return request<Unit, CampaignList>(
             localVariableConfig
@@ -809,13 +809,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingCampaigns
+     * To obtain the request config of the operation getMarketingCampaigns
      *
      * @param status Status keeps only campaigns in that lifecycle state (draft, scheduled, active, paused, completed). Empty means every campaign. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun getV1MarketingCampaignsRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMarketingCampaignsRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -853,8 +853,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingCampaignsById(id: kotlin.String) : Campaign {
-        val localVarResponse = getV1MarketingCampaignsByIdWithHttpInfo(id = id)
+    fun getMarketingCampaignsById(id: kotlin.String) : Campaign {
+        val localVarResponse = getMarketingCampaignsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Campaign
@@ -882,8 +882,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Campaign?> {
-        val localVariableConfig = getV1MarketingCampaignsByIdRequestConfig(id = id)
+    fun getMarketingCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Campaign?> {
+        val localVariableConfig = getMarketingCampaignsByIdRequestConfig(id = id)
 
         return request<Unit, Campaign>(
             localVariableConfig
@@ -891,12 +891,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingCampaignsById
+     * To obtain the request config of the operation getMarketingCampaignsById
      *
      * @param id ID is the campaign id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun getV1MarketingCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getMarketingCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -925,8 +925,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingPromos() : PromoList {
-        val localVarResponse = getV1MarketingPromosWithHttpInfo()
+    fun getMarketingPromos() : PromoList {
+        val localVarResponse = getMarketingPromosWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PromoList
@@ -953,8 +953,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingPromosWithHttpInfo() : ApiResponse<PromoList?> {
-        val localVariableConfig = getV1MarketingPromosRequestConfig()
+    fun getMarketingPromosWithHttpInfo() : ApiResponse<PromoList?> {
+        val localVariableConfig = getMarketingPromosRequestConfig()
 
         return request<Unit, PromoList>(
             localVariableConfig
@@ -962,11 +962,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingPromos
+     * To obtain the request config of the operation getMarketingPromos
      *
      * @return RequestConfig
      */
-    fun getV1MarketingPromosRequestConfig() : RequestConfig<Unit> {
+    fun getMarketingPromosRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -998,8 +998,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingPromosByCodeEligibility(code: kotlin.String, plan: kotlin.String? = null, seats: kotlin.Int? = null) : Quote {
-        val localVarResponse = getV1MarketingPromosByCodeEligibilityWithHttpInfo(code = code, plan = plan, seats = seats)
+    fun getMarketingPromosByCodeEligibility(code: kotlin.String, plan: kotlin.String? = null, seats: kotlin.Int? = null) : Quote {
+        val localVarResponse = getMarketingPromosByCodeEligibilityWithHttpInfo(code = code, plan = plan, seats = seats)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Quote
@@ -1029,8 +1029,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingPromosByCodeEligibilityWithHttpInfo(code: kotlin.String, plan: kotlin.String?, seats: kotlin.Int?) : ApiResponse<Quote?> {
-        val localVariableConfig = getV1MarketingPromosByCodeEligibilityRequestConfig(code = code, plan = plan, seats = seats)
+    fun getMarketingPromosByCodeEligibilityWithHttpInfo(code: kotlin.String, plan: kotlin.String?, seats: kotlin.Int?) : ApiResponse<Quote?> {
+        val localVariableConfig = getMarketingPromosByCodeEligibilityRequestConfig(code = code, plan = plan, seats = seats)
 
         return request<Unit, Quote>(
             localVariableConfig
@@ -1038,14 +1038,14 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingPromosByCodeEligibility
+     * To obtain the request config of the operation getMarketingPromosByCodeEligibility
      *
      * @param code Code is the promo code from the path.
      * @param plan Plan is the plan being priced: pro, max or team. Anything else (including the free Developer plan) has no list price and so nothing to discount. (optional)
      * @param seats Seats is the Team seat count; 0 means 1, and it is ignored for the single-seat plans. (optional)
      * @return RequestConfig
      */
-    fun getV1MarketingPromosByCodeEligibilityRequestConfig(code: kotlin.String, plan: kotlin.String?, seats: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMarketingPromosByCodeEligibilityRequestConfig(code: kotlin.String, plan: kotlin.String?, seats: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1083,8 +1083,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingPromosByCodeRedemption(code: kotlin.String) : Redemption {
-        val localVarResponse = getV1MarketingPromosByCodeRedemptionWithHttpInfo(code = code)
+    fun getMarketingPromosByCodeRedemption(code: kotlin.String) : Redemption {
+        val localVarResponse = getMarketingPromosByCodeRedemptionWithHttpInfo(code = code)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Redemption
@@ -1112,8 +1112,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingPromosByCodeRedemptionWithHttpInfo(code: kotlin.String) : ApiResponse<Redemption?> {
-        val localVariableConfig = getV1MarketingPromosByCodeRedemptionRequestConfig(code = code)
+    fun getMarketingPromosByCodeRedemptionWithHttpInfo(code: kotlin.String) : ApiResponse<Redemption?> {
+        val localVariableConfig = getMarketingPromosByCodeRedemptionRequestConfig(code = code)
 
         return request<Unit, Redemption>(
             localVariableConfig
@@ -1121,12 +1121,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingPromosByCodeRedemption
+     * To obtain the request config of the operation getMarketingPromosByCodeRedemption
      *
      * @param code Code is the promo code from the path, e.g. \&quot;first1000\&quot;.
      * @return RequestConfig
      */
-    fun getV1MarketingPromosByCodeRedemptionRequestConfig(code: kotlin.String) : RequestConfig<Unit> {
+    fun getMarketingPromosByCodeRedemptionRequestConfig(code: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1156,8 +1156,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingSequences(limit: kotlin.Int? = null) : SequenceList {
-        val localVarResponse = getV1MarketingSequencesWithHttpInfo(limit = limit)
+    fun getMarketingSequences(limit: kotlin.Int? = null) : SequenceList {
+        val localVarResponse = getMarketingSequencesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SequenceList
@@ -1185,8 +1185,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingSequencesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SequenceList?> {
-        val localVariableConfig = getV1MarketingSequencesRequestConfig(limit = limit)
+    fun getMarketingSequencesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SequenceList?> {
+        val localVariableConfig = getMarketingSequencesRequestConfig(limit = limit)
 
         return request<Unit, SequenceList>(
             localVariableConfig
@@ -1194,12 +1194,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingSequences
+     * To obtain the request config of the operation getMarketingSequences
      *
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun getV1MarketingSequencesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMarketingSequencesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1234,8 +1234,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingSequencesById(id: kotlin.String) : SequenceView {
-        val localVarResponse = getV1MarketingSequencesByIdWithHttpInfo(id = id)
+    fun getMarketingSequencesById(id: kotlin.String) : SequenceView {
+        val localVarResponse = getMarketingSequencesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SequenceView
@@ -1263,8 +1263,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingSequencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SequenceView?> {
-        val localVariableConfig = getV1MarketingSequencesByIdRequestConfig(id = id)
+    fun getMarketingSequencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SequenceView?> {
+        val localVariableConfig = getMarketingSequencesByIdRequestConfig(id = id)
 
         return request<Unit, SequenceView>(
             localVariableConfig
@@ -1272,12 +1272,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingSequencesById
+     * To obtain the request config of the operation getMarketingSequencesById
      *
      * @param id ID is the sequence id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun getV1MarketingSequencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getMarketingSequencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1308,8 +1308,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingSequencesByIdEnrollments(id: kotlin.String, limit: kotlin.Int? = null) : EnrollmentList {
-        val localVarResponse = getV1MarketingSequencesByIdEnrollmentsWithHttpInfo(id = id, limit = limit)
+    fun getMarketingSequencesByIdEnrollments(id: kotlin.String, limit: kotlin.Int? = null) : EnrollmentList {
+        val localVarResponse = getMarketingSequencesByIdEnrollmentsWithHttpInfo(id = id, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EnrollmentList
@@ -1338,8 +1338,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingSequencesByIdEnrollmentsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<EnrollmentList?> {
-        val localVariableConfig = getV1MarketingSequencesByIdEnrollmentsRequestConfig(id = id, limit = limit)
+    fun getMarketingSequencesByIdEnrollmentsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<EnrollmentList?> {
+        val localVariableConfig = getMarketingSequencesByIdEnrollmentsRequestConfig(id = id, limit = limit)
 
         return request<Unit, EnrollmentList>(
             localVariableConfig
@@ -1347,13 +1347,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingSequencesByIdEnrollments
+     * To obtain the request config of the operation getMarketingSequencesByIdEnrollments
      *
      * @param id ID is the sequence id from the path.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun getV1MarketingSequencesByIdEnrollmentsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMarketingSequencesByIdEnrollmentsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1388,8 +1388,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingSequencesByIdSteps(id: kotlin.String) : StepList {
-        val localVarResponse = getV1MarketingSequencesByIdStepsWithHttpInfo(id = id)
+    fun getMarketingSequencesByIdSteps(id: kotlin.String) : StepList {
+        val localVarResponse = getMarketingSequencesByIdStepsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StepList
@@ -1417,8 +1417,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingSequencesByIdStepsWithHttpInfo(id: kotlin.String) : ApiResponse<StepList?> {
-        val localVariableConfig = getV1MarketingSequencesByIdStepsRequestConfig(id = id)
+    fun getMarketingSequencesByIdStepsWithHttpInfo(id: kotlin.String) : ApiResponse<StepList?> {
+        val localVariableConfig = getMarketingSequencesByIdStepsRequestConfig(id = id)
 
         return request<Unit, StepList>(
             localVariableConfig
@@ -1426,12 +1426,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingSequencesByIdSteps
+     * To obtain the request config of the operation getMarketingSequencesByIdSteps
      *
      * @param id ID is the sequence id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun getV1MarketingSequencesByIdStepsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getMarketingSequencesByIdStepsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1460,8 +1460,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingSummary() : Summary {
-        val localVarResponse = getV1MarketingSummaryWithHttpInfo()
+    fun getMarketingSummary() : Summary {
+        val localVarResponse = getMarketingSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Summary
@@ -1488,8 +1488,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingSummaryWithHttpInfo() : ApiResponse<Summary?> {
-        val localVariableConfig = getV1MarketingSummaryRequestConfig()
+    fun getMarketingSummaryWithHttpInfo() : ApiResponse<Summary?> {
+        val localVariableConfig = getMarketingSummaryRequestConfig()
 
         return request<Unit, Summary>(
             localVariableConfig
@@ -1497,11 +1497,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingSummary
+     * To obtain the request config of the operation getMarketingSummary
      *
      * @return RequestConfig
      */
-    fun getV1MarketingSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getMarketingSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1531,8 +1531,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingSuppressions(limit: kotlin.Int? = null) : SuppressionList {
-        val localVarResponse = getV1MarketingSuppressionsWithHttpInfo(limit = limit)
+    fun getMarketingSuppressions(limit: kotlin.Int? = null) : SuppressionList {
+        val localVarResponse = getMarketingSuppressionsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SuppressionList
@@ -1560,8 +1560,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingSuppressionsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SuppressionList?> {
-        val localVariableConfig = getV1MarketingSuppressionsRequestConfig(limit = limit)
+    fun getMarketingSuppressionsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SuppressionList?> {
+        val localVariableConfig = getMarketingSuppressionsRequestConfig(limit = limit)
 
         return request<Unit, SuppressionList>(
             localVariableConfig
@@ -1569,12 +1569,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingSuppressions
+     * To obtain the request config of the operation getMarketingSuppressions
      *
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun getV1MarketingSuppressionsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMarketingSuppressionsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1612,8 +1612,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketingUnsubscribe(org: kotlin.String? = null, channel: kotlin.String? = null, address: kotlin.String? = null, token: kotlin.String? = null) : Unsubscribed {
-        val localVarResponse = getV1MarketingUnsubscribeWithHttpInfo(org = org, channel = channel, address = address, token = token)
+    fun getMarketingUnsubscribe(org: kotlin.String? = null, channel: kotlin.String? = null, address: kotlin.String? = null, token: kotlin.String? = null) : Unsubscribed {
+        val localVarResponse = getMarketingUnsubscribeWithHttpInfo(org = org, channel = channel, address = address, token = token)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Unsubscribed
@@ -1644,8 +1644,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketingUnsubscribeWithHttpInfo(org: kotlin.String?, channel: kotlin.String?, address: kotlin.String?, token: kotlin.String?) : ApiResponse<Unsubscribed?> {
-        val localVariableConfig = getV1MarketingUnsubscribeRequestConfig(org = org, channel = channel, address = address, token = token)
+    fun getMarketingUnsubscribeWithHttpInfo(org: kotlin.String?, channel: kotlin.String?, address: kotlin.String?, token: kotlin.String?) : ApiResponse<Unsubscribed?> {
+        val localVariableConfig = getMarketingUnsubscribeRequestConfig(org = org, channel = channel, address = address, token = token)
 
         return request<Unit, Unsubscribed>(
             localVariableConfig
@@ -1653,7 +1653,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketingUnsubscribe
+     * To obtain the request config of the operation getMarketingUnsubscribe
      *
      * @param org Org is the org the link was minted for. (optional)
      * @param channel Channel is the surface to opt out of. (optional)
@@ -1661,7 +1661,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param token Token is the HMAC over (org, channel, address). It is the ONLY authority here — there is no principal — so it binds the request to one tuple and nothing else. (optional)
      * @return RequestConfig
      */
-    fun getV1MarketingUnsubscribeRequestConfig(org: kotlin.String?, channel: kotlin.String?, address: kotlin.String?, token: kotlin.String?) : RequestConfig<Unit> {
+    fun getMarketingUnsubscribeRequestConfig(org: kotlin.String?, channel: kotlin.String?, address: kotlin.String?, token: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1705,8 +1705,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingAudiences(audience: Audience) : Audience {
-        val localVarResponse = postV1MarketingAudiencesWithHttpInfo(audience = audience)
+    fun postMarketingAudiences(audience: Audience) : Audience {
+        val localVarResponse = postMarketingAudiencesWithHttpInfo(audience = audience)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Audience
@@ -1734,8 +1734,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingAudiencesWithHttpInfo(audience: Audience) : ApiResponse<Audience?> {
-        val localVariableConfig = postV1MarketingAudiencesRequestConfig(audience = audience)
+    fun postMarketingAudiencesWithHttpInfo(audience: Audience) : ApiResponse<Audience?> {
+        val localVariableConfig = postMarketingAudiencesRequestConfig(audience = audience)
 
         return request<Audience, Audience>(
             localVariableConfig
@@ -1743,12 +1743,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingAudiences
+     * To obtain the request config of the operation postMarketingAudiences
      *
      * @param audience 
      * @return RequestConfig
      */
-    fun postV1MarketingAudiencesRequestConfig(audience: Audience) : RequestConfig<Audience> {
+    fun postMarketingAudiencesRequestConfig(audience: Audience) : RequestConfig<Audience> {
         val localVariableBody = audience
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1779,8 +1779,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingCalendar(calendarPost: CalendarPost) : CalendarPost {
-        val localVarResponse = postV1MarketingCalendarWithHttpInfo(calendarPost = calendarPost)
+    fun postMarketingCalendar(calendarPost: CalendarPost) : CalendarPost {
+        val localVarResponse = postMarketingCalendarWithHttpInfo(calendarPost = calendarPost)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CalendarPost
@@ -1808,8 +1808,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingCalendarWithHttpInfo(calendarPost: CalendarPost) : ApiResponse<CalendarPost?> {
-        val localVariableConfig = postV1MarketingCalendarRequestConfig(calendarPost = calendarPost)
+    fun postMarketingCalendarWithHttpInfo(calendarPost: CalendarPost) : ApiResponse<CalendarPost?> {
+        val localVariableConfig = postMarketingCalendarRequestConfig(calendarPost = calendarPost)
 
         return request<CalendarPost, CalendarPost>(
             localVariableConfig
@@ -1817,12 +1817,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingCalendar
+     * To obtain the request config of the operation postMarketingCalendar
      *
      * @param calendarPost 
      * @return RequestConfig
      */
-    fun postV1MarketingCalendarRequestConfig(calendarPost: CalendarPost) : RequestConfig<CalendarPost> {
+    fun postMarketingCalendarRequestConfig(calendarPost: CalendarPost) : RequestConfig<CalendarPost> {
         val localVariableBody = calendarPost
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1853,8 +1853,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingCalendarByIdPublish(id: kotlin.String) : CalendarPost {
-        val localVarResponse = postV1MarketingCalendarByIdPublishWithHttpInfo(id = id)
+    fun postMarketingCalendarByIdPublish(id: kotlin.String) : CalendarPost {
+        val localVarResponse = postMarketingCalendarByIdPublishWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CalendarPost
@@ -1882,8 +1882,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingCalendarByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<CalendarPost?> {
-        val localVariableConfig = postV1MarketingCalendarByIdPublishRequestConfig(id = id)
+    fun postMarketingCalendarByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<CalendarPost?> {
+        val localVariableConfig = postMarketingCalendarByIdPublishRequestConfig(id = id)
 
         return request<Unit, CalendarPost>(
             localVariableConfig
@@ -1891,12 +1891,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingCalendarByIdPublish
+     * To obtain the request config of the operation postMarketingCalendarByIdPublish
      *
      * @param id ID is the post id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun postV1MarketingCalendarByIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postMarketingCalendarByIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1926,8 +1926,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingCampaigns(campaign: Campaign) : Campaign {
-        val localVarResponse = postV1MarketingCampaignsWithHttpInfo(campaign = campaign)
+    fun postMarketingCampaigns(campaign: Campaign) : Campaign {
+        val localVarResponse = postMarketingCampaignsWithHttpInfo(campaign = campaign)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Campaign
@@ -1955,8 +1955,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingCampaignsWithHttpInfo(campaign: Campaign) : ApiResponse<Campaign?> {
-        val localVariableConfig = postV1MarketingCampaignsRequestConfig(campaign = campaign)
+    fun postMarketingCampaignsWithHttpInfo(campaign: Campaign) : ApiResponse<Campaign?> {
+        val localVariableConfig = postMarketingCampaignsRequestConfig(campaign = campaign)
 
         return request<Campaign, Campaign>(
             localVariableConfig
@@ -1964,12 +1964,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingCampaigns
+     * To obtain the request config of the operation postMarketingCampaigns
      *
      * @param campaign 
      * @return RequestConfig
      */
-    fun postV1MarketingCampaignsRequestConfig(campaign: Campaign) : RequestConfig<Campaign> {
+    fun postMarketingCampaignsRequestConfig(campaign: Campaign) : RequestConfig<Campaign> {
         val localVariableBody = campaign
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2001,8 +2001,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingCampaignsByIdSchedule(id: kotlin.String, scheduleInput: ScheduleInput) : Campaign {
-        val localVarResponse = postV1MarketingCampaignsByIdScheduleWithHttpInfo(id = id, scheduleInput = scheduleInput)
+    fun postMarketingCampaignsByIdSchedule(id: kotlin.String, scheduleInput: ScheduleInput) : Campaign {
+        val localVarResponse = postMarketingCampaignsByIdScheduleWithHttpInfo(id = id, scheduleInput = scheduleInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Campaign
@@ -2031,8 +2031,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingCampaignsByIdScheduleWithHttpInfo(id: kotlin.String, scheduleInput: ScheduleInput) : ApiResponse<Campaign?> {
-        val localVariableConfig = postV1MarketingCampaignsByIdScheduleRequestConfig(id = id, scheduleInput = scheduleInput)
+    fun postMarketingCampaignsByIdScheduleWithHttpInfo(id: kotlin.String, scheduleInput: ScheduleInput) : ApiResponse<Campaign?> {
+        val localVariableConfig = postMarketingCampaignsByIdScheduleRequestConfig(id = id, scheduleInput = scheduleInput)
 
         return request<ScheduleInput, Campaign>(
             localVariableConfig
@@ -2040,13 +2040,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingCampaignsByIdSchedule
+     * To obtain the request config of the operation postMarketingCampaignsByIdSchedule
      *
      * @param id ID is the campaign id from the path.
      * @param scheduleInput 
      * @return RequestConfig
      */
-    fun postV1MarketingCampaignsByIdScheduleRequestConfig(id: kotlin.String, scheduleInput: ScheduleInput) : RequestConfig<ScheduleInput> {
+    fun postMarketingCampaignsByIdScheduleRequestConfig(id: kotlin.String, scheduleInput: ScheduleInput) : RequestConfig<ScheduleInput> {
         val localVariableBody = scheduleInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2078,8 +2078,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingPromosByCodeRedeem(code: kotlin.String, redeemInput: RedeemInput) : RedeemResult {
-        val localVarResponse = postV1MarketingPromosByCodeRedeemWithHttpInfo(code = code, redeemInput = redeemInput)
+    fun postMarketingPromosByCodeRedeem(code: kotlin.String, redeemInput: RedeemInput) : RedeemResult {
+        val localVarResponse = postMarketingPromosByCodeRedeemWithHttpInfo(code = code, redeemInput = redeemInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RedeemResult
@@ -2108,8 +2108,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingPromosByCodeRedeemWithHttpInfo(code: kotlin.String, redeemInput: RedeemInput) : ApiResponse<RedeemResult?> {
-        val localVariableConfig = postV1MarketingPromosByCodeRedeemRequestConfig(code = code, redeemInput = redeemInput)
+    fun postMarketingPromosByCodeRedeemWithHttpInfo(code: kotlin.String, redeemInput: RedeemInput) : ApiResponse<RedeemResult?> {
+        val localVariableConfig = postMarketingPromosByCodeRedeemRequestConfig(code = code, redeemInput = redeemInput)
 
         return request<RedeemInput, RedeemResult>(
             localVariableConfig
@@ -2117,13 +2117,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingPromosByCodeRedeem
+     * To obtain the request config of the operation postMarketingPromosByCodeRedeem
      *
      * @param code Code is the promo code from the path.
      * @param redeemInput 
      * @return RequestConfig
      */
-    fun postV1MarketingPromosByCodeRedeemRequestConfig(code: kotlin.String, redeemInput: RedeemInput) : RequestConfig<RedeemInput> {
+    fun postMarketingPromosByCodeRedeemRequestConfig(code: kotlin.String, redeemInput: RedeemInput) : RequestConfig<RedeemInput> {
         val localVariableBody = redeemInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2154,8 +2154,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingSequences(sequence: Sequence) : Sequence {
-        val localVarResponse = postV1MarketingSequencesWithHttpInfo(sequence = sequence)
+    fun postMarketingSequences(sequence: Sequence) : Sequence {
+        val localVarResponse = postMarketingSequencesWithHttpInfo(sequence = sequence)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Sequence
@@ -2183,8 +2183,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingSequencesWithHttpInfo(sequence: Sequence) : ApiResponse<Sequence?> {
-        val localVariableConfig = postV1MarketingSequencesRequestConfig(sequence = sequence)
+    fun postMarketingSequencesWithHttpInfo(sequence: Sequence) : ApiResponse<Sequence?> {
+        val localVariableConfig = postMarketingSequencesRequestConfig(sequence = sequence)
 
         return request<Sequence, Sequence>(
             localVariableConfig
@@ -2192,12 +2192,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingSequences
+     * To obtain the request config of the operation postMarketingSequences
      *
      * @param sequence 
      * @return RequestConfig
      */
-    fun postV1MarketingSequencesRequestConfig(sequence: Sequence) : RequestConfig<Sequence> {
+    fun postMarketingSequencesRequestConfig(sequence: Sequence) : RequestConfig<Sequence> {
         val localVariableBody = sequence
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2229,8 +2229,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingSequencesByIdEnroll(id: kotlin.String, enrollInput: EnrollInput) : EnrollResult {
-        val localVarResponse = postV1MarketingSequencesByIdEnrollWithHttpInfo(id = id, enrollInput = enrollInput)
+    fun postMarketingSequencesByIdEnroll(id: kotlin.String, enrollInput: EnrollInput) : EnrollResult {
+        val localVarResponse = postMarketingSequencesByIdEnrollWithHttpInfo(id = id, enrollInput = enrollInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EnrollResult
@@ -2259,8 +2259,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingSequencesByIdEnrollWithHttpInfo(id: kotlin.String, enrollInput: EnrollInput) : ApiResponse<EnrollResult?> {
-        val localVariableConfig = postV1MarketingSequencesByIdEnrollRequestConfig(id = id, enrollInput = enrollInput)
+    fun postMarketingSequencesByIdEnrollWithHttpInfo(id: kotlin.String, enrollInput: EnrollInput) : ApiResponse<EnrollResult?> {
+        val localVariableConfig = postMarketingSequencesByIdEnrollRequestConfig(id = id, enrollInput = enrollInput)
 
         return request<EnrollInput, EnrollResult>(
             localVariableConfig
@@ -2268,13 +2268,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingSequencesByIdEnroll
+     * To obtain the request config of the operation postMarketingSequencesByIdEnroll
      *
      * @param id ID is the sequence id from the path.
      * @param enrollInput 
      * @return RequestConfig
      */
-    fun postV1MarketingSequencesByIdEnrollRequestConfig(id: kotlin.String, enrollInput: EnrollInput) : RequestConfig<EnrollInput> {
+    fun postMarketingSequencesByIdEnrollRequestConfig(id: kotlin.String, enrollInput: EnrollInput) : RequestConfig<EnrollInput> {
         val localVariableBody = enrollInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2305,8 +2305,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingSequencesByIdEnrollmentsByEidCancel(id: kotlin.String, eid: kotlin.String) : Unit {
-        val localVarResponse = postV1MarketingSequencesByIdEnrollmentsByEidCancelWithHttpInfo(id = id, eid = eid)
+    fun postMarketingSequencesByIdEnrollmentsByEidCancel(id: kotlin.String, eid: kotlin.String) : Unit {
+        val localVarResponse = postMarketingSequencesByIdEnrollmentsByEidCancelWithHttpInfo(id = id, eid = eid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2334,8 +2334,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingSequencesByIdEnrollmentsByEidCancelWithHttpInfo(id: kotlin.String, eid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MarketingSequencesByIdEnrollmentsByEidCancelRequestConfig(id = id, eid = eid)
+    fun postMarketingSequencesByIdEnrollmentsByEidCancelWithHttpInfo(id: kotlin.String, eid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postMarketingSequencesByIdEnrollmentsByEidCancelRequestConfig(id = id, eid = eid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2343,13 +2343,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingSequencesByIdEnrollmentsByEidCancel
+     * To obtain the request config of the operation postMarketingSequencesByIdEnrollmentsByEidCancel
      *
      * @param id ID is the sequence id from the path.
      * @param eid EID is the enrollment id from the path, as returned by a single-address enroll.
      * @return RequestConfig
      */
-    fun postV1MarketingSequencesByIdEnrollmentsByEidCancelRequestConfig(id: kotlin.String, eid: kotlin.String) : RequestConfig<Unit> {
+    fun postMarketingSequencesByIdEnrollmentsByEidCancelRequestConfig(id: kotlin.String, eid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2379,8 +2379,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingSequencesByIdStatus(id: kotlin.String, sequenceStatus: SequenceStatus) : SequenceStatus {
-        val localVarResponse = postV1MarketingSequencesByIdStatusWithHttpInfo(id = id, sequenceStatus = sequenceStatus)
+    fun postMarketingSequencesByIdStatus(id: kotlin.String, sequenceStatus: SequenceStatus) : SequenceStatus {
+        val localVarResponse = postMarketingSequencesByIdStatusWithHttpInfo(id = id, sequenceStatus = sequenceStatus)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SequenceStatus
@@ -2409,8 +2409,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingSequencesByIdStatusWithHttpInfo(id: kotlin.String, sequenceStatus: SequenceStatus) : ApiResponse<SequenceStatus?> {
-        val localVariableConfig = postV1MarketingSequencesByIdStatusRequestConfig(id = id, sequenceStatus = sequenceStatus)
+    fun postMarketingSequencesByIdStatusWithHttpInfo(id: kotlin.String, sequenceStatus: SequenceStatus) : ApiResponse<SequenceStatus?> {
+        val localVariableConfig = postMarketingSequencesByIdStatusRequestConfig(id = id, sequenceStatus = sequenceStatus)
 
         return request<SequenceStatus, SequenceStatus>(
             localVariableConfig
@@ -2418,13 +2418,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingSequencesByIdStatus
+     * To obtain the request config of the operation postMarketingSequencesByIdStatus
      *
      * @param id ID is the sequence id from the path.
      * @param sequenceStatus 
      * @return RequestConfig
      */
-    fun postV1MarketingSequencesByIdStatusRequestConfig(id: kotlin.String, sequenceStatus: SequenceStatus) : RequestConfig<SequenceStatus> {
+    fun postMarketingSequencesByIdStatusRequestConfig(id: kotlin.String, sequenceStatus: SequenceStatus) : RequestConfig<SequenceStatus> {
         val localVariableBody = sequenceStatus
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2456,8 +2456,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingSequencesByIdSteps(id: kotlin.String, stepInput: StepInput) : Step {
-        val localVarResponse = postV1MarketingSequencesByIdStepsWithHttpInfo(id = id, stepInput = stepInput)
+    fun postMarketingSequencesByIdSteps(id: kotlin.String, stepInput: StepInput) : Step {
+        val localVarResponse = postMarketingSequencesByIdStepsWithHttpInfo(id = id, stepInput = stepInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Step
@@ -2486,8 +2486,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingSequencesByIdStepsWithHttpInfo(id: kotlin.String, stepInput: StepInput) : ApiResponse<Step?> {
-        val localVariableConfig = postV1MarketingSequencesByIdStepsRequestConfig(id = id, stepInput = stepInput)
+    fun postMarketingSequencesByIdStepsWithHttpInfo(id: kotlin.String, stepInput: StepInput) : ApiResponse<Step?> {
+        val localVariableConfig = postMarketingSequencesByIdStepsRequestConfig(id = id, stepInput = stepInput)
 
         return request<StepInput, Step>(
             localVariableConfig
@@ -2495,13 +2495,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingSequencesByIdSteps
+     * To obtain the request config of the operation postMarketingSequencesByIdSteps
      *
      * @param id SequenceID is the sequence id from the path (the route&#39;s :id).
      * @param stepInput 
      * @return RequestConfig
      */
-    fun postV1MarketingSequencesByIdStepsRequestConfig(id: kotlin.String, stepInput: StepInput) : RequestConfig<StepInput> {
+    fun postMarketingSequencesByIdStepsRequestConfig(id: kotlin.String, stepInput: StepInput) : RequestConfig<StepInput> {
         val localVariableBody = stepInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2532,8 +2532,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketingSuppressions(suppression: Suppression) : Suppression {
-        val localVarResponse = postV1MarketingSuppressionsWithHttpInfo(suppression = suppression)
+    fun postMarketingSuppressions(suppression: Suppression) : Suppression {
+        val localVarResponse = postMarketingSuppressionsWithHttpInfo(suppression = suppression)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Suppression
@@ -2561,8 +2561,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketingSuppressionsWithHttpInfo(suppression: Suppression) : ApiResponse<Suppression?> {
-        val localVariableConfig = postV1MarketingSuppressionsRequestConfig(suppression = suppression)
+    fun postMarketingSuppressionsWithHttpInfo(suppression: Suppression) : ApiResponse<Suppression?> {
+        val localVariableConfig = postMarketingSuppressionsRequestConfig(suppression = suppression)
 
         return request<Suppression, Suppression>(
             localVariableConfig
@@ -2570,12 +2570,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketingSuppressions
+     * To obtain the request config of the operation postMarketingSuppressions
      *
      * @param suppression 
      * @return RequestConfig
      */
-    fun postV1MarketingSuppressionsRequestConfig(suppression: Suppression) : RequestConfig<Suppression> {
+    fun postMarketingSuppressionsRequestConfig(suppression: Suppression) : RequestConfig<Suppression> {
         val localVariableBody = suppression
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2607,8 +2607,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1MarketingCalendarById(id: kotlin.String, calendarPost: CalendarPost) : CalendarPost {
-        val localVarResponse = putV1MarketingCalendarByIdWithHttpInfo(id = id, calendarPost = calendarPost)
+    fun putMarketingCalendarById(id: kotlin.String, calendarPost: CalendarPost) : CalendarPost {
+        val localVarResponse = putMarketingCalendarByIdWithHttpInfo(id = id, calendarPost = calendarPost)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CalendarPost
@@ -2637,8 +2637,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1MarketingCalendarByIdWithHttpInfo(id: kotlin.String, calendarPost: CalendarPost) : ApiResponse<CalendarPost?> {
-        val localVariableConfig = putV1MarketingCalendarByIdRequestConfig(id = id, calendarPost = calendarPost)
+    fun putMarketingCalendarByIdWithHttpInfo(id: kotlin.String, calendarPost: CalendarPost) : ApiResponse<CalendarPost?> {
+        val localVariableConfig = putMarketingCalendarByIdRequestConfig(id = id, calendarPost = calendarPost)
 
         return request<CalendarPost, CalendarPost>(
             localVariableConfig
@@ -2646,13 +2646,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation putV1MarketingCalendarById
+     * To obtain the request config of the operation putMarketingCalendarById
      *
      * @param id ID is the server-assigned post id (\&quot;cal_\&quot; + 128 random bits).
      * @param calendarPost 
      * @return RequestConfig
      */
-    fun putV1MarketingCalendarByIdRequestConfig(id: kotlin.String, calendarPost: CalendarPost) : RequestConfig<CalendarPost> {
+    fun putMarketingCalendarByIdRequestConfig(id: kotlin.String, calendarPost: CalendarPost) : RequestConfig<CalendarPost> {
         val localVariableBody = calendarPost
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2684,8 +2684,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1MarketingCampaignsById(id: kotlin.String, campaign: Campaign) : Campaign {
-        val localVarResponse = putV1MarketingCampaignsByIdWithHttpInfo(id = id, campaign = campaign)
+    fun putMarketingCampaignsById(id: kotlin.String, campaign: Campaign) : Campaign {
+        val localVarResponse = putMarketingCampaignsByIdWithHttpInfo(id = id, campaign = campaign)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Campaign
@@ -2714,8 +2714,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1MarketingCampaignsByIdWithHttpInfo(id: kotlin.String, campaign: Campaign) : ApiResponse<Campaign?> {
-        val localVariableConfig = putV1MarketingCampaignsByIdRequestConfig(id = id, campaign = campaign)
+    fun putMarketingCampaignsByIdWithHttpInfo(id: kotlin.String, campaign: Campaign) : ApiResponse<Campaign?> {
+        val localVariableConfig = putMarketingCampaignsByIdRequestConfig(id = id, campaign = campaign)
 
         return request<Campaign, Campaign>(
             localVariableConfig
@@ -2723,13 +2723,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation putV1MarketingCampaignsById
+     * To obtain the request config of the operation putMarketingCampaignsById
      *
      * @param id ID is the server-assigned campaign id (\&quot;camp_\&quot; + 128 random bits).
      * @param campaign 
      * @return RequestConfig
      */
-    fun putV1MarketingCampaignsByIdRequestConfig(id: kotlin.String, campaign: Campaign) : RequestConfig<Campaign> {
+    fun putMarketingCampaignsByIdRequestConfig(id: kotlin.String, campaign: Campaign) : RequestConfig<Campaign> {
         val localVariableBody = campaign
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

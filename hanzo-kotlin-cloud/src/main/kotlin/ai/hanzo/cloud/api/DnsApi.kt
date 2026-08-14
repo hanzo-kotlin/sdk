@@ -57,8 +57,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteDnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteDnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -85,8 +85,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteDnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteDnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1DnsByWildcard1
+     * To obtain the request config of the operation deleteDnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteDnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -127,8 +127,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getDnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getDnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -155,8 +155,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getDnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getDnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,12 +164,12 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1DnsByWildcard1
+     * To obtain the request config of the operation getDnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getDnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -197,8 +197,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = patchV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchDnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchDnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -225,8 +225,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchDnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchDnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -234,12 +234,12 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation patchV1DnsByWildcard1
+     * To obtain the request config of the operation patchDnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun patchV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchDnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -267,8 +267,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = postV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postDnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postDnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -295,8 +295,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postDnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postDnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -304,12 +304,12 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1DnsByWildcard1
+     * To obtain the request config of the operation postDnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun postV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postDnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -337,8 +337,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = putV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putDnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putDnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -365,8 +365,8 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putDnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putDnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -374,12 +374,12 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putV1DnsByWildcard1
+     * To obtain the request config of the operation putDnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun putV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putDnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

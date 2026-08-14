@@ -82,8 +82,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksAccounts(sandbox: kotlin.String? = null) : kotlin.collections.List<Account> {
-        val localVarResponse = getV1BooksAccountsWithHttpInfo(sandbox = sandbox)
+    fun getBooksAccounts(sandbox: kotlin.String? = null) : kotlin.collections.List<Account> {
+        val localVarResponse = getBooksAccountsWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Account>
@@ -111,8 +111,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksAccountsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<kotlin.collections.List<Account>?> {
-        val localVariableConfig = getV1BooksAccountsRequestConfig(sandbox = sandbox)
+    fun getBooksAccountsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<kotlin.collections.List<Account>?> {
+        val localVariableConfig = getBooksAccountsRequestConfig(sandbox = sandbox)
 
         return request<Unit, kotlin.collections.List<Account>>(
             localVariableConfig
@@ -120,12 +120,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksAccounts
+     * To obtain the request config of the operation getBooksAccounts
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksAccountsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksAccountsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -161,8 +161,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksBankTransactions(sandbox: kotlin.String? = null, limit: kotlin.Int? = null) : kotlin.collections.List<BankTxnRow> {
-        val localVarResponse = getV1BooksBankTransactionsWithHttpInfo(sandbox = sandbox, limit = limit)
+    fun getBooksBankTransactions(sandbox: kotlin.String? = null, limit: kotlin.Int? = null) : kotlin.collections.List<BankTxnRow> {
+        val localVarResponse = getBooksBankTransactionsWithHttpInfo(sandbox = sandbox, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<BankTxnRow>
@@ -191,8 +191,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksBankTransactionsWithHttpInfo(sandbox: kotlin.String?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<BankTxnRow>?> {
-        val localVariableConfig = getV1BooksBankTransactionsRequestConfig(sandbox = sandbox, limit = limit)
+    fun getBooksBankTransactionsWithHttpInfo(sandbox: kotlin.String?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<BankTxnRow>?> {
+        val localVariableConfig = getBooksBankTransactionsRequestConfig(sandbox = sandbox, limit = limit)
 
         return request<Unit, kotlin.collections.List<BankTxnRow>>(
             localVariableConfig
@@ -200,13 +200,13 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksBankTransactions
+     * To obtain the request config of the operation getBooksBankTransactions
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param limit Limit caps how many rows come back; 500 when absent or not positive. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksBankTransactionsRequestConfig(sandbox: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getBooksBankTransactionsRequestConfig(sandbox: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -244,8 +244,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksBankUnreconciled(sandbox: kotlin.String? = null) : UnreconciledOut {
-        val localVarResponse = getV1BooksBankUnreconciledWithHttpInfo(sandbox = sandbox)
+    fun getBooksBankUnreconciled(sandbox: kotlin.String? = null) : UnreconciledOut {
+        val localVarResponse = getBooksBankUnreconciledWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UnreconciledOut
@@ -273,8 +273,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksBankUnreconciledWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<UnreconciledOut?> {
-        val localVariableConfig = getV1BooksBankUnreconciledRequestConfig(sandbox = sandbox)
+    fun getBooksBankUnreconciledWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<UnreconciledOut?> {
+        val localVariableConfig = getBooksBankUnreconciledRequestConfig(sandbox = sandbox)
 
         return request<Unit, UnreconciledOut>(
             localVariableConfig
@@ -282,12 +282,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksBankUnreconciled
+     * To obtain the request config of the operation getBooksBankUnreconciled
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksBankUnreconciledRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksBankUnreconciledRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -326,8 +326,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksExport(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null, format: kotlin.String? = null, limit: kotlin.Int? = null) : FinancialPackage {
-        val localVarResponse = getV1BooksExportWithHttpInfo(sandbox = sandbox, from = from, to = to, format = format, limit = limit)
+    fun getBooksExport(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null, format: kotlin.String? = null, limit: kotlin.Int? = null) : FinancialPackage {
+        val localVarResponse = getBooksExportWithHttpInfo(sandbox = sandbox, from = from, to = to, format = format, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FinancialPackage
@@ -359,8 +359,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksExportWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, format: kotlin.String?, limit: kotlin.Int?) : ApiResponse<FinancialPackage?> {
-        val localVariableConfig = getV1BooksExportRequestConfig(sandbox = sandbox, from = from, to = to, format = format, limit = limit)
+    fun getBooksExportWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, format: kotlin.String?, limit: kotlin.Int?) : ApiResponse<FinancialPackage?> {
+        val localVariableConfig = getBooksExportRequestConfig(sandbox = sandbox, from = from, to = to, format = format, limit = limit)
 
         return request<Unit, FinancialPackage>(
             localVariableConfig
@@ -368,7 +368,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksExport
+     * To obtain the request config of the operation getBooksExport
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
@@ -377,7 +377,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param limit Limit caps the GL detail rows included as the audit trail; 5000 when absent or not positive. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksExportRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, format: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getBooksExportRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, format: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -425,8 +425,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksGl(sandbox: kotlin.String? = null, limit: kotlin.Int? = null) : kotlin.collections.List<GLRow> {
-        val localVarResponse = getV1BooksGlWithHttpInfo(sandbox = sandbox, limit = limit)
+    fun getBooksGl(sandbox: kotlin.String? = null, limit: kotlin.Int? = null) : kotlin.collections.List<GLRow> {
+        val localVarResponse = getBooksGlWithHttpInfo(sandbox = sandbox, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<GLRow>
@@ -455,8 +455,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksGlWithHttpInfo(sandbox: kotlin.String?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<GLRow>?> {
-        val localVariableConfig = getV1BooksGlRequestConfig(sandbox = sandbox, limit = limit)
+    fun getBooksGlWithHttpInfo(sandbox: kotlin.String?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<GLRow>?> {
+        val localVariableConfig = getBooksGlRequestConfig(sandbox = sandbox, limit = limit)
 
         return request<Unit, kotlin.collections.List<GLRow>>(
             localVariableConfig
@@ -464,13 +464,13 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksGl
+     * To obtain the request config of the operation getBooksGl
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param limit Limit caps how many rows come back; 500 when absent or not positive. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksGlRequestConfig(sandbox: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getBooksGlRequestConfig(sandbox: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -508,8 +508,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksInbox(sandbox: kotlin.String? = null) : InboxOut {
-        val localVarResponse = getV1BooksInboxWithHttpInfo(sandbox = sandbox)
+    fun getBooksInbox(sandbox: kotlin.String? = null) : InboxOut {
+        val localVarResponse = getBooksInboxWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InboxOut
@@ -537,8 +537,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksInboxWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<InboxOut?> {
-        val localVariableConfig = getV1BooksInboxRequestConfig(sandbox = sandbox)
+    fun getBooksInboxWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<InboxOut?> {
+        val localVariableConfig = getBooksInboxRequestConfig(sandbox = sandbox)
 
         return request<Unit, InboxOut>(
             localVariableConfig
@@ -546,12 +546,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksInbox
+     * To obtain the request config of the operation getBooksInbox
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksInboxRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksInboxRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -588,8 +588,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksMetrics(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : MetricsResponse {
-        val localVarResponse = getV1BooksMetricsWithHttpInfo(sandbox = sandbox, from = from, to = to)
+    fun getBooksMetrics(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : MetricsResponse {
+        val localVarResponse = getBooksMetricsWithHttpInfo(sandbox = sandbox, from = from, to = to)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MetricsResponse
@@ -619,8 +619,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksMetricsWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<MetricsResponse?> {
-        val localVariableConfig = getV1BooksMetricsRequestConfig(sandbox = sandbox, from = from, to = to)
+    fun getBooksMetricsWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<MetricsResponse?> {
+        val localVariableConfig = getBooksMetricsRequestConfig(sandbox = sandbox, from = from, to = to)
 
         return request<Unit, MetricsResponse>(
             localVariableConfig
@@ -628,14 +628,14 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksMetrics
+     * To obtain the request config of the operation getBooksMetrics
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksMetricsRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksMetricsRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -678,8 +678,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksPnl(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : PnL {
-        val localVarResponse = getV1BooksPnlWithHttpInfo(sandbox = sandbox, from = from, to = to)
+    fun getBooksPnl(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : PnL {
+        val localVarResponse = getBooksPnlWithHttpInfo(sandbox = sandbox, from = from, to = to)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PnL
@@ -709,8 +709,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksPnlWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<PnL?> {
-        val localVariableConfig = getV1BooksPnlRequestConfig(sandbox = sandbox, from = from, to = to)
+    fun getBooksPnlWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<PnL?> {
+        val localVariableConfig = getBooksPnlRequestConfig(sandbox = sandbox, from = from, to = to)
 
         return request<Unit, PnL>(
             localVariableConfig
@@ -718,14 +718,14 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksPnl
+     * To obtain the request config of the operation getBooksPnl
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksPnlRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksPnlRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -767,8 +767,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksPosition(sandbox: kotlin.String? = null, to: kotlin.String? = null) : BalanceSheet {
-        val localVarResponse = getV1BooksPositionWithHttpInfo(sandbox = sandbox, to = to)
+    fun getBooksPosition(sandbox: kotlin.String? = null, to: kotlin.String? = null) : BalanceSheet {
+        val localVarResponse = getBooksPositionWithHttpInfo(sandbox = sandbox, to = to)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BalanceSheet
@@ -797,8 +797,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksPositionWithHttpInfo(sandbox: kotlin.String?, to: kotlin.String?) : ApiResponse<BalanceSheet?> {
-        val localVariableConfig = getV1BooksPositionRequestConfig(sandbox = sandbox, to = to)
+    fun getBooksPositionWithHttpInfo(sandbox: kotlin.String?, to: kotlin.String?) : ApiResponse<BalanceSheet?> {
+        val localVariableConfig = getBooksPositionRequestConfig(sandbox = sandbox, to = to)
 
         return request<Unit, BalanceSheet>(
             localVariableConfig
@@ -806,13 +806,13 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksPosition
+     * To obtain the request config of the operation getBooksPosition
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param to To is the RFC3339 instant the statement is struck as of. Empty means all time. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksPositionRequestConfig(sandbox: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksPositionRequestConfig(sandbox: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -850,8 +850,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksQuestions(sandbox: kotlin.String? = null) : QuestionsResponse {
-        val localVarResponse = getV1BooksQuestionsWithHttpInfo(sandbox = sandbox)
+    fun getBooksQuestions(sandbox: kotlin.String? = null) : QuestionsResponse {
+        val localVarResponse = getBooksQuestionsWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as QuestionsResponse
@@ -879,8 +879,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksQuestionsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<QuestionsResponse?> {
-        val localVariableConfig = getV1BooksQuestionsRequestConfig(sandbox = sandbox)
+    fun getBooksQuestionsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<QuestionsResponse?> {
+        val localVariableConfig = getBooksQuestionsRequestConfig(sandbox = sandbox)
 
         return request<Unit, QuestionsResponse>(
             localVariableConfig
@@ -888,12 +888,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksQuestions
+     * To obtain the request config of the operation getBooksQuestions
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksQuestionsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksQuestionsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -928,8 +928,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksRules(sandbox: kotlin.String? = null) : RulesOut {
-        val localVarResponse = getV1BooksRulesWithHttpInfo(sandbox = sandbox)
+    fun getBooksRules(sandbox: kotlin.String? = null) : RulesOut {
+        val localVarResponse = getBooksRulesWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RulesOut
@@ -957,8 +957,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksRulesWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<RulesOut?> {
-        val localVariableConfig = getV1BooksRulesRequestConfig(sandbox = sandbox)
+    fun getBooksRulesWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<RulesOut?> {
+        val localVariableConfig = getBooksRulesRequestConfig(sandbox = sandbox)
 
         return request<Unit, RulesOut>(
             localVariableConfig
@@ -966,12 +966,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksRules
+     * To obtain the request config of the operation getBooksRules
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksRulesRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksRulesRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1011,8 +1011,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksTransactions(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null, category: kotlin.String? = null, vendor: kotlin.String? = null, limit: kotlin.Int? = null) : TransactionsOut {
-        val localVarResponse = getV1BooksTransactionsWithHttpInfo(sandbox = sandbox, from = from, to = to, category = category, vendor = vendor, limit = limit)
+    fun getBooksTransactions(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null, category: kotlin.String? = null, vendor: kotlin.String? = null, limit: kotlin.Int? = null) : TransactionsOut {
+        val localVarResponse = getBooksTransactionsWithHttpInfo(sandbox = sandbox, from = from, to = to, category = category, vendor = vendor, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TransactionsOut
@@ -1045,8 +1045,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksTransactionsWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, category: kotlin.String?, vendor: kotlin.String?, limit: kotlin.Int?) : ApiResponse<TransactionsOut?> {
-        val localVariableConfig = getV1BooksTransactionsRequestConfig(sandbox = sandbox, from = from, to = to, category = category, vendor = vendor, limit = limit)
+    fun getBooksTransactionsWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, category: kotlin.String?, vendor: kotlin.String?, limit: kotlin.Int?) : ApiResponse<TransactionsOut?> {
+        val localVariableConfig = getBooksTransactionsRequestConfig(sandbox = sandbox, from = from, to = to, category = category, vendor = vendor, limit = limit)
 
         return request<Unit, TransactionsOut>(
             localVariableConfig
@@ -1054,7 +1054,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksTransactions
+     * To obtain the request config of the operation getBooksTransactions
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the posting-time window, inclusive. (optional)
@@ -1064,7 +1064,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param limit Limit caps how many rows come back; 200 when absent or not positive. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksTransactionsRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, category: kotlin.String?, vendor: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getBooksTransactionsRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, category: kotlin.String?, vendor: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1116,8 +1116,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksTrial(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : TrialBalance {
-        val localVarResponse = getV1BooksTrialWithHttpInfo(sandbox = sandbox, from = from, to = to)
+    fun getBooksTrial(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : TrialBalance {
+        val localVarResponse = getBooksTrialWithHttpInfo(sandbox = sandbox, from = from, to = to)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TrialBalance
@@ -1147,8 +1147,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksTrialWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<TrialBalance?> {
-        val localVariableConfig = getV1BooksTrialRequestConfig(sandbox = sandbox, from = from, to = to)
+    fun getBooksTrialWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<TrialBalance?> {
+        val localVariableConfig = getBooksTrialRequestConfig(sandbox = sandbox, from = from, to = to)
 
         return request<Unit, TrialBalance>(
             localVariableConfig
@@ -1156,14 +1156,14 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksTrial
+     * To obtain the request config of the operation getBooksTrial
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksTrialRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksTrialRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1204,8 +1204,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BooksVendors(sandbox: kotlin.String? = null) : VendorsOut {
-        val localVarResponse = getV1BooksVendorsWithHttpInfo(sandbox = sandbox)
+    fun getBooksVendors(sandbox: kotlin.String? = null) : VendorsOut {
+        val localVarResponse = getBooksVendorsWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VendorsOut
@@ -1233,8 +1233,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BooksVendorsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<VendorsOut?> {
-        val localVariableConfig = getV1BooksVendorsRequestConfig(sandbox = sandbox)
+    fun getBooksVendorsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<VendorsOut?> {
+        val localVariableConfig = getBooksVendorsRequestConfig(sandbox = sandbox)
 
         return request<Unit, VendorsOut>(
             localVariableConfig
@@ -1242,12 +1242,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1BooksVendors
+     * To obtain the request config of the operation getBooksVendors
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun getV1BooksVendorsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getBooksVendorsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1282,8 +1282,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksAsk(askRequest: AskRequest) : AskResponse {
-        val localVarResponse = postV1BooksAskWithHttpInfo(askRequest = askRequest)
+    fun postBooksAsk(askRequest: AskRequest) : AskResponse {
+        val localVarResponse = postBooksAskWithHttpInfo(askRequest = askRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AskResponse
@@ -1311,8 +1311,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksAskWithHttpInfo(askRequest: AskRequest) : ApiResponse<AskResponse?> {
-        val localVariableConfig = postV1BooksAskRequestConfig(askRequest = askRequest)
+    fun postBooksAskWithHttpInfo(askRequest: AskRequest) : ApiResponse<AskResponse?> {
+        val localVariableConfig = postBooksAskRequestConfig(askRequest = askRequest)
 
         return request<AskRequest, AskResponse>(
             localVariableConfig
@@ -1320,12 +1320,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksAsk
+     * To obtain the request config of the operation postBooksAsk
      *
      * @param askRequest 
      * @return RequestConfig
      */
-    fun postV1BooksAskRequestConfig(askRequest: AskRequest) : RequestConfig<AskRequest> {
+    fun postBooksAskRequestConfig(askRequest: AskRequest) : RequestConfig<AskRequest> {
         val localVariableBody = askRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1354,8 +1354,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksBankExchange() : Unit {
-        val localVarResponse = postV1BooksBankExchangeWithHttpInfo()
+    fun postBooksBankExchange() : Unit {
+        val localVarResponse = postBooksBankExchangeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1381,8 +1381,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksBankExchangeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1BooksBankExchangeRequestConfig()
+    fun postBooksBankExchangeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postBooksBankExchangeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1390,11 +1390,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksBankExchange
+     * To obtain the request config of the operation postBooksBankExchange
      *
      * @return RequestConfig
      */
-    fun postV1BooksBankExchangeRequestConfig() : RequestConfig<Unit> {
+    fun postBooksBankExchangeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1423,8 +1423,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksBankImport(body: java.io.File? = null) : BankTally {
-        val localVarResponse = postV1BooksBankImportWithHttpInfo(body = body)
+    fun postBooksBankImport(body: java.io.File? = null) : BankTally {
+        val localVarResponse = postBooksBankImportWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BankTally
@@ -1452,8 +1452,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksBankImportWithHttpInfo(body: java.io.File?) : ApiResponse<BankTally?> {
-        val localVariableConfig = postV1BooksBankImportRequestConfig(body = body)
+    fun postBooksBankImportWithHttpInfo(body: java.io.File?) : ApiResponse<BankTally?> {
+        val localVariableConfig = postBooksBankImportRequestConfig(body = body)
 
         return request<java.io.File, BankTally>(
             localVariableConfig
@@ -1461,12 +1461,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksBankImport
+     * To obtain the request config of the operation postBooksBankImport
      *
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1BooksBankImportRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postBooksBankImportRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1496,8 +1496,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksBankSync() : BankTally {
-        val localVarResponse = postV1BooksBankSyncWithHttpInfo()
+    fun postBooksBankSync() : BankTally {
+        val localVarResponse = postBooksBankSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BankTally
@@ -1524,8 +1524,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksBankSyncWithHttpInfo() : ApiResponse<BankTally?> {
-        val localVariableConfig = postV1BooksBankSyncRequestConfig()
+    fun postBooksBankSyncWithHttpInfo() : ApiResponse<BankTally?> {
+        val localVariableConfig = postBooksBankSyncRequestConfig()
 
         return request<Unit, BankTally>(
             localVariableConfig
@@ -1533,11 +1533,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksBankSync
+     * To obtain the request config of the operation postBooksBankSync
      *
      * @return RequestConfig
      */
-    fun postV1BooksBankSyncRequestConfig() : RequestConfig<Unit> {
+    fun postBooksBankSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1565,8 +1565,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksBankToken() : Unit {
-        val localVarResponse = postV1BooksBankTokenWithHttpInfo()
+    fun postBooksBankToken() : Unit {
+        val localVarResponse = postBooksBankTokenWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1592,8 +1592,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksBankTokenWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1BooksBankTokenRequestConfig()
+    fun postBooksBankTokenWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postBooksBankTokenRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1601,11 +1601,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksBankToken
+     * To obtain the request config of the operation postBooksBankToken
      *
      * @return RequestConfig
      */
-    fun postV1BooksBankTokenRequestConfig() : RequestConfig<Unit> {
+    fun postBooksBankTokenRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1634,8 +1634,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksInbox(body: java.io.File? = null) : InboxItem {
-        val localVarResponse = postV1BooksInboxWithHttpInfo(body = body)
+    fun postBooksInbox(body: java.io.File? = null) : InboxItem {
+        val localVarResponse = postBooksInboxWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InboxItem
@@ -1663,8 +1663,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksInboxWithHttpInfo(body: java.io.File?) : ApiResponse<InboxItem?> {
-        val localVariableConfig = postV1BooksInboxRequestConfig(body = body)
+    fun postBooksInboxWithHttpInfo(body: java.io.File?) : ApiResponse<InboxItem?> {
+        val localVariableConfig = postBooksInboxRequestConfig(body = body)
 
         return request<java.io.File, InboxItem>(
             localVariableConfig
@@ -1672,12 +1672,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksInbox
+     * To obtain the request config of the operation postBooksInbox
      *
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1BooksInboxRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postBooksInboxRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1708,8 +1708,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksRules(rule: Rule) : Rule {
-        val localVarResponse = postV1BooksRulesWithHttpInfo(rule = rule)
+    fun postBooksRules(rule: Rule) : Rule {
+        val localVarResponse = postBooksRulesWithHttpInfo(rule = rule)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Rule
@@ -1737,8 +1737,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksRulesWithHttpInfo(rule: Rule) : ApiResponse<Rule?> {
-        val localVariableConfig = postV1BooksRulesRequestConfig(rule = rule)
+    fun postBooksRulesWithHttpInfo(rule: Rule) : ApiResponse<Rule?> {
+        val localVariableConfig = postBooksRulesRequestConfig(rule = rule)
 
         return request<Rule, Rule>(
             localVariableConfig
@@ -1746,12 +1746,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksRules
+     * To obtain the request config of the operation postBooksRules
      *
      * @param rule 
      * @return RequestConfig
      */
-    fun postV1BooksRulesRequestConfig(rule: Rule) : RequestConfig<Rule> {
+    fun postBooksRulesRequestConfig(rule: Rule) : RequestConfig<Rule> {
         val localVariableBody = rule
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1782,8 +1782,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksScan(body: java.io.File? = null) : ScanDraft {
-        val localVarResponse = postV1BooksScanWithHttpInfo(body = body)
+    fun postBooksScan(body: java.io.File? = null) : ScanDraft {
+        val localVarResponse = postBooksScanWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ScanDraft
@@ -1811,8 +1811,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksScanWithHttpInfo(body: java.io.File?) : ApiResponse<ScanDraft?> {
-        val localVariableConfig = postV1BooksScanRequestConfig(body = body)
+    fun postBooksScanWithHttpInfo(body: java.io.File?) : ApiResponse<ScanDraft?> {
+        val localVariableConfig = postBooksScanRequestConfig(body = body)
 
         return request<java.io.File, ScanDraft>(
             localVariableConfig
@@ -1820,12 +1820,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksScan
+     * To obtain the request config of the operation postBooksScan
      *
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1BooksScanRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postBooksScanRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1856,8 +1856,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksScanBook(bookRequest: BookRequest) : BookResponse {
-        val localVarResponse = postV1BooksScanBookWithHttpInfo(bookRequest = bookRequest)
+    fun postBooksScanBook(bookRequest: BookRequest) : BookResponse {
+        val localVarResponse = postBooksScanBookWithHttpInfo(bookRequest = bookRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BookResponse
@@ -1885,8 +1885,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksScanBookWithHttpInfo(bookRequest: BookRequest) : ApiResponse<BookResponse?> {
-        val localVariableConfig = postV1BooksScanBookRequestConfig(bookRequest = bookRequest)
+    fun postBooksScanBookWithHttpInfo(bookRequest: BookRequest) : ApiResponse<BookResponse?> {
+        val localVariableConfig = postBooksScanBookRequestConfig(bookRequest = bookRequest)
 
         return request<BookRequest, BookResponse>(
             localVariableConfig
@@ -1894,12 +1894,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksScanBook
+     * To obtain the request config of the operation postBooksScanBook
      *
      * @param bookRequest 
      * @return RequestConfig
      */
-    fun postV1BooksScanBookRequestConfig(bookRequest: BookRequest) : RequestConfig<BookRequest> {
+    fun postBooksScanBookRequestConfig(bookRequest: BookRequest) : RequestConfig<BookRequest> {
         val localVariableBody = bookRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1929,8 +1929,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksSync() : SyncTally {
-        val localVarResponse = postV1BooksSyncWithHttpInfo()
+    fun postBooksSync() : SyncTally {
+        val localVarResponse = postBooksSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SyncTally
@@ -1957,8 +1957,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksSyncWithHttpInfo() : ApiResponse<SyncTally?> {
-        val localVariableConfig = postV1BooksSyncRequestConfig()
+    fun postBooksSyncWithHttpInfo() : ApiResponse<SyncTally?> {
+        val localVariableConfig = postBooksSyncRequestConfig()
 
         return request<Unit, SyncTally>(
             localVariableConfig
@@ -1966,11 +1966,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksSync
+     * To obtain the request config of the operation postBooksSync
      *
      * @return RequestConfig
      */
-    fun postV1BooksSyncRequestConfig() : RequestConfig<Unit> {
+    fun postBooksSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2000,8 +2000,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BooksVendors(vendorRow: VendorRow) : VendorRow {
-        val localVarResponse = postV1BooksVendorsWithHttpInfo(vendorRow = vendorRow)
+    fun postBooksVendors(vendorRow: VendorRow) : VendorRow {
+        val localVarResponse = postBooksVendorsWithHttpInfo(vendorRow = vendorRow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VendorRow
@@ -2029,8 +2029,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BooksVendorsWithHttpInfo(vendorRow: VendorRow) : ApiResponse<VendorRow?> {
-        val localVariableConfig = postV1BooksVendorsRequestConfig(vendorRow = vendorRow)
+    fun postBooksVendorsWithHttpInfo(vendorRow: VendorRow) : ApiResponse<VendorRow?> {
+        val localVariableConfig = postBooksVendorsRequestConfig(vendorRow = vendorRow)
 
         return request<VendorRow, VendorRow>(
             localVariableConfig
@@ -2038,12 +2038,12 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1BooksVendors
+     * To obtain the request config of the operation postBooksVendors
      *
      * @param vendorRow 
      * @return RequestConfig
      */
-    fun postV1BooksVendorsRequestConfig(vendorRow: VendorRow) : RequestConfig<VendorRow> {
+    fun postBooksVendorsRequestConfig(vendorRow: VendorRow) : RequestConfig<VendorRow> {
         val localVariableBody = vendorRow
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

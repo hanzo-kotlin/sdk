@@ -63,8 +63,8 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TranslateMemory(target: kotlin.String? = null, state: kotlin.String? = null, limit: kotlin.Int? = null) : MemoryPage {
-        val localVarResponse = getV1TranslateMemoryWithHttpInfo(target = target, state = state, limit = limit)
+    fun getTranslateMemory(target: kotlin.String? = null, state: kotlin.String? = null, limit: kotlin.Int? = null) : MemoryPage {
+        val localVarResponse = getTranslateMemoryWithHttpInfo(target = target, state = state, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MemoryPage
@@ -94,8 +94,8 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TranslateMemoryWithHttpInfo(target: kotlin.String?, state: kotlin.String?, limit: kotlin.Int?) : ApiResponse<MemoryPage?> {
-        val localVariableConfig = getV1TranslateMemoryRequestConfig(target = target, state = state, limit = limit)
+    fun getTranslateMemoryWithHttpInfo(target: kotlin.String?, state: kotlin.String?, limit: kotlin.Int?) : ApiResponse<MemoryPage?> {
+        val localVariableConfig = getTranslateMemoryRequestConfig(target = target, state = state, limit = limit)
 
         return request<Unit, MemoryPage>(
             localVariableConfig
@@ -103,14 +103,14 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1TranslateMemory
+     * To obtain the request config of the operation getTranslateMemory
      *
      * @param target Target narrows to one target language tag (BCP-47, e.g. \&quot;es\&quot; or \&quot;pt-BR\&quot;). (optional)
      * @param state State narrows to one position on the review ladder: machine, suggested, approved or published. (optional)
      * @param limit Limit caps the rows returned. Non-positive or unparseable means the server default (200); the ceiling is 1000. (optional)
      * @return RequestConfig
      */
-    fun getV1TranslateMemoryRequestConfig(target: kotlin.String?, state: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getTranslateMemoryRequestConfig(target: kotlin.String?, state: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -149,8 +149,8 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Translate() : Unit {
-        val localVarResponse = postV1TranslateWithHttpInfo()
+    fun postTranslate() : Unit {
+        val localVarResponse = postTranslateWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -176,8 +176,8 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1TranslateWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1TranslateRequestConfig()
+    fun postTranslateWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postTranslateRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -185,11 +185,11 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1Translate
+     * To obtain the request config of the operation postTranslate
      *
      * @return RequestConfig
      */
-    fun postV1TranslateRequestConfig() : RequestConfig<Unit> {
+    fun postTranslateRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -218,8 +218,8 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1TranslateMemory(reviewRequest: ReviewRequest) : MemoryEntry {
-        val localVarResponse = putV1TranslateMemoryWithHttpInfo(reviewRequest = reviewRequest)
+    fun putTranslateMemory(reviewRequest: ReviewRequest) : MemoryEntry {
+        val localVarResponse = putTranslateMemoryWithHttpInfo(reviewRequest = reviewRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MemoryEntry
@@ -247,8 +247,8 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1TranslateMemoryWithHttpInfo(reviewRequest: ReviewRequest) : ApiResponse<MemoryEntry?> {
-        val localVariableConfig = putV1TranslateMemoryRequestConfig(reviewRequest = reviewRequest)
+    fun putTranslateMemoryWithHttpInfo(reviewRequest: ReviewRequest) : ApiResponse<MemoryEntry?> {
+        val localVariableConfig = putTranslateMemoryRequestConfig(reviewRequest = reviewRequest)
 
         return request<ReviewRequest, MemoryEntry>(
             localVariableConfig
@@ -256,12 +256,12 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation putV1TranslateMemory
+     * To obtain the request config of the operation putTranslateMemory
      *
      * @param reviewRequest 
      * @return RequestConfig
      */
-    fun putV1TranslateMemoryRequestConfig(reviewRequest: ReviewRequest) : RequestConfig<ReviewRequest> {
+    fun putTranslateMemoryRequestConfig(reviewRequest: ReviewRequest) : RequestConfig<ReviewRequest> {
         val localVariableBody = reviewRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

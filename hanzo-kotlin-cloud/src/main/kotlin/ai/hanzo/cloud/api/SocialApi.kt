@@ -57,8 +57,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1SocialAccountsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1SocialAccountsByIdWithHttpInfo(id = id)
+    fun deleteSocialAccountsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteSocialAccountsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -85,8 +85,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1SocialAccountsByIdRequestConfig(id = id)
+    fun deleteSocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteSocialAccountsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1SocialAccountsById
+     * To obtain the request config of the operation deleteSocialAccountsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun deleteV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteSocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -127,8 +127,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1SocialPostsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1SocialPostsByIdWithHttpInfo(id = id)
+    fun deleteSocialPostsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteSocialPostsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -155,8 +155,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1SocialPostsByIdRequestConfig(id = id)
+    fun deleteSocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteSocialPostsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,12 +164,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1SocialPostsById
+     * To obtain the request config of the operation deleteSocialPostsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun deleteV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteSocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -196,8 +196,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SocialAccounts() : Unit {
-        val localVarResponse = getV1SocialAccountsWithHttpInfo()
+    fun getSocialAccounts() : Unit {
+        val localVarResponse = getSocialAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -223,8 +223,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SocialAccountsRequestConfig()
+    fun getSocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getSocialAccountsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -232,11 +232,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SocialAccounts
+     * To obtain the request config of the operation getSocialAccounts
      *
      * @return RequestConfig
      */
-    fun getV1SocialAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getSocialAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -264,8 +264,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SocialAccountsById(id: kotlin.String) : Unit {
-        val localVarResponse = getV1SocialAccountsByIdWithHttpInfo(id = id)
+    fun getSocialAccountsById(id: kotlin.String) : Unit {
+        val localVarResponse = getSocialAccountsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -292,8 +292,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SocialAccountsByIdRequestConfig(id = id)
+    fun getSocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSocialAccountsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -301,12 +301,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SocialAccountsById
+     * To obtain the request config of the operation getSocialAccountsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -333,8 +333,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SocialPosts() : Unit {
-        val localVarResponse = getV1SocialPostsWithHttpInfo()
+    fun getSocialPosts() : Unit {
+        val localVarResponse = getSocialPostsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -360,8 +360,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SocialPostsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SocialPostsRequestConfig()
+    fun getSocialPostsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getSocialPostsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -369,11 +369,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SocialPosts
+     * To obtain the request config of the operation getSocialPosts
      *
      * @return RequestConfig
      */
-    fun getV1SocialPostsRequestConfig() : RequestConfig<Unit> {
+    fun getSocialPostsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -401,8 +401,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SocialPostsById(id: kotlin.String) : Unit {
-        val localVarResponse = getV1SocialPostsByIdWithHttpInfo(id = id)
+    fun getSocialPostsById(id: kotlin.String) : Unit {
+        val localVarResponse = getSocialPostsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -429,8 +429,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SocialPostsByIdRequestConfig(id = id)
+    fun getSocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSocialPostsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -438,12 +438,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SocialPostsById
+     * To obtain the request config of the operation getSocialPostsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -470,8 +470,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SocialProviders() : Unit {
-        val localVarResponse = getV1SocialProvidersWithHttpInfo()
+    fun getSocialProviders() : Unit {
+        val localVarResponse = getSocialProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -497,8 +497,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SocialProvidersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SocialProvidersRequestConfig()
+    fun getSocialProvidersWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getSocialProvidersRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -506,11 +506,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SocialProviders
+     * To obtain the request config of the operation getSocialProviders
      *
      * @return RequestConfig
      */
-    fun getV1SocialProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getSocialProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -537,8 +537,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SocialSummary() : Unit {
-        val localVarResponse = getV1SocialSummaryWithHttpInfo()
+    fun getSocialSummary() : Unit {
+        val localVarResponse = getSocialSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -564,8 +564,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SocialSummaryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SocialSummaryRequestConfig()
+    fun getSocialSummaryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getSocialSummaryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -573,11 +573,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SocialSummary
+     * To obtain the request config of the operation getSocialSummary
      *
      * @return RequestConfig
      */
-    fun getV1SocialSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getSocialSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -604,8 +604,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SocialAccounts() : Unit {
-        val localVarResponse = postV1SocialAccountsWithHttpInfo()
+    fun postSocialAccounts() : Unit {
+        val localVarResponse = postSocialAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -631,8 +631,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SocialAccountsRequestConfig()
+    fun postSocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postSocialAccountsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -640,11 +640,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SocialAccounts
+     * To obtain the request config of the operation postSocialAccounts
      *
      * @return RequestConfig
      */
-    fun postV1SocialAccountsRequestConfig() : RequestConfig<Unit> {
+    fun postSocialAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -671,8 +671,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SocialPosts() : Unit {
-        val localVarResponse = postV1SocialPostsWithHttpInfo()
+    fun postSocialPosts() : Unit {
+        val localVarResponse = postSocialPostsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -698,8 +698,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SocialPostsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SocialPostsRequestConfig()
+    fun postSocialPostsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postSocialPostsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -707,11 +707,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SocialPosts
+     * To obtain the request config of the operation postSocialPosts
      *
      * @return RequestConfig
      */
-    fun postV1SocialPostsRequestConfig() : RequestConfig<Unit> {
+    fun postSocialPostsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -739,8 +739,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SocialPostsByIdPublish(id: kotlin.String) : Unit {
-        val localVarResponse = postV1SocialPostsByIdPublishWithHttpInfo(id = id)
+    fun postSocialPostsByIdPublish(id: kotlin.String) : Unit {
+        val localVarResponse = postSocialPostsByIdPublishWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -767,8 +767,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SocialPostsByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SocialPostsByIdPublishRequestConfig(id = id)
+    fun postSocialPostsByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postSocialPostsByIdPublishRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -776,12 +776,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SocialPostsByIdPublish
+     * To obtain the request config of the operation postSocialPostsByIdPublish
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1SocialPostsByIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postSocialPostsByIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -809,8 +809,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1SocialAccountsById(id: kotlin.String) : Unit {
-        val localVarResponse = putV1SocialAccountsByIdWithHttpInfo(id = id)
+    fun putSocialAccountsById(id: kotlin.String) : Unit {
+        val localVarResponse = putSocialAccountsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -837,8 +837,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1SocialAccountsByIdRequestConfig(id = id)
+    fun putSocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putSocialAccountsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -846,12 +846,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1SocialAccountsById
+     * To obtain the request config of the operation putSocialAccountsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun putV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun putSocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -879,8 +879,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1SocialPostsById(id: kotlin.String) : Unit {
-        val localVarResponse = putV1SocialPostsByIdWithHttpInfo(id = id)
+    fun putSocialPostsById(id: kotlin.String) : Unit {
+        val localVarResponse = putSocialPostsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -907,8 +907,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1SocialPostsByIdRequestConfig(id = id)
+    fun putSocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putSocialPostsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -916,12 +916,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1SocialPostsById
+     * To obtain the request config of the operation putSocialPostsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun putV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun putSocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -61,8 +61,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1TemplatesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = deleteV1TemplatesBySlugWithHttpInfo(slug = slug)
+    fun deleteTemplatesBySlug(slug: kotlin.String) : Unit {
+        val localVarResponse = deleteTemplatesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -89,8 +89,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1TemplatesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1TemplatesBySlugRequestConfig(slug = slug)
+    fun deleteTemplatesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteTemplatesBySlugRequestConfig(slug = slug)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +98,12 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1TemplatesBySlug
+     * To obtain the request config of the operation deleteTemplatesBySlug
      *
      * @param slug Slug is the starter kit to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1TemplatesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun deleteTemplatesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,8 +131,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Templates() : KitList {
-        val localVarResponse = getV1TemplatesWithHttpInfo()
+    fun getTemplates() : KitList {
+        val localVarResponse = getTemplatesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KitList
@@ -159,8 +159,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TemplatesWithHttpInfo() : ApiResponse<KitList?> {
-        val localVariableConfig = getV1TemplatesRequestConfig()
+    fun getTemplatesWithHttpInfo() : ApiResponse<KitList?> {
+        val localVariableConfig = getTemplatesRequestConfig()
 
         return request<Unit, KitList>(
             localVariableConfig
@@ -168,11 +168,11 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1Templates
+     * To obtain the request config of the operation getTemplates
      *
      * @return RequestConfig
      */
-    fun getV1TemplatesRequestConfig() : RequestConfig<Unit> {
+    fun getTemplatesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -202,8 +202,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TemplatesBySlug(slug: kotlin.String) : StarterKit {
-        val localVarResponse = getV1TemplatesBySlugWithHttpInfo(slug = slug)
+    fun getTemplatesBySlug(slug: kotlin.String) : StarterKit {
+        val localVarResponse = getTemplatesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StarterKit
@@ -231,8 +231,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TemplatesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<StarterKit?> {
-        val localVariableConfig = getV1TemplatesBySlugRequestConfig(slug = slug)
+    fun getTemplatesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<StarterKit?> {
+        val localVariableConfig = getTemplatesBySlugRequestConfig(slug = slug)
 
         return request<Unit, StarterKit>(
             localVariableConfig
@@ -240,12 +240,12 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1TemplatesBySlug
+     * To obtain the request config of the operation getTemplatesBySlug
      *
      * @param slug Slug is the starter kit to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1TemplatesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getTemplatesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -275,8 +275,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Templates(publishKitIn: PublishKitIn) : StarterKit {
-        val localVarResponse = postV1TemplatesWithHttpInfo(publishKitIn = publishKitIn)
+    fun postTemplates(publishKitIn: PublishKitIn) : StarterKit {
+        val localVarResponse = postTemplatesWithHttpInfo(publishKitIn = publishKitIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StarterKit
@@ -304,8 +304,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1TemplatesWithHttpInfo(publishKitIn: PublishKitIn) : ApiResponse<StarterKit?> {
-        val localVariableConfig = postV1TemplatesRequestConfig(publishKitIn = publishKitIn)
+    fun postTemplatesWithHttpInfo(publishKitIn: PublishKitIn) : ApiResponse<StarterKit?> {
+        val localVariableConfig = postTemplatesRequestConfig(publishKitIn = publishKitIn)
 
         return request<PublishKitIn, StarterKit>(
             localVariableConfig
@@ -313,12 +313,12 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1Templates
+     * To obtain the request config of the operation postTemplates
      *
      * @param publishKitIn 
      * @return RequestConfig
      */
-    fun postV1TemplatesRequestConfig(publishKitIn: PublishKitIn) : RequestConfig<PublishKitIn> {
+    fun postTemplatesRequestConfig(publishKitIn: PublishKitIn) : RequestConfig<PublishKitIn> {
         val localVariableBody = publishKitIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -350,8 +350,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1TemplatesBySlug(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : StarterKit {
-        val localVarResponse = putV1TemplatesBySlugWithHttpInfo(slug = slug, replaceKitIn = replaceKitIn)
+    fun putTemplatesBySlug(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : StarterKit {
+        val localVarResponse = putTemplatesBySlugWithHttpInfo(slug = slug, replaceKitIn = replaceKitIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StarterKit
@@ -380,8 +380,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1TemplatesBySlugWithHttpInfo(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : ApiResponse<StarterKit?> {
-        val localVariableConfig = putV1TemplatesBySlugRequestConfig(slug = slug, replaceKitIn = replaceKitIn)
+    fun putTemplatesBySlugWithHttpInfo(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : ApiResponse<StarterKit?> {
+        val localVariableConfig = putTemplatesBySlugRequestConfig(slug = slug, replaceKitIn = replaceKitIn)
 
         return request<ReplaceKitIn, StarterKit>(
             localVariableConfig
@@ -389,13 +389,13 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation putV1TemplatesBySlug
+     * To obtain the request config of the operation putTemplatesBySlug
      *
      * @param slug Slug is the kit to replace, from the path.
      * @param replaceKitIn 
      * @return RequestConfig
      */
-    fun putV1TemplatesBySlugRequestConfig(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : RequestConfig<ReplaceKitIn> {
+    fun putTemplatesBySlugRequestConfig(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : RequestConfig<ReplaceKitIn> {
         val localVariableBody = replaceKitIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

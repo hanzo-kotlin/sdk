@@ -59,8 +59,8 @@ class AvatarApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AvatarByOrgByUserByDigest(org: kotlin.String, user: kotlin.String, digest: kotlin.String) : Unit {
-        val localVarResponse = getV1AvatarByOrgByUserByDigestWithHttpInfo(org = org, user = user, digest = digest)
+    fun getAvatarByOrgByUserByDigest(org: kotlin.String, user: kotlin.String, digest: kotlin.String) : Unit {
+        val localVarResponse = getAvatarByOrgByUserByDigestWithHttpInfo(org = org, user = user, digest = digest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -89,8 +89,8 @@ class AvatarApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AvatarByOrgByUserByDigestWithHttpInfo(org: kotlin.String, user: kotlin.String, digest: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AvatarByOrgByUserByDigestRequestConfig(org = org, user = user, digest = digest)
+    fun getAvatarByOrgByUserByDigestWithHttpInfo(org: kotlin.String, user: kotlin.String, digest: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getAvatarByOrgByUserByDigestRequestConfig(org = org, user = user, digest = digest)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,14 +98,14 @@ class AvatarApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AvatarByOrgByUserByDigest
+     * To obtain the request config of the operation getAvatarByOrgByUserByDigest
      *
      * @param org 
      * @param user 
      * @param digest 
      * @return RequestConfig
      */
-    fun getV1AvatarByOrgByUserByDigestRequestConfig(org: kotlin.String, user: kotlin.String, digest: kotlin.String) : RequestConfig<Unit> {
+    fun getAvatarByOrgByUserByDigestRequestConfig(org: kotlin.String, user: kotlin.String, digest: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -132,8 +132,8 @@ class AvatarApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Avatar() : Unit {
-        val localVarResponse = postV1AvatarWithHttpInfo()
+    fun postAvatar() : Unit {
+        val localVarResponse = postAvatarWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -159,8 +159,8 @@ class AvatarApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AvatarWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AvatarRequestConfig()
+    fun postAvatarWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAvatarRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -168,11 +168,11 @@ class AvatarApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Avatar
+     * To obtain the request config of the operation postAvatar
      *
      * @return RequestConfig
      */
-    fun postV1AvatarRequestConfig() : RequestConfig<Unit> {
+    fun postAvatarRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

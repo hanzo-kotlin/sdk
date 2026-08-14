@@ -62,8 +62,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AdsCampaignsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1AdsCampaignsByIdWithHttpInfo(id = id)
+    fun deleteAdsCampaignsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteAdsCampaignsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -90,8 +90,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AdsCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1AdsCampaignsByIdRequestConfig(id = id)
+    fun deleteAdsCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteAdsCampaignsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -99,12 +99,12 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AdsCampaignsById
+     * To obtain the request config of the operation deleteAdsCampaignsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun deleteV1AdsCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAdsCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -134,8 +134,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdsCampaigns(status: kotlin.String? = null, limit: kotlin.Int? = null) : CampaignList {
-        val localVarResponse = getV1AdsCampaignsWithHttpInfo(status = status, limit = limit)
+    fun getAdsCampaigns(status: kotlin.String? = null, limit: kotlin.Int? = null) : CampaignList {
+        val localVarResponse = getAdsCampaignsWithHttpInfo(status = status, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignList
@@ -164,8 +164,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdsCampaignsWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CampaignList?> {
-        val localVariableConfig = getV1AdsCampaignsRequestConfig(status = status, limit = limit)
+    fun getAdsCampaignsWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CampaignList?> {
+        val localVariableConfig = getAdsCampaignsRequestConfig(status = status, limit = limit)
 
         return request<Unit, CampaignList>(
             localVariableConfig
@@ -173,13 +173,13 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1AdsCampaigns
+     * To obtain the request config of the operation getAdsCampaigns
      *
      * @param status Status filters to one lifecycle state (draft, active, paused, completed). Empty returns every campaign the org has. (optional)
      * @param limit Limit caps how many campaigns come back: default 200, maximum 1000. A value that is not a positive integer reads as the default. (optional)
      * @return RequestConfig
      */
-    fun getV1AdsCampaignsRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAdsCampaignsRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -217,8 +217,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdsCampaignsById(id: kotlin.String) : AdCampaign {
-        val localVarResponse = getV1AdsCampaignsByIdWithHttpInfo(id = id)
+    fun getAdsCampaignsById(id: kotlin.String) : AdCampaign {
+        val localVarResponse = getAdsCampaignsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdCampaign
@@ -246,8 +246,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdsCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<AdCampaign?> {
-        val localVariableConfig = getV1AdsCampaignsByIdRequestConfig(id = id)
+    fun getAdsCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<AdCampaign?> {
+        val localVariableConfig = getAdsCampaignsByIdRequestConfig(id = id)
 
         return request<Unit, AdCampaign>(
             localVariableConfig
@@ -255,12 +255,12 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1AdsCampaignsById
+     * To obtain the request config of the operation getAdsCampaignsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1AdsCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getAdsCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -289,8 +289,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdsSummary() : AdSummary {
-        val localVarResponse = getV1AdsSummaryWithHttpInfo()
+    fun getAdsSummary() : AdSummary {
+        val localVarResponse = getAdsSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdSummary
@@ -317,8 +317,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdsSummaryWithHttpInfo() : ApiResponse<AdSummary?> {
-        val localVariableConfig = getV1AdsSummaryRequestConfig()
+    fun getAdsSummaryWithHttpInfo() : ApiResponse<AdSummary?> {
+        val localVariableConfig = getAdsSummaryRequestConfig()
 
         return request<Unit, AdSummary>(
             localVariableConfig
@@ -326,11 +326,11 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1AdsSummary
+     * To obtain the request config of the operation getAdsSummary
      *
      * @return RequestConfig
      */
-    fun getV1AdsSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getAdsSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -360,8 +360,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdsCampaigns(campaignInput: CampaignInput) : AdCampaign {
-        val localVarResponse = postV1AdsCampaignsWithHttpInfo(campaignInput = campaignInput)
+    fun postAdsCampaigns(campaignInput: CampaignInput) : AdCampaign {
+        val localVarResponse = postAdsCampaignsWithHttpInfo(campaignInput = campaignInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdCampaign
@@ -389,8 +389,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdsCampaignsWithHttpInfo(campaignInput: CampaignInput) : ApiResponse<AdCampaign?> {
-        val localVariableConfig = postV1AdsCampaignsRequestConfig(campaignInput = campaignInput)
+    fun postAdsCampaignsWithHttpInfo(campaignInput: CampaignInput) : ApiResponse<AdCampaign?> {
+        val localVariableConfig = postAdsCampaignsRequestConfig(campaignInput = campaignInput)
 
         return request<CampaignInput, AdCampaign>(
             localVariableConfig
@@ -398,12 +398,12 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1AdsCampaigns
+     * To obtain the request config of the operation postAdsCampaigns
      *
      * @param campaignInput 
      * @return RequestConfig
      */
-    fun postV1AdsCampaignsRequestConfig(campaignInput: CampaignInput) : RequestConfig<CampaignInput> {
+    fun postAdsCampaignsRequestConfig(campaignInput: CampaignInput) : RequestConfig<CampaignInput> {
         val localVariableBody = campaignInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -433,8 +433,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdsCampaignsByIdLaunch(id: kotlin.String) : Unit {
-        val localVarResponse = postV1AdsCampaignsByIdLaunchWithHttpInfo(id = id)
+    fun postAdsCampaignsByIdLaunch(id: kotlin.String) : Unit {
+        val localVarResponse = postAdsCampaignsByIdLaunchWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -461,8 +461,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdsCampaignsByIdLaunchWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AdsCampaignsByIdLaunchRequestConfig(id = id)
+    fun postAdsCampaignsByIdLaunchWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAdsCampaignsByIdLaunchRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -470,12 +470,12 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1AdsCampaignsByIdLaunch
+     * To obtain the request config of the operation postAdsCampaignsByIdLaunch
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1AdsCampaignsByIdLaunchRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAdsCampaignsByIdLaunchRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -505,8 +505,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AdsCampaignsById(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : AdCampaign {
-        val localVarResponse = putV1AdsCampaignsByIdWithHttpInfo(id = id, updateCampaignIn = updateCampaignIn)
+    fun putAdsCampaignsById(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : AdCampaign {
+        val localVarResponse = putAdsCampaignsByIdWithHttpInfo(id = id, updateCampaignIn = updateCampaignIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdCampaign
@@ -535,8 +535,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AdsCampaignsByIdWithHttpInfo(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : ApiResponse<AdCampaign?> {
-        val localVariableConfig = putV1AdsCampaignsByIdRequestConfig(id = id, updateCampaignIn = updateCampaignIn)
+    fun putAdsCampaignsByIdWithHttpInfo(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : ApiResponse<AdCampaign?> {
+        val localVariableConfig = putAdsCampaignsByIdRequestConfig(id = id, updateCampaignIn = updateCampaignIn)
 
         return request<UpdateCampaignIn, AdCampaign>(
             localVariableConfig
@@ -544,13 +544,13 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putV1AdsCampaignsById
+     * To obtain the request config of the operation putAdsCampaignsById
      *
      * @param id 
      * @param updateCampaignIn 
      * @return RequestConfig
      */
-    fun putV1AdsCampaignsByIdRequestConfig(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : RequestConfig<UpdateCampaignIn> {
+    fun putAdsCampaignsByIdRequestConfig(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : RequestConfig<UpdateCampaignIn> {
         val localVariableBody = updateCampaignIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

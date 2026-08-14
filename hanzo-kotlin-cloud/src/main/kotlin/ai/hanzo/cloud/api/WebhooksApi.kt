@@ -63,8 +63,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1WebhooksById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1WebhooksByIdWithHttpInfo(id = id)
+    fun deleteWebhooksById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteWebhooksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -91,8 +91,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1WebhooksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1WebhooksByIdRequestConfig(id = id)
+    fun deleteWebhooksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteWebhooksByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -100,12 +100,12 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1WebhooksById
+     * To obtain the request config of the operation deleteWebhooksById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun deleteV1WebhooksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteWebhooksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -133,8 +133,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Webhooks() : EndpointList {
-        val localVarResponse = getV1WebhooksWithHttpInfo()
+    fun getWebhooks() : EndpointList {
+        val localVarResponse = getWebhooksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EndpointList
@@ -161,8 +161,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WebhooksWithHttpInfo() : ApiResponse<EndpointList?> {
-        val localVariableConfig = getV1WebhooksRequestConfig()
+    fun getWebhooksWithHttpInfo() : ApiResponse<EndpointList?> {
+        val localVariableConfig = getWebhooksRequestConfig()
 
         return request<Unit, EndpointList>(
             localVariableConfig
@@ -170,11 +170,11 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1Webhooks
+     * To obtain the request config of the operation getWebhooks
      *
      * @return RequestConfig
      */
-    fun getV1WebhooksRequestConfig() : RequestConfig<Unit> {
+    fun getWebhooksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -204,8 +204,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WebhooksById(id: kotlin.String) : Endpoint {
-        val localVarResponse = getV1WebhooksByIdWithHttpInfo(id = id)
+    fun getWebhooksById(id: kotlin.String) : Endpoint {
+        val localVarResponse = getWebhooksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Endpoint
@@ -233,8 +233,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WebhooksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Endpoint?> {
-        val localVariableConfig = getV1WebhooksByIdRequestConfig(id = id)
+    fun getWebhooksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Endpoint?> {
+        val localVariableConfig = getWebhooksByIdRequestConfig(id = id)
 
         return request<Unit, Endpoint>(
             localVariableConfig
@@ -242,12 +242,12 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1WebhooksById
+     * To obtain the request config of the operation getWebhooksById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1WebhooksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getWebhooksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -279,8 +279,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WebhooksByIdDeliveries(id: kotlin.String, limit: kotlin.Int? = null, status: kotlin.String? = null) : DeliveryList {
-        val localVarResponse = getV1WebhooksByIdDeliveriesWithHttpInfo(id = id, limit = limit, status = status)
+    fun getWebhooksByIdDeliveries(id: kotlin.String, limit: kotlin.Int? = null, status: kotlin.String? = null) : DeliveryList {
+        val localVarResponse = getWebhooksByIdDeliveriesWithHttpInfo(id = id, limit = limit, status = status)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeliveryList
@@ -310,8 +310,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WebhooksByIdDeliveriesWithHttpInfo(id: kotlin.String, limit: kotlin.Int?, status: kotlin.String?) : ApiResponse<DeliveryList?> {
-        val localVariableConfig = getV1WebhooksByIdDeliveriesRequestConfig(id = id, limit = limit, status = status)
+    fun getWebhooksByIdDeliveriesWithHttpInfo(id: kotlin.String, limit: kotlin.Int?, status: kotlin.String?) : ApiResponse<DeliveryList?> {
+        val localVariableConfig = getWebhooksByIdDeliveriesRequestConfig(id = id, limit = limit, status = status)
 
         return request<Unit, DeliveryList>(
             localVariableConfig
@@ -319,14 +319,14 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1WebhooksByIdDeliveries
+     * To obtain the request config of the operation getWebhooksByIdDeliveries
      *
      * @param id 
      * @param limit Limit caps how many attempts come back: default 50, maximum 200. A value that is not a positive integer reads as the default. (optional)
      * @param status Status narrows the log to one outcome: \&quot;ok\&quot;, \&quot;retrying\&quot; or \&quot;failed\&quot;. Empty returns every attempt. (optional)
      * @return RequestConfig
      */
-    fun getV1WebhooksByIdDeliveriesRequestConfig(id: kotlin.String, limit: kotlin.Int?, status: kotlin.String?) : RequestConfig<Unit> {
+    fun getWebhooksByIdDeliveriesRequestConfig(id: kotlin.String, limit: kotlin.Int?, status: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -364,8 +364,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Webhooks(createEndpointIn: CreateEndpointIn) : Endpoint {
-        val localVarResponse = postV1WebhooksWithHttpInfo(createEndpointIn = createEndpointIn)
+    fun postWebhooks(createEndpointIn: CreateEndpointIn) : Endpoint {
+        val localVarResponse = postWebhooksWithHttpInfo(createEndpointIn = createEndpointIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Endpoint
@@ -393,8 +393,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WebhooksWithHttpInfo(createEndpointIn: CreateEndpointIn) : ApiResponse<Endpoint?> {
-        val localVariableConfig = postV1WebhooksRequestConfig(createEndpointIn = createEndpointIn)
+    fun postWebhooksWithHttpInfo(createEndpointIn: CreateEndpointIn) : ApiResponse<Endpoint?> {
+        val localVariableConfig = postWebhooksRequestConfig(createEndpointIn = createEndpointIn)
 
         return request<CreateEndpointIn, Endpoint>(
             localVariableConfig
@@ -402,12 +402,12 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1Webhooks
+     * To obtain the request config of the operation postWebhooks
      *
      * @param createEndpointIn 
      * @return RequestConfig
      */
-    fun postV1WebhooksRequestConfig(createEndpointIn: CreateEndpointIn) : RequestConfig<CreateEndpointIn> {
+    fun postWebhooksRequestConfig(createEndpointIn: CreateEndpointIn) : RequestConfig<CreateEndpointIn> {
         val localVariableBody = createEndpointIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -438,8 +438,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1WebhooksByIdSecret(id: kotlin.String) : Endpoint {
-        val localVarResponse = postV1WebhooksByIdSecretWithHttpInfo(id = id)
+    fun postWebhooksByIdSecret(id: kotlin.String) : Endpoint {
+        val localVarResponse = postWebhooksByIdSecretWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Endpoint
@@ -467,8 +467,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WebhooksByIdSecretWithHttpInfo(id: kotlin.String) : ApiResponse<Endpoint?> {
-        val localVariableConfig = postV1WebhooksByIdSecretRequestConfig(id = id)
+    fun postWebhooksByIdSecretWithHttpInfo(id: kotlin.String) : ApiResponse<Endpoint?> {
+        val localVariableConfig = postWebhooksByIdSecretRequestConfig(id = id)
 
         return request<Unit, Endpoint>(
             localVariableConfig
@@ -476,12 +476,12 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1WebhooksByIdSecret
+     * To obtain the request config of the operation postWebhooksByIdSecret
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1WebhooksByIdSecretRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postWebhooksByIdSecretRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -511,8 +511,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1WebhooksByIdTest(id: kotlin.String) : TestResult {
-        val localVarResponse = postV1WebhooksByIdTestWithHttpInfo(id = id)
+    fun postWebhooksByIdTest(id: kotlin.String) : TestResult {
+        val localVarResponse = postWebhooksByIdTestWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TestResult
@@ -540,8 +540,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WebhooksByIdTestWithHttpInfo(id: kotlin.String) : ApiResponse<TestResult?> {
-        val localVariableConfig = postV1WebhooksByIdTestRequestConfig(id = id)
+    fun postWebhooksByIdTestWithHttpInfo(id: kotlin.String) : ApiResponse<TestResult?> {
+        val localVariableConfig = postWebhooksByIdTestRequestConfig(id = id)
 
         return request<Unit, TestResult>(
             localVariableConfig
@@ -549,12 +549,12 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1WebhooksByIdTest
+     * To obtain the request config of the operation postWebhooksByIdTest
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1WebhooksByIdTestRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postWebhooksByIdTestRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -585,8 +585,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1WebhooksById(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : Endpoint {
-        val localVarResponse = putV1WebhooksByIdWithHttpInfo(id = id, updateEndpointIn = updateEndpointIn)
+    fun putWebhooksById(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : Endpoint {
+        val localVarResponse = putWebhooksByIdWithHttpInfo(id = id, updateEndpointIn = updateEndpointIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Endpoint
@@ -615,8 +615,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1WebhooksByIdWithHttpInfo(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : ApiResponse<Endpoint?> {
-        val localVariableConfig = putV1WebhooksByIdRequestConfig(id = id, updateEndpointIn = updateEndpointIn)
+    fun putWebhooksByIdWithHttpInfo(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : ApiResponse<Endpoint?> {
+        val localVariableConfig = putWebhooksByIdRequestConfig(id = id, updateEndpointIn = updateEndpointIn)
 
         return request<UpdateEndpointIn, Endpoint>(
             localVariableConfig
@@ -624,13 +624,13 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1WebhooksById
+     * To obtain the request config of the operation putWebhooksById
      *
      * @param id 
      * @param updateEndpointIn 
      * @return RequestConfig
      */
-    fun putV1WebhooksByIdRequestConfig(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : RequestConfig<UpdateEndpointIn> {
+    fun putWebhooksByIdRequestConfig(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : RequestConfig<UpdateEndpointIn> {
         val localVariableBody = updateEndpointIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -56,8 +56,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MetricsHealth() : Unit {
-        val localVarResponse = getV1MetricsHealthWithHttpInfo()
+    fun getMetricsHealth() : Unit {
+        val localVarResponse = getMetricsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MetricsHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1MetricsHealthRequestConfig()
+    fun getMetricsHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMetricsHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1MetricsHealth
+     * To obtain the request config of the operation getMetricsHealth
      *
      * @return RequestConfig
      */
-    fun getV1MetricsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getMetricsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MetricsQuery() : Unit {
-        val localVarResponse = getV1MetricsQueryWithHttpInfo()
+    fun getMetricsQuery() : Unit {
+        val localVarResponse = getMetricsQueryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MetricsQueryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1MetricsQueryRequestConfig()
+    fun getMetricsQueryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMetricsQueryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1MetricsQuery
+     * To obtain the request config of the operation getMetricsQuery
      *
      * @return RequestConfig
      */
-    fun getV1MetricsQueryRequestConfig() : RequestConfig<Unit> {
+    fun getMetricsQueryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MetricsBatch() : Unit {
-        val localVarResponse = postV1MetricsBatchWithHttpInfo()
+    fun postMetricsBatch() : Unit {
+        val localVarResponse = postMetricsBatchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MetricsBatchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MetricsBatchRequestConfig()
+    fun postMetricsBatchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMetricsBatchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1MetricsBatch
+     * To obtain the request config of the operation postMetricsBatch
      *
      * @return RequestConfig
      */
-    fun postV1MetricsBatchRequestConfig() : RequestConfig<Unit> {
+    fun postMetricsBatchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -257,8 +257,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MetricsWrite() : Unit {
-        val localVarResponse = postV1MetricsWriteWithHttpInfo()
+    fun postMetricsWrite() : Unit {
+        val localVarResponse = postMetricsWriteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,8 +284,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MetricsWriteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MetricsWriteRequestConfig()
+    fun postMetricsWriteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMetricsWriteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +293,11 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1MetricsWrite
+     * To obtain the request config of the operation postMetricsWrite
      *
      * @return RequestConfig
      */
-    fun postV1MetricsWriteRequestConfig() : RequestConfig<Unit> {
+    fun postMetricsWriteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

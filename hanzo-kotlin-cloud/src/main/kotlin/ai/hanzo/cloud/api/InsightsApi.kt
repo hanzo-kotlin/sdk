@@ -60,8 +60,8 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1InsightsEvents(limit: kotlin.Int? = null) : EventList {
-        val localVarResponse = getV1InsightsEventsWithHttpInfo(limit = limit)
+    fun getInsightsEvents(limit: kotlin.Int? = null) : EventList {
+        val localVarResponse = getInsightsEventsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EventList
@@ -89,8 +89,8 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1InsightsEventsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<EventList?> {
-        val localVariableConfig = getV1InsightsEventsRequestConfig(limit = limit)
+    fun getInsightsEventsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<EventList?> {
+        val localVariableConfig = getInsightsEventsRequestConfig(limit = limit)
 
         return request<Unit, EventList>(
             localVariableConfig
@@ -98,12 +98,12 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1InsightsEvents
+     * To obtain the request config of the operation getInsightsEvents
      *
      * @param limit Limit is how many rows to return, newest first. Default 50, maximum 200; a value at or below zero, or one that is not a number, takes the default. (optional)
      * @return RequestConfig
      */
-    fun getV1InsightsEventsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getInsightsEventsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -137,8 +137,8 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1InsightsHealth() : InsightsStatus {
-        val localVarResponse = getV1InsightsHealthWithHttpInfo()
+    fun getInsightsHealth() : InsightsStatus {
+        val localVarResponse = getInsightsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InsightsStatus
@@ -165,8 +165,8 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1InsightsHealthWithHttpInfo() : ApiResponse<InsightsStatus?> {
-        val localVariableConfig = getV1InsightsHealthRequestConfig()
+    fun getInsightsHealthWithHttpInfo() : ApiResponse<InsightsStatus?> {
+        val localVariableConfig = getInsightsHealthRequestConfig()
 
         return request<Unit, InsightsStatus>(
             localVariableConfig
@@ -174,11 +174,11 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1InsightsHealth
+     * To obtain the request config of the operation getInsightsHealth
      *
      * @return RequestConfig
      */
-    fun getV1InsightsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getInsightsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

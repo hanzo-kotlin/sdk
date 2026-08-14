@@ -15,6 +15,7 @@
 
 package ai.hanzo.cloud.model
 
+import ai.hanzo.cloud.model.AimActorStat
 import ai.hanzo.cloud.model.AimEvals
 import ai.hanzo.cloud.model.AimLfModelStat
 import ai.hanzo.cloud.model.AimModelStat
@@ -38,6 +39,7 @@ import com.google.gson.annotations.SerializedName
  * @param scoreNames eval_scores per score-name
  * @param scoreSeries avg eval score over time (progress trend)
  * @param start 
+ * @param topActors TopActors is per-PRINCIPAL spend from the same ledger — whose bill it is, which the per-model board cannot answer.
  * @param topModels cloud_usage per-model (populated today)
  * @param usage 
  */
@@ -75,6 +77,10 @@ data class AiMetrics (
 
     @SerializedName("start")
     val start: kotlin.String? = null,
+
+    /* TopActors is per-PRINCIPAL spend from the same ledger — whose bill it is, which the per-model board cannot answer. */
+    @SerializedName("topActors")
+    val topActors: kotlin.collections.List<AimActorStat>? = null,
 
     /* cloud_usage per-model (populated today) */
     @SerializedName("topModels")

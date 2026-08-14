@@ -65,8 +65,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Experiments() : ExperimentList {
-        val localVarResponse = getV1ExperimentsWithHttpInfo()
+    fun getExperiments() : ExperimentList {
+        val localVarResponse = getExperimentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ExperimentList
@@ -93,8 +93,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ExperimentsWithHttpInfo() : ApiResponse<ExperimentList?> {
-        val localVariableConfig = getV1ExperimentsRequestConfig()
+    fun getExperimentsWithHttpInfo() : ApiResponse<ExperimentList?> {
+        val localVariableConfig = getExperimentsRequestConfig()
 
         return request<Unit, ExperimentList>(
             localVariableConfig
@@ -102,11 +102,11 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1Experiments
+     * To obtain the request config of the operation getExperiments
      *
      * @return RequestConfig
      */
-    fun getV1ExperimentsRequestConfig() : RequestConfig<Unit> {
+    fun getExperimentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -136,8 +136,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ExperimentsById(id: kotlin.String) : Trial {
-        val localVarResponse = getV1ExperimentsByIdWithHttpInfo(id = id)
+    fun getExperimentsById(id: kotlin.String) : Trial {
+        val localVarResponse = getExperimentsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Trial
@@ -165,8 +165,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ExperimentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Trial?> {
-        val localVariableConfig = getV1ExperimentsByIdRequestConfig(id = id)
+    fun getExperimentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Trial?> {
+        val localVariableConfig = getExperimentsByIdRequestConfig(id = id)
 
         return request<Unit, Trial>(
             localVariableConfig
@@ -174,12 +174,12 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1ExperimentsById
+     * To obtain the request config of the operation getExperimentsById
      *
      * @param id ID is the experiment the URL names.
      * @return RequestConfig
      */
-    fun getV1ExperimentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getExperimentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -211,8 +211,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ExperimentsByIdAssign(id: kotlin.String, subject: kotlin.String, props: kotlin.String? = null) : Assignment {
-        val localVarResponse = getV1ExperimentsByIdAssignWithHttpInfo(id = id, subject = subject, props = props)
+    fun getExperimentsByIdAssign(id: kotlin.String, subject: kotlin.String, props: kotlin.String? = null) : Assignment {
+        val localVarResponse = getExperimentsByIdAssignWithHttpInfo(id = id, subject = subject, props = props)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Assignment
@@ -242,8 +242,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ExperimentsByIdAssignWithHttpInfo(id: kotlin.String, subject: kotlin.String, props: kotlin.String?) : ApiResponse<Assignment?> {
-        val localVariableConfig = getV1ExperimentsByIdAssignRequestConfig(id = id, subject = subject, props = props)
+    fun getExperimentsByIdAssignWithHttpInfo(id: kotlin.String, subject: kotlin.String, props: kotlin.String?) : ApiResponse<Assignment?> {
+        val localVariableConfig = getExperimentsByIdAssignRequestConfig(id = id, subject = subject, props = props)
 
         return request<Unit, Assignment>(
             localVariableConfig
@@ -251,14 +251,14 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1ExperimentsByIdAssign
+     * To obtain the request config of the operation getExperimentsByIdAssign
      *
      * @param id ID is the experiment the URL names.
      * @param subject Subject is the unit to bucket — a user, org, session or audience key, matching the experiment&#39;s subjectKind.
      * @param props Props is a JSON object of person properties for targeting. A value that is not valid JSON is dropped rather than refused, so a malformed one changes the bucketing without saying so. (optional)
      * @return RequestConfig
      */
-    fun getV1ExperimentsByIdAssignRequestConfig(id: kotlin.String, subject: kotlin.String, props: kotlin.String?) : RequestConfig<Unit> {
+    fun getExperimentsByIdAssignRequestConfig(id: kotlin.String, subject: kotlin.String, props: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -293,8 +293,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ExperimentsHealth() : Health {
-        val localVarResponse = getV1ExperimentsHealthWithHttpInfo()
+    fun getExperimentsHealth() : Health {
+        val localVarResponse = getExperimentsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Health
@@ -321,8 +321,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ExperimentsHealthWithHttpInfo() : ApiResponse<Health?> {
-        val localVariableConfig = getV1ExperimentsHealthRequestConfig()
+    fun getExperimentsHealthWithHttpInfo() : ApiResponse<Health?> {
+        val localVariableConfig = getExperimentsHealthRequestConfig()
 
         return request<Unit, Health>(
             localVariableConfig
@@ -330,11 +330,11 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1ExperimentsHealth
+     * To obtain the request config of the operation getExperimentsHealth
      *
      * @return RequestConfig
      */
-    fun getV1ExperimentsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getExperimentsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -364,8 +364,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Experiments(createBody: CreateBody) : Trial {
-        val localVarResponse = postV1ExperimentsWithHttpInfo(createBody = createBody)
+    fun postExperiments(createBody: CreateBody) : Trial {
+        val localVarResponse = postExperimentsWithHttpInfo(createBody = createBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Trial
@@ -393,8 +393,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ExperimentsWithHttpInfo(createBody: CreateBody) : ApiResponse<Trial?> {
-        val localVariableConfig = postV1ExperimentsRequestConfig(createBody = createBody)
+    fun postExperimentsWithHttpInfo(createBody: CreateBody) : ApiResponse<Trial?> {
+        val localVariableConfig = postExperimentsRequestConfig(createBody = createBody)
 
         return request<CreateBody, Trial>(
             localVariableConfig
@@ -402,12 +402,12 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1Experiments
+     * To obtain the request config of the operation postExperiments
      *
      * @param createBody 
      * @return RequestConfig
      */
-    fun postV1ExperimentsRequestConfig(createBody: CreateBody) : RequestConfig<CreateBody> {
+    fun postExperimentsRequestConfig(createBody: CreateBody) : RequestConfig<CreateBody> {
         val localVariableBody = createBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -439,8 +439,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ExperimentsByIdAnalyze(id: kotlin.String, analyzeQuery: AnalyzeQuery) : Analysis {
-        val localVarResponse = postV1ExperimentsByIdAnalyzeWithHttpInfo(id = id, analyzeQuery = analyzeQuery)
+    fun postExperimentsByIdAnalyze(id: kotlin.String, analyzeQuery: AnalyzeQuery) : Analysis {
+        val localVarResponse = postExperimentsByIdAnalyzeWithHttpInfo(id = id, analyzeQuery = analyzeQuery)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Analysis
@@ -469,8 +469,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ExperimentsByIdAnalyzeWithHttpInfo(id: kotlin.String, analyzeQuery: AnalyzeQuery) : ApiResponse<Analysis?> {
-        val localVariableConfig = postV1ExperimentsByIdAnalyzeRequestConfig(id = id, analyzeQuery = analyzeQuery)
+    fun postExperimentsByIdAnalyzeWithHttpInfo(id: kotlin.String, analyzeQuery: AnalyzeQuery) : ApiResponse<Analysis?> {
+        val localVariableConfig = postExperimentsByIdAnalyzeRequestConfig(id = id, analyzeQuery = analyzeQuery)
 
         return request<AnalyzeQuery, Analysis>(
             localVariableConfig
@@ -478,13 +478,13 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1ExperimentsByIdAnalyze
+     * To obtain the request config of the operation postExperimentsByIdAnalyze
      *
      * @param id ID is the experiment the URL names.
      * @param analyzeQuery 
      * @return RequestConfig
      */
-    fun postV1ExperimentsByIdAnalyzeRequestConfig(id: kotlin.String, analyzeQuery: AnalyzeQuery) : RequestConfig<AnalyzeQuery> {
+    fun postExperimentsByIdAnalyzeRequestConfig(id: kotlin.String, analyzeQuery: AnalyzeQuery) : RequestConfig<AnalyzeQuery> {
         val localVariableBody = analyzeQuery
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -516,8 +516,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ExperimentsByIdDecide(id: kotlin.String, decideBody: DecideBody) : Trial {
-        val localVarResponse = postV1ExperimentsByIdDecideWithHttpInfo(id = id, decideBody = decideBody)
+    fun postExperimentsByIdDecide(id: kotlin.String, decideBody: DecideBody) : Trial {
+        val localVarResponse = postExperimentsByIdDecideWithHttpInfo(id = id, decideBody = decideBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Trial
@@ -546,8 +546,8 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ExperimentsByIdDecideWithHttpInfo(id: kotlin.String, decideBody: DecideBody) : ApiResponse<Trial?> {
-        val localVariableConfig = postV1ExperimentsByIdDecideRequestConfig(id = id, decideBody = decideBody)
+    fun postExperimentsByIdDecideWithHttpInfo(id: kotlin.String, decideBody: DecideBody) : ApiResponse<Trial?> {
+        val localVariableConfig = postExperimentsByIdDecideRequestConfig(id = id, decideBody = decideBody)
 
         return request<DecideBody, Trial>(
             localVariableConfig
@@ -555,13 +555,13 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1ExperimentsByIdDecide
+     * To obtain the request config of the operation postExperimentsByIdDecide
      *
      * @param id 
      * @param decideBody 
      * @return RequestConfig
      */
-    fun postV1ExperimentsByIdDecideRequestConfig(id: kotlin.String, decideBody: DecideBody) : RequestConfig<DecideBody> {
+    fun postExperimentsByIdDecideRequestConfig(id: kotlin.String, decideBody: DecideBody) : RequestConfig<DecideBody> {
         val localVariableBody = decideBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

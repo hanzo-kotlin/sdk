@@ -59,8 +59,8 @@ class EmbedApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Embed(app: kotlin.String? = null) : EmbedStatusResp {
-        val localVarResponse = getV1EmbedWithHttpInfo(app = app)
+    fun getEmbed(app: kotlin.String? = null) : EmbedStatusResp {
+        val localVarResponse = getEmbedWithHttpInfo(app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EmbedStatusResp
@@ -88,8 +88,8 @@ class EmbedApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EmbedWithHttpInfo(app: kotlin.String?) : ApiResponse<EmbedStatusResp?> {
-        val localVariableConfig = getV1EmbedRequestConfig(app = app)
+    fun getEmbedWithHttpInfo(app: kotlin.String?) : ApiResponse<EmbedStatusResp?> {
+        val localVariableConfig = getEmbedRequestConfig(app = app)
 
         return request<Unit, EmbedStatusResp>(
             localVariableConfig
@@ -97,12 +97,12 @@ class EmbedApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Embed
+     * To obtain the request config of the operation getEmbed
      *
      * @param app App is the embedded app to report on: cms (Content Studio), erp or help. (optional)
      * @return RequestConfig
      */
-    fun getV1EmbedRequestConfig(app: kotlin.String?) : RequestConfig<Unit> {
+    fun getEmbedRequestConfig(app: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {

@@ -56,8 +56,8 @@ class GenerateTextToSpeechAudioApi(basePath: kotlin.String = defaultBasePath, cl
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GenerateTextToSpeechAudio() : Unit {
-        val localVarResponse = postV1GenerateTextToSpeechAudioWithHttpInfo()
+    fun postGenerateTextToSpeechAudio() : Unit {
+        val localVarResponse = postGenerateTextToSpeechAudioWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class GenerateTextToSpeechAudioApi(basePath: kotlin.String = defaultBasePath, cl
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GenerateTextToSpeechAudioWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GenerateTextToSpeechAudioRequestConfig()
+    fun postGenerateTextToSpeechAudioWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postGenerateTextToSpeechAudioRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class GenerateTextToSpeechAudioApi(basePath: kotlin.String = defaultBasePath, cl
     }
 
     /**
-     * To obtain the request config of the operation postV1GenerateTextToSpeechAudio
+     * To obtain the request config of the operation postGenerateTextToSpeechAudio
      *
      * @return RequestConfig
      */
-    fun postV1GenerateTextToSpeechAudioRequestConfig() : RequestConfig<Unit> {
+    fun postGenerateTextToSpeechAudioRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

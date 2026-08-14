@@ -58,8 +58,8 @@ class CsrfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Csrf() : CsrfResp {
-        val localVarResponse = getV1CsrfWithHttpInfo()
+    fun getCsrf() : CsrfResp {
+        val localVarResponse = getCsrfWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CsrfResp
@@ -86,8 +86,8 @@ class CsrfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CsrfWithHttpInfo() : ApiResponse<CsrfResp?> {
-        val localVariableConfig = getV1CsrfRequestConfig()
+    fun getCsrfWithHttpInfo() : ApiResponse<CsrfResp?> {
+        val localVariableConfig = getCsrfRequestConfig()
 
         return request<Unit, CsrfResp>(
             localVariableConfig
@@ -95,11 +95,11 @@ class CsrfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1Csrf
+     * To obtain the request config of the operation getCsrf
      *
      * @return RequestConfig
      */
-    fun getV1CsrfRequestConfig() : RequestConfig<Unit> {
+    fun getCsrfRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

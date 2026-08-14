@@ -66,8 +66,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PlansEntriesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PlansEntriesBySlugWithHttpInfo(slug = slug)
+    fun deletePlansEntriesBySlug(slug: kotlin.String) : Unit {
+        val localVarResponse = deletePlansEntriesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -94,8 +94,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PlansEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PlansEntriesBySlugRequestConfig(slug = slug)
+    fun deletePlansEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePlansEntriesBySlugRequestConfig(slug = slug)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -103,12 +103,12 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PlansEntriesBySlug
+     * To obtain the request config of the operation deletePlansEntriesBySlug
      *
      * @param slug 
      * @return RequestConfig
      */
-    fun deleteV1PlansEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun deletePlansEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -136,8 +136,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Plans() : PlanList {
-        val localVarResponse = getV1PlansWithHttpInfo()
+    fun getPlans() : PlanList {
+        val localVarResponse = getPlansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
@@ -164,8 +164,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansWithHttpInfo() : ApiResponse<PlanList?> {
-        val localVariableConfig = getV1PlansRequestConfig()
+    fun getPlansWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getPlansRequestConfig()
 
         return request<Unit, PlanList>(
             localVariableConfig
@@ -173,11 +173,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Plans
+     * To obtain the request config of the operation getPlans
      *
      * @return RequestConfig
      */
-    fun getV1PlansRequestConfig() : RequestConfig<Unit> {
+    fun getPlansRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -206,8 +206,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansBlockchain() : PlanList {
-        val localVarResponse = getV1PlansBlockchainWithHttpInfo()
+    fun getPlansBlockchain() : PlanList {
+        val localVarResponse = getPlansBlockchainWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
@@ -234,8 +234,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansBlockchainWithHttpInfo() : ApiResponse<PlanList?> {
-        val localVariableConfig = getV1PlansBlockchainRequestConfig()
+    fun getPlansBlockchainWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getPlansBlockchainRequestConfig()
 
         return request<Unit, PlanList>(
             localVariableConfig
@@ -243,11 +243,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansBlockchain
+     * To obtain the request config of the operation getPlansBlockchain
      *
      * @return RequestConfig
      */
-    fun getV1PlansBlockchainRequestConfig() : RequestConfig<Unit> {
+    fun getPlansBlockchainRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -276,8 +276,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansCloud() : PlanList {
-        val localVarResponse = getV1PlansCloudWithHttpInfo()
+    fun getPlansCloud() : PlanList {
+        val localVarResponse = getPlansCloudWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
@@ -304,8 +304,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansCloudWithHttpInfo() : ApiResponse<PlanList?> {
-        val localVariableConfig = getV1PlansCloudRequestConfig()
+    fun getPlansCloudWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getPlansCloudRequestConfig()
 
         return request<Unit, PlanList>(
             localVariableConfig
@@ -313,11 +313,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansCloud
+     * To obtain the request config of the operation getPlansCloud
      *
      * @return RequestConfig
      */
-    fun getV1PlansCloudRequestConfig() : RequestConfig<Unit> {
+    fun getPlansCloudRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -346,8 +346,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansDns() : PlanList {
-        val localVarResponse = getV1PlansDnsWithHttpInfo()
+    fun getPlansDns() : PlanList {
+        val localVarResponse = getPlansDnsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
@@ -374,8 +374,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansDnsWithHttpInfo() : ApiResponse<PlanList?> {
-        val localVariableConfig = getV1PlansDnsRequestConfig()
+    fun getPlansDnsWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getPlansDnsRequestConfig()
 
         return request<Unit, PlanList>(
             localVariableConfig
@@ -383,11 +383,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansDns
+     * To obtain the request config of the operation getPlansDns
      *
      * @return RequestConfig
      */
-    fun getV1PlansDnsRequestConfig() : RequestConfig<Unit> {
+    fun getPlansDnsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -417,8 +417,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansEntitlementsById(id: kotlin.String) : PlanEntitlements {
-        val localVarResponse = getV1PlansEntitlementsByIdWithHttpInfo(id = id)
+    fun getPlansEntitlementsById(id: kotlin.String) : PlanEntitlements {
+        val localVarResponse = getPlansEntitlementsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanEntitlements
@@ -446,8 +446,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansEntitlementsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PlanEntitlements?> {
-        val localVariableConfig = getV1PlansEntitlementsByIdRequestConfig(id = id)
+    fun getPlansEntitlementsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PlanEntitlements?> {
+        val localVariableConfig = getPlansEntitlementsByIdRequestConfig(id = id)
 
         return request<Unit, PlanEntitlements>(
             localVariableConfig
@@ -455,12 +455,12 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansEntitlementsById
+     * To obtain the request config of the operation getPlansEntitlementsById
      *
      * @param id ID is the plan&#39;s catalog id or slug — \&quot;pro\&quot;, \&quot;team\&quot;, \&quot;world-enterprise\&quot;, \&quot;rpc-growth\&quot;. Both are matched, so a slug resolves the plan it names.
      * @return RequestConfig
      */
-    fun getV1PlansEntitlementsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getPlansEntitlementsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -488,8 +488,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansEntries() : Unit {
-        val localVarResponse = getV1PlansEntriesWithHttpInfo()
+    fun getPlansEntries() : Unit {
+        val localVarResponse = getPlansEntriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -515,8 +515,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansEntriesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1PlansEntriesRequestConfig()
+    fun getPlansEntriesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getPlansEntriesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -524,11 +524,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansEntries
+     * To obtain the request config of the operation getPlansEntries
      *
      * @return RequestConfig
      */
-    fun getV1PlansEntriesRequestConfig() : RequestConfig<Unit> {
+    fun getPlansEntriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -556,8 +556,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansGpu() : PlanTierList {
-        val localVarResponse = getV1PlansGpuWithHttpInfo()
+    fun getPlansGpu() : PlanTierList {
+        val localVarResponse = getPlansGpuWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanTierList
@@ -584,8 +584,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansGpuWithHttpInfo() : ApiResponse<PlanTierList?> {
-        val localVariableConfig = getV1PlansGpuRequestConfig()
+    fun getPlansGpuWithHttpInfo() : ApiResponse<PlanTierList?> {
+        val localVariableConfig = getPlansGpuRequestConfig()
 
         return request<Unit, PlanTierList>(
             localVariableConfig
@@ -593,11 +593,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansGpu
+     * To obtain the request config of the operation getPlansGpu
      *
      * @return RequestConfig
      */
-    fun getV1PlansGpuRequestConfig() : RequestConfig<Unit> {
+    fun getPlansGpuRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -626,8 +626,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansHealth() : PlanHealth {
-        val localVarResponse = getV1PlansHealthWithHttpInfo()
+    fun getPlansHealth() : PlanHealth {
+        val localVarResponse = getPlansHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanHealth
@@ -654,8 +654,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansHealthWithHttpInfo() : ApiResponse<PlanHealth?> {
-        val localVariableConfig = getV1PlansHealthRequestConfig()
+    fun getPlansHealthWithHttpInfo() : ApiResponse<PlanHealth?> {
+        val localVariableConfig = getPlansHealthRequestConfig()
 
         return request<Unit, PlanHealth>(
             localVariableConfig
@@ -663,11 +663,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansHealth
+     * To obtain the request config of the operation getPlansHealth
      *
      * @return RequestConfig
      */
-    fun getV1PlansHealthRequestConfig() : RequestConfig<Unit> {
+    fun getPlansHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -696,8 +696,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansPolicy() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PlansPolicyWithHttpInfo()
+    fun getPlansPolicy() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPlansPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -724,8 +724,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansPolicyWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PlansPolicyRequestConfig()
+    fun getPlansPolicyWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPlansPolicyRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -733,11 +733,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansPolicy
+     * To obtain the request config of the operation getPlansPolicy
      *
      * @return RequestConfig
      */
-    fun getV1PlansPolicyRequestConfig() : RequestConfig<Unit> {
+    fun getPlansPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -766,8 +766,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansRegions() : PlanRegionList {
-        val localVarResponse = getV1PlansRegionsWithHttpInfo()
+    fun getPlansRegions() : PlanRegionList {
+        val localVarResponse = getPlansRegionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanRegionList
@@ -794,8 +794,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansRegionsWithHttpInfo() : ApiResponse<PlanRegionList?> {
-        val localVariableConfig = getV1PlansRegionsRequestConfig()
+    fun getPlansRegionsWithHttpInfo() : ApiResponse<PlanRegionList?> {
+        val localVariableConfig = getPlansRegionsRequestConfig()
 
         return request<Unit, PlanRegionList>(
             localVariableConfig
@@ -803,11 +803,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansRegions
+     * To obtain the request config of the operation getPlansRegions
      *
      * @return RequestConfig
      */
-    fun getV1PlansRegionsRequestConfig() : RequestConfig<Unit> {
+    fun getPlansRegionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -837,8 +837,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansResolveById(id: kotlin.String) : PlanResolution {
-        val localVarResponse = getV1PlansResolveByIdWithHttpInfo(id = id)
+    fun getPlansResolveById(id: kotlin.String) : PlanResolution {
+        val localVarResponse = getPlansResolveByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanResolution
@@ -866,8 +866,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansResolveByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PlanResolution?> {
-        val localVariableConfig = getV1PlansResolveByIdRequestConfig(id = id)
+    fun getPlansResolveByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PlanResolution?> {
+        val localVariableConfig = getPlansResolveByIdRequestConfig(id = id)
 
         return request<Unit, PlanResolution>(
             localVariableConfig
@@ -875,12 +875,12 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansResolveById
+     * To obtain the request config of the operation getPlansResolveById
      *
      * @param id ID is the plan&#39;s catalog id or slug — \&quot;pro\&quot;, \&quot;team\&quot;, \&quot;world-enterprise\&quot;, \&quot;rpc-growth\&quot;. Both are matched, so a slug resolves the plan it names.
      * @return RequestConfig
      */
-    fun getV1PlansResolveByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getPlansResolveByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -909,8 +909,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansSchema() : PlanSchemas {
-        val localVarResponse = getV1PlansSchemaWithHttpInfo()
+    fun getPlansSchema() : PlanSchemas {
+        val localVarResponse = getPlansSchemaWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanSchemas
@@ -937,8 +937,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansSchemaWithHttpInfo() : ApiResponse<PlanSchemas?> {
-        val localVariableConfig = getV1PlansSchemaRequestConfig()
+    fun getPlansSchemaWithHttpInfo() : ApiResponse<PlanSchemas?> {
+        val localVariableConfig = getPlansSchemaRequestConfig()
 
         return request<Unit, PlanSchemas>(
             localVariableConfig
@@ -946,11 +946,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansSchema
+     * To obtain the request config of the operation getPlansSchema
      *
      * @return RequestConfig
      */
-    fun getV1PlansSchemaRequestConfig() : RequestConfig<Unit> {
+    fun getPlansSchemaRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -979,8 +979,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansStorage() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PlansStorageWithHttpInfo()
+    fun getPlansStorage() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPlansStorageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1007,8 +1007,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansStorageWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PlansStorageRequestConfig()
+    fun getPlansStorageWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPlansStorageRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1016,11 +1016,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansStorage
+     * To obtain the request config of the operation getPlansStorage
      *
      * @return RequestConfig
      */
-    fun getV1PlansStorageRequestConfig() : RequestConfig<Unit> {
+    fun getPlansStorageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1049,8 +1049,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansSubscriptions() : PlanList {
-        val localVarResponse = getV1PlansSubscriptionsWithHttpInfo()
+    fun getPlansSubscriptions() : PlanList {
+        val localVarResponse = getPlansSubscriptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
@@ -1077,8 +1077,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansSubscriptionsWithHttpInfo() : ApiResponse<PlanList?> {
-        val localVariableConfig = getV1PlansSubscriptionsRequestConfig()
+    fun getPlansSubscriptionsWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getPlansSubscriptionsRequestConfig()
 
         return request<Unit, PlanList>(
             localVariableConfig
@@ -1086,11 +1086,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansSubscriptions
+     * To obtain the request config of the operation getPlansSubscriptions
      *
      * @return RequestConfig
      */
-    fun getV1PlansSubscriptionsRequestConfig() : RequestConfig<Unit> {
+    fun getPlansSubscriptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1119,8 +1119,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansTools() : PlanToolList {
-        val localVarResponse = getV1PlansToolsWithHttpInfo()
+    fun getPlansTools() : PlanToolList {
+        val localVarResponse = getPlansToolsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanToolList
@@ -1147,8 +1147,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansToolsWithHttpInfo() : ApiResponse<PlanToolList?> {
-        val localVariableConfig = getV1PlansToolsRequestConfig()
+    fun getPlansToolsWithHttpInfo() : ApiResponse<PlanToolList?> {
+        val localVariableConfig = getPlansToolsRequestConfig()
 
         return request<Unit, PlanToolList>(
             localVariableConfig
@@ -1156,11 +1156,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansTools
+     * To obtain the request config of the operation getPlansTools
      *
      * @return RequestConfig
      */
-    fun getV1PlansToolsRequestConfig() : RequestConfig<Unit> {
+    fun getPlansToolsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1189,8 +1189,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlansVocab() : PlanVocab {
-        val localVarResponse = getV1PlansVocabWithHttpInfo()
+    fun getPlansVocab() : PlanVocab {
+        val localVarResponse = getPlansVocabWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanVocab
@@ -1217,8 +1217,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlansVocabWithHttpInfo() : ApiResponse<PlanVocab?> {
-        val localVariableConfig = getV1PlansVocabRequestConfig()
+    fun getPlansVocabWithHttpInfo() : ApiResponse<PlanVocab?> {
+        val localVariableConfig = getPlansVocabRequestConfig()
 
         return request<Unit, PlanVocab>(
             localVariableConfig
@@ -1226,11 +1226,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1PlansVocab
+     * To obtain the request config of the operation getPlansVocab
      *
      * @return RequestConfig
      */
-    fun getV1PlansVocabRequestConfig() : RequestConfig<Unit> {
+    fun getPlansVocabRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1258,8 +1258,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlansEntries() : Unit {
-        val localVarResponse = postV1PlansEntriesWithHttpInfo()
+    fun postPlansEntries() : Unit {
+        val localVarResponse = postPlansEntriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1285,8 +1285,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlansEntriesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1PlansEntriesRequestConfig()
+    fun postPlansEntriesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postPlansEntriesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1294,11 +1294,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1PlansEntries
+     * To obtain the request config of the operation postPlansEntries
      *
      * @return RequestConfig
      */
-    fun postV1PlansEntriesRequestConfig() : RequestConfig<Unit> {
+    fun postPlansEntriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1325,8 +1325,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlansSeed() : Unit {
-        val localVarResponse = postV1PlansSeedWithHttpInfo()
+    fun postPlansSeed() : Unit {
+        val localVarResponse = postPlansSeedWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1352,8 +1352,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlansSeedWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1PlansSeedRequestConfig()
+    fun postPlansSeedWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postPlansSeedRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1361,11 +1361,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1PlansSeed
+     * To obtain the request config of the operation postPlansSeed
      *
      * @return RequestConfig
      */
-    fun postV1PlansSeedRequestConfig() : RequestConfig<Unit> {
+    fun postPlansSeedRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1393,8 +1393,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1PlansEntriesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = putV1PlansEntriesBySlugWithHttpInfo(slug = slug)
+    fun putPlansEntriesBySlug(slug: kotlin.String) : Unit {
+        val localVarResponse = putPlansEntriesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1421,8 +1421,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1PlansEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1PlansEntriesBySlugRequestConfig(slug = slug)
+    fun putPlansEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putPlansEntriesBySlugRequestConfig(slug = slug)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1430,12 +1430,12 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1PlansEntriesBySlug
+     * To obtain the request config of the operation putPlansEntriesBySlug
      *
      * @param slug 
      * @return RequestConfig
      */
-    fun putV1PlansEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun putPlansEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -69,8 +69,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1LinksById(id: kotlin.String) : RevokeResp {
-        val localVarResponse = deleteV1LinksByIdWithHttpInfo(id = id)
+    fun deleteLinksById(id: kotlin.String) : RevokeResp {
+        val localVarResponse = deleteLinksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RevokeResp
@@ -98,8 +98,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1LinksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<RevokeResp?> {
-        val localVariableConfig = deleteV1LinksByIdRequestConfig(id = id)
+    fun deleteLinksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<RevokeResp?> {
+        val localVariableConfig = deleteLinksByIdRequestConfig(id = id)
 
         return request<Unit, RevokeResp>(
             localVariableConfig
@@ -107,12 +107,12 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1LinksById
+     * To obtain the request config of the operation deleteLinksById
      *
      * @param id ID is the link to act on, from the path. It is scoped to the caller, so another user&#39;s or org&#39;s id is a 404.
      * @return RequestConfig
      */
-    fun deleteV1LinksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteLinksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -141,8 +141,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Links() : LinkList {
-        val localVarResponse = getV1LinksWithHttpInfo()
+    fun getLinks() : LinkList {
+        val localVarResponse = getLinksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LinkList
@@ -169,8 +169,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LinksWithHttpInfo() : ApiResponse<LinkList?> {
-        val localVariableConfig = getV1LinksRequestConfig()
+    fun getLinksWithHttpInfo() : ApiResponse<LinkList?> {
+        val localVariableConfig = getLinksRequestConfig()
 
         return request<Unit, LinkList>(
             localVariableConfig
@@ -178,11 +178,11 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Links
+     * To obtain the request config of the operation getLinks
      *
      * @return RequestConfig
      */
-    fun getV1LinksRequestConfig() : RequestConfig<Unit> {
+    fun getLinksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -212,8 +212,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LinksById(id: kotlin.String) : LinkView {
-        val localVarResponse = getV1LinksByIdWithHttpInfo(id = id)
+    fun getLinksById(id: kotlin.String) : LinkView {
+        val localVarResponse = getLinksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LinkView
@@ -241,8 +241,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LinksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<LinkView?> {
-        val localVariableConfig = getV1LinksByIdRequestConfig(id = id)
+    fun getLinksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<LinkView?> {
+        val localVariableConfig = getLinksByIdRequestConfig(id = id)
 
         return request<Unit, LinkView>(
             localVariableConfig
@@ -250,12 +250,12 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LinksById
+     * To obtain the request config of the operation getLinksById
      *
      * @param id ID is the link to act on, from the path. It is scoped to the caller, so another user&#39;s or org&#39;s id is a 404.
      * @return RequestConfig
      */
-    fun getV1LinksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getLinksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -285,8 +285,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LinksDevicesByMachine(machine: kotlin.String) : DeviceView {
-        val localVarResponse = getV1LinksDevicesByMachineWithHttpInfo(machine = machine)
+    fun getLinksDevicesByMachine(machine: kotlin.String) : DeviceView {
+        val localVarResponse = getLinksDevicesByMachineWithHttpInfo(machine = machine)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeviceView
@@ -314,8 +314,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LinksDevicesByMachineWithHttpInfo(machine: kotlin.String) : ApiResponse<DeviceView?> {
-        val localVariableConfig = getV1LinksDevicesByMachineRequestConfig(machine = machine)
+    fun getLinksDevicesByMachineWithHttpInfo(machine: kotlin.String) : ApiResponse<DeviceView?> {
+        val localVariableConfig = getLinksDevicesByMachineRequestConfig(machine = machine)
 
         return request<Unit, DeviceView>(
             localVariableConfig
@@ -323,12 +323,12 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LinksDevicesByMachine
+     * To obtain the request config of the operation getLinksDevicesByMachine
      *
      * @param machine Machine is the machine to act on, from the path. It is scoped to the caller, so a machine with none of the caller&#39;s accounts is a 404.
      * @return RequestConfig
      */
-    fun getV1LinksDevicesByMachineRequestConfig(machine: kotlin.String) : RequestConfig<Unit> {
+    fun getLinksDevicesByMachineRequestConfig(machine: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -357,8 +357,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LinksRoute() : RoutePlan {
-        val localVarResponse = getV1LinksRouteWithHttpInfo()
+    fun getLinksRoute() : RoutePlan {
+        val localVarResponse = getLinksRouteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RoutePlan
@@ -385,8 +385,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LinksRouteWithHttpInfo() : ApiResponse<RoutePlan?> {
-        val localVariableConfig = getV1LinksRouteRequestConfig()
+    fun getLinksRouteWithHttpInfo() : ApiResponse<RoutePlan?> {
+        val localVariableConfig = getLinksRouteRequestConfig()
 
         return request<Unit, RoutePlan>(
             localVariableConfig
@@ -394,11 +394,11 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LinksRoute
+     * To obtain the request config of the operation getLinksRoute
      *
      * @return RequestConfig
      */
-    fun getV1LinksRouteRequestConfig() : RequestConfig<Unit> {
+    fun getLinksRouteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -431,8 +431,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LinksUsage(provider: kotlin.String? = null, account: kotlin.String? = null, window: kotlin.String? = null, range: kotlin.String? = null) : BoardResp {
-        val localVarResponse = getV1LinksUsageWithHttpInfo(provider = provider, account = account, window = window, range = range)
+    fun getLinksUsage(provider: kotlin.String? = null, account: kotlin.String? = null, window: kotlin.String? = null, range: kotlin.String? = null) : BoardResp {
+        val localVarResponse = getLinksUsageWithHttpInfo(provider = provider, account = account, window = window, range = range)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BoardResp
@@ -463,8 +463,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LinksUsageWithHttpInfo(provider: kotlin.String?, account: kotlin.String?, window: kotlin.String?, range: kotlin.String?) : ApiResponse<BoardResp?> {
-        val localVariableConfig = getV1LinksUsageRequestConfig(provider = provider, account = account, window = window, range = range)
+    fun getLinksUsageWithHttpInfo(provider: kotlin.String?, account: kotlin.String?, window: kotlin.String?, range: kotlin.String?) : ApiResponse<BoardResp?> {
+        val localVariableConfig = getLinksUsageRequestConfig(provider = provider, account = account, window = window, range = range)
 
         return request<Unit, BoardResp>(
             localVariableConfig
@@ -472,7 +472,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LinksUsage
+     * To obtain the request config of the operation getLinksUsage
      *
      * @param provider Provider is the provider whose meter to read. Required. (optional)
      * @param account Account narrows to one account when a user has several with the provider. (optional)
@@ -480,7 +480,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param range Range is the period, one of 1h, 24h, 7d or 30d; empty means 24h, and an unknown label is 400, never a quiet fallback. (optional)
      * @return RequestConfig
      */
-    fun getV1LinksUsageRequestConfig(provider: kotlin.String?, account: kotlin.String?, window: kotlin.String?, range: kotlin.String?) : RequestConfig<Unit> {
+    fun getLinksUsageRequestConfig(provider: kotlin.String?, account: kotlin.String?, window: kotlin.String?, range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -523,8 +523,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LinksUsageAccounts() : AccountsUsage {
-        val localVarResponse = getV1LinksUsageAccountsWithHttpInfo()
+    fun getLinksUsageAccounts() : AccountsUsage {
+        val localVarResponse = getLinksUsageAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccountsUsage
@@ -551,8 +551,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LinksUsageAccountsWithHttpInfo() : ApiResponse<AccountsUsage?> {
-        val localVariableConfig = getV1LinksUsageAccountsRequestConfig()
+    fun getLinksUsageAccountsWithHttpInfo() : ApiResponse<AccountsUsage?> {
+        val localVariableConfig = getLinksUsageAccountsRequestConfig()
 
         return request<Unit, AccountsUsage>(
             localVariableConfig
@@ -560,11 +560,11 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LinksUsageAccounts
+     * To obtain the request config of the operation getLinksUsageAccounts
      *
      * @return RequestConfig
      */
-    fun getV1LinksUsageAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getLinksUsageAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -594,8 +594,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LinksUsageSummary(range: kotlin.String? = null) : SummaryResp {
-        val localVarResponse = getV1LinksUsageSummaryWithHttpInfo(range = range)
+    fun getLinksUsageSummary(range: kotlin.String? = null) : SummaryResp {
+        val localVarResponse = getLinksUsageSummaryWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SummaryResp
@@ -623,8 +623,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LinksUsageSummaryWithHttpInfo(range: kotlin.String?) : ApiResponse<SummaryResp?> {
-        val localVariableConfig = getV1LinksUsageSummaryRequestConfig(range = range)
+    fun getLinksUsageSummaryWithHttpInfo(range: kotlin.String?) : ApiResponse<SummaryResp?> {
+        val localVariableConfig = getLinksUsageSummaryRequestConfig(range = range)
 
         return request<Unit, SummaryResp>(
             localVariableConfig
@@ -632,12 +632,12 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LinksUsageSummary
+     * To obtain the request config of the operation getLinksUsageSummary
      *
      * @param range Range is the period, one of 1h, 24h, 7d or 30d; empty means 24h, and an unknown label is 400, never a silent substitution. (optional)
      * @return RequestConfig
      */
-    fun getV1LinksUsageSummaryRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun getLinksUsageSummaryRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -672,8 +672,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Links(enrollReq: EnrollReq) : LinkView {
-        val localVarResponse = postV1LinksWithHttpInfo(enrollReq = enrollReq)
+    fun postLinks(enrollReq: EnrollReq) : LinkView {
+        val localVarResponse = postLinksWithHttpInfo(enrollReq = enrollReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LinkView
@@ -701,8 +701,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LinksWithHttpInfo(enrollReq: EnrollReq) : ApiResponse<LinkView?> {
-        val localVariableConfig = postV1LinksRequestConfig(enrollReq = enrollReq)
+    fun postLinksWithHttpInfo(enrollReq: EnrollReq) : ApiResponse<LinkView?> {
+        val localVariableConfig = postLinksRequestConfig(enrollReq = enrollReq)
 
         return request<EnrollReq, LinkView>(
             localVariableConfig
@@ -710,12 +710,12 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1Links
+     * To obtain the request config of the operation postLinks
      *
      * @param enrollReq 
      * @return RequestConfig
      */
-    fun postV1LinksRequestConfig(enrollReq: EnrollReq) : RequestConfig<EnrollReq> {
+    fun postLinksRequestConfig(enrollReq: EnrollReq) : RequestConfig<EnrollReq> {
         val localVariableBody = enrollReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -746,8 +746,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LinksDevicesByMachineRevoke(machine: kotlin.String) : RevokeResp {
-        val localVarResponse = postV1LinksDevicesByMachineRevokeWithHttpInfo(machine = machine)
+    fun postLinksDevicesByMachineRevoke(machine: kotlin.String) : RevokeResp {
+        val localVarResponse = postLinksDevicesByMachineRevokeWithHttpInfo(machine = machine)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RevokeResp
@@ -775,8 +775,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LinksDevicesByMachineRevokeWithHttpInfo(machine: kotlin.String) : ApiResponse<RevokeResp?> {
-        val localVariableConfig = postV1LinksDevicesByMachineRevokeRequestConfig(machine = machine)
+    fun postLinksDevicesByMachineRevokeWithHttpInfo(machine: kotlin.String) : ApiResponse<RevokeResp?> {
+        val localVariableConfig = postLinksDevicesByMachineRevokeRequestConfig(machine = machine)
 
         return request<Unit, RevokeResp>(
             localVariableConfig
@@ -784,12 +784,12 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1LinksDevicesByMachineRevoke
+     * To obtain the request config of the operation postLinksDevicesByMachineRevoke
      *
      * @param machine Machine is the machine to act on, from the path. It is scoped to the caller, so a machine with none of the caller&#39;s accounts is a 404.
      * @return RequestConfig
      */
-    fun postV1LinksDevicesByMachineRevokeRequestConfig(machine: kotlin.String) : RequestConfig<Unit> {
+    fun postLinksDevicesByMachineRevokeRequestConfig(machine: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -819,8 +819,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LinksUsage(ingestReq: IngestReq) : IngestResp {
-        val localVarResponse = postV1LinksUsageWithHttpInfo(ingestReq = ingestReq)
+    fun postLinksUsage(ingestReq: IngestReq) : IngestResp {
+        val localVarResponse = postLinksUsageWithHttpInfo(ingestReq = ingestReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IngestResp
@@ -848,8 +848,8 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LinksUsageWithHttpInfo(ingestReq: IngestReq) : ApiResponse<IngestResp?> {
-        val localVariableConfig = postV1LinksUsageRequestConfig(ingestReq = ingestReq)
+    fun postLinksUsageWithHttpInfo(ingestReq: IngestReq) : ApiResponse<IngestResp?> {
+        val localVariableConfig = postLinksUsageRequestConfig(ingestReq = ingestReq)
 
         return request<IngestReq, IngestResp>(
             localVariableConfig
@@ -857,12 +857,12 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1LinksUsage
+     * To obtain the request config of the operation postLinksUsage
      *
      * @param ingestReq 
      * @return RequestConfig
      */
-    fun postV1LinksUsageRequestConfig(ingestReq: IngestReq) : RequestConfig<IngestReq> {
+    fun postLinksUsageRequestConfig(ingestReq: IngestReq) : RequestConfig<IngestReq> {
         val localVariableBody = ingestReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

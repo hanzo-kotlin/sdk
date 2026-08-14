@@ -58,8 +58,8 @@ class PipelinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Pipelines() : PipelineBoard {
-        val localVarResponse = getV1PipelinesWithHttpInfo()
+    fun getPipelines() : PipelineBoard {
+        val localVarResponse = getPipelinesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PipelineBoard
@@ -86,8 +86,8 @@ class PipelinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PipelinesWithHttpInfo() : ApiResponse<PipelineBoard?> {
-        val localVariableConfig = getV1PipelinesRequestConfig()
+    fun getPipelinesWithHttpInfo() : ApiResponse<PipelineBoard?> {
+        val localVariableConfig = getPipelinesRequestConfig()
 
         return request<Unit, PipelineBoard>(
             localVariableConfig
@@ -95,11 +95,11 @@ class PipelinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1Pipelines
+     * To obtain the request config of the operation getPipelines
      *
      * @return RequestConfig
      */
-    fun getV1PipelinesRequestConfig() : RequestConfig<Unit> {
+    fun getPipelinesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

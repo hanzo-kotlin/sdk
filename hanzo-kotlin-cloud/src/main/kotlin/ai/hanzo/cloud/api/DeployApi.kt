@@ -68,8 +68,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployAccountCanIByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1DeployAccountCanIByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getDeployAccountCanIByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getDeployAccountCanIByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -96,8 +96,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployAccountCanIByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DeployAccountCanIByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getDeployAccountCanIByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getDeployAccountCanIByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -105,12 +105,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployAccountCanIByWildcard1
+     * To obtain the request config of the operation getDeployAccountCanIByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1DeployAccountCanIByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getDeployAccountCanIByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -138,8 +138,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployApplications() : ArgoAppList {
-        val localVarResponse = getV1DeployApplicationsWithHttpInfo()
+    fun getDeployApplications() : ArgoAppList {
+        val localVarResponse = getDeployApplicationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoAppList
@@ -166,8 +166,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployApplicationsWithHttpInfo() : ApiResponse<ArgoAppList?> {
-        val localVariableConfig = getV1DeployApplicationsRequestConfig()
+    fun getDeployApplicationsWithHttpInfo() : ApiResponse<ArgoAppList?> {
+        val localVariableConfig = getDeployApplicationsRequestConfig()
 
         return request<Unit, ArgoAppList>(
             localVariableConfig
@@ -175,11 +175,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployApplications
+     * To obtain the request config of the operation getDeployApplications
      *
      * @return RequestConfig
      */
-    fun getV1DeployApplicationsRequestConfig() : RequestConfig<Unit> {
+    fun getDeployApplicationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -209,8 +209,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployApplicationsByName(name: kotlin.String) : ArgoApp {
-        val localVarResponse = getV1DeployApplicationsByNameWithHttpInfo(name = name)
+    fun getDeployApplicationsByName(name: kotlin.String) : ArgoApp {
+        val localVarResponse = getDeployApplicationsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoApp
@@ -238,8 +238,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployApplicationsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoApp?> {
-        val localVariableConfig = getV1DeployApplicationsByNameRequestConfig(name = name)
+    fun getDeployApplicationsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoApp?> {
+        val localVariableConfig = getDeployApplicationsByNameRequestConfig(name = name)
 
         return request<Unit, ArgoApp>(
             localVariableConfig
@@ -247,12 +247,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployApplicationsByName
+     * To obtain the request config of the operation getDeployApplicationsByName
      *
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
      * @return RequestConfig
      */
-    fun getV1DeployApplicationsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getDeployApplicationsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -282,8 +282,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployApplicationsByNameResourceTree(name: kotlin.String) : ArgoTree {
-        val localVarResponse = getV1DeployApplicationsByNameResourceTreeWithHttpInfo(name = name)
+    fun getDeployApplicationsByNameResourceTree(name: kotlin.String) : ArgoTree {
+        val localVarResponse = getDeployApplicationsByNameResourceTreeWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoTree
@@ -311,8 +311,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployApplicationsByNameResourceTreeWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoTree?> {
-        val localVariableConfig = getV1DeployApplicationsByNameResourceTreeRequestConfig(name = name)
+    fun getDeployApplicationsByNameResourceTreeWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoTree?> {
+        val localVariableConfig = getDeployApplicationsByNameResourceTreeRequestConfig(name = name)
 
         return request<Unit, ArgoTree>(
             localVariableConfig
@@ -320,12 +320,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployApplicationsByNameResourceTree
+     * To obtain the request config of the operation getDeployApplicationsByNameResourceTree
      *
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
      * @return RequestConfig
      */
-    fun getV1DeployApplicationsByNameResourceTreeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getDeployApplicationsByNameResourceTreeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -356,8 +356,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployApplicationsByNameRevisionsByRevisionMetadata(name: kotlin.String, revision: kotlin.String) : ArgoRevisionMetadata {
-        val localVarResponse = getV1DeployApplicationsByNameRevisionsByRevisionMetadataWithHttpInfo(name = name, revision = revision)
+    fun getDeployApplicationsByNameRevisionsByRevisionMetadata(name: kotlin.String, revision: kotlin.String) : ArgoRevisionMetadata {
+        val localVarResponse = getDeployApplicationsByNameRevisionsByRevisionMetadataWithHttpInfo(name = name, revision = revision)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoRevisionMetadata
@@ -386,8 +386,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployApplicationsByNameRevisionsByRevisionMetadataWithHttpInfo(name: kotlin.String, revision: kotlin.String) : ApiResponse<ArgoRevisionMetadata?> {
-        val localVariableConfig = getV1DeployApplicationsByNameRevisionsByRevisionMetadataRequestConfig(name = name, revision = revision)
+    fun getDeployApplicationsByNameRevisionsByRevisionMetadataWithHttpInfo(name: kotlin.String, revision: kotlin.String) : ApiResponse<ArgoRevisionMetadata?> {
+        val localVariableConfig = getDeployApplicationsByNameRevisionsByRevisionMetadataRequestConfig(name = name, revision = revision)
 
         return request<Unit, ArgoRevisionMetadata>(
             localVariableConfig
@@ -395,13 +395,13 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployApplicationsByNameRevisionsByRevisionMetadata
+     * To obtain the request config of the operation getDeployApplicationsByNameRevisionsByRevisionMetadata
      *
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label.
      * @param revision Revision is the revision to describe, from the path. The empty revision and \&quot;HEAD\&quot; both mean \&quot;whatever this application currently declares\&quot;.
      * @return RequestConfig
      */
-    fun getV1DeployApplicationsByNameRevisionsByRevisionMetadataRequestConfig(name: kotlin.String, revision: kotlin.String) : RequestConfig<Unit> {
+    fun getDeployApplicationsByNameRevisionsByRevisionMetadataRequestConfig(name: kotlin.String, revision: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -431,8 +431,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployApplicationsByNameSyncwindows(name: kotlin.String) : ArgoSyncWindows {
-        val localVarResponse = getV1DeployApplicationsByNameSyncwindowsWithHttpInfo(name = name)
+    fun getDeployApplicationsByNameSyncwindows(name: kotlin.String) : ArgoSyncWindows {
+        val localVarResponse = getDeployApplicationsByNameSyncwindowsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoSyncWindows
@@ -460,8 +460,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployApplicationsByNameSyncwindowsWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoSyncWindows?> {
-        val localVariableConfig = getV1DeployApplicationsByNameSyncwindowsRequestConfig(name = name)
+    fun getDeployApplicationsByNameSyncwindowsWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoSyncWindows?> {
+        val localVariableConfig = getDeployApplicationsByNameSyncwindowsRequestConfig(name = name)
 
         return request<Unit, ArgoSyncWindows>(
             localVariableConfig
@@ -469,12 +469,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployApplicationsByNameSyncwindows
+     * To obtain the request config of the operation getDeployApplicationsByNameSyncwindows
      *
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
      * @return RequestConfig
      */
-    fun getV1DeployApplicationsByNameSyncwindowsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getDeployApplicationsByNameSyncwindowsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -502,8 +502,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployCallback() : Unit {
-        val localVarResponse = getV1DeployCallbackWithHttpInfo()
+    fun getDeployCallback() : Unit {
+        val localVarResponse = getDeployCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -529,8 +529,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DeployCallbackRequestConfig()
+    fun getDeployCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getDeployCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -538,11 +538,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployCallback
+     * To obtain the request config of the operation getDeployCallback
      *
      * @return RequestConfig
      */
-    fun getV1DeployCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getDeployCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -570,8 +570,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployClusters() : ArgoClusterList {
-        val localVarResponse = getV1DeployClustersWithHttpInfo()
+    fun getDeployClusters() : ArgoClusterList {
+        val localVarResponse = getDeployClustersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoClusterList
@@ -598,8 +598,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployClustersWithHttpInfo() : ApiResponse<ArgoClusterList?> {
-        val localVariableConfig = getV1DeployClustersRequestConfig()
+    fun getDeployClustersWithHttpInfo() : ApiResponse<ArgoClusterList?> {
+        val localVariableConfig = getDeployClustersRequestConfig()
 
         return request<Unit, ArgoClusterList>(
             localVariableConfig
@@ -607,11 +607,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployClusters
+     * To obtain the request config of the operation getDeployClusters
      *
      * @return RequestConfig
      */
-    fun getV1DeployClustersRequestConfig() : RequestConfig<Unit> {
+    fun getDeployClustersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -640,8 +640,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployGitops() : GitOpsPlane {
-        val localVarResponse = getV1DeployGitopsWithHttpInfo()
+    fun getDeployGitops() : GitOpsPlane {
+        val localVarResponse = getDeployGitopsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GitOpsPlane
@@ -668,8 +668,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployGitopsWithHttpInfo() : ApiResponse<GitOpsPlane?> {
-        val localVariableConfig = getV1DeployGitopsRequestConfig()
+    fun getDeployGitopsWithHttpInfo() : ApiResponse<GitOpsPlane?> {
+        val localVariableConfig = getDeployGitopsRequestConfig()
 
         return request<Unit, GitOpsPlane>(
             localVariableConfig
@@ -677,11 +677,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployGitops
+     * To obtain the request config of the operation getDeployGitops
      *
      * @return RequestConfig
      */
-    fun getV1DeployGitopsRequestConfig() : RequestConfig<Unit> {
+    fun getDeployGitopsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -709,8 +709,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployHealth() : Unit {
-        val localVarResponse = getV1DeployHealthWithHttpInfo()
+    fun getDeployHealth() : Unit {
+        val localVarResponse = getDeployHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -736,8 +736,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DeployHealthRequestConfig()
+    fun getDeployHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getDeployHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -745,11 +745,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployHealth
+     * To obtain the request config of the operation getDeployHealth
      *
      * @return RequestConfig
      */
-    fun getV1DeployHealthRequestConfig() : RequestConfig<Unit> {
+    fun getDeployHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -776,8 +776,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployLogin() : Unit {
-        val localVarResponse = getV1DeployLoginWithHttpInfo()
+    fun getDeployLogin() : Unit {
+        val localVarResponse = getDeployLoginWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -803,8 +803,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployLoginWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DeployLoginRequestConfig()
+    fun getDeployLoginWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getDeployLoginRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -812,11 +812,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployLogin
+     * To obtain the request config of the operation getDeployLogin
      *
      * @return RequestConfig
      */
-    fun getV1DeployLoginRequestConfig() : RequestConfig<Unit> {
+    fun getDeployLoginRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -844,8 +844,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployProjects() : ArgoProjectList {
-        val localVarResponse = getV1DeployProjectsWithHttpInfo()
+    fun getDeployProjects() : ArgoProjectList {
+        val localVarResponse = getDeployProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoProjectList
@@ -872,8 +872,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployProjectsWithHttpInfo() : ApiResponse<ArgoProjectList?> {
-        val localVariableConfig = getV1DeployProjectsRequestConfig()
+    fun getDeployProjectsWithHttpInfo() : ApiResponse<ArgoProjectList?> {
+        val localVariableConfig = getDeployProjectsRequestConfig()
 
         return request<Unit, ArgoProjectList>(
             localVariableConfig
@@ -881,11 +881,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployProjects
+     * To obtain the request config of the operation getDeployProjects
      *
      * @return RequestConfig
      */
-    fun getV1DeployProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getDeployProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -914,8 +914,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeploySessionUserinfo() : SessionUser {
-        val localVarResponse = getV1DeploySessionUserinfoWithHttpInfo()
+    fun getDeploySessionUserinfo() : SessionUser {
+        val localVarResponse = getDeploySessionUserinfoWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SessionUser
@@ -942,8 +942,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeploySessionUserinfoWithHttpInfo() : ApiResponse<SessionUser?> {
-        val localVariableConfig = getV1DeploySessionUserinfoRequestConfig()
+    fun getDeploySessionUserinfoWithHttpInfo() : ApiResponse<SessionUser?> {
+        val localVariableConfig = getDeploySessionUserinfoRequestConfig()
 
         return request<Unit, SessionUser>(
             localVariableConfig
@@ -951,11 +951,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeploySessionUserinfo
+     * To obtain the request config of the operation getDeploySessionUserinfo
      *
      * @return RequestConfig
      */
-    fun getV1DeploySessionUserinfoRequestConfig() : RequestConfig<Unit> {
+    fun getDeploySessionUserinfoRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -984,8 +984,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeploySettings() : ConsoleSettings {
-        val localVarResponse = getV1DeploySettingsWithHttpInfo()
+    fun getDeploySettings() : ConsoleSettings {
+        val localVarResponse = getDeploySettingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConsoleSettings
@@ -1012,8 +1012,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeploySettingsWithHttpInfo() : ApiResponse<ConsoleSettings?> {
-        val localVariableConfig = getV1DeploySettingsRequestConfig()
+    fun getDeploySettingsWithHttpInfo() : ApiResponse<ConsoleSettings?> {
+        val localVariableConfig = getDeploySettingsRequestConfig()
 
         return request<Unit, ConsoleSettings>(
             localVariableConfig
@@ -1021,11 +1021,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeploySettings
+     * To obtain the request config of the operation getDeploySettings
      *
      * @return RequestConfig
      */
-    fun getV1DeploySettingsRequestConfig() : RequestConfig<Unit> {
+    fun getDeploySettingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1053,8 +1053,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployStreamApplications() : Unit {
-        val localVarResponse = getV1DeployStreamApplicationsWithHttpInfo()
+    fun getDeployStreamApplications() : Unit {
+        val localVarResponse = getDeployStreamApplicationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1080,8 +1080,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployStreamApplicationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DeployStreamApplicationsRequestConfig()
+    fun getDeployStreamApplicationsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getDeployStreamApplicationsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1089,11 +1089,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployStreamApplications
+     * To obtain the request config of the operation getDeployStreamApplications
      *
      * @return RequestConfig
      */
-    fun getV1DeployStreamApplicationsRequestConfig() : RequestConfig<Unit> {
+    fun getDeployStreamApplicationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1121,8 +1121,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployStreamApplicationsByNameResourceTree(name: kotlin.String) : Unit {
-        val localVarResponse = getV1DeployStreamApplicationsByNameResourceTreeWithHttpInfo(name = name)
+    fun getDeployStreamApplicationsByNameResourceTree(name: kotlin.String) : Unit {
+        val localVarResponse = getDeployStreamApplicationsByNameResourceTreeWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1149,8 +1149,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployStreamApplicationsByNameResourceTreeWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DeployStreamApplicationsByNameResourceTreeRequestConfig(name = name)
+    fun getDeployStreamApplicationsByNameResourceTreeWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getDeployStreamApplicationsByNameResourceTreeRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1158,12 +1158,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployStreamApplicationsByNameResourceTree
+     * To obtain the request config of the operation getDeployStreamApplicationsByNameResourceTree
      *
      * @param name 
      * @return RequestConfig
      */
-    fun getV1DeployStreamApplicationsByNameResourceTreeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getDeployStreamApplicationsByNameResourceTreeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1191,8 +1191,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DeployVersion() : VersionMessage {
-        val localVarResponse = getV1DeployVersionWithHttpInfo()
+    fun getDeployVersion() : VersionMessage {
+        val localVarResponse = getDeployVersionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VersionMessage
@@ -1219,8 +1219,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DeployVersionWithHttpInfo() : ApiResponse<VersionMessage?> {
-        val localVariableConfig = getV1DeployVersionRequestConfig()
+    fun getDeployVersionWithHttpInfo() : ApiResponse<VersionMessage?> {
+        val localVariableConfig = getDeployVersionRequestConfig()
 
         return request<Unit, VersionMessage>(
             localVariableConfig
@@ -1228,11 +1228,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1DeployVersion
+     * To obtain the request config of the operation getDeployVersion
      *
      * @return RequestConfig
      */
-    fun getV1DeployVersionRequestConfig() : RequestConfig<Unit> {
+    fun getDeployVersionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1261,8 +1261,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DeployApplicationsByNameRollback(name: kotlin.String) : Unit {
-        val localVarResponse = postV1DeployApplicationsByNameRollbackWithHttpInfo(name = name)
+    fun postDeployApplicationsByNameRollback(name: kotlin.String) : Unit {
+        val localVarResponse = postDeployApplicationsByNameRollbackWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1289,8 +1289,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DeployApplicationsByNameRollbackWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DeployApplicationsByNameRollbackRequestConfig(name = name)
+    fun postDeployApplicationsByNameRollbackWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postDeployApplicationsByNameRollbackRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1298,12 +1298,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1DeployApplicationsByNameRollback
+     * To obtain the request config of the operation postDeployApplicationsByNameRollback
      *
      * @param name 
      * @return RequestConfig
      */
-    fun postV1DeployApplicationsByNameRollbackRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun postDeployApplicationsByNameRollbackRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1331,8 +1331,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DeployApplicationsByNameSync(name: kotlin.String) : Unit {
-        val localVarResponse = postV1DeployApplicationsByNameSyncWithHttpInfo(name = name)
+    fun postDeployApplicationsByNameSync(name: kotlin.String) : Unit {
+        val localVarResponse = postDeployApplicationsByNameSyncWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1359,8 +1359,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DeployApplicationsByNameSyncWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DeployApplicationsByNameSyncRequestConfig(name = name)
+    fun postDeployApplicationsByNameSyncWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postDeployApplicationsByNameSyncRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1368,12 +1368,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1DeployApplicationsByNameSync
+     * To obtain the request config of the operation postDeployApplicationsByNameSync
      *
      * @param name 
      * @return RequestConfig
      */
-    fun postV1DeployApplicationsByNameSyncRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun postDeployApplicationsByNameSyncRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1400,8 +1400,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DeployLogout() : Unit {
-        val localVarResponse = postV1DeployLogoutWithHttpInfo()
+    fun postDeployLogout() : Unit {
+        val localVarResponse = postDeployLogoutWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1427,8 +1427,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DeployLogoutWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DeployLogoutRequestConfig()
+    fun postDeployLogoutWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postDeployLogoutRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1436,11 +1436,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1DeployLogout
+     * To obtain the request config of the operation postDeployLogout
      *
      * @return RequestConfig
      */
-    fun postV1DeployLogoutRequestConfig() : RequestConfig<Unit> {
+    fun postDeployLogoutRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1467,8 +1467,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DeployReconcile() : Unit {
-        val localVarResponse = postV1DeployReconcileWithHttpInfo()
+    fun postDeployReconcile() : Unit {
+        val localVarResponse = postDeployReconcileWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1494,8 +1494,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DeployReconcileWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DeployReconcileRequestConfig()
+    fun postDeployReconcileWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postDeployReconcileRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1503,11 +1503,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1DeployReconcile
+     * To obtain the request config of the operation postDeployReconcile
      *
      * @return RequestConfig
      */
-    fun postV1DeployReconcileRequestConfig() : RequestConfig<Unit> {
+    fun postDeployReconcileRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

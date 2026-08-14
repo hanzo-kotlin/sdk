@@ -21,11 +21,16 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param limit Limit narrows what the minted key may reach, as `kind:name` entries: `model:zen5`, `project:acme`, `product:commerce`, or `model:*` for a whole kind. It only ever NARROWS — a key can never reach further than the person who minted it — so an unrecognised kind costs availability, never privilege.  Omitted mints an unrestricted key, because that is what every key in the estate is today and a default that restricted would revoke all of them.  Example: {\"type\": \"secret\", \"limit\": [\"model:zen5\", \"project:acme\"]}
  * @param type Type is the key class to act on: \"secret\" (sk-, session-equivalent, belongs on a server) or \"publishable\" (pk-, org-identifying, safe in a browser bundle). Omitted means secret, which is what every existing caller means.
  */
 
 
 data class KeyTypeIn (
+
+    /* Limit narrows what the minted key may reach, as `kind:name` entries: `model:zen5`, `project:acme`, `product:commerce`, or `model:*` for a whole kind. It only ever NARROWS — a key can never reach further than the person who minted it — so an unrecognised kind costs availability, never privilege.  Omitted mints an unrestricted key, because that is what every key in the estate is today and a default that restricted would revoke all of them.  Example: {\"type\": \"secret\", \"limit\": [\"model:zen5\", \"project:acme\"]} */
+    @SerializedName("limit")
+    val limit: kotlin.collections.List<kotlin.String>? = null,
 
     /* Type is the key class to act on: \"secret\" (sk-, session-equivalent, belongs on a server) or \"publishable\" (pk-, org-identifying, safe in a browser bundle). Omitted means secret, which is what every existing caller means. */
     @SerializedName("type")

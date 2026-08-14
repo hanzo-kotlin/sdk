@@ -96,8 +96,8 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RiskHealth() : Unit {
-        val localVarResponse = getV1RiskHealthWithHttpInfo()
+    fun getRiskHealth() : Unit {
+        val localVarResponse = getRiskHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -123,8 +123,8 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RiskHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RiskHealthRequestConfig()
+    fun getRiskHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRiskHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -132,11 +132,11 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1RiskHealth
+     * To obtain the request config of the operation getRiskHealth
      *
      * @return RequestConfig
      */
-    fun getV1RiskHealthRequestConfig() : RequestConfig<Unit> {
+    fun getRiskHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -58,8 +58,8 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MeetHealth() : MeetHealth {
-        val localVarResponse = getV1MeetHealthWithHttpInfo()
+    fun getMeetHealth() : MeetHealth {
+        val localVarResponse = getMeetHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MeetHealth
@@ -86,8 +86,8 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MeetHealthWithHttpInfo() : ApiResponse<MeetHealth?> {
-        val localVariableConfig = getV1MeetHealthRequestConfig()
+    fun getMeetHealthWithHttpInfo() : ApiResponse<MeetHealth?> {
+        val localVariableConfig = getMeetHealthRequestConfig()
 
         return request<Unit, MeetHealth>(
             localVariableConfig
@@ -95,11 +95,11 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1MeetHealth
+     * To obtain the request config of the operation getMeetHealth
      *
      * @return RequestConfig
      */
-    fun getV1MeetHealthRequestConfig() : RequestConfig<Unit> {
+    fun getMeetHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -127,8 +127,8 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MeetSession() : Unit {
-        val localVarResponse = getV1MeetSessionWithHttpInfo()
+    fun getMeetSession() : Unit {
+        val localVarResponse = getMeetSessionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -154,8 +154,8 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MeetSessionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1MeetSessionRequestConfig()
+    fun getMeetSessionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMeetSessionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -163,11 +163,11 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1MeetSession
+     * To obtain the request config of the operation getMeetSession
      *
      * @return RequestConfig
      */
-    fun getV1MeetSessionRequestConfig() : RequestConfig<Unit> {
+    fun getMeetSessionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -194,8 +194,8 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MeetGettoken() : Unit {
-        val localVarResponse = postV1MeetGettokenWithHttpInfo()
+    fun postMeetGettoken() : Unit {
+        val localVarResponse = postMeetGettokenWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -221,8 +221,8 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MeetGettokenWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MeetGettokenRequestConfig()
+    fun postMeetGettokenWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMeetGettokenRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -230,11 +230,11 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1MeetGettoken
+     * To obtain the request config of the operation postMeetGettoken
      *
      * @return RequestConfig
      */
-    fun postV1MeetGettokenRequestConfig() : RequestConfig<Unit> {
+    fun postMeetGettokenRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

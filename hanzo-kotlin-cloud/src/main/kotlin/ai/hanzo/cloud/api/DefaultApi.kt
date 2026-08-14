@@ -59,8 +59,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteMeet() : Unit {
-        val localVarResponse = deleteMeetWithHttpInfo()
+    fun deleteMeetApp() : Unit {
+        val localVarResponse = deleteMeetAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -86,8 +86,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteMeetWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteMeetRequestConfig()
+    fun deleteMeetAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMeetAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -95,11 +95,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteMeet
+     * To obtain the request config of the operation deleteMeetApp
      *
      * @return RequestConfig
      */
-    fun deleteMeetRequestConfig() : RequestConfig<Unit> {
+    fun deleteMeetAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -127,8 +127,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteMeetByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteMeetByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteMeetAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteMeetAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -155,8 +155,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteMeetByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteMeetByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteMeetAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMeetAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,12 +164,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteMeetByWildcard1
+     * To obtain the request config of the operation deleteMeetAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteMeetByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMeetAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -196,8 +196,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteTasks() : Unit {
-        val localVarResponse = deleteTasksWithHttpInfo()
+    fun deleteTasksApp() : Unit {
+        val localVarResponse = deleteTasksAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -223,8 +223,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteTasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteTasksRequestConfig()
+    fun deleteTasksAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteTasksAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -232,11 +232,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteTasks
+     * To obtain the request config of the operation deleteTasksApp
      *
      * @return RequestConfig
      */
-    fun deleteTasksRequestConfig() : RequestConfig<Unit> {
+    fun deleteTasksAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -264,8 +264,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteTasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteTasksAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -292,8 +292,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteTasksAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteTasksAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -301,12 +301,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteTasksByWildcard1
+     * To obtain the request config of the operation deleteTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteTasksAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -314,143 +314,6 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /tracker
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteTracker() : Unit {
-        val localVarResponse = deleteTrackerWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /tracker
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun deleteTrackerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteTrackerRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation deleteTracker
-     *
-     * @return RequestConfig
-     */
-    fun deleteTrackerRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/tracker",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /tracker/{wildcard1}
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteTrackerByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteTrackerByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /tracker/{wildcard1}
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun deleteTrackerByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteTrackerByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation deleteTrackerByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun deleteTrackerByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/tracker/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -1177,6 +1040,75 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
+     * GET /v1/event.js
+     * The Hanzo event tag — the one-line install for a surface with no bundler
+     * Serves the browser tag that autocaptures pageviews (initial and SPA) and uncaught errors onto the canonical wire at POST /v1/event.  Install is one line, and it is the same line for a Hanzo property and for a customer&#39;s own page:      &lt;script defer src&#x3D;\&quot;https://api.hanzo.ai/v1/event.js\&quot; data-key&#x3D;\&quot;pk-…\&quot;&gt;&lt;/script&gt;  &#x60;data-key&#x60; is the publishable key the project mints; &#x60;data-product&#x60; optionally names the emitting surface. The key may also ride the src as &#x60;?key&#x3D;&#x60; for a host that strips data attributes.  WITHOUT A KEY THE TAG SENDS NOTHING. A keyless beacon is accepted 200 into $public, a reserved tenant the owning org cannot read — so silence is the honest failure, and the tag picks it rather than reporting success into a tenant nobody reads.
+     * @return java.io.File
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getEventJs() : java.io.File {
+        val localVarResponse = getEventJsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as java.io.File
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/event.js
+     * The Hanzo event tag — the one-line install for a surface with no bundler
+     * Serves the browser tag that autocaptures pageviews (initial and SPA) and uncaught errors onto the canonical wire at POST /v1/event.  Install is one line, and it is the same line for a Hanzo property and for a customer&#39;s own page:      &lt;script defer src&#x3D;\&quot;https://api.hanzo.ai/v1/event.js\&quot; data-key&#x3D;\&quot;pk-…\&quot;&gt;&lt;/script&gt;  &#x60;data-key&#x60; is the publishable key the project mints; &#x60;data-product&#x60; optionally names the emitting surface. The key may also ride the src as &#x60;?key&#x3D;&#x60; for a host that strips data attributes.  WITHOUT A KEY THE TAG SENDS NOTHING. A keyless beacon is accepted 200 into $public, a reserved tenant the owning org cannot read — so silence is the honest failure, and the tag picks it rather than reporting success into a tenant nobody reads.
+     * @return ApiResponse<java.io.File?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getEventJsWithHttpInfo() : ApiResponse<java.io.File?> {
+        val localVariableConfig = getEventJsRequestConfig()
+
+        return request<Unit, java.io.File>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getEventJs
+     *
+     * @return RequestConfig
+     */
+    fun getEventJsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/event.js",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /explore
      * Discover public repositories across every org
      * The open, unauthenticated face of the git host: every PUBLIC repository in the fleet, org-qualified, so a project can be found and cloned with no account at all — signing in is for private repos and for writes. Repositories live in per-org stores with no global index, so this unions each org&#39;s public rows and is bounded to a fixed number of stores per request, keeping discovery quick however many orgs exist. A fleet with no orgs yet is an empty page, not an error. This is a server-rendered browser page, not JSON — the console repo-browser reads the same repository through the JSON ops under /v1/git. Repository names, paths and file contents all render through auto-escaping templates rather than being concatenated into HTML. Served only on the dedicated git host, where a browse URL matches the clone URL; on the API and console hosts it falls through to their own routes, so it can never shadow them.
@@ -1687,8 +1619,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getMeet() : Unit {
-        val localVarResponse = getMeetWithHttpInfo()
+    fun getMeetApp() : Unit {
+        val localVarResponse = getMeetAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1714,8 +1646,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getMeetWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getMeetRequestConfig()
+    fun getMeetAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMeetAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1723,11 +1655,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getMeet
+     * To obtain the request config of the operation getMeetApp
      *
      * @return RequestConfig
      */
-    fun getMeetRequestConfig() : RequestConfig<Unit> {
+    fun getMeetAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1755,8 +1687,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getMeetByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getMeetByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getMeetAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getMeetAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1783,8 +1715,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getMeetByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getMeetByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getMeetAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getMeetAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1792,12 +1724,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getMeetByWildcard1
+     * To obtain the request config of the operation getMeetAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getMeetByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getMeetAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1805,6 +1737,73 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/meet/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/openapi.json
+     * The API description this SDK was generated from
+     * Serves the OpenAPI document for the routes this process actually answers — generated from the live router at request time, not from a checked-in file that can disagree with it.  On an app it is that app&#39;s own surface; on the fleet&#39;s front door it is the woven document for every mounted app. Unauthenticated by design: a client has to be able to read the contract before it holds a credential, and the document grants nothing.  Rendered once and served as bytes thereafter, so the route table&#39;s immutability is what makes a repeat request a memcpy rather than a re-encode of a megabyte document.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getOpenapiJson() : Unit {
+        val localVarResponse = getOpenapiJsonWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/openapi.json
+     * The API description this SDK was generated from
+     * Serves the OpenAPI document for the routes this process actually answers — generated from the live router at request time, not from a checked-in file that can disagree with it.  On an app it is that app&#39;s own surface; on the fleet&#39;s front door it is the woven document for every mounted app. Unauthenticated by design: a client has to be able to read the contract before it holds a credential, and the document grants nothing.  Rendered once and served as bytes thereafter, so the route table&#39;s immutability is what makes a repeat request a memcpy rather than a re-encode of a megabyte document.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getOpenapiJsonWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getOpenapiJsonRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getOpenapiJson
+     *
+     * @return RequestConfig
+     */
+    fun getOpenapiJsonRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/openapi.json",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -1824,8 +1823,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getTasks() : Unit {
-        val localVarResponse = getTasksWithHttpInfo()
+    fun getTasksApp() : Unit {
+        val localVarResponse = getTasksAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1851,8 +1850,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getTasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getTasksRequestConfig()
+    fun getTasksAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getTasksAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1860,11 +1859,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getTasks
+     * To obtain the request config of the operation getTasksApp
      *
      * @return RequestConfig
      */
-    fun getTasksRequestConfig() : RequestConfig<Unit> {
+    fun getTasksAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1892,8 +1891,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getTasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getTasksAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1920,8 +1919,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getTasksAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getTasksAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1929,12 +1928,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getTasksByWildcard1
+     * To obtain the request config of the operation getTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getTasksAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1942,279 +1941,6 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /tracker
-     * The tracker board
-     * Serves the application shell on GET, which is the entry point a browser loads before it calls anything under /v1/tracker/.  This is the tracker board itself — HTML and hashed assets, not an API. Only GET and HEAD are served; every other method is refused 405. Hashed assets are returned immutable and cached for a year, while the shell is always revalidated, so a new deployment replaces a stale one on the next request.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getTracker() : Unit {
-        val localVarResponse = getTrackerWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /tracker
-     * The tracker board
-     * Serves the application shell on GET, which is the entry point a browser loads before it calls anything under /v1/tracker/.  This is the tracker board itself — HTML and hashed assets, not an API. Only GET and HEAD are served; every other method is refused 405. Hashed assets are returned immutable and cached for a year, while the shell is always revalidated, so a new deployment replaces a stale one on the next request.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getTrackerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getTrackerRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getTracker
-     *
-     * @return RequestConfig
-     */
-    fun getTrackerRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/tracker",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /tracker/{wildcard1}
-     * The tracker board&#39;s assets and client-side routes
-     * Serves the static assets on GET, and returns the application shell for any path that is not a file — client-side routing means a deep link is a shell load, not a 404.  The one exception is /tracker/assets/, which holds only content-addressed build output: a name that is not there is a purged chunk, never a route, and answers 404. Everywhere else a path that looks like a missing file answers 200 with the shell, so read the content type rather than the status when a resource seems to be missing.  A bundle that was never built answers 503 under its own name on every path, which is a failed deploy rather than a missing page.  This is the tracker board itself — HTML and hashed assets, not an API. Only GET and HEAD are served; every other method is refused 405. Hashed assets are returned immutable and cached for a year, while the shell is always revalidated, so a new deployment replaces a stale one on the next request.
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getTrackerByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getTrackerByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /tracker/{wildcard1}
-     * The tracker board&#39;s assets and client-side routes
-     * Serves the static assets on GET, and returns the application shell for any path that is not a file — client-side routing means a deep link is a shell load, not a 404.  The one exception is /tracker/assets/, which holds only content-addressed build output: a name that is not there is a purged chunk, never a route, and answers 404. Everywhere else a path that looks like a missing file answers 200 with the shell, so read the content type rather than the status when a resource seems to be missing.  A bundle that was never built answers 503 under its own name on every path, which is a failed deploy rather than a missing page.  This is the tracker board itself — HTML and hashed assets, not an API. Only GET and HEAD are served; every other method is refused 405. Hashed assets are returned immutable and cached for a year, while the shell is always revalidated, so a new deployment replaces a stale one on the next request.
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getTrackerByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getTrackerByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getTrackerByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun getTrackerByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/tracker/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/event.js
-     * The Hanzo event tag — the one-line install for a surface with no bundler
-     * Serves the browser tag that autocaptures pageviews (initial and SPA) and uncaught errors onto the canonical wire at POST /v1/event.  Install is one line, and it is the same line for a Hanzo property and for a customer&#39;s own page:      &lt;script defer src&#x3D;\&quot;https://api.hanzo.ai/v1/event.js\&quot; data-key&#x3D;\&quot;pk-…\&quot;&gt;&lt;/script&gt;  &#x60;data-key&#x60; is the publishable key the project mints; &#x60;data-product&#x60; optionally names the emitting surface. The key may also ride the src as &#x60;?key&#x3D;&#x60; for a host that strips data attributes.  WITHOUT A KEY THE TAG SENDS NOTHING. A keyless beacon is accepted 200 into $public, a reserved tenant the owning org cannot read — so silence is the honest failure, and the tag picks it rather than reporting success into a tenant nobody reads.
-     * @return java.io.File
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EventJs() : java.io.File {
-        val localVarResponse = getV1EventJsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as java.io.File
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/event.js
-     * The Hanzo event tag — the one-line install for a surface with no bundler
-     * Serves the browser tag that autocaptures pageviews (initial and SPA) and uncaught errors onto the canonical wire at POST /v1/event.  Install is one line, and it is the same line for a Hanzo property and for a customer&#39;s own page:      &lt;script defer src&#x3D;\&quot;https://api.hanzo.ai/v1/event.js\&quot; data-key&#x3D;\&quot;pk-…\&quot;&gt;&lt;/script&gt;  &#x60;data-key&#x60; is the publishable key the project mints; &#x60;data-product&#x60; optionally names the emitting surface. The key may also ride the src as &#x60;?key&#x3D;&#x60; for a host that strips data attributes.  WITHOUT A KEY THE TAG SENDS NOTHING. A keyless beacon is accepted 200 into $public, a reserved tenant the owning org cannot read — so silence is the honest failure, and the tag picks it rather than reporting success into a tenant nobody reads.
-     * @return ApiResponse<java.io.File?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EventJsWithHttpInfo() : ApiResponse<java.io.File?> {
-        val localVariableConfig = getV1EventJsRequestConfig()
-
-        return request<Unit, java.io.File>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getV1EventJs
-     *
-     * @return RequestConfig
-     */
-    fun getV1EventJsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/event.js",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/openapi.json
-     * The API description this SDK was generated from
-     * Serves the OpenAPI document for the routes this process actually answers — generated from the live router at request time, not from a checked-in file that can disagree with it.  On an app it is that app&#39;s own surface; on the fleet&#39;s front door it is the woven document for every mounted app. Unauthenticated by design: a client has to be able to read the contract before it holds a credential, and the document grants nothing.  Rendered once and served as bytes thereafter, so the route table&#39;s immutability is what makes a repeat request a memcpy rather than a re-encode of a megabyte document.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1OpenapiJson() : Unit {
-        val localVarResponse = getV1OpenapiJsonWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/openapi.json
-     * The API description this SDK was generated from
-     * Serves the OpenAPI document for the routes this process actually answers — generated from the live router at request time, not from a checked-in file that can disagree with it.  On an app it is that app&#39;s own surface; on the fleet&#39;s front door it is the woven document for every mounted app. Unauthenticated by design: a client has to be able to read the contract before it holds a credential, and the document grants nothing.  Rendered once and served as bytes thereafter, so the route table&#39;s immutability is what makes a repeat request a memcpy rather than a re-encode of a megabyte document.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getV1OpenapiJsonWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1OpenapiJsonRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getV1OpenapiJson
-     *
-     * @return RequestConfig
-     */
-    fun getV1OpenapiJsonRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/openapi.json",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -2639,8 +2365,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchMeet() : Unit {
-        val localVarResponse = patchMeetWithHttpInfo()
+    fun patchMeetApp() : Unit {
+        val localVarResponse = patchMeetAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2666,8 +2392,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchMeetWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchMeetRequestConfig()
+    fun patchMeetAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchMeetAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2675,11 +2401,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation patchMeet
+     * To obtain the request config of the operation patchMeetApp
      *
      * @return RequestConfig
      */
-    fun patchMeetRequestConfig() : RequestConfig<Unit> {
+    fun patchMeetAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2707,8 +2433,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchMeetByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = patchMeetByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchMeetAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchMeetAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2735,8 +2461,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchMeetByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchMeetByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchMeetAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchMeetAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2744,12 +2470,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation patchMeetByWildcard1
+     * To obtain the request config of the operation patchMeetAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun patchMeetByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchMeetAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2776,8 +2502,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchTasks() : Unit {
-        val localVarResponse = patchTasksWithHttpInfo()
+    fun patchTasksApp() : Unit {
+        val localVarResponse = patchTasksAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2803,8 +2529,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchTasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchTasksRequestConfig()
+    fun patchTasksAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchTasksAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2812,11 +2538,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation patchTasks
+     * To obtain the request config of the operation patchTasksApp
      *
      * @return RequestConfig
      */
-    fun patchTasksRequestConfig() : RequestConfig<Unit> {
+    fun patchTasksAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2844,8 +2570,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchTasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = patchTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchTasksAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2872,8 +2598,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchTasksAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchTasksAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2881,12 +2607,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation patchTasksByWildcard1
+     * To obtain the request config of the operation patchTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun patchTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchTasksAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2894,143 +2620,6 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.PATCH,
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /tracker
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchTracker() : Unit {
-        val localVarResponse = patchTrackerWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /tracker
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun patchTrackerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchTrackerRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation patchTracker
-     *
-     * @return RequestConfig
-     */
-    fun patchTrackerRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/tracker",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /tracker/{wildcard1}
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchTrackerByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = patchTrackerByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /tracker/{wildcard1}
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun patchTrackerByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchTrackerByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation patchTrackerByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun patchTrackerByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/tracker/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -3441,8 +3030,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postMeet() : Unit {
-        val localVarResponse = postMeetWithHttpInfo()
+    fun postMeetApp() : Unit {
+        val localVarResponse = postMeetAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3468,8 +3057,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postMeetWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postMeetRequestConfig()
+    fun postMeetAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMeetAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3477,11 +3066,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postMeet
+     * To obtain the request config of the operation postMeetApp
      *
      * @return RequestConfig
      */
-    fun postMeetRequestConfig() : RequestConfig<Unit> {
+    fun postMeetAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3509,8 +3098,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postMeetByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = postMeetByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postMeetAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postMeetAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3537,8 +3126,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postMeetByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postMeetByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postMeetAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postMeetAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3546,12 +3135,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postMeetByWildcard1
+     * To obtain the request config of the operation postMeetAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun postMeetByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postMeetAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3578,8 +3167,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postTasks() : Unit {
-        val localVarResponse = postTasksWithHttpInfo()
+    fun postTasksApp() : Unit {
+        val localVarResponse = postTasksAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3605,8 +3194,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postTasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postTasksRequestConfig()
+    fun postTasksAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postTasksAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3614,11 +3203,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postTasks
+     * To obtain the request config of the operation postTasksApp
      *
      * @return RequestConfig
      */
-    fun postTasksRequestConfig() : RequestConfig<Unit> {
+    fun postTasksAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3646,8 +3235,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postTasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = postTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postTasksAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3674,8 +3263,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postTasksAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postTasksAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3683,12 +3272,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postTasksByWildcard1
+     * To obtain the request config of the operation postTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun postTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postTasksAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3704,143 +3293,6 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * POST /tracker
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postTracker() : Unit {
-        val localVarResponse = postTrackerWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /tracker
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postTrackerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postTrackerRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postTracker
-     *
-     * @return RequestConfig
-     */
-    fun postTrackerRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/tracker",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /tracker/{wildcard1}
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postTrackerByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = postTrackerByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /tracker/{wildcard1}
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postTrackerByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postTrackerByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postTrackerByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun postTrackerByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/tracker/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * PUT /meet
      * Not served by the call client
      * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
@@ -3852,8 +3304,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putMeet() : Unit {
-        val localVarResponse = putMeetWithHttpInfo()
+    fun putMeetApp() : Unit {
+        val localVarResponse = putMeetAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3879,8 +3331,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putMeetWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putMeetRequestConfig()
+    fun putMeetAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putMeetAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3888,11 +3340,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putMeet
+     * To obtain the request config of the operation putMeetApp
      *
      * @return RequestConfig
      */
-    fun putMeetRequestConfig() : RequestConfig<Unit> {
+    fun putMeetAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3920,8 +3372,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putMeetByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = putMeetByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putMeetAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putMeetAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3948,8 +3400,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putMeetByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putMeetByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putMeetAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putMeetAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3957,12 +3409,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putMeetByWildcard1
+     * To obtain the request config of the operation putMeetAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun putMeetByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putMeetAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3989,8 +3441,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putTasks() : Unit {
-        val localVarResponse = putTasksWithHttpInfo()
+    fun putTasksApp() : Unit {
+        val localVarResponse = putTasksAppWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4016,8 +3468,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putTasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putTasksRequestConfig()
+    fun putTasksAppWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putTasksAppRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4025,11 +3477,11 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putTasks
+     * To obtain the request config of the operation putTasksApp
      *
      * @return RequestConfig
      */
-    fun putTasksRequestConfig() : RequestConfig<Unit> {
+    fun putTasksAppRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4057,8 +3509,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putTasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = putTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putTasksAppAssetsWithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4085,8 +3537,8 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putTasksAppAssetsWithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putTasksAppAssetsRequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4094,12 +3546,12 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putTasksByWildcard1
+     * To obtain the request config of the operation putTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun putTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putTasksAppAssetsRequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4107,143 +3559,6 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.PUT,
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /tracker
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putTracker() : Unit {
-        val localVarResponse = putTrackerWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /tracker
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun putTrackerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putTrackerRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation putTracker
-     *
-     * @return RequestConfig
-     */
-    fun putTrackerRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/tracker",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /tracker/{wildcard1}
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putTrackerByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = putTrackerByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /tracker/{wildcard1}
-     * Not served by the tracker board
-     * Published because this address accepts every method, but a static bundle has no writes: the request is refused 405 and nothing is read or changed.
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun putTrackerByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putTrackerByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation putTrackerByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun putTrackerByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/tracker/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

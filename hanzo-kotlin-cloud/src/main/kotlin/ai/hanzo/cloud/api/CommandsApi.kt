@@ -56,8 +56,8 @@ class CommandsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Commands() : Unit {
-        val localVarResponse = getV1CommandsWithHttpInfo()
+    fun getCommands() : Unit {
+        val localVarResponse = getCommandsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class CommandsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommandsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommandsRequestConfig()
+    fun getCommandsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommandsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class CommandsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1Commands
+     * To obtain the request config of the operation getCommands
      *
      * @return RequestConfig
      */
-    fun getV1CommandsRequestConfig() : RequestConfig<Unit> {
+    fun getCommandsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

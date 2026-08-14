@@ -60,8 +60,8 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SettingsByProduct(product: kotlin.String) : SettingsView {
-        val localVarResponse = getV1SettingsByProductWithHttpInfo(product = product)
+    fun getSettingsByProduct(product: kotlin.String) : SettingsView {
+        val localVarResponse = getSettingsByProductWithHttpInfo(product = product)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SettingsView
@@ -89,8 +89,8 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SettingsByProductWithHttpInfo(product: kotlin.String) : ApiResponse<SettingsView?> {
-        val localVariableConfig = getV1SettingsByProductRequestConfig(product = product)
+    fun getSettingsByProductWithHttpInfo(product: kotlin.String) : ApiResponse<SettingsView?> {
+        val localVariableConfig = getSettingsByProductRequestConfig(product = product)
 
         return request<Unit, SettingsView>(
             localVariableConfig
@@ -98,12 +98,12 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1SettingsByProduct
+     * To obtain the request config of the operation getSettingsByProduct
      *
      * @param product Product is the catalog slug, from the path. Must match ^[a-z0-9][a-z0-9._-]{0,62}$.
      * @return RequestConfig
      */
-    fun getV1SettingsByProductRequestConfig(product: kotlin.String) : RequestConfig<Unit> {
+    fun getSettingsByProductRequestConfig(product: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -134,8 +134,8 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1SettingsByProduct(product: kotlin.String, settingsReq: SettingsReq) : SettingsView {
-        val localVarResponse = putV1SettingsByProductWithHttpInfo(product = product, settingsReq = settingsReq)
+    fun putSettingsByProduct(product: kotlin.String, settingsReq: SettingsReq) : SettingsView {
+        val localVarResponse = putSettingsByProductWithHttpInfo(product = product, settingsReq = settingsReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SettingsView
@@ -164,8 +164,8 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1SettingsByProductWithHttpInfo(product: kotlin.String, settingsReq: SettingsReq) : ApiResponse<SettingsView?> {
-        val localVariableConfig = putV1SettingsByProductRequestConfig(product = product, settingsReq = settingsReq)
+    fun putSettingsByProductWithHttpInfo(product: kotlin.String, settingsReq: SettingsReq) : ApiResponse<SettingsView?> {
+        val localVariableConfig = putSettingsByProductRequestConfig(product = product, settingsReq = settingsReq)
 
         return request<SettingsReq, SettingsView>(
             localVariableConfig
@@ -173,13 +173,13 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1SettingsByProduct
+     * To obtain the request config of the operation putSettingsByProduct
      *
      * @param product Product is the catalog slug, from the PATH. zip binds the path last, so the URL names the product being written whatever a body field claims.
      * @param settingsReq 
      * @return RequestConfig
      */
-    fun putV1SettingsByProductRequestConfig(product: kotlin.String, settingsReq: SettingsReq) : RequestConfig<SettingsReq> {
+    fun putSettingsByProductRequestConfig(product: kotlin.String, settingsReq: SettingsReq) : RequestConfig<SettingsReq> {
         val localVariableBody = settingsReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

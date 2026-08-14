@@ -56,8 +56,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RagContext() : Unit {
-        val localVarResponse = getV1RagContextWithHttpInfo()
+    fun getRagContext() : Unit {
+        val localVarResponse = getRagContextWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RagContextWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RagContextRequestConfig()
+    fun getRagContextWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRagContextRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1RagContext
+     * To obtain the request config of the operation getRagContext
      *
      * @return RequestConfig
      */
-    fun getV1RagContextRequestConfig() : RequestConfig<Unit> {
+    fun getRagContextRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RagDelete() : Unit {
-        val localVarResponse = postV1RagDeleteWithHttpInfo()
+    fun postRagDelete() : Unit {
+        val localVarResponse = postRagDeleteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RagDeleteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RagDeleteRequestConfig()
+    fun postRagDeleteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRagDeleteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1RagDelete
+     * To obtain the request config of the operation postRagDelete
      *
      * @return RequestConfig
      */
-    fun postV1RagDeleteRequestConfig() : RequestConfig<Unit> {
+    fun postRagDeleteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RagEmbed() : Unit {
-        val localVarResponse = postV1RagEmbedWithHttpInfo()
+    fun postRagEmbed() : Unit {
+        val localVarResponse = postRagEmbedWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RagEmbedWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RagEmbedRequestConfig()
+    fun postRagEmbedWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRagEmbedRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1RagEmbed
+     * To obtain the request config of the operation postRagEmbed
      *
      * @return RequestConfig
      */
-    fun postV1RagEmbedRequestConfig() : RequestConfig<Unit> {
+    fun postRagEmbedRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -257,8 +257,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RagQuery() : Unit {
-        val localVarResponse = postV1RagQueryWithHttpInfo()
+    fun postRagQuery() : Unit {
+        val localVarResponse = postRagQueryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,8 +284,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RagQueryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RagQueryRequestConfig()
+    fun postRagQueryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRagQueryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +293,11 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1RagQuery
+     * To obtain the request config of the operation postRagQuery
      *
      * @return RequestConfig
      */
-    fun postV1RagQueryRequestConfig() : RequestConfig<Unit> {
+    fun postRagQueryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -324,8 +324,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RagQueryMultiple() : Unit {
-        val localVarResponse = postV1RagQueryMultipleWithHttpInfo()
+    fun postRagQueryMultiple() : Unit {
+        val localVarResponse = postRagQueryMultipleWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -351,8 +351,8 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RagQueryMultipleWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RagQueryMultipleRequestConfig()
+    fun postRagQueryMultipleWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRagQueryMultipleRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -360,11 +360,11 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1RagQueryMultiple
+     * To obtain the request config of the operation postRagQueryMultiple
      *
      * @return RequestConfig
      */
-    fun postV1RagQueryMultipleRequestConfig() : RequestConfig<Unit> {
+    fun postRagQueryMultipleRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

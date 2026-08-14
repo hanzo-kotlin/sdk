@@ -56,8 +56,8 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1VideosById() : Unit {
-        val localVarResponse = getV1VideosByIdWithHttpInfo()
+    fun getVideosById() : Unit {
+        val localVarResponse = getVideosByIdWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1VideosByIdWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1VideosByIdRequestConfig()
+    fun getVideosByIdWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getVideosByIdRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1VideosById
+     * To obtain the request config of the operation getVideosById
      *
      * @return RequestConfig
      */
-    fun getV1VideosByIdRequestConfig() : RequestConfig<Unit> {
+    fun getVideosByIdRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1VideosByIdContent() : Unit {
-        val localVarResponse = getV1VideosByIdContentWithHttpInfo()
+    fun getVideosByIdContent() : Unit {
+        val localVarResponse = getVideosByIdContentWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1VideosByIdContentWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1VideosByIdContentRequestConfig()
+    fun getVideosByIdContentWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getVideosByIdContentRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1VideosByIdContent
+     * To obtain the request config of the operation getVideosByIdContent
      *
      * @return RequestConfig
      */
-    fun getV1VideosByIdContentRequestConfig() : RequestConfig<Unit> {
+    fun getVideosByIdContentRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1VideosGenerations() : Unit {
-        val localVarResponse = postV1VideosGenerationsWithHttpInfo()
+    fun postVideosGenerations() : Unit {
+        val localVarResponse = postVideosGenerationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1VideosGenerationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1VideosGenerationsRequestConfig()
+    fun postVideosGenerationsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postVideosGenerationsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1VideosGenerations
+     * To obtain the request config of the operation postVideosGenerations
      *
      * @return RequestConfig
      */
-    fun postV1VideosGenerationsRequestConfig() : RequestConfig<Unit> {
+    fun postVideosGenerationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -83,8 +83,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1IntegrationsGithubReposByRepoPages(repo: kotlin.String) : GithubPagesDisabledOut {
-        val localVarResponse = deleteV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo)
+    fun deleteIntegrationsGithubReposByRepoPages(repo: kotlin.String) : GithubPagesDisabledOut {
+        val localVarResponse = deleteIntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesDisabledOut
@@ -112,8 +112,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesDisabledOut?> {
-        val localVariableConfig = deleteV1IntegrationsGithubReposByRepoPagesRequestConfig(repo = repo)
+    fun deleteIntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesDisabledOut?> {
+        val localVariableConfig = deleteIntegrationsGithubReposByRepoPagesRequestConfig(repo = repo)
 
         return request<Unit, GithubPagesDisabledOut>(
             localVariableConfig
@@ -121,12 +121,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation deleteV1IntegrationsGithubReposByRepoPages
+     * To obtain the request config of the operation deleteIntegrationsGithubReposByRepoPages
      *
      * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun deleteV1IntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
+    fun deleteIntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -155,8 +155,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Integrations() : ListOut {
-        val localVarResponse = getV1IntegrationsWithHttpInfo()
+    fun getIntegrations() : ListOut {
+        val localVarResponse = getIntegrationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ListOut
@@ -183,8 +183,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsWithHttpInfo() : ApiResponse<ListOut?> {
-        val localVariableConfig = getV1IntegrationsRequestConfig()
+    fun getIntegrationsWithHttpInfo() : ApiResponse<ListOut?> {
+        val localVariableConfig = getIntegrationsRequestConfig()
 
         return request<Unit, ListOut>(
             localVariableConfig
@@ -192,11 +192,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1Integrations
+     * To obtain the request config of the operation getIntegrations
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -226,8 +226,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsByProvider(provider: kotlin.String) : ProviderView {
-        val localVarResponse = getV1IntegrationsByProviderWithHttpInfo(provider = provider)
+    fun getIntegrationsByProvider(provider: kotlin.String) : ProviderView {
+        val localVarResponse = getIntegrationsByProviderWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProviderView
@@ -255,8 +255,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<ProviderView?> {
-        val localVariableConfig = getV1IntegrationsByProviderRequestConfig(provider = provider)
+    fun getIntegrationsByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<ProviderView?> {
+        val localVariableConfig = getIntegrationsByProviderRequestConfig(provider = provider)
 
         return request<Unit, ProviderView>(
             localVariableConfig
@@ -264,12 +264,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsByProvider
+     * To obtain the request config of the operation getIntegrationsByProvider
      *
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
-    fun getV1IntegrationsByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getIntegrationsByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -298,8 +298,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsByProviderCallback(provider: kotlin.String) : Unit {
-        val localVarResponse = getV1IntegrationsByProviderCallbackWithHttpInfo(provider = provider)
+    fun getIntegrationsByProviderCallback(provider: kotlin.String) : Unit {
+        val localVarResponse = getIntegrationsByProviderCallbackWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -326,8 +326,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsByProviderCallbackWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsByProviderCallbackRequestConfig(provider = provider)
+    fun getIntegrationsByProviderCallbackWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsByProviderCallbackRequestConfig(provider = provider)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -335,12 +335,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsByProviderCallback
+     * To obtain the request config of the operation getIntegrationsByProviderCallback
      *
      * @param provider 
      * @return RequestConfig
      */
-    fun getV1IntegrationsByProviderCallbackRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getIntegrationsByProviderCallbackRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -367,8 +367,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsDiscordLink() : Unit {
-        val localVarResponse = getV1IntegrationsDiscordLinkWithHttpInfo()
+    fun getIntegrationsDiscordLink() : Unit {
+        val localVarResponse = getIntegrationsDiscordLinkWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -394,8 +394,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsDiscordLinkWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsDiscordLinkRequestConfig()
+    fun getIntegrationsDiscordLinkWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsDiscordLinkRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -403,11 +403,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsDiscordLink
+     * To obtain the request config of the operation getIntegrationsDiscordLink
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsDiscordLinkRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsDiscordLinkRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -434,8 +434,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsDiscordLinkCallback() : Unit {
-        val localVarResponse = getV1IntegrationsDiscordLinkCallbackWithHttpInfo()
+    fun getIntegrationsDiscordLinkCallback() : Unit {
+        val localVarResponse = getIntegrationsDiscordLinkCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -461,8 +461,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsDiscordLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsDiscordLinkCallbackRequestConfig()
+    fun getIntegrationsDiscordLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsDiscordLinkCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -470,11 +470,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsDiscordLinkCallback
+     * To obtain the request config of the operation getIntegrationsDiscordLinkCallback
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsDiscordLinkCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsDiscordLinkCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -501,8 +501,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsDiscordLinkDiscord() : Unit {
-        val localVarResponse = getV1IntegrationsDiscordLinkDiscordWithHttpInfo()
+    fun getIntegrationsDiscordLinkDiscord() : Unit {
+        val localVarResponse = getIntegrationsDiscordLinkDiscordWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -528,8 +528,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsDiscordLinkDiscordWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsDiscordLinkDiscordRequestConfig()
+    fun getIntegrationsDiscordLinkDiscordWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsDiscordLinkDiscordRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -537,11 +537,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsDiscordLinkDiscord
+     * To obtain the request config of the operation getIntegrationsDiscordLinkDiscord
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsDiscordLinkDiscordRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsDiscordLinkDiscordRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -569,8 +569,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsGithubInstallations() : GithubInstallationsOut {
-        val localVarResponse = getV1IntegrationsGithubInstallationsWithHttpInfo()
+    fun getIntegrationsGithubInstallations() : GithubInstallationsOut {
+        val localVarResponse = getIntegrationsGithubInstallationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubInstallationsOut
@@ -597,8 +597,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsGithubInstallationsWithHttpInfo() : ApiResponse<GithubInstallationsOut?> {
-        val localVariableConfig = getV1IntegrationsGithubInstallationsRequestConfig()
+    fun getIntegrationsGithubInstallationsWithHttpInfo() : ApiResponse<GithubInstallationsOut?> {
+        val localVariableConfig = getIntegrationsGithubInstallationsRequestConfig()
 
         return request<Unit, GithubInstallationsOut>(
             localVariableConfig
@@ -606,11 +606,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsGithubInstallations
+     * To obtain the request config of the operation getIntegrationsGithubInstallations
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsGithubInstallationsRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsGithubInstallationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -639,8 +639,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsGithubRepos() : GithubReposOut {
-        val localVarResponse = getV1IntegrationsGithubReposWithHttpInfo()
+    fun getIntegrationsGithubRepos() : GithubReposOut {
+        val localVarResponse = getIntegrationsGithubReposWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubReposOut
@@ -667,8 +667,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsGithubReposWithHttpInfo() : ApiResponse<GithubReposOut?> {
-        val localVariableConfig = getV1IntegrationsGithubReposRequestConfig()
+    fun getIntegrationsGithubReposWithHttpInfo() : ApiResponse<GithubReposOut?> {
+        val localVariableConfig = getIntegrationsGithubReposRequestConfig()
 
         return request<Unit, GithubReposOut>(
             localVariableConfig
@@ -676,11 +676,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsGithubRepos
+     * To obtain the request config of the operation getIntegrationsGithubRepos
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsGithubReposRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsGithubReposRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -710,8 +710,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsGithubReposByRepoPages(repo: kotlin.String) : GithubPagesView {
-        val localVarResponse = getV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo)
+    fun getIntegrationsGithubReposByRepoPages(repo: kotlin.String) : GithubPagesView {
+        val localVarResponse = getIntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesView
@@ -739,8 +739,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesView?> {
-        val localVariableConfig = getV1IntegrationsGithubReposByRepoPagesRequestConfig(repo = repo)
+    fun getIntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesView?> {
+        val localVariableConfig = getIntegrationsGithubReposByRepoPagesRequestConfig(repo = repo)
 
         return request<Unit, GithubPagesView>(
             localVariableConfig
@@ -748,12 +748,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsGithubReposByRepoPages
+     * To obtain the request config of the operation getIntegrationsGithubReposByRepoPages
      *
      * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun getV1IntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
+    fun getIntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -781,8 +781,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsSlackInstall() : Unit {
-        val localVarResponse = getV1IntegrationsSlackInstallWithHttpInfo()
+    fun getIntegrationsSlackInstall() : Unit {
+        val localVarResponse = getIntegrationsSlackInstallWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -808,8 +808,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsSlackInstallWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsSlackInstallRequestConfig()
+    fun getIntegrationsSlackInstallWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsSlackInstallRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -817,11 +817,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsSlackInstall
+     * To obtain the request config of the operation getIntegrationsSlackInstall
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsSlackInstallRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsSlackInstallRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -848,8 +848,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsSlackLink() : Unit {
-        val localVarResponse = getV1IntegrationsSlackLinkWithHttpInfo()
+    fun getIntegrationsSlackLink() : Unit {
+        val localVarResponse = getIntegrationsSlackLinkWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -875,8 +875,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsSlackLinkWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsSlackLinkRequestConfig()
+    fun getIntegrationsSlackLinkWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsSlackLinkRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -884,11 +884,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsSlackLink
+     * To obtain the request config of the operation getIntegrationsSlackLink
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsSlackLinkRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsSlackLinkRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -915,8 +915,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsSlackLinkCallback() : Unit {
-        val localVarResponse = getV1IntegrationsSlackLinkCallbackWithHttpInfo()
+    fun getIntegrationsSlackLinkCallback() : Unit {
+        val localVarResponse = getIntegrationsSlackLinkCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -942,8 +942,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsSlackLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsSlackLinkCallbackRequestConfig()
+    fun getIntegrationsSlackLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsSlackLinkCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -951,11 +951,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsSlackLinkCallback
+     * To obtain the request config of the operation getIntegrationsSlackLinkCallback
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsSlackLinkCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsSlackLinkCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -982,8 +982,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsSlackLinkSlack() : Unit {
-        val localVarResponse = getV1IntegrationsSlackLinkSlackWithHttpInfo()
+    fun getIntegrationsSlackLinkSlack() : Unit {
+        val localVarResponse = getIntegrationsSlackLinkSlackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1009,8 +1009,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsSlackLinkSlackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsSlackLinkSlackRequestConfig()
+    fun getIntegrationsSlackLinkSlackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsSlackLinkSlackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1018,11 +1018,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsSlackLinkSlack
+     * To obtain the request config of the operation getIntegrationsSlackLinkSlack
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsSlackLinkSlackRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsSlackLinkSlackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1049,8 +1049,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsTeamsLink() : Unit {
-        val localVarResponse = getV1IntegrationsTeamsLinkWithHttpInfo()
+    fun getIntegrationsTeamsLink() : Unit {
+        val localVarResponse = getIntegrationsTeamsLinkWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1076,8 +1076,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsTeamsLinkWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsTeamsLinkRequestConfig()
+    fun getIntegrationsTeamsLinkWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsTeamsLinkRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1085,11 +1085,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsTeamsLink
+     * To obtain the request config of the operation getIntegrationsTeamsLink
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsTeamsLinkRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsTeamsLinkRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1116,8 +1116,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsTeamsLinkAad() : Unit {
-        val localVarResponse = getV1IntegrationsTeamsLinkAadWithHttpInfo()
+    fun getIntegrationsTeamsLinkAad() : Unit {
+        val localVarResponse = getIntegrationsTeamsLinkAadWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1143,8 +1143,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsTeamsLinkAadWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsTeamsLinkAadRequestConfig()
+    fun getIntegrationsTeamsLinkAadWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsTeamsLinkAadRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1152,11 +1152,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsTeamsLinkAad
+     * To obtain the request config of the operation getIntegrationsTeamsLinkAad
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsTeamsLinkAadRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsTeamsLinkAadRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1183,8 +1183,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsTeamsLinkCallback() : Unit {
-        val localVarResponse = getV1IntegrationsTeamsLinkCallbackWithHttpInfo()
+    fun getIntegrationsTeamsLinkCallback() : Unit {
+        val localVarResponse = getIntegrationsTeamsLinkCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1210,8 +1210,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsTeamsLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsTeamsLinkCallbackRequestConfig()
+    fun getIntegrationsTeamsLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsTeamsLinkCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1219,11 +1219,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsTeamsLinkCallback
+     * To obtain the request config of the operation getIntegrationsTeamsLinkCallback
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsTeamsLinkCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsTeamsLinkCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1250,8 +1250,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsTelegramLink() : Unit {
-        val localVarResponse = getV1IntegrationsTelegramLinkWithHttpInfo()
+    fun getIntegrationsTelegramLink() : Unit {
+        val localVarResponse = getIntegrationsTelegramLinkWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1277,8 +1277,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsTelegramLinkWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsTelegramLinkRequestConfig()
+    fun getIntegrationsTelegramLinkWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsTelegramLinkRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1286,11 +1286,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsTelegramLink
+     * To obtain the request config of the operation getIntegrationsTelegramLink
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsTelegramLinkRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsTelegramLinkRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1317,8 +1317,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsTelegramLinkAuth() : Unit {
-        val localVarResponse = getV1IntegrationsTelegramLinkAuthWithHttpInfo()
+    fun getIntegrationsTelegramLinkAuth() : Unit {
+        val localVarResponse = getIntegrationsTelegramLinkAuthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1344,8 +1344,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsTelegramLinkAuthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsTelegramLinkAuthRequestConfig()
+    fun getIntegrationsTelegramLinkAuthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsTelegramLinkAuthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1353,11 +1353,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsTelegramLinkAuth
+     * To obtain the request config of the operation getIntegrationsTelegramLinkAuth
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsTelegramLinkAuthRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsTelegramLinkAuthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1384,8 +1384,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IntegrationsTelegramLinkCallback() : Unit {
-        val localVarResponse = getV1IntegrationsTelegramLinkCallbackWithHttpInfo()
+    fun getIntegrationsTelegramLinkCallback() : Unit {
+        val localVarResponse = getIntegrationsTelegramLinkCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1411,8 +1411,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IntegrationsTelegramLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IntegrationsTelegramLinkCallbackRequestConfig()
+    fun getIntegrationsTelegramLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIntegrationsTelegramLinkCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1420,11 +1420,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1IntegrationsTelegramLinkCallback
+     * To obtain the request config of the operation getIntegrationsTelegramLinkCallback
      *
      * @return RequestConfig
      */
-    fun getV1IntegrationsTelegramLinkCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getIntegrationsTelegramLinkCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1454,8 +1454,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsByProviderConnect(provider: kotlin.String, connectIn: ConnectIn) : ConnectOut {
-        val localVarResponse = postV1IntegrationsByProviderConnectWithHttpInfo(provider = provider, connectIn = connectIn)
+    fun postIntegrationsByProviderConnect(provider: kotlin.String, connectIn: ConnectIn) : ConnectOut {
+        val localVarResponse = postIntegrationsByProviderConnectWithHttpInfo(provider = provider, connectIn = connectIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectOut
@@ -1484,8 +1484,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsByProviderConnectWithHttpInfo(provider: kotlin.String, connectIn: ConnectIn) : ApiResponse<ConnectOut?> {
-        val localVariableConfig = postV1IntegrationsByProviderConnectRequestConfig(provider = provider, connectIn = connectIn)
+    fun postIntegrationsByProviderConnectWithHttpInfo(provider: kotlin.String, connectIn: ConnectIn) : ApiResponse<ConnectOut?> {
+        val localVariableConfig = postIntegrationsByProviderConnectRequestConfig(provider = provider, connectIn = connectIn)
 
         return request<ConnectIn, ConnectOut>(
             localVariableConfig
@@ -1493,13 +1493,13 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsByProviderConnect
+     * To obtain the request config of the operation postIntegrationsByProviderConnect
      *
      * @param provider Provider is the connector&#39;s registry id, from the :provider path segment.
      * @param connectIn 
      * @return RequestConfig
      */
-    fun postV1IntegrationsByProviderConnectRequestConfig(provider: kotlin.String, connectIn: ConnectIn) : RequestConfig<ConnectIn> {
+    fun postIntegrationsByProviderConnectRequestConfig(provider: kotlin.String, connectIn: ConnectIn) : RequestConfig<ConnectIn> {
         val localVariableBody = connectIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1530,8 +1530,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsByProviderDisconnect(provider: kotlin.String) : DisconnectOut {
-        val localVarResponse = postV1IntegrationsByProviderDisconnectWithHttpInfo(provider = provider)
+    fun postIntegrationsByProviderDisconnect(provider: kotlin.String) : DisconnectOut {
+        val localVarResponse = postIntegrationsByProviderDisconnectWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DisconnectOut
@@ -1559,8 +1559,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsByProviderDisconnectWithHttpInfo(provider: kotlin.String) : ApiResponse<DisconnectOut?> {
-        val localVariableConfig = postV1IntegrationsByProviderDisconnectRequestConfig(provider = provider)
+    fun postIntegrationsByProviderDisconnectWithHttpInfo(provider: kotlin.String) : ApiResponse<DisconnectOut?> {
+        val localVariableConfig = postIntegrationsByProviderDisconnectRequestConfig(provider = provider)
 
         return request<Unit, DisconnectOut>(
             localVariableConfig
@@ -1568,12 +1568,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsByProviderDisconnect
+     * To obtain the request config of the operation postIntegrationsByProviderDisconnect
      *
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
-    fun postV1IntegrationsByProviderDisconnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun postIntegrationsByProviderDisconnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1603,8 +1603,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsByProviderVerify(provider: kotlin.String) : VerifyOut {
-        val localVarResponse = postV1IntegrationsByProviderVerifyWithHttpInfo(provider = provider)
+    fun postIntegrationsByProviderVerify(provider: kotlin.String) : VerifyOut {
+        val localVarResponse = postIntegrationsByProviderVerifyWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VerifyOut
@@ -1632,8 +1632,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsByProviderVerifyWithHttpInfo(provider: kotlin.String) : ApiResponse<VerifyOut?> {
-        val localVariableConfig = postV1IntegrationsByProviderVerifyRequestConfig(provider = provider)
+    fun postIntegrationsByProviderVerifyWithHttpInfo(provider: kotlin.String) : ApiResponse<VerifyOut?> {
+        val localVariableConfig = postIntegrationsByProviderVerifyRequestConfig(provider = provider)
 
         return request<Unit, VerifyOut>(
             localVariableConfig
@@ -1641,12 +1641,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsByProviderVerify
+     * To obtain the request config of the operation postIntegrationsByProviderVerify
      *
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
-    fun postV1IntegrationsByProviderVerifyRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun postIntegrationsByProviderVerifyRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1674,8 +1674,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsDiscordInteractions() : Unit {
-        val localVarResponse = postV1IntegrationsDiscordInteractionsWithHttpInfo()
+    fun postIntegrationsDiscordInteractions() : Unit {
+        val localVarResponse = postIntegrationsDiscordInteractionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1701,8 +1701,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsDiscordInteractionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IntegrationsDiscordInteractionsRequestConfig()
+    fun postIntegrationsDiscordInteractionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIntegrationsDiscordInteractionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1710,11 +1710,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsDiscordInteractions
+     * To obtain the request config of the operation postIntegrationsDiscordInteractions
      *
      * @return RequestConfig
      */
-    fun postV1IntegrationsDiscordInteractionsRequestConfig() : RequestConfig<Unit> {
+    fun postIntegrationsDiscordInteractionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1743,8 +1743,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsGithubClaim(githubClaimIn: GithubClaimIn) : GithubClaimOut {
-        val localVarResponse = postV1IntegrationsGithubClaimWithHttpInfo(githubClaimIn = githubClaimIn)
+    fun postIntegrationsGithubClaim(githubClaimIn: GithubClaimIn) : GithubClaimOut {
+        val localVarResponse = postIntegrationsGithubClaimWithHttpInfo(githubClaimIn = githubClaimIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubClaimOut
@@ -1772,8 +1772,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsGithubClaimWithHttpInfo(githubClaimIn: GithubClaimIn) : ApiResponse<GithubClaimOut?> {
-        val localVariableConfig = postV1IntegrationsGithubClaimRequestConfig(githubClaimIn = githubClaimIn)
+    fun postIntegrationsGithubClaimWithHttpInfo(githubClaimIn: GithubClaimIn) : ApiResponse<GithubClaimOut?> {
+        val localVariableConfig = postIntegrationsGithubClaimRequestConfig(githubClaimIn = githubClaimIn)
 
         return request<GithubClaimIn, GithubClaimOut>(
             localVariableConfig
@@ -1781,12 +1781,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsGithubClaim
+     * To obtain the request config of the operation postIntegrationsGithubClaim
      *
      * @param githubClaimIn 
      * @return RequestConfig
      */
-    fun postV1IntegrationsGithubClaimRequestConfig(githubClaimIn: GithubClaimIn) : RequestConfig<GithubClaimIn> {
+    fun postIntegrationsGithubClaimRequestConfig(githubClaimIn: GithubClaimIn) : RequestConfig<GithubClaimIn> {
         val localVariableBody = githubClaimIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1817,8 +1817,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsGithubFork(githubForkReq: GithubForkReq) : GithubForkOut {
-        val localVarResponse = postV1IntegrationsGithubForkWithHttpInfo(githubForkReq = githubForkReq)
+    fun postIntegrationsGithubFork(githubForkReq: GithubForkReq) : GithubForkOut {
+        val localVarResponse = postIntegrationsGithubForkWithHttpInfo(githubForkReq = githubForkReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubForkOut
@@ -1846,8 +1846,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsGithubForkWithHttpInfo(githubForkReq: GithubForkReq) : ApiResponse<GithubForkOut?> {
-        val localVariableConfig = postV1IntegrationsGithubForkRequestConfig(githubForkReq = githubForkReq)
+    fun postIntegrationsGithubForkWithHttpInfo(githubForkReq: GithubForkReq) : ApiResponse<GithubForkOut?> {
+        val localVariableConfig = postIntegrationsGithubForkRequestConfig(githubForkReq = githubForkReq)
 
         return request<GithubForkReq, GithubForkOut>(
             localVariableConfig
@@ -1855,12 +1855,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsGithubFork
+     * To obtain the request config of the operation postIntegrationsGithubFork
      *
      * @param githubForkReq 
      * @return RequestConfig
      */
-    fun postV1IntegrationsGithubForkRequestConfig(githubForkReq: GithubForkReq) : RequestConfig<GithubForkReq> {
+    fun postIntegrationsGithubForkRequestConfig(githubForkReq: GithubForkReq) : RequestConfig<GithubForkReq> {
         val localVariableBody = githubForkReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1879,8 +1879,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * POST /v1/integrations/github/issues/backfill
-     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter.
-     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter. Org-scoped by the validated principal — a caller only ever backfills its OWN org. Synchronous + bounded (a total time budget and an issue cap) so it returns the counts directly; idempotent by ExtRef, so a re-run continues where a truncated pass left off and never duplicates.
+     * Seeds the native todo with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter.
+     * Seeds the native todo with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter. Org-scoped by the validated principal — a caller only ever backfills its OWN org. Synchronous + bounded (a total time budget and an issue cap) so it returns the counts directly; idempotent by ExtRef, so a re-run continues where a truncated pass left off and never duplicates.
      * @param githubBackfillIn 
      * @return GithubBackfillResult
      * @throws IllegalStateException If the request is not correctly configured
@@ -1891,8 +1891,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsGithubIssuesBackfill(githubBackfillIn: GithubBackfillIn) : GithubBackfillResult {
-        val localVarResponse = postV1IntegrationsGithubIssuesBackfillWithHttpInfo(githubBackfillIn = githubBackfillIn)
+    fun postIntegrationsGithubIssuesBackfill(githubBackfillIn: GithubBackfillIn) : GithubBackfillResult {
+        val localVarResponse = postIntegrationsGithubIssuesBackfillWithHttpInfo(githubBackfillIn = githubBackfillIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubBackfillResult
@@ -1911,8 +1911,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * POST /v1/integrations/github/issues/backfill
-     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter.
-     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter. Org-scoped by the validated principal — a caller only ever backfills its OWN org. Synchronous + bounded (a total time budget and an issue cap) so it returns the counts directly; idempotent by ExtRef, so a re-run continues where a truncated pass left off and never duplicates.
+     * Seeds the native todo with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter.
+     * Seeds the native todo with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter. Org-scoped by the validated principal — a caller only ever backfills its OWN org. Synchronous + bounded (a total time budget and an issue cap) so it returns the counts directly; idempotent by ExtRef, so a re-run continues where a truncated pass left off and never duplicates.
      * @param githubBackfillIn 
      * @return ApiResponse<GithubBackfillResult?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1920,8 +1920,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsGithubIssuesBackfillWithHttpInfo(githubBackfillIn: GithubBackfillIn) : ApiResponse<GithubBackfillResult?> {
-        val localVariableConfig = postV1IntegrationsGithubIssuesBackfillRequestConfig(githubBackfillIn = githubBackfillIn)
+    fun postIntegrationsGithubIssuesBackfillWithHttpInfo(githubBackfillIn: GithubBackfillIn) : ApiResponse<GithubBackfillResult?> {
+        val localVariableConfig = postIntegrationsGithubIssuesBackfillRequestConfig(githubBackfillIn = githubBackfillIn)
 
         return request<GithubBackfillIn, GithubBackfillResult>(
             localVariableConfig
@@ -1929,12 +1929,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsGithubIssuesBackfill
+     * To obtain the request config of the operation postIntegrationsGithubIssuesBackfill
      *
      * @param githubBackfillIn 
      * @return RequestConfig
      */
-    fun postV1IntegrationsGithubIssuesBackfillRequestConfig(githubBackfillIn: GithubBackfillIn) : RequestConfig<GithubBackfillIn> {
+    fun postIntegrationsGithubIssuesBackfillRequestConfig(githubBackfillIn: GithubBackfillIn) : RequestConfig<GithubBackfillIn> {
         val localVariableBody = githubBackfillIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1966,8 +1966,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsGithubReposByRepoPages(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : GithubPagesView {
-        val localVarResponse = postV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo, githubPagesEnableReq = githubPagesEnableReq)
+    fun postIntegrationsGithubReposByRepoPages(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : GithubPagesView {
+        val localVarResponse = postIntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo, githubPagesEnableReq = githubPagesEnableReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesView
@@ -1996,8 +1996,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : ApiResponse<GithubPagesView?> {
-        val localVariableConfig = postV1IntegrationsGithubReposByRepoPagesRequestConfig(repo = repo, githubPagesEnableReq = githubPagesEnableReq)
+    fun postIntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : ApiResponse<GithubPagesView?> {
+        val localVariableConfig = postIntegrationsGithubReposByRepoPagesRequestConfig(repo = repo, githubPagesEnableReq = githubPagesEnableReq)
 
         return request<GithubPagesEnableReq, GithubPagesView>(
             localVariableConfig
@@ -2005,13 +2005,13 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsGithubReposByRepoPages
+     * To obtain the request config of the operation postIntegrationsGithubReposByRepoPages
      *
      * @param repo Repo is the repository, from the :repo path segment.
      * @param githubPagesEnableReq 
      * @return RequestConfig
      */
-    fun postV1IntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : RequestConfig<GithubPagesEnableReq> {
+    fun postIntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : RequestConfig<GithubPagesEnableReq> {
         val localVariableBody = githubPagesEnableReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2042,8 +2042,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsGithubReposByRepoPagesBuilds(repo: kotlin.String) : GithubPagesBuildOut {
-        val localVarResponse = postV1IntegrationsGithubReposByRepoPagesBuildsWithHttpInfo(repo = repo)
+    fun postIntegrationsGithubReposByRepoPagesBuilds(repo: kotlin.String) : GithubPagesBuildOut {
+        val localVarResponse = postIntegrationsGithubReposByRepoPagesBuildsWithHttpInfo(repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesBuildOut
@@ -2071,8 +2071,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsGithubReposByRepoPagesBuildsWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesBuildOut?> {
-        val localVariableConfig = postV1IntegrationsGithubReposByRepoPagesBuildsRequestConfig(repo = repo)
+    fun postIntegrationsGithubReposByRepoPagesBuildsWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesBuildOut?> {
+        val localVariableConfig = postIntegrationsGithubReposByRepoPagesBuildsRequestConfig(repo = repo)
 
         return request<Unit, GithubPagesBuildOut>(
             localVariableConfig
@@ -2080,12 +2080,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsGithubReposByRepoPagesBuilds
+     * To obtain the request config of the operation postIntegrationsGithubReposByRepoPagesBuilds
      *
      * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun postV1IntegrationsGithubReposByRepoPagesBuildsRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
+    fun postIntegrationsGithubReposByRepoPagesBuildsRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2115,8 +2115,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsGithubReposImport(githubImportIn: GithubImportIn) : GithubImportOut {
-        val localVarResponse = postV1IntegrationsGithubReposImportWithHttpInfo(githubImportIn = githubImportIn)
+    fun postIntegrationsGithubReposImport(githubImportIn: GithubImportIn) : GithubImportOut {
+        val localVarResponse = postIntegrationsGithubReposImportWithHttpInfo(githubImportIn = githubImportIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubImportOut
@@ -2144,8 +2144,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsGithubReposImportWithHttpInfo(githubImportIn: GithubImportIn) : ApiResponse<GithubImportOut?> {
-        val localVariableConfig = postV1IntegrationsGithubReposImportRequestConfig(githubImportIn = githubImportIn)
+    fun postIntegrationsGithubReposImportWithHttpInfo(githubImportIn: GithubImportIn) : ApiResponse<GithubImportOut?> {
+        val localVariableConfig = postIntegrationsGithubReposImportRequestConfig(githubImportIn = githubImportIn)
 
         return request<GithubImportIn, GithubImportOut>(
             localVariableConfig
@@ -2153,12 +2153,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsGithubReposImport
+     * To obtain the request config of the operation postIntegrationsGithubReposImport
      *
      * @param githubImportIn 
      * @return RequestConfig
      */
-    fun postV1IntegrationsGithubReposImportRequestConfig(githubImportIn: GithubImportIn) : RequestConfig<GithubImportIn> {
+    fun postIntegrationsGithubReposImportRequestConfig(githubImportIn: GithubImportIn) : RequestConfig<GithubImportIn> {
         val localVariableBody = githubImportIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2189,8 +2189,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsGithubSearch(githubSearchReq: GithubSearchReq) : GithubSearchOut {
-        val localVarResponse = postV1IntegrationsGithubSearchWithHttpInfo(githubSearchReq = githubSearchReq)
+    fun postIntegrationsGithubSearch(githubSearchReq: GithubSearchReq) : GithubSearchOut {
+        val localVarResponse = postIntegrationsGithubSearchWithHttpInfo(githubSearchReq = githubSearchReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubSearchOut
@@ -2218,8 +2218,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsGithubSearchWithHttpInfo(githubSearchReq: GithubSearchReq) : ApiResponse<GithubSearchOut?> {
-        val localVariableConfig = postV1IntegrationsGithubSearchRequestConfig(githubSearchReq = githubSearchReq)
+    fun postIntegrationsGithubSearchWithHttpInfo(githubSearchReq: GithubSearchReq) : ApiResponse<GithubSearchOut?> {
+        val localVariableConfig = postIntegrationsGithubSearchRequestConfig(githubSearchReq = githubSearchReq)
 
         return request<GithubSearchReq, GithubSearchOut>(
             localVariableConfig
@@ -2227,12 +2227,12 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsGithubSearch
+     * To obtain the request config of the operation postIntegrationsGithubSearch
      *
      * @param githubSearchReq 
      * @return RequestConfig
      */
-    fun postV1IntegrationsGithubSearchRequestConfig(githubSearchReq: GithubSearchReq) : RequestConfig<GithubSearchReq> {
+    fun postIntegrationsGithubSearchRequestConfig(githubSearchReq: GithubSearchReq) : RequestConfig<GithubSearchReq> {
         val localVariableBody = githubSearchReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2250,6 +2250,147 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
+     * POST /v1/integrations/github/webhook
+     * GitHub App webhook
+     * The address the GitHub App delivers events to. A push is handed to the repository sync engine, and an issue or issue-comment event is mirrored into the native todo — idempotently, so the same issue re-syncs to one row however many times it is edited, closed or reopened.  It answers a benign 200 for everything it does not act on — the ping, other event types, an unknown installation — deliberately, so GitHub does not enter a retry storm over events that were never going to do anything. Only a bad signature and a genuine sync failure are non-200, and an oversized payload is refused outright.  Two sync rules are worth stating because neither is guessable. EVERY ref syncs, tags as well as branches, because releases are cut by tag and filtering them would stop publishing with nothing reporting a failure. And a delete is NEVER propagated: the native side is canonical, so an inbound delete never removes a native ref.  The payload is verified by HMAC against the webhook secret before it is parsed.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsGithubWebhook() : Unit {
+        val localVarResponse = postIntegrationsGithubWebhookWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/github/webhook
+     * GitHub App webhook
+     * The address the GitHub App delivers events to. A push is handed to the repository sync engine, and an issue or issue-comment event is mirrored into the native todo — idempotently, so the same issue re-syncs to one row however many times it is edited, closed or reopened.  It answers a benign 200 for everything it does not act on — the ping, other event types, an unknown installation — deliberately, so GitHub does not enter a retry storm over events that were never going to do anything. Only a bad signature and a genuine sync failure are non-200, and an oversized payload is refused outright.  Two sync rules are worth stating because neither is guessable. EVERY ref syncs, tags as well as branches, because releases are cut by tag and filtering them would stop publishing with nothing reporting a failure. And a delete is NEVER propagated: the native side is canonical, so an inbound delete never removes a native ref.  The payload is verified by HMAC against the webhook secret before it is parsed.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsGithubWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIntegrationsGithubWebhookRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsGithubWebhook
+     *
+     * @return RequestConfig
+     */
+    fun postIntegrationsGithubWebhookRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/github/webhook",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/openrouter/webhook
+     * Receive OpenRouter Broadcast traces as usage rows
+     * OpenRouter&#39;s spend is invisible to every Hanzo money lens because those lenses read hanzo.cloud_usage and OpenRouter meters keys of its own. Point a Broadcast destination (Settings ▸ Observability ▸ Webhook) at this door and each generation span becomes ONE row in that same ledger with provider &#x60;openrouter&#x60;, so one query answers what we spend everywhere. Enable the Cost and Identity field categories: cost is the money and identity carries &#x60;openrouter.api_key_name&#x60;, which is what says WHICH key spent it — it lands in &#x60;account&#x60; as openrouter/&lt;key name&gt;.  AUTHENTICATION IS A HANZO KEY. Broadcast signs nothing; its only authentication is the destination&#39;s Headers map, so send a key as &#x60;Authorization: Bearer pk-…&#x60; and it is admitted exactly as /v1/event admits a beacon&#39;s: a project key resolves through the project that minted it, an IAM-issued key through IAM. That key names the org every row is filed under; it can write and cannot read. No key, or a key that names no org, is 401 and nothing is stored.  The body is OTLP/JSON — &#x60;{resourceSpans:[{scopeSpans:[{spans:[…]}]}]}&#x60; — exactly as OpenTelemetry defines it; the model, tokens and cost are read from each span&#39;s &#x60;gen_ai.*&#x60; attributes and the key name from &#x60;openrouter.api_key_name&#x60;. The answer is &#x60;{stored, dropped}&#x60;: how many generations became rows, and how many spans named no model. Those are OpenRouter&#39;s trace and span parents — they carry no cost to meter. An empty payload stores nothing and answers 200, which is what makes Test Connection pass. A warehouse that cannot take the rows answers 503 so the delivery shows red and can be replayed: a row is keyed by its span id, so a redelivery collapses rather than double-counting.
+     * @param requestBody  (optional)
+     * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsOpenrouterWebhook(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = postIntegrationsOpenrouterWebhookWithHttpInfo(requestBody = requestBody)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/openrouter/webhook
+     * Receive OpenRouter Broadcast traces as usage rows
+     * OpenRouter&#39;s spend is invisible to every Hanzo money lens because those lenses read hanzo.cloud_usage and OpenRouter meters keys of its own. Point a Broadcast destination (Settings ▸ Observability ▸ Webhook) at this door and each generation span becomes ONE row in that same ledger with provider &#x60;openrouter&#x60;, so one query answers what we spend everywhere. Enable the Cost and Identity field categories: cost is the money and identity carries &#x60;openrouter.api_key_name&#x60;, which is what says WHICH key spent it — it lands in &#x60;account&#x60; as openrouter/&lt;key name&gt;.  AUTHENTICATION IS A HANZO KEY. Broadcast signs nothing; its only authentication is the destination&#39;s Headers map, so send a key as &#x60;Authorization: Bearer pk-…&#x60; and it is admitted exactly as /v1/event admits a beacon&#39;s: a project key resolves through the project that minted it, an IAM-issued key through IAM. That key names the org every row is filed under; it can write and cannot read. No key, or a key that names no org, is 401 and nothing is stored.  The body is OTLP/JSON — &#x60;{resourceSpans:[{scopeSpans:[{spans:[…]}]}]}&#x60; — exactly as OpenTelemetry defines it; the model, tokens and cost are read from each span&#39;s &#x60;gen_ai.*&#x60; attributes and the key name from &#x60;openrouter.api_key_name&#x60;. The answer is &#x60;{stored, dropped}&#x60;: how many generations became rows, and how many spans named no model. Those are OpenRouter&#39;s trace and span parents — they carry no cost to meter. An empty payload stores nothing and answers 200, which is what makes Test Connection pass. A warehouse that cannot take the rows answers 503 so the delivery shows red and can be replayed: a row is keyed by its span id, so a redelivery collapses rather than double-counting.
+     * @param requestBody  (optional)
+     * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsOpenrouterWebhookWithHttpInfo(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = postIntegrationsOpenrouterWebhookRequestConfig(requestBody = requestBody)
+
+        return request<kotlin.collections.Map<kotlin.String, kotlin.Any>, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsOpenrouterWebhook
+     *
+     * @param requestBody  (optional)
+     * @return RequestConfig
+     */
+    fun postIntegrationsOpenrouterWebhookRequestConfig(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
+        val localVariableBody = requestBody
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/openrouter/webhook",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * POST /v1/integrations/slack/commands
      * Slack slash command webhook
      * The address Slack posts a slash command to, form-encoded. It acknowledges inside Slack&#39;s three-second budget and posts the answer afterwards to the command&#39;s own response URL, which is why the immediate reply is empty.  The body is verified against the same app signing secret as the events webhook, and a repeat of the same command invocation is absorbed rather than answered twice.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
@@ -2261,8 +2402,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsSlackCommands() : Unit {
-        val localVarResponse = postV1IntegrationsSlackCommandsWithHttpInfo()
+    fun postIntegrationsSlackCommands() : Unit {
+        val localVarResponse = postIntegrationsSlackCommandsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2288,8 +2429,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsSlackCommandsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IntegrationsSlackCommandsRequestConfig()
+    fun postIntegrationsSlackCommandsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIntegrationsSlackCommandsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2297,11 +2438,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsSlackCommands
+     * To obtain the request config of the operation postIntegrationsSlackCommands
      *
      * @return RequestConfig
      */
-    fun postV1IntegrationsSlackCommandsRequestConfig() : RequestConfig<Unit> {
+    fun postIntegrationsSlackCommandsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2319,7 +2460,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     /**
      * POST /v1/integrations/slack/events
      * Slack Events API webhook
-     * The address a Slack app posts workspace events to. It answers Slack&#39;s url_verification handshake with the challenge, and routes an @mention or a direct message to an agent turn that replies in the same thread. A prompt beginning with &#x60;code:&#x60; is routed to the coding flow instead, which runs under its own pool.  The raw body and its timestamp are verified against the app&#39;s signing secret before anything is read from them. Hanzo&#39;s own bot messages are dropped, so a reply cannot trigger another reply.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
+     * The address a Slack app posts workspace events to. It answers Slack&#39;s url_verification handshake with the challenge, and routes an @mention or a direct message to an agent turn that replies in the same thread. The turn holds the product&#39;s own tools, so a request to change code starts a sandbox run because the model chose to — there is no prefix and no second path.  The raw body and its timestamp are verified against the app&#39;s signing secret before anything is read from them. Hanzo&#39;s own bot messages are dropped, so a reply cannot trigger another reply.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2328,8 +2469,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsSlackEvents() : Unit {
-        val localVarResponse = postV1IntegrationsSlackEventsWithHttpInfo()
+    fun postIntegrationsSlackEvents() : Unit {
+        val localVarResponse = postIntegrationsSlackEventsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2349,14 +2490,14 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     /**
      * POST /v1/integrations/slack/events
      * Slack Events API webhook
-     * The address a Slack app posts workspace events to. It answers Slack&#39;s url_verification handshake with the challenge, and routes an @mention or a direct message to an agent turn that replies in the same thread. A prompt beginning with &#x60;code:&#x60; is routed to the coding flow instead, which runs under its own pool.  The raw body and its timestamp are verified against the app&#39;s signing secret before anything is read from them. Hanzo&#39;s own bot messages are dropped, so a reply cannot trigger another reply.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
+     * The address a Slack app posts workspace events to. It answers Slack&#39;s url_verification handshake with the challenge, and routes an @mention or a direct message to an agent turn that replies in the same thread. The turn holds the product&#39;s own tools, so a request to change code starts a sandbox run because the model chose to — there is no prefix and no second path.  The raw body and its timestamp are verified against the app&#39;s signing secret before anything is read from them. Hanzo&#39;s own bot messages are dropped, so a reply cannot trigger another reply.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsSlackEventsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IntegrationsSlackEventsRequestConfig()
+    fun postIntegrationsSlackEventsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIntegrationsSlackEventsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2364,11 +2505,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsSlackEvents
+     * To obtain the request config of the operation postIntegrationsSlackEvents
      *
      * @return RequestConfig
      */
-    fun postV1IntegrationsSlackEventsRequestConfig() : RequestConfig<Unit> {
+    fun postIntegrationsSlackEventsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2395,8 +2536,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsTeamsEvents() : Unit {
-        val localVarResponse = postV1IntegrationsTeamsEventsWithHttpInfo()
+    fun postIntegrationsTeamsEvents() : Unit {
+        val localVarResponse = postIntegrationsTeamsEventsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2422,8 +2563,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsTeamsEventsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IntegrationsTeamsEventsRequestConfig()
+    fun postIntegrationsTeamsEventsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIntegrationsTeamsEventsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2431,11 +2572,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsTeamsEvents
+     * To obtain the request config of the operation postIntegrationsTeamsEvents
      *
      * @return RequestConfig
      */
-    fun postV1IntegrationsTeamsEventsRequestConfig() : RequestConfig<Unit> {
+    fun postIntegrationsTeamsEventsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2463,8 +2604,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsTelegramConnect() : AuthorizeOut {
-        val localVarResponse = postV1IntegrationsTelegramConnectWithHttpInfo()
+    fun postIntegrationsTelegramConnect() : AuthorizeOut {
+        val localVarResponse = postIntegrationsTelegramConnectWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AuthorizeOut
@@ -2491,8 +2632,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsTelegramConnectWithHttpInfo() : ApiResponse<AuthorizeOut?> {
-        val localVariableConfig = postV1IntegrationsTelegramConnectRequestConfig()
+    fun postIntegrationsTelegramConnectWithHttpInfo() : ApiResponse<AuthorizeOut?> {
+        val localVariableConfig = postIntegrationsTelegramConnectRequestConfig()
 
         return request<Unit, AuthorizeOut>(
             localVariableConfig
@@ -2500,11 +2641,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsTelegramConnect
+     * To obtain the request config of the operation postIntegrationsTelegramConnect
      *
      * @return RequestConfig
      */
-    fun postV1IntegrationsTelegramConnectRequestConfig() : RequestConfig<Unit> {
+    fun postIntegrationsTelegramConnectRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2532,8 +2673,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IntegrationsTelegramWebhook() : Unit {
-        val localVarResponse = postV1IntegrationsTelegramWebhookWithHttpInfo()
+    fun postIntegrationsTelegramWebhook() : Unit {
+        val localVarResponse = postIntegrationsTelegramWebhookWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2559,8 +2700,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IntegrationsTelegramWebhookWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IntegrationsTelegramWebhookRequestConfig()
+    fun postIntegrationsTelegramWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIntegrationsTelegramWebhookRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2568,11 +2709,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1IntegrationsTelegramWebhook
+     * To obtain the request config of the operation postIntegrationsTelegramWebhook
      *
      * @return RequestConfig
      */
-    fun postV1IntegrationsTelegramWebhookRequestConfig() : RequestConfig<Unit> {
+    fun postIntegrationsTelegramWebhookRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2602,8 +2743,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1IntegrationsGithubReposByRepoPages(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : GithubPagesUpdatedOut {
-        val localVarResponse = putV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo, githubPagesUpdateReq = githubPagesUpdateReq)
+    fun putIntegrationsGithubReposByRepoPages(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : GithubPagesUpdatedOut {
+        val localVarResponse = putIntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo, githubPagesUpdateReq = githubPagesUpdateReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesUpdatedOut
@@ -2632,8 +2773,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : ApiResponse<GithubPagesUpdatedOut?> {
-        val localVariableConfig = putV1IntegrationsGithubReposByRepoPagesRequestConfig(repo = repo, githubPagesUpdateReq = githubPagesUpdateReq)
+    fun putIntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : ApiResponse<GithubPagesUpdatedOut?> {
+        val localVariableConfig = putIntegrationsGithubReposByRepoPagesRequestConfig(repo = repo, githubPagesUpdateReq = githubPagesUpdateReq)
 
         return request<GithubPagesUpdateReq, GithubPagesUpdatedOut>(
             localVariableConfig
@@ -2641,13 +2782,13 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation putV1IntegrationsGithubReposByRepoPages
+     * To obtain the request config of the operation putIntegrationsGithubReposByRepoPages
      *
      * @param repo Repo is the repository, from the :repo path segment.
      * @param githubPagesUpdateReq 
      * @return RequestConfig
      */
-    fun putV1IntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : RequestConfig<GithubPagesUpdateReq> {
+    fun putIntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : RequestConfig<GithubPagesUpdateReq> {
         val localVariableBody = githubPagesUpdateReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

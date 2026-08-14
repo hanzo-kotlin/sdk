@@ -59,8 +59,8 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Bots() : BotRuns {
-        val localVarResponse = getV1BotsWithHttpInfo()
+    fun getBots() : BotRuns {
+        val localVarResponse = getBotsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BotRuns
@@ -87,8 +87,8 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BotsWithHttpInfo() : ApiResponse<BotRuns?> {
-        val localVariableConfig = getV1BotsRequestConfig()
+    fun getBotsWithHttpInfo() : ApiResponse<BotRuns?> {
+        val localVariableConfig = getBotsRequestConfig()
 
         return request<Unit, BotRuns>(
             localVariableConfig
@@ -96,11 +96,11 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1Bots
+     * To obtain the request config of the operation getBots
      *
      * @return RequestConfig
      */
-    fun getV1BotsRequestConfig() : RequestConfig<Unit> {
+    fun getBotsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -130,8 +130,8 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BotsByRunidStop(runId: kotlin.String) : BotStopped {
-        val localVarResponse = postV1BotsByRunidStopWithHttpInfo(runId = runId)
+    fun postBotsByRunidStop(runId: kotlin.String) : BotStopped {
+        val localVarResponse = postBotsByRunidStopWithHttpInfo(runId = runId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BotStopped
@@ -159,8 +159,8 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BotsByRunidStopWithHttpInfo(runId: kotlin.String) : ApiResponse<BotStopped?> {
-        val localVariableConfig = postV1BotsByRunidStopRequestConfig(runId = runId)
+    fun postBotsByRunidStopWithHttpInfo(runId: kotlin.String) : ApiResponse<BotStopped?> {
+        val localVariableConfig = postBotsByRunidStopRequestConfig(runId = runId)
 
         return request<Unit, BotStopped>(
             localVariableConfig
@@ -168,12 +168,12 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1BotsByRunidStop
+     * To obtain the request config of the operation postBotsByRunidStop
      *
      * @param runId 
      * @return RequestConfig
      */
-    fun postV1BotsByRunidStopRequestConfig(runId: kotlin.String) : RequestConfig<Unit> {
+    fun postBotsByRunidStopRequestConfig(runId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -201,8 +201,8 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BotsRun() : Unit {
-        val localVarResponse = postV1BotsRunWithHttpInfo()
+    fun postBotsRun() : Unit {
+        val localVarResponse = postBotsRunWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -228,8 +228,8 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BotsRunWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1BotsRunRequestConfig()
+    fun postBotsRunWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postBotsRunRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -237,11 +237,11 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1BotsRun
+     * To obtain the request config of the operation postBotsRun
      *
      * @return RequestConfig
      */
-    fun postV1BotsRunRequestConfig() : RequestConfig<Unit> {
+    fun postBotsRunRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

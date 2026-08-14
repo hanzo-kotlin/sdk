@@ -56,8 +56,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MemoryFacts() : Unit {
-        val localVarResponse = getV1MemoryFactsWithHttpInfo()
+    fun getMemoryFacts() : Unit {
+        val localVarResponse = getMemoryFactsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MemoryFactsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1MemoryFactsRequestConfig()
+    fun getMemoryFactsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMemoryFactsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1MemoryFacts
+     * To obtain the request config of the operation getMemoryFacts
      *
      * @return RequestConfig
      */
-    fun getV1MemoryFactsRequestConfig() : RequestConfig<Unit> {
+    fun getMemoryFactsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MemoryList() : Unit {
-        val localVarResponse = getV1MemoryListWithHttpInfo()
+    fun getMemoryList() : Unit {
+        val localVarResponse = getMemoryListWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MemoryListWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1MemoryListRequestConfig()
+    fun getMemoryListWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMemoryListRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1MemoryList
+     * To obtain the request config of the operation getMemoryList
      *
      * @return RequestConfig
      */
-    fun getV1MemoryListRequestConfig() : RequestConfig<Unit> {
+    fun getMemoryListRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MemoryRecall() : Unit {
-        val localVarResponse = getV1MemoryRecallWithHttpInfo()
+    fun getMemoryRecall() : Unit {
+        val localVarResponse = getMemoryRecallWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MemoryRecallWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1MemoryRecallRequestConfig()
+    fun getMemoryRecallWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMemoryRecallRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1MemoryRecall
+     * To obtain the request config of the operation getMemoryRecall
      *
      * @return RequestConfig
      */
-    fun getV1MemoryRecallRequestConfig() : RequestConfig<Unit> {
+    fun getMemoryRecallRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -257,8 +257,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MemorySearch() : Unit {
-        val localVarResponse = getV1MemorySearchWithHttpInfo()
+    fun getMemorySearch() : Unit {
+        val localVarResponse = getMemorySearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,8 +284,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MemorySearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1MemorySearchRequestConfig()
+    fun getMemorySearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getMemorySearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +293,11 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1MemorySearch
+     * To obtain the request config of the operation getMemorySearch
      *
      * @return RequestConfig
      */
-    fun getV1MemorySearchRequestConfig() : RequestConfig<Unit> {
+    fun getMemorySearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -324,8 +324,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MemoryDelete() : Unit {
-        val localVarResponse = postV1MemoryDeleteWithHttpInfo()
+    fun postMemoryDelete() : Unit {
+        val localVarResponse = postMemoryDeleteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -351,8 +351,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MemoryDeleteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MemoryDeleteRequestConfig()
+    fun postMemoryDeleteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMemoryDeleteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -360,11 +360,11 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1MemoryDelete
+     * To obtain the request config of the operation postMemoryDelete
      *
      * @return RequestConfig
      */
-    fun postV1MemoryDeleteRequestConfig() : RequestConfig<Unit> {
+    fun postMemoryDeleteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -391,8 +391,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MemoryRemember() : Unit {
-        val localVarResponse = postV1MemoryRememberWithHttpInfo()
+    fun postMemoryRemember() : Unit {
+        val localVarResponse = postMemoryRememberWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -418,8 +418,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MemoryRememberWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MemoryRememberRequestConfig()
+    fun postMemoryRememberWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMemoryRememberRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -427,11 +427,11 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1MemoryRemember
+     * To obtain the request config of the operation postMemoryRemember
      *
      * @return RequestConfig
      */
-    fun postV1MemoryRememberRequestConfig() : RequestConfig<Unit> {
+    fun postMemoryRememberRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -458,8 +458,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MemoryUpdate() : Unit {
-        val localVarResponse = postV1MemoryUpdateWithHttpInfo()
+    fun postMemoryUpdate() : Unit {
+        val localVarResponse = postMemoryUpdateWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -485,8 +485,8 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MemoryUpdateWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MemoryUpdateRequestConfig()
+    fun postMemoryUpdateWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMemoryUpdateRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -494,11 +494,11 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1MemoryUpdate
+     * To obtain the request config of the operation postMemoryUpdate
      *
      * @return RequestConfig
      */
-    fun postV1MemoryUpdateRequestConfig() : RequestConfig<Unit> {
+    fun postMemoryUpdateRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

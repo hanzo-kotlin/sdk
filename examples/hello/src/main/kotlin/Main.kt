@@ -18,7 +18,7 @@ fun main() {
     // `propertyKeys`, not `keys`: the wire name is `keys`, which the Kotlin
     // generator renames because a data class cannot carry it, and @SerializedName
     // still sends the original.
-    val keys = Hanzo().api(::KeysApi).getV1Keys().propertyKeys.orEmpty()
+    val keys = Hanzo().api(::KeysApi).getKeys().propertyKeys.orEmpty()
     if (keys.isEmpty()) {
         println("the key is good, and it owns no keys of its own")
         return

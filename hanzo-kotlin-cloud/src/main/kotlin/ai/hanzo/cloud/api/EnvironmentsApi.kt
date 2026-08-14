@@ -58,8 +58,8 @@ class EnvironmentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Environments() : EnvironmentBoard {
-        val localVarResponse = getV1EnvironmentsWithHttpInfo()
+    fun getEnvironments() : EnvironmentBoard {
+        val localVarResponse = getEnvironmentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EnvironmentBoard
@@ -86,8 +86,8 @@ class EnvironmentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EnvironmentsWithHttpInfo() : ApiResponse<EnvironmentBoard?> {
-        val localVariableConfig = getV1EnvironmentsRequestConfig()
+    fun getEnvironmentsWithHttpInfo() : ApiResponse<EnvironmentBoard?> {
+        val localVariableConfig = getEnvironmentsRequestConfig()
 
         return request<Unit, EnvironmentBoard>(
             localVariableConfig
@@ -95,11 +95,11 @@ class EnvironmentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1Environments
+     * To obtain the request config of the operation getEnvironments
      *
      * @return RequestConfig
      */
-    fun getV1EnvironmentsRequestConfig() : RequestConfig<Unit> {
+    fun getEnvironmentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

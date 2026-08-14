@@ -47,26 +47,26 @@ class FlowsTest {
         assertEquals("test-org", request.getHeader("X-Org-Id"))
     }
 
-    @Test fun hello() = assertRoute("GET", "/v1/keys") { api(::KeysApi).getV1Keys() }
+    @Test fun hello() = assertRoute("GET", "/v1/keys") { api(::KeysApi).getKeys() }
 
     @Test
     fun chat() =
-        assertRoute("POST", "/v1/chat/completions") { api(::ChatApi).postV1ChatCompletions() }
+        assertRoute("POST", "/v1/chat/completions") { api(::ChatApi).postChatCompletions() }
 
     @Test
-    fun money() = assertRoute("GET", "/v1/billing/balance") { api(::BillingApi).getV1BillingBalance() }
+    fun money() = assertRoute("GET", "/v1/billing/balance") { api(::BillingApi).getBillingBalance() }
 
     @Test
     fun store() =
-        assertRoute("POST", "/v1/kv") { api(::KvApi).postV1Kv(ProvisionRequest(name = "sdk-example")) }
+        assertRoute("POST", "/v1/kv") { api(::KvApi).postKv(ProvisionRequest(name = "sdk-example")) }
 
     @Test
     fun agent() =
         assertRoute("POST", "/v1/agents") {
-            api(::AgentsApi).postV1Agents(CreateAgentIn(name = "sdk-example"))
+            api(::AgentsApi).postAgents(CreateAgentIn(name = "sdk-example"))
         }
 
-    @Test fun tools() = assertRoute("GET", "/v1/tools") { api(::ToolsApi).getV1Tools() }
+    @Test fun tools() = assertRoute("GET", "/v1/tools") { api(::ToolsApi).getTools() }
 
     /**
      * With no key the client sends no `Authorization` header, so the API is the
@@ -74,7 +74,7 @@ class FlowsTest {
      */
     @Test
     fun anUnauthenticatedClientSendsNoCredential() {
-        val request = probe({ api(::KeysApi).getV1Keys() }, apiKey = null)
+        val request = probe({ api(::KeysApi).getKeys() }, apiKey = null)
         assertNull(request.getHeader("Authorization"))
     }
 

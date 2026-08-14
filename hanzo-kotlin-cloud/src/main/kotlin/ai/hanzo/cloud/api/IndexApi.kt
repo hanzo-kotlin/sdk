@@ -57,8 +57,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1IndexIndexesByUid(uid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1IndexIndexesByUidWithHttpInfo(uid = uid)
+    fun deleteIndexIndexesByUid(uid: kotlin.String) : Unit {
+        val localVarResponse = deleteIndexIndexesByUidWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -85,8 +85,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1IndexIndexesByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1IndexIndexesByUidRequestConfig(uid = uid)
+    fun deleteIndexIndexesByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteIndexIndexesByUidRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1IndexIndexesByUid
+     * To obtain the request config of the operation deleteIndexIndexesByUid
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun deleteV1IndexIndexesByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteIndexIndexesByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -128,8 +128,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1IndexIndexesByUidDocumentsById(uid: kotlin.String, id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid = uid, id = id)
+    fun deleteIndexIndexesByUidDocumentsById(uid: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = deleteIndexIndexesByUidDocumentsByIdWithHttpInfo(uid = uid, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -157,8 +157,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1IndexIndexesByUidDocumentsByIdRequestConfig(uid = uid, id = id)
+    fun deleteIndexIndexesByUidDocumentsByIdWithHttpInfo(uid: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteIndexIndexesByUidDocumentsByIdRequestConfig(uid = uid, id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -166,13 +166,13 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1IndexIndexesByUidDocumentsById
+     * To obtain the request config of the operation deleteIndexIndexesByUidDocumentsById
      *
      * @param uid 
      * @param id 
      * @return RequestConfig
      */
-    fun deleteV1IndexIndexesByUidDocumentsByIdRequestConfig(uid: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteIndexIndexesByUidDocumentsByIdRequestConfig(uid: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -199,8 +199,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexHealth() : Unit {
-        val localVarResponse = getV1IndexHealthWithHttpInfo()
+    fun getIndexHealth() : Unit {
+        val localVarResponse = getIndexHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -226,8 +226,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexHealthRequestConfig()
+    fun getIndexHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -235,11 +235,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexHealth
+     * To obtain the request config of the operation getIndexHealth
      *
      * @return RequestConfig
      */
-    fun getV1IndexHealthRequestConfig() : RequestConfig<Unit> {
+    fun getIndexHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -266,8 +266,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexIndexes() : Unit {
-        val localVarResponse = getV1IndexIndexesWithHttpInfo()
+    fun getIndexIndexes() : Unit {
+        val localVarResponse = getIndexIndexesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -293,8 +293,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexIndexesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexIndexesRequestConfig()
+    fun getIndexIndexesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexIndexesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -302,11 +302,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexIndexes
+     * To obtain the request config of the operation getIndexIndexes
      *
      * @return RequestConfig
      */
-    fun getV1IndexIndexesRequestConfig() : RequestConfig<Unit> {
+    fun getIndexIndexesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -334,8 +334,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexIndexesByUid(uid: kotlin.String) : Unit {
-        val localVarResponse = getV1IndexIndexesByUidWithHttpInfo(uid = uid)
+    fun getIndexIndexesByUid(uid: kotlin.String) : Unit {
+        val localVarResponse = getIndexIndexesByUidWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -362,8 +362,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexIndexesByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexIndexesByUidRequestConfig(uid = uid)
+    fun getIndexIndexesByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexIndexesByUidRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -371,12 +371,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexIndexesByUid
+     * To obtain the request config of the operation getIndexIndexesByUid
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun getV1IndexIndexesByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun getIndexIndexesByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -404,8 +404,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
-        val localVarResponse = getV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
+    fun getIndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
+        val localVarResponse = getIndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -432,8 +432,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
+    fun getIndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexIndexesByUidDocumentsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -441,12 +441,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexIndexesByUidDocuments
+     * To obtain the request config of the operation getIndexIndexesByUidDocuments
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun getV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun getIndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -475,8 +475,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexIndexesByUidDocumentsById(uid: kotlin.String, id: kotlin.String) : Unit {
-        val localVarResponse = getV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid = uid, id = id)
+    fun getIndexIndexesByUidDocumentsById(uid: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = getIndexIndexesByUidDocumentsByIdWithHttpInfo(uid = uid, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -504,8 +504,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexIndexesByUidDocumentsByIdRequestConfig(uid = uid, id = id)
+    fun getIndexIndexesByUidDocumentsByIdWithHttpInfo(uid: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexIndexesByUidDocumentsByIdRequestConfig(uid = uid, id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -513,13 +513,13 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexIndexesByUidDocumentsById
+     * To obtain the request config of the operation getIndexIndexesByUidDocumentsById
      *
      * @param uid 
      * @param id 
      * @return RequestConfig
      */
-    fun getV1IndexIndexesByUidDocumentsByIdRequestConfig(uid: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun getIndexIndexesByUidDocumentsByIdRequestConfig(uid: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -547,8 +547,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexIndexesByUidSettings(uid: kotlin.String) : Unit {
-        val localVarResponse = getV1IndexIndexesByUidSettingsWithHttpInfo(uid = uid)
+    fun getIndexIndexesByUidSettings(uid: kotlin.String) : Unit {
+        val localVarResponse = getIndexIndexesByUidSettingsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -575,8 +575,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexIndexesByUidSettingsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexIndexesByUidSettingsRequestConfig(uid = uid)
+    fun getIndexIndexesByUidSettingsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexIndexesByUidSettingsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -584,12 +584,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexIndexesByUidSettings
+     * To obtain the request config of the operation getIndexIndexesByUidSettings
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun getV1IndexIndexesByUidSettingsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun getIndexIndexesByUidSettingsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -616,8 +616,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexStats() : Unit {
-        val localVarResponse = getV1IndexStatsWithHttpInfo()
+    fun getIndexStats() : Unit {
+        val localVarResponse = getIndexStatsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -643,8 +643,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexStatsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexStatsRequestConfig()
+    fun getIndexStatsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexStatsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -652,11 +652,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexStats
+     * To obtain the request config of the operation getIndexStats
      *
      * @return RequestConfig
      */
-    fun getV1IndexStatsRequestConfig() : RequestConfig<Unit> {
+    fun getIndexStatsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -684,8 +684,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexTasksByUid(uid: kotlin.String) : Unit {
-        val localVarResponse = getV1IndexTasksByUidWithHttpInfo(uid = uid)
+    fun getIndexTasksByUid(uid: kotlin.String) : Unit {
+        val localVarResponse = getIndexTasksByUidWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -712,8 +712,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexTasksByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexTasksByUidRequestConfig(uid = uid)
+    fun getIndexTasksByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexTasksByUidRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -721,12 +721,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexTasksByUid
+     * To obtain the request config of the operation getIndexTasksByUid
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun getV1IndexTasksByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun getIndexTasksByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -753,8 +753,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IndexVersion() : Unit {
-        val localVarResponse = getV1IndexVersionWithHttpInfo()
+    fun getIndexVersion() : Unit {
+        val localVarResponse = getIndexVersionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -780,8 +780,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IndexVersionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1IndexVersionRequestConfig()
+    fun getIndexVersionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIndexVersionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -789,11 +789,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1IndexVersion
+     * To obtain the request config of the operation getIndexVersion
      *
      * @return RequestConfig
      */
-    fun getV1IndexVersionRequestConfig() : RequestConfig<Unit> {
+    fun getIndexVersionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -821,8 +821,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1IndexIndexesByUidSettings(uid: kotlin.String) : Unit {
-        val localVarResponse = patchV1IndexIndexesByUidSettingsWithHttpInfo(uid = uid)
+    fun patchIndexIndexesByUidSettings(uid: kotlin.String) : Unit {
+        val localVarResponse = patchIndexIndexesByUidSettingsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -849,8 +849,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1IndexIndexesByUidSettingsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1IndexIndexesByUidSettingsRequestConfig(uid = uid)
+    fun patchIndexIndexesByUidSettingsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchIndexIndexesByUidSettingsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -858,12 +858,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1IndexIndexesByUidSettings
+     * To obtain the request config of the operation patchIndexIndexesByUidSettings
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun patchV1IndexIndexesByUidSettingsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun patchIndexIndexesByUidSettingsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -890,8 +890,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IndexIndexes() : Unit {
-        val localVarResponse = postV1IndexIndexesWithHttpInfo()
+    fun postIndexIndexes() : Unit {
+        val localVarResponse = postIndexIndexesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -917,8 +917,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IndexIndexesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IndexIndexesRequestConfig()
+    fun postIndexIndexesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIndexIndexesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -926,11 +926,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1IndexIndexes
+     * To obtain the request config of the operation postIndexIndexes
      *
      * @return RequestConfig
      */
-    fun postV1IndexIndexesRequestConfig() : RequestConfig<Unit> {
+    fun postIndexIndexesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -958,8 +958,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
-        val localVarResponse = postV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
+    fun postIndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
+        val localVarResponse = postIndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -986,8 +986,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
+    fun postIndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postIndexIndexesByUidDocumentsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -995,12 +995,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1IndexIndexesByUidDocuments
+     * To obtain the request config of the operation postIndexIndexesByUidDocuments
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun postV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun postIndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1028,8 +1028,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IndexIndexesByUidDocumentsDeleteBatch(uid: kotlin.String) : Unit {
-        val localVarResponse = postV1IndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid = uid)
+    fun postIndexIndexesByUidDocumentsDeleteBatch(uid: kotlin.String) : Unit {
+        val localVarResponse = postIndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1056,8 +1056,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid = uid)
+    fun postIndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postIndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1065,12 +1065,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1IndexIndexesByUidDocumentsDeleteBatch
+     * To obtain the request config of the operation postIndexIndexesByUidDocumentsDeleteBatch
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun postV1IndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun postIndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1098,8 +1098,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IndexIndexesByUidSearch(uid: kotlin.String) : Unit {
-        val localVarResponse = postV1IndexIndexesByUidSearchWithHttpInfo(uid = uid)
+    fun postIndexIndexesByUidSearch(uid: kotlin.String) : Unit {
+        val localVarResponse = postIndexIndexesByUidSearchWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1126,8 +1126,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IndexIndexesByUidSearchWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1IndexIndexesByUidSearchRequestConfig(uid = uid)
+    fun postIndexIndexesByUidSearchWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postIndexIndexesByUidSearchRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1135,12 +1135,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1IndexIndexesByUidSearch
+     * To obtain the request config of the operation postIndexIndexesByUidSearch
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun postV1IndexIndexesByUidSearchRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun postIndexIndexesByUidSearchRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1168,8 +1168,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
-        val localVarResponse = putV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
+    fun putIndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
+        val localVarResponse = putIndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1196,8 +1196,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
+    fun putIndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putIndexIndexesByUidDocumentsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1205,12 +1205,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1IndexIndexesByUidDocuments
+     * To obtain the request config of the operation putIndexIndexesByUidDocuments
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun putV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun putIndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

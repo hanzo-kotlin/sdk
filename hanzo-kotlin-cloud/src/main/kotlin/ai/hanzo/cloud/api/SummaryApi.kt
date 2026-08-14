@@ -58,8 +58,8 @@ class SummaryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Summary() : O11yStatusSummary {
-        val localVarResponse = getV1SummaryWithHttpInfo()
+    fun getSummary() : O11yStatusSummary {
+        val localVarResponse = getSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yStatusSummary
@@ -86,8 +86,8 @@ class SummaryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SummaryWithHttpInfo() : ApiResponse<O11yStatusSummary?> {
-        val localVariableConfig = getV1SummaryRequestConfig()
+    fun getSummaryWithHttpInfo() : ApiResponse<O11yStatusSummary?> {
+        val localVariableConfig = getSummaryRequestConfig()
 
         return request<Unit, O11yStatusSummary>(
             localVariableConfig
@@ -95,11 +95,11 @@ class SummaryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Summary
+     * To obtain the request config of the operation getSummary
      *
      * @return RequestConfig
      */
-    fun getV1SummaryRequestConfig() : RequestConfig<Unit> {
+    fun getSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

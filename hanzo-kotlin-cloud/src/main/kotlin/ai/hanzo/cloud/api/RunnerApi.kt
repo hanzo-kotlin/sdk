@@ -61,8 +61,8 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RunnerReleases() : SelfReleaseList {
-        val localVarResponse = getV1RunnerReleasesWithHttpInfo()
+    fun getRunnerReleases() : SelfReleaseList {
+        val localVarResponse = getRunnerReleasesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SelfReleaseList
@@ -89,8 +89,8 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RunnerReleasesWithHttpInfo() : ApiResponse<SelfReleaseList?> {
-        val localVariableConfig = getV1RunnerReleasesRequestConfig()
+    fun getRunnerReleasesWithHttpInfo() : ApiResponse<SelfReleaseList?> {
+        val localVariableConfig = getRunnerReleasesRequestConfig()
 
         return request<Unit, SelfReleaseList>(
             localVariableConfig
@@ -98,11 +98,11 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RunnerReleases
+     * To obtain the request config of the operation getRunnerReleases
      *
      * @return RequestConfig
      */
-    fun getV1RunnerReleasesRequestConfig() : RequestConfig<Unit> {
+    fun getRunnerReleasesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -132,8 +132,8 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RunnerReleasesById(id: kotlin.String) : ReleaseState {
-        val localVarResponse = getV1RunnerReleasesByIdWithHttpInfo(id = id)
+    fun getRunnerReleasesById(id: kotlin.String) : ReleaseState {
+        val localVarResponse = getRunnerReleasesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReleaseState
@@ -161,8 +161,8 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RunnerReleasesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ReleaseState?> {
-        val localVariableConfig = getV1RunnerReleasesByIdRequestConfig(id = id)
+    fun getRunnerReleasesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ReleaseState?> {
+        val localVariableConfig = getRunnerReleasesByIdRequestConfig(id = id)
 
         return request<Unit, ReleaseState>(
             localVariableConfig
@@ -170,12 +170,12 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RunnerReleasesById
+     * To obtain the request config of the operation getRunnerReleasesById
      *
      * @param id ID is the build id the release trigger answered with, from the path.
      * @return RequestConfig
      */
-    fun getV1RunnerReleasesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getRunnerReleasesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -205,8 +205,8 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Runner(runnerBuildReq: RunnerBuildReq) : RunnerBuildResp {
-        val localVarResponse = postV1RunnerWithHttpInfo(runnerBuildReq = runnerBuildReq)
+    fun postRunner(runnerBuildReq: RunnerBuildReq) : RunnerBuildResp {
+        val localVarResponse = postRunnerWithHttpInfo(runnerBuildReq = runnerBuildReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RunnerBuildResp
@@ -234,8 +234,8 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RunnerWithHttpInfo(runnerBuildReq: RunnerBuildReq) : ApiResponse<RunnerBuildResp?> {
-        val localVariableConfig = postV1RunnerRequestConfig(runnerBuildReq = runnerBuildReq)
+    fun postRunnerWithHttpInfo(runnerBuildReq: RunnerBuildReq) : ApiResponse<RunnerBuildResp?> {
+        val localVariableConfig = postRunnerRequestConfig(runnerBuildReq = runnerBuildReq)
 
         return request<RunnerBuildReq, RunnerBuildResp>(
             localVariableConfig
@@ -243,12 +243,12 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Runner
+     * To obtain the request config of the operation postRunner
      *
      * @param runnerBuildReq 
      * @return RequestConfig
      */
-    fun postV1RunnerRequestConfig(runnerBuildReq: RunnerBuildReq) : RequestConfig<RunnerBuildReq> {
+    fun postRunnerRequestConfig(runnerBuildReq: RunnerBuildReq) : RequestConfig<RunnerBuildReq> {
         val localVariableBody = runnerBuildReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -56,8 +56,8 @@ class InstallPatchApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1InstallPatch() : Unit {
-        val localVarResponse = postV1InstallPatchWithHttpInfo()
+    fun postInstallPatch() : Unit {
+        val localVarResponse = postInstallPatchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class InstallPatchApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1InstallPatchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1InstallPatchRequestConfig()
+    fun postInstallPatchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postInstallPatchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class InstallPatchApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1InstallPatch
+     * To obtain the request config of the operation postInstallPatch
      *
      * @return RequestConfig
      */
-    fun postV1InstallPatchRequestConfig() : RequestConfig<Unit> {
+    fun postInstallPatchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

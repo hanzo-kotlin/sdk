@@ -201,8 +201,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComputeRegions() : Unit {
-        val localVarResponse = getV1ComputeRegionsWithHttpInfo()
+    fun getComputeRegions() : Unit {
+        val localVarResponse = getComputeRegionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -228,8 +228,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComputeRegionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1ComputeRegionsRequestConfig()
+    fun getComputeRegionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getComputeRegionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -237,11 +237,11 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1ComputeRegions
+     * To obtain the request config of the operation getComputeRegions
      *
      * @return RequestConfig
      */
-    fun getV1ComputeRegionsRequestConfig() : RequestConfig<Unit> {
+    fun getComputeRegionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -268,8 +268,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComputeSizes() : Unit {
-        val localVarResponse = getV1ComputeSizesWithHttpInfo()
+    fun getComputeSizes() : Unit {
+        val localVarResponse = getComputeSizesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -295,8 +295,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComputeSizesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1ComputeSizesRequestConfig()
+    fun getComputeSizesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getComputeSizesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -304,11 +304,11 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1ComputeSizes
+     * To obtain the request config of the operation getComputeSizes
      *
      * @return RequestConfig
      */
-    fun getV1ComputeSizesRequestConfig() : RequestConfig<Unit> {
+    fun getComputeSizesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -407,8 +407,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComputeBotsByIdByAction(id: kotlin.String, action: kotlin.String) : Unit {
-        val localVarResponse = postV1ComputeBotsByIdByActionWithHttpInfo(id = id, action = action)
+    fun postComputeBotsByIdByAction(id: kotlin.String, action: kotlin.String) : Unit {
+        val localVarResponse = postComputeBotsByIdByActionWithHttpInfo(id = id, action = action)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -436,8 +436,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComputeBotsByIdByActionWithHttpInfo(id: kotlin.String, action: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ComputeBotsByIdByActionRequestConfig(id = id, action = action)
+    fun postComputeBotsByIdByActionWithHttpInfo(id: kotlin.String, action: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postComputeBotsByIdByActionRequestConfig(id = id, action = action)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -445,13 +445,13 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1ComputeBotsByIdByAction
+     * To obtain the request config of the operation postComputeBotsByIdByAction
      *
      * @param id 
      * @param action 
      * @return RequestConfig
      */
-    fun postV1ComputeBotsByIdByActionRequestConfig(id: kotlin.String, action: kotlin.String) : RequestConfig<Unit> {
+    fun postComputeBotsByIdByActionRequestConfig(id: kotlin.String, action: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -478,8 +478,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComputeBotsLaunch() : Unit {
-        val localVarResponse = postV1ComputeBotsLaunchWithHttpInfo()
+    fun postComputeBotsLaunch() : Unit {
+        val localVarResponse = postComputeBotsLaunchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -505,8 +505,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComputeBotsLaunchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ComputeBotsLaunchRequestConfig()
+    fun postComputeBotsLaunchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postComputeBotsLaunchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -514,11 +514,11 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1ComputeBotsLaunch
+     * To obtain the request config of the operation postComputeBotsLaunch
      *
      * @return RequestConfig
      */
-    fun postV1ComputeBotsLaunchRequestConfig() : RequestConfig<Unit> {
+    fun postComputeBotsLaunchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

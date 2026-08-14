@@ -27,7 +27,7 @@ import com.google.gson.annotations.SerializedName
  * @param export Export is whether the resolved plan allows exporting these rows.
  * @param plan Plan echoes the plan id the entitlement was resolved from.
  * @param providers Providers is the per-provider roll-up over the window.
- * @param range Range is the window label that was served, which is what was asked for.
+ * @param range Range is the label that was ASKED for. A plan whose retention is shorter than that window is served the retention instead, so read start and end for the window the rows actually cover and retentionDays for the reason — on a clamped read the label is longer than what was served.
  * @param retentionDays RetentionDays is how far back the resolved plan allows reading.
  * @param scope Scope is the tenant the rows were read under — the validated principal's org.
  * @param start Start is the window's inclusive start, RFC3339 UTC, AFTER the retention clamp — so it may be later than the start that was asked for.
@@ -52,7 +52,7 @@ data class UsageAnalyticsView (
     @SerializedName("providers")
     val providers: ProviderBreakdown? = null,
 
-    /* Range is the window label that was served, which is what was asked for. */
+    /* Range is the label that was ASKED for. A plan whose retention is shorter than that window is served the retention instead, so read start and end for the window the rows actually cover and retentionDays for the reason — on a clamped read the label is longer than what was served. */
     @SerializedName("range")
     val range: kotlin.String? = null,
 

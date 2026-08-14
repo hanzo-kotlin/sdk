@@ -68,8 +68,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Tools(source: kotlin.String? = null, activated: kotlin.String? = null) : ToolList {
-        val localVarResponse = getV1ToolsWithHttpInfo(source = source, activated = activated)
+    fun getTools(source: kotlin.String? = null, activated: kotlin.String? = null) : ToolList {
+        val localVarResponse = getToolsWithHttpInfo(source = source, activated = activated)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ToolList
@@ -98,8 +98,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ToolsWithHttpInfo(source: kotlin.String?, activated: kotlin.String?) : ApiResponse<ToolList?> {
-        val localVariableConfig = getV1ToolsRequestConfig(source = source, activated = activated)
+    fun getToolsWithHttpInfo(source: kotlin.String?, activated: kotlin.String?) : ApiResponse<ToolList?> {
+        val localVariableConfig = getToolsRequestConfig(source = source, activated = activated)
 
         return request<Unit, ToolList>(
             localVariableConfig
@@ -107,13 +107,13 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Tools
+     * To obtain the request config of the operation getTools
      *
      * @param source Source keeps only tools from one source — connector, function, zap-service, agent, skill or mcp. Empty keeps every source. (optional)
      * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @return RequestConfig
      */
-    fun getV1ToolsRequestConfig(source: kotlin.String?, activated: kotlin.String?) : RequestConfig<Unit> {
+    fun getToolsRequestConfig(source: kotlin.String?, activated: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -150,8 +150,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ToolsActivation() : ActivationSet {
-        val localVarResponse = getV1ToolsActivationWithHttpInfo()
+    fun getToolsActivation() : ActivationSet {
+        val localVarResponse = getToolsActivationWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ActivationSet
@@ -178,8 +178,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ToolsActivationWithHttpInfo() : ApiResponse<ActivationSet?> {
-        val localVariableConfig = getV1ToolsActivationRequestConfig()
+    fun getToolsActivationWithHttpInfo() : ApiResponse<ActivationSet?> {
+        val localVariableConfig = getToolsActivationRequestConfig()
 
         return request<Unit, ActivationSet>(
             localVariableConfig
@@ -187,11 +187,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1ToolsActivation
+     * To obtain the request config of the operation getToolsActivation
      *
      * @return RequestConfig
      */
-    fun getV1ToolsActivationRequestConfig() : RequestConfig<Unit> {
+    fun getToolsActivationRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -225,8 +225,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ToolsCatalog(q: kotlin.String? = null, featured: kotlin.String? = null, official: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : McpCatalog {
-        val localVarResponse = getV1ToolsCatalogWithHttpInfo(q = q, featured = featured, official = official, limit = limit, offset = offset)
+    fun getToolsCatalog(q: kotlin.String? = null, featured: kotlin.String? = null, official: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : McpCatalog {
+        val localVarResponse = getToolsCatalogWithHttpInfo(q = q, featured = featured, official = official, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as McpCatalog
@@ -258,8 +258,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ToolsCatalogWithHttpInfo(q: kotlin.String?, featured: kotlin.String?, official: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<McpCatalog?> {
-        val localVariableConfig = getV1ToolsCatalogRequestConfig(q = q, featured = featured, official = official, limit = limit, offset = offset)
+    fun getToolsCatalogWithHttpInfo(q: kotlin.String?, featured: kotlin.String?, official: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<McpCatalog?> {
+        val localVariableConfig = getToolsCatalogRequestConfig(q = q, featured = featured, official = official, limit = limit, offset = offset)
 
         return request<Unit, McpCatalog>(
             localVariableConfig
@@ -267,7 +267,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1ToolsCatalog
+     * To obtain the request config of the operation getToolsCatalog
      *
      * @param q Q matches the name, title or description, case-insensitively. (optional)
      * @param featured Featured keeps only the listings we put on the front of the shelf, and only when it is exactly the string \&quot;true\&quot;. (optional)
@@ -276,7 +276,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param offset Offset skips that many listings. (optional)
      * @return RequestConfig
      */
-    fun getV1ToolsCatalogRequestConfig(q: kotlin.String?, featured: kotlin.String?, official: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getToolsCatalogRequestConfig(q: kotlin.String?, featured: kotlin.String?, official: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -323,8 +323,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ToolsCatalogById(id: kotlin.String) : MCPListing {
-        val localVarResponse = getV1ToolsCatalogByIdWithHttpInfo(id = id)
+    fun getToolsCatalogById(id: kotlin.String) : MCPListing {
+        val localVarResponse = getToolsCatalogByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MCPListing
@@ -352,8 +352,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ToolsCatalogByIdWithHttpInfo(id: kotlin.String) : ApiResponse<MCPListing?> {
-        val localVariableConfig = getV1ToolsCatalogByIdRequestConfig(id = id)
+    fun getToolsCatalogByIdWithHttpInfo(id: kotlin.String) : ApiResponse<MCPListing?> {
+        val localVariableConfig = getToolsCatalogByIdRequestConfig(id = id)
 
         return request<Unit, MCPListing>(
             localVariableConfig
@@ -361,12 +361,12 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1ToolsCatalogById
+     * To obtain the request config of the operation getToolsCatalogById
      *
      * @param id ID is the listing, from the path. It is the publisher&#39;s reverse-DNS name with its one slash written as an underscore — \&quot;com.stripe_mcp\&quot;.
      * @return RequestConfig
      */
-    fun getV1ToolsCatalogByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getToolsCatalogByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -397,8 +397,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1ToolsCatalogById(id: kotlin.String, curateReq: CurateReq) : MCPListing {
-        val localVarResponse = patchV1ToolsCatalogByIdWithHttpInfo(id = id, curateReq = curateReq)
+    fun patchToolsCatalogById(id: kotlin.String, curateReq: CurateReq) : MCPListing {
+        val localVarResponse = patchToolsCatalogByIdWithHttpInfo(id = id, curateReq = curateReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MCPListing
@@ -427,8 +427,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1ToolsCatalogByIdWithHttpInfo(id: kotlin.String, curateReq: CurateReq) : ApiResponse<MCPListing?> {
-        val localVariableConfig = patchV1ToolsCatalogByIdRequestConfig(id = id, curateReq = curateReq)
+    fun patchToolsCatalogByIdWithHttpInfo(id: kotlin.String, curateReq: CurateReq) : ApiResponse<MCPListing?> {
+        val localVariableConfig = patchToolsCatalogByIdRequestConfig(id = id, curateReq = curateReq)
 
         return request<CurateReq, MCPListing>(
             localVariableConfig
@@ -436,13 +436,13 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1ToolsCatalogById
+     * To obtain the request config of the operation patchToolsCatalogById
      *
      * @param id ID is the listing to curate, from the path.
      * @param curateReq 
      * @return RequestConfig
      */
-    fun patchV1ToolsCatalogByIdRequestConfig(id: kotlin.String, curateReq: CurateReq) : RequestConfig<CurateReq> {
+    fun patchToolsCatalogByIdRequestConfig(id: kotlin.String, curateReq: CurateReq) : RequestConfig<CurateReq> {
         val localVariableBody = curateReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -473,8 +473,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ToolsCall(toolCall: ToolCall) : ToolResult {
-        val localVarResponse = postV1ToolsCallWithHttpInfo(toolCall = toolCall)
+    fun postToolsCall(toolCall: ToolCall) : ToolResult {
+        val localVarResponse = postToolsCallWithHttpInfo(toolCall = toolCall)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ToolResult
@@ -502,8 +502,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ToolsCallWithHttpInfo(toolCall: ToolCall) : ApiResponse<ToolResult?> {
-        val localVariableConfig = postV1ToolsCallRequestConfig(toolCall = toolCall)
+    fun postToolsCallWithHttpInfo(toolCall: ToolCall) : ApiResponse<ToolResult?> {
+        val localVariableConfig = postToolsCallRequestConfig(toolCall = toolCall)
 
         return request<ToolCall, ToolResult>(
             localVariableConfig
@@ -511,12 +511,12 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1ToolsCall
+     * To obtain the request config of the operation postToolsCall
      *
      * @param toolCall 
      * @return RequestConfig
      */
-    fun postV1ToolsCallRequestConfig(toolCall: ToolCall) : RequestConfig<ToolCall> {
+    fun postToolsCallRequestConfig(toolCall: ToolCall) : RequestConfig<ToolCall> {
         val localVariableBody = toolCall
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -546,8 +546,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ToolsCatalogSync() : McpCatalogSync {
-        val localVarResponse = postV1ToolsCatalogSyncWithHttpInfo()
+    fun postToolsCatalogSync() : McpCatalogSync {
+        val localVarResponse = postToolsCatalogSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as McpCatalogSync
@@ -574,8 +574,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ToolsCatalogSyncWithHttpInfo() : ApiResponse<McpCatalogSync?> {
-        val localVariableConfig = postV1ToolsCatalogSyncRequestConfig()
+    fun postToolsCatalogSyncWithHttpInfo() : ApiResponse<McpCatalogSync?> {
+        val localVariableConfig = postToolsCatalogSyncRequestConfig()
 
         return request<Unit, McpCatalogSync>(
             localVariableConfig
@@ -583,11 +583,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1ToolsCatalogSync
+     * To obtain the request config of the operation postToolsCatalogSync
      *
      * @return RequestConfig
      */
-    fun postV1ToolsCatalogSyncRequestConfig() : RequestConfig<Unit> {
+    fun postToolsCatalogSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -617,8 +617,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1ToolsActivation(activationReq: ActivationReq) : ActivationSet {
-        val localVarResponse = putV1ToolsActivationWithHttpInfo(activationReq = activationReq)
+    fun putToolsActivation(activationReq: ActivationReq) : ActivationSet {
+        val localVarResponse = putToolsActivationWithHttpInfo(activationReq = activationReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ActivationSet
@@ -646,8 +646,8 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1ToolsActivationWithHttpInfo(activationReq: ActivationReq) : ApiResponse<ActivationSet?> {
-        val localVariableConfig = putV1ToolsActivationRequestConfig(activationReq = activationReq)
+    fun putToolsActivationWithHttpInfo(activationReq: ActivationReq) : ApiResponse<ActivationSet?> {
+        val localVariableConfig = putToolsActivationRequestConfig(activationReq = activationReq)
 
         return request<ActivationReq, ActivationSet>(
             localVariableConfig
@@ -655,12 +655,12 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1ToolsActivation
+     * To obtain the request config of the operation putToolsActivation
      *
      * @param activationReq 
      * @return RequestConfig
      */
-    fun putV1ToolsActivationRequestConfig(activationReq: ActivationReq) : RequestConfig<ActivationReq> {
+    fun putToolsActivationRequestConfig(activationReq: ActivationReq) : RequestConfig<ActivationReq> {
         val localVariableBody = activationReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

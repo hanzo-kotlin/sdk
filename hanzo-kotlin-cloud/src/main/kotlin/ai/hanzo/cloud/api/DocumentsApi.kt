@@ -56,8 +56,8 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1Documents() : Unit {
-        val localVarResponse = deleteV1DocumentsWithHttpInfo()
+    fun deleteDocuments() : Unit {
+        val localVarResponse = deleteDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1DocumentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1DocumentsRequestConfig()
+    fun deleteDocumentsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteDocumentsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1Documents
+     * To obtain the request config of the operation deleteDocuments
      *
      * @return RequestConfig
      */
-    fun deleteV1DocumentsRequestConfig() : RequestConfig<Unit> {
+    fun deleteDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DocumentsByFileIdContext() : Unit {
-        val localVarResponse = getV1DocumentsByFileIdContextWithHttpInfo()
+    fun getDocumentsByFileIdContext() : Unit {
+        val localVarResponse = getDocumentsByFileIdContextWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DocumentsByFileIdContextWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DocumentsByFileIdContextRequestConfig()
+    fun getDocumentsByFileIdContextWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getDocumentsByFileIdContextRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1DocumentsByFileIdContext
+     * To obtain the request config of the operation getDocumentsByFileIdContext
      *
      * @return RequestConfig
      */
-    fun getV1DocumentsByFileIdContextRequestConfig() : RequestConfig<Unit> {
+    fun getDocumentsByFileIdContextRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

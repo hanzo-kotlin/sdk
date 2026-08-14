@@ -56,8 +56,8 @@ class TrafficApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TrafficGlobe() : Unit {
-        val localVarResponse = getV1TrafficGlobeWithHttpInfo()
+    fun getTrafficGlobe() : Unit {
+        val localVarResponse = getTrafficGlobeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class TrafficApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TrafficGlobeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TrafficGlobeRequestConfig()
+    fun getTrafficGlobeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getTrafficGlobeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class TrafficApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1TrafficGlobe
+     * To obtain the request config of the operation getTrafficGlobe
      *
      * @return RequestConfig
      */
-    fun getV1TrafficGlobeRequestConfig() : RequestConfig<Unit> {
+    fun getTrafficGlobeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -23,7 +23,7 @@ import okhttp3.OkHttpClient
  *
  * ```
  * val hanzo = Hanzo()
- * val keys = hanzo.api(::KeysApi).getV1Keys()
+ * val keys = hanzo.api(::KeysApi).getKeys()
  * ```
  */
 class Hanzo(

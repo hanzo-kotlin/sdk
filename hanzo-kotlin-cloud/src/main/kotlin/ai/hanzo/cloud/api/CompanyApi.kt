@@ -79,8 +79,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Company() : FormationView {
-        val localVarResponse = getV1CompanyWithHttpInfo()
+    fun getCompany() : FormationView {
+        val localVarResponse = getCompanyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -107,8 +107,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CompanyWithHttpInfo() : ApiResponse<FormationView?> {
-        val localVariableConfig = getV1CompanyRequestConfig()
+    fun getCompanyWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = getCompanyRequestConfig()
 
         return request<Unit, FormationView>(
             localVariableConfig
@@ -116,11 +116,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Company
+     * To obtain the request config of the operation getCompany
      *
      * @return RequestConfig
      */
-    fun getV1CompanyRequestConfig() : RequestConfig<Unit> {
+    fun getCompanyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -153,8 +153,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CompanyRegister(stage: kotlin.String? = null, structure: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : RegisterPage {
-        val localVarResponse = getV1CompanyRegisterWithHttpInfo(stage = stage, structure = structure, limit = limit, offset = offset)
+    fun getCompanyRegister(stage: kotlin.String? = null, structure: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : RegisterPage {
+        val localVarResponse = getCompanyRegisterWithHttpInfo(stage = stage, structure = structure, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterPage
@@ -185,8 +185,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CompanyRegisterWithHttpInfo(stage: kotlin.String?, structure: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<RegisterPage?> {
-        val localVariableConfig = getV1CompanyRegisterRequestConfig(stage = stage, structure = structure, limit = limit, offset = offset)
+    fun getCompanyRegisterWithHttpInfo(stage: kotlin.String?, structure: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<RegisterPage?> {
+        val localVariableConfig = getCompanyRegisterRequestConfig(stage = stage, structure = structure, limit = limit, offset = offset)
 
         return request<Unit, RegisterPage>(
             localVariableConfig
@@ -194,7 +194,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1CompanyRegister
+     * To obtain the request config of the operation getCompanyRegister
      *
      * @param stage Stage keeps only formations at that stage. Empty means any. (optional)
      * @param structure Structure keeps only formations of that entity kind. Empty means any. (optional)
@@ -202,7 +202,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param offset Offset skips that many rows. (optional)
      * @return RequestConfig
      */
-    fun getV1CompanyRegisterRequestConfig(stage: kotlin.String?, structure: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getCompanyRegisterRequestConfig(stage: kotlin.String?, structure: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -245,8 +245,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CompanyRegisterSummary() : RegisterCounts {
-        val localVarResponse = getV1CompanyRegisterSummaryWithHttpInfo()
+    fun getCompanyRegisterSummary() : RegisterCounts {
+        val localVarResponse = getCompanyRegisterSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterCounts
@@ -273,8 +273,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CompanyRegisterSummaryWithHttpInfo() : ApiResponse<RegisterCounts?> {
-        val localVariableConfig = getV1CompanyRegisterSummaryRequestConfig()
+    fun getCompanyRegisterSummaryWithHttpInfo() : ApiResponse<RegisterCounts?> {
+        val localVariableConfig = getCompanyRegisterSummaryRequestConfig()
 
         return request<Unit, RegisterCounts>(
             localVariableConfig
@@ -282,11 +282,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1CompanyRegisterSummary
+     * To obtain the request config of the operation getCompanyRegisterSummary
      *
      * @return RequestConfig
      */
-    fun getV1CompanyRegisterSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getCompanyRegisterSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -316,8 +316,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CompanyReview(limit: kotlin.Int? = null) : ReviewQueue {
-        val localVarResponse = getV1CompanyReviewWithHttpInfo(limit = limit)
+    fun getCompanyReview(limit: kotlin.Int? = null) : ReviewQueue {
+        val localVarResponse = getCompanyReviewWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReviewQueue
@@ -345,8 +345,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CompanyReviewWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ReviewQueue?> {
-        val localVariableConfig = getV1CompanyReviewRequestConfig(limit = limit)
+    fun getCompanyReviewWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ReviewQueue?> {
+        val localVariableConfig = getCompanyReviewRequestConfig(limit = limit)
 
         return request<Unit, ReviewQueue>(
             localVariableConfig
@@ -354,12 +354,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1CompanyReview
+     * To obtain the request config of the operation getCompanyReview
      *
      * @param limit Limit bounds how many formations are scanned; 0 or less means the default of 200. (optional)
      * @return RequestConfig
      */
-    fun getV1CompanyReviewRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getCompanyReviewRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -394,8 +394,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Company(beginIn: BeginIn) : FormationView {
-        val localVarResponse = postV1CompanyWithHttpInfo(beginIn = beginIn)
+    fun postCompany(beginIn: BeginIn) : FormationView {
+        val localVarResponse = postCompanyWithHttpInfo(beginIn = beginIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -423,8 +423,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyWithHttpInfo(beginIn: BeginIn) : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanyRequestConfig(beginIn = beginIn)
+    fun postCompanyWithHttpInfo(beginIn: BeginIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanyRequestConfig(beginIn = beginIn)
 
         return request<BeginIn, FormationView>(
             localVariableConfig
@@ -432,12 +432,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1Company
+     * To obtain the request config of the operation postCompany
      *
      * @param beginIn 
      * @return RequestConfig
      */
-    fun postV1CompanyRequestConfig(beginIn: BeginIn) : RequestConfig<BeginIn> {
+    fun postCompanyRequestConfig(beginIn: BeginIn) : RequestConfig<BeginIn> {
         val localVariableBody = beginIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -468,8 +468,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyAdvance(advanceIn: AdvanceIn) : FormationView {
-        val localVarResponse = postV1CompanyAdvanceWithHttpInfo(advanceIn = advanceIn)
+    fun postCompanyAdvance(advanceIn: AdvanceIn) : FormationView {
+        val localVarResponse = postCompanyAdvanceWithHttpInfo(advanceIn = advanceIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -497,8 +497,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyAdvanceWithHttpInfo(advanceIn: AdvanceIn) : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanyAdvanceRequestConfig(advanceIn = advanceIn)
+    fun postCompanyAdvanceWithHttpInfo(advanceIn: AdvanceIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanyAdvanceRequestConfig(advanceIn = advanceIn)
 
         return request<AdvanceIn, FormationView>(
             localVariableConfig
@@ -506,12 +506,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyAdvance
+     * To obtain the request config of the operation postCompanyAdvance
      *
      * @param advanceIn 
      * @return RequestConfig
      */
-    fun postV1CompanyAdvanceRequestConfig(advanceIn: AdvanceIn) : RequestConfig<AdvanceIn> {
+    fun postCompanyAdvanceRequestConfig(advanceIn: AdvanceIn) : RequestConfig<AdvanceIn> {
         val localVariableBody = advanceIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -541,8 +541,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyDocuments() : FormationView {
-        val localVarResponse = postV1CompanyDocumentsWithHttpInfo()
+    fun postCompanyDocuments() : FormationView {
+        val localVarResponse = postCompanyDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -569,8 +569,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyDocumentsWithHttpInfo() : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanyDocumentsRequestConfig()
+    fun postCompanyDocumentsWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanyDocumentsRequestConfig()
 
         return request<Unit, FormationView>(
             localVariableConfig
@@ -578,11 +578,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyDocuments
+     * To obtain the request config of the operation postCompanyDocuments
      *
      * @return RequestConfig
      */
-    fun postV1CompanyDocumentsRequestConfig() : RequestConfig<Unit> {
+    fun postCompanyDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -611,8 +611,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyEsign() : EsignOut {
-        val localVarResponse = postV1CompanyEsignWithHttpInfo()
+    fun postCompanyEsign() : EsignOut {
+        val localVarResponse = postCompanyEsignWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EsignOut
@@ -639,8 +639,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyEsignWithHttpInfo() : ApiResponse<EsignOut?> {
-        val localVariableConfig = postV1CompanyEsignRequestConfig()
+    fun postCompanyEsignWithHttpInfo() : ApiResponse<EsignOut?> {
+        val localVariableConfig = postCompanyEsignRequestConfig()
 
         return request<Unit, EsignOut>(
             localVariableConfig
@@ -648,11 +648,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyEsign
+     * To obtain the request config of the operation postCompanyEsign
      *
      * @return RequestConfig
      */
-    fun postV1CompanyEsignRequestConfig() : RequestConfig<Unit> {
+    fun postCompanyEsignRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -682,8 +682,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyEsignComplete(esignCompleteIn: EsignCompleteIn) : FormationView {
-        val localVarResponse = postV1CompanyEsignCompleteWithHttpInfo(esignCompleteIn = esignCompleteIn)
+    fun postCompanyEsignComplete(esignCompleteIn: EsignCompleteIn) : FormationView {
+        val localVarResponse = postCompanyEsignCompleteWithHttpInfo(esignCompleteIn = esignCompleteIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -711,8 +711,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyEsignCompleteWithHttpInfo(esignCompleteIn: EsignCompleteIn) : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanyEsignCompleteRequestConfig(esignCompleteIn = esignCompleteIn)
+    fun postCompanyEsignCompleteWithHttpInfo(esignCompleteIn: EsignCompleteIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanyEsignCompleteRequestConfig(esignCompleteIn = esignCompleteIn)
 
         return request<EsignCompleteIn, FormationView>(
             localVariableConfig
@@ -720,12 +720,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyEsignComplete
+     * To obtain the request config of the operation postCompanyEsignComplete
      *
      * @param esignCompleteIn 
      * @return RequestConfig
      */
-    fun postV1CompanyEsignCompleteRequestConfig(esignCompleteIn: EsignCompleteIn) : RequestConfig<EsignCompleteIn> {
+    fun postCompanyEsignCompleteRequestConfig(esignCompleteIn: EsignCompleteIn) : RequestConfig<EsignCompleteIn> {
         val localVariableBody = esignCompleteIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -756,8 +756,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyFounders(foundersIn: FoundersIn) : FormationView {
-        val localVarResponse = postV1CompanyFoundersWithHttpInfo(foundersIn = foundersIn)
+    fun postCompanyFounders(foundersIn: FoundersIn) : FormationView {
+        val localVarResponse = postCompanyFoundersWithHttpInfo(foundersIn = foundersIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -785,8 +785,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyFoundersWithHttpInfo(foundersIn: FoundersIn) : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanyFoundersRequestConfig(foundersIn = foundersIn)
+    fun postCompanyFoundersWithHttpInfo(foundersIn: FoundersIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanyFoundersRequestConfig(foundersIn = foundersIn)
 
         return request<FoundersIn, FormationView>(
             localVariableConfig
@@ -794,12 +794,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyFounders
+     * To obtain the request config of the operation postCompanyFounders
      *
      * @param foundersIn 
      * @return RequestConfig
      */
-    fun postV1CompanyFoundersRequestConfig(foundersIn: FoundersIn) : RequestConfig<FoundersIn> {
+    fun postCompanyFoundersRequestConfig(foundersIn: FoundersIn) : RequestConfig<FoundersIn> {
         val localVariableBody = foundersIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -830,8 +830,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyFundraiseDeck(body: java.io.File? = null) : DeckOut {
-        val localVarResponse = postV1CompanyFundraiseDeckWithHttpInfo(body = body)
+    fun postCompanyFundraiseDeck(body: java.io.File? = null) : DeckOut {
+        val localVarResponse = postCompanyFundraiseDeckWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeckOut
@@ -859,8 +859,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyFundraiseDeckWithHttpInfo(body: java.io.File?) : ApiResponse<DeckOut?> {
-        val localVariableConfig = postV1CompanyFundraiseDeckRequestConfig(body = body)
+    fun postCompanyFundraiseDeckWithHttpInfo(body: java.io.File?) : ApiResponse<DeckOut?> {
+        val localVariableConfig = postCompanyFundraiseDeckRequestConfig(body = body)
 
         return request<java.io.File, DeckOut>(
             localVariableConfig
@@ -868,12 +868,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyFundraiseDeck
+     * To obtain the request config of the operation postCompanyFundraiseDeck
      *
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1CompanyFundraiseDeckRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postCompanyFundraiseDeckRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -904,8 +904,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyFundraiseRound(roundInput: RoundInput) : RoundOut {
-        val localVarResponse = postV1CompanyFundraiseRoundWithHttpInfo(roundInput = roundInput)
+    fun postCompanyFundraiseRound(roundInput: RoundInput) : RoundOut {
+        val localVarResponse = postCompanyFundraiseRoundWithHttpInfo(roundInput = roundInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RoundOut
@@ -933,8 +933,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyFundraiseRoundWithHttpInfo(roundInput: RoundInput) : ApiResponse<RoundOut?> {
-        val localVariableConfig = postV1CompanyFundraiseRoundRequestConfig(roundInput = roundInput)
+    fun postCompanyFundraiseRoundWithHttpInfo(roundInput: RoundInput) : ApiResponse<RoundOut?> {
+        val localVariableConfig = postCompanyFundraiseRoundRequestConfig(roundInput = roundInput)
 
         return request<RoundInput, RoundOut>(
             localVariableConfig
@@ -942,12 +942,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyFundraiseRound
+     * To obtain the request config of the operation postCompanyFundraiseRound
      *
      * @param roundInput 
      * @return RequestConfig
      */
-    fun postV1CompanyFundraiseRoundRequestConfig(roundInput: RoundInput) : RequestConfig<RoundInput> {
+    fun postCompanyFundraiseRoundRequestConfig(roundInput: RoundInput) : RequestConfig<RoundInput> {
         val localVariableBody = roundInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -978,8 +978,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyFundraiseSafe(safeIn: SafeIn) : SafeOut {
-        val localVarResponse = postV1CompanyFundraiseSafeWithHttpInfo(safeIn = safeIn)
+    fun postCompanyFundraiseSafe(safeIn: SafeIn) : SafeOut {
+        val localVarResponse = postCompanyFundraiseSafeWithHttpInfo(safeIn = safeIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SafeOut
@@ -1007,8 +1007,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyFundraiseSafeWithHttpInfo(safeIn: SafeIn) : ApiResponse<SafeOut?> {
-        val localVariableConfig = postV1CompanyFundraiseSafeRequestConfig(safeIn = safeIn)
+    fun postCompanyFundraiseSafeWithHttpInfo(safeIn: SafeIn) : ApiResponse<SafeOut?> {
+        val localVariableConfig = postCompanyFundraiseSafeRequestConfig(safeIn = safeIn)
 
         return request<SafeIn, SafeOut>(
             localVariableConfig
@@ -1016,12 +1016,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyFundraiseSafe
+     * To obtain the request config of the operation postCompanyFundraiseSafe
      *
      * @param safeIn 
      * @return RequestConfig
      */
-    fun postV1CompanyFundraiseSafeRequestConfig(safeIn: SafeIn) : RequestConfig<SafeIn> {
+    fun postCompanyFundraiseSafeRequestConfig(safeIn: SafeIn) : RequestConfig<SafeIn> {
         val localVariableBody = safeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1051,8 +1051,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyGenesis() : FormationView {
-        val localVarResponse = postV1CompanyGenesisWithHttpInfo()
+    fun postCompanyGenesis() : FormationView {
+        val localVarResponse = postCompanyGenesisWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -1079,8 +1079,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyGenesisWithHttpInfo() : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanyGenesisRequestConfig()
+    fun postCompanyGenesisWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanyGenesisRequestConfig()
 
         return request<Unit, FormationView>(
             localVariableConfig
@@ -1088,11 +1088,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyGenesis
+     * To obtain the request config of the operation postCompanyGenesis
      *
      * @return RequestConfig
      */
-    fun postV1CompanyGenesisRequestConfig() : RequestConfig<Unit> {
+    fun postCompanyGenesisRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1122,8 +1122,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyImportCaptable(importCapTableIn: ImportCapTableIn) : ImportCapTableOut {
-        val localVarResponse = postV1CompanyImportCaptableWithHttpInfo(importCapTableIn = importCapTableIn)
+    fun postCompanyImportCaptable(importCapTableIn: ImportCapTableIn) : ImportCapTableOut {
+        val localVarResponse = postCompanyImportCaptableWithHttpInfo(importCapTableIn = importCapTableIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ImportCapTableOut
@@ -1151,8 +1151,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyImportCaptableWithHttpInfo(importCapTableIn: ImportCapTableIn) : ApiResponse<ImportCapTableOut?> {
-        val localVariableConfig = postV1CompanyImportCaptableRequestConfig(importCapTableIn = importCapTableIn)
+    fun postCompanyImportCaptableWithHttpInfo(importCapTableIn: ImportCapTableIn) : ApiResponse<ImportCapTableOut?> {
+        val localVariableConfig = postCompanyImportCaptableRequestConfig(importCapTableIn = importCapTableIn)
 
         return request<ImportCapTableIn, ImportCapTableOut>(
             localVariableConfig
@@ -1160,12 +1160,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyImportCaptable
+     * To obtain the request config of the operation postCompanyImportCaptable
      *
      * @param importCapTableIn 
      * @return RequestConfig
      */
-    fun postV1CompanyImportCaptableRequestConfig(importCapTableIn: ImportCapTableIn) : RequestConfig<ImportCapTableIn> {
+    fun postCompanyImportCaptableRequestConfig(importCapTableIn: ImportCapTableIn) : RequestConfig<ImportCapTableIn> {
         val localVariableBody = importCapTableIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1196,8 +1196,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyImportDocuments(importDocumentsIn: ImportDocumentsIn) : ImportDocumentsOut {
-        val localVarResponse = postV1CompanyImportDocumentsWithHttpInfo(importDocumentsIn = importDocumentsIn)
+    fun postCompanyImportDocuments(importDocumentsIn: ImportDocumentsIn) : ImportDocumentsOut {
+        val localVarResponse = postCompanyImportDocumentsWithHttpInfo(importDocumentsIn = importDocumentsIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ImportDocumentsOut
@@ -1225,8 +1225,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyImportDocumentsWithHttpInfo(importDocumentsIn: ImportDocumentsIn) : ApiResponse<ImportDocumentsOut?> {
-        val localVariableConfig = postV1CompanyImportDocumentsRequestConfig(importDocumentsIn = importDocumentsIn)
+    fun postCompanyImportDocumentsWithHttpInfo(importDocumentsIn: ImportDocumentsIn) : ApiResponse<ImportDocumentsOut?> {
+        val localVariableConfig = postCompanyImportDocumentsRequestConfig(importDocumentsIn = importDocumentsIn)
 
         return request<ImportDocumentsIn, ImportDocumentsOut>(
             localVariableConfig
@@ -1234,12 +1234,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyImportDocuments
+     * To obtain the request config of the operation postCompanyImportDocuments
      *
      * @param importDocumentsIn 
      * @return RequestConfig
      */
-    fun postV1CompanyImportDocumentsRequestConfig(importDocumentsIn: ImportDocumentsIn) : RequestConfig<ImportDocumentsIn> {
+    fun postCompanyImportDocumentsRequestConfig(importDocumentsIn: ImportDocumentsIn) : RequestConfig<ImportDocumentsIn> {
         val localVariableBody = importDocumentsIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1269,8 +1269,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyKyc() : KycStartOut {
-        val localVarResponse = postV1CompanyKycWithHttpInfo()
+    fun postCompanyKyc() : KycStartOut {
+        val localVarResponse = postCompanyKycWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KycStartOut
@@ -1297,8 +1297,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyKycWithHttpInfo() : ApiResponse<KycStartOut?> {
-        val localVariableConfig = postV1CompanyKycRequestConfig()
+    fun postCompanyKycWithHttpInfo() : ApiResponse<KycStartOut?> {
+        val localVariableConfig = postCompanyKycRequestConfig()
 
         return request<Unit, KycStartOut>(
             localVariableConfig
@@ -1306,11 +1306,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyKyc
+     * To obtain the request config of the operation postCompanyKyc
      *
      * @return RequestConfig
      */
-    fun postV1CompanyKycRequestConfig() : RequestConfig<Unit> {
+    fun postCompanyKycRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1340,8 +1340,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyKycDecision(decisionIn: DecisionIn) : FormationView {
-        val localVarResponse = postV1CompanyKycDecisionWithHttpInfo(decisionIn = decisionIn)
+    fun postCompanyKycDecision(decisionIn: DecisionIn) : FormationView {
+        val localVarResponse = postCompanyKycDecisionWithHttpInfo(decisionIn = decisionIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -1369,8 +1369,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyKycDecisionWithHttpInfo(decisionIn: DecisionIn) : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanyKycDecisionRequestConfig(decisionIn = decisionIn)
+    fun postCompanyKycDecisionWithHttpInfo(decisionIn: DecisionIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanyKycDecisionRequestConfig(decisionIn = decisionIn)
 
         return request<DecisionIn, FormationView>(
             localVariableConfig
@@ -1378,12 +1378,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyKycDecision
+     * To obtain the request config of the operation postCompanyKycDecision
      *
      * @param decisionIn 
      * @return RequestConfig
      */
-    fun postV1CompanyKycDecisionRequestConfig(decisionIn: DecisionIn) : RequestConfig<DecisionIn> {
+    fun postCompanyKycDecisionRequestConfig(decisionIn: DecisionIn) : RequestConfig<DecisionIn> {
         val localVariableBody = decisionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1413,8 +1413,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyKycRefresh() : KycRefreshOut {
-        val localVarResponse = postV1CompanyKycRefreshWithHttpInfo()
+    fun postCompanyKycRefresh() : KycRefreshOut {
+        val localVarResponse = postCompanyKycRefreshWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KycRefreshOut
@@ -1441,8 +1441,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyKycRefreshWithHttpInfo() : ApiResponse<KycRefreshOut?> {
-        val localVariableConfig = postV1CompanyKycRefreshRequestConfig()
+    fun postCompanyKycRefreshWithHttpInfo() : ApiResponse<KycRefreshOut?> {
+        val localVariableConfig = postCompanyKycRefreshRequestConfig()
 
         return request<Unit, KycRefreshOut>(
             localVariableConfig
@@ -1450,11 +1450,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyKycRefresh
+     * To obtain the request config of the operation postCompanyKycRefresh
      *
      * @return RequestConfig
      */
-    fun postV1CompanyKycRefreshRequestConfig() : RequestConfig<Unit> {
+    fun postCompanyKycRefreshRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1483,8 +1483,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanyPayment() : FormationView {
-        val localVarResponse = postV1CompanyPaymentWithHttpInfo()
+    fun postCompanyPayment() : FormationView {
+        val localVarResponse = postCompanyPaymentWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -1511,8 +1511,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanyPaymentWithHttpInfo() : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanyPaymentRequestConfig()
+    fun postCompanyPaymentWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanyPaymentRequestConfig()
 
         return request<Unit, FormationView>(
             localVariableConfig
@@ -1520,11 +1520,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanyPayment
+     * To obtain the request config of the operation postCompanyPayment
      *
      * @return RequestConfig
      */
-    fun postV1CompanyPaymentRequestConfig() : RequestConfig<Unit> {
+    fun postCompanyPaymentRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1553,8 +1553,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CompanySkip() : FormationView {
-        val localVarResponse = postV1CompanySkipWithHttpInfo()
+    fun postCompanySkip() : FormationView {
+        val localVarResponse = postCompanySkipWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -1581,8 +1581,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompanySkipWithHttpInfo() : ApiResponse<FormationView?> {
-        val localVariableConfig = postV1CompanySkipRequestConfig()
+    fun postCompanySkipWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = postCompanySkipRequestConfig()
 
         return request<Unit, FormationView>(
             localVariableConfig
@@ -1590,11 +1590,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CompanySkip
+     * To obtain the request config of the operation postCompanySkip
      *
      * @return RequestConfig
      */
-    fun postV1CompanySkipRequestConfig() : RequestConfig<Unit> {
+    fun postCompanySkipRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1624,8 +1624,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CompanyStructure(structureIn: StructureIn) : FormationView {
-        val localVarResponse = putV1CompanyStructureWithHttpInfo(structureIn = structureIn)
+    fun putCompanyStructure(structureIn: StructureIn) : FormationView {
+        val localVarResponse = putCompanyStructureWithHttpInfo(structureIn = structureIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
@@ -1653,8 +1653,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CompanyStructureWithHttpInfo(structureIn: StructureIn) : ApiResponse<FormationView?> {
-        val localVariableConfig = putV1CompanyStructureRequestConfig(structureIn = structureIn)
+    fun putCompanyStructureWithHttpInfo(structureIn: StructureIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = putCompanyStructureRequestConfig(structureIn = structureIn)
 
         return request<StructureIn, FormationView>(
             localVariableConfig
@@ -1662,12 +1662,12 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putV1CompanyStructure
+     * To obtain the request config of the operation putCompanyStructure
      *
      * @param structureIn 
      * @return RequestConfig
      */
-    fun putV1CompanyStructureRequestConfig(structureIn: StructureIn) : RequestConfig<StructureIn> {
+    fun putCompanyStructureRequestConfig(structureIn: StructureIn) : RequestConfig<StructureIn> {
         val localVariableBody = structureIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

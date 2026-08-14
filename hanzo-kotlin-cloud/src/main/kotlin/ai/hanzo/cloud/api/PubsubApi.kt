@@ -76,8 +76,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PubsubJetstreamStreamsByStream(stream: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream)
+    fun deletePubsubJetstreamStreamsByStream(stream: kotlin.String) : Unit {
+        val localVarResponse = deletePubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -104,8 +104,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PubsubJetstreamStreamsByStreamRequestConfig(stream = stream)
+    fun deletePubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePubsubJetstreamStreamsByStreamRequestConfig(stream = stream)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -113,12 +113,12 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PubsubJetstreamStreamsByStream
+     * To obtain the request config of the operation deletePubsubJetstreamStreamsByStream
      *
      * @param stream Stream is the stream&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun deleteV1PubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
+    fun deletePubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -147,8 +147,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PubsubJetstreamStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
+    fun deletePubsubJetstreamStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = deletePubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -176,8 +176,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
+    fun deletePubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -185,13 +185,13 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PubsubJetstreamStreamsByStreamConsumersByName
+     * To obtain the request config of the operation deletePubsubJetstreamStreamsByStreamConsumersByName
      *
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
      * @return RequestConfig
      */
-    fun deleteV1PubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deletePubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -219,8 +219,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PubsubKvByBucket(bucket: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PubsubKvByBucketWithHttpInfo(bucket = bucket)
+    fun deletePubsubKvByBucket(bucket: kotlin.String) : Unit {
+        val localVarResponse = deletePubsubKvByBucketWithHttpInfo(bucket = bucket)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -247,8 +247,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PubsubKvByBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PubsubKvByBucketRequestConfig(bucket = bucket)
+    fun deletePubsubKvByBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePubsubKvByBucketRequestConfig(bucket = bucket)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -256,12 +256,12 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PubsubKvByBucket
+     * To obtain the request config of the operation deletePubsubKvByBucket
      *
      * @param bucket Bucket is the bucket&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun deleteV1PubsubKvByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
+    fun deletePubsubKvByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -290,8 +290,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key)
+    fun deletePubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = deletePubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -319,8 +319,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key)
+    fun deletePubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -328,13 +328,13 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PubsubKvByBucketByKey
+     * To obtain the request config of the operation deletePubsubKvByBucketByKey
      *
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
      * @return RequestConfig
      */
-    fun deleteV1PubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun deletePubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -362,8 +362,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PubsubJetstreamStreams() : StreamPage {
-        val localVarResponse = getV1PubsubJetstreamStreamsWithHttpInfo()
+    fun getPubsubJetstreamStreams() : StreamPage {
+        val localVarResponse = getPubsubJetstreamStreamsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StreamPage
@@ -390,8 +390,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PubsubJetstreamStreamsWithHttpInfo() : ApiResponse<StreamPage?> {
-        val localVariableConfig = getV1PubsubJetstreamStreamsRequestConfig()
+    fun getPubsubJetstreamStreamsWithHttpInfo() : ApiResponse<StreamPage?> {
+        val localVariableConfig = getPubsubJetstreamStreamsRequestConfig()
 
         return request<Unit, StreamPage>(
             localVariableConfig
@@ -399,11 +399,11 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1PubsubJetstreamStreams
+     * To obtain the request config of the operation getPubsubJetstreamStreams
      *
      * @return RequestConfig
      */
-    fun getV1PubsubJetstreamStreamsRequestConfig() : RequestConfig<Unit> {
+    fun getPubsubJetstreamStreamsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -433,8 +433,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PubsubJetstreamStreamsByStream(stream: kotlin.String) : StreamRecord {
-        val localVarResponse = getV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream)
+    fun getPubsubJetstreamStreamsByStream(stream: kotlin.String) : StreamRecord {
+        val localVarResponse = getPubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StreamRecord
@@ -462,8 +462,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String) : ApiResponse<StreamRecord?> {
-        val localVariableConfig = getV1PubsubJetstreamStreamsByStreamRequestConfig(stream = stream)
+    fun getPubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String) : ApiResponse<StreamRecord?> {
+        val localVariableConfig = getPubsubJetstreamStreamsByStreamRequestConfig(stream = stream)
 
         return request<Unit, StreamRecord>(
             localVariableConfig
@@ -471,12 +471,12 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1PubsubJetstreamStreamsByStream
+     * To obtain the request config of the operation getPubsubJetstreamStreamsByStream
      *
      * @param stream Stream is the stream&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun getV1PubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
+    fun getPubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -506,8 +506,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PubsubJetstreamStreamsByStreamConsumers(stream: kotlin.String) : ConsumerPage {
-        val localVarResponse = getV1PubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream = stream)
+    fun getPubsubJetstreamStreamsByStreamConsumers(stream: kotlin.String) : ConsumerPage {
+        val localVarResponse = getPubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream = stream)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConsumerPage
@@ -535,8 +535,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String) : ApiResponse<ConsumerPage?> {
-        val localVariableConfig = getV1PubsubJetstreamStreamsByStreamConsumersRequestConfig(stream = stream)
+    fun getPubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String) : ApiResponse<ConsumerPage?> {
+        val localVariableConfig = getPubsubJetstreamStreamsByStreamConsumersRequestConfig(stream = stream)
 
         return request<Unit, ConsumerPage>(
             localVariableConfig
@@ -544,12 +544,12 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1PubsubJetstreamStreamsByStreamConsumers
+     * To obtain the request config of the operation getPubsubJetstreamStreamsByStreamConsumers
      *
      * @param stream Stream is the stream&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun getV1PubsubJetstreamStreamsByStreamConsumersRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
+    fun getPubsubJetstreamStreamsByStreamConsumersRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -580,8 +580,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PubsubJetstreamStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : ConsumerRecord {
-        val localVarResponse = getV1PubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
+    fun getPubsubJetstreamStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : ConsumerRecord {
+        val localVarResponse = getPubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConsumerRecord
@@ -610,8 +610,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<ConsumerRecord?> {
-        val localVariableConfig = getV1PubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
+    fun getPubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<ConsumerRecord?> {
+        val localVariableConfig = getPubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
 
         return request<Unit, ConsumerRecord>(
             localVariableConfig
@@ -619,13 +619,13 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1PubsubJetstreamStreamsByStreamConsumersByName
+     * To obtain the request config of the operation getPubsubJetstreamStreamsByStreamConsumersByName
      *
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
      * @return RequestConfig
      */
-    fun getV1PubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getPubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -656,8 +656,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String) : KvEntry {
-        val localVarResponse = getV1PubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key)
+    fun getPubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String) : KvEntry {
+        val localVarResponse = getPubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KvEntry
@@ -686,8 +686,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<KvEntry?> {
-        val localVariableConfig = getV1PubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key)
+    fun getPubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<KvEntry?> {
+        val localVariableConfig = getPubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key)
 
         return request<Unit, KvEntry>(
             localVariableConfig
@@ -695,13 +695,13 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1PubsubKvByBucketByKey
+     * To obtain the request config of the operation getPubsubKvByBucketByKey
      *
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
      * @return RequestConfig
      */
-    fun getV1PubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getPubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -732,8 +732,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PubsubKvByBucketByKeyHistory(bucket: kotlin.String, key: kotlin.String) : KvPage {
-        val localVarResponse = getV1PubsubKvByBucketByKeyHistoryWithHttpInfo(bucket = bucket, key = key)
+    fun getPubsubKvByBucketByKeyHistory(bucket: kotlin.String, key: kotlin.String) : KvPage {
+        val localVarResponse = getPubsubKvByBucketByKeyHistoryWithHttpInfo(bucket = bucket, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KvPage
@@ -762,8 +762,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PubsubKvByBucketByKeyHistoryWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<KvPage?> {
-        val localVariableConfig = getV1PubsubKvByBucketByKeyHistoryRequestConfig(bucket = bucket, key = key)
+    fun getPubsubKvByBucketByKeyHistoryWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<KvPage?> {
+        val localVariableConfig = getPubsubKvByBucketByKeyHistoryRequestConfig(bucket = bucket, key = key)
 
         return request<Unit, KvPage>(
             localVariableConfig
@@ -771,13 +771,13 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1PubsubKvByBucketByKeyHistory
+     * To obtain the request config of the operation getPubsubKvByBucketByKeyHistory
      *
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
      * @return RequestConfig
      */
-    fun getV1PubsubKvByBucketByKeyHistoryRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getPubsubKvByBucketByKeyHistoryRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -807,8 +807,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PubsubJetstreamStreams(streamWrite: StreamWrite) : StreamRecord {
-        val localVarResponse = postV1PubsubJetstreamStreamsWithHttpInfo(streamWrite = streamWrite)
+    fun postPubsubJetstreamStreams(streamWrite: StreamWrite) : StreamRecord {
+        val localVarResponse = postPubsubJetstreamStreamsWithHttpInfo(streamWrite = streamWrite)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StreamRecord
@@ -836,8 +836,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PubsubJetstreamStreamsWithHttpInfo(streamWrite: StreamWrite) : ApiResponse<StreamRecord?> {
-        val localVariableConfig = postV1PubsubJetstreamStreamsRequestConfig(streamWrite = streamWrite)
+    fun postPubsubJetstreamStreamsWithHttpInfo(streamWrite: StreamWrite) : ApiResponse<StreamRecord?> {
+        val localVariableConfig = postPubsubJetstreamStreamsRequestConfig(streamWrite = streamWrite)
 
         return request<StreamWrite, StreamRecord>(
             localVariableConfig
@@ -845,12 +845,12 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1PubsubJetstreamStreams
+     * To obtain the request config of the operation postPubsubJetstreamStreams
      *
      * @param streamWrite 
      * @return RequestConfig
      */
-    fun postV1PubsubJetstreamStreamsRequestConfig(streamWrite: StreamWrite) : RequestConfig<StreamWrite> {
+    fun postPubsubJetstreamStreamsRequestConfig(streamWrite: StreamWrite) : RequestConfig<StreamWrite> {
         val localVariableBody = streamWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -882,8 +882,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PubsubJetstreamStreamsByStreamConsumers(stream: kotlin.String, consumerWrite: ConsumerWrite) : ConsumerRecord {
-        val localVarResponse = postV1PubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream = stream, consumerWrite = consumerWrite)
+    fun postPubsubJetstreamStreamsByStreamConsumers(stream: kotlin.String, consumerWrite: ConsumerWrite) : ConsumerRecord {
+        val localVarResponse = postPubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream = stream, consumerWrite = consumerWrite)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConsumerRecord
@@ -912,8 +912,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String, consumerWrite: ConsumerWrite) : ApiResponse<ConsumerRecord?> {
-        val localVariableConfig = postV1PubsubJetstreamStreamsByStreamConsumersRequestConfig(stream = stream, consumerWrite = consumerWrite)
+    fun postPubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String, consumerWrite: ConsumerWrite) : ApiResponse<ConsumerRecord?> {
+        val localVariableConfig = postPubsubJetstreamStreamsByStreamConsumersRequestConfig(stream = stream, consumerWrite = consumerWrite)
 
         return request<ConsumerWrite, ConsumerRecord>(
             localVariableConfig
@@ -921,13 +921,13 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1PubsubJetstreamStreamsByStreamConsumers
+     * To obtain the request config of the operation postPubsubJetstreamStreamsByStreamConsumers
      *
      * @param stream Stream is the stream to consume, from the path.
      * @param consumerWrite 
      * @return RequestConfig
      */
-    fun postV1PubsubJetstreamStreamsByStreamConsumersRequestConfig(stream: kotlin.String, consumerWrite: ConsumerWrite) : RequestConfig<ConsumerWrite> {
+    fun postPubsubJetstreamStreamsByStreamConsumersRequestConfig(stream: kotlin.String, consumerWrite: ConsumerWrite) : RequestConfig<ConsumerWrite> {
         val localVariableBody = consumerWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -960,8 +960,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PubsubJetstreamStreamsByStreamConsumersByNameNext(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : MessagePage {
-        val localVarResponse = postV1PubsubJetstreamStreamsByStreamConsumersByNameNextWithHttpInfo(stream = stream, name = name, fetchQuery = fetchQuery)
+    fun postPubsubJetstreamStreamsByStreamConsumersByNameNext(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : MessagePage {
+        val localVarResponse = postPubsubJetstreamStreamsByStreamConsumersByNameNextWithHttpInfo(stream = stream, name = name, fetchQuery = fetchQuery)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MessagePage
@@ -991,8 +991,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PubsubJetstreamStreamsByStreamConsumersByNameNextWithHttpInfo(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : ApiResponse<MessagePage?> {
-        val localVariableConfig = postV1PubsubJetstreamStreamsByStreamConsumersByNameNextRequestConfig(stream = stream, name = name, fetchQuery = fetchQuery)
+    fun postPubsubJetstreamStreamsByStreamConsumersByNameNextWithHttpInfo(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : ApiResponse<MessagePage?> {
+        val localVariableConfig = postPubsubJetstreamStreamsByStreamConsumersByNameNextRequestConfig(stream = stream, name = name, fetchQuery = fetchQuery)
 
         return request<FetchQuery, MessagePage>(
             localVariableConfig
@@ -1000,14 +1000,14 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1PubsubJetstreamStreamsByStreamConsumersByNameNext
+     * To obtain the request config of the operation postPubsubJetstreamStreamsByStreamConsumersByNameNext
      *
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
      * @param fetchQuery 
      * @return RequestConfig
      */
-    fun postV1PubsubJetstreamStreamsByStreamConsumersByNameNextRequestConfig(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : RequestConfig<FetchQuery> {
+    fun postPubsubJetstreamStreamsByStreamConsumersByNameNextRequestConfig(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : RequestConfig<FetchQuery> {
         val localVariableBody = fetchQuery
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1039,8 +1039,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PubsubKvByBucket(bucket: kotlin.String, bucketWrite: BucketWrite) : BucketRecord {
-        val localVarResponse = postV1PubsubKvByBucketWithHttpInfo(bucket = bucket, bucketWrite = bucketWrite)
+    fun postPubsubKvByBucket(bucket: kotlin.String, bucketWrite: BucketWrite) : BucketRecord {
+        val localVarResponse = postPubsubKvByBucketWithHttpInfo(bucket = bucket, bucketWrite = bucketWrite)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BucketRecord
@@ -1069,8 +1069,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PubsubKvByBucketWithHttpInfo(bucket: kotlin.String, bucketWrite: BucketWrite) : ApiResponse<BucketRecord?> {
-        val localVariableConfig = postV1PubsubKvByBucketRequestConfig(bucket = bucket, bucketWrite = bucketWrite)
+    fun postPubsubKvByBucketWithHttpInfo(bucket: kotlin.String, bucketWrite: BucketWrite) : ApiResponse<BucketRecord?> {
+        val localVariableConfig = postPubsubKvByBucketRequestConfig(bucket = bucket, bucketWrite = bucketWrite)
 
         return request<BucketWrite, BucketRecord>(
             localVariableConfig
@@ -1078,13 +1078,13 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1PubsubKvByBucket
+     * To obtain the request config of the operation postPubsubKvByBucket
      *
      * @param bucket Bucket is the bucket&#39;s name within the org, from the path: 1–64 of [A-Za-z0-9_], no dash.
      * @param bucketWrite 
      * @return RequestConfig
      */
-    fun postV1PubsubKvByBucketRequestConfig(bucket: kotlin.String, bucketWrite: BucketWrite) : RequestConfig<BucketWrite> {
+    fun postPubsubKvByBucketRequestConfig(bucket: kotlin.String, bucketWrite: BucketWrite) : RequestConfig<BucketWrite> {
         val localVariableBody = bucketWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1115,8 +1115,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PubsubPublish(busPublish: BusPublish) : BusAck {
-        val localVarResponse = postV1PubsubPublishWithHttpInfo(busPublish = busPublish)
+    fun postPubsubPublish(busPublish: BusPublish) : BusAck {
+        val localVarResponse = postPubsubPublishWithHttpInfo(busPublish = busPublish)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BusAck
@@ -1144,8 +1144,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PubsubPublishWithHttpInfo(busPublish: BusPublish) : ApiResponse<BusAck?> {
-        val localVariableConfig = postV1PubsubPublishRequestConfig(busPublish = busPublish)
+    fun postPubsubPublishWithHttpInfo(busPublish: BusPublish) : ApiResponse<BusAck?> {
+        val localVariableConfig = postPubsubPublishRequestConfig(busPublish = busPublish)
 
         return request<BusPublish, BusAck>(
             localVariableConfig
@@ -1153,12 +1153,12 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1PubsubPublish
+     * To obtain the request config of the operation postPubsubPublish
      *
      * @param busPublish 
      * @return RequestConfig
      */
-    fun postV1PubsubPublishRequestConfig(busPublish: BusPublish) : RequestConfig<BusPublish> {
+    fun postPubsubPublishRequestConfig(busPublish: BusPublish) : RequestConfig<BusPublish> {
         val localVariableBody = busPublish
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1189,8 +1189,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PubsubRequest(busRequest: BusRequest) : BusMessage {
-        val localVarResponse = postV1PubsubRequestWithHttpInfo(busRequest = busRequest)
+    fun postPubsubRequest(busRequest: BusRequest) : BusMessage {
+        val localVarResponse = postPubsubRequestWithHttpInfo(busRequest = busRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BusMessage
@@ -1218,8 +1218,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PubsubRequestWithHttpInfo(busRequest: BusRequest) : ApiResponse<BusMessage?> {
-        val localVariableConfig = postV1PubsubRequestRequestConfig(busRequest = busRequest)
+    fun postPubsubRequestWithHttpInfo(busRequest: BusRequest) : ApiResponse<BusMessage?> {
+        val localVariableConfig = postPubsubRequestRequestConfig(busRequest = busRequest)
 
         return request<BusRequest, BusMessage>(
             localVariableConfig
@@ -1227,12 +1227,12 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1PubsubRequest
+     * To obtain the request config of the operation postPubsubRequest
      *
      * @param busRequest 
      * @return RequestConfig
      */
-    fun postV1PubsubRequestRequestConfig(busRequest: BusRequest) : RequestConfig<BusRequest> {
+    fun postPubsubRequestRequestConfig(busRequest: BusRequest) : RequestConfig<BusRequest> {
         val localVariableBody = busRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1264,8 +1264,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1PubsubJetstreamStreamsByStream(stream: kotlin.String, streamUpdate: StreamUpdate) : StreamRecord {
-        val localVarResponse = putV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream, streamUpdate = streamUpdate)
+    fun putPubsubJetstreamStreamsByStream(stream: kotlin.String, streamUpdate: StreamUpdate) : StreamRecord {
+        val localVarResponse = putPubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream, streamUpdate = streamUpdate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StreamRecord
@@ -1294,8 +1294,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String, streamUpdate: StreamUpdate) : ApiResponse<StreamRecord?> {
-        val localVariableConfig = putV1PubsubJetstreamStreamsByStreamRequestConfig(stream = stream, streamUpdate = streamUpdate)
+    fun putPubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String, streamUpdate: StreamUpdate) : ApiResponse<StreamRecord?> {
+        val localVariableConfig = putPubsubJetstreamStreamsByStreamRequestConfig(stream = stream, streamUpdate = streamUpdate)
 
         return request<StreamUpdate, StreamRecord>(
             localVariableConfig
@@ -1303,13 +1303,13 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1PubsubJetstreamStreamsByStream
+     * To obtain the request config of the operation putPubsubJetstreamStreamsByStream
      *
      * @param stream Stream is the stream to update, from the path.
      * @param streamUpdate 
      * @return RequestConfig
      */
-    fun putV1PubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String, streamUpdate: StreamUpdate) : RequestConfig<StreamUpdate> {
+    fun putPubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String, streamUpdate: StreamUpdate) : RequestConfig<StreamUpdate> {
         val localVariableBody = streamUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1342,8 +1342,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1PubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : KvAck {
-        val localVarResponse = putV1PubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key, kvWrite = kvWrite)
+    fun putPubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : KvAck {
+        val localVarResponse = putPubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key, kvWrite = kvWrite)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KvAck
@@ -1373,8 +1373,8 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1PubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : ApiResponse<KvAck?> {
-        val localVariableConfig = putV1PubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key, kvWrite = kvWrite)
+    fun putPubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : ApiResponse<KvAck?> {
+        val localVariableConfig = putPubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key, kvWrite = kvWrite)
 
         return request<KvWrite, KvAck>(
             localVariableConfig
@@ -1382,14 +1382,14 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1PubsubKvByBucketByKey
+     * To obtain the request config of the operation putPubsubKvByBucketByKey
      *
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
      * @param kvWrite 
      * @return RequestConfig
      */
-    fun putV1PubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : RequestConfig<KvWrite> {
+    fun putPubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : RequestConfig<KvWrite> {
         val localVariableBody = kvWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

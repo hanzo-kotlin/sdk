@@ -61,8 +61,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1DocdbByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1DocdbByNameWithHttpInfo(name = name)
+    fun deleteDocdbByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteDocdbByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -89,8 +89,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1DocdbByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1DocdbByNameRequestConfig(name = name)
+    fun deleteDocdbByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteDocdbByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +98,12 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1DocdbByName
+     * To obtain the request config of the operation deleteDocdbByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun deleteV1DocdbByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteDocdbByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,8 +131,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Docdb() : kotlin.collections.List<ProvisionedSummary> {
-        val localVarResponse = getV1DocdbWithHttpInfo()
+    fun getDocdb() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getDocdbWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
@@ -159,8 +159,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DocdbWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
-        val localVariableConfig = getV1DocdbRequestConfig()
+    fun getDocdbWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getDocdbRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
@@ -168,11 +168,11 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Docdb
+     * To obtain the request config of the operation getDocdb
      *
      * @return RequestConfig
      */
-    fun getV1DocdbRequestConfig() : RequestConfig<Unit> {
+    fun getDocdbRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -202,8 +202,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DocdbByName(name: kotlin.String) : ProvisionedResource {
-        val localVarResponse = getV1DocdbByNameWithHttpInfo(name = name)
+    fun getDocdbByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getDocdbByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
@@ -231,8 +231,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DocdbByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
-        val localVariableConfig = getV1DocdbByNameRequestConfig(name = name)
+    fun getDocdbByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getDocdbByNameRequestConfig(name = name)
 
         return request<Unit, ProvisionedResource>(
             localVariableConfig
@@ -240,12 +240,12 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1DocdbByName
+     * To obtain the request config of the operation getDocdbByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun getV1DocdbByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getDocdbByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -275,8 +275,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Docdb(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
-        val localVarResponse = postV1DocdbWithHttpInfo(provisionRequest = provisionRequest)
+    fun postDocdb(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postDocdbWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
@@ -304,8 +304,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DocdbWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
-        val localVariableConfig = postV1DocdbRequestConfig(provisionRequest = provisionRequest)
+    fun postDocdbWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postDocdbRequestConfig(provisionRequest = provisionRequest)
 
         return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
@@ -313,12 +313,12 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1Docdb
+     * To obtain the request config of the operation postDocdb
      *
      * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun postV1DocdbRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+    fun postDocdbRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
         val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

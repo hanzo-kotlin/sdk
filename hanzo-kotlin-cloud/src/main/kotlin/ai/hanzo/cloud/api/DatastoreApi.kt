@@ -61,8 +61,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1DatastoreByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1DatastoreByNameWithHttpInfo(name = name)
+    fun deleteDatastoreByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteDatastoreByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -89,8 +89,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1DatastoreByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1DatastoreByNameRequestConfig(name = name)
+    fun deleteDatastoreByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteDatastoreByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +98,12 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1DatastoreByName
+     * To obtain the request config of the operation deleteDatastoreByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun deleteV1DatastoreByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteDatastoreByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,8 +131,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Datastore() : kotlin.collections.List<ProvisionedSummary> {
-        val localVarResponse = getV1DatastoreWithHttpInfo()
+    fun getDatastore() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getDatastoreWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
@@ -159,8 +159,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DatastoreWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
-        val localVariableConfig = getV1DatastoreRequestConfig()
+    fun getDatastoreWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getDatastoreRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
@@ -168,11 +168,11 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1Datastore
+     * To obtain the request config of the operation getDatastore
      *
      * @return RequestConfig
      */
-    fun getV1DatastoreRequestConfig() : RequestConfig<Unit> {
+    fun getDatastoreRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -202,8 +202,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DatastoreByName(name: kotlin.String) : ProvisionedResource {
-        val localVarResponse = getV1DatastoreByNameWithHttpInfo(name = name)
+    fun getDatastoreByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getDatastoreByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
@@ -231,8 +231,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DatastoreByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
-        val localVariableConfig = getV1DatastoreByNameRequestConfig(name = name)
+    fun getDatastoreByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getDatastoreByNameRequestConfig(name = name)
 
         return request<Unit, ProvisionedResource>(
             localVariableConfig
@@ -240,12 +240,12 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1DatastoreByName
+     * To obtain the request config of the operation getDatastoreByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun getV1DatastoreByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getDatastoreByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -275,8 +275,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Datastore(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
-        val localVarResponse = postV1DatastoreWithHttpInfo(provisionRequest = provisionRequest)
+    fun postDatastore(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postDatastoreWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
@@ -304,8 +304,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DatastoreWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
-        val localVariableConfig = postV1DatastoreRequestConfig(provisionRequest = provisionRequest)
+    fun postDatastoreWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postDatastoreRequestConfig(provisionRequest = provisionRequest)
 
         return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
@@ -313,12 +313,12 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1Datastore
+     * To obtain the request config of the operation postDatastore
      *
      * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun postV1DatastoreRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+    fun postDatastoreRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
         val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -68,8 +68,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1ConnectorsById(id: kotlin.String) : DisconnectOut {
-        val localVarResponse = deleteV1ConnectorsByIdWithHttpInfo(id = id)
+    fun deleteConnectorsById(id: kotlin.String) : DisconnectOut {
+        val localVarResponse = deleteConnectorsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DisconnectOut
@@ -97,8 +97,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1ConnectorsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DisconnectOut?> {
-        val localVariableConfig = deleteV1ConnectorsByIdRequestConfig(id = id)
+    fun deleteConnectorsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DisconnectOut?> {
+        val localVariableConfig = deleteConnectorsByIdRequestConfig(id = id)
 
         return request<Unit, DisconnectOut>(
             localVariableConfig
@@ -106,12 +106,12 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1ConnectorsById
+     * To obtain the request config of the operation deleteConnectorsById
      *
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
      * @return RequestConfig
      */
-    fun deleteV1ConnectorsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteConnectorsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -140,8 +140,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Connectors() : ConnectorsOut {
-        val localVarResponse = getV1ConnectorsWithHttpInfo()
+    fun getConnectors() : ConnectorsOut {
+        val localVarResponse = getConnectorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorsOut
@@ -168,8 +168,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ConnectorsWithHttpInfo() : ApiResponse<ConnectorsOut?> {
-        val localVariableConfig = getV1ConnectorsRequestConfig()
+    fun getConnectorsWithHttpInfo() : ApiResponse<ConnectorsOut?> {
+        val localVariableConfig = getConnectorsRequestConfig()
 
         return request<Unit, ConnectorsOut>(
             localVariableConfig
@@ -177,11 +177,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1Connectors
+     * To obtain the request config of the operation getConnectors
      *
      * @return RequestConfig
      */
-    fun getV1ConnectorsRequestConfig() : RequestConfig<Unit> {
+    fun getConnectorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -211,8 +211,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ConnectorsByIdToken(id: kotlin.String) : ConnectorTokenOut {
-        val localVarResponse = getV1ConnectorsByIdTokenWithHttpInfo(id = id)
+    fun getConnectorsByIdToken(id: kotlin.String) : ConnectorTokenOut {
+        val localVarResponse = getConnectorsByIdTokenWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorTokenOut
@@ -240,8 +240,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ConnectorsByIdTokenWithHttpInfo(id: kotlin.String) : ApiResponse<ConnectorTokenOut?> {
-        val localVariableConfig = getV1ConnectorsByIdTokenRequestConfig(id = id)
+    fun getConnectorsByIdTokenWithHttpInfo(id: kotlin.String) : ApiResponse<ConnectorTokenOut?> {
+        val localVariableConfig = getConnectorsByIdTokenRequestConfig(id = id)
 
         return request<Unit, ConnectorTokenOut>(
             localVariableConfig
@@ -249,12 +249,12 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ConnectorsByIdToken
+     * To obtain the request config of the operation getConnectorsByIdToken
      *
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
      * @return RequestConfig
      */
-    fun getV1ConnectorsByIdTokenRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getConnectorsByIdTokenRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -283,8 +283,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ConnectorsProviders() : ConnectorProvidersOut {
-        val localVarResponse = getV1ConnectorsProvidersWithHttpInfo()
+    fun getConnectorsProviders() : ConnectorProvidersOut {
+        val localVarResponse = getConnectorsProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorProvidersOut
@@ -311,8 +311,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ConnectorsProvidersWithHttpInfo() : ApiResponse<ConnectorProvidersOut?> {
-        val localVariableConfig = getV1ConnectorsProvidersRequestConfig()
+    fun getConnectorsProvidersWithHttpInfo() : ApiResponse<ConnectorProvidersOut?> {
+        val localVariableConfig = getConnectorsProvidersRequestConfig()
 
         return request<Unit, ConnectorProvidersOut>(
             localVariableConfig
@@ -320,11 +320,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ConnectorsProviders
+     * To obtain the request config of the operation getConnectorsProviders
      *
      * @return RequestConfig
      */
-    fun getV1ConnectorsProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getConnectorsProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -354,8 +354,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ConnectorsByIdRefresh(id: kotlin.String) : RefreshOut {
-        val localVarResponse = postV1ConnectorsByIdRefreshWithHttpInfo(id = id)
+    fun postConnectorsByIdRefresh(id: kotlin.String) : RefreshOut {
+        val localVarResponse = postConnectorsByIdRefreshWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RefreshOut
@@ -383,8 +383,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ConnectorsByIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<RefreshOut?> {
-        val localVariableConfig = postV1ConnectorsByIdRefreshRequestConfig(id = id)
+    fun postConnectorsByIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<RefreshOut?> {
+        val localVariableConfig = postConnectorsByIdRefreshRequestConfig(id = id)
 
         return request<Unit, RefreshOut>(
             localVariableConfig
@@ -392,12 +392,12 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ConnectorsByIdRefresh
+     * To obtain the request config of the operation postConnectorsByIdRefresh
      *
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
      * @return RequestConfig
      */
-    fun postV1ConnectorsByIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postConnectorsByIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -428,8 +428,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ConnectorsByProviderCredential(provider: kotlin.String, credentialIn: CredentialIn) : CredentialOut {
-        val localVarResponse = postV1ConnectorsByProviderCredentialWithHttpInfo(provider = provider, credentialIn = credentialIn)
+    fun postConnectorsByProviderCredential(provider: kotlin.String, credentialIn: CredentialIn) : CredentialOut {
+        val localVarResponse = postConnectorsByProviderCredentialWithHttpInfo(provider = provider, credentialIn = credentialIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CredentialOut
@@ -458,8 +458,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ConnectorsByProviderCredentialWithHttpInfo(provider: kotlin.String, credentialIn: CredentialIn) : ApiResponse<CredentialOut?> {
-        val localVariableConfig = postV1ConnectorsByProviderCredentialRequestConfig(provider = provider, credentialIn = credentialIn)
+    fun postConnectorsByProviderCredentialWithHttpInfo(provider: kotlin.String, credentialIn: CredentialIn) : ApiResponse<CredentialOut?> {
+        val localVariableConfig = postConnectorsByProviderCredentialRequestConfig(provider = provider, credentialIn = credentialIn)
 
         return request<CredentialIn, CredentialOut>(
             localVariableConfig
@@ -467,13 +467,13 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ConnectorsByProviderCredential
+     * To obtain the request config of the operation postConnectorsByProviderCredential
      *
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
      * @param credentialIn 
      * @return RequestConfig
      */
-    fun postV1ConnectorsByProviderCredentialRequestConfig(provider: kotlin.String, credentialIn: CredentialIn) : RequestConfig<CredentialIn> {
+    fun postConnectorsByProviderCredentialRequestConfig(provider: kotlin.String, credentialIn: CredentialIn) : RequestConfig<CredentialIn> {
         val localVariableBody = credentialIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -505,8 +505,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ConnectorsByProviderDevice(provider: kotlin.String, deviceStartIn: DeviceStartIn) : DeviceStartOut {
-        val localVarResponse = postV1ConnectorsByProviderDeviceWithHttpInfo(provider = provider, deviceStartIn = deviceStartIn)
+    fun postConnectorsByProviderDevice(provider: kotlin.String, deviceStartIn: DeviceStartIn) : DeviceStartOut {
+        val localVarResponse = postConnectorsByProviderDeviceWithHttpInfo(provider = provider, deviceStartIn = deviceStartIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeviceStartOut
@@ -535,8 +535,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ConnectorsByProviderDeviceWithHttpInfo(provider: kotlin.String, deviceStartIn: DeviceStartIn) : ApiResponse<DeviceStartOut?> {
-        val localVariableConfig = postV1ConnectorsByProviderDeviceRequestConfig(provider = provider, deviceStartIn = deviceStartIn)
+    fun postConnectorsByProviderDeviceWithHttpInfo(provider: kotlin.String, deviceStartIn: DeviceStartIn) : ApiResponse<DeviceStartOut?> {
+        val localVariableConfig = postConnectorsByProviderDeviceRequestConfig(provider = provider, deviceStartIn = deviceStartIn)
 
         return request<DeviceStartIn, DeviceStartOut>(
             localVariableConfig
@@ -544,13 +544,13 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ConnectorsByProviderDevice
+     * To obtain the request config of the operation postConnectorsByProviderDevice
      *
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
      * @param deviceStartIn 
      * @return RequestConfig
      */
-    fun postV1ConnectorsByProviderDeviceRequestConfig(provider: kotlin.String, deviceStartIn: DeviceStartIn) : RequestConfig<DeviceStartIn> {
+    fun postConnectorsByProviderDeviceRequestConfig(provider: kotlin.String, deviceStartIn: DeviceStartIn) : RequestConfig<DeviceStartIn> {
         val localVariableBody = deviceStartIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -582,8 +582,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ConnectorsByProviderDeviceByFlowPoll(provider: kotlin.String, flow: kotlin.String) : DevicePollOut {
-        val localVarResponse = postV1ConnectorsByProviderDeviceByFlowPollWithHttpInfo(provider = provider, flow = flow)
+    fun postConnectorsByProviderDeviceByFlowPoll(provider: kotlin.String, flow: kotlin.String) : DevicePollOut {
+        val localVarResponse = postConnectorsByProviderDeviceByFlowPollWithHttpInfo(provider = provider, flow = flow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DevicePollOut
@@ -612,8 +612,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ConnectorsByProviderDeviceByFlowPollWithHttpInfo(provider: kotlin.String, flow: kotlin.String) : ApiResponse<DevicePollOut?> {
-        val localVariableConfig = postV1ConnectorsByProviderDeviceByFlowPollRequestConfig(provider = provider, flow = flow)
+    fun postConnectorsByProviderDeviceByFlowPollWithHttpInfo(provider: kotlin.String, flow: kotlin.String) : ApiResponse<DevicePollOut?> {
+        val localVariableConfig = postConnectorsByProviderDeviceByFlowPollRequestConfig(provider = provider, flow = flow)
 
         return request<Unit, DevicePollOut>(
             localVariableConfig
@@ -621,13 +621,13 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ConnectorsByProviderDeviceByFlowPoll
+     * To obtain the request config of the operation postConnectorsByProviderDeviceByFlowPoll
      *
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
      * @param flow Flow is the id deviceStartOut returned. Expired or another user&#39;s flow is indistinguishable from an unknown one: 404.
      * @return RequestConfig
      */
-    fun postV1ConnectorsByProviderDeviceByFlowPollRequestConfig(provider: kotlin.String, flow: kotlin.String) : RequestConfig<Unit> {
+    fun postConnectorsByProviderDeviceByFlowPollRequestConfig(provider: kotlin.String, flow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

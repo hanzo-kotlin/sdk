@@ -56,8 +56,8 @@ class DocsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DocsIngest() : Unit {
-        val localVarResponse = postV1DocsIngestWithHttpInfo()
+    fun postDocsIngest() : Unit {
+        val localVarResponse = postDocsIngestWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class DocsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DocsIngestWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DocsIngestRequestConfig()
+    fun postDocsIngestWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postDocsIngestRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class DocsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1DocsIngest
+     * To obtain the request config of the operation postDocsIngest
      *
      * @return RequestConfig
      */
-    fun postV1DocsIngestRequestConfig() : RequestConfig<Unit> {
+    fun postDocsIngestRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

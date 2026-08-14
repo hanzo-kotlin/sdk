@@ -63,8 +63,8 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PluginsAuthoredById(id: kotlin.String) : PluginDeleted {
-        val localVarResponse = deleteV1PluginsAuthoredByIdWithHttpInfo(id = id)
+    fun deletePluginsAuthoredById(id: kotlin.String) : PluginDeleted {
+        val localVarResponse = deletePluginsAuthoredByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PluginDeleted
@@ -92,8 +92,8 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PluginsAuthoredByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PluginDeleted?> {
-        val localVariableConfig = deleteV1PluginsAuthoredByIdRequestConfig(id = id)
+    fun deletePluginsAuthoredByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PluginDeleted?> {
+        val localVariableConfig = deletePluginsAuthoredByIdRequestConfig(id = id)
 
         return request<Unit, PluginDeleted>(
             localVariableConfig
@@ -101,12 +101,12 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PluginsAuthoredById
+     * To obtain the request config of the operation deletePluginsAuthoredById
      *
      * @param id ID is the plugin to remove, from the path.
      * @return RequestConfig
      */
-    fun deleteV1PluginsAuthoredByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deletePluginsAuthoredByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -136,8 +136,8 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Plugins(all: kotlin.String? = null) : PluginMountList {
-        val localVarResponse = getV1PluginsWithHttpInfo(all = all)
+    fun getPlugins(all: kotlin.String? = null) : PluginMountList {
+        val localVarResponse = getPluginsWithHttpInfo(all = all)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PluginMountList
@@ -165,8 +165,8 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PluginsWithHttpInfo(all: kotlin.String?) : ApiResponse<PluginMountList?> {
-        val localVariableConfig = getV1PluginsRequestConfig(all = all)
+    fun getPluginsWithHttpInfo(all: kotlin.String?) : ApiResponse<PluginMountList?> {
+        val localVariableConfig = getPluginsRequestConfig(all = all)
 
         return request<Unit, PluginMountList>(
             localVariableConfig
@@ -174,12 +174,12 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Plugins
+     * To obtain the request config of the operation getPlugins
      *
      * @param all All includes the configured-but-disabled subsystems too, but only when it is exactly the string \&quot;true\&quot;. Otherwise only the running ones are reported. (optional)
      * @return RequestConfig
      */
-    fun getV1PluginsRequestConfig(all: kotlin.String?) : RequestConfig<Unit> {
+    fun getPluginsRequestConfig(all: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -213,8 +213,8 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PluginsAuthored() : AuthoredPluginList {
-        val localVarResponse = getV1PluginsAuthoredWithHttpInfo()
+    fun getPluginsAuthored() : AuthoredPluginList {
+        val localVarResponse = getPluginsAuthoredWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AuthoredPluginList
@@ -241,8 +241,8 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PluginsAuthoredWithHttpInfo() : ApiResponse<AuthoredPluginList?> {
-        val localVariableConfig = getV1PluginsAuthoredRequestConfig()
+    fun getPluginsAuthoredWithHttpInfo() : ApiResponse<AuthoredPluginList?> {
+        val localVariableConfig = getPluginsAuthoredRequestConfig()
 
         return request<Unit, AuthoredPluginList>(
             localVariableConfig
@@ -250,11 +250,11 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PluginsAuthored
+     * To obtain the request config of the operation getPluginsAuthored
      *
      * @return RequestConfig
      */
-    fun getV1PluginsAuthoredRequestConfig() : RequestConfig<Unit> {
+    fun getPluginsAuthoredRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -284,8 +284,8 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PluginsBuild(buildRequest: BuildRequest? = null) : BuildOut {
-        val localVarResponse = postV1PluginsBuildWithHttpInfo(buildRequest = buildRequest)
+    fun postPluginsBuild(buildRequest: BuildRequest? = null) : BuildOut {
+        val localVarResponse = postPluginsBuildWithHttpInfo(buildRequest = buildRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BuildOut
@@ -313,8 +313,8 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PluginsBuildWithHttpInfo(buildRequest: BuildRequest?) : ApiResponse<BuildOut?> {
-        val localVariableConfig = postV1PluginsBuildRequestConfig(buildRequest = buildRequest)
+    fun postPluginsBuildWithHttpInfo(buildRequest: BuildRequest?) : ApiResponse<BuildOut?> {
+        val localVariableConfig = postPluginsBuildRequestConfig(buildRequest = buildRequest)
 
         return request<BuildRequest, BuildOut>(
             localVariableConfig
@@ -322,12 +322,12 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1PluginsBuild
+     * To obtain the request config of the operation postPluginsBuild
      *
      * @param buildRequest  (optional)
      * @return RequestConfig
      */
-    fun postV1PluginsBuildRequestConfig(buildRequest: BuildRequest?) : RequestConfig<BuildRequest> {
+    fun postPluginsBuildRequestConfig(buildRequest: BuildRequest?) : RequestConfig<BuildRequest> {
         val localVariableBody = buildRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -2602,7 +2602,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * GET /v1/admin/overview
      * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.
-     * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.  It ALWAYS answers 200 — a tile board that fails as a whole because one upstream is down is useless. Instead every upstream reports itself in sources[]: ok, degraded, or not-configured. A commerce read that failed for ANY org marks that source degraded, because the spend/credits totals are then an undercount and must not read healthy.  tokens30d is 0 for the same reason /usage has no series: there is no fleet token counter to read yet.
+     * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.  It ALWAYS answers 200 — a tile board that fails as a whole because one upstream is down is useless. Instead every upstream reports itself in sources[]: ok, degraded, or not-configured. A commerce read that failed for ANY org marks that source degraded, because the spend/credits totals are then an undercount and must not read healthy.  The AI tiles — 30-day spend and tokens — come from the AI ledger (ledger.go), the plane that owns \&quot;what was served\&quot;. They used to come from the money plane with the token counter hardcoded to zero, so the board read $0.00 and 0 tokens over a month in which the fleet served fifteen thousand requests. Credits still come from commerce, which owns the wallet.
      * @return OverviewOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2633,7 +2633,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * GET /v1/admin/overview
      * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.
-     * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.  It ALWAYS answers 200 — a tile board that fails as a whole because one upstream is down is useless. Instead every upstream reports itself in sources[]: ok, degraded, or not-configured. A commerce read that failed for ANY org marks that source degraded, because the spend/credits totals are then an undercount and must not read healthy.  tokens30d is 0 for the same reason /usage has no series: there is no fleet token counter to read yet.
+     * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.  It ALWAYS answers 200 — a tile board that fails as a whole because one upstream is down is useless. Instead every upstream reports itself in sources[]: ok, degraded, or not-configured. A commerce read that failed for ANY org marks that source degraded, because the spend/credits totals are then an undercount and must not read healthy.  The AI tiles — 30-day spend and tokens — come from the AI ledger (ledger.go), the plane that owns \&quot;what was served\&quot;. They used to come from the money plane with the token counter hardcoded to zero, so the board read $0.00 and 0 tokens over a month in which the fleet served fifteen thousand requests. Credits still come from commerce, which owns the wallet.
      * @return ApiResponse<OverviewOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -4360,9 +4360,9 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/usage
-     * Returns the month-to-date money totals: one org&#39;s when org names one, else the fleet sum across every org a SuperAdmin can see.
-     * Returns the month-to-date money totals: one org&#39;s when org names one, else the fleet sum across every org a SuperAdmin can see.  series and byProduct are ALWAYS empty. A daily trend and a per-product split are not derivable from the commerce billing API — they live in insights/datastore — so this answers with the honest empty arrays rather than fabricating a shape the console would then chart. Same reason tokens and requests are 0: there is no fleet counter to read.
-     * @param org Org reads ONE tenant&#39;s month-to-date total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org. (optional)
+     * Returns the trailing 30 days of AI usage: one org&#39;s when org names one, else the whole fleet&#39;s — the spend, the tokens and the requests, the daily curve behind them, and the split by model.
+     * Returns the trailing 30 days of AI usage: one org&#39;s when org names one, else the whole fleet&#39;s — the spend, the tokens and the requests, the daily curve behind them, and the split by model.  It reads the AI ledger (ledger.go), which is the plane that owns this question. It used to ask the commerce billing API instead, once per org, and answer with a hardcoded empty series, zero tokens and zero requests, on the reasoning that a trend and a split were \&quot;not derivable from the commerce billing API\&quot;. They are not — but the question was never commerce&#39;s. hanzo.cloud_usage carries a row per served request, so all three fall out of the same window the totals do.
+     * @param org Org reads ONE tenant&#39;s trailing-30-day total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org.  The window is the one core.OrgMoney returns, and it is what the operator board beside this already labelled (\&quot;Daily, last 30 days\&quot;). The wire used to say month-to-date while that UI said 30 days; they agree now. This comment is REGENERATED into plugin/admin/openapi.json and openapi.yaml as the ?org parameter description, so a stale word here ships as a contradiction inside one spec file — which is the drift this whole change set exists to remove. (optional)
      * @return UsageOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -4392,9 +4392,9 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/usage
-     * Returns the month-to-date money totals: one org&#39;s when org names one, else the fleet sum across every org a SuperAdmin can see.
-     * Returns the month-to-date money totals: one org&#39;s when org names one, else the fleet sum across every org a SuperAdmin can see.  series and byProduct are ALWAYS empty. A daily trend and a per-product split are not derivable from the commerce billing API — they live in insights/datastore — so this answers with the honest empty arrays rather than fabricating a shape the console would then chart. Same reason tokens and requests are 0: there is no fleet counter to read.
-     * @param org Org reads ONE tenant&#39;s month-to-date total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org. (optional)
+     * Returns the trailing 30 days of AI usage: one org&#39;s when org names one, else the whole fleet&#39;s — the spend, the tokens and the requests, the daily curve behind them, and the split by model.
+     * Returns the trailing 30 days of AI usage: one org&#39;s when org names one, else the whole fleet&#39;s — the spend, the tokens and the requests, the daily curve behind them, and the split by model.  It reads the AI ledger (ledger.go), which is the plane that owns this question. It used to ask the commerce billing API instead, once per org, and answer with a hardcoded empty series, zero tokens and zero requests, on the reasoning that a trend and a split were \&quot;not derivable from the commerce billing API\&quot;. They are not — but the question was never commerce&#39;s. hanzo.cloud_usage carries a row per served request, so all three fall out of the same window the totals do.
+     * @param org Org reads ONE tenant&#39;s trailing-30-day total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org.  The window is the one core.OrgMoney returns, and it is what the operator board beside this already labelled (\&quot;Daily, last 30 days\&quot;). The wire used to say month-to-date while that UI said 30 days; they agree now. This comment is REGENERATED into plugin/admin/openapi.json and openapi.yaml as the ?org parameter description, so a stale word here ships as a contradiction inside one spec file — which is the drift this whole change set exists to remove. (optional)
      * @return ApiResponse<UsageOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -4412,7 +4412,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * To obtain the request config of the operation adminUsage
      *
-     * @param org Org reads ONE tenant&#39;s month-to-date total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org. (optional)
+     * @param org Org reads ONE tenant&#39;s trailing-30-day total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org.  The window is the one core.OrgMoney returns, and it is what the operator board beside this already labelled (\&quot;Daily, last 30 days\&quot;). The wire used to say month-to-date while that UI said 30 days; they agree now. This comment is REGENERATED into plugin/admin/openapi.json and openapi.yaml as the ?org parameter description, so a stale word here ships as a contradiction inside one spec file — which is the drift this whole change set exists to remove. (optional)
      * @return RequestConfig
      */
     fun adminUsageRequestConfig(org: kotlin.String?) : RequestConfig<Unit> {
@@ -4864,8 +4864,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdminAffiliates(limit: kotlin.Int? = null) : DirectoryOut {
-        val localVarResponse = getV1AdminAffiliatesWithHttpInfo(limit = limit)
+    fun getAdminAffiliates(limit: kotlin.Int? = null) : DirectoryOut {
+        val localVarResponse = getAdminAffiliatesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DirectoryOut
@@ -4893,8 +4893,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdminAffiliatesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DirectoryOut?> {
-        val localVariableConfig = getV1AdminAffiliatesRequestConfig(limit = limit)
+    fun getAdminAffiliatesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DirectoryOut?> {
+        val localVariableConfig = getAdminAffiliatesRequestConfig(limit = limit)
 
         return request<Unit, DirectoryOut>(
             localVariableConfig
@@ -4902,12 +4902,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AdminAffiliates
+     * To obtain the request config of the operation getAdminAffiliates
      *
      * @param limit Limit caps the rows returned. Absent or non-positive means the default of 500; anything above 1000 is clamped to 1000. (optional)
      * @return RequestConfig
      */
-    fun getV1AdminAffiliatesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAdminAffiliatesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -4942,8 +4942,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdminAuthors(limit: kotlin.Int? = null) : AdminBook {
-        val localVarResponse = getV1AdminAuthorsWithHttpInfo(limit = limit)
+    fun getAdminAuthors(limit: kotlin.Int? = null) : AdminBook {
+        val localVarResponse = getAdminAuthorsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdminBook
@@ -4971,8 +4971,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdminAuthorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AdminBook?> {
-        val localVariableConfig = getV1AdminAuthorsRequestConfig(limit = limit)
+    fun getAdminAuthorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AdminBook?> {
+        val localVariableConfig = getAdminAuthorsRequestConfig(limit = limit)
 
         return request<Unit, AdminBook>(
             localVariableConfig
@@ -4980,12 +4980,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AdminAuthors
+     * To obtain the request config of the operation getAdminAuthors
      *
      * @param limit Limit bounds the page. 0 or less means the default of 500; anything above 1000 is clamped to 1000. (optional)
      * @return RequestConfig
      */
-    fun getV1AdminAuthorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAdminAuthorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5021,8 +5021,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdminAuthorsByIdBasis(id: kotlin.String, period: kotlin.String? = null) : BasisResult {
-        val localVarResponse = getV1AdminAuthorsByIdBasisWithHttpInfo(id = id, period = period)
+    fun getAdminAuthorsByIdBasis(id: kotlin.String, period: kotlin.String? = null) : BasisResult {
+        val localVarResponse = getAdminAuthorsByIdBasisWithHttpInfo(id = id, period = period)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BasisResult
@@ -5051,8 +5051,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdminAuthorsByIdBasisWithHttpInfo(id: kotlin.String, period: kotlin.String?) : ApiResponse<BasisResult?> {
-        val localVariableConfig = getV1AdminAuthorsByIdBasisRequestConfig(id = id, period = period)
+    fun getAdminAuthorsByIdBasisWithHttpInfo(id: kotlin.String, period: kotlin.String?) : ApiResponse<BasisResult?> {
+        val localVariableConfig = getAdminAuthorsByIdBasisRequestConfig(id = id, period = period)
 
         return request<Unit, BasisResult>(
             localVariableConfig
@@ -5060,13 +5060,13 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AdminAuthorsByIdBasis
+     * To obtain the request config of the operation getAdminAuthorsByIdBasis
      *
      * @param id ID is the author record&#39;s handle, from the path.
      * @param period Period is the UTC accrual month, YYYY-MM. Empty means every period; any other shape is refused with 400. (optional)
      * @return RequestConfig
      */
-    fun getV1AdminAuthorsByIdBasisRequestConfig(id: kotlin.String, period: kotlin.String?) : RequestConfig<Unit> {
+    fun getAdminAuthorsByIdBasisRequestConfig(id: kotlin.String, period: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5100,8 +5100,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdminCatalog() : AdminCatalogOut {
-        val localVarResponse = getV1AdminCatalogWithHttpInfo()
+    fun getAdminCatalog() : AdminCatalogOut {
+        val localVarResponse = getAdminCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdminCatalogOut
@@ -5128,8 +5128,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdminCatalogWithHttpInfo() : ApiResponse<AdminCatalogOut?> {
-        val localVariableConfig = getV1AdminCatalogRequestConfig()
+    fun getAdminCatalogWithHttpInfo() : ApiResponse<AdminCatalogOut?> {
+        val localVariableConfig = getAdminCatalogRequestConfig()
 
         return request<Unit, AdminCatalogOut>(
             localVariableConfig
@@ -5137,11 +5137,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AdminCatalog
+     * To obtain the request config of the operation getAdminCatalog
      *
      * @return RequestConfig
      */
-    fun getV1AdminCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getAdminCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5170,8 +5170,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdminEnablement() : AdminEnablementBoard {
-        val localVarResponse = getV1AdminEnablementWithHttpInfo()
+    fun getAdminEnablement() : AdminEnablementBoard {
+        val localVarResponse = getAdminEnablementWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdminEnablementBoard
@@ -5198,8 +5198,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdminEnablementWithHttpInfo() : ApiResponse<AdminEnablementBoard?> {
-        val localVariableConfig = getV1AdminEnablementRequestConfig()
+    fun getAdminEnablementWithHttpInfo() : ApiResponse<AdminEnablementBoard?> {
+        val localVariableConfig = getAdminEnablementRequestConfig()
 
         return request<Unit, AdminEnablementBoard>(
             localVariableConfig
@@ -5207,11 +5207,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AdminEnablement
+     * To obtain the request config of the operation getAdminEnablement
      *
      * @return RequestConfig
      */
-    fun getV1AdminEnablementRequestConfig() : RequestConfig<Unit> {
+    fun getAdminEnablementRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5240,8 +5240,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdminReferrals() : ReferralsOut {
-        val localVarResponse = getV1AdminReferralsWithHttpInfo()
+    fun getAdminReferrals() : ReferralsOut {
+        val localVarResponse = getAdminReferralsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReferralsOut
@@ -5268,8 +5268,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdminReferralsWithHttpInfo() : ApiResponse<ReferralsOut?> {
-        val localVariableConfig = getV1AdminReferralsRequestConfig()
+    fun getAdminReferralsWithHttpInfo() : ApiResponse<ReferralsOut?> {
+        val localVariableConfig = getAdminReferralsRequestConfig()
 
         return request<Unit, ReferralsOut>(
             localVariableConfig
@@ -5277,11 +5277,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AdminReferrals
+     * To obtain the request config of the operation getAdminReferrals
      *
      * @return RequestConfig
      */
-    fun getV1AdminReferralsRequestConfig() : RequestConfig<Unit> {
+    fun getAdminReferralsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5311,8 +5311,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdminReferralsBonuses(limit: kotlin.String? = null) : AdminBonusesEnvelope {
-        val localVarResponse = getV1AdminReferralsBonusesWithHttpInfo(limit = limit)
+    fun getAdminReferralsBonuses(limit: kotlin.String? = null) : AdminBonusesEnvelope {
+        val localVarResponse = getAdminReferralsBonusesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdminBonusesEnvelope
@@ -5340,8 +5340,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdminReferralsBonusesWithHttpInfo(limit: kotlin.String?) : ApiResponse<AdminBonusesEnvelope?> {
-        val localVariableConfig = getV1AdminReferralsBonusesRequestConfig(limit = limit)
+    fun getAdminReferralsBonusesWithHttpInfo(limit: kotlin.String?) : ApiResponse<AdminBonusesEnvelope?> {
+        val localVariableConfig = getAdminReferralsBonusesRequestConfig(limit = limit)
 
         return request<Unit, AdminBonusesEnvelope>(
             localVariableConfig
@@ -5349,12 +5349,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AdminReferralsBonuses
+     * To obtain the request config of the operation getAdminReferralsBonuses
      *
      * @param limit Limit is how many referrals to return, as a decimal string in the &#x60;?limit&#x3D;&#x60; query. Absent, unparseable or non-positive means 500; over 1000 is clamped to 1000. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
      * @return RequestConfig
      */
-    fun getV1AdminReferralsBonusesRequestConfig(limit: kotlin.String?) : RequestConfig<Unit> {
+    fun getAdminReferralsBonusesRequestConfig(limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5389,8 +5389,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AdminTreasury(limit: kotlin.Int? = null) : AdminReportOut {
-        val localVarResponse = getV1AdminTreasuryWithHttpInfo(limit = limit)
+    fun getAdminTreasury(limit: kotlin.Int? = null) : AdminReportOut {
+        val localVarResponse = getAdminTreasuryWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdminReportOut
@@ -5418,8 +5418,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AdminTreasuryWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AdminReportOut?> {
-        val localVariableConfig = getV1AdminTreasuryRequestConfig(limit = limit)
+    fun getAdminTreasuryWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AdminReportOut?> {
+        val localVariableConfig = getAdminTreasuryRequestConfig(limit = limit)
 
         return request<Unit, AdminReportOut>(
             localVariableConfig
@@ -5427,12 +5427,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AdminTreasury
+     * To obtain the request config of the operation getAdminTreasury
      *
      * @param limit Limit caps the journal entries returned. Out of range or unparseable takes the default. (optional)
      * @return RequestConfig
      */
-    fun getV1AdminTreasuryRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAdminTreasuryRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5466,8 +5466,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AdminCatalogModelsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = patchV1AdminCatalogModelsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchAdminCatalogModelsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchAdminCatalogModelsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5494,8 +5494,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AdminCatalogModelsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1AdminCatalogModelsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchAdminCatalogModelsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchAdminCatalogModelsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5503,12 +5503,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1AdminCatalogModelsByWildcard1
+     * To obtain the request config of the operation patchAdminCatalogModelsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun patchV1AdminCatalogModelsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchAdminCatalogModelsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5538,8 +5538,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AdminCatalogProvidersByName(name: kotlin.String, providerPatchIn: ProviderPatchIn) : Overlay {
-        val localVarResponse = patchV1AdminCatalogProvidersByNameWithHttpInfo(name = name, providerPatchIn = providerPatchIn)
+    fun patchAdminCatalogProvidersByName(name: kotlin.String, providerPatchIn: ProviderPatchIn) : Overlay {
+        val localVarResponse = patchAdminCatalogProvidersByNameWithHttpInfo(name = name, providerPatchIn = providerPatchIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Overlay
@@ -5568,8 +5568,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AdminCatalogProvidersByNameWithHttpInfo(name: kotlin.String, providerPatchIn: ProviderPatchIn) : ApiResponse<Overlay?> {
-        val localVariableConfig = patchV1AdminCatalogProvidersByNameRequestConfig(name = name, providerPatchIn = providerPatchIn)
+    fun patchAdminCatalogProvidersByNameWithHttpInfo(name: kotlin.String, providerPatchIn: ProviderPatchIn) : ApiResponse<Overlay?> {
+        val localVariableConfig = patchAdminCatalogProvidersByNameRequestConfig(name = name, providerPatchIn = providerPatchIn)
 
         return request<ProviderPatchIn, Overlay>(
             localVariableConfig
@@ -5577,13 +5577,13 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1AdminCatalogProvidersByName
+     * To obtain the request config of the operation patchAdminCatalogProvidersByName
      *
      * @param name Name is the provider the overlay belongs to, from the URL.
      * @param providerPatchIn 
      * @return RequestConfig
      */
-    fun patchV1AdminCatalogProvidersByNameRequestConfig(name: kotlin.String, providerPatchIn: ProviderPatchIn) : RequestConfig<ProviderPatchIn> {
+    fun patchAdminCatalogProvidersByNameRequestConfig(name: kotlin.String, providerPatchIn: ProviderPatchIn) : RequestConfig<ProviderPatchIn> {
         val localVariableBody = providerPatchIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5615,8 +5615,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAffiliatesByIdApprove(id: kotlin.String, approval: Approval) : AffiliateOut {
-        val localVarResponse = postV1AdminAffiliatesByIdApproveWithHttpInfo(id = id, approval = approval)
+    fun postAdminAffiliatesByIdApprove(id: kotlin.String, approval: Approval) : AffiliateOut {
+        val localVarResponse = postAdminAffiliatesByIdApproveWithHttpInfo(id = id, approval = approval)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateOut
@@ -5645,8 +5645,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAffiliatesByIdApproveWithHttpInfo(id: kotlin.String, approval: Approval) : ApiResponse<AffiliateOut?> {
-        val localVariableConfig = postV1AdminAffiliatesByIdApproveRequestConfig(id = id, approval = approval)
+    fun postAdminAffiliatesByIdApproveWithHttpInfo(id: kotlin.String, approval: Approval) : ApiResponse<AffiliateOut?> {
+        val localVariableConfig = postAdminAffiliatesByIdApproveRequestConfig(id = id, approval = approval)
 
         return request<Approval, AffiliateOut>(
             localVariableConfig
@@ -5654,13 +5654,13 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAffiliatesByIdApprove
+     * To obtain the request config of the operation postAdminAffiliatesByIdApprove
      *
      * @param id ID is the affiliate to approve, from the path.
      * @param approval 
      * @return RequestConfig
      */
-    fun postV1AdminAffiliatesByIdApproveRequestConfig(id: kotlin.String, approval: Approval) : RequestConfig<Approval> {
+    fun postAdminAffiliatesByIdApproveRequestConfig(id: kotlin.String, approval: Approval) : RequestConfig<Approval> {
         val localVariableBody = approval
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5692,8 +5692,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAffiliatesByIdPayout(id: kotlin.String, disbursal: Disbursal) : PayoutOut {
-        val localVarResponse = postV1AdminAffiliatesByIdPayoutWithHttpInfo(id = id, disbursal = disbursal)
+    fun postAdminAffiliatesByIdPayout(id: kotlin.String, disbursal: Disbursal) : PayoutOut {
+        val localVarResponse = postAdminAffiliatesByIdPayoutWithHttpInfo(id = id, disbursal = disbursal)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PayoutOut
@@ -5722,8 +5722,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAffiliatesByIdPayoutWithHttpInfo(id: kotlin.String, disbursal: Disbursal) : ApiResponse<PayoutOut?> {
-        val localVariableConfig = postV1AdminAffiliatesByIdPayoutRequestConfig(id = id, disbursal = disbursal)
+    fun postAdminAffiliatesByIdPayoutWithHttpInfo(id: kotlin.String, disbursal: Disbursal) : ApiResponse<PayoutOut?> {
+        val localVariableConfig = postAdminAffiliatesByIdPayoutRequestConfig(id = id, disbursal = disbursal)
 
         return request<Disbursal, PayoutOut>(
             localVariableConfig
@@ -5731,13 +5731,13 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAffiliatesByIdPayout
+     * To obtain the request config of the operation postAdminAffiliatesByIdPayout
      *
      * @param id ID is the affiliate to pay, from the path.
      * @param disbursal 
      * @return RequestConfig
      */
-    fun postV1AdminAffiliatesByIdPayoutRequestConfig(id: kotlin.String, disbursal: Disbursal) : RequestConfig<Disbursal> {
+    fun postAdminAffiliatesByIdPayoutRequestConfig(id: kotlin.String, disbursal: Disbursal) : RequestConfig<Disbursal> {
         val localVariableBody = disbursal
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5769,8 +5769,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAffiliatesByIdRate(id: kotlin.String, rateSet: RateSet) : AffiliateOut {
-        val localVarResponse = postV1AdminAffiliatesByIdRateWithHttpInfo(id = id, rateSet = rateSet)
+    fun postAdminAffiliatesByIdRate(id: kotlin.String, rateSet: RateSet) : AffiliateOut {
+        val localVarResponse = postAdminAffiliatesByIdRateWithHttpInfo(id = id, rateSet = rateSet)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateOut
@@ -5799,8 +5799,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAffiliatesByIdRateWithHttpInfo(id: kotlin.String, rateSet: RateSet) : ApiResponse<AffiliateOut?> {
-        val localVariableConfig = postV1AdminAffiliatesByIdRateRequestConfig(id = id, rateSet = rateSet)
+    fun postAdminAffiliatesByIdRateWithHttpInfo(id: kotlin.String, rateSet: RateSet) : ApiResponse<AffiliateOut?> {
+        val localVariableConfig = postAdminAffiliatesByIdRateRequestConfig(id = id, rateSet = rateSet)
 
         return request<RateSet, AffiliateOut>(
             localVariableConfig
@@ -5808,13 +5808,13 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAffiliatesByIdRate
+     * To obtain the request config of the operation postAdminAffiliatesByIdRate
      *
      * @param id ID is the affiliate whose direct rate moves, from the path.
      * @param rateSet 
      * @return RequestConfig
      */
-    fun postV1AdminAffiliatesByIdRateRequestConfig(id: kotlin.String, rateSet: RateSet) : RequestConfig<RateSet> {
+    fun postAdminAffiliatesByIdRateRequestConfig(id: kotlin.String, rateSet: RateSet) : RequestConfig<RateSet> {
         val localVariableBody = rateSet
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5845,8 +5845,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAffiliatesByIdSuspend(id: kotlin.String) : AffiliateOut {
-        val localVarResponse = postV1AdminAffiliatesByIdSuspendWithHttpInfo(id = id)
+    fun postAdminAffiliatesByIdSuspend(id: kotlin.String) : AffiliateOut {
+        val localVarResponse = postAdminAffiliatesByIdSuspendWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateOut
@@ -5874,8 +5874,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAffiliatesByIdSuspendWithHttpInfo(id: kotlin.String) : ApiResponse<AffiliateOut?> {
-        val localVariableConfig = postV1AdminAffiliatesByIdSuspendRequestConfig(id = id)
+    fun postAdminAffiliatesByIdSuspendWithHttpInfo(id: kotlin.String) : ApiResponse<AffiliateOut?> {
+        val localVariableConfig = postAdminAffiliatesByIdSuspendRequestConfig(id = id)
 
         return request<Unit, AffiliateOut>(
             localVariableConfig
@@ -5883,12 +5883,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAffiliatesByIdSuspend
+     * To obtain the request config of the operation postAdminAffiliatesByIdSuspend
      *
      * @param id ID is the affiliate&#39;s server-minted handle, \&quot;aff_\&quot;-prefixed.
      * @return RequestConfig
      */
-    fun postV1AdminAffiliatesByIdSuspendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAdminAffiliatesByIdSuspendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5917,8 +5917,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAffiliatesSweep() : AccrualsOut {
-        val localVarResponse = postV1AdminAffiliatesSweepWithHttpInfo()
+    fun postAdminAffiliatesSweep() : AccrualsOut {
+        val localVarResponse = postAdminAffiliatesSweepWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccrualsOut
@@ -5945,8 +5945,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAffiliatesSweepWithHttpInfo() : ApiResponse<AccrualsOut?> {
-        val localVariableConfig = postV1AdminAffiliatesSweepRequestConfig()
+    fun postAdminAffiliatesSweepWithHttpInfo() : ApiResponse<AccrualsOut?> {
+        val localVariableConfig = postAdminAffiliatesSweepRequestConfig()
 
         return request<Unit, AccrualsOut>(
             localVariableConfig
@@ -5954,11 +5954,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAffiliatesSweep
+     * To obtain the request config of the operation postAdminAffiliatesSweep
      *
      * @return RequestConfig
      */
-    fun postV1AdminAffiliatesSweepRequestConfig() : RequestConfig<Unit> {
+    fun postAdminAffiliatesSweepRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5989,8 +5989,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAuthorsByIdApprove(id: kotlin.String, approveRequest: ApproveRequest) : AuthorResult {
-        val localVarResponse = postV1AdminAuthorsByIdApproveWithHttpInfo(id = id, approveRequest = approveRequest)
+    fun postAdminAuthorsByIdApprove(id: kotlin.String, approveRequest: ApproveRequest) : AuthorResult {
+        val localVarResponse = postAdminAuthorsByIdApproveWithHttpInfo(id = id, approveRequest = approveRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AuthorResult
@@ -6019,8 +6019,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAuthorsByIdApproveWithHttpInfo(id: kotlin.String, approveRequest: ApproveRequest) : ApiResponse<AuthorResult?> {
-        val localVariableConfig = postV1AdminAuthorsByIdApproveRequestConfig(id = id, approveRequest = approveRequest)
+    fun postAdminAuthorsByIdApproveWithHttpInfo(id: kotlin.String, approveRequest: ApproveRequest) : ApiResponse<AuthorResult?> {
+        val localVariableConfig = postAdminAuthorsByIdApproveRequestConfig(id = id, approveRequest = approveRequest)
 
         return request<ApproveRequest, AuthorResult>(
             localVariableConfig
@@ -6028,13 +6028,13 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAuthorsByIdApprove
+     * To obtain the request config of the operation postAdminAuthorsByIdApprove
      *
      * @param id ID is the author to approve, from the path.
      * @param approveRequest 
      * @return RequestConfig
      */
-    fun postV1AdminAuthorsByIdApproveRequestConfig(id: kotlin.String, approveRequest: ApproveRequest) : RequestConfig<ApproveRequest> {
+    fun postAdminAuthorsByIdApproveRequestConfig(id: kotlin.String, approveRequest: ApproveRequest) : RequestConfig<ApproveRequest> {
         val localVariableBody = approveRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6066,8 +6066,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAuthorsByIdPayout(id: kotlin.String, payoutRequest: PayoutRequest) : PayoutResult {
-        val localVarResponse = postV1AdminAuthorsByIdPayoutWithHttpInfo(id = id, payoutRequest = payoutRequest)
+    fun postAdminAuthorsByIdPayout(id: kotlin.String, payoutRequest: PayoutRequest) : PayoutResult {
+        val localVarResponse = postAdminAuthorsByIdPayoutWithHttpInfo(id = id, payoutRequest = payoutRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PayoutResult
@@ -6096,8 +6096,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAuthorsByIdPayoutWithHttpInfo(id: kotlin.String, payoutRequest: PayoutRequest) : ApiResponse<PayoutResult?> {
-        val localVariableConfig = postV1AdminAuthorsByIdPayoutRequestConfig(id = id, payoutRequest = payoutRequest)
+    fun postAdminAuthorsByIdPayoutWithHttpInfo(id: kotlin.String, payoutRequest: PayoutRequest) : ApiResponse<PayoutResult?> {
+        val localVariableConfig = postAdminAuthorsByIdPayoutRequestConfig(id = id, payoutRequest = payoutRequest)
 
         return request<PayoutRequest, PayoutResult>(
             localVariableConfig
@@ -6105,13 +6105,13 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAuthorsByIdPayout
+     * To obtain the request config of the operation postAdminAuthorsByIdPayout
      *
      * @param id ID is the author to pay, from the path.
      * @param payoutRequest 
      * @return RequestConfig
      */
-    fun postV1AdminAuthorsByIdPayoutRequestConfig(id: kotlin.String, payoutRequest: PayoutRequest) : RequestConfig<PayoutRequest> {
+    fun postAdminAuthorsByIdPayoutRequestConfig(id: kotlin.String, payoutRequest: PayoutRequest) : RequestConfig<PayoutRequest> {
         val localVariableBody = payoutRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6142,8 +6142,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAuthorsByIdSuspend(id: kotlin.String) : AuthorResult {
-        val localVarResponse = postV1AdminAuthorsByIdSuspendWithHttpInfo(id = id)
+    fun postAdminAuthorsByIdSuspend(id: kotlin.String) : AuthorResult {
+        val localVarResponse = postAdminAuthorsByIdSuspendWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AuthorResult
@@ -6171,8 +6171,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAuthorsByIdSuspendWithHttpInfo(id: kotlin.String) : ApiResponse<AuthorResult?> {
-        val localVariableConfig = postV1AdminAuthorsByIdSuspendRequestConfig(id = id)
+    fun postAdminAuthorsByIdSuspendWithHttpInfo(id: kotlin.String) : ApiResponse<AuthorResult?> {
+        val localVariableConfig = postAdminAuthorsByIdSuspendRequestConfig(id = id)
 
         return request<Unit, AuthorResult>(
             localVariableConfig
@@ -6180,12 +6180,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAuthorsByIdSuspend
+     * To obtain the request config of the operation postAdminAuthorsByIdSuspend
      *
      * @param id ID is the author record&#39;s handle, \&quot;aut_\&quot;-prefixed.
      * @return RequestConfig
      */
-    fun postV1AdminAuthorsByIdSuspendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAdminAuthorsByIdSuspendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6214,8 +6214,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminAuthorsSweep() : AuthorSweepResult {
-        val localVarResponse = postV1AdminAuthorsSweepWithHttpInfo()
+    fun postAdminAuthorsSweep() : AuthorSweepResult {
+        val localVarResponse = postAdminAuthorsSweepWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AuthorSweepResult
@@ -6242,8 +6242,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminAuthorsSweepWithHttpInfo() : ApiResponse<AuthorSweepResult?> {
-        val localVariableConfig = postV1AdminAuthorsSweepRequestConfig()
+    fun postAdminAuthorsSweepWithHttpInfo() : ApiResponse<AuthorSweepResult?> {
+        val localVariableConfig = postAdminAuthorsSweepRequestConfig()
 
         return request<Unit, AuthorSweepResult>(
             localVariableConfig
@@ -6251,11 +6251,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminAuthorsSweep
+     * To obtain the request config of the operation postAdminAuthorsSweep
      *
      * @return RequestConfig
      */
-    fun postV1AdminAuthorsSweepRequestConfig() : RequestConfig<Unit> {
+    fun postAdminAuthorsSweepRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6284,8 +6284,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminReferralsSweep() : SweepEnvelope {
-        val localVarResponse = postV1AdminReferralsSweepWithHttpInfo()
+    fun postAdminReferralsSweep() : SweepEnvelope {
+        val localVarResponse = postAdminReferralsSweepWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SweepEnvelope
@@ -6312,8 +6312,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminReferralsSweepWithHttpInfo() : ApiResponse<SweepEnvelope?> {
-        val localVariableConfig = postV1AdminReferralsSweepRequestConfig()
+    fun postAdminReferralsSweepWithHttpInfo() : ApiResponse<SweepEnvelope?> {
+        val localVariableConfig = postAdminReferralsSweepRequestConfig()
 
         return request<Unit, SweepEnvelope>(
             localVariableConfig
@@ -6321,11 +6321,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminReferralsSweep
+     * To obtain the request config of the operation postAdminReferralsSweep
      *
      * @return RequestConfig
      */
-    fun postV1AdminReferralsSweepRequestConfig() : RequestConfig<Unit> {
+    fun postAdminReferralsSweepRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6354,8 +6354,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminTreasuryAnchor() : AnchorOut {
-        val localVarResponse = postV1AdminTreasuryAnchorWithHttpInfo()
+    fun postAdminTreasuryAnchor() : AnchorOut {
+        val localVarResponse = postAdminTreasuryAnchorWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AnchorOut
@@ -6382,8 +6382,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminTreasuryAnchorWithHttpInfo() : ApiResponse<AnchorOut?> {
-        val localVariableConfig = postV1AdminTreasuryAnchorRequestConfig()
+    fun postAdminTreasuryAnchorWithHttpInfo() : ApiResponse<AnchorOut?> {
+        val localVariableConfig = postAdminTreasuryAnchorRequestConfig()
 
         return request<Unit, AnchorOut>(
             localVariableConfig
@@ -6391,11 +6391,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminTreasuryAnchor
+     * To obtain the request config of the operation postAdminTreasuryAnchor
      *
      * @return RequestConfig
      */
-    fun postV1AdminTreasuryAnchorRequestConfig() : RequestConfig<Unit> {
+    fun postAdminTreasuryAnchorRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6425,8 +6425,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminTreasuryPolicy(policyRequest: PolicyRequest) : PolicyOut {
-        val localVarResponse = postV1AdminTreasuryPolicyWithHttpInfo(policyRequest = policyRequest)
+    fun postAdminTreasuryPolicy(policyRequest: PolicyRequest) : PolicyOut {
+        val localVarResponse = postAdminTreasuryPolicyWithHttpInfo(policyRequest = policyRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PolicyOut
@@ -6454,8 +6454,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminTreasuryPolicyWithHttpInfo(policyRequest: PolicyRequest) : ApiResponse<PolicyOut?> {
-        val localVariableConfig = postV1AdminTreasuryPolicyRequestConfig(policyRequest = policyRequest)
+    fun postAdminTreasuryPolicyWithHttpInfo(policyRequest: PolicyRequest) : ApiResponse<PolicyOut?> {
+        val localVariableConfig = postAdminTreasuryPolicyRequestConfig(policyRequest = policyRequest)
 
         return request<PolicyRequest, PolicyOut>(
             localVariableConfig
@@ -6463,12 +6463,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminTreasuryPolicy
+     * To obtain the request config of the operation postAdminTreasuryPolicy
      *
      * @param policyRequest 
      * @return RequestConfig
      */
-    fun postV1AdminTreasuryPolicyRequestConfig(policyRequest: PolicyRequest) : RequestConfig<PolicyRequest> {
+    fun postAdminTreasuryPolicyRequestConfig(policyRequest: PolicyRequest) : RequestConfig<PolicyRequest> {
         val localVariableBody = policyRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6499,8 +6499,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminTreasurySeed(seedRequest: SeedRequest) : SeedOut {
-        val localVarResponse = postV1AdminTreasurySeedWithHttpInfo(seedRequest = seedRequest)
+    fun postAdminTreasurySeed(seedRequest: SeedRequest) : SeedOut {
+        val localVarResponse = postAdminTreasurySeedWithHttpInfo(seedRequest = seedRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SeedOut
@@ -6528,8 +6528,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminTreasurySeedWithHttpInfo(seedRequest: SeedRequest) : ApiResponse<SeedOut?> {
-        val localVariableConfig = postV1AdminTreasurySeedRequestConfig(seedRequest = seedRequest)
+    fun postAdminTreasurySeedWithHttpInfo(seedRequest: SeedRequest) : ApiResponse<SeedOut?> {
+        val localVariableConfig = postAdminTreasurySeedRequestConfig(seedRequest = seedRequest)
 
         return request<SeedRequest, SeedOut>(
             localVariableConfig
@@ -6537,12 +6537,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminTreasurySeed
+     * To obtain the request config of the operation postAdminTreasurySeed
      *
      * @param seedRequest 
      * @return RequestConfig
      */
-    fun postV1AdminTreasurySeedRequestConfig(seedRequest: SeedRequest) : RequestConfig<SeedRequest> {
+    fun postAdminTreasurySeedRequestConfig(seedRequest: SeedRequest) : RequestConfig<SeedRequest> {
         val localVariableBody = seedRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6573,8 +6573,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AdminTreasurySweep(sweepRequest: SweepRequest) : SweepOut {
-        val localVarResponse = postV1AdminTreasurySweepWithHttpInfo(sweepRequest = sweepRequest)
+    fun postAdminTreasurySweep(sweepRequest: SweepRequest) : SweepOut {
+        val localVarResponse = postAdminTreasurySweepWithHttpInfo(sweepRequest = sweepRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SweepOut
@@ -6602,8 +6602,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AdminTreasurySweepWithHttpInfo(sweepRequest: SweepRequest) : ApiResponse<SweepOut?> {
-        val localVariableConfig = postV1AdminTreasurySweepRequestConfig(sweepRequest = sweepRequest)
+    fun postAdminTreasurySweepWithHttpInfo(sweepRequest: SweepRequest) : ApiResponse<SweepOut?> {
+        val localVariableConfig = postAdminTreasurySweepRequestConfig(sweepRequest = sweepRequest)
 
         return request<SweepRequest, SweepOut>(
             localVariableConfig
@@ -6611,12 +6611,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AdminTreasurySweep
+     * To obtain the request config of the operation postAdminTreasurySweep
      *
      * @param sweepRequest 
      * @return RequestConfig
      */
-    fun postV1AdminTreasurySweepRequestConfig(sweepRequest: SweepRequest) : RequestConfig<SweepRequest> {
+    fun postAdminTreasurySweepRequestConfig(sweepRequest: SweepRequest) : RequestConfig<SweepRequest> {
         val localVariableBody = sweepRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6647,8 +6647,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AdminEnablement(setEnablementBody: SetEnablementBody) : AdminEnablementItem {
-        val localVarResponse = putV1AdminEnablementWithHttpInfo(setEnablementBody = setEnablementBody)
+    fun putAdminEnablement(setEnablementBody: SetEnablementBody) : AdminEnablementItem {
+        val localVarResponse = putAdminEnablementWithHttpInfo(setEnablementBody = setEnablementBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AdminEnablementItem
@@ -6676,8 +6676,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AdminEnablementWithHttpInfo(setEnablementBody: SetEnablementBody) : ApiResponse<AdminEnablementItem?> {
-        val localVariableConfig = putV1AdminEnablementRequestConfig(setEnablementBody = setEnablementBody)
+    fun putAdminEnablementWithHttpInfo(setEnablementBody: SetEnablementBody) : ApiResponse<AdminEnablementItem?> {
+        val localVariableConfig = putAdminEnablementRequestConfig(setEnablementBody = setEnablementBody)
 
         return request<SetEnablementBody, AdminEnablementItem>(
             localVariableConfig
@@ -6685,12 +6685,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1AdminEnablement
+     * To obtain the request config of the operation putAdminEnablement
      *
      * @param setEnablementBody 
      * @return RequestConfig
      */
-    fun putV1AdminEnablementRequestConfig(setEnablementBody: SetEnablementBody) : RequestConfig<SetEnablementBody> {
+    fun putAdminEnablementRequestConfig(setEnablementBody: SetEnablementBody) : RequestConfig<SetEnablementBody> {
         val localVariableBody = setEnablementBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6720,8 +6720,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AdminTreasuryAnchorSigner() : SignerOut {
-        val localVarResponse = putV1AdminTreasuryAnchorSignerWithHttpInfo()
+    fun putAdminTreasuryAnchorSigner() : SignerOut {
+        val localVarResponse = putAdminTreasuryAnchorSignerWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SignerOut
@@ -6748,8 +6748,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AdminTreasuryAnchorSignerWithHttpInfo() : ApiResponse<SignerOut?> {
-        val localVariableConfig = putV1AdminTreasuryAnchorSignerRequestConfig()
+    fun putAdminTreasuryAnchorSignerWithHttpInfo() : ApiResponse<SignerOut?> {
+        val localVariableConfig = putAdminTreasuryAnchorSignerRequestConfig()
 
         return request<Unit, SignerOut>(
             localVariableConfig
@@ -6757,11 +6757,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1AdminTreasuryAnchorSigner
+     * To obtain the request config of the operation putAdminTreasuryAnchorSigner
      *
      * @return RequestConfig
      */
-    fun putV1AdminTreasuryAnchorSignerRequestConfig() : RequestConfig<Unit> {
+    fun putAdminTreasuryAnchorSignerRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

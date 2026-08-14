@@ -64,8 +64,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Channels() : ChatChannels {
-        val localVarResponse = getV1ChannelsWithHttpInfo()
+    fun getChannels() : ChatChannels {
+        val localVarResponse = getChannelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ChatChannels
@@ -92,8 +92,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ChannelsWithHttpInfo() : ApiResponse<ChatChannels?> {
-        val localVariableConfig = getV1ChannelsRequestConfig()
+    fun getChannelsWithHttpInfo() : ApiResponse<ChatChannels?> {
+        val localVariableConfig = getChannelsRequestConfig()
 
         return request<Unit, ChatChannels>(
             localVariableConfig
@@ -101,11 +101,11 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1Channels
+     * To obtain the request config of the operation getChannels
      *
      * @return RequestConfig
      */
-    fun getV1ChannelsRequestConfig() : RequestConfig<Unit> {
+    fun getChannelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -135,8 +135,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ChannelsAllowlist(channel: kotlin.String? = null) : AllowlistView {
-        val localVarResponse = getV1ChannelsAllowlistWithHttpInfo(channel = channel)
+    fun getChannelsAllowlist(channel: kotlin.String? = null) : AllowlistView {
+        val localVarResponse = getChannelsAllowlistWithHttpInfo(channel = channel)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AllowlistView
@@ -164,8 +164,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ChannelsAllowlistWithHttpInfo(channel: kotlin.String?) : ApiResponse<AllowlistView?> {
-        val localVariableConfig = getV1ChannelsAllowlistRequestConfig(channel = channel)
+    fun getChannelsAllowlistWithHttpInfo(channel: kotlin.String?) : ApiResponse<AllowlistView?> {
+        val localVariableConfig = getChannelsAllowlistRequestConfig(channel = channel)
 
         return request<Unit, AllowlistView>(
             localVariableConfig
@@ -173,12 +173,12 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ChannelsAllowlist
+     * To obtain the request config of the operation getChannelsAllowlist
      *
      * @param channel Channel is the transport to read: discord, slack, teams or telegram. Required; an unknown value is a 404. (optional)
      * @return RequestConfig
      */
-    fun getV1ChannelsAllowlistRequestConfig(channel: kotlin.String?) : RequestConfig<Unit> {
+    fun getChannelsAllowlistRequestConfig(channel: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -214,8 +214,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ChannelsInbox(since: kotlin.String? = null, limit: kotlin.String? = null) : InboxPage {
-        val localVarResponse = getV1ChannelsInboxWithHttpInfo(since = since, limit = limit)
+    fun getChannelsInbox(since: kotlin.String? = null, limit: kotlin.String? = null) : InboxPage {
+        val localVarResponse = getChannelsInboxWithHttpInfo(since = since, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InboxPage
@@ -244,8 +244,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ChannelsInboxWithHttpInfo(since: kotlin.String?, limit: kotlin.String?) : ApiResponse<InboxPage?> {
-        val localVariableConfig = getV1ChannelsInboxRequestConfig(since = since, limit = limit)
+    fun getChannelsInboxWithHttpInfo(since: kotlin.String?, limit: kotlin.String?) : ApiResponse<InboxPage?> {
+        val localVariableConfig = getChannelsInboxRequestConfig(since = since, limit = limit)
 
         return request<Unit, InboxPage>(
             localVariableConfig
@@ -253,13 +253,13 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ChannelsInbox
+     * To obtain the request config of the operation getChannelsInbox
      *
      * @param since Since is the exclusive cursor: only messages with a higher row id come back. Empty starts at the beginning. Must parse as an integer. (optional)
      * @param limit Limit caps how many messages come back. Empty or 0 uses the store&#39;s default page size. Must parse as an integer. (optional)
      * @return RequestConfig
      */
-    fun getV1ChannelsInboxRequestConfig(since: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
+    fun getChannelsInboxRequestConfig(since: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -296,8 +296,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ChannelsPairing() : PairingQueue {
-        val localVarResponse = getV1ChannelsPairingWithHttpInfo()
+    fun getChannelsPairing() : PairingQueue {
+        val localVarResponse = getChannelsPairingWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PairingQueue
@@ -324,8 +324,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ChannelsPairingWithHttpInfo() : ApiResponse<PairingQueue?> {
-        val localVariableConfig = getV1ChannelsPairingRequestConfig()
+    fun getChannelsPairingWithHttpInfo() : ApiResponse<PairingQueue?> {
+        val localVariableConfig = getChannelsPairingRequestConfig()
 
         return request<Unit, PairingQueue>(
             localVariableConfig
@@ -333,11 +333,11 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ChannelsPairing
+     * To obtain the request config of the operation getChannelsPairing
      *
      * @return RequestConfig
      */
-    fun getV1ChannelsPairingRequestConfig() : RequestConfig<Unit> {
+    fun getChannelsPairingRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -366,8 +366,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ChannelsByChannelSend(channel: kotlin.String) : Unit {
-        val localVarResponse = postV1ChannelsByChannelSendWithHttpInfo(channel = channel)
+    fun postChannelsByChannelSend(channel: kotlin.String) : Unit {
+        val localVarResponse = postChannelsByChannelSendWithHttpInfo(channel = channel)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -394,8 +394,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ChannelsByChannelSendWithHttpInfo(channel: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ChannelsByChannelSendRequestConfig(channel = channel)
+    fun postChannelsByChannelSendWithHttpInfo(channel: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postChannelsByChannelSendRequestConfig(channel = channel)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -403,12 +403,12 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ChannelsByChannelSend
+     * To obtain the request config of the operation postChannelsByChannelSend
      *
      * @param channel 
      * @return RequestConfig
      */
-    fun postV1ChannelsByChannelSendRequestConfig(channel: kotlin.String) : RequestConfig<Unit> {
+    fun postChannelsByChannelSendRequestConfig(channel: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -437,8 +437,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ChannelsPairingApprove(approvePairingIn: ApprovePairingIn) : PairingApproved {
-        val localVarResponse = postV1ChannelsPairingApproveWithHttpInfo(approvePairingIn = approvePairingIn)
+    fun postChannelsPairingApprove(approvePairingIn: ApprovePairingIn) : PairingApproved {
+        val localVarResponse = postChannelsPairingApproveWithHttpInfo(approvePairingIn = approvePairingIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PairingApproved
@@ -466,8 +466,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ChannelsPairingApproveWithHttpInfo(approvePairingIn: ApprovePairingIn) : ApiResponse<PairingApproved?> {
-        val localVariableConfig = postV1ChannelsPairingApproveRequestConfig(approvePairingIn = approvePairingIn)
+    fun postChannelsPairingApproveWithHttpInfo(approvePairingIn: ApprovePairingIn) : ApiResponse<PairingApproved?> {
+        val localVariableConfig = postChannelsPairingApproveRequestConfig(approvePairingIn = approvePairingIn)
 
         return request<ApprovePairingIn, PairingApproved>(
             localVariableConfig
@@ -475,12 +475,12 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ChannelsPairingApprove
+     * To obtain the request config of the operation postChannelsPairingApprove
      *
      * @param approvePairingIn 
      * @return RequestConfig
      */
-    fun postV1ChannelsPairingApproveRequestConfig(approvePairingIn: ApprovePairingIn) : RequestConfig<ApprovePairingIn> {
+    fun postChannelsPairingApproveRequestConfig(approvePairingIn: ApprovePairingIn) : RequestConfig<ApprovePairingIn> {
         val localVariableBody = approvePairingIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -511,8 +511,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1ChannelsAllowlist(allowlistPutIn: AllowlistPutIn) : AllowlistView {
-        val localVarResponse = putV1ChannelsAllowlistWithHttpInfo(allowlistPutIn = allowlistPutIn)
+    fun putChannelsAllowlist(allowlistPutIn: AllowlistPutIn) : AllowlistView {
+        val localVarResponse = putChannelsAllowlistWithHttpInfo(allowlistPutIn = allowlistPutIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AllowlistView
@@ -540,8 +540,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1ChannelsAllowlistWithHttpInfo(allowlistPutIn: AllowlistPutIn) : ApiResponse<AllowlistView?> {
-        val localVariableConfig = putV1ChannelsAllowlistRequestConfig(allowlistPutIn = allowlistPutIn)
+    fun putChannelsAllowlistWithHttpInfo(allowlistPutIn: AllowlistPutIn) : ApiResponse<AllowlistView?> {
+        val localVariableConfig = putChannelsAllowlistRequestConfig(allowlistPutIn = allowlistPutIn)
 
         return request<AllowlistPutIn, AllowlistView>(
             localVariableConfig
@@ -549,12 +549,12 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1ChannelsAllowlist
+     * To obtain the request config of the operation putChannelsAllowlist
      *
      * @param allowlistPutIn 
      * @return RequestConfig
      */
-    fun putV1ChannelsAllowlistRequestConfig(allowlistPutIn: AllowlistPutIn) : RequestConfig<AllowlistPutIn> {
+    fun putChannelsAllowlistRequestConfig(allowlistPutIn: AllowlistPutIn) : RequestConfig<AllowlistPutIn> {
         val localVariableBody = allowlistPutIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

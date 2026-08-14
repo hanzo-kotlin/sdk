@@ -56,8 +56,8 @@ class GenerateTextToSpeechAudioStreamApi(basePath: kotlin.String = defaultBasePa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GenerateTextToSpeechAudioStream() : Unit {
-        val localVarResponse = getV1GenerateTextToSpeechAudioStreamWithHttpInfo()
+    fun getGenerateTextToSpeechAudioStream() : Unit {
+        val localVarResponse = getGenerateTextToSpeechAudioStreamWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class GenerateTextToSpeechAudioStreamApi(basePath: kotlin.String = defaultBasePa
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GenerateTextToSpeechAudioStreamWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1GenerateTextToSpeechAudioStreamRequestConfig()
+    fun getGenerateTextToSpeechAudioStreamWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getGenerateTextToSpeechAudioStreamRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class GenerateTextToSpeechAudioStreamApi(basePath: kotlin.String = defaultBasePa
     }
 
     /**
-     * To obtain the request config of the operation getV1GenerateTextToSpeechAudioStream
+     * To obtain the request config of the operation getGenerateTextToSpeechAudioStream
      *
      * @return RequestConfig
      */
-    fun getV1GenerateTextToSpeechAudioStreamRequestConfig() : RequestConfig<Unit> {
+    fun getGenerateTextToSpeechAudioStreamRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

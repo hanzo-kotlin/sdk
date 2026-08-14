@@ -56,8 +56,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1Tasks() : Unit {
-        val localVarResponse = deleteV1TasksWithHttpInfo()
+    fun deleteTasksApp() : Unit {
+        val localVarResponse = deleteTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1TasksRequestConfig()
+    fun deleteTasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteTasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1Tasks
+     * To obtain the request config of the operation deleteTasksApp
      *
      * @return RequestConfig
      */
-    fun deleteV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun deleteTasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -124,8 +124,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -152,8 +152,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -161,12 +161,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1TasksByWildcard1
+     * To obtain the request config of the operation deleteTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -193,8 +193,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Tasks() : Unit {
-        val localVarResponse = getV1TasksWithHttpInfo()
+    fun getTasksApp() : Unit {
+        val localVarResponse = getTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -220,8 +220,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TasksRequestConfig()
+    fun getTasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getTasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -229,11 +229,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Tasks
+     * To obtain the request config of the operation getTasksApp
      *
      * @return RequestConfig
      */
-    fun getV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun getTasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -261,8 +261,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -289,8 +289,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -298,12 +298,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1TasksByWildcard1
+     * To obtain the request config of the operation getTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -330,8 +330,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1Tasks() : Unit {
-        val localVarResponse = patchV1TasksWithHttpInfo()
+    fun patchTasksApp() : Unit {
+        val localVarResponse = patchTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -357,8 +357,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1TasksRequestConfig()
+    fun patchTasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchTasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -366,11 +366,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1Tasks
+     * To obtain the request config of the operation patchTasksApp
      *
      * @return RequestConfig
      */
-    fun patchV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun patchTasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -398,8 +398,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = patchV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -426,8 +426,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -435,12 +435,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1TasksByWildcard1
+     * To obtain the request config of the operation patchTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun patchV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -467,8 +467,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Tasks() : Unit {
-        val localVarResponse = postV1TasksWithHttpInfo()
+    fun postTasksApp() : Unit {
+        val localVarResponse = postTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -494,8 +494,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1TasksRequestConfig()
+    fun postTasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postTasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -503,11 +503,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1Tasks
+     * To obtain the request config of the operation postTasksApp
      *
      * @return RequestConfig
      */
-    fun postV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun postTasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -535,8 +535,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = postV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -563,8 +563,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -572,12 +572,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1TasksByWildcard1
+     * To obtain the request config of the operation postTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun postV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -604,8 +604,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1Tasks() : Unit {
-        val localVarResponse = putV1TasksWithHttpInfo()
+    fun putTasksApp() : Unit {
+        val localVarResponse = putTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -631,8 +631,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1TasksRequestConfig()
+    fun putTasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putTasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -640,11 +640,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1Tasks
+     * To obtain the request config of the operation putTasksApp
      *
      * @return RequestConfig
      */
-    fun putV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun putTasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -672,8 +672,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = putV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putTasksAppAssets(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -700,8 +700,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putTasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putTasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -709,12 +709,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1TasksByWildcard1
+     * To obtain the request config of the operation putTasksAppAssets
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun putV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putTasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

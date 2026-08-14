@@ -68,8 +68,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1GuideCurriculum() : CurriculumView {
-        val localVarResponse = deleteV1GuideCurriculumWithHttpInfo()
+    fun deleteGuideCurriculum() : CurriculumView {
+        val localVarResponse = deleteGuideCurriculumWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CurriculumView
@@ -96,8 +96,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1GuideCurriculumWithHttpInfo() : ApiResponse<CurriculumView?> {
-        val localVariableConfig = deleteV1GuideCurriculumRequestConfig()
+    fun deleteGuideCurriculumWithHttpInfo() : ApiResponse<CurriculumView?> {
+        val localVariableConfig = deleteGuideCurriculumRequestConfig()
 
         return request<Unit, CurriculumView>(
             localVariableConfig
@@ -105,11 +105,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1GuideCurriculum
+     * To obtain the request config of the operation deleteGuideCurriculum
      *
      * @return RequestConfig
      */
-    fun deleteV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
+    fun deleteGuideCurriculumRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -138,8 +138,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Guide() : OverviewView {
-        val localVarResponse = getV1GuideWithHttpInfo()
+    fun getGuide() : OverviewView {
+        val localVarResponse = getGuideWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewView
@@ -166,8 +166,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideWithHttpInfo() : ApiResponse<OverviewView?> {
-        val localVariableConfig = getV1GuideRequestConfig()
+    fun getGuideWithHttpInfo() : ApiResponse<OverviewView?> {
+        val localVariableConfig = getGuideRequestConfig()
 
         return request<Unit, OverviewView>(
             localVariableConfig
@@ -175,11 +175,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Guide
+     * To obtain the request config of the operation getGuide
      *
      * @return RequestConfig
      */
-    fun getV1GuideRequestConfig() : RequestConfig<Unit> {
+    fun getGuideRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -208,8 +208,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GuideActions() : ActionsView {
-        val localVarResponse = getV1GuideActionsWithHttpInfo()
+    fun getGuideActions() : ActionsView {
+        val localVarResponse = getGuideActionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ActionsView
@@ -236,8 +236,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideActionsWithHttpInfo() : ApiResponse<ActionsView?> {
-        val localVariableConfig = getV1GuideActionsRequestConfig()
+    fun getGuideActionsWithHttpInfo() : ApiResponse<ActionsView?> {
+        val localVariableConfig = getGuideActionsRequestConfig()
 
         return request<Unit, ActionsView>(
             localVariableConfig
@@ -245,11 +245,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1GuideActions
+     * To obtain the request config of the operation getGuideActions
      *
      * @return RequestConfig
      */
-    fun getV1GuideActionsRequestConfig() : RequestConfig<Unit> {
+    fun getGuideActionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -278,8 +278,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GuideAnalytics() : AnalyticsView {
-        val localVarResponse = getV1GuideAnalyticsWithHttpInfo()
+    fun getGuideAnalytics() : AnalyticsView {
+        val localVarResponse = getGuideAnalyticsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AnalyticsView
@@ -306,8 +306,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideAnalyticsWithHttpInfo() : ApiResponse<AnalyticsView?> {
-        val localVariableConfig = getV1GuideAnalyticsRequestConfig()
+    fun getGuideAnalyticsWithHttpInfo() : ApiResponse<AnalyticsView?> {
+        val localVariableConfig = getGuideAnalyticsRequestConfig()
 
         return request<Unit, AnalyticsView>(
             localVariableConfig
@@ -315,11 +315,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1GuideAnalytics
+     * To obtain the request config of the operation getGuideAnalytics
      *
      * @return RequestConfig
      */
-    fun getV1GuideAnalyticsRequestConfig() : RequestConfig<Unit> {
+    fun getGuideAnalyticsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -348,8 +348,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GuideBlueprint() : BlueprintView {
-        val localVarResponse = getV1GuideBlueprintWithHttpInfo()
+    fun getGuideBlueprint() : BlueprintView {
+        val localVarResponse = getGuideBlueprintWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BlueprintView
@@ -376,8 +376,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideBlueprintWithHttpInfo() : ApiResponse<BlueprintView?> {
-        val localVariableConfig = getV1GuideBlueprintRequestConfig()
+    fun getGuideBlueprintWithHttpInfo() : ApiResponse<BlueprintView?> {
+        val localVariableConfig = getGuideBlueprintRequestConfig()
 
         return request<Unit, BlueprintView>(
             localVariableConfig
@@ -385,11 +385,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1GuideBlueprint
+     * To obtain the request config of the operation getGuideBlueprint
      *
      * @return RequestConfig
      */
-    fun getV1GuideBlueprintRequestConfig() : RequestConfig<Unit> {
+    fun getGuideBlueprintRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -418,8 +418,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GuideBlueprintVersions() : BlueprintVersionsView {
-        val localVarResponse = getV1GuideBlueprintVersionsWithHttpInfo()
+    fun getGuideBlueprintVersions() : BlueprintVersionsView {
+        val localVarResponse = getGuideBlueprintVersionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BlueprintVersionsView
@@ -446,8 +446,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideBlueprintVersionsWithHttpInfo() : ApiResponse<BlueprintVersionsView?> {
-        val localVariableConfig = getV1GuideBlueprintVersionsRequestConfig()
+    fun getGuideBlueprintVersionsWithHttpInfo() : ApiResponse<BlueprintVersionsView?> {
+        val localVariableConfig = getGuideBlueprintVersionsRequestConfig()
 
         return request<Unit, BlueprintVersionsView>(
             localVariableConfig
@@ -455,11 +455,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1GuideBlueprintVersions
+     * To obtain the request config of the operation getGuideBlueprintVersions
      *
      * @return RequestConfig
      */
-    fun getV1GuideBlueprintVersionsRequestConfig() : RequestConfig<Unit> {
+    fun getGuideBlueprintVersionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -488,8 +488,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GuideCurriculum() : CurriculumView {
-        val localVarResponse = getV1GuideCurriculumWithHttpInfo()
+    fun getGuideCurriculum() : CurriculumView {
+        val localVarResponse = getGuideCurriculumWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CurriculumView
@@ -516,8 +516,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideCurriculumWithHttpInfo() : ApiResponse<CurriculumView?> {
-        val localVariableConfig = getV1GuideCurriculumRequestConfig()
+    fun getGuideCurriculumWithHttpInfo() : ApiResponse<CurriculumView?> {
+        val localVariableConfig = getGuideCurriculumRequestConfig()
 
         return request<Unit, CurriculumView>(
             localVariableConfig
@@ -525,11 +525,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1GuideCurriculum
+     * To obtain the request config of the operation getGuideCurriculum
      *
      * @return RequestConfig
      */
-    fun getV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
+    fun getGuideCurriculumRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -558,8 +558,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GuideProfile() : ProfileResponse {
-        val localVarResponse = getV1GuideProfileWithHttpInfo()
+    fun getGuideProfile() : ProfileResponse {
+        val localVarResponse = getGuideProfileWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProfileResponse
@@ -586,8 +586,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideProfileWithHttpInfo() : ApiResponse<ProfileResponse?> {
-        val localVariableConfig = getV1GuideProfileRequestConfig()
+    fun getGuideProfileWithHttpInfo() : ApiResponse<ProfileResponse?> {
+        val localVariableConfig = getGuideProfileRequestConfig()
 
         return request<Unit, ProfileResponse>(
             localVariableConfig
@@ -595,11 +595,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1GuideProfile
+     * To obtain the request config of the operation getGuideProfile
      *
      * @return RequestConfig
      */
-    fun getV1GuideProfileRequestConfig() : RequestConfig<Unit> {
+    fun getGuideProfileRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -631,8 +631,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GuideStrategies(category: kotlin.String? = null, stage: kotlin.String? = null, workload: kotlin.String? = null) : CorpusView {
-        val localVarResponse = getV1GuideStrategiesWithHttpInfo(category = category, stage = stage, workload = workload)
+    fun getGuideStrategies(category: kotlin.String? = null, stage: kotlin.String? = null, workload: kotlin.String? = null) : CorpusView {
+        val localVarResponse = getGuideStrategiesWithHttpInfo(category = category, stage = stage, workload = workload)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CorpusView
@@ -662,8 +662,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideStrategiesWithHttpInfo(category: kotlin.String?, stage: kotlin.String?, workload: kotlin.String?) : ApiResponse<CorpusView?> {
-        val localVariableConfig = getV1GuideStrategiesRequestConfig(category = category, stage = stage, workload = workload)
+    fun getGuideStrategiesWithHttpInfo(category: kotlin.String?, stage: kotlin.String?, workload: kotlin.String?) : ApiResponse<CorpusView?> {
+        val localVariableConfig = getGuideStrategiesRequestConfig(category = category, stage = stage, workload = workload)
 
         return request<Unit, CorpusView>(
             localVariableConfig
@@ -671,14 +671,14 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1GuideStrategies
+     * To obtain the request config of the operation getGuideStrategies
      *
      * @param category Category filters to tactics in exactly this category. (optional)
      * @param stage Stage previews the corpus at a chosen growth stage (research|formed|launched|activated|scaling), overriding the org&#39;s observed one. An unknown value is ignored and the observed stage stands. (optional)
      * @param workload Workload filters to tactics with exactly this workload. (optional)
      * @return RequestConfig
      */
-    fun getV1GuideStrategiesRequestConfig(category: kotlin.String?, stage: kotlin.String?, workload: kotlin.String?) : RequestConfig<Unit> {
+    fun getGuideStrategiesRequestConfig(category: kotlin.String?, stage: kotlin.String?, workload: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -718,8 +718,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GuideSuggest() : SuggestResponse {
-        val localVarResponse = getV1GuideSuggestWithHttpInfo()
+    fun getGuideSuggest() : SuggestResponse {
+        val localVarResponse = getGuideSuggestWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SuggestResponse
@@ -746,8 +746,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GuideSuggestWithHttpInfo() : ApiResponse<SuggestResponse?> {
-        val localVariableConfig = getV1GuideSuggestRequestConfig()
+    fun getGuideSuggestWithHttpInfo() : ApiResponse<SuggestResponse?> {
+        val localVariableConfig = getGuideSuggestRequestConfig()
 
         return request<Unit, SuggestResponse>(
             localVariableConfig
@@ -755,11 +755,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1GuideSuggest
+     * To obtain the request config of the operation getGuideSuggest
      *
      * @return RequestConfig
      */
-    fun getV1GuideSuggestRequestConfig() : RequestConfig<Unit> {
+    fun getGuideSuggestRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -789,8 +789,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1GuideBlueprintByCollectionById(collection: kotlin.String, id: kotlin.String) : Unit {
-        val localVarResponse = patchV1GuideBlueprintByCollectionByIdWithHttpInfo(collection = collection, id = id)
+    fun patchGuideBlueprintByCollectionById(collection: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = patchGuideBlueprintByCollectionByIdWithHttpInfo(collection = collection, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -818,8 +818,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1GuideBlueprintByCollectionByIdWithHttpInfo(collection: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1GuideBlueprintByCollectionByIdRequestConfig(collection = collection, id = id)
+    fun patchGuideBlueprintByCollectionByIdWithHttpInfo(collection: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchGuideBlueprintByCollectionByIdRequestConfig(collection = collection, id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -827,13 +827,13 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1GuideBlueprintByCollectionById
+     * To obtain the request config of the operation patchGuideBlueprintByCollectionById
      *
      * @param collection 
      * @param id 
      * @return RequestConfig
      */
-    fun patchV1GuideBlueprintByCollectionByIdRequestConfig(collection: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun patchGuideBlueprintByCollectionByIdRequestConfig(collection: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -862,8 +862,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GuideChat(chatRequest: ChatRequest) : ChatResponse {
-        val localVarResponse = postV1GuideChatWithHttpInfo(chatRequest = chatRequest)
+    fun postGuideChat(chatRequest: ChatRequest) : ChatResponse {
+        val localVarResponse = postGuideChatWithHttpInfo(chatRequest = chatRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ChatResponse
@@ -891,8 +891,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GuideChatWithHttpInfo(chatRequest: ChatRequest) : ApiResponse<ChatResponse?> {
-        val localVariableConfig = postV1GuideChatRequestConfig(chatRequest = chatRequest)
+    fun postGuideChatWithHttpInfo(chatRequest: ChatRequest) : ApiResponse<ChatResponse?> {
+        val localVariableConfig = postGuideChatRequestConfig(chatRequest = chatRequest)
 
         return request<ChatRequest, ChatResponse>(
             localVariableConfig
@@ -900,12 +900,12 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1GuideChat
+     * To obtain the request config of the operation postGuideChat
      *
      * @param chatRequest 
      * @return RequestConfig
      */
-    fun postV1GuideChatRequestConfig(chatRequest: ChatRequest) : RequestConfig<ChatRequest> {
+    fun postGuideChatRequestConfig(chatRequest: ChatRequest) : RequestConfig<ChatRequest> {
         val localVariableBody = chatRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -935,8 +935,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GuideStepsByIdDo(id: kotlin.String) : Unit {
-        val localVarResponse = postV1GuideStepsByIdDoWithHttpInfo(id = id)
+    fun postGuideStepsByIdDo(id: kotlin.String) : Unit {
+        val localVarResponse = postGuideStepsByIdDoWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -963,8 +963,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GuideStepsByIdDoWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GuideStepsByIdDoRequestConfig(id = id)
+    fun postGuideStepsByIdDoWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postGuideStepsByIdDoRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -972,12 +972,12 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1GuideStepsByIdDo
+     * To obtain the request config of the operation postGuideStepsByIdDo
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1GuideStepsByIdDoRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postGuideStepsByIdDoRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1005,8 +1005,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GuideStepsByIdDone(id: kotlin.String) : Unit {
-        val localVarResponse = postV1GuideStepsByIdDoneWithHttpInfo(id = id)
+    fun postGuideStepsByIdDone(id: kotlin.String) : Unit {
+        val localVarResponse = postGuideStepsByIdDoneWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1033,8 +1033,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GuideStepsByIdDoneWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GuideStepsByIdDoneRequestConfig(id = id)
+    fun postGuideStepsByIdDoneWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postGuideStepsByIdDoneRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1042,12 +1042,12 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1GuideStepsByIdDone
+     * To obtain the request config of the operation postGuideStepsByIdDone
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1GuideStepsByIdDoneRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postGuideStepsByIdDoneRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1076,8 +1076,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GuideStepsByIdReset(id: kotlin.String) : OverviewView {
-        val localVarResponse = postV1GuideStepsByIdResetWithHttpInfo(id = id)
+    fun postGuideStepsByIdReset(id: kotlin.String) : OverviewView {
+        val localVarResponse = postGuideStepsByIdResetWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewView
@@ -1105,8 +1105,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GuideStepsByIdResetWithHttpInfo(id: kotlin.String) : ApiResponse<OverviewView?> {
-        val localVariableConfig = postV1GuideStepsByIdResetRequestConfig(id = id)
+    fun postGuideStepsByIdResetWithHttpInfo(id: kotlin.String) : ApiResponse<OverviewView?> {
+        val localVariableConfig = postGuideStepsByIdResetRequestConfig(id = id)
 
         return request<Unit, OverviewView>(
             localVariableConfig
@@ -1114,12 +1114,12 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1GuideStepsByIdReset
+     * To obtain the request config of the operation postGuideStepsByIdReset
      *
      * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
      * @return RequestConfig
      */
-    fun postV1GuideStepsByIdResetRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postGuideStepsByIdResetRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1149,8 +1149,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GuideStepsByIdSkip(id: kotlin.String) : OverviewView {
-        val localVarResponse = postV1GuideStepsByIdSkipWithHttpInfo(id = id)
+    fun postGuideStepsByIdSkip(id: kotlin.String) : OverviewView {
+        val localVarResponse = postGuideStepsByIdSkipWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewView
@@ -1178,8 +1178,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GuideStepsByIdSkipWithHttpInfo(id: kotlin.String) : ApiResponse<OverviewView?> {
-        val localVariableConfig = postV1GuideStepsByIdSkipRequestConfig(id = id)
+    fun postGuideStepsByIdSkipWithHttpInfo(id: kotlin.String) : ApiResponse<OverviewView?> {
+        val localVariableConfig = postGuideStepsByIdSkipRequestConfig(id = id)
 
         return request<Unit, OverviewView>(
             localVariableConfig
@@ -1187,12 +1187,12 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1GuideStepsByIdSkip
+     * To obtain the request config of the operation postGuideStepsByIdSkip
      *
      * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
      * @return RequestConfig
      */
-    fun postV1GuideStepsByIdSkipRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postGuideStepsByIdSkipRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1221,8 +1221,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GuideStepsByIdStart(id: kotlin.String) : Unit {
-        val localVarResponse = postV1GuideStepsByIdStartWithHttpInfo(id = id)
+    fun postGuideStepsByIdStart(id: kotlin.String) : Unit {
+        val localVarResponse = postGuideStepsByIdStartWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1249,8 +1249,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GuideStepsByIdStartWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GuideStepsByIdStartRequestConfig(id = id)
+    fun postGuideStepsByIdStartWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postGuideStepsByIdStartRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1258,12 +1258,12 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1GuideStepsByIdStart
+     * To obtain the request config of the operation postGuideStepsByIdStart
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1GuideStepsByIdStartRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postGuideStepsByIdStartRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1290,8 +1290,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1GuideBlueprint() : Unit {
-        val localVarResponse = putV1GuideBlueprintWithHttpInfo()
+    fun putGuideBlueprint() : Unit {
+        val localVarResponse = putGuideBlueprintWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1317,8 +1317,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1GuideBlueprintWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1GuideBlueprintRequestConfig()
+    fun putGuideBlueprintWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putGuideBlueprintRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1326,11 +1326,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1GuideBlueprint
+     * To obtain the request config of the operation putGuideBlueprint
      *
      * @return RequestConfig
      */
-    fun putV1GuideBlueprintRequestConfig() : RequestConfig<Unit> {
+    fun putGuideBlueprintRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1357,8 +1357,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1GuideCurriculum() : Unit {
-        val localVarResponse = putV1GuideCurriculumWithHttpInfo()
+    fun putGuideCurriculum() : Unit {
+        val localVarResponse = putGuideCurriculumWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1384,8 +1384,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1GuideCurriculumWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1GuideCurriculumRequestConfig()
+    fun putGuideCurriculumWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putGuideCurriculumRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1393,11 +1393,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1GuideCurriculum
+     * To obtain the request config of the operation putGuideCurriculum
      *
      * @return RequestConfig
      */
-    fun putV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
+    fun putGuideCurriculumRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

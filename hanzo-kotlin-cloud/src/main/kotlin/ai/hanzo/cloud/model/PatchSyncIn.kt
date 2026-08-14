@@ -25,9 +25,9 @@ import com.google.gson.annotations.SerializedName
  * @param actor Actor is the loop-guard identity the sync writes as. Omitted, the stored actor stands.
  * @param direction Direction is both, pull, push or off. Omitted, the stored direction stands.
  * @param id ID is the sync to update, from the path.
- * @param kind 
- * @param source Source, Target and Kind are DECLARED HERE IN ORDER TO BE REFUSED.  They are immutable by design — re-pointing a sync is a delete and a create, so a link can never silently start syncing somewhere else — but an UNDECLARED field is dropped by the binder before the handler sees it, so a request asking to repoint answered 200, changed nothing, and said nothing. The operator then believes a moved repository has been repointed and it has not.  Live: a sync still naming github.com/hanzoai/cloud after the repository moved to hanzo-inc/cloud failed every reconcile with \"Repository not found\", and the PATCH that appeared to fix it did nothing at all. Declaring the fields is what lets the documented immutability actually answer.
- * @param target 
+ * @param kind Kind names a different kind of sync, and is refused, for the same reason.
+ * @param source Source, Target and Kind are DECLARED HERE IN ORDER TO BE REFUSED.  They are immutable by design — re-pointing a sync is a delete and a create, so a link can never silently start syncing somewhere else — but an UNDECLARED field is dropped by the binder before the handler sees it, so a request asking to repoint answered 200, changed nothing, and said nothing. The operator then believes a moved repository has been repointed and it has not.  Live: a sync still naming github.com/hanzoai/cloud after the repository moved to hanzo-inc/cloud failed every reconcile with \"Repository not found\", and the PATCH that appeared to fix it did nothing at all. Declaring the fields is what lets the documented immutability actually answer. Source names a new upstream, and is refused. Delete this sync and create the one you want.
+ * @param target Target names a new native repository, and is refused, for the same reason.
  * @param trigger Trigger is webhook, poll or manual. Omitted, the stored trigger stands.
  */
 
@@ -46,13 +46,15 @@ data class PatchSyncIn (
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Kind names a different kind of sync, and is refused, for the same reason. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
-    /* Source, Target and Kind are DECLARED HERE IN ORDER TO BE REFUSED.  They are immutable by design — re-pointing a sync is a delete and a create, so a link can never silently start syncing somewhere else — but an UNDECLARED field is dropped by the binder before the handler sees it, so a request asking to repoint answered 200, changed nothing, and said nothing. The operator then believes a moved repository has been repointed and it has not.  Live: a sync still naming github.com/hanzoai/cloud after the repository moved to hanzo-inc/cloud failed every reconcile with \"Repository not found\", and the PATCH that appeared to fix it did nothing at all. Declaring the fields is what lets the documented immutability actually answer. */
+    /* Source, Target and Kind are DECLARED HERE IN ORDER TO BE REFUSED.  They are immutable by design — re-pointing a sync is a delete and a create, so a link can never silently start syncing somewhere else — but an UNDECLARED field is dropped by the binder before the handler sees it, so a request asking to repoint answered 200, changed nothing, and said nothing. The operator then believes a moved repository has been repointed and it has not.  Live: a sync still naming github.com/hanzoai/cloud after the repository moved to hanzo-inc/cloud failed every reconcile with \"Repository not found\", and the PATCH that appeared to fix it did nothing at all. Declaring the fields is what lets the documented immutability actually answer. Source names a new upstream, and is refused. Delete this sync and create the one you want. */
     @SerializedName("source")
     val source: EndpointReq? = null,
 
+    /* Target names a new native repository, and is refused, for the same reason. */
     @SerializedName("target")
     val target: EndpointReq? = null,
 

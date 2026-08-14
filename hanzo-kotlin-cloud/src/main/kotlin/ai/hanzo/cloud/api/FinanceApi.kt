@@ -67,8 +67,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinanceAccounts(scope: kotlin.String? = null, org: kotlin.String? = null) : AccountsOut {
-        val localVarResponse = getV1FinanceAccountsWithHttpInfo(scope = scope, org = org)
+    fun getFinanceAccounts(scope: kotlin.String? = null, org: kotlin.String? = null) : AccountsOut {
+        val localVarResponse = getFinanceAccountsWithHttpInfo(scope = scope, org = org)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccountsOut
@@ -97,8 +97,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinanceAccountsWithHttpInfo(scope: kotlin.String?, org: kotlin.String?) : ApiResponse<AccountsOut?> {
-        val localVariableConfig = getV1FinanceAccountsRequestConfig(scope = scope, org = org)
+    fun getFinanceAccountsWithHttpInfo(scope: kotlin.String?, org: kotlin.String?) : ApiResponse<AccountsOut?> {
+        val localVariableConfig = getFinanceAccountsRequestConfig(scope = scope, org = org)
 
         return request<Unit, AccountsOut>(
             localVariableConfig
@@ -106,13 +106,13 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1FinanceAccounts
+     * To obtain the request config of the operation getFinanceAccounts
      *
      * @param scope Scope is \&quot;house\&quot; to read the reserve/revenue/payout house accounts. SuperAdmin only. (optional)
      * @param org Org names another tenant to read. SuperAdmin only; ignored when scope&#x3D;house. (optional)
      * @return RequestConfig
      */
-    fun getV1FinanceAccountsRequestConfig(scope: kotlin.String?, org: kotlin.String?) : RequestConfig<Unit> {
+    fun getFinanceAccountsRequestConfig(scope: kotlin.String?, org: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -149,8 +149,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinanceBalance() : FinanceBalanceView {
-        val localVarResponse = getV1FinanceBalanceWithHttpInfo()
+    fun getFinanceBalance() : FinanceBalanceView {
+        val localVarResponse = getFinanceBalanceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FinanceBalanceView
@@ -177,8 +177,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinanceBalanceWithHttpInfo() : ApiResponse<FinanceBalanceView?> {
-        val localVariableConfig = getV1FinanceBalanceRequestConfig()
+    fun getFinanceBalanceWithHttpInfo() : ApiResponse<FinanceBalanceView?> {
+        val localVariableConfig = getFinanceBalanceRequestConfig()
 
         return request<Unit, FinanceBalanceView>(
             localVariableConfig
@@ -186,11 +186,11 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1FinanceBalance
+     * To obtain the request config of the operation getFinanceBalance
      *
      * @return RequestConfig
      */
-    fun getV1FinanceBalanceRequestConfig() : RequestConfig<Unit> {
+    fun getFinanceBalanceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -219,8 +219,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinanceCredits() : kotlin.collections.List<FinanceCredit> {
-        val localVarResponse = getV1FinanceCreditsWithHttpInfo()
+    fun getFinanceCredits() : kotlin.collections.List<FinanceCredit> {
+        val localVarResponse = getFinanceCreditsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FinanceCredit>
@@ -247,8 +247,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinanceCreditsWithHttpInfo() : ApiResponse<kotlin.collections.List<FinanceCredit>?> {
-        val localVariableConfig = getV1FinanceCreditsRequestConfig()
+    fun getFinanceCreditsWithHttpInfo() : ApiResponse<kotlin.collections.List<FinanceCredit>?> {
+        val localVariableConfig = getFinanceCreditsRequestConfig()
 
         return request<Unit, kotlin.collections.List<FinanceCredit>>(
             localVariableConfig
@@ -256,11 +256,11 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1FinanceCredits
+     * To obtain the request config of the operation getFinanceCredits
      *
      * @return RequestConfig
      */
-    fun getV1FinanceCreditsRequestConfig() : RequestConfig<Unit> {
+    fun getFinanceCreditsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -289,8 +289,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinanceInvoices() : kotlin.collections.List<FinanceInvoice> {
-        val localVarResponse = getV1FinanceInvoicesWithHttpInfo()
+    fun getFinanceInvoices() : kotlin.collections.List<FinanceInvoice> {
+        val localVarResponse = getFinanceInvoicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FinanceInvoice>
@@ -317,8 +317,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinanceInvoicesWithHttpInfo() : ApiResponse<kotlin.collections.List<FinanceInvoice>?> {
-        val localVariableConfig = getV1FinanceInvoicesRequestConfig()
+    fun getFinanceInvoicesWithHttpInfo() : ApiResponse<kotlin.collections.List<FinanceInvoice>?> {
+        val localVariableConfig = getFinanceInvoicesRequestConfig()
 
         return request<Unit, kotlin.collections.List<FinanceInvoice>>(
             localVariableConfig
@@ -326,11 +326,11 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1FinanceInvoices
+     * To obtain the request config of the operation getFinanceInvoices
      *
      * @return RequestConfig
      */
-    fun getV1FinanceInvoicesRequestConfig() : RequestConfig<Unit> {
+    fun getFinanceInvoicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -360,8 +360,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinanceLedger(range: kotlin.String? = null) : kotlin.collections.List<FinanceLedgerEntry> {
-        val localVarResponse = getV1FinanceLedgerWithHttpInfo(range = range)
+    fun getFinanceLedger(range: kotlin.String? = null) : kotlin.collections.List<FinanceLedgerEntry> {
+        val localVarResponse = getFinanceLedgerWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FinanceLedgerEntry>
@@ -389,8 +389,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinanceLedgerWithHttpInfo(range: kotlin.String?) : ApiResponse<kotlin.collections.List<FinanceLedgerEntry>?> {
-        val localVariableConfig = getV1FinanceLedgerRequestConfig(range = range)
+    fun getFinanceLedgerWithHttpInfo(range: kotlin.String?) : ApiResponse<kotlin.collections.List<FinanceLedgerEntry>?> {
+        val localVariableConfig = getFinanceLedgerRequestConfig(range = range)
 
         return request<Unit, kotlin.collections.List<FinanceLedgerEntry>>(
             localVariableConfig
@@ -398,12 +398,12 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1FinanceLedger
+     * To obtain the request config of the operation getFinanceLedger
      *
      * @param range Range is the window: 24h, 7d, 30d or 90d. Anything else — including absent — is 30d, so a typo silently widens the window to a month rather than failing. (optional)
      * @return RequestConfig
      */
-    fun getV1FinanceLedgerRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun getFinanceLedgerRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -437,8 +437,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinancePaymentMethods() : kotlin.collections.List<FinancePaymentMethod> {
-        val localVarResponse = getV1FinancePaymentMethodsWithHttpInfo()
+    fun getFinancePaymentMethods() : kotlin.collections.List<FinancePaymentMethod> {
+        val localVarResponse = getFinancePaymentMethodsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FinancePaymentMethod>
@@ -465,8 +465,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinancePaymentMethodsWithHttpInfo() : ApiResponse<kotlin.collections.List<FinancePaymentMethod>?> {
-        val localVariableConfig = getV1FinancePaymentMethodsRequestConfig()
+    fun getFinancePaymentMethodsWithHttpInfo() : ApiResponse<kotlin.collections.List<FinancePaymentMethod>?> {
+        val localVariableConfig = getFinancePaymentMethodsRequestConfig()
 
         return request<Unit, kotlin.collections.List<FinancePaymentMethod>>(
             localVariableConfig
@@ -474,11 +474,11 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1FinancePaymentMethods
+     * To obtain the request config of the operation getFinancePaymentMethods
      *
      * @return RequestConfig
      */
-    fun getV1FinancePaymentMethodsRequestConfig() : RequestConfig<Unit> {
+    fun getFinancePaymentMethodsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -507,8 +507,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinanceTreasury() : TreasuryReport {
-        val localVarResponse = getV1FinanceTreasuryWithHttpInfo()
+    fun getFinanceTreasury() : TreasuryReport {
+        val localVarResponse = getFinanceTreasuryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TreasuryReport
@@ -535,8 +535,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinanceTreasuryWithHttpInfo() : ApiResponse<TreasuryReport?> {
-        val localVariableConfig = getV1FinanceTreasuryRequestConfig()
+    fun getFinanceTreasuryWithHttpInfo() : ApiResponse<TreasuryReport?> {
+        val localVariableConfig = getFinanceTreasuryRequestConfig()
 
         return request<Unit, TreasuryReport>(
             localVariableConfig
@@ -544,11 +544,11 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1FinanceTreasury
+     * To obtain the request config of the operation getFinanceTreasury
      *
      * @return RequestConfig
      */
-    fun getV1FinanceTreasuryRequestConfig() : RequestConfig<Unit> {
+    fun getFinanceTreasuryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -578,8 +578,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinanceUsage(range: kotlin.String? = null) : FinanceUsageView {
-        val localVarResponse = getV1FinanceUsageWithHttpInfo(range = range)
+    fun getFinanceUsage(range: kotlin.String? = null) : FinanceUsageView {
+        val localVarResponse = getFinanceUsageWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FinanceUsageView
@@ -607,8 +607,8 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinanceUsageWithHttpInfo(range: kotlin.String?) : ApiResponse<FinanceUsageView?> {
-        val localVariableConfig = getV1FinanceUsageRequestConfig(range = range)
+    fun getFinanceUsageWithHttpInfo(range: kotlin.String?) : ApiResponse<FinanceUsageView?> {
+        val localVariableConfig = getFinanceUsageRequestConfig(range = range)
 
         return request<Unit, FinanceUsageView>(
             localVariableConfig
@@ -616,12 +616,12 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1FinanceUsage
+     * To obtain the request config of the operation getFinanceUsage
      *
      * @param range Range is the window: 24h, 7d, 30d or 90d. Anything else — including absent — is 30d, so a typo silently widens the window to a month rather than failing. (optional)
      * @return RequestConfig
      */
-    fun getV1FinanceUsageRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun getFinanceUsageRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {

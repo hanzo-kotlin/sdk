@@ -70,8 +70,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ContentBoard(status: kotlin.String? = null, project: kotlin.String? = null, doctype: kotlin.String? = null, limit: kotlin.Int? = null) : BoardPage {
-        val localVarResponse = getV1ContentBoardWithHttpInfo(status = status, project = project, doctype = doctype, limit = limit)
+    fun getContentBoard(status: kotlin.String? = null, project: kotlin.String? = null, doctype: kotlin.String? = null, limit: kotlin.Int? = null) : BoardPage {
+        val localVarResponse = getContentBoardWithHttpInfo(status = status, project = project, doctype = doctype, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BoardPage
@@ -102,8 +102,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ContentBoardWithHttpInfo(status: kotlin.String?, project: kotlin.String?, doctype: kotlin.String?, limit: kotlin.Int?) : ApiResponse<BoardPage?> {
-        val localVariableConfig = getV1ContentBoardRequestConfig(status = status, project = project, doctype = doctype, limit = limit)
+    fun getContentBoardWithHttpInfo(status: kotlin.String?, project: kotlin.String?, doctype: kotlin.String?, limit: kotlin.Int?) : ApiResponse<BoardPage?> {
+        val localVariableConfig = getContentBoardRequestConfig(status = status, project = project, doctype = doctype, limit = limit)
 
         return request<Unit, BoardPage>(
             localVariableConfig
@@ -111,7 +111,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1ContentBoard
+     * To obtain the request config of the operation getContentBoard
      *
      * @param status Status keeps only items in one lifecycle state (draft, in_review, approved, queued, published, archived). An undefined state is refused. (optional)
      * @param project Project keeps only items in one brand/site sub-scope. (optional)
@@ -119,7 +119,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param limit Limit caps the rows returned, clamped to 1000. Defaults to 200, which is also what a non-positive or unparseable value takes. (optional)
      * @return RequestConfig
      */
-    fun getV1ContentBoardRequestConfig(status: kotlin.String?, project: kotlin.String?, doctype: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getContentBoardRequestConfig(status: kotlin.String?, project: kotlin.String?, doctype: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -162,8 +162,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ContentChannels() : ChannelList {
-        val localVarResponse = getV1ContentChannelsWithHttpInfo()
+    fun getContentChannels() : ChannelList {
+        val localVarResponse = getContentChannelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ChannelList
@@ -190,8 +190,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ContentChannelsWithHttpInfo() : ApiResponse<ChannelList?> {
-        val localVariableConfig = getV1ContentChannelsRequestConfig()
+    fun getContentChannelsWithHttpInfo() : ApiResponse<ChannelList?> {
+        val localVariableConfig = getContentChannelsRequestConfig()
 
         return request<Unit, ChannelList>(
             localVariableConfig
@@ -199,11 +199,11 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1ContentChannels
+     * To obtain the request config of the operation getContentChannels
      *
      * @return RequestConfig
      */
-    fun getV1ContentChannelsRequestConfig() : RequestConfig<Unit> {
+    fun getContentChannelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -232,8 +232,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ContentLifecycle() : StateGraph {
-        val localVarResponse = getV1ContentLifecycleWithHttpInfo()
+    fun getContentLifecycle() : StateGraph {
+        val localVarResponse = getContentLifecycleWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StateGraph
@@ -260,8 +260,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ContentLifecycleWithHttpInfo() : ApiResponse<StateGraph?> {
-        val localVariableConfig = getV1ContentLifecycleRequestConfig()
+    fun getContentLifecycleWithHttpInfo() : ApiResponse<StateGraph?> {
+        val localVariableConfig = getContentLifecycleRequestConfig()
 
         return request<Unit, StateGraph>(
             localVariableConfig
@@ -269,11 +269,11 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1ContentLifecycle
+     * To obtain the request config of the operation getContentLifecycle
      *
      * @return RequestConfig
      */
-    fun getV1ContentLifecycleRequestConfig() : RequestConfig<Unit> {
+    fun getContentLifecycleRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -305,8 +305,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ContentByDoctypeByNameTransition(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : TransitionResult {
-        val localVarResponse = postV1ContentByDoctypeByNameTransitionWithHttpInfo(doctype = doctype, name = name, transitionIn = transitionIn)
+    fun postContentByDoctypeByNameTransition(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : TransitionResult {
+        val localVarResponse = postContentByDoctypeByNameTransitionWithHttpInfo(doctype = doctype, name = name, transitionIn = transitionIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TransitionResult
@@ -336,8 +336,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ContentByDoctypeByNameTransitionWithHttpInfo(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : ApiResponse<TransitionResult?> {
-        val localVariableConfig = postV1ContentByDoctypeByNameTransitionRequestConfig(doctype = doctype, name = name, transitionIn = transitionIn)
+    fun postContentByDoctypeByNameTransitionWithHttpInfo(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : ApiResponse<TransitionResult?> {
+        val localVariableConfig = postContentByDoctypeByNameTransitionRequestConfig(doctype = doctype, name = name, transitionIn = transitionIn)
 
         return request<TransitionIn, TransitionResult>(
             localVariableConfig
@@ -345,14 +345,14 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1ContentByDoctypeByNameTransition
+     * To obtain the request config of the operation postContentByDoctypeByNameTransition
      *
      * @param doctype DocType is the content type to act on, from the path.
      * @param name Name is the document to act on, from the path.
      * @param transitionIn 
      * @return RequestConfig
      */
-    fun postV1ContentByDoctypeByNameTransitionRequestConfig(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : RequestConfig<TransitionIn> {
+    fun postContentByDoctypeByNameTransitionRequestConfig(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : RequestConfig<TransitionIn> {
         val localVariableBody = transitionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -383,8 +383,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ContentGenerate(generateInput: GenerateInput) : GenerateResult {
-        val localVarResponse = postV1ContentGenerateWithHttpInfo(generateInput = generateInput)
+    fun postContentGenerate(generateInput: GenerateInput) : GenerateResult {
+        val localVarResponse = postContentGenerateWithHttpInfo(generateInput = generateInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GenerateResult
@@ -412,8 +412,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ContentGenerateWithHttpInfo(generateInput: GenerateInput) : ApiResponse<GenerateResult?> {
-        val localVariableConfig = postV1ContentGenerateRequestConfig(generateInput = generateInput)
+    fun postContentGenerateWithHttpInfo(generateInput: GenerateInput) : ApiResponse<GenerateResult?> {
+        val localVariableConfig = postContentGenerateRequestConfig(generateInput = generateInput)
 
         return request<GenerateInput, GenerateResult>(
             localVariableConfig
@@ -421,12 +421,12 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1ContentGenerate
+     * To obtain the request config of the operation postContentGenerate
      *
      * @param generateInput 
      * @return RequestConfig
      */
-    fun postV1ContentGenerateRequestConfig(generateInput: GenerateInput) : RequestConfig<GenerateInput> {
+    fun postContentGenerateRequestConfig(generateInput: GenerateInput) : RequestConfig<GenerateInput> {
         val localVariableBody = generateInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -457,8 +457,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ContentPublish(publishInput: PublishInput) : PublishResult {
-        val localVarResponse = postV1ContentPublishWithHttpInfo(publishInput = publishInput)
+    fun postContentPublish(publishInput: PublishInput) : PublishResult {
+        val localVarResponse = postContentPublishWithHttpInfo(publishInput = publishInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PublishResult
@@ -486,8 +486,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ContentPublishWithHttpInfo(publishInput: PublishInput) : ApiResponse<PublishResult?> {
-        val localVariableConfig = postV1ContentPublishRequestConfig(publishInput = publishInput)
+    fun postContentPublishWithHttpInfo(publishInput: PublishInput) : ApiResponse<PublishResult?> {
+        val localVariableConfig = postContentPublishRequestConfig(publishInput = publishInput)
 
         return request<PublishInput, PublishResult>(
             localVariableConfig
@@ -495,12 +495,12 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1ContentPublish
+     * To obtain the request config of the operation postContentPublish
      *
      * @param publishInput 
      * @return RequestConfig
      */
-    fun postV1ContentPublishRequestConfig(publishInput: PublishInput) : RequestConfig<PublishInput> {
+    fun postContentPublishRequestConfig(publishInput: PublishInput) : RequestConfig<PublishInput> {
         val localVariableBody = publishInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

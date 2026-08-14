@@ -56,8 +56,8 @@ class CompletionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Completions() : Unit {
-        val localVarResponse = postV1CompletionsWithHttpInfo()
+    fun postCompletions() : Unit {
+        val localVarResponse = postCompletionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class CompletionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CompletionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CompletionsRequestConfig()
+    fun postCompletionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCompletionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class CompletionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1Completions
+     * To obtain the request config of the operation postCompletions
      *
      * @return RequestConfig
      */
-    fun postV1CompletionsRequestConfig() : RequestConfig<Unit> {
+    fun postCompletionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -56,8 +56,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EsignDocuments() : Unit {
-        val localVarResponse = getV1EsignDocumentsWithHttpInfo()
+    fun getEsignDocuments() : Unit {
+        val localVarResponse = getEsignDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EsignDocumentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1EsignDocumentsRequestConfig()
+    fun getEsignDocumentsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getEsignDocumentsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EsignDocuments
+     * To obtain the request config of the operation getEsignDocuments
      *
      * @return RequestConfig
      */
-    fun getV1EsignDocumentsRequestConfig() : RequestConfig<Unit> {
+    fun getEsignDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -124,8 +124,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EsignDocumentsById(id: kotlin.String) : Unit {
-        val localVarResponse = getV1EsignDocumentsByIdWithHttpInfo(id = id)
+    fun getEsignDocumentsById(id: kotlin.String) : Unit {
+        val localVarResponse = getEsignDocumentsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -152,8 +152,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EsignDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1EsignDocumentsByIdRequestConfig(id = id)
+    fun getEsignDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getEsignDocumentsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -161,12 +161,12 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EsignDocumentsById
+     * To obtain the request config of the operation getEsignDocumentsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1EsignDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getEsignDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -194,8 +194,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EsignDocumentsByIdAudit(id: kotlin.String) : Unit {
-        val localVarResponse = getV1EsignDocumentsByIdAuditWithHttpInfo(id = id)
+    fun getEsignDocumentsByIdAudit(id: kotlin.String) : Unit {
+        val localVarResponse = getEsignDocumentsByIdAuditWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -222,8 +222,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EsignDocumentsByIdAuditWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1EsignDocumentsByIdAuditRequestConfig(id = id)
+    fun getEsignDocumentsByIdAuditWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getEsignDocumentsByIdAuditRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -231,12 +231,12 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EsignDocumentsByIdAudit
+     * To obtain the request config of the operation getEsignDocumentsByIdAudit
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1EsignDocumentsByIdAuditRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getEsignDocumentsByIdAuditRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -264,8 +264,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EsignDocumentsByIdDownload(id: kotlin.String) : Unit {
-        val localVarResponse = getV1EsignDocumentsByIdDownloadWithHttpInfo(id = id)
+    fun getEsignDocumentsByIdDownload(id: kotlin.String) : Unit {
+        val localVarResponse = getEsignDocumentsByIdDownloadWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -292,8 +292,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EsignDocumentsByIdDownloadWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1EsignDocumentsByIdDownloadRequestConfig(id = id)
+    fun getEsignDocumentsByIdDownloadWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getEsignDocumentsByIdDownloadRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -301,12 +301,12 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EsignDocumentsByIdDownload
+     * To obtain the request config of the operation getEsignDocumentsByIdDownload
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1EsignDocumentsByIdDownloadRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getEsignDocumentsByIdDownloadRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -333,8 +333,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EsignHealth() : Unit {
-        val localVarResponse = getV1EsignHealthWithHttpInfo()
+    fun getEsignHealth() : Unit {
+        val localVarResponse = getEsignHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -360,8 +360,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EsignHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1EsignHealthRequestConfig()
+    fun getEsignHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getEsignHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -369,11 +369,11 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EsignHealth
+     * To obtain the request config of the operation getEsignHealth
      *
      * @return RequestConfig
      */
-    fun getV1EsignHealthRequestConfig() : RequestConfig<Unit> {
+    fun getEsignHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -402,8 +402,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EsignOByOrgSignByToken(org: kotlin.String, token: kotlin.String) : Unit {
-        val localVarResponse = getV1EsignOByOrgSignByTokenWithHttpInfo(org = org, token = token)
+    fun getEsignOByOrgSignByToken(org: kotlin.String, token: kotlin.String) : Unit {
+        val localVarResponse = getEsignOByOrgSignByTokenWithHttpInfo(org = org, token = token)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -431,8 +431,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EsignOByOrgSignByTokenWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1EsignOByOrgSignByTokenRequestConfig(org = org, token = token)
+    fun getEsignOByOrgSignByTokenWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getEsignOByOrgSignByTokenRequestConfig(org = org, token = token)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -440,13 +440,13 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EsignOByOrgSignByToken
+     * To obtain the request config of the operation getEsignOByOrgSignByToken
      *
      * @param org 
      * @param token 
      * @return RequestConfig
      */
-    fun getV1EsignOByOrgSignByTokenRequestConfig(org: kotlin.String, token: kotlin.String) : RequestConfig<Unit> {
+    fun getEsignOByOrgSignByTokenRequestConfig(org: kotlin.String, token: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -473,8 +473,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EsignDocuments() : Unit {
-        val localVarResponse = postV1EsignDocumentsWithHttpInfo()
+    fun postEsignDocuments() : Unit {
+        val localVarResponse = postEsignDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -500,8 +500,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EsignDocumentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1EsignDocumentsRequestConfig()
+    fun postEsignDocumentsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postEsignDocumentsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -509,11 +509,11 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EsignDocuments
+     * To obtain the request config of the operation postEsignDocuments
      *
      * @return RequestConfig
      */
-    fun postV1EsignDocumentsRequestConfig() : RequestConfig<Unit> {
+    fun postEsignDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -541,8 +541,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EsignDocumentsByIdFields(id: kotlin.String) : Unit {
-        val localVarResponse = postV1EsignDocumentsByIdFieldsWithHttpInfo(id = id)
+    fun postEsignDocumentsByIdFields(id: kotlin.String) : Unit {
+        val localVarResponse = postEsignDocumentsByIdFieldsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -569,8 +569,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EsignDocumentsByIdFieldsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1EsignDocumentsByIdFieldsRequestConfig(id = id)
+    fun postEsignDocumentsByIdFieldsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postEsignDocumentsByIdFieldsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -578,12 +578,12 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EsignDocumentsByIdFields
+     * To obtain the request config of the operation postEsignDocumentsByIdFields
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1EsignDocumentsByIdFieldsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postEsignDocumentsByIdFieldsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -611,8 +611,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EsignDocumentsByIdRecipients(id: kotlin.String) : Unit {
-        val localVarResponse = postV1EsignDocumentsByIdRecipientsWithHttpInfo(id = id)
+    fun postEsignDocumentsByIdRecipients(id: kotlin.String) : Unit {
+        val localVarResponse = postEsignDocumentsByIdRecipientsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -639,8 +639,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EsignDocumentsByIdRecipientsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1EsignDocumentsByIdRecipientsRequestConfig(id = id)
+    fun postEsignDocumentsByIdRecipientsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postEsignDocumentsByIdRecipientsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -648,12 +648,12 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EsignDocumentsByIdRecipients
+     * To obtain the request config of the operation postEsignDocumentsByIdRecipients
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1EsignDocumentsByIdRecipientsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postEsignDocumentsByIdRecipientsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -681,8 +681,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EsignDocumentsByIdSend(id: kotlin.String) : Unit {
-        val localVarResponse = postV1EsignDocumentsByIdSendWithHttpInfo(id = id)
+    fun postEsignDocumentsByIdSend(id: kotlin.String) : Unit {
+        val localVarResponse = postEsignDocumentsByIdSendWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -709,8 +709,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EsignDocumentsByIdSendWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1EsignDocumentsByIdSendRequestConfig(id = id)
+    fun postEsignDocumentsByIdSendWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postEsignDocumentsByIdSendRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -718,12 +718,12 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EsignDocumentsByIdSend
+     * To obtain the request config of the operation postEsignDocumentsByIdSend
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1EsignDocumentsByIdSendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postEsignDocumentsByIdSendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -752,8 +752,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EsignOByOrgSignByTokenComplete(org: kotlin.String, token: kotlin.String) : Unit {
-        val localVarResponse = postV1EsignOByOrgSignByTokenCompleteWithHttpInfo(org = org, token = token)
+    fun postEsignOByOrgSignByTokenComplete(org: kotlin.String, token: kotlin.String) : Unit {
+        val localVarResponse = postEsignOByOrgSignByTokenCompleteWithHttpInfo(org = org, token = token)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -781,8 +781,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EsignOByOrgSignByTokenCompleteWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1EsignOByOrgSignByTokenCompleteRequestConfig(org = org, token = token)
+    fun postEsignOByOrgSignByTokenCompleteWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postEsignOByOrgSignByTokenCompleteRequestConfig(org = org, token = token)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -790,13 +790,13 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EsignOByOrgSignByTokenComplete
+     * To obtain the request config of the operation postEsignOByOrgSignByTokenComplete
      *
      * @param org 
      * @param token 
      * @return RequestConfig
      */
-    fun postV1EsignOByOrgSignByTokenCompleteRequestConfig(org: kotlin.String, token: kotlin.String) : RequestConfig<Unit> {
+    fun postEsignOByOrgSignByTokenCompleteRequestConfig(org: kotlin.String, token: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -826,8 +826,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EsignOByOrgSignByTokenFieldsByFieldid(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : Unit {
-        val localVarResponse = postV1EsignOByOrgSignByTokenFieldsByFieldidWithHttpInfo(org = org, token = token, fieldId = fieldId)
+    fun postEsignOByOrgSignByTokenFieldsByFieldid(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : Unit {
+        val localVarResponse = postEsignOByOrgSignByTokenFieldsByFieldidWithHttpInfo(org = org, token = token, fieldId = fieldId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -856,8 +856,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EsignOByOrgSignByTokenFieldsByFieldidWithHttpInfo(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1EsignOByOrgSignByTokenFieldsByFieldidRequestConfig(org = org, token = token, fieldId = fieldId)
+    fun postEsignOByOrgSignByTokenFieldsByFieldidWithHttpInfo(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postEsignOByOrgSignByTokenFieldsByFieldidRequestConfig(org = org, token = token, fieldId = fieldId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -865,14 +865,14 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EsignOByOrgSignByTokenFieldsByFieldid
+     * To obtain the request config of the operation postEsignOByOrgSignByTokenFieldsByFieldid
      *
      * @param org 
      * @param token 
      * @param fieldId 
      * @return RequestConfig
      */
-    fun postV1EsignOByOrgSignByTokenFieldsByFieldidRequestConfig(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : RequestConfig<Unit> {
+    fun postEsignOByOrgSignByTokenFieldsByFieldidRequestConfig(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -901,8 +901,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EsignOByOrgSignByTokenReject(org: kotlin.String, token: kotlin.String) : Unit {
-        val localVarResponse = postV1EsignOByOrgSignByTokenRejectWithHttpInfo(org = org, token = token)
+    fun postEsignOByOrgSignByTokenReject(org: kotlin.String, token: kotlin.String) : Unit {
+        val localVarResponse = postEsignOByOrgSignByTokenRejectWithHttpInfo(org = org, token = token)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -930,8 +930,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EsignOByOrgSignByTokenRejectWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1EsignOByOrgSignByTokenRejectRequestConfig(org = org, token = token)
+    fun postEsignOByOrgSignByTokenRejectWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postEsignOByOrgSignByTokenRejectRequestConfig(org = org, token = token)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -939,13 +939,13 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EsignOByOrgSignByTokenReject
+     * To obtain the request config of the operation postEsignOByOrgSignByTokenReject
      *
      * @param org 
      * @param token 
      * @return RequestConfig
      */
-    fun postV1EsignOByOrgSignByTokenRejectRequestConfig(org: kotlin.String, token: kotlin.String) : RequestConfig<Unit> {
+    fun postEsignOByOrgSignByTokenRejectRequestConfig(org: kotlin.String, token: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

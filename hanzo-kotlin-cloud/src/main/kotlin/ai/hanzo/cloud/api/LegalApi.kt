@@ -70,8 +70,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LegalDocuments(limit: kotlin.Int? = null) : DocumentPage {
-        val localVarResponse = getV1LegalDocumentsWithHttpInfo(limit = limit)
+    fun getLegalDocuments(limit: kotlin.Int? = null) : DocumentPage {
+        val localVarResponse = getLegalDocumentsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DocumentPage
@@ -99,8 +99,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LegalDocumentsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DocumentPage?> {
-        val localVariableConfig = getV1LegalDocumentsRequestConfig(limit = limit)
+    fun getLegalDocumentsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DocumentPage?> {
+        val localVariableConfig = getLegalDocumentsRequestConfig(limit = limit)
 
         return request<Unit, DocumentPage>(
             localVariableConfig
@@ -108,12 +108,12 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LegalDocuments
+     * To obtain the request config of the operation getLegalDocuments
      *
      * @param limit Limit bounds the page. Absent or unparseable means the store&#39;s own default. (optional)
      * @return RequestConfig
      */
-    fun getV1LegalDocumentsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getLegalDocumentsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -148,8 +148,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LegalDocumentsById(id: kotlin.String) : DocumentReply {
-        val localVarResponse = getV1LegalDocumentsByIdWithHttpInfo(id = id)
+    fun getLegalDocumentsById(id: kotlin.String) : DocumentReply {
+        val localVarResponse = getLegalDocumentsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DocumentReply
@@ -177,8 +177,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LegalDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DocumentReply?> {
-        val localVariableConfig = getV1LegalDocumentsByIdRequestConfig(id = id)
+    fun getLegalDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DocumentReply?> {
+        val localVariableConfig = getLegalDocumentsByIdRequestConfig(id = id)
 
         return request<Unit, DocumentReply>(
             localVariableConfig
@@ -186,12 +186,12 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LegalDocumentsById
+     * To obtain the request config of the operation getLegalDocumentsById
      *
      * @param id ID is the document&#39;s server-minted handle, \&quot;doc_\&quot;-prefixed.
      * @return RequestConfig
      */
-    fun getV1LegalDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getLegalDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -221,8 +221,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LegalFilings(limit: kotlin.Int? = null) : FilingPage {
-        val localVarResponse = getV1LegalFilingsWithHttpInfo(limit = limit)
+    fun getLegalFilings(limit: kotlin.Int? = null) : FilingPage {
+        val localVarResponse = getLegalFilingsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FilingPage
@@ -250,8 +250,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LegalFilingsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<FilingPage?> {
-        val localVariableConfig = getV1LegalFilingsRequestConfig(limit = limit)
+    fun getLegalFilingsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<FilingPage?> {
+        val localVariableConfig = getLegalFilingsRequestConfig(limit = limit)
 
         return request<Unit, FilingPage>(
             localVariableConfig
@@ -259,12 +259,12 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LegalFilings
+     * To obtain the request config of the operation getLegalFilings
      *
      * @param limit Limit bounds the page. Absent or unparseable means the store&#39;s own default. (optional)
      * @return RequestConfig
      */
-    fun getV1LegalFilingsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getLegalFilingsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -298,8 +298,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LegalHealth() : LegalHealth {
-        val localVarResponse = getV1LegalHealthWithHttpInfo()
+    fun getLegalHealth() : LegalHealth {
+        val localVarResponse = getLegalHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LegalHealth
@@ -326,8 +326,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LegalHealthWithHttpInfo() : ApiResponse<LegalHealth?> {
-        val localVariableConfig = getV1LegalHealthRequestConfig()
+    fun getLegalHealthWithHttpInfo() : ApiResponse<LegalHealth?> {
+        val localVariableConfig = getLegalHealthRequestConfig()
 
         return request<Unit, LegalHealth>(
             localVariableConfig
@@ -335,11 +335,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LegalHealth
+     * To obtain the request config of the operation getLegalHealth
      *
      * @return RequestConfig
      */
-    fun getV1LegalHealthRequestConfig() : RequestConfig<Unit> {
+    fun getLegalHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -368,8 +368,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LegalTemplates() : TemplateCatalog {
-        val localVarResponse = getV1LegalTemplatesWithHttpInfo()
+    fun getLegalTemplates() : TemplateCatalog {
+        val localVarResponse = getLegalTemplatesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TemplateCatalog
@@ -396,8 +396,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LegalTemplatesWithHttpInfo() : ApiResponse<TemplateCatalog?> {
-        val localVariableConfig = getV1LegalTemplatesRequestConfig()
+    fun getLegalTemplatesWithHttpInfo() : ApiResponse<TemplateCatalog?> {
+        val localVariableConfig = getLegalTemplatesRequestConfig()
 
         return request<Unit, TemplateCatalog>(
             localVariableConfig
@@ -405,11 +405,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LegalTemplates
+     * To obtain the request config of the operation getLegalTemplates
      *
      * @return RequestConfig
      */
-    fun getV1LegalTemplatesRequestConfig() : RequestConfig<Unit> {
+    fun getLegalTemplatesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -439,8 +439,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LegalTemplatesById(id: kotlin.String) : TemplateReply {
-        val localVarResponse = getV1LegalTemplatesByIdWithHttpInfo(id = id)
+    fun getLegalTemplatesById(id: kotlin.String) : TemplateReply {
+        val localVarResponse = getLegalTemplatesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TemplateReply
@@ -468,8 +468,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LegalTemplatesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TemplateReply?> {
-        val localVariableConfig = getV1LegalTemplatesByIdRequestConfig(id = id)
+    fun getLegalTemplatesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TemplateReply?> {
+        val localVariableConfig = getLegalTemplatesByIdRequestConfig(id = id)
 
         return request<Unit, TemplateReply>(
             localVariableConfig
@@ -477,12 +477,12 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1LegalTemplatesById
+     * To obtain the request config of the operation getLegalTemplatesById
      *
      * @param id ID is the template&#39;s stable id, e.g. \&quot;nda\&quot; or \&quot;safe\&quot;.
      * @return RequestConfig
      */
-    fun getV1LegalTemplatesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getLegalTemplatesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -512,8 +512,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LegalDocuments(generateRequest: GenerateRequest) : DocumentReply {
-        val localVarResponse = postV1LegalDocumentsWithHttpInfo(generateRequest = generateRequest)
+    fun postLegalDocuments(generateRequest: GenerateRequest) : DocumentReply {
+        val localVarResponse = postLegalDocumentsWithHttpInfo(generateRequest = generateRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DocumentReply
@@ -541,8 +541,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LegalDocumentsWithHttpInfo(generateRequest: GenerateRequest) : ApiResponse<DocumentReply?> {
-        val localVariableConfig = postV1LegalDocumentsRequestConfig(generateRequest = generateRequest)
+    fun postLegalDocumentsWithHttpInfo(generateRequest: GenerateRequest) : ApiResponse<DocumentReply?> {
+        val localVariableConfig = postLegalDocumentsRequestConfig(generateRequest = generateRequest)
 
         return request<GenerateRequest, DocumentReply>(
             localVariableConfig
@@ -550,12 +550,12 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1LegalDocuments
+     * To obtain the request config of the operation postLegalDocuments
      *
      * @param generateRequest 
      * @return RequestConfig
      */
-    fun postV1LegalDocumentsRequestConfig(generateRequest: GenerateRequest) : RequestConfig<GenerateRequest> {
+    fun postLegalDocumentsRequestConfig(generateRequest: GenerateRequest) : RequestConfig<GenerateRequest> {
         val localVariableBody = generateRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -587,8 +587,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LegalDocumentsByIdSign(id: kotlin.String, signRequest: SignRequest) : SignReply {
-        val localVarResponse = postV1LegalDocumentsByIdSignWithHttpInfo(id = id, signRequest = signRequest)
+    fun postLegalDocumentsByIdSign(id: kotlin.String, signRequest: SignRequest) : SignReply {
+        val localVarResponse = postLegalDocumentsByIdSignWithHttpInfo(id = id, signRequest = signRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SignReply
@@ -617,8 +617,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LegalDocumentsByIdSignWithHttpInfo(id: kotlin.String, signRequest: SignRequest) : ApiResponse<SignReply?> {
-        val localVariableConfig = postV1LegalDocumentsByIdSignRequestConfig(id = id, signRequest = signRequest)
+    fun postLegalDocumentsByIdSignWithHttpInfo(id: kotlin.String, signRequest: SignRequest) : ApiResponse<SignReply?> {
+        val localVariableConfig = postLegalDocumentsByIdSignRequestConfig(id = id, signRequest = signRequest)
 
         return request<SignRequest, SignReply>(
             localVariableConfig
@@ -626,13 +626,13 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1LegalDocumentsByIdSign
+     * To obtain the request config of the operation postLegalDocumentsByIdSign
      *
      * @param id ID is the document to send for signature, from the path.
      * @param signRequest 
      * @return RequestConfig
      */
-    fun postV1LegalDocumentsByIdSignRequestConfig(id: kotlin.String, signRequest: SignRequest) : RequestConfig<SignRequest> {
+    fun postLegalDocumentsByIdSignRequestConfig(id: kotlin.String, signRequest: SignRequest) : RequestConfig<SignRequest> {
         val localVariableBody = signRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -662,8 +662,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LegalDocumentsByIdSignComplete(id: kotlin.String) : Unit {
-        val localVarResponse = postV1LegalDocumentsByIdSignCompleteWithHttpInfo(id = id)
+    fun postLegalDocumentsByIdSignComplete(id: kotlin.String) : Unit {
+        val localVarResponse = postLegalDocumentsByIdSignCompleteWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -690,8 +690,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LegalDocumentsByIdSignCompleteWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1LegalDocumentsByIdSignCompleteRequestConfig(id = id)
+    fun postLegalDocumentsByIdSignCompleteWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postLegalDocumentsByIdSignCompleteRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -699,12 +699,12 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1LegalDocumentsByIdSignComplete
+     * To obtain the request config of the operation postLegalDocumentsByIdSignComplete
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1LegalDocumentsByIdSignCompleteRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postLegalDocumentsByIdSignCompleteRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -733,8 +733,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LegalFilings(filingRequest: FilingRequest) : FilingReply {
-        val localVarResponse = postV1LegalFilingsWithHttpInfo(filingRequest = filingRequest)
+    fun postLegalFilings(filingRequest: FilingRequest) : FilingReply {
+        val localVarResponse = postLegalFilingsWithHttpInfo(filingRequest = filingRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FilingReply
@@ -762,8 +762,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LegalFilingsWithHttpInfo(filingRequest: FilingRequest) : ApiResponse<FilingReply?> {
-        val localVariableConfig = postV1LegalFilingsRequestConfig(filingRequest = filingRequest)
+    fun postLegalFilingsWithHttpInfo(filingRequest: FilingRequest) : ApiResponse<FilingReply?> {
+        val localVariableConfig = postLegalFilingsRequestConfig(filingRequest = filingRequest)
 
         return request<FilingRequest, FilingReply>(
             localVariableConfig
@@ -771,12 +771,12 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1LegalFilings
+     * To obtain the request config of the operation postLegalFilings
      *
      * @param filingRequest 
      * @return RequestConfig
      */
-    fun postV1LegalFilingsRequestConfig(filingRequest: FilingRequest) : RequestConfig<FilingRequest> {
+    fun postLegalFilingsRequestConfig(filingRequest: FilingRequest) : RequestConfig<FilingRequest> {
         val localVariableBody = filingRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -808,8 +808,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1LegalTemplatesById(id: kotlin.String, templateOverride: TemplateOverride) : TemplateReply {
-        val localVarResponse = putV1LegalTemplatesByIdWithHttpInfo(id = id, templateOverride = templateOverride)
+    fun putLegalTemplatesById(id: kotlin.String, templateOverride: TemplateOverride) : TemplateReply {
+        val localVarResponse = putLegalTemplatesByIdWithHttpInfo(id = id, templateOverride = templateOverride)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TemplateReply
@@ -838,8 +838,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1LegalTemplatesByIdWithHttpInfo(id: kotlin.String, templateOverride: TemplateOverride) : ApiResponse<TemplateReply?> {
-        val localVariableConfig = putV1LegalTemplatesByIdRequestConfig(id = id, templateOverride = templateOverride)
+    fun putLegalTemplatesByIdWithHttpInfo(id: kotlin.String, templateOverride: TemplateOverride) : ApiResponse<TemplateReply?> {
+        val localVariableConfig = putLegalTemplatesByIdRequestConfig(id = id, templateOverride = templateOverride)
 
         return request<TemplateOverride, TemplateReply>(
             localVariableConfig
@@ -847,13 +847,13 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1LegalTemplatesById
+     * To obtain the request config of the operation putLegalTemplatesById
      *
      * @param id ID is the template to override, from the path. Overriding a built-in id inherits that built-in&#39;s category, title and counsel-review posture.
      * @param templateOverride 
      * @return RequestConfig
      */
-    fun putV1LegalTemplatesByIdRequestConfig(id: kotlin.String, templateOverride: TemplateOverride) : RequestConfig<TemplateOverride> {
+    fun putLegalTemplatesByIdRequestConfig(id: kotlin.String, templateOverride: TemplateOverride) : RequestConfig<TemplateOverride> {
         val localVariableBody = templateOverride
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

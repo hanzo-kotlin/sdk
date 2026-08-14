@@ -56,8 +56,8 @@ class DevBridgeApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DevBridge() : Unit {
-        val localVarResponse = getV1DevBridgeWithHttpInfo()
+    fun getDevBridge() : Unit {
+        val localVarResponse = getDevBridgeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class DevBridgeApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DevBridgeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DevBridgeRequestConfig()
+    fun getDevBridgeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getDevBridgeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class DevBridgeApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1DevBridge
+     * To obtain the request config of the operation getDevBridge
      *
      * @return RequestConfig
      */
-    fun getV1DevBridgeRequestConfig() : RequestConfig<Unit> {
+    fun getDevBridgeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

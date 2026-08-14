@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param branch 
- * @param repo 
- * @param routed 
- * @param sessionId 
- * @param targetId 
+ * @param branch Branch is the ref the run will push its work to, and the ONLY ref it is permitted to write. It exists before the work does, so it is safe to tell somebody where to look while the run is still going.
+ * @param repo Repo is the repository the run was admitted against, echoed back as the engine resolved it.
+ * @param routed Routed says the run went to one of the org's own registered machines rather than to a sandbox in our cluster. False is the ordinary case.
+ * @param sessionId SessionID is the run's handle: its durable record, and the id its live progress streams under at /v1/agents/sessions/{sessionId}/stream. Every later question about this run is asked with it.
+ * @param targetId TargetID names that machine when Routed is true, and is empty otherwise.
  */
 
 
 data class CodingStarted (
 
+    /* Branch is the ref the run will push its work to, and the ONLY ref it is permitted to write. It exists before the work does, so it is safe to tell somebody where to look while the run is still going. */
     @SerializedName("branch")
     val branch: kotlin.String? = null,
 
+    /* Repo is the repository the run was admitted against, echoed back as the engine resolved it. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* Routed says the run went to one of the org's own registered machines rather than to a sandbox in our cluster. False is the ordinary case. */
     @SerializedName("routed")
     val routed: kotlin.Boolean? = null,
 
+    /* SessionID is the run's handle: its durable record, and the id its live progress streams under at /v1/agents/sessions/{sessionId}/stream. Every later question about this run is asked with it. */
     @SerializedName("sessionId")
     val sessionId: kotlin.String? = null,
 
+    /* TargetID names that machine when Routed is true, and is empty otherwise. */
     @SerializedName("targetId")
     val targetId: kotlin.String? = null
 

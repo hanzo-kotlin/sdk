@@ -62,8 +62,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PromptsByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PromptsByNameWithHttpInfo(name = name)
+    fun deletePromptsByName(name: kotlin.String) : Unit {
+        val localVarResponse = deletePromptsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -90,8 +90,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PromptsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PromptsByNameRequestConfig(name = name)
+    fun deletePromptsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePromptsByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -99,12 +99,12 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PromptsByName
+     * To obtain the request config of the operation deletePromptsByName
      *
      * @param name Name is the prompt to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1PromptsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deletePromptsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -132,8 +132,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Prompts() : PromptList {
-        val localVarResponse = getV1PromptsWithHttpInfo()
+    fun getPrompts() : PromptList {
+        val localVarResponse = getPromptsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PromptList
@@ -160,8 +160,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PromptsWithHttpInfo() : ApiResponse<PromptList?> {
-        val localVariableConfig = getV1PromptsRequestConfig()
+    fun getPromptsWithHttpInfo() : ApiResponse<PromptList?> {
+        val localVariableConfig = getPromptsRequestConfig()
 
         return request<Unit, PromptList>(
             localVariableConfig
@@ -169,11 +169,11 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Prompts
+     * To obtain the request config of the operation getPrompts
      *
      * @return RequestConfig
      */
-    fun getV1PromptsRequestConfig() : RequestConfig<Unit> {
+    fun getPromptsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -203,8 +203,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PromptsByName(name: kotlin.String) : PromptDetail {
-        val localVarResponse = getV1PromptsByNameWithHttpInfo(name = name)
+    fun getPromptsByName(name: kotlin.String) : PromptDetail {
+        val localVarResponse = getPromptsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PromptDetail
@@ -232,8 +232,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PromptsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<PromptDetail?> {
-        val localVariableConfig = getV1PromptsByNameRequestConfig(name = name)
+    fun getPromptsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<PromptDetail?> {
+        val localVariableConfig = getPromptsByNameRequestConfig(name = name)
 
         return request<Unit, PromptDetail>(
             localVariableConfig
@@ -241,12 +241,12 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PromptsByName
+     * To obtain the request config of the operation getPromptsByName
      *
      * @param name Name is the prompt to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1PromptsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getPromptsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -275,8 +275,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PromptsCatalog() : CatalogList {
-        val localVarResponse = getV1PromptsCatalogWithHttpInfo()
+    fun getPromptsCatalog() : CatalogList {
+        val localVarResponse = getPromptsCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CatalogList
@@ -303,8 +303,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PromptsCatalogWithHttpInfo() : ApiResponse<CatalogList?> {
-        val localVariableConfig = getV1PromptsCatalogRequestConfig()
+    fun getPromptsCatalogWithHttpInfo() : ApiResponse<CatalogList?> {
+        val localVariableConfig = getPromptsCatalogRequestConfig()
 
         return request<Unit, CatalogList>(
             localVariableConfig
@@ -312,11 +312,11 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PromptsCatalog
+     * To obtain the request config of the operation getPromptsCatalog
      *
      * @return RequestConfig
      */
-    fun getV1PromptsCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getPromptsCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -345,8 +345,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PromptsMetrics() : MetricList {
-        val localVarResponse = getV1PromptsMetricsWithHttpInfo()
+    fun getPromptsMetrics() : MetricList {
+        val localVarResponse = getPromptsMetricsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MetricList
@@ -373,8 +373,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PromptsMetricsWithHttpInfo() : ApiResponse<MetricList?> {
-        val localVariableConfig = getV1PromptsMetricsRequestConfig()
+    fun getPromptsMetricsWithHttpInfo() : ApiResponse<MetricList?> {
+        val localVariableConfig = getPromptsMetricsRequestConfig()
 
         return request<Unit, MetricList>(
             localVariableConfig
@@ -382,11 +382,11 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PromptsMetrics
+     * To obtain the request config of the operation getPromptsMetrics
      *
      * @return RequestConfig
      */
-    fun getV1PromptsMetricsRequestConfig() : RequestConfig<Unit> {
+    fun getPromptsMetricsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -416,8 +416,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Prompts(promptReq: PromptReq) : PromptDetail {
-        val localVarResponse = postV1PromptsWithHttpInfo(promptReq = promptReq)
+    fun postPrompts(promptReq: PromptReq) : PromptDetail {
+        val localVarResponse = postPromptsWithHttpInfo(promptReq = promptReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PromptDetail
@@ -445,8 +445,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PromptsWithHttpInfo(promptReq: PromptReq) : ApiResponse<PromptDetail?> {
-        val localVariableConfig = postV1PromptsRequestConfig(promptReq = promptReq)
+    fun postPromptsWithHttpInfo(promptReq: PromptReq) : ApiResponse<PromptDetail?> {
+        val localVariableConfig = postPromptsRequestConfig(promptReq = promptReq)
 
         return request<PromptReq, PromptDetail>(
             localVariableConfig
@@ -454,12 +454,12 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1Prompts
+     * To obtain the request config of the operation postPrompts
      *
      * @param promptReq 
      * @return RequestConfig
      */
-    fun postV1PromptsRequestConfig(promptReq: PromptReq) : RequestConfig<PromptReq> {
+    fun postPromptsRequestConfig(promptReq: PromptReq) : RequestConfig<PromptReq> {
         val localVariableBody = promptReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

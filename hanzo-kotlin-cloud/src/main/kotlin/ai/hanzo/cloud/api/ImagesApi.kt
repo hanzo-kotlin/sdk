@@ -56,8 +56,8 @@ class ImagesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ImagesGenerations() : Unit {
-        val localVarResponse = postV1ImagesGenerationsWithHttpInfo()
+    fun postImagesGenerations() : Unit {
+        val localVarResponse = postImagesGenerationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class ImagesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ImagesGenerationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ImagesGenerationsRequestConfig()
+    fun postImagesGenerationsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postImagesGenerationsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class ImagesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1ImagesGenerations
+     * To obtain the request config of the operation postImagesGenerations
      *
      * @return RequestConfig
      */
-    fun postV1ImagesGenerationsRequestConfig() : RequestConfig<Unit> {
+    fun postImagesGenerationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

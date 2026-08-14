@@ -69,8 +69,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudflareD1DatabasesByDatabase(database: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1CloudflareD1DatabasesByDatabaseWithHttpInfo(database = database)
+    fun deleteCloudflareD1DatabasesByDatabase(database: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteCloudflareD1DatabasesByDatabaseWithHttpInfo(database = database)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -98,8 +98,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudflareD1DatabasesByDatabaseWithHttpInfo(database: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1CloudflareD1DatabasesByDatabaseRequestConfig(database = database)
+    fun deleteCloudflareD1DatabasesByDatabaseWithHttpInfo(database: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteCloudflareD1DatabasesByDatabaseRequestConfig(database = database)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -107,12 +107,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudflareD1DatabasesByDatabase
+     * To obtain the request config of the operation deleteCloudflareD1DatabasesByDatabase
      *
      * @param database Database is the Cloudflare D1 database id or name.
      * @return RequestConfig
      */
-    fun deleteV1CloudflareD1DatabasesByDatabaseRequestConfig(database: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudflareD1DatabasesByDatabaseRequestConfig(database: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -142,8 +142,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudflareKvNamespacesByNamespace(namespace: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1CloudflareKvNamespacesByNamespaceWithHttpInfo(namespace = namespace)
+    fun deleteCloudflareKvNamespacesByNamespace(namespace: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteCloudflareKvNamespacesByNamespaceWithHttpInfo(namespace = namespace)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -171,8 +171,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudflareKvNamespacesByNamespaceWithHttpInfo(namespace: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1CloudflareKvNamespacesByNamespaceRequestConfig(namespace = namespace)
+    fun deleteCloudflareKvNamespacesByNamespaceWithHttpInfo(namespace: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteCloudflareKvNamespacesByNamespaceRequestConfig(namespace = namespace)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -180,12 +180,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudflareKvNamespacesByNamespace
+     * To obtain the request config of the operation deleteCloudflareKvNamespacesByNamespace
      *
      * @param namespace Namespace is the Cloudflare KV namespace id.
      * @return RequestConfig
      */
-    fun deleteV1CloudflareKvNamespacesByNamespaceRequestConfig(namespace: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudflareKvNamespacesByNamespaceRequestConfig(namespace: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -216,8 +216,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudflareKvNamespacesByNamespaceValuesByKey(namespace: kotlin.String, key: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1CloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace = namespace, key = key)
+    fun deleteCloudflareKvNamespacesByNamespaceValuesByKey(namespace: kotlin.String, key: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteCloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace = namespace, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -246,8 +246,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace: kotlin.String, key: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1CloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace = namespace, key = key)
+    fun deleteCloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace: kotlin.String, key: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteCloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace = namespace, key = key)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -255,13 +255,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudflareKvNamespacesByNamespaceValuesByKey
+     * To obtain the request config of the operation deleteCloudflareKvNamespacesByNamespaceValuesByKey
      *
      * @param namespace Namespace is the Cloudflare KV namespace id.
      * @param key Key is the key within that namespace. KV keys are broad (up to 512 bytes), so this one is escaped rather than charset-restricted.
      * @return RequestConfig
      */
-    fun deleteV1CloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -291,8 +291,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudflarePagesProjectsByProject(project: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1CloudflarePagesProjectsByProjectWithHttpInfo(project = project)
+    fun deleteCloudflarePagesProjectsByProject(project: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteCloudflarePagesProjectsByProjectWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -320,8 +320,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudflarePagesProjectsByProjectWithHttpInfo(project: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1CloudflarePagesProjectsByProjectRequestConfig(project = project)
+    fun deleteCloudflarePagesProjectsByProjectWithHttpInfo(project: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteCloudflarePagesProjectsByProjectRequestConfig(project = project)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -329,12 +329,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudflarePagesProjectsByProject
+     * To obtain the request config of the operation deleteCloudflarePagesProjectsByProject
      *
      * @param project Project is the Pages project name.
      * @return RequestConfig
      */
-    fun deleteV1CloudflarePagesProjectsByProjectRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudflarePagesProjectsByProjectRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -365,8 +365,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudflarePagesProjectsByProjectDomainsByDomain(project: kotlin.String, domain: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1CloudflarePagesProjectsByProjectDomainsByDomainWithHttpInfo(project = project, domain = domain)
+    fun deleteCloudflarePagesProjectsByProjectDomainsByDomain(project: kotlin.String, domain: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteCloudflarePagesProjectsByProjectDomainsByDomainWithHttpInfo(project = project, domain = domain)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -395,8 +395,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudflarePagesProjectsByProjectDomainsByDomainWithHttpInfo(project: kotlin.String, domain: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1CloudflarePagesProjectsByProjectDomainsByDomainRequestConfig(project = project, domain = domain)
+    fun deleteCloudflarePagesProjectsByProjectDomainsByDomainWithHttpInfo(project: kotlin.String, domain: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteCloudflarePagesProjectsByProjectDomainsByDomainRequestConfig(project = project, domain = domain)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -404,13 +404,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudflarePagesProjectsByProjectDomainsByDomain
+     * To obtain the request config of the operation deleteCloudflarePagesProjectsByProjectDomainsByDomain
      *
      * @param project Project is the Pages project name.
      * @param domain Domain is the attached custom domain to detach.
      * @return RequestConfig
      */
-    fun deleteV1CloudflarePagesProjectsByProjectDomainsByDomainRequestConfig(project: kotlin.String, domain: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudflarePagesProjectsByProjectDomainsByDomainRequestConfig(project: kotlin.String, domain: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -440,8 +440,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudflareR2BucketsByBucket(bucket: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1CloudflareR2BucketsByBucketWithHttpInfo(bucket = bucket)
+    fun deleteCloudflareR2BucketsByBucket(bucket: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteCloudflareR2BucketsByBucketWithHttpInfo(bucket = bucket)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -469,8 +469,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudflareR2BucketsByBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1CloudflareR2BucketsByBucketRequestConfig(bucket = bucket)
+    fun deleteCloudflareR2BucketsByBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteCloudflareR2BucketsByBucketRequestConfig(bucket = bucket)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -478,12 +478,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudflareR2BucketsByBucket
+     * To obtain the request config of the operation deleteCloudflareR2BucketsByBucket
      *
      * @param bucket Bucket is the R2 bucket name.
      * @return RequestConfig
      */
-    fun deleteV1CloudflareR2BucketsByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudflareR2BucketsByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -513,8 +513,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudflareWorkersScriptsByScript(script: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1CloudflareWorkersScriptsByScriptWithHttpInfo(script = script)
+    fun deleteCloudflareWorkersScriptsByScript(script: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteCloudflareWorkersScriptsByScriptWithHttpInfo(script = script)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -542,8 +542,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudflareWorkersScriptsByScriptWithHttpInfo(script: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1CloudflareWorkersScriptsByScriptRequestConfig(script = script)
+    fun deleteCloudflareWorkersScriptsByScriptWithHttpInfo(script: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteCloudflareWorkersScriptsByScriptRequestConfig(script = script)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -551,12 +551,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudflareWorkersScriptsByScript
+     * To obtain the request config of the operation deleteCloudflareWorkersScriptsByScript
      *
      * @param script Script is the Worker script name.
      * @return RequestConfig
      */
-    fun deleteV1CloudflareWorkersScriptsByScriptRequestConfig(script: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudflareWorkersScriptsByScriptRequestConfig(script: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -587,8 +587,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CloudflareWorkersZonesByZoneRoutesByRoute(zone: kotlin.String, route: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1CloudflareWorkersZonesByZoneRoutesByRouteWithHttpInfo(zone = zone, route = route)
+    fun deleteCloudflareWorkersZonesByZoneRoutesByRoute(zone: kotlin.String, route: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteCloudflareWorkersZonesByZoneRoutesByRouteWithHttpInfo(zone = zone, route = route)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -617,8 +617,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CloudflareWorkersZonesByZoneRoutesByRouteWithHttpInfo(zone: kotlin.String, route: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1CloudflareWorkersZonesByZoneRoutesByRouteRequestConfig(zone = zone, route = route)
+    fun deleteCloudflareWorkersZonesByZoneRoutesByRouteWithHttpInfo(zone: kotlin.String, route: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteCloudflareWorkersZonesByZoneRoutesByRouteRequestConfig(zone = zone, route = route)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -626,13 +626,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CloudflareWorkersZonesByZoneRoutesByRoute
+     * To obtain the request config of the operation deleteCloudflareWorkersZonesByZoneRoutesByRoute
      *
      * @param zone Zone is the 32-hex Cloudflare zone id.
      * @param route Route is the 32-hex Cloudflare route id.
      * @return RequestConfig
      */
-    fun deleteV1CloudflareWorkersZonesByZoneRoutesByRouteRequestConfig(zone: kotlin.String, route: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCloudflareWorkersZonesByZoneRoutesByRouteRequestConfig(zone: kotlin.String, route: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -664,8 +664,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareD1Databases(page: kotlin.String? = null, perPage: kotlin.String? = null, name: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = getV1CloudflareD1DatabasesWithHttpInfo(page = page, perPage = perPage, name = name)
+    fun getCloudflareD1Databases(page: kotlin.String? = null, perPage: kotlin.String? = null, name: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getCloudflareD1DatabasesWithHttpInfo(page = page, perPage = perPage, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -695,8 +695,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareD1DatabasesWithHttpInfo(page: kotlin.String?, perPage: kotlin.String?, name: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareD1DatabasesRequestConfig(page = page, perPage = perPage, name = name)
+    fun getCloudflareD1DatabasesWithHttpInfo(page: kotlin.String?, perPage: kotlin.String?, name: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareD1DatabasesRequestConfig(page = page, perPage = perPage, name = name)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -704,14 +704,14 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareD1Databases
+     * To obtain the request config of the operation getCloudflareD1Databases
      *
      * @param page Page is the 1-based page of databases to return. (optional)
      * @param perPage PerPage is how many databases one page holds. (optional)
      * @param name Name filters to the database with this name. (optional)
      * @return RequestConfig
      */
-    fun getV1CloudflareD1DatabasesRequestConfig(page: kotlin.String?, perPage: kotlin.String?, name: kotlin.String?) : RequestConfig<Unit> {
+    fun getCloudflareD1DatabasesRequestConfig(page: kotlin.String?, perPage: kotlin.String?, name: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -755,8 +755,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareKvNamespaces(page: kotlin.String? = null, perPage: kotlin.String? = null, order: kotlin.String? = null, direction: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = getV1CloudflareKvNamespacesWithHttpInfo(page = page, perPage = perPage, order = order, direction = direction)
+    fun getCloudflareKvNamespaces(page: kotlin.String? = null, perPage: kotlin.String? = null, order: kotlin.String? = null, direction: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getCloudflareKvNamespacesWithHttpInfo(page = page, perPage = perPage, order = order, direction = direction)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -787,8 +787,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareKvNamespacesWithHttpInfo(page: kotlin.String?, perPage: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareKvNamespacesRequestConfig(page = page, perPage = perPage, order = order, direction = direction)
+    fun getCloudflareKvNamespacesWithHttpInfo(page: kotlin.String?, perPage: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareKvNamespacesRequestConfig(page = page, perPage = perPage, order = order, direction = direction)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -796,7 +796,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareKvNamespaces
+     * To obtain the request config of the operation getCloudflareKvNamespaces
      *
      * @param page Page is the 1-based page of namespaces to return. (optional)
      * @param perPage PerPage is how many namespaces one page holds. (optional)
@@ -804,7 +804,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @param direction  (optional)
      * @return RequestConfig
      */
-    fun getV1CloudflareKvNamespacesRequestConfig(page: kotlin.String?, perPage: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : RequestConfig<Unit> {
+    fun getCloudflareKvNamespacesRequestConfig(page: kotlin.String?, perPage: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -848,8 +848,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareKvNamespacesByNamespaceValuesByKey(namespace: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = getV1CloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace = namespace, key = key)
+    fun getCloudflareKvNamespacesByNamespaceValuesByKey(namespace: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = getCloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace = namespace, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -877,8 +877,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace = namespace, key = key)
+    fun getCloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace = namespace, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -886,13 +886,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareKvNamespacesByNamespaceValuesByKey
+     * To obtain the request config of the operation getCloudflareKvNamespacesByNamespaceValuesByKey
      *
      * @param namespace 
      * @param key 
      * @return RequestConfig
      */
-    fun getV1CloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getCloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -920,8 +920,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflarePagesProjects() : kotlin.Any {
-        val localVarResponse = getV1CloudflarePagesProjectsWithHttpInfo()
+    fun getCloudflarePagesProjects() : kotlin.Any {
+        val localVarResponse = getCloudflarePagesProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -948,8 +948,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflarePagesProjectsWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflarePagesProjectsRequestConfig()
+    fun getCloudflarePagesProjectsWithHttpInfo() : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflarePagesProjectsRequestConfig()
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -957,11 +957,11 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflarePagesProjects
+     * To obtain the request config of the operation getCloudflarePagesProjects
      *
      * @return RequestConfig
      */
-    fun getV1CloudflarePagesProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getCloudflarePagesProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -991,8 +991,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflarePagesProjectsByProject(project: kotlin.String) : kotlin.Any {
-        val localVarResponse = getV1CloudflarePagesProjectsByProjectWithHttpInfo(project = project)
+    fun getCloudflarePagesProjectsByProject(project: kotlin.String) : kotlin.Any {
+        val localVarResponse = getCloudflarePagesProjectsByProjectWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1020,8 +1020,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflarePagesProjectsByProjectWithHttpInfo(project: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflarePagesProjectsByProjectRequestConfig(project = project)
+    fun getCloudflarePagesProjectsByProjectWithHttpInfo(project: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflarePagesProjectsByProjectRequestConfig(project = project)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -1029,12 +1029,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflarePagesProjectsByProject
+     * To obtain the request config of the operation getCloudflarePagesProjectsByProject
      *
      * @param project Project is the Pages project name.
      * @return RequestConfig
      */
-    fun getV1CloudflarePagesProjectsByProjectRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
+    fun getCloudflarePagesProjectsByProjectRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1068,8 +1068,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareR2Buckets(perPage: kotlin.String? = null, cursor: kotlin.String? = null, nameContains: kotlin.String? = null, order: kotlin.String? = null, direction: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = getV1CloudflareR2BucketsWithHttpInfo(perPage = perPage, cursor = cursor, nameContains = nameContains, order = order, direction = direction)
+    fun getCloudflareR2Buckets(perPage: kotlin.String? = null, cursor: kotlin.String? = null, nameContains: kotlin.String? = null, order: kotlin.String? = null, direction: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getCloudflareR2BucketsWithHttpInfo(perPage = perPage, cursor = cursor, nameContains = nameContains, order = order, direction = direction)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1101,8 +1101,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareR2BucketsWithHttpInfo(perPage: kotlin.String?, cursor: kotlin.String?, nameContains: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareR2BucketsRequestConfig(perPage = perPage, cursor = cursor, nameContains = nameContains, order = order, direction = direction)
+    fun getCloudflareR2BucketsWithHttpInfo(perPage: kotlin.String?, cursor: kotlin.String?, nameContains: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareR2BucketsRequestConfig(perPage = perPage, cursor = cursor, nameContains = nameContains, order = order, direction = direction)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -1110,7 +1110,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareR2Buckets
+     * To obtain the request config of the operation getCloudflareR2Buckets
      *
      * @param perPage PerPage is how many buckets one page holds. (optional)
      * @param cursor Cursor continues from the position a previous page returned. (optional)
@@ -1119,7 +1119,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @param direction  (optional)
      * @return RequestConfig
      */
-    fun getV1CloudflareR2BucketsRequestConfig(perPage: kotlin.String?, cursor: kotlin.String?, nameContains: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : RequestConfig<Unit> {
+    fun getCloudflareR2BucketsRequestConfig(perPage: kotlin.String?, cursor: kotlin.String?, nameContains: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1165,8 +1165,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareWorkersScripts() : kotlin.Any {
-        val localVarResponse = getV1CloudflareWorkersScriptsWithHttpInfo()
+    fun getCloudflareWorkersScripts() : kotlin.Any {
+        val localVarResponse = getCloudflareWorkersScriptsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1193,8 +1193,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareWorkersScriptsWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareWorkersScriptsRequestConfig()
+    fun getCloudflareWorkersScriptsWithHttpInfo() : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareWorkersScriptsRequestConfig()
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -1202,11 +1202,11 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareWorkersScripts
+     * To obtain the request config of the operation getCloudflareWorkersScripts
      *
      * @return RequestConfig
      */
-    fun getV1CloudflareWorkersScriptsRequestConfig() : RequestConfig<Unit> {
+    fun getCloudflareWorkersScriptsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1235,8 +1235,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareWorkersSubdomain() : kotlin.Any {
-        val localVarResponse = getV1CloudflareWorkersSubdomainWithHttpInfo()
+    fun getCloudflareWorkersSubdomain() : kotlin.Any {
+        val localVarResponse = getCloudflareWorkersSubdomainWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1263,8 +1263,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareWorkersSubdomainWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareWorkersSubdomainRequestConfig()
+    fun getCloudflareWorkersSubdomainWithHttpInfo() : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareWorkersSubdomainRequestConfig()
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -1272,11 +1272,11 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareWorkersSubdomain
+     * To obtain the request config of the operation getCloudflareWorkersSubdomain
      *
      * @return RequestConfig
      */
-    fun getV1CloudflareWorkersSubdomainRequestConfig() : RequestConfig<Unit> {
+    fun getCloudflareWorkersSubdomainRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1306,8 +1306,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareWorkersZonesByZoneRoutes(zone: kotlin.String) : kotlin.Any {
-        val localVarResponse = getV1CloudflareWorkersZonesByZoneRoutesWithHttpInfo(zone = zone)
+    fun getCloudflareWorkersZonesByZoneRoutes(zone: kotlin.String) : kotlin.Any {
+        val localVarResponse = getCloudflareWorkersZonesByZoneRoutesWithHttpInfo(zone = zone)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1335,8 +1335,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareWorkersZonesByZoneRoutesWithHttpInfo(zone: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareWorkersZonesByZoneRoutesRequestConfig(zone = zone)
+    fun getCloudflareWorkersZonesByZoneRoutesWithHttpInfo(zone: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareWorkersZonesByZoneRoutesRequestConfig(zone = zone)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -1344,12 +1344,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareWorkersZonesByZoneRoutes
+     * To obtain the request config of the operation getCloudflareWorkersZonesByZoneRoutes
      *
      * @param zone Zone is the 32-hex Cloudflare zone id.
      * @return RequestConfig
      */
-    fun getV1CloudflareWorkersZonesByZoneRoutesRequestConfig(zone: kotlin.String) : RequestConfig<Unit> {
+    fun getCloudflareWorkersZonesByZoneRoutesRequestConfig(zone: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1384,8 +1384,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareZones(page: kotlin.String? = null, perPage: kotlin.String? = null, name: kotlin.String? = null, status: kotlin.String? = null, order: kotlin.String? = null, direction: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = getV1CloudflareZonesWithHttpInfo(page = page, perPage = perPage, name = name, status = status, order = order, direction = direction)
+    fun getCloudflareZones(page: kotlin.String? = null, perPage: kotlin.String? = null, name: kotlin.String? = null, status: kotlin.String? = null, order: kotlin.String? = null, direction: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getCloudflareZonesWithHttpInfo(page = page, perPage = perPage, name = name, status = status, order = order, direction = direction)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1418,8 +1418,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareZonesWithHttpInfo(page: kotlin.String?, perPage: kotlin.String?, name: kotlin.String?, status: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareZonesRequestConfig(page = page, perPage = perPage, name = name, status = status, order = order, direction = direction)
+    fun getCloudflareZonesWithHttpInfo(page: kotlin.String?, perPage: kotlin.String?, name: kotlin.String?, status: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareZonesRequestConfig(page = page, perPage = perPage, name = name, status = status, order = order, direction = direction)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -1427,7 +1427,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareZones
+     * To obtain the request config of the operation getCloudflareZones
      *
      * @param page Page is the 1-based page of zones to return. (optional)
      * @param perPage PerPage is how many zones one page holds. (optional)
@@ -1437,7 +1437,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @param direction  (optional)
      * @return RequestConfig
      */
-    fun getV1CloudflareZonesRequestConfig(page: kotlin.String?, perPage: kotlin.String?, name: kotlin.String?, status: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : RequestConfig<Unit> {
+    fun getCloudflareZonesRequestConfig(page: kotlin.String?, perPage: kotlin.String?, name: kotlin.String?, status: kotlin.String?, order: kotlin.String?, direction: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1487,8 +1487,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareZonesByZone(zone: kotlin.String) : kotlin.Any {
-        val localVarResponse = getV1CloudflareZonesByZoneWithHttpInfo(zone = zone)
+    fun getCloudflareZonesByZone(zone: kotlin.String) : kotlin.Any {
+        val localVarResponse = getCloudflareZonesByZoneWithHttpInfo(zone = zone)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1516,8 +1516,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareZonesByZoneWithHttpInfo(zone: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareZonesByZoneRequestConfig(zone = zone)
+    fun getCloudflareZonesByZoneWithHttpInfo(zone: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareZonesByZoneRequestConfig(zone = zone)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -1525,12 +1525,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareZonesByZone
+     * To obtain the request config of the operation getCloudflareZonesByZone
      *
      * @param zone Zone is the 32-hex Cloudflare zone id.
      * @return RequestConfig
      */
-    fun getV1CloudflareZonesByZoneRequestConfig(zone: kotlin.String) : RequestConfig<Unit> {
+    fun getCloudflareZonesByZoneRequestConfig(zone: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1563,8 +1563,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CloudflareZonesByZoneAnalytics(zone: kotlin.String, since: kotlin.String? = null, until: kotlin.String? = null, continuous: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = getV1CloudflareZonesByZoneAnalyticsWithHttpInfo(zone = zone, since = since, until = until, continuous = continuous)
+    fun getCloudflareZonesByZoneAnalytics(zone: kotlin.String, since: kotlin.String? = null, until: kotlin.String? = null, continuous: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getCloudflareZonesByZoneAnalyticsWithHttpInfo(zone = zone, since = since, until = until, continuous = continuous)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1595,8 +1595,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CloudflareZonesByZoneAnalyticsWithHttpInfo(zone: kotlin.String, since: kotlin.String?, until: kotlin.String?, continuous: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1CloudflareZonesByZoneAnalyticsRequestConfig(zone = zone, since = since, until = until, continuous = continuous)
+    fun getCloudflareZonesByZoneAnalyticsWithHttpInfo(zone: kotlin.String, since: kotlin.String?, until: kotlin.String?, continuous: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getCloudflareZonesByZoneAnalyticsRequestConfig(zone = zone, since = since, until = until, continuous = continuous)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -1604,7 +1604,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1CloudflareZonesByZoneAnalytics
+     * To obtain the request config of the operation getCloudflareZonesByZoneAnalytics
      *
      * @param zone Zone is the 32-hex Cloudflare zone id.
      * @param since Since and Until bound the window, in the form Cloudflare accepts — an RFC 3339 time or a negative number of minutes from now (\&quot;-1440\&quot; is the last day). (optional)
@@ -1612,7 +1612,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @param continuous Continuous asks Cloudflare for only fully-aggregated buckets. (optional)
      * @return RequestConfig
      */
-    fun getV1CloudflareZonesByZoneAnalyticsRequestConfig(zone: kotlin.String, since: kotlin.String?, until: kotlin.String?, continuous: kotlin.String?) : RequestConfig<Unit> {
+    fun getCloudflareZonesByZoneAnalyticsRequestConfig(zone: kotlin.String, since: kotlin.String?, until: kotlin.String?, continuous: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1652,8 +1652,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflareAiRunByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = postV1CloudflareAiRunByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postCloudflareAiRunByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postCloudflareAiRunByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1680,8 +1680,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflareAiRunByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CloudflareAiRunByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postCloudflareAiRunByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCloudflareAiRunByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1689,12 +1689,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflareAiRunByWildcard1
+     * To obtain the request config of the operation postCloudflareAiRunByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun postV1CloudflareAiRunByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postCloudflareAiRunByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1723,8 +1723,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflareD1Databases(databaseCreateIn: DatabaseCreateIn) : kotlin.Any {
-        val localVarResponse = postV1CloudflareD1DatabasesWithHttpInfo(databaseCreateIn = databaseCreateIn)
+    fun postCloudflareD1Databases(databaseCreateIn: DatabaseCreateIn) : kotlin.Any {
+        val localVarResponse = postCloudflareD1DatabasesWithHttpInfo(databaseCreateIn = databaseCreateIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1752,8 +1752,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflareD1DatabasesWithHttpInfo(databaseCreateIn: DatabaseCreateIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflareD1DatabasesRequestConfig(databaseCreateIn = databaseCreateIn)
+    fun postCloudflareD1DatabasesWithHttpInfo(databaseCreateIn: DatabaseCreateIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflareD1DatabasesRequestConfig(databaseCreateIn = databaseCreateIn)
 
         return request<DatabaseCreateIn, kotlin.Any>(
             localVariableConfig
@@ -1761,12 +1761,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflareD1Databases
+     * To obtain the request config of the operation postCloudflareD1Databases
      *
      * @param databaseCreateIn 
      * @return RequestConfig
      */
-    fun postV1CloudflareD1DatabasesRequestConfig(databaseCreateIn: DatabaseCreateIn) : RequestConfig<DatabaseCreateIn> {
+    fun postCloudflareD1DatabasesRequestConfig(databaseCreateIn: DatabaseCreateIn) : RequestConfig<DatabaseCreateIn> {
         val localVariableBody = databaseCreateIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1798,8 +1798,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflareD1DatabasesByDatabaseQuery(database: kotlin.String, d1Query: D1Query? = null) : kotlin.Any {
-        val localVarResponse = postV1CloudflareD1DatabasesByDatabaseQueryWithHttpInfo(database = database, d1Query = d1Query)
+    fun postCloudflareD1DatabasesByDatabaseQuery(database: kotlin.String, d1Query: D1Query? = null) : kotlin.Any {
+        val localVarResponse = postCloudflareD1DatabasesByDatabaseQueryWithHttpInfo(database = database, d1Query = d1Query)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1828,8 +1828,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflareD1DatabasesByDatabaseQueryWithHttpInfo(database: kotlin.String, d1Query: D1Query?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflareD1DatabasesByDatabaseQueryRequestConfig(database = database, d1Query = d1Query)
+    fun postCloudflareD1DatabasesByDatabaseQueryWithHttpInfo(database: kotlin.String, d1Query: D1Query?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflareD1DatabasesByDatabaseQueryRequestConfig(database = database, d1Query = d1Query)
 
         return request<D1Query, kotlin.Any>(
             localVariableConfig
@@ -1837,13 +1837,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflareD1DatabasesByDatabaseQuery
+     * To obtain the request config of the operation postCloudflareD1DatabasesByDatabaseQuery
      *
      * @param database 
      * @param d1Query  (optional)
      * @return RequestConfig
      */
-    fun postV1CloudflareD1DatabasesByDatabaseQueryRequestConfig(database: kotlin.String, d1Query: D1Query?) : RequestConfig<D1Query> {
+    fun postCloudflareD1DatabasesByDatabaseQueryRequestConfig(database: kotlin.String, d1Query: D1Query?) : RequestConfig<D1Query> {
         val localVariableBody = d1Query
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1874,8 +1874,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflareKvNamespaces(namespaceCreateIn: NamespaceCreateIn) : kotlin.Any {
-        val localVarResponse = postV1CloudflareKvNamespacesWithHttpInfo(namespaceCreateIn = namespaceCreateIn)
+    fun postCloudflareKvNamespaces(namespaceCreateIn: NamespaceCreateIn) : kotlin.Any {
+        val localVarResponse = postCloudflareKvNamespacesWithHttpInfo(namespaceCreateIn = namespaceCreateIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1903,8 +1903,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflareKvNamespacesWithHttpInfo(namespaceCreateIn: NamespaceCreateIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflareKvNamespacesRequestConfig(namespaceCreateIn = namespaceCreateIn)
+    fun postCloudflareKvNamespacesWithHttpInfo(namespaceCreateIn: NamespaceCreateIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflareKvNamespacesRequestConfig(namespaceCreateIn = namespaceCreateIn)
 
         return request<NamespaceCreateIn, kotlin.Any>(
             localVariableConfig
@@ -1912,12 +1912,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflareKvNamespaces
+     * To obtain the request config of the operation postCloudflareKvNamespaces
      *
      * @param namespaceCreateIn 
      * @return RequestConfig
      */
-    fun postV1CloudflareKvNamespacesRequestConfig(namespaceCreateIn: NamespaceCreateIn) : RequestConfig<NamespaceCreateIn> {
+    fun postCloudflareKvNamespacesRequestConfig(namespaceCreateIn: NamespaceCreateIn) : RequestConfig<NamespaceCreateIn> {
         val localVariableBody = namespaceCreateIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1948,8 +1948,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflarePagesProjects(pagesProjectCreate: PagesProjectCreate) : kotlin.Any {
-        val localVarResponse = postV1CloudflarePagesProjectsWithHttpInfo(pagesProjectCreate = pagesProjectCreate)
+    fun postCloudflarePagesProjects(pagesProjectCreate: PagesProjectCreate) : kotlin.Any {
+        val localVarResponse = postCloudflarePagesProjectsWithHttpInfo(pagesProjectCreate = pagesProjectCreate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -1977,8 +1977,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflarePagesProjectsWithHttpInfo(pagesProjectCreate: PagesProjectCreate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflarePagesProjectsRequestConfig(pagesProjectCreate = pagesProjectCreate)
+    fun postCloudflarePagesProjectsWithHttpInfo(pagesProjectCreate: PagesProjectCreate) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflarePagesProjectsRequestConfig(pagesProjectCreate = pagesProjectCreate)
 
         return request<PagesProjectCreate, kotlin.Any>(
             localVariableConfig
@@ -1986,12 +1986,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflarePagesProjects
+     * To obtain the request config of the operation postCloudflarePagesProjects
      *
      * @param pagesProjectCreate 
      * @return RequestConfig
      */
-    fun postV1CloudflarePagesProjectsRequestConfig(pagesProjectCreate: PagesProjectCreate) : RequestConfig<PagesProjectCreate> {
+    fun postCloudflarePagesProjectsRequestConfig(pagesProjectCreate: PagesProjectCreate) : RequestConfig<PagesProjectCreate> {
         val localVariableBody = pagesProjectCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2023,8 +2023,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflarePagesProjectsByProjectDeployments(project: kotlin.String, pagesDeploy: PagesDeploy? = null) : kotlin.Any {
-        val localVarResponse = postV1CloudflarePagesProjectsByProjectDeploymentsWithHttpInfo(project = project, pagesDeploy = pagesDeploy)
+    fun postCloudflarePagesProjectsByProjectDeployments(project: kotlin.String, pagesDeploy: PagesDeploy? = null) : kotlin.Any {
+        val localVarResponse = postCloudflarePagesProjectsByProjectDeploymentsWithHttpInfo(project = project, pagesDeploy = pagesDeploy)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -2053,8 +2053,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflarePagesProjectsByProjectDeploymentsWithHttpInfo(project: kotlin.String, pagesDeploy: PagesDeploy?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflarePagesProjectsByProjectDeploymentsRequestConfig(project = project, pagesDeploy = pagesDeploy)
+    fun postCloudflarePagesProjectsByProjectDeploymentsWithHttpInfo(project: kotlin.String, pagesDeploy: PagesDeploy?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflarePagesProjectsByProjectDeploymentsRequestConfig(project = project, pagesDeploy = pagesDeploy)
 
         return request<PagesDeploy, kotlin.Any>(
             localVariableConfig
@@ -2062,13 +2062,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflarePagesProjectsByProjectDeployments
+     * To obtain the request config of the operation postCloudflarePagesProjectsByProjectDeployments
      *
      * @param project 
      * @param pagesDeploy  (optional)
      * @return RequestConfig
      */
-    fun postV1CloudflarePagesProjectsByProjectDeploymentsRequestConfig(project: kotlin.String, pagesDeploy: PagesDeploy?) : RequestConfig<PagesDeploy> {
+    fun postCloudflarePagesProjectsByProjectDeploymentsRequestConfig(project: kotlin.String, pagesDeploy: PagesDeploy?) : RequestConfig<PagesDeploy> {
         val localVariableBody = pagesDeploy
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2100,8 +2100,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflarePagesProjectsByProjectDomains(project: kotlin.String, domainAddIn: DomainAddIn) : kotlin.Any {
-        val localVarResponse = postV1CloudflarePagesProjectsByProjectDomainsWithHttpInfo(project = project, domainAddIn = domainAddIn)
+    fun postCloudflarePagesProjectsByProjectDomains(project: kotlin.String, domainAddIn: DomainAddIn) : kotlin.Any {
+        val localVarResponse = postCloudflarePagesProjectsByProjectDomainsWithHttpInfo(project = project, domainAddIn = domainAddIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -2130,8 +2130,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflarePagesProjectsByProjectDomainsWithHttpInfo(project: kotlin.String, domainAddIn: DomainAddIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflarePagesProjectsByProjectDomainsRequestConfig(project = project, domainAddIn = domainAddIn)
+    fun postCloudflarePagesProjectsByProjectDomainsWithHttpInfo(project: kotlin.String, domainAddIn: DomainAddIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflarePagesProjectsByProjectDomainsRequestConfig(project = project, domainAddIn = domainAddIn)
 
         return request<DomainAddIn, kotlin.Any>(
             localVariableConfig
@@ -2139,13 +2139,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflarePagesProjectsByProjectDomains
+     * To obtain the request config of the operation postCloudflarePagesProjectsByProjectDomains
      *
      * @param project Project is the Pages project name, from the path.
      * @param domainAddIn 
      * @return RequestConfig
      */
-    fun postV1CloudflarePagesProjectsByProjectDomainsRequestConfig(project: kotlin.String, domainAddIn: DomainAddIn) : RequestConfig<DomainAddIn> {
+    fun postCloudflarePagesProjectsByProjectDomainsRequestConfig(project: kotlin.String, domainAddIn: DomainAddIn) : RequestConfig<DomainAddIn> {
         val localVariableBody = domainAddIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2176,8 +2176,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflareR2Buckets(bucketCreateIn: BucketCreateIn) : kotlin.Any {
-        val localVarResponse = postV1CloudflareR2BucketsWithHttpInfo(bucketCreateIn = bucketCreateIn)
+    fun postCloudflareR2Buckets(bucketCreateIn: BucketCreateIn) : kotlin.Any {
+        val localVarResponse = postCloudflareR2BucketsWithHttpInfo(bucketCreateIn = bucketCreateIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -2205,8 +2205,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflareR2BucketsWithHttpInfo(bucketCreateIn: BucketCreateIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflareR2BucketsRequestConfig(bucketCreateIn = bucketCreateIn)
+    fun postCloudflareR2BucketsWithHttpInfo(bucketCreateIn: BucketCreateIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflareR2BucketsRequestConfig(bucketCreateIn = bucketCreateIn)
 
         return request<BucketCreateIn, kotlin.Any>(
             localVariableConfig
@@ -2214,12 +2214,12 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflareR2Buckets
+     * To obtain the request config of the operation postCloudflareR2Buckets
      *
      * @param bucketCreateIn 
      * @return RequestConfig
      */
-    fun postV1CloudflareR2BucketsRequestConfig(bucketCreateIn: BucketCreateIn) : RequestConfig<BucketCreateIn> {
+    fun postCloudflareR2BucketsRequestConfig(bucketCreateIn: BucketCreateIn) : RequestConfig<BucketCreateIn> {
         val localVariableBody = bucketCreateIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2251,8 +2251,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflareWorkersScriptsByScriptSubdomain(script: kotlin.String, subdomainSetIn: SubdomainSetIn) : kotlin.Any {
-        val localVarResponse = postV1CloudflareWorkersScriptsByScriptSubdomainWithHttpInfo(script = script, subdomainSetIn = subdomainSetIn)
+    fun postCloudflareWorkersScriptsByScriptSubdomain(script: kotlin.String, subdomainSetIn: SubdomainSetIn) : kotlin.Any {
+        val localVarResponse = postCloudflareWorkersScriptsByScriptSubdomainWithHttpInfo(script = script, subdomainSetIn = subdomainSetIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -2281,8 +2281,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflareWorkersScriptsByScriptSubdomainWithHttpInfo(script: kotlin.String, subdomainSetIn: SubdomainSetIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflareWorkersScriptsByScriptSubdomainRequestConfig(script = script, subdomainSetIn = subdomainSetIn)
+    fun postCloudflareWorkersScriptsByScriptSubdomainWithHttpInfo(script: kotlin.String, subdomainSetIn: SubdomainSetIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflareWorkersScriptsByScriptSubdomainRequestConfig(script = script, subdomainSetIn = subdomainSetIn)
 
         return request<SubdomainSetIn, kotlin.Any>(
             localVariableConfig
@@ -2290,13 +2290,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflareWorkersScriptsByScriptSubdomain
+     * To obtain the request config of the operation postCloudflareWorkersScriptsByScriptSubdomain
      *
      * @param script Script is the Worker script name, from the path.
      * @param subdomainSetIn 
      * @return RequestConfig
      */
-    fun postV1CloudflareWorkersScriptsByScriptSubdomainRequestConfig(script: kotlin.String, subdomainSetIn: SubdomainSetIn) : RequestConfig<SubdomainSetIn> {
+    fun postCloudflareWorkersScriptsByScriptSubdomainRequestConfig(script: kotlin.String, subdomainSetIn: SubdomainSetIn) : RequestConfig<SubdomainSetIn> {
         val localVariableBody = subdomainSetIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2328,8 +2328,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflareWorkersZonesByZoneRoutes(zone: kotlin.String, routeCreateIn: RouteCreateIn) : kotlin.Any {
-        val localVarResponse = postV1CloudflareWorkersZonesByZoneRoutesWithHttpInfo(zone = zone, routeCreateIn = routeCreateIn)
+    fun postCloudflareWorkersZonesByZoneRoutes(zone: kotlin.String, routeCreateIn: RouteCreateIn) : kotlin.Any {
+        val localVarResponse = postCloudflareWorkersZonesByZoneRoutesWithHttpInfo(zone = zone, routeCreateIn = routeCreateIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -2358,8 +2358,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflareWorkersZonesByZoneRoutesWithHttpInfo(zone: kotlin.String, routeCreateIn: RouteCreateIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflareWorkersZonesByZoneRoutesRequestConfig(zone = zone, routeCreateIn = routeCreateIn)
+    fun postCloudflareWorkersZonesByZoneRoutesWithHttpInfo(zone: kotlin.String, routeCreateIn: RouteCreateIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflareWorkersZonesByZoneRoutesRequestConfig(zone = zone, routeCreateIn = routeCreateIn)
 
         return request<RouteCreateIn, kotlin.Any>(
             localVariableConfig
@@ -2367,13 +2367,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflareWorkersZonesByZoneRoutes
+     * To obtain the request config of the operation postCloudflareWorkersZonesByZoneRoutes
      *
      * @param zone Zone is the 32-hex Cloudflare zone id, from the path.
      * @param routeCreateIn 
      * @return RequestConfig
      */
-    fun postV1CloudflareWorkersZonesByZoneRoutesRequestConfig(zone: kotlin.String, routeCreateIn: RouteCreateIn) : RequestConfig<RouteCreateIn> {
+    fun postCloudflareWorkersZonesByZoneRoutesRequestConfig(zone: kotlin.String, routeCreateIn: RouteCreateIn) : RequestConfig<RouteCreateIn> {
         val localVariableBody = routeCreateIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2405,8 +2405,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CloudflareZonesByZonePurge(zone: kotlin.String, purgeIn: PurgeIn) : kotlin.Any {
-        val localVarResponse = postV1CloudflareZonesByZonePurgeWithHttpInfo(zone = zone, purgeIn = purgeIn)
+    fun postCloudflareZonesByZonePurge(zone: kotlin.String, purgeIn: PurgeIn) : kotlin.Any {
+        val localVarResponse = postCloudflareZonesByZonePurgeWithHttpInfo(zone = zone, purgeIn = purgeIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -2435,8 +2435,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CloudflareZonesByZonePurgeWithHttpInfo(zone: kotlin.String, purgeIn: PurgeIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1CloudflareZonesByZonePurgeRequestConfig(zone = zone, purgeIn = purgeIn)
+    fun postCloudflareZonesByZonePurgeWithHttpInfo(zone: kotlin.String, purgeIn: PurgeIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postCloudflareZonesByZonePurgeRequestConfig(zone = zone, purgeIn = purgeIn)
 
         return request<PurgeIn, kotlin.Any>(
             localVariableConfig
@@ -2444,13 +2444,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1CloudflareZonesByZonePurge
+     * To obtain the request config of the operation postCloudflareZonesByZonePurge
      *
      * @param zone Zone is the 32-hex Cloudflare zone id, from the path.
      * @param purgeIn 
      * @return RequestConfig
      */
-    fun postV1CloudflareZonesByZonePurgeRequestConfig(zone: kotlin.String, purgeIn: PurgeIn) : RequestConfig<PurgeIn> {
+    fun postCloudflareZonesByZonePurgeRequestConfig(zone: kotlin.String, purgeIn: PurgeIn) : RequestConfig<PurgeIn> {
         val localVariableBody = purgeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2481,8 +2481,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CloudflareKvNamespacesByNamespaceValuesByKey(namespace: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = putV1CloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace = namespace, key = key)
+    fun putCloudflareKvNamespacesByNamespaceValuesByKey(namespace: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = putCloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace = namespace, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2510,8 +2510,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace = namespace, key = key)
+    fun putCloudflareKvNamespacesByNamespaceValuesByKeyWithHttpInfo(namespace: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace = namespace, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2519,13 +2519,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation putV1CloudflareKvNamespacesByNamespaceValuesByKey
+     * To obtain the request config of the operation putCloudflareKvNamespacesByNamespaceValuesByKey
      *
      * @param namespace 
      * @param key 
      * @return RequestConfig
      */
-    fun putV1CloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun putCloudflareKvNamespacesByNamespaceValuesByKeyRequestConfig(namespace: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2555,8 +2555,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CloudflareWorkersScriptsByScript(script: kotlin.String, workerScriptPut: WorkerScriptPut? = null) : kotlin.Any {
-        val localVarResponse = putV1CloudflareWorkersScriptsByScriptWithHttpInfo(script = script, workerScriptPut = workerScriptPut)
+    fun putCloudflareWorkersScriptsByScript(script: kotlin.String, workerScriptPut: WorkerScriptPut? = null) : kotlin.Any {
+        val localVarResponse = putCloudflareWorkersScriptsByScriptWithHttpInfo(script = script, workerScriptPut = workerScriptPut)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -2585,8 +2585,8 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CloudflareWorkersScriptsByScriptWithHttpInfo(script: kotlin.String, workerScriptPut: WorkerScriptPut?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = putV1CloudflareWorkersScriptsByScriptRequestConfig(script = script, workerScriptPut = workerScriptPut)
+    fun putCloudflareWorkersScriptsByScriptWithHttpInfo(script: kotlin.String, workerScriptPut: WorkerScriptPut?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = putCloudflareWorkersScriptsByScriptRequestConfig(script = script, workerScriptPut = workerScriptPut)
 
         return request<WorkerScriptPut, kotlin.Any>(
             localVariableConfig
@@ -2594,13 +2594,13 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation putV1CloudflareWorkersScriptsByScript
+     * To obtain the request config of the operation putCloudflareWorkersScriptsByScript
      *
      * @param script 
      * @param workerScriptPut  (optional)
      * @return RequestConfig
      */
-    fun putV1CloudflareWorkersScriptsByScriptRequestConfig(script: kotlin.String, workerScriptPut: WorkerScriptPut?) : RequestConfig<WorkerScriptPut> {
+    fun putCloudflareWorkersScriptsByScriptRequestConfig(script: kotlin.String, workerScriptPut: WorkerScriptPut?) : RequestConfig<WorkerScriptPut> {
         val localVariableBody = workerScriptPut
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -76,8 +76,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1UsageActivity(subject: kotlin.String? = null, id: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : ActivityView {
-        val localVarResponse = getV1UsageActivityWithHttpInfo(subject = subject, id = id, from = from, to = to)
+    fun getUsageActivity(subject: kotlin.String? = null, id: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : ActivityView {
+        val localVarResponse = getUsageActivityWithHttpInfo(subject = subject, id = id, from = from, to = to)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ActivityView
@@ -108,8 +108,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1UsageActivityWithHttpInfo(subject: kotlin.String?, id: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<ActivityView?> {
-        val localVariableConfig = getV1UsageActivityRequestConfig(subject = subject, id = id, from = from, to = to)
+    fun getUsageActivityWithHttpInfo(subject: kotlin.String?, id: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<ActivityView?> {
+        val localVariableConfig = getUsageActivityRequestConfig(subject = subject, id = id, from = from, to = to)
 
         return request<Unit, ActivityView>(
             localVariableConfig
@@ -117,7 +117,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1UsageActivity
+     * To obtain the request config of the operation getUsageActivity
      *
      * @param subject Subject is what the series is about: \&quot;user\&quot; (default), \&quot;org\&quot; or \&quot;project\&quot;. (optional)
      * @param id ID names the subject within what the caller is entitled to see. Omitted (or \&quot;me\&quot;) it is the caller themselves, or their own org. Another user requires org admin and must belong to the caller&#39;s org; another org requires a SuperAdmin. (optional)
@@ -125,7 +125,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param to To is the last day of the range, \&quot;2006-01-02\&quot;. Defaults to today; the span is clamped to 366 days. (optional)
      * @return RequestConfig
      */
-    fun getV1UsageActivityRequestConfig(subject: kotlin.String?, id: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getUsageActivityRequestConfig(subject: kotlin.String?, id: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -161,7 +161,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Is the entitlement-GATED per-provider breakdown of the caller org&#39;s LLM usage — the paid lens over the same warehouse ledger GET /v1/usage/summary reads its totals from. Basic own-org usage stays ungated at /v1/usage/summary.  A plan that does not grant the analytics datastore is refused with 402, and an unresolvable plan fails closed to the free floor, which does not grant it. The window is clamped forward to the plan&#39;s retention entitlement, so a tenant can never read older than its plan allows even with a custom start. The response is marked no-store.  INTERIM (mirrors apps/world&#39;s limits echo): no org→plan resolver exists in cloud yet — the subscription lookup is owned by the billing plane and the gateway principal carries no plan claim — so the caller passes the plan and the gate resolves THAT plan&#39;s access.
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
      * @param plan Plan is the plan id whose entitlement decides access and retention. INTERIM: cloud has no org-to-plan resolver yet, so the caller names the plan; when that resolver lands this becomes the caller org&#39;s own plan. (optional)
-     * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. (optional)
+     * @param range Range is the window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all, custom. Empty means 24h. The window is then clamped forward to the plan&#39;s retention entitlement. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom, and clamped forward to the plan&#39;s retention floor. (optional)
      * @return UsageAnalyticsView
      * @throws IllegalStateException If the request is not correctly configured
@@ -172,8 +172,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1UsageAnalytics(end: kotlin.String? = null, plan: kotlin.String? = null, range: kotlin.String? = null, start: kotlin.String? = null) : UsageAnalyticsView {
-        val localVarResponse = getV1UsageAnalyticsWithHttpInfo(end = end, plan = plan, range = range, start = start)
+    fun getUsageAnalytics(end: kotlin.String? = null, plan: kotlin.String? = null, range: kotlin.String? = null, start: kotlin.String? = null) : UsageAnalyticsView {
+        val localVarResponse = getUsageAnalyticsWithHttpInfo(end = end, plan = plan, range = range, start = start)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UsageAnalyticsView
@@ -196,7 +196,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Is the entitlement-GATED per-provider breakdown of the caller org&#39;s LLM usage — the paid lens over the same warehouse ledger GET /v1/usage/summary reads its totals from. Basic own-org usage stays ungated at /v1/usage/summary.  A plan that does not grant the analytics datastore is refused with 402, and an unresolvable plan fails closed to the free floor, which does not grant it. The window is clamped forward to the plan&#39;s retention entitlement, so a tenant can never read older than its plan allows even with a custom start. The response is marked no-store.  INTERIM (mirrors apps/world&#39;s limits echo): no org→plan resolver exists in cloud yet — the subscription lookup is owned by the billing plane and the gateway principal carries no plan claim — so the caller passes the plan and the gate resolves THAT plan&#39;s access.
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
      * @param plan Plan is the plan id whose entitlement decides access and retention. INTERIM: cloud has no org-to-plan resolver yet, so the caller names the plan; when that resolver lands this becomes the caller org&#39;s own plan. (optional)
-     * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. (optional)
+     * @param range Range is the window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all, custom. Empty means 24h. The window is then clamped forward to the plan&#39;s retention entitlement. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom, and clamped forward to the plan&#39;s retention floor. (optional)
      * @return ApiResponse<UsageAnalyticsView?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -204,8 +204,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1UsageAnalyticsWithHttpInfo(end: kotlin.String?, plan: kotlin.String?, range: kotlin.String?, start: kotlin.String?) : ApiResponse<UsageAnalyticsView?> {
-        val localVariableConfig = getV1UsageAnalyticsRequestConfig(end = end, plan = plan, range = range, start = start)
+    fun getUsageAnalyticsWithHttpInfo(end: kotlin.String?, plan: kotlin.String?, range: kotlin.String?, start: kotlin.String?) : ApiResponse<UsageAnalyticsView?> {
+        val localVariableConfig = getUsageAnalyticsRequestConfig(end = end, plan = plan, range = range, start = start)
 
         return request<Unit, UsageAnalyticsView>(
             localVariableConfig
@@ -213,15 +213,15 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1UsageAnalytics
+     * To obtain the request config of the operation getUsageAnalytics
      *
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
      * @param plan Plan is the plan id whose entitlement decides access and retention. INTERIM: cloud has no org-to-plan resolver yet, so the caller names the plan; when that resolver lands this becomes the caller org&#39;s own plan. (optional)
-     * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. (optional)
+     * @param range Range is the window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all, custom. Empty means 24h. The window is then clamped forward to the plan&#39;s retention entitlement. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom, and clamped forward to the plan&#39;s retention floor. (optional)
      * @return RequestConfig
      */
-    fun getV1UsageAnalyticsRequestConfig(end: kotlin.String?, plan: kotlin.String?, range: kotlin.String?, start: kotlin.String?) : RequestConfig<Unit> {
+    fun getUsageAnalyticsRequestConfig(end: kotlin.String?, plan: kotlin.String?, range: kotlin.String?, start: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -265,8 +265,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1UsageAnalyticsAccess(plan: kotlin.String? = null) : UsageAnalyticsAccess {
-        val localVarResponse = getV1UsageAnalyticsAccessWithHttpInfo(plan = plan)
+    fun getUsageAnalyticsAccess(plan: kotlin.String? = null) : UsageAnalyticsAccess {
+        val localVarResponse = getUsageAnalyticsAccessWithHttpInfo(plan = plan)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UsageAnalyticsAccess
@@ -294,8 +294,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1UsageAnalyticsAccessWithHttpInfo(plan: kotlin.String?) : ApiResponse<UsageAnalyticsAccess?> {
-        val localVariableConfig = getV1UsageAnalyticsAccessRequestConfig(plan = plan)
+    fun getUsageAnalyticsAccessWithHttpInfo(plan: kotlin.String?) : ApiResponse<UsageAnalyticsAccess?> {
+        val localVariableConfig = getUsageAnalyticsAccessRequestConfig(plan = plan)
 
         return request<Unit, UsageAnalyticsAccess>(
             localVariableConfig
@@ -303,12 +303,12 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1UsageAnalyticsAccess
+     * To obtain the request config of the operation getUsageAnalyticsAccess
      *
      * @param plan Plan is a plan id from the live @hanzo/plans catalog. Empty resolves the free floor, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
      * @return RequestConfig
      */
-    fun getV1UsageAnalyticsAccessRequestConfig(plan: kotlin.String?) : RequestConfig<Unit> {
+    fun getUsageAnalyticsAccessRequestConfig(plan: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -346,8 +346,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1UsageLeaderboard(scope: kotlin.String? = null, metric: kotlin.String? = null, period: kotlin.String? = null, limit: kotlin.Int? = null) : LeaderboardView {
-        val localVarResponse = getV1UsageLeaderboardWithHttpInfo(scope = scope, metric = metric, period = period, limit = limit)
+    fun getUsageLeaderboard(scope: kotlin.String? = null, metric: kotlin.String? = null, period: kotlin.String? = null, limit: kotlin.Int? = null) : LeaderboardView {
+        val localVarResponse = getUsageLeaderboardWithHttpInfo(scope = scope, metric = metric, period = period, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LeaderboardView
@@ -378,8 +378,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1UsageLeaderboardWithHttpInfo(scope: kotlin.String?, metric: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<LeaderboardView?> {
-        val localVariableConfig = getV1UsageLeaderboardRequestConfig(scope = scope, metric = metric, period = period, limit = limit)
+    fun getUsageLeaderboardWithHttpInfo(scope: kotlin.String?, metric: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<LeaderboardView?> {
+        val localVariableConfig = getUsageLeaderboardRequestConfig(scope = scope, metric = metric, period = period, limit = limit)
 
         return request<Unit, LeaderboardView>(
             localVariableConfig
@@ -387,7 +387,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1UsageLeaderboard
+     * To obtain the request config of the operation getUsageLeaderboard
      *
      * @param scope Scope picks the board: \&quot;personal\&quot; (default) ranks the caller among their own org&#39;s users, \&quot;org\&quot; is that same org board named for an admin, \&quot;global\&quot; ranks organizations against each other. (optional)
      * @param metric Metric is the value ranked: tokens (default), requests, or cost. (optional)
@@ -395,7 +395,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param limit Limit caps the rows returned, clamped to 100. Defaults to 10, which is also what a non-positive or unparseable value takes. (optional)
      * @return RequestConfig
      */
-    fun getV1UsageLeaderboardRequestConfig(scope: kotlin.String?, metric: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getUsageLeaderboardRequestConfig(scope: kotlin.String?, metric: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -438,8 +438,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1UsageLeaderboardOptin() : OptinView {
-        val localVarResponse = getV1UsageLeaderboardOptinWithHttpInfo()
+    fun getUsageLeaderboardOptin() : OptinView {
+        val localVarResponse = getUsageLeaderboardOptinWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OptinView
@@ -466,8 +466,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1UsageLeaderboardOptinWithHttpInfo() : ApiResponse<OptinView?> {
-        val localVariableConfig = getV1UsageLeaderboardOptinRequestConfig()
+    fun getUsageLeaderboardOptinWithHttpInfo() : ApiResponse<OptinView?> {
+        val localVariableConfig = getUsageLeaderboardOptinRequestConfig()
 
         return request<Unit, OptinView>(
             localVariableConfig
@@ -475,11 +475,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1UsageLeaderboardOptin
+     * To obtain the request config of the operation getUsageLeaderboardOptin
      *
      * @return RequestConfig
      */
-    fun getV1UsageLeaderboardOptinRequestConfig() : RequestConfig<Unit> {
+    fun getUsageLeaderboardOptinRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -501,7 +501,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my plan is 47% through its 6h window, resets at 14:20\&quot;.  &#x60;current&#x60; is the newest instance of each lane (the headline); &#x60;windows&#x60; is the history behind it. Both come from ONE deduped read, so they can never disagree. The rows are the caller&#39;s OWN linked accounts, scoped to the validated principal and its subject — never another user&#39;s, and never another org&#39;s.
      * @param account Account narrows to ONE linked account of that provider. Empty covers every account the caller has linked there. (optional)
      * @param provider Provider is the upstream to read, e.g. anthropic. Required. (optional)
-     * @param range Range is the window to read: 1h, 24h, 7d or 30d. Empty means 24h, and any other label is refused rather than silently replaced. (optional)
+     * @param range Range is the window to read: a count and a unit — 1h, 24h, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Empty means 24h. A label that is not a count, or one reaching past the 730-day horizon, is refused rather than silently replaced. (optional)
      * @param window Window narrows to ONE window class: 6h, day, week or month. Empty covers every class. (optional)
      * @return DashResp
      * @throws IllegalStateException If the request is not correctly configured
@@ -512,8 +512,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1UsageSamples(account: kotlin.String? = null, provider: kotlin.String? = null, range: kotlin.String? = null, window: kotlin.String? = null) : DashResp {
-        val localVarResponse = getV1UsageSamplesWithHttpInfo(account = account, provider = provider, range = range, window = window)
+    fun getUsageSamples(account: kotlin.String? = null, provider: kotlin.String? = null, range: kotlin.String? = null, window: kotlin.String? = null) : DashResp {
+        val localVarResponse = getUsageSamplesWithHttpInfo(account = account, provider = provider, range = range, window = window)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DashResp
@@ -536,7 +536,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my plan is 47% through its 6h window, resets at 14:20\&quot;.  &#x60;current&#x60; is the newest instance of each lane (the headline); &#x60;windows&#x60; is the history behind it. Both come from ONE deduped read, so they can never disagree. The rows are the caller&#39;s OWN linked accounts, scoped to the validated principal and its subject — never another user&#39;s, and never another org&#39;s.
      * @param account Account narrows to ONE linked account of that provider. Empty covers every account the caller has linked there. (optional)
      * @param provider Provider is the upstream to read, e.g. anthropic. Required. (optional)
-     * @param range Range is the window to read: 1h, 24h, 7d or 30d. Empty means 24h, and any other label is refused rather than silently replaced. (optional)
+     * @param range Range is the window to read: a count and a unit — 1h, 24h, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Empty means 24h. A label that is not a count, or one reaching past the 730-day horizon, is refused rather than silently replaced. (optional)
      * @param window Window narrows to ONE window class: 6h, day, week or month. Empty covers every class. (optional)
      * @return ApiResponse<DashResp?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -544,8 +544,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1UsageSamplesWithHttpInfo(account: kotlin.String?, provider: kotlin.String?, range: kotlin.String?, window: kotlin.String?) : ApiResponse<DashResp?> {
-        val localVariableConfig = getV1UsageSamplesRequestConfig(account = account, provider = provider, range = range, window = window)
+    fun getUsageSamplesWithHttpInfo(account: kotlin.String?, provider: kotlin.String?, range: kotlin.String?, window: kotlin.String?) : ApiResponse<DashResp?> {
+        val localVariableConfig = getUsageSamplesRequestConfig(account = account, provider = provider, range = range, window = window)
 
         return request<Unit, DashResp>(
             localVariableConfig
@@ -553,15 +553,15 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1UsageSamples
+     * To obtain the request config of the operation getUsageSamples
      *
      * @param account Account narrows to ONE linked account of that provider. Empty covers every account the caller has linked there. (optional)
      * @param provider Provider is the upstream to read, e.g. anthropic. Required. (optional)
-     * @param range Range is the window to read: 1h, 24h, 7d or 30d. Empty means 24h, and any other label is refused rather than silently replaced. (optional)
+     * @param range Range is the window to read: a count and a unit — 1h, 24h, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Empty means 24h. A label that is not a count, or one reaching past the 730-day horizon, is refused rather than silently replaced. (optional)
      * @param window Window narrows to ONE window class: 6h, day, week or month. Empty covers every class. (optional)
      * @return RequestConfig
      */
-    fun getV1UsageSamplesRequestConfig(account: kotlin.String?, provider: kotlin.String?, range: kotlin.String?, window: kotlin.String?) : RequestConfig<Unit> {
+    fun getUsageSamplesRequestConfig(account: kotlin.String?, provider: kotlin.String?, range: kotlin.String?, window: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -595,7 +595,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/usage/summary
      * Answers GET /v1/usage/summary: the caller&#39;s own usage footprint over one window — the categorized spend roll-up from the commerce ledger, the org&#39;s LLM usage totals from the warehouse, and the caller&#39;s OWN linked provider accounts beside the org&#39;s Hanzo-routed usage.
      * Answers GET /v1/usage/summary: the caller&#39;s own usage footprint over one window — the categorized spend roll-up from the commerce ledger, the org&#39;s LLM usage totals from the warehouse, and the caller&#39;s OWN linked provider accounts beside the org&#39;s Hanzo-routed usage.  Every source degrades INDEPENDENTLY to honest zeros and says so in &#x60;sources&#x60; and in its own &#x60;available&#x60; flag, so a partial deploy reports \&quot;no data\&quot; rather than fabricating spend. The account rows and the Hanzo rows are concatenated and never summed: a plan&#39;s percent is not money.  The response is org-scoped from the validated principal and marked no-store — a signed-out caller is refused.
-     * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. A label this surface does not know is refused rather than silently replaced. (optional)
+     * @param range Range is the window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all, custom. Empty means 24h. A label this surface does not know, or one reaching past the 730-day horizon, is refused rather than silently replaced. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom. (optional)
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
      * @return UsageSummary
@@ -607,8 +607,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1UsageSummary(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : UsageSummary {
-        val localVarResponse = getV1UsageSummaryWithHttpInfo(range = range, start = start, end = end)
+    fun getUsageSummary(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : UsageSummary {
+        val localVarResponse = getUsageSummaryWithHttpInfo(range = range, start = start, end = end)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UsageSummary
@@ -629,7 +629,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/usage/summary
      * Answers GET /v1/usage/summary: the caller&#39;s own usage footprint over one window — the categorized spend roll-up from the commerce ledger, the org&#39;s LLM usage totals from the warehouse, and the caller&#39;s OWN linked provider accounts beside the org&#39;s Hanzo-routed usage.
      * Answers GET /v1/usage/summary: the caller&#39;s own usage footprint over one window — the categorized spend roll-up from the commerce ledger, the org&#39;s LLM usage totals from the warehouse, and the caller&#39;s OWN linked provider accounts beside the org&#39;s Hanzo-routed usage.  Every source degrades INDEPENDENTLY to honest zeros and says so in &#x60;sources&#x60; and in its own &#x60;available&#x60; flag, so a partial deploy reports \&quot;no data\&quot; rather than fabricating spend. The account rows and the Hanzo rows are concatenated and never summed: a plan&#39;s percent is not money.  The response is org-scoped from the validated principal and marked no-store — a signed-out caller is refused.
-     * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. A label this surface does not know is refused rather than silently replaced. (optional)
+     * @param range Range is the window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all, custom. Empty means 24h. A label this surface does not know, or one reaching past the 730-day horizon, is refused rather than silently replaced. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom. (optional)
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
      * @return ApiResponse<UsageSummary?>
@@ -638,8 +638,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1UsageSummaryWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<UsageSummary?> {
-        val localVariableConfig = getV1UsageSummaryRequestConfig(range = range, start = start, end = end)
+    fun getUsageSummaryWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<UsageSummary?> {
+        val localVariableConfig = getUsageSummaryRequestConfig(range = range, start = start, end = end)
 
         return request<Unit, UsageSummary>(
             localVariableConfig
@@ -647,14 +647,14 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1UsageSummary
+     * To obtain the request config of the operation getUsageSummary
      *
-     * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. A label this surface does not know is refused rather than silently replaced. (optional)
+     * @param range Range is the window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all, custom. Empty means 24h. A label this surface does not know, or one reaching past the 730-day horizon, is refused rather than silently replaced. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom. (optional)
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
      * @return RequestConfig
      */
-    fun getV1UsageSummaryRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
+    fun getUsageSummaryRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -695,8 +695,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Usage(reportReq: ReportReq) : ReportResp {
-        val localVarResponse = postV1UsageWithHttpInfo(reportReq = reportReq)
+    fun postUsage(reportReq: ReportReq) : ReportResp {
+        val localVarResponse = postUsageWithHttpInfo(reportReq = reportReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReportResp
@@ -724,8 +724,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1UsageWithHttpInfo(reportReq: ReportReq) : ApiResponse<ReportResp?> {
-        val localVariableConfig = postV1UsageRequestConfig(reportReq = reportReq)
+    fun postUsageWithHttpInfo(reportReq: ReportReq) : ApiResponse<ReportResp?> {
+        val localVariableConfig = postUsageRequestConfig(reportReq = reportReq)
 
         return request<ReportReq, ReportResp>(
             localVariableConfig
@@ -733,12 +733,12 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1Usage
+     * To obtain the request config of the operation postUsage
      *
      * @param reportReq 
      * @return RequestConfig
      */
-    fun postV1UsageRequestConfig(reportReq: ReportReq) : RequestConfig<ReportReq> {
+    fun postUsageRequestConfig(reportReq: ReportReq) : RequestConfig<ReportReq> {
         val localVariableBody = reportReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -769,8 +769,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1UsageRollupBackfill(backfillQuery: BackfillQuery) : BackfillResult {
-        val localVarResponse = postV1UsageRollupBackfillWithHttpInfo(backfillQuery = backfillQuery)
+    fun postUsageRollupBackfill(backfillQuery: BackfillQuery) : BackfillResult {
+        val localVarResponse = postUsageRollupBackfillWithHttpInfo(backfillQuery = backfillQuery)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BackfillResult
@@ -798,8 +798,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1UsageRollupBackfillWithHttpInfo(backfillQuery: BackfillQuery) : ApiResponse<BackfillResult?> {
-        val localVariableConfig = postV1UsageRollupBackfillRequestConfig(backfillQuery = backfillQuery)
+    fun postUsageRollupBackfillWithHttpInfo(backfillQuery: BackfillQuery) : ApiResponse<BackfillResult?> {
+        val localVariableConfig = postUsageRollupBackfillRequestConfig(backfillQuery = backfillQuery)
 
         return request<BackfillQuery, BackfillResult>(
             localVariableConfig
@@ -807,12 +807,12 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1UsageRollupBackfill
+     * To obtain the request config of the operation postUsageRollupBackfill
      *
      * @param backfillQuery 
      * @return RequestConfig
      */
-    fun postV1UsageRollupBackfillRequestConfig(backfillQuery: BackfillQuery) : RequestConfig<BackfillQuery> {
+    fun postUsageRollupBackfillRequestConfig(backfillQuery: BackfillQuery) : RequestConfig<BackfillQuery> {
         val localVariableBody = backfillQuery
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -843,8 +843,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1UsageLeaderboardOptin(userOptinReq: UserOptinReq) : UserOptinView {
-        val localVarResponse = putV1UsageLeaderboardOptinWithHttpInfo(userOptinReq = userOptinReq)
+    fun putUsageLeaderboardOptin(userOptinReq: UserOptinReq) : UserOptinView {
+        val localVarResponse = putUsageLeaderboardOptinWithHttpInfo(userOptinReq = userOptinReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UserOptinView
@@ -872,8 +872,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1UsageLeaderboardOptinWithHttpInfo(userOptinReq: UserOptinReq) : ApiResponse<UserOptinView?> {
-        val localVariableConfig = putV1UsageLeaderboardOptinRequestConfig(userOptinReq = userOptinReq)
+    fun putUsageLeaderboardOptinWithHttpInfo(userOptinReq: UserOptinReq) : ApiResponse<UserOptinView?> {
+        val localVariableConfig = putUsageLeaderboardOptinRequestConfig(userOptinReq = userOptinReq)
 
         return request<UserOptinReq, UserOptinView>(
             localVariableConfig
@@ -881,12 +881,12 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1UsageLeaderboardOptin
+     * To obtain the request config of the operation putUsageLeaderboardOptin
      *
      * @param userOptinReq 
      * @return RequestConfig
      */
-    fun putV1UsageLeaderboardOptinRequestConfig(userOptinReq: UserOptinReq) : RequestConfig<UserOptinReq> {
+    fun putUsageLeaderboardOptinRequestConfig(userOptinReq: UserOptinReq) : RequestConfig<UserOptinReq> {
         val localVariableBody = userOptinReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -917,8 +917,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1UsageLeaderboardOptinOrg(orgOptinReq: OrgOptinReq) : OrgOptinView {
-        val localVarResponse = putV1UsageLeaderboardOptinOrgWithHttpInfo(orgOptinReq = orgOptinReq)
+    fun putUsageLeaderboardOptinOrg(orgOptinReq: OrgOptinReq) : OrgOptinView {
+        val localVarResponse = putUsageLeaderboardOptinOrgWithHttpInfo(orgOptinReq = orgOptinReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OrgOptinView
@@ -946,8 +946,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1UsageLeaderboardOptinOrgWithHttpInfo(orgOptinReq: OrgOptinReq) : ApiResponse<OrgOptinView?> {
-        val localVariableConfig = putV1UsageLeaderboardOptinOrgRequestConfig(orgOptinReq = orgOptinReq)
+    fun putUsageLeaderboardOptinOrgWithHttpInfo(orgOptinReq: OrgOptinReq) : ApiResponse<OrgOptinView?> {
+        val localVariableConfig = putUsageLeaderboardOptinOrgRequestConfig(orgOptinReq = orgOptinReq)
 
         return request<OrgOptinReq, OrgOptinView>(
             localVariableConfig
@@ -955,12 +955,12 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1UsageLeaderboardOptinOrg
+     * To obtain the request config of the operation putUsageLeaderboardOptinOrg
      *
      * @param orgOptinReq 
      * @return RequestConfig
      */
-    fun putV1UsageLeaderboardOptinOrgRequestConfig(orgOptinReq: OrgOptinReq) : RequestConfig<OrgOptinReq> {
+    fun putUsageLeaderboardOptinOrgRequestConfig(orgOptinReq: OrgOptinReq) : RequestConfig<OrgOptinReq> {
         val localVariableBody = orgOptinReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -70,8 +70,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ResearchArtifacts(project: kotlin.String? = null, run: kotlin.String? = null, since: kotlin.Int? = null) : ArtifactsOut {
-        val localVarResponse = getV1ResearchArtifactsWithHttpInfo(project = project, run = run, since = since)
+    fun getResearchArtifacts(project: kotlin.String? = null, run: kotlin.String? = null, since: kotlin.Int? = null) : ArtifactsOut {
+        val localVarResponse = getResearchArtifactsWithHttpInfo(project = project, run = run, since = since)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArtifactsOut
@@ -101,8 +101,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ResearchArtifactsWithHttpInfo(project: kotlin.String?, run: kotlin.String?, since: kotlin.Int?) : ApiResponse<ArtifactsOut?> {
-        val localVariableConfig = getV1ResearchArtifactsRequestConfig(project = project, run = run, since = since)
+    fun getResearchArtifactsWithHttpInfo(project: kotlin.String?, run: kotlin.String?, since: kotlin.Int?) : ApiResponse<ArtifactsOut?> {
+        val localVariableConfig = getResearchArtifactsRequestConfig(project = project, run = run, since = since)
 
         return request<Unit, ArtifactsOut>(
             localVariableConfig
@@ -110,14 +110,14 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ResearchArtifacts
+     * To obtain the request config of the operation getResearchArtifacts
      *
      * @param project Project narrows to one project. Empty takes the caller&#39;s project scope. (optional)
      * @param run Run narrows to one run&#39;s artifacts by its stable id. (optional)
      * @param since Since bounds the feed to artifacts recorded at or after this unix second. (optional)
      * @return RequestConfig
      */
-    fun getV1ResearchArtifactsRequestConfig(project: kotlin.String?, run: kotlin.String?, since: kotlin.Int?) : RequestConfig<Unit> {
+    fun getResearchArtifactsRequestConfig(project: kotlin.String?, run: kotlin.String?, since: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -157,8 +157,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ResearchArtifactsBySha256(sha256: kotlin.String) : Unit {
-        val localVarResponse = getV1ResearchArtifactsBySha256WithHttpInfo(sha256 = sha256)
+    fun getResearchArtifactsBySha256(sha256: kotlin.String) : Unit {
+        val localVarResponse = getResearchArtifactsBySha256WithHttpInfo(sha256 = sha256)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -185,8 +185,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ResearchArtifactsBySha256WithHttpInfo(sha256: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1ResearchArtifactsBySha256RequestConfig(sha256 = sha256)
+    fun getResearchArtifactsBySha256WithHttpInfo(sha256: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getResearchArtifactsBySha256RequestConfig(sha256 = sha256)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -194,12 +194,12 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ResearchArtifactsBySha256
+     * To obtain the request config of the operation getResearchArtifactsBySha256
      *
      * @param sha256 
      * @return RequestConfig
      */
-    fun getV1ResearchArtifactsBySha256RequestConfig(sha256: kotlin.String) : RequestConfig<Unit> {
+    fun getResearchArtifactsBySha256RequestConfig(sha256: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -229,8 +229,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ResearchExperiments(project: kotlin.String? = null, kind: kotlin.String? = null) : ExperimentsOut {
-        val localVarResponse = getV1ResearchExperimentsWithHttpInfo(project = project, kind = kind)
+    fun getResearchExperiments(project: kotlin.String? = null, kind: kotlin.String? = null) : ExperimentsOut {
+        val localVarResponse = getResearchExperimentsWithHttpInfo(project = project, kind = kind)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ExperimentsOut
@@ -259,8 +259,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ResearchExperimentsWithHttpInfo(project: kotlin.String?, kind: kotlin.String?) : ApiResponse<ExperimentsOut?> {
-        val localVariableConfig = getV1ResearchExperimentsRequestConfig(project = project, kind = kind)
+    fun getResearchExperimentsWithHttpInfo(project: kotlin.String?, kind: kotlin.String?) : ApiResponse<ExperimentsOut?> {
+        val localVariableConfig = getResearchExperimentsRequestConfig(project = project, kind = kind)
 
         return request<Unit, ExperimentsOut>(
             localVariableConfig
@@ -268,13 +268,13 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ResearchExperiments
+     * To obtain the request config of the operation getResearchExperiments
      *
      * @param project Project narrows to one project. Empty reads the org&#39;s whole set across projects. (optional)
      * @param kind Kind narrows to one discriminator: benchmark, kernel-perf, training, ablation or policy-eval. (optional)
      * @return RequestConfig
      */
-    fun getV1ResearchExperimentsRequestConfig(project: kotlin.String?, kind: kotlin.String?) : RequestConfig<Unit> {
+    fun getResearchExperimentsRequestConfig(project: kotlin.String?, kind: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -311,8 +311,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ResearchProjects() : ProjectsOut {
-        val localVarResponse = getV1ResearchProjectsWithHttpInfo()
+    fun getResearchProjects() : ProjectsOut {
+        val localVarResponse = getResearchProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsOut
@@ -339,8 +339,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ResearchProjectsWithHttpInfo() : ApiResponse<ProjectsOut?> {
-        val localVariableConfig = getV1ResearchProjectsRequestConfig()
+    fun getResearchProjectsWithHttpInfo() : ApiResponse<ProjectsOut?> {
+        val localVariableConfig = getResearchProjectsRequestConfig()
 
         return request<Unit, ProjectsOut>(
             localVariableConfig
@@ -348,11 +348,11 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ResearchProjects
+     * To obtain the request config of the operation getResearchProjects
      *
      * @return RequestConfig
      */
-    fun getV1ResearchProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getResearchProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -382,8 +382,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ResearchTotals(project: kotlin.String? = null) : ResearchTotals {
-        val localVarResponse = getV1ResearchTotalsWithHttpInfo(project = project)
+    fun getResearchTotals(project: kotlin.String? = null) : ResearchTotals {
+        val localVarResponse = getResearchTotalsWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ResearchTotals
@@ -411,8 +411,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ResearchTotalsWithHttpInfo(project: kotlin.String?) : ApiResponse<ResearchTotals?> {
-        val localVariableConfig = getV1ResearchTotalsRequestConfig(project = project)
+    fun getResearchTotalsWithHttpInfo(project: kotlin.String?) : ApiResponse<ResearchTotals?> {
+        val localVariableConfig = getResearchTotalsRequestConfig(project = project)
 
         return request<Unit, ResearchTotals>(
             localVariableConfig
@@ -420,12 +420,12 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ResearchTotals
+     * To obtain the request config of the operation getResearchTotals
      *
      * @param project Project narrows the aggregate to one project. Empty aggregates the whole org. (optional)
      * @return RequestConfig
      */
-    fun getV1ResearchTotalsRequestConfig(project: kotlin.String?) : RequestConfig<Unit> {
+    fun getResearchTotalsRequestConfig(project: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -460,8 +460,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ResearchArtifacts(researchArtifact: ResearchArtifact) : ArtifactOut {
-        val localVarResponse = postV1ResearchArtifactsWithHttpInfo(researchArtifact = researchArtifact)
+    fun postResearchArtifacts(researchArtifact: ResearchArtifact) : ArtifactOut {
+        val localVarResponse = postResearchArtifactsWithHttpInfo(researchArtifact = researchArtifact)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ArtifactOut
@@ -489,8 +489,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ResearchArtifactsWithHttpInfo(researchArtifact: ResearchArtifact) : ApiResponse<ArtifactOut?> {
-        val localVariableConfig = postV1ResearchArtifactsRequestConfig(researchArtifact = researchArtifact)
+    fun postResearchArtifactsWithHttpInfo(researchArtifact: ResearchArtifact) : ApiResponse<ArtifactOut?> {
+        val localVariableConfig = postResearchArtifactsRequestConfig(researchArtifact = researchArtifact)
 
         return request<ResearchArtifact, ArtifactOut>(
             localVariableConfig
@@ -498,12 +498,12 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ResearchArtifacts
+     * To obtain the request config of the operation postResearchArtifacts
      *
      * @param researchArtifact 
      * @return RequestConfig
      */
-    fun postV1ResearchArtifactsRequestConfig(researchArtifact: ResearchArtifact) : RequestConfig<ResearchArtifact> {
+    fun postResearchArtifactsRequestConfig(researchArtifact: ResearchArtifact) : RequestConfig<ResearchArtifact> {
         val localVariableBody = researchArtifact
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -534,8 +534,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ResearchExperiments(ingestRequest: IngestRequest) : IngestOut {
-        val localVarResponse = postV1ResearchExperimentsWithHttpInfo(ingestRequest = ingestRequest)
+    fun postResearchExperiments(ingestRequest: IngestRequest) : IngestOut {
+        val localVarResponse = postResearchExperimentsWithHttpInfo(ingestRequest = ingestRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IngestOut
@@ -563,8 +563,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ResearchExperimentsWithHttpInfo(ingestRequest: IngestRequest) : ApiResponse<IngestOut?> {
-        val localVariableConfig = postV1ResearchExperimentsRequestConfig(ingestRequest = ingestRequest)
+    fun postResearchExperimentsWithHttpInfo(ingestRequest: IngestRequest) : ApiResponse<IngestOut?> {
+        val localVariableConfig = postResearchExperimentsRequestConfig(ingestRequest = ingestRequest)
 
         return request<IngestRequest, IngestOut>(
             localVariableConfig
@@ -572,12 +572,12 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ResearchExperiments
+     * To obtain the request config of the operation postResearchExperiments
      *
      * @param ingestRequest 
      * @return RequestConfig
      */
-    fun postV1ResearchExperimentsRequestConfig(ingestRequest: IngestRequest) : RequestConfig<IngestRequest> {
+    fun postResearchExperimentsRequestConfig(ingestRequest: IngestRequest) : RequestConfig<IngestRequest> {
         val localVariableBody = ingestRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -608,8 +608,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ResearchGrants(grantRequest: GrantRequest) : GrantOut {
-        val localVarResponse = postV1ResearchGrantsWithHttpInfo(grantRequest = grantRequest)
+    fun postResearchGrants(grantRequest: GrantRequest) : GrantOut {
+        val localVarResponse = postResearchGrantsWithHttpInfo(grantRequest = grantRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GrantOut
@@ -637,8 +637,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ResearchGrantsWithHttpInfo(grantRequest: GrantRequest) : ApiResponse<GrantOut?> {
-        val localVariableConfig = postV1ResearchGrantsRequestConfig(grantRequest = grantRequest)
+    fun postResearchGrantsWithHttpInfo(grantRequest: GrantRequest) : ApiResponse<GrantOut?> {
+        val localVariableConfig = postResearchGrantsRequestConfig(grantRequest = grantRequest)
 
         return request<GrantRequest, GrantOut>(
             localVariableConfig
@@ -646,12 +646,12 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ResearchGrants
+     * To obtain the request config of the operation postResearchGrants
      *
      * @param grantRequest 
      * @return RequestConfig
      */
-    fun postV1ResearchGrantsRequestConfig(grantRequest: GrantRequest) : RequestConfig<GrantRequest> {
+    fun postResearchGrantsRequestConfig(grantRequest: GrantRequest) : RequestConfig<GrantRequest> {
         val localVariableBody = grantRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

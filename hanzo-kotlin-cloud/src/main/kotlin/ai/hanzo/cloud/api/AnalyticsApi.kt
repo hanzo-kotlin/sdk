@@ -61,8 +61,8 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AnalyticsHealth() : HealthReport {
-        val localVarResponse = getV1AnalyticsHealthWithHttpInfo()
+    fun getAnalyticsHealth() : HealthReport {
+        val localVarResponse = getAnalyticsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as HealthReport
@@ -89,8 +89,8 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AnalyticsHealthWithHttpInfo() : ApiResponse<HealthReport?> {
-        val localVariableConfig = getV1AnalyticsHealthRequestConfig()
+    fun getAnalyticsHealthWithHttpInfo() : ApiResponse<HealthReport?> {
+        val localVariableConfig = getAnalyticsHealthRequestConfig()
 
         return request<Unit, HealthReport>(
             localVariableConfig
@@ -98,11 +98,11 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1AnalyticsHealth
+     * To obtain the request config of the operation getAnalyticsHealth
      *
      * @return RequestConfig
      */
-    fun getV1AnalyticsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getAnalyticsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -122,7 +122,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/analytics/overview
      * Overview returns the caller org&#39;s analytics KPIs for one time window.
      * Overview returns the caller org&#39;s analytics KPIs for one time window. Three lenses over one warehouse: llm is the live per-org LLM usage ledger (requests, tokens, spend, models, providers, errors) and is always real; web (pageviews, visitors, sessions) and commerce (orders, revenue, AOV) read the product-event table and report available&#x3D;false rather than fabricating zeros when it holds nothing yet.  The org is the validated principal&#39;s — never a parameter — so a caller can only ever read its own tenant. 403 without a validated bearer, 400 on an unknown range, 503 when the warehouse is unreachable.
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @return Overview
@@ -134,8 +134,8 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AnalyticsOverview(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : Overview {
-        val localVarResponse = getV1AnalyticsOverviewWithHttpInfo(range = range, start = start, end = end)
+    fun getAnalyticsOverview(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : Overview {
+        val localVarResponse = getAnalyticsOverviewWithHttpInfo(range = range, start = start, end = end)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Overview
@@ -156,7 +156,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/analytics/overview
      * Overview returns the caller org&#39;s analytics KPIs for one time window.
      * Overview returns the caller org&#39;s analytics KPIs for one time window. Three lenses over one warehouse: llm is the live per-org LLM usage ledger (requests, tokens, spend, models, providers, errors) and is always real; web (pageviews, visitors, sessions) and commerce (orders, revenue, AOV) read the product-event table and report available&#x3D;false rather than fabricating zeros when it holds nothing yet.  The org is the validated principal&#39;s — never a parameter — so a caller can only ever read its own tenant. 403 without a validated bearer, 400 on an unknown range, 503 when the warehouse is unreachable.
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @return ApiResponse<Overview?>
@@ -165,8 +165,8 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AnalyticsOverviewWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<Overview?> {
-        val localVariableConfig = getV1AnalyticsOverviewRequestConfig(range = range, start = start, end = end)
+    fun getAnalyticsOverviewWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<Overview?> {
+        val localVariableConfig = getAnalyticsOverviewRequestConfig(range = range, start = start, end = end)
 
         return request<Unit, Overview>(
             localVariableConfig
@@ -174,14 +174,14 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1AnalyticsOverview
+     * To obtain the request config of the operation getAnalyticsOverview
      *
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @return RequestConfig
      */
-    fun getV1AnalyticsOverviewRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
+    fun getAnalyticsOverviewRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -212,7 +212,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/analytics/timeseries
      * Timeseries returns the caller org&#39;s LLM usage over time as an evenly-spaced series.
      * Timeseries returns the caller org&#39;s LLM usage over time as an evenly-spaced series. One point per hour or per day — the bucket the window implies, 24h giving hours and 7d/30d giving days — carrying requests, total tokens and spend in cents. Empty buckets are filled with zeros so a client charts a continuous line.  The org is the validated principal&#39;s — never a parameter. 403 without a validated bearer, 400 on an unknown range, 503 when the warehouse is unreachable.
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @return Timeseries
@@ -224,8 +224,8 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AnalyticsTimeseries(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : Timeseries {
-        val localVarResponse = getV1AnalyticsTimeseriesWithHttpInfo(range = range, start = start, end = end)
+    fun getAnalyticsTimeseries(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : Timeseries {
+        val localVarResponse = getAnalyticsTimeseriesWithHttpInfo(range = range, start = start, end = end)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Timeseries
@@ -246,7 +246,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/analytics/timeseries
      * Timeseries returns the caller org&#39;s LLM usage over time as an evenly-spaced series.
      * Timeseries returns the caller org&#39;s LLM usage over time as an evenly-spaced series. One point per hour or per day — the bucket the window implies, 24h giving hours and 7d/30d giving days — carrying requests, total tokens and spend in cents. Empty buckets are filled with zeros so a client charts a continuous line.  The org is the validated principal&#39;s — never a parameter. 403 without a validated bearer, 400 on an unknown range, 503 when the warehouse is unreachable.
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @return ApiResponse<Timeseries?>
@@ -255,8 +255,8 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AnalyticsTimeseriesWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<Timeseries?> {
-        val localVariableConfig = getV1AnalyticsTimeseriesRequestConfig(range = range, start = start, end = end)
+    fun getAnalyticsTimeseriesWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<Timeseries?> {
+        val localVariableConfig = getAnalyticsTimeseriesRequestConfig(range = range, start = start, end = end)
 
         return request<Unit, Timeseries>(
             localVariableConfig
@@ -264,14 +264,14 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1AnalyticsTimeseries
+     * To obtain the request config of the operation getAnalyticsTimeseries
      *
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @return RequestConfig
      */
-    fun getV1AnalyticsTimeseriesRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
+    fun getAnalyticsTimeseriesRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -302,7 +302,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/analytics/top
      * Top returns the caller org&#39;s ranked lenses for one window, five of them at once.
      * Top returns the caller org&#39;s ranked lenses for one window, five of them at once. models ranks LLM models by spend and is always real; products ranks commerce orders by revenue; topPages ranks requested paths, topReferrers the external referrer domains (\&quot;(direct)\&quot; for a missing or same-origin one) and topSources the utm_source campaigns (\&quot;(none)\&quot; when absent), each by pageviews. Every lens carries each row&#39;s share of the in-window total, so a top-N honestly shows the long tail.  The four event lenses report available&#x3D;false rather than fabricating zeros when the product-event table holds nothing yet. The org is the validated principal&#39;s — never a parameter. 403 without a validated bearer, 400 on an unknown range, 503 when the warehouse is unreachable.
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @param limit Limit bounds every ranked lens in the response. Default 10, maximum 100; a value at or below zero, or one that is not a number, takes the default. (optional)
@@ -315,8 +315,8 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AnalyticsTop(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null, limit: kotlin.Int? = null) : Top {
-        val localVarResponse = getV1AnalyticsTopWithHttpInfo(range = range, start = start, end = end, limit = limit)
+    fun getAnalyticsTop(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null, limit: kotlin.Int? = null) : Top {
+        val localVarResponse = getAnalyticsTopWithHttpInfo(range = range, start = start, end = end, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Top
@@ -337,7 +337,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/analytics/top
      * Top returns the caller org&#39;s ranked lenses for one window, five of them at once.
      * Top returns the caller org&#39;s ranked lenses for one window, five of them at once. models ranks LLM models by spend and is always real; products ranks commerce orders by revenue; topPages ranks requested paths, topReferrers the external referrer domains (\&quot;(direct)\&quot; for a missing or same-origin one) and topSources the utm_source campaigns (\&quot;(none)\&quot; when absent), each by pageviews. Every lens carries each row&#39;s share of the in-window total, so a top-N honestly shows the long tail.  The four event lenses report available&#x3D;false rather than fabricating zeros when the product-event table holds nothing yet. The org is the validated principal&#39;s — never a parameter. 403 without a validated bearer, 400 on an unknown range, 503 when the warehouse is unreachable.
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @param limit Limit bounds every ranked lens in the response. Default 10, maximum 100; a value at or below zero, or one that is not a number, takes the default. (optional)
@@ -347,8 +347,8 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AnalyticsTopWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?, limit: kotlin.Int?) : ApiResponse<Top?> {
-        val localVariableConfig = getV1AnalyticsTopRequestConfig(range = range, start = start, end = end, limit = limit)
+    fun getAnalyticsTopWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?, limit: kotlin.Int?) : ApiResponse<Top?> {
+        val localVariableConfig = getAnalyticsTopRequestConfig(range = range, start = start, end = end, limit = limit)
 
         return request<Unit, Top>(
             localVariableConfig
@@ -356,15 +356,15 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1AnalyticsTop
+     * To obtain the request config of the operation getAnalyticsTop
      *
-     * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
+     * @param range Range is a relative window: a count and a unit — 24h, 7d, 90d, any &lt;N&gt;h or &lt;N&gt;d — or day, week, month, all. Default 24h. Ignored when both start and end are given. An unknown value, or one past the 730-day horizon, is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @param limit Limit bounds every ranked lens in the response. Default 10, maximum 100; a value at or below zero, or one that is not a number, takes the default. (optional)
      * @return RequestConfig
      */
-    fun getV1AnalyticsTopRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAnalyticsTopRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {

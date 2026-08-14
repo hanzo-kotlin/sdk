@@ -57,8 +57,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1RouterArtifactMeta() : Unit {
-        val localVarResponse = deleteV1RouterArtifactMetaWithHttpInfo()
+    fun deleteRouterArtifactMeta() : Unit {
+        val localVarResponse = deleteRouterArtifactMetaWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -84,8 +84,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1RouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1RouterArtifactMetaRequestConfig()
+    fun deleteRouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteRouterArtifactMetaRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -93,11 +93,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1RouterArtifactMeta
+     * To obtain the request config of the operation deleteRouterArtifactMeta
      *
      * @return RequestConfig
      */
-    fun deleteV1RouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
+    fun deleteRouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -125,8 +125,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1RouterData() : Envelope {
-        val localVarResponse = deleteV1RouterDataWithHttpInfo()
+    fun deleteRouterData() : Envelope {
+        val localVarResponse = deleteRouterDataWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -153,8 +153,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1RouterDataWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = deleteV1RouterDataRequestConfig()
+    fun deleteRouterDataWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = deleteRouterDataRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -162,11 +162,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1RouterData
+     * To obtain the request config of the operation deleteRouterData
      *
      * @return RequestConfig
      */
-    fun deleteV1RouterDataRequestConfig() : RequestConfig<Unit> {
+    fun deleteRouterDataRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -194,8 +194,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1RouterDefaults() : Unit {
-        val localVarResponse = deleteV1RouterDefaultsWithHttpInfo()
+    fun deleteRouterDefaults() : Unit {
+        val localVarResponse = deleteRouterDefaultsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -221,8 +221,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1RouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1RouterDefaultsRequestConfig()
+    fun deleteRouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteRouterDefaultsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -230,11 +230,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1RouterDefaults
+     * To obtain the request config of the operation deleteRouterDefaults
      *
      * @return RequestConfig
      */
-    fun deleteV1RouterDefaultsRequestConfig() : RequestConfig<Unit> {
+    fun deleteRouterDefaultsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -261,8 +261,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1RouterLedger() : Unit {
-        val localVarResponse = deleteV1RouterLedgerWithHttpInfo()
+    fun deleteRouterLedger() : Unit {
+        val localVarResponse = deleteRouterLedgerWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -288,8 +288,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1RouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1RouterLedgerRequestConfig()
+    fun deleteRouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteRouterLedgerRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -297,11 +297,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1RouterLedger
+     * To obtain the request config of the operation deleteRouterLedger
      *
      * @return RequestConfig
      */
-    fun deleteV1RouterLedgerRequestConfig() : RequestConfig<Unit> {
+    fun deleteRouterLedgerRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,8 +328,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1RouterPolicy() : Unit {
-        val localVarResponse = deleteV1RouterPolicyWithHttpInfo()
+    fun deleteRouterPolicy() : Unit {
+        val localVarResponse = deleteRouterPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -355,8 +355,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1RouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1RouterPolicyRequestConfig()
+    fun deleteRouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteRouterPolicyRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -364,11 +364,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1RouterPolicy
+     * To obtain the request config of the operation deleteRouterPolicy
      *
      * @return RequestConfig
      */
-    fun deleteV1RouterPolicyRequestConfig() : RequestConfig<Unit> {
+    fun deleteRouterPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -395,8 +395,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1RouterRewards() : Unit {
-        val localVarResponse = deleteV1RouterRewardsWithHttpInfo()
+    fun deleteRouterRewards() : Unit {
+        val localVarResponse = deleteRouterRewardsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -422,8 +422,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1RouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1RouterRewardsRequestConfig()
+    fun deleteRouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteRouterRewardsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -431,11 +431,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1RouterRewards
+     * To obtain the request config of the operation deleteRouterRewards
      *
      * @return RequestConfig
      */
-    fun deleteV1RouterRewardsRequestConfig() : RequestConfig<Unit> {
+    fun deleteRouterRewardsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -462,8 +462,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterArtifactMeta() : Unit {
-        val localVarResponse = getV1RouterArtifactMetaWithHttpInfo()
+    fun getRouterArtifactMeta() : Unit {
+        val localVarResponse = getRouterArtifactMetaWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -489,8 +489,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RouterArtifactMetaRequestConfig()
+    fun getRouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRouterArtifactMetaRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -498,11 +498,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterArtifactMeta
+     * To obtain the request config of the operation getRouterArtifactMeta
      *
      * @return RequestConfig
      */
-    fun getV1RouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
+    fun getRouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -530,8 +530,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterData() : Envelope {
-        val localVarResponse = getV1RouterDataWithHttpInfo()
+    fun getRouterData() : Envelope {
+        val localVarResponse = getRouterDataWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -558,8 +558,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterDataWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1RouterDataRequestConfig()
+    fun getRouterDataWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getRouterDataRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -567,11 +567,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterData
+     * To obtain the request config of the operation getRouterData
      *
      * @return RequestConfig
      */
-    fun getV1RouterDataRequestConfig() : RequestConfig<Unit> {
+    fun getRouterDataRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -599,8 +599,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterDefaults() : Unit {
-        val localVarResponse = getV1RouterDefaultsWithHttpInfo()
+    fun getRouterDefaults() : Unit {
+        val localVarResponse = getRouterDefaultsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -626,8 +626,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RouterDefaultsRequestConfig()
+    fun getRouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRouterDefaultsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -635,11 +635,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterDefaults
+     * To obtain the request config of the operation getRouterDefaults
      *
      * @return RequestConfig
      */
-    fun getV1RouterDefaultsRequestConfig() : RequestConfig<Unit> {
+    fun getRouterDefaultsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -666,8 +666,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterHistory() : Unit {
-        val localVarResponse = getV1RouterHistoryWithHttpInfo()
+    fun getRouterHistory() : Unit {
+        val localVarResponse = getRouterHistoryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -693,8 +693,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterHistoryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RouterHistoryRequestConfig()
+    fun getRouterHistoryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRouterHistoryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -702,11 +702,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterHistory
+     * To obtain the request config of the operation getRouterHistory
      *
      * @return RequestConfig
      */
-    fun getV1RouterHistoryRequestConfig() : RequestConfig<Unit> {
+    fun getRouterHistoryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -733,8 +733,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterJudgePanel() : Unit {
-        val localVarResponse = getV1RouterJudgePanelWithHttpInfo()
+    fun getRouterJudgePanel() : Unit {
+        val localVarResponse = getRouterJudgePanelWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -760,8 +760,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterJudgePanelWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RouterJudgePanelRequestConfig()
+    fun getRouterJudgePanelWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRouterJudgePanelRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -769,11 +769,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterJudgePanel
+     * To obtain the request config of the operation getRouterJudgePanel
      *
      * @return RequestConfig
      */
-    fun getV1RouterJudgePanelRequestConfig() : RequestConfig<Unit> {
+    fun getRouterJudgePanelRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -800,8 +800,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterLedger() : Unit {
-        val localVarResponse = getV1RouterLedgerWithHttpInfo()
+    fun getRouterLedger() : Unit {
+        val localVarResponse = getRouterLedgerWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -827,8 +827,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RouterLedgerRequestConfig()
+    fun getRouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRouterLedgerRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -836,11 +836,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterLedger
+     * To obtain the request config of the operation getRouterLedger
      *
      * @return RequestConfig
      */
-    fun getV1RouterLedgerRequestConfig() : RequestConfig<Unit> {
+    fun getRouterLedgerRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -867,8 +867,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterPolicy() : Unit {
-        val localVarResponse = getV1RouterPolicyWithHttpInfo()
+    fun getRouterPolicy() : Unit {
+        val localVarResponse = getRouterPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -894,8 +894,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RouterPolicyRequestConfig()
+    fun getRouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRouterPolicyRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -903,11 +903,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterPolicy
+     * To obtain the request config of the operation getRouterPolicy
      *
      * @return RequestConfig
      */
-    fun getV1RouterPolicyRequestConfig() : RequestConfig<Unit> {
+    fun getRouterPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -934,8 +934,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterRewards() : Unit {
-        val localVarResponse = getV1RouterRewardsWithHttpInfo()
+    fun getRouterRewards() : Unit {
+        val localVarResponse = getRouterRewardsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -961,8 +961,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RouterRewardsRequestConfig()
+    fun getRouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRouterRewardsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -970,11 +970,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterRewards
+     * To obtain the request config of the operation getRouterRewards
      *
      * @return RequestConfig
      */
-    fun getV1RouterRewardsRequestConfig() : RequestConfig<Unit> {
+    fun getRouterRewardsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1001,8 +1001,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RouterStats() : Unit {
-        val localVarResponse = getV1RouterStatsWithHttpInfo()
+    fun getRouterStats() : Unit {
+        val localVarResponse = getRouterStatsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1028,8 +1028,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RouterStatsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1RouterStatsRequestConfig()
+    fun getRouterStatsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getRouterStatsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1037,11 +1037,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1RouterStats
+     * To obtain the request config of the operation getRouterStats
      *
      * @return RequestConfig
      */
-    fun getV1RouterStatsRequestConfig() : RequestConfig<Unit> {
+    fun getRouterStatsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1068,8 +1068,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1RouterArtifactMeta() : Unit {
-        val localVarResponse = patchV1RouterArtifactMetaWithHttpInfo()
+    fun patchRouterArtifactMeta() : Unit {
+        val localVarResponse = patchRouterArtifactMetaWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1095,8 +1095,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1RouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1RouterArtifactMetaRequestConfig()
+    fun patchRouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchRouterArtifactMetaRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1104,11 +1104,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1RouterArtifactMeta
+     * To obtain the request config of the operation patchRouterArtifactMeta
      *
      * @return RequestConfig
      */
-    fun patchV1RouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
+    fun patchRouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1135,8 +1135,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1RouterDefaults() : Unit {
-        val localVarResponse = patchV1RouterDefaultsWithHttpInfo()
+    fun patchRouterDefaults() : Unit {
+        val localVarResponse = patchRouterDefaultsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1162,8 +1162,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1RouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1RouterDefaultsRequestConfig()
+    fun patchRouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchRouterDefaultsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1171,11 +1171,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1RouterDefaults
+     * To obtain the request config of the operation patchRouterDefaults
      *
      * @return RequestConfig
      */
-    fun patchV1RouterDefaultsRequestConfig() : RequestConfig<Unit> {
+    fun patchRouterDefaultsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1202,8 +1202,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1RouterLedger() : Unit {
-        val localVarResponse = patchV1RouterLedgerWithHttpInfo()
+    fun patchRouterLedger() : Unit {
+        val localVarResponse = patchRouterLedgerWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1229,8 +1229,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1RouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1RouterLedgerRequestConfig()
+    fun patchRouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchRouterLedgerRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1238,11 +1238,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1RouterLedger
+     * To obtain the request config of the operation patchRouterLedger
      *
      * @return RequestConfig
      */
-    fun patchV1RouterLedgerRequestConfig() : RequestConfig<Unit> {
+    fun patchRouterLedgerRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1269,8 +1269,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1RouterPolicy() : Unit {
-        val localVarResponse = patchV1RouterPolicyWithHttpInfo()
+    fun patchRouterPolicy() : Unit {
+        val localVarResponse = patchRouterPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1296,8 +1296,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1RouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1RouterPolicyRequestConfig()
+    fun patchRouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchRouterPolicyRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1305,11 +1305,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1RouterPolicy
+     * To obtain the request config of the operation patchRouterPolicy
      *
      * @return RequestConfig
      */
-    fun patchV1RouterPolicyRequestConfig() : RequestConfig<Unit> {
+    fun patchRouterPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1336,8 +1336,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1RouterRewards() : Unit {
-        val localVarResponse = patchV1RouterRewardsWithHttpInfo()
+    fun patchRouterRewards() : Unit {
+        val localVarResponse = patchRouterRewardsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1363,8 +1363,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1RouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1RouterRewardsRequestConfig()
+    fun patchRouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchRouterRewardsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1372,11 +1372,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1RouterRewards
+     * To obtain the request config of the operation patchRouterRewards
      *
      * @return RequestConfig
      */
-    fun patchV1RouterRewardsRequestConfig() : RequestConfig<Unit> {
+    fun patchRouterRewardsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1403,8 +1403,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RouterArtifactMeta() : Unit {
-        val localVarResponse = postV1RouterArtifactMetaWithHttpInfo()
+    fun postRouterArtifactMeta() : Unit {
+        val localVarResponse = postRouterArtifactMetaWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1430,8 +1430,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RouterArtifactMetaRequestConfig()
+    fun postRouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRouterArtifactMetaRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1439,11 +1439,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1RouterArtifactMeta
+     * To obtain the request config of the operation postRouterArtifactMeta
      *
      * @return RequestConfig
      */
-    fun postV1RouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
+    fun postRouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1470,8 +1470,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RouterDefaults() : Unit {
-        val localVarResponse = postV1RouterDefaultsWithHttpInfo()
+    fun postRouterDefaults() : Unit {
+        val localVarResponse = postRouterDefaultsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1497,8 +1497,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RouterDefaultsRequestConfig()
+    fun postRouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRouterDefaultsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1506,11 +1506,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1RouterDefaults
+     * To obtain the request config of the operation postRouterDefaults
      *
      * @return RequestConfig
      */
-    fun postV1RouterDefaultsRequestConfig() : RequestConfig<Unit> {
+    fun postRouterDefaultsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1537,8 +1537,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RouterLedger() : Unit {
-        val localVarResponse = postV1RouterLedgerWithHttpInfo()
+    fun postRouterLedger() : Unit {
+        val localVarResponse = postRouterLedgerWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1564,8 +1564,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RouterLedgerRequestConfig()
+    fun postRouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRouterLedgerRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1573,11 +1573,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1RouterLedger
+     * To obtain the request config of the operation postRouterLedger
      *
      * @return RequestConfig
      */
-    fun postV1RouterLedgerRequestConfig() : RequestConfig<Unit> {
+    fun postRouterLedgerRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1604,8 +1604,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RouterPolicy() : Unit {
-        val localVarResponse = postV1RouterPolicyWithHttpInfo()
+    fun postRouterPolicy() : Unit {
+        val localVarResponse = postRouterPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1631,8 +1631,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RouterPolicyRequestConfig()
+    fun postRouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRouterPolicyRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1640,11 +1640,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1RouterPolicy
+     * To obtain the request config of the operation postRouterPolicy
      *
      * @return RequestConfig
      */
-    fun postV1RouterPolicyRequestConfig() : RequestConfig<Unit> {
+    fun postRouterPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1671,8 +1671,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RouterRewards() : Unit {
-        val localVarResponse = postV1RouterRewardsWithHttpInfo()
+    fun postRouterRewards() : Unit {
+        val localVarResponse = postRouterRewardsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1698,8 +1698,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1RouterRewardsRequestConfig()
+    fun postRouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postRouterRewardsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1707,11 +1707,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1RouterRewards
+     * To obtain the request config of the operation postRouterRewards
      *
      * @return RequestConfig
      */
-    fun postV1RouterRewardsRequestConfig() : RequestConfig<Unit> {
+    fun postRouterRewardsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1738,8 +1738,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1RouterArtifactMeta() : Unit {
-        val localVarResponse = putV1RouterArtifactMetaWithHttpInfo()
+    fun putRouterArtifactMeta() : Unit {
+        val localVarResponse = putRouterArtifactMetaWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1765,8 +1765,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1RouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1RouterArtifactMetaRequestConfig()
+    fun putRouterArtifactMetaWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putRouterArtifactMetaRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1774,11 +1774,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1RouterArtifactMeta
+     * To obtain the request config of the operation putRouterArtifactMeta
      *
      * @return RequestConfig
      */
-    fun putV1RouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
+    fun putRouterArtifactMetaRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1805,8 +1805,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1RouterDefaults() : Unit {
-        val localVarResponse = putV1RouterDefaultsWithHttpInfo()
+    fun putRouterDefaults() : Unit {
+        val localVarResponse = putRouterDefaultsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1832,8 +1832,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1RouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1RouterDefaultsRequestConfig()
+    fun putRouterDefaultsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putRouterDefaultsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1841,11 +1841,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1RouterDefaults
+     * To obtain the request config of the operation putRouterDefaults
      *
      * @return RequestConfig
      */
-    fun putV1RouterDefaultsRequestConfig() : RequestConfig<Unit> {
+    fun putRouterDefaultsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1872,8 +1872,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1RouterLedger() : Unit {
-        val localVarResponse = putV1RouterLedgerWithHttpInfo()
+    fun putRouterLedger() : Unit {
+        val localVarResponse = putRouterLedgerWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1899,8 +1899,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1RouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1RouterLedgerRequestConfig()
+    fun putRouterLedgerWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putRouterLedgerRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1908,11 +1908,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1RouterLedger
+     * To obtain the request config of the operation putRouterLedger
      *
      * @return RequestConfig
      */
-    fun putV1RouterLedgerRequestConfig() : RequestConfig<Unit> {
+    fun putRouterLedgerRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1939,8 +1939,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1RouterPolicy() : Unit {
-        val localVarResponse = putV1RouterPolicyWithHttpInfo()
+    fun putRouterPolicy() : Unit {
+        val localVarResponse = putRouterPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1966,8 +1966,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1RouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1RouterPolicyRequestConfig()
+    fun putRouterPolicyWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putRouterPolicyRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1975,11 +1975,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1RouterPolicy
+     * To obtain the request config of the operation putRouterPolicy
      *
      * @return RequestConfig
      */
-    fun putV1RouterPolicyRequestConfig() : RequestConfig<Unit> {
+    fun putRouterPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2006,8 +2006,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1RouterRewards() : Unit {
-        val localVarResponse = putV1RouterRewardsWithHttpInfo()
+    fun putRouterRewards() : Unit {
+        val localVarResponse = putRouterRewardsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2033,8 +2033,8 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1RouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1RouterRewardsRequestConfig()
+    fun putRouterRewardsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putRouterRewardsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2042,11 +2042,11 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1RouterRewards
+     * To obtain the request config of the operation putRouterRewards
      *
      * @return RequestConfig
      */
-    fun putV1RouterRewardsRequestConfig() : RequestConfig<Unit> {
+    fun putRouterRewardsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -56,8 +56,8 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Chat() : Unit {
-        val localVarResponse = postV1ChatWithHttpInfo()
+    fun postChat() : Unit {
+        val localVarResponse = postChatWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ChatWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ChatRequestConfig()
+    fun postChatWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postChatRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1Chat
+     * To obtain the request config of the operation postChat
      *
      * @return RequestConfig
      */
-    fun postV1ChatRequestConfig() : RequestConfig<Unit> {
+    fun postChatRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ChatCompletions() : Unit {
-        val localVarResponse = postV1ChatCompletionsWithHttpInfo()
+    fun postChatCompletions() : Unit {
+        val localVarResponse = postChatCompletionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ChatCompletionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ChatCompletionsRequestConfig()
+    fun postChatCompletionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postChatCompletionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1ChatCompletions
+     * To obtain the request config of the operation postChatCompletions
      *
      * @return RequestConfig
      */
-    fun postV1ChatCompletionsRequestConfig() : RequestConfig<Unit> {
+    fun postChatCompletionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

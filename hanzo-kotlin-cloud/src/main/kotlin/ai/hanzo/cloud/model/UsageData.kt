@@ -15,7 +15,7 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.UsageByProduct
+import ai.hanzo.cloud.model.UsageByModel
 import ai.hanzo.cloud.model.UsagePoint
 import ai.hanzo.cloud.model.UsageTotals
 
@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param byProduct 
+ * @param byModel 
  * @param series 
  * @param totals 
  */
@@ -32,8 +32,8 @@ import com.google.gson.annotations.SerializedName
 
 data class UsageData (
 
-    @SerializedName("byProduct")
-    val byProduct: kotlin.collections.List<UsageByProduct>? = null,
+    @SerializedName("byModel")
+    val byModel: kotlin.collections.List<UsageByModel>? = null,
 
     @SerializedName("series")
     val series: kotlin.collections.List<UsagePoint>? = null,

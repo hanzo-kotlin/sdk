@@ -56,8 +56,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TracesHealth() : Unit {
-        val localVarResponse = getV1TracesHealthWithHttpInfo()
+    fun getTracesHealth() : Unit {
+        val localVarResponse = getTracesHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TracesHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TracesHealthRequestConfig()
+    fun getTracesHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getTracesHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1TracesHealth
+     * To obtain the request config of the operation getTracesHealth
      *
      * @return RequestConfig
      */
-    fun getV1TracesHealthRequestConfig() : RequestConfig<Unit> {
+    fun getTracesHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TracesQuery() : Unit {
-        val localVarResponse = getV1TracesQueryWithHttpInfo()
+    fun getTracesQuery() : Unit {
+        val localVarResponse = getTracesQueryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TracesQueryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TracesQueryRequestConfig()
+    fun getTracesQueryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getTracesQueryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1TracesQuery
+     * To obtain the request config of the operation getTracesQuery
      *
      * @return RequestConfig
      */
-    fun getV1TracesQueryRequestConfig() : RequestConfig<Unit> {
+    fun getTracesQueryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TracesTrace() : Unit {
-        val localVarResponse = getV1TracesTraceWithHttpInfo()
+    fun getTracesTrace() : Unit {
+        val localVarResponse = getTracesTraceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TracesTraceWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TracesTraceRequestConfig()
+    fun getTracesTraceWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getTracesTraceRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1TracesTrace
+     * To obtain the request config of the operation getTracesTrace
      *
      * @return RequestConfig
      */
-    fun getV1TracesTraceRequestConfig() : RequestConfig<Unit> {
+    fun getTracesTraceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -257,8 +257,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1TracesWrite() : Unit {
-        val localVarResponse = postV1TracesWriteWithHttpInfo()
+    fun postTracesWrite() : Unit {
+        val localVarResponse = postTracesWriteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,8 +284,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1TracesWriteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1TracesWriteRequestConfig()
+    fun postTracesWriteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postTracesWriteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +293,11 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1TracesWrite
+     * To obtain the request config of the operation postTracesWrite
      *
      * @return RequestConfig
      */
-    fun postV1TracesWriteRequestConfig() : RequestConfig<Unit> {
+    fun postTracesWriteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

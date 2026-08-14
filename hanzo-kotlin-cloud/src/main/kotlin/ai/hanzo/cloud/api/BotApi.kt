@@ -58,8 +58,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteBotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteBotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -86,8 +86,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteBotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteBotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -95,12 +95,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1BotByWildcard1
+     * To obtain the request config of the operation deleteBotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteBotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -128,8 +128,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getBotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getBotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -156,8 +156,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getBotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getBotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -165,12 +165,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1BotByWildcard1
+     * To obtain the request config of the operation getBotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getBotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -197,8 +197,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BotConnect() : Unit {
-        val localVarResponse = getV1BotConnectWithHttpInfo()
+    fun getBotConnect() : Unit {
+        val localVarResponse = getBotConnectWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -224,8 +224,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BotConnectWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1BotConnectRequestConfig()
+    fun getBotConnectWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getBotConnectRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -233,11 +233,11 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1BotConnect
+     * To obtain the request config of the operation getBotConnect
      *
      * @return RequestConfig
      */
-    fun getV1BotConnectRequestConfig() : RequestConfig<Unit> {
+    fun getBotConnectRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -265,8 +265,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BotNodes() : NodesView {
-        val localVarResponse = getV1BotNodesWithHttpInfo()
+    fun getBotNodes() : NodesView {
+        val localVarResponse = getBotNodesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as NodesView
@@ -293,8 +293,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BotNodesWithHttpInfo() : ApiResponse<NodesView?> {
-        val localVariableConfig = getV1BotNodesRequestConfig()
+    fun getBotNodesWithHttpInfo() : ApiResponse<NodesView?> {
+        val localVariableConfig = getBotNodesRequestConfig()
 
         return request<Unit, NodesView>(
             localVariableConfig
@@ -302,11 +302,11 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1BotNodes
+     * To obtain the request config of the operation getBotNodes
      *
      * @return RequestConfig
      */
-    fun getV1BotNodesRequestConfig() : RequestConfig<Unit> {
+    fun getBotNodesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -335,8 +335,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = patchV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchBotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchBotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -363,8 +363,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchBotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchBotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -372,12 +372,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation patchV1BotByWildcard1
+     * To obtain the request config of the operation patchBotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun patchV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchBotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -405,8 +405,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = postV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postBotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postBotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -433,8 +433,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postBotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postBotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -442,12 +442,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1BotByWildcard1
+     * To obtain the request config of the operation postBotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun postV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postBotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -475,8 +475,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BotNodesByIdInvoke(id: kotlin.String) : Unit {
-        val localVarResponse = postV1BotNodesByIdInvokeWithHttpInfo(id = id)
+    fun postBotNodesByIdInvoke(id: kotlin.String) : Unit {
+        val localVarResponse = postBotNodesByIdInvokeWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -503,8 +503,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BotNodesByIdInvokeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1BotNodesByIdInvokeRequestConfig(id = id)
+    fun postBotNodesByIdInvokeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postBotNodesByIdInvokeRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -512,12 +512,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1BotNodesByIdInvoke
+     * To obtain the request config of the operation postBotNodesByIdInvoke
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1BotNodesByIdInvokeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postBotNodesByIdInvokeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -544,8 +544,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BotPeerInvoke() : Unit {
-        val localVarResponse = postV1BotPeerInvokeWithHttpInfo()
+    fun postBotPeerInvoke() : Unit {
+        val localVarResponse = postBotPeerInvokeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -571,8 +571,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BotPeerInvokeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1BotPeerInvokeRequestConfig()
+    fun postBotPeerInvokeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postBotPeerInvokeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -580,11 +580,11 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1BotPeerInvoke
+     * To obtain the request config of the operation postBotPeerInvoke
      *
      * @return RequestConfig
      */
-    fun postV1BotPeerInvokeRequestConfig() : RequestConfig<Unit> {
+    fun postBotPeerInvokeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -612,8 +612,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = putV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putBotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putBotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -640,8 +640,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putBotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putBotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -649,12 +649,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putV1BotByWildcard1
+     * To obtain the request config of the operation putBotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun putV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putBotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

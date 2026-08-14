@@ -56,8 +56,8 @@ class WecomBotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WecomBotCallbackByBotid() : Unit {
-        val localVarResponse = getV1WecomBotCallbackByBotidWithHttpInfo()
+    fun getWecomBotCallbackByBotid() : Unit {
+        val localVarResponse = getWecomBotCallbackByBotidWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class WecomBotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WecomBotCallbackByBotidWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1WecomBotCallbackByBotidRequestConfig()
+    fun getWecomBotCallbackByBotidWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getWecomBotCallbackByBotidRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class WecomBotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1WecomBotCallbackByBotid
+     * To obtain the request config of the operation getWecomBotCallbackByBotid
      *
      * @return RequestConfig
      */
-    fun getV1WecomBotCallbackByBotidRequestConfig() : RequestConfig<Unit> {
+    fun getWecomBotCallbackByBotidRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class WecomBotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1WecomBotCallbackByBotid() : Unit {
-        val localVarResponse = postV1WecomBotCallbackByBotidWithHttpInfo()
+    fun postWecomBotCallbackByBotid() : Unit {
+        val localVarResponse = postWecomBotCallbackByBotidWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class WecomBotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WecomBotCallbackByBotidWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1WecomBotCallbackByBotidRequestConfig()
+    fun postWecomBotCallbackByBotidWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postWecomBotCallbackByBotidRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class WecomBotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1WecomBotCallbackByBotid
+     * To obtain the request config of the operation postWecomBotCallbackByBotid
      *
      * @return RequestConfig
      */
-    fun postV1WecomBotCallbackByBotidRequestConfig() : RequestConfig<Unit> {
+    fun postWecomBotCallbackByBotidRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

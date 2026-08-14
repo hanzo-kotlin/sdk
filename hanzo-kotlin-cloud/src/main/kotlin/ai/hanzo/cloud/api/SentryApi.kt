@@ -72,8 +72,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteSentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteSentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -100,8 +100,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteSentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteSentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -109,12 +109,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1SentryByWildcard1
+     * To obtain the request config of the operation deleteSentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteSentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -142,8 +142,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1SentryProjectsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1SentryProjectsByIdWithHttpInfo(id = id)
+    fun deleteSentryProjectsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteSentryProjectsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -170,8 +170,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1SentryProjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1SentryProjectsByIdRequestConfig(id = id)
+    fun deleteSentryProjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteSentryProjectsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -179,12 +179,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1SentryProjectsById
+     * To obtain the request config of the operation deleteSentryProjectsById
      *
      * @param id ID is the project id.
      * @return RequestConfig
      */
-    fun deleteV1SentryProjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteSentryProjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -212,8 +212,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getSentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getSentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -240,8 +240,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getSentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -249,12 +249,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryByWildcard1
+     * To obtain the request config of the operation getSentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getSentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -284,8 +284,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryEventsById(id: kotlin.String, project: kotlin.String) : O11yO11ySentryEventOut {
-        val localVarResponse = getV1SentryEventsByIdWithHttpInfo(id = id, project = project)
+    fun getSentryEventsById(id: kotlin.String, project: kotlin.String) : O11yO11ySentryEventOut {
+        val localVarResponse = getSentryEventsByIdWithHttpInfo(id = id, project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryEventOut
@@ -314,8 +314,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryEventsByIdWithHttpInfo(id: kotlin.String, project: kotlin.String) : ApiResponse<O11yO11ySentryEventOut?> {
-        val localVariableConfig = getV1SentryEventsByIdRequestConfig(id = id, project = project)
+    fun getSentryEventsByIdWithHttpInfo(id: kotlin.String, project: kotlin.String) : ApiResponse<O11yO11ySentryEventOut?> {
+        val localVariableConfig = getSentryEventsByIdRequestConfig(id = id, project = project)
 
         return request<Unit, O11yO11ySentryEventOut>(
             localVariableConfig
@@ -323,13 +323,13 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryEventsById
+     * To obtain the request config of the operation getSentryEventsById
      *
      * @param id ID is the event id.
      * @param project Project is the project the event belongs to, by its id. Required.
      * @return RequestConfig
      */
-    fun getV1SentryEventsByIdRequestConfig(id: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
+    fun getSentryEventsByIdRequestConfig(id: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -371,8 +371,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryIssues(status: kotlin.String? = null, level: kotlin.String? = null, environment: kotlin.String? = null, serviceName: kotlin.String? = null, query: kotlin.String? = null, sort: kotlin.String? = null, offset: kotlin.Int? = null, limit: kotlin.Int? = null, project: kotlin.String? = null, period: kotlin.String? = null) : O11yO11yErrorIssuesOut {
-        val localVarResponse = getV1SentryIssuesWithHttpInfo(status = status, level = level, environment = environment, serviceName = serviceName, query = query, sort = sort, offset = offset, limit = limit, project = project, period = period)
+    fun getSentryIssues(status: kotlin.String? = null, level: kotlin.String? = null, environment: kotlin.String? = null, serviceName: kotlin.String? = null, query: kotlin.String? = null, sort: kotlin.String? = null, offset: kotlin.Int? = null, limit: kotlin.Int? = null, project: kotlin.String? = null, period: kotlin.String? = null) : O11yO11yErrorIssuesOut {
+        val localVarResponse = getSentryIssuesWithHttpInfo(status = status, level = level, environment = environment, serviceName = serviceName, query = query, sort = sort, offset = offset, limit = limit, project = project, period = period)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yErrorIssuesOut
@@ -409,8 +409,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryIssuesWithHttpInfo(status: kotlin.String?, level: kotlin.String?, environment: kotlin.String?, serviceName: kotlin.String?, query: kotlin.String?, sort: kotlin.String?, offset: kotlin.Int?, limit: kotlin.Int?, project: kotlin.String?, period: kotlin.String?) : ApiResponse<O11yO11yErrorIssuesOut?> {
-        val localVariableConfig = getV1SentryIssuesRequestConfig(status = status, level = level, environment = environment, serviceName = serviceName, query = query, sort = sort, offset = offset, limit = limit, project = project, period = period)
+    fun getSentryIssuesWithHttpInfo(status: kotlin.String?, level: kotlin.String?, environment: kotlin.String?, serviceName: kotlin.String?, query: kotlin.String?, sort: kotlin.String?, offset: kotlin.Int?, limit: kotlin.Int?, project: kotlin.String?, period: kotlin.String?) : ApiResponse<O11yO11yErrorIssuesOut?> {
+        val localVariableConfig = getSentryIssuesRequestConfig(status = status, level = level, environment = environment, serviceName = serviceName, query = query, sort = sort, offset = offset, limit = limit, project = project, period = period)
 
         return request<Unit, O11yO11yErrorIssuesOut>(
             localVariableConfig
@@ -418,7 +418,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryIssues
+     * To obtain the request config of the operation getSentryIssues
      *
      * @param status Status narrows to one lifecycle state: unresolved, resolved or ignored. (optional)
      * @param level Level narrows to one severity, e.g. error, warning, info. (optional)
@@ -432,7 +432,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
      * @return RequestConfig
      */
-    fun getV1SentryIssuesRequestConfig(status: kotlin.String?, level: kotlin.String?, environment: kotlin.String?, serviceName: kotlin.String?, query: kotlin.String?, sort: kotlin.String?, offset: kotlin.Int?, limit: kotlin.Int?, project: kotlin.String?, period: kotlin.String?) : RequestConfig<Unit> {
+    fun getSentryIssuesRequestConfig(status: kotlin.String?, level: kotlin.String?, environment: kotlin.String?, serviceName: kotlin.String?, query: kotlin.String?, sort: kotlin.String?, offset: kotlin.Int?, limit: kotlin.Int?, project: kotlin.String?, period: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -494,8 +494,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryIssuesById(id: kotlin.String) : O11yO11yErrorGettableIssueOut {
-        val localVarResponse = getV1SentryIssuesByIdWithHttpInfo(id = id)
+    fun getSentryIssuesById(id: kotlin.String) : O11yO11yErrorGettableIssueOut {
+        val localVarResponse = getSentryIssuesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yErrorGettableIssueOut
@@ -523,8 +523,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryIssuesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11yErrorGettableIssueOut?> {
-        val localVariableConfig = getV1SentryIssuesByIdRequestConfig(id = id)
+    fun getSentryIssuesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11yErrorGettableIssueOut?> {
+        val localVariableConfig = getSentryIssuesByIdRequestConfig(id = id)
 
         return request<Unit, O11yO11yErrorGettableIssueOut>(
             localVariableConfig
@@ -532,12 +532,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryIssuesById
+     * To obtain the request config of the operation getSentryIssuesById
      *
      * @param id ID is the issue id.
      * @return RequestConfig
      */
-    fun getV1SentryIssuesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSentryIssuesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -569,8 +569,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryIssuesByIdEvents(id: kotlin.String, project: kotlin.String, limit: kotlin.Int? = null) : O11yO11ySentryIssueEventsOut {
-        val localVarResponse = getV1SentryIssuesByIdEventsWithHttpInfo(id = id, project = project, limit = limit)
+    fun getSentryIssuesByIdEvents(id: kotlin.String, project: kotlin.String, limit: kotlin.Int? = null) : O11yO11ySentryIssueEventsOut {
+        val localVarResponse = getSentryIssuesByIdEventsWithHttpInfo(id = id, project = project, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryIssueEventsOut
@@ -600,8 +600,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryIssuesByIdEventsWithHttpInfo(id: kotlin.String, project: kotlin.String, limit: kotlin.Int?) : ApiResponse<O11yO11ySentryIssueEventsOut?> {
-        val localVariableConfig = getV1SentryIssuesByIdEventsRequestConfig(id = id, project = project, limit = limit)
+    fun getSentryIssuesByIdEventsWithHttpInfo(id: kotlin.String, project: kotlin.String, limit: kotlin.Int?) : ApiResponse<O11yO11ySentryIssueEventsOut?> {
+        val localVariableConfig = getSentryIssuesByIdEventsRequestConfig(id = id, project = project, limit = limit)
 
         return request<Unit, O11yO11ySentryIssueEventsOut>(
             localVariableConfig
@@ -609,14 +609,14 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryIssuesByIdEvents
+     * To obtain the request config of the operation getSentryIssuesByIdEvents
      *
      * @param id ID is the issue id.
      * @param project Project is the project whose occurrences to read, by its id. Required.
      * @param limit Limit caps how many occurrences come back. Zero means the default. (optional)
      * @return RequestConfig
      */
-    fun getV1SentryIssuesByIdEventsRequestConfig(id: kotlin.String, project: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getSentryIssuesByIdEventsRequestConfig(id: kotlin.String, project: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -655,8 +655,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryLogs(project: kotlin.String, query: kotlin.String? = null, period: kotlin.String? = null, limit: kotlin.Int? = null) : O11yO11yLogsOut {
-        val localVarResponse = getV1SentryLogsWithHttpInfo(project = project, query = query, period = period, limit = limit)
+    fun getSentryLogs(project: kotlin.String, query: kotlin.String? = null, period: kotlin.String? = null, limit: kotlin.Int? = null) : O11yO11yLogsOut {
+        val localVarResponse = getSentryLogsWithHttpInfo(project = project, query = query, period = period, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yLogsOut
@@ -687,8 +687,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryLogsWithHttpInfo(project: kotlin.String, query: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<O11yO11yLogsOut?> {
-        val localVariableConfig = getV1SentryLogsRequestConfig(project = project, query = query, period = period, limit = limit)
+    fun getSentryLogsWithHttpInfo(project: kotlin.String, query: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<O11yO11yLogsOut?> {
+        val localVariableConfig = getSentryLogsRequestConfig(project = project, query = query, period = period, limit = limit)
 
         return request<Unit, O11yO11yLogsOut>(
             localVariableConfig
@@ -696,7 +696,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryLogs
+     * To obtain the request config of the operation getSentryLogs
      *
      * @param project Project is the project to read, as its id. Required.
      * @param query Query narrows the page to events whose text contains it. (optional)
@@ -704,7 +704,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param limit Limit caps how many events come back. (optional)
      * @return RequestConfig
      */
-    fun getV1SentryLogsRequestConfig(project: kotlin.String, query: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getSentryLogsRequestConfig(project: kotlin.String, query: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -745,8 +745,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryProjects() : O11yO11ySentryProjectsOut {
-        val localVarResponse = getV1SentryProjectsWithHttpInfo()
+    fun getSentryProjects() : O11yO11ySentryProjectsOut {
+        val localVarResponse = getSentryProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryProjectsOut
@@ -773,8 +773,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryProjectsWithHttpInfo() : ApiResponse<O11yO11ySentryProjectsOut?> {
-        val localVariableConfig = getV1SentryProjectsRequestConfig()
+    fun getSentryProjectsWithHttpInfo() : ApiResponse<O11yO11ySentryProjectsOut?> {
+        val localVariableConfig = getSentryProjectsRequestConfig()
 
         return request<Unit, O11yO11ySentryProjectsOut>(
             localVariableConfig
@@ -782,11 +782,11 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryProjects
+     * To obtain the request config of the operation getSentryProjects
      *
      * @return RequestConfig
      */
-    fun getV1SentryProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getSentryProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -816,8 +816,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryProjectsById(id: kotlin.String) : O11yO11ySentryProjectOut {
-        val localVarResponse = getV1SentryProjectsByIdWithHttpInfo(id = id)
+    fun getSentryProjectsById(id: kotlin.String) : O11yO11ySentryProjectOut {
+        val localVarResponse = getSentryProjectsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryProjectOut
@@ -845,8 +845,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryProjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11ySentryProjectOut?> {
-        val localVariableConfig = getV1SentryProjectsByIdRequestConfig(id = id)
+    fun getSentryProjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11ySentryProjectOut?> {
+        val localVariableConfig = getSentryProjectsByIdRequestConfig(id = id)
 
         return request<Unit, O11yO11ySentryProjectOut>(
             localVariableConfig
@@ -854,12 +854,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryProjectsById
+     * To obtain the request config of the operation getSentryProjectsById
      *
      * @param id ID is the project id.
      * @return RequestConfig
      */
-    fun getV1SentryProjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSentryProjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -891,8 +891,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryStats(project: kotlin.String, `field`: kotlin.String? = null, period: kotlin.String? = null) : O11yO11yStatsOut {
-        val localVarResponse = getV1SentryStatsWithHttpInfo(project = project, `field` = `field`, period = period)
+    fun getSentryStats(project: kotlin.String, `field`: kotlin.String? = null, period: kotlin.String? = null) : O11yO11yStatsOut {
+        val localVarResponse = getSentryStatsWithHttpInfo(project = project, `field` = `field`, period = period)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yStatsOut
@@ -922,8 +922,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryStatsWithHttpInfo(project: kotlin.String, `field`: kotlin.String?, period: kotlin.String?) : ApiResponse<O11yO11yStatsOut?> {
-        val localVariableConfig = getV1SentryStatsRequestConfig(project = project, `field` = `field`, period = period)
+    fun getSentryStatsWithHttpInfo(project: kotlin.String, `field`: kotlin.String?, period: kotlin.String?) : ApiResponse<O11yO11yStatsOut?> {
+        val localVariableConfig = getSentryStatsRequestConfig(project = project, `field` = `field`, period = period)
 
         return request<Unit, O11yO11yStatsOut>(
             localVariableConfig
@@ -931,14 +931,14 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryStats
+     * To obtain the request config of the operation getSentryStats
      *
      * @param project Project is the project to read, as its id. Required.
      * @param `field` Field is the dimension to count over. Empty counts all events. (optional)
      * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
      * @return RequestConfig
      */
-    fun getV1SentryStatsRequestConfig(project: kotlin.String, `field`: kotlin.String?, period: kotlin.String?) : RequestConfig<Unit> {
+    fun getSentryStatsRequestConfig(project: kotlin.String, `field`: kotlin.String?, period: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -979,8 +979,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryTraces(project: kotlin.String, period: kotlin.String? = null, limit: kotlin.Int? = null) : O11yO11yTracesOut {
-        val localVarResponse = getV1SentryTracesWithHttpInfo(project = project, period = period, limit = limit)
+    fun getSentryTraces(project: kotlin.String, period: kotlin.String? = null, limit: kotlin.Int? = null) : O11yO11yTracesOut {
+        val localVarResponse = getSentryTracesWithHttpInfo(project = project, period = period, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yTracesOut
@@ -1010,8 +1010,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryTracesWithHttpInfo(project: kotlin.String, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<O11yO11yTracesOut?> {
-        val localVariableConfig = getV1SentryTracesRequestConfig(project = project, period = period, limit = limit)
+    fun getSentryTracesWithHttpInfo(project: kotlin.String, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<O11yO11yTracesOut?> {
+        val localVariableConfig = getSentryTracesRequestConfig(project = project, period = period, limit = limit)
 
         return request<Unit, O11yO11yTracesOut>(
             localVariableConfig
@@ -1019,14 +1019,14 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryTraces
+     * To obtain the request config of the operation getSentryTraces
      *
      * @param project Project is the project to read, as its id. Required.
      * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
      * @param limit Limit caps how many traces come back. (optional)
      * @return RequestConfig
      */
-    fun getV1SentryTracesRequestConfig(project: kotlin.String, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getSentryTracesRequestConfig(project: kotlin.String, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1066,8 +1066,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SentryTracesById(id: kotlin.String, project: kotlin.String) : O11yO11yTraceOut {
-        val localVarResponse = getV1SentryTracesByIdWithHttpInfo(id = id, project = project)
+    fun getSentryTracesById(id: kotlin.String, project: kotlin.String) : O11yO11yTraceOut {
+        val localVarResponse = getSentryTracesByIdWithHttpInfo(id = id, project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yTraceOut
@@ -1096,8 +1096,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SentryTracesByIdWithHttpInfo(id: kotlin.String, project: kotlin.String) : ApiResponse<O11yO11yTraceOut?> {
-        val localVariableConfig = getV1SentryTracesByIdRequestConfig(id = id, project = project)
+    fun getSentryTracesByIdWithHttpInfo(id: kotlin.String, project: kotlin.String) : ApiResponse<O11yO11yTraceOut?> {
+        val localVariableConfig = getSentryTracesByIdRequestConfig(id = id, project = project)
 
         return request<Unit, O11yO11yTraceOut>(
             localVariableConfig
@@ -1105,13 +1105,13 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SentryTracesById
+     * To obtain the request config of the operation getSentryTracesById
      *
      * @param id ID is the trace id.
      * @param project Project is the project the trace&#39;s errors belong to. Required.
      * @return RequestConfig
      */
-    fun getV1SentryTracesByIdRequestConfig(id: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
+    fun getSentryTracesByIdRequestConfig(id: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1143,8 +1143,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = patchV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchSentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchSentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1171,8 +1171,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchSentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchSentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1180,12 +1180,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1SentryByWildcard1
+     * To obtain the request config of the operation patchSentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun patchV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchSentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1213,8 +1213,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SentryByProjectEnvelope(project: kotlin.String) : Unit {
-        val localVarResponse = postV1SentryByProjectEnvelopeWithHttpInfo(project = project)
+    fun postSentryByProjectEnvelope(project: kotlin.String) : Unit {
+        val localVarResponse = postSentryByProjectEnvelopeWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1241,8 +1241,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SentryByProjectEnvelopeWithHttpInfo(project: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SentryByProjectEnvelopeRequestConfig(project = project)
+    fun postSentryByProjectEnvelopeWithHttpInfo(project: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postSentryByProjectEnvelopeRequestConfig(project = project)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1250,12 +1250,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SentryByProjectEnvelope
+     * To obtain the request config of the operation postSentryByProjectEnvelope
      *
      * @param project 
      * @return RequestConfig
      */
-    fun postV1SentryByProjectEnvelopeRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
+    fun postSentryByProjectEnvelopeRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1283,8 +1283,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SentryByProjectStore(project: kotlin.String) : Unit {
-        val localVarResponse = postV1SentryByProjectStoreWithHttpInfo(project = project)
+    fun postSentryByProjectStore(project: kotlin.String) : Unit {
+        val localVarResponse = postSentryByProjectStoreWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1311,8 +1311,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SentryByProjectStoreWithHttpInfo(project: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SentryByProjectStoreRequestConfig(project = project)
+    fun postSentryByProjectStoreWithHttpInfo(project: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postSentryByProjectStoreRequestConfig(project = project)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1320,12 +1320,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SentryByProjectStore
+     * To obtain the request config of the operation postSentryByProjectStore
      *
      * @param project 
      * @return RequestConfig
      */
-    fun postV1SentryByProjectStoreRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
+    fun postSentryByProjectStoreRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1353,8 +1353,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = postV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postSentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postSentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1381,8 +1381,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postSentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postSentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1390,12 +1390,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SentryByWildcard1
+     * To obtain the request config of the operation postSentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun postV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postSentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1424,8 +1424,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SentryDiscover(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : O11yO11yDiscoverOut {
-        val localVarResponse = postV1SentryDiscoverWithHttpInfo(o11yO11yDiscoverIn = o11yO11yDiscoverIn)
+    fun postSentryDiscover(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : O11yO11yDiscoverOut {
+        val localVarResponse = postSentryDiscoverWithHttpInfo(o11yO11yDiscoverIn = o11yO11yDiscoverIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yDiscoverOut
@@ -1453,8 +1453,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SentryDiscoverWithHttpInfo(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : ApiResponse<O11yO11yDiscoverOut?> {
-        val localVariableConfig = postV1SentryDiscoverRequestConfig(o11yO11yDiscoverIn = o11yO11yDiscoverIn)
+    fun postSentryDiscoverWithHttpInfo(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : ApiResponse<O11yO11yDiscoverOut?> {
+        val localVariableConfig = postSentryDiscoverRequestConfig(o11yO11yDiscoverIn = o11yO11yDiscoverIn)
 
         return request<O11yO11yDiscoverIn, O11yO11yDiscoverOut>(
             localVariableConfig
@@ -1462,12 +1462,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SentryDiscover
+     * To obtain the request config of the operation postSentryDiscover
      *
      * @param o11yO11yDiscoverIn 
      * @return RequestConfig
      */
-    fun postV1SentryDiscoverRequestConfig(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : RequestConfig<O11yO11yDiscoverIn> {
+    fun postSentryDiscoverRequestConfig(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : RequestConfig<O11yO11yDiscoverIn> {
         val localVariableBody = o11yO11yDiscoverIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1498,8 +1498,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SentryProjects(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : O11yO11ySentryProjectOut {
-        val localVarResponse = postV1SentryProjectsWithHttpInfo(o11yO11ySentryPostableProject = o11yO11ySentryPostableProject)
+    fun postSentryProjects(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : O11yO11ySentryProjectOut {
+        val localVarResponse = postSentryProjectsWithHttpInfo(o11yO11ySentryPostableProject = o11yO11ySentryPostableProject)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryProjectOut
@@ -1527,8 +1527,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SentryProjectsWithHttpInfo(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : ApiResponse<O11yO11ySentryProjectOut?> {
-        val localVariableConfig = postV1SentryProjectsRequestConfig(o11yO11ySentryPostableProject = o11yO11ySentryPostableProject)
+    fun postSentryProjectsWithHttpInfo(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : ApiResponse<O11yO11ySentryProjectOut?> {
+        val localVariableConfig = postSentryProjectsRequestConfig(o11yO11ySentryPostableProject = o11yO11ySentryPostableProject)
 
         return request<O11yO11ySentryPostableProject, O11yO11ySentryProjectOut>(
             localVariableConfig
@@ -1536,12 +1536,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SentryProjects
+     * To obtain the request config of the operation postSentryProjects
      *
      * @param o11yO11ySentryPostableProject 
      * @return RequestConfig
      */
-    fun postV1SentryProjectsRequestConfig(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : RequestConfig<O11yO11ySentryPostableProject> {
+    fun postSentryProjectsRequestConfig(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : RequestConfig<O11yO11ySentryPostableProject> {
         val localVariableBody = o11yO11ySentryPostableProject
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1572,8 +1572,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SentryProjectsByIdKeysRotate(id: kotlin.String) : O11yO11ySentryProjectOut {
-        val localVarResponse = postV1SentryProjectsByIdKeysRotateWithHttpInfo(id = id)
+    fun postSentryProjectsByIdKeysRotate(id: kotlin.String) : O11yO11ySentryProjectOut {
+        val localVarResponse = postSentryProjectsByIdKeysRotateWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryProjectOut
@@ -1601,8 +1601,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SentryProjectsByIdKeysRotateWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11ySentryProjectOut?> {
-        val localVariableConfig = postV1SentryProjectsByIdKeysRotateRequestConfig(id = id)
+    fun postSentryProjectsByIdKeysRotateWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11ySentryProjectOut?> {
+        val localVariableConfig = postSentryProjectsByIdKeysRotateRequestConfig(id = id)
 
         return request<Unit, O11yO11ySentryProjectOut>(
             localVariableConfig
@@ -1610,12 +1610,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1SentryProjectsByIdKeysRotate
+     * To obtain the request config of the operation postSentryProjectsByIdKeysRotate
      *
      * @param id ID is the project id.
      * @return RequestConfig
      */
-    fun postV1SentryProjectsByIdKeysRotateRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postSentryProjectsByIdKeysRotateRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1644,8 +1644,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = putV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putSentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putSentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1672,8 +1672,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putSentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putSentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1681,12 +1681,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1SentryByWildcard1
+     * To obtain the request config of the operation putSentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun putV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putSentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1716,8 +1716,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1SentryIssuesById(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : O11yO11yErrorIssueOut {
-        val localVarResponse = putV1SentryIssuesByIdWithHttpInfo(id = id, o11yO11ySentryUpdateIssueIn = o11yO11ySentryUpdateIssueIn)
+    fun putSentryIssuesById(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : O11yO11yErrorIssueOut {
+        val localVarResponse = putSentryIssuesByIdWithHttpInfo(id = id, o11yO11ySentryUpdateIssueIn = o11yO11ySentryUpdateIssueIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yErrorIssueOut
@@ -1746,8 +1746,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1SentryIssuesByIdWithHttpInfo(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : ApiResponse<O11yO11yErrorIssueOut?> {
-        val localVariableConfig = putV1SentryIssuesByIdRequestConfig(id = id, o11yO11ySentryUpdateIssueIn = o11yO11ySentryUpdateIssueIn)
+    fun putSentryIssuesByIdWithHttpInfo(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : ApiResponse<O11yO11yErrorIssueOut?> {
+        val localVariableConfig = putSentryIssuesByIdRequestConfig(id = id, o11yO11ySentryUpdateIssueIn = o11yO11ySentryUpdateIssueIn)
 
         return request<O11yO11ySentryUpdateIssueIn, O11yO11yErrorIssueOut>(
             localVariableConfig
@@ -1755,13 +1755,13 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1SentryIssuesById
+     * To obtain the request config of the operation putSentryIssuesById
      *
      * @param id ID is the issue id.
      * @param o11yO11ySentryUpdateIssueIn 
      * @return RequestConfig
      */
-    fun putV1SentryIssuesByIdRequestConfig(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : RequestConfig<O11yO11ySentryUpdateIssueIn> {
+    fun putSentryIssuesByIdRequestConfig(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : RequestConfig<O11yO11ySentryUpdateIssueIn> {
         val localVariableBody = o11yO11ySentryUpdateIssueIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -56,8 +56,8 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentConversations() : Unit {
-        val localVarResponse = getV1AgentConversationsWithHttpInfo()
+    fun getAgentConversations() : Unit {
+        val localVarResponse = getAgentConversationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentConversationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AgentConversationsRequestConfig()
+    fun getAgentConversationsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAgentConversationsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentConversations
+     * To obtain the request config of the operation getAgentConversations
      *
      * @return RequestConfig
      */
-    fun getV1AgentConversationsRequestConfig() : RequestConfig<Unit> {
+    fun getAgentConversationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -124,8 +124,8 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentConversationsById(id: kotlin.String) : Unit {
-        val localVarResponse = getV1AgentConversationsByIdWithHttpInfo(id = id)
+    fun getAgentConversationsById(id: kotlin.String) : Unit {
+        val localVarResponse = getAgentConversationsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -152,8 +152,8 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentConversationsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AgentConversationsByIdRequestConfig(id = id)
+    fun getAgentConversationsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getAgentConversationsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -161,12 +161,12 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentConversationsById
+     * To obtain the request config of the operation getAgentConversationsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1AgentConversationsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getAgentConversationsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -193,8 +193,8 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentPresets() : Unit {
-        val localVarResponse = getV1AgentPresetsWithHttpInfo()
+    fun getAgentPresets() : Unit {
+        val localVarResponse = getAgentPresetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -220,8 +220,8 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentPresetsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AgentPresetsRequestConfig()
+    fun getAgentPresetsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAgentPresetsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -229,11 +229,11 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentPresets
+     * To obtain the request config of the operation getAgentPresets
      *
      * @return RequestConfig
      */
-    fun getV1AgentPresetsRequestConfig() : RequestConfig<Unit> {
+    fun getAgentPresetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -260,8 +260,8 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Agent() : Unit {
-        val localVarResponse = postV1AgentWithHttpInfo()
+    fun postAgent() : Unit {
+        val localVarResponse = postAgentWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -287,8 +287,8 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AgentRequestConfig()
+    fun postAgentWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAgentRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -296,11 +296,11 @@ class AgentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1Agent
+     * To obtain the request config of the operation postAgent
      *
      * @return RequestConfig
      */
-    fun postV1AgentRequestConfig() : RequestConfig<Unit> {
+    fun postAgentRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
