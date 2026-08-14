@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class Call (
+data class ModelCall (
 
     @SerializedName("agent")
     val agent: kotlin.String? = null,
