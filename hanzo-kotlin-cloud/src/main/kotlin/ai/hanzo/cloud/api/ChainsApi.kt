@@ -59,8 +59,8 @@ class ChainsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Chains() : ChainList {
-        val localVarResponse = getV1ChainsWithHttpInfo()
+    fun getChains() : ChainList {
+        val localVarResponse = getChainsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ChainList
@@ -87,8 +87,8 @@ class ChainsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ChainsWithHttpInfo() : ApiResponse<ChainList?> {
-        val localVariableConfig = getV1ChainsRequestConfig()
+    fun getChainsWithHttpInfo() : ApiResponse<ChainList?> {
+        val localVariableConfig = getChainsRequestConfig()
 
         return request<Unit, ChainList>(
             localVariableConfig
@@ -96,11 +96,11 @@ class ChainsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Chains
+     * To obtain the request config of the operation getChains
      *
      * @return RequestConfig
      */
-    fun getV1ChainsRequestConfig() : RequestConfig<Unit> {
+    fun getChainsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -130,8 +130,8 @@ class ChainsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ChainsByChain(chain: kotlin.String) : ChainStatus {
-        val localVarResponse = getV1ChainsByChainWithHttpInfo(chain = chain)
+    fun getChainsByChain(chain: kotlin.String) : ChainStatus {
+        val localVarResponse = getChainsByChainWithHttpInfo(chain = chain)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ChainStatus
@@ -159,8 +159,8 @@ class ChainsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ChainsByChainWithHttpInfo(chain: kotlin.String) : ApiResponse<ChainStatus?> {
-        val localVariableConfig = getV1ChainsByChainRequestConfig(chain = chain)
+    fun getChainsByChainWithHttpInfo(chain: kotlin.String) : ApiResponse<ChainStatus?> {
+        val localVariableConfig = getChainsByChainRequestConfig(chain = chain)
 
         return request<Unit, ChainStatus>(
             localVariableConfig
@@ -168,12 +168,12 @@ class ChainsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1ChainsByChain
+     * To obtain the request config of the operation getChainsByChain
      *
      * @param chain Chain is the registry id, as in /v1/chains/lux.
      * @return RequestConfig
      */
-    fun getV1ChainsByChainRequestConfig(chain: kotlin.String) : RequestConfig<Unit> {
+    fun getChainsByChainRequestConfig(chain: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -56,8 +56,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AuthzHealth() : Unit {
-        val localVarResponse = getV1AuthzHealthWithHttpInfo()
+    fun getAuthzHealth() : Unit {
+        val localVarResponse = getAuthzHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AuthzHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AuthzHealthRequestConfig()
+    fun getAuthzHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAuthzHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AuthzHealth
+     * To obtain the request config of the operation getAuthzHealth
      *
      * @return RequestConfig
      */
-    fun getV1AuthzHealthRequestConfig() : RequestConfig<Unit> {
+    fun getAuthzHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AuthzReadyz() : Unit {
-        val localVarResponse = getV1AuthzReadyzWithHttpInfo()
+    fun getAuthzReadyz() : Unit {
+        val localVarResponse = getAuthzReadyzWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AuthzReadyzWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AuthzReadyzRequestConfig()
+    fun getAuthzReadyzWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAuthzReadyzRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1AuthzReadyz
+     * To obtain the request config of the operation getAuthzReadyz
      *
      * @return RequestConfig
      */
-    fun getV1AuthzReadyzRequestConfig() : RequestConfig<Unit> {
+    fun getAuthzReadyzRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AuthzCheck() : Unit {
-        val localVarResponse = postV1AuthzCheckWithHttpInfo()
+    fun postAuthzCheck() : Unit {
+        val localVarResponse = postAuthzCheckWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AuthzCheckWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AuthzCheckRequestConfig()
+    fun postAuthzCheckWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAuthzCheckRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AuthzCheck
+     * To obtain the request config of the operation postAuthzCheck
      *
      * @return RequestConfig
      */
-    fun postV1AuthzCheckRequestConfig() : RequestConfig<Unit> {
+    fun postAuthzCheckRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

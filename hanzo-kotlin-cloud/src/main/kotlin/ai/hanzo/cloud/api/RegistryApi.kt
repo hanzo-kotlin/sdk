@@ -64,8 +64,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RegistryImages() : RegistryImageList {
-        val localVarResponse = getV1RegistryImagesWithHttpInfo()
+    fun getRegistryImages() : RegistryImageList {
+        val localVarResponse = getRegistryImagesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryImageList
@@ -92,8 +92,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RegistryImagesWithHttpInfo() : ApiResponse<RegistryImageList?> {
-        val localVariableConfig = getV1RegistryImagesRequestConfig()
+    fun getRegistryImagesWithHttpInfo() : ApiResponse<RegistryImageList?> {
+        val localVariableConfig = getRegistryImagesRequestConfig()
 
         return request<Unit, RegistryImageList>(
             localVariableConfig
@@ -101,11 +101,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1RegistryImages
+     * To obtain the request config of the operation getRegistryImages
      *
      * @return RequestConfig
      */
-    fun getV1RegistryImagesRequestConfig() : RequestConfig<Unit> {
+    fun getRegistryImagesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -135,8 +135,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RegistryPackages(query: kotlin.String? = null) : RegistryPackageList {
-        val localVarResponse = getV1RegistryPackagesWithHttpInfo(query = query)
+    fun getRegistryPackages(query: kotlin.String? = null) : RegistryPackageList {
+        val localVarResponse = getRegistryPackagesWithHttpInfo(query = query)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryPackageList
@@ -164,8 +164,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RegistryPackagesWithHttpInfo(query: kotlin.String?) : ApiResponse<RegistryPackageList?> {
-        val localVariableConfig = getV1RegistryPackagesRequestConfig(query = query)
+    fun getRegistryPackagesWithHttpInfo(query: kotlin.String?) : ApiResponse<RegistryPackageList?> {
+        val localVariableConfig = getRegistryPackagesRequestConfig(query = query)
 
         return request<Unit, RegistryPackageList>(
             localVariableConfig
@@ -173,12 +173,12 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1RegistryPackages
+     * To obtain the request config of the operation getRegistryPackages
      *
      * @param query Query narrows the listing within the org&#39;s scope when present; the org boundary itself is never widened by it. It rides the query string. (optional)
      * @return RequestConfig
      */
-    fun getV1RegistryPackagesRequestConfig(query: kotlin.String?) : RequestConfig<Unit> {
+    fun getRegistryPackagesRequestConfig(query: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -212,8 +212,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RegistryProjects() : RegistryProjectList {
-        val localVarResponse = getV1RegistryProjectsWithHttpInfo()
+    fun getRegistryProjects() : RegistryProjectList {
+        val localVarResponse = getRegistryProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryProjectList
@@ -240,8 +240,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RegistryProjectsWithHttpInfo() : ApiResponse<RegistryProjectList?> {
-        val localVariableConfig = getV1RegistryProjectsRequestConfig()
+    fun getRegistryProjectsWithHttpInfo() : ApiResponse<RegistryProjectList?> {
+        val localVariableConfig = getRegistryProjectsRequestConfig()
 
         return request<Unit, RegistryProjectList>(
             localVariableConfig
@@ -249,11 +249,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1RegistryProjects
+     * To obtain the request config of the operation getRegistryProjects
      *
      * @return RequestConfig
      */
-    fun getV1RegistryProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getRegistryProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -282,8 +282,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RegistryStatus() : RegistryStatus {
-        val localVarResponse = getV1RegistryStatusWithHttpInfo()
+    fun getRegistryStatus() : RegistryStatus {
+        val localVarResponse = getRegistryStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryStatus
@@ -310,8 +310,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RegistryStatusWithHttpInfo() : ApiResponse<RegistryStatus?> {
-        val localVariableConfig = getV1RegistryStatusRequestConfig()
+    fun getRegistryStatusWithHttpInfo() : ApiResponse<RegistryStatus?> {
+        val localVariableConfig = getRegistryStatusRequestConfig()
 
         return request<Unit, RegistryStatus>(
             localVariableConfig
@@ -319,11 +319,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1RegistryStatus
+     * To obtain the request config of the operation getRegistryStatus
      *
      * @return RequestConfig
      */
-    fun getV1RegistryStatusRequestConfig() : RequestConfig<Unit> {
+    fun getRegistryStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -353,8 +353,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1RegistryTags(image: kotlin.String? = null) : RegistryTagList {
-        val localVarResponse = getV1RegistryTagsWithHttpInfo(image = image)
+    fun getRegistryTags(image: kotlin.String? = null) : RegistryTagList {
+        val localVarResponse = getRegistryTagsWithHttpInfo(image = image)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryTagList
@@ -382,8 +382,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1RegistryTagsWithHttpInfo(image: kotlin.String?) : ApiResponse<RegistryTagList?> {
-        val localVariableConfig = getV1RegistryTagsRequestConfig(image = image)
+    fun getRegistryTagsWithHttpInfo(image: kotlin.String?) : ApiResponse<RegistryTagList?> {
+        val localVariableConfig = getRegistryTagsRequestConfig(image = image)
 
         return request<Unit, RegistryTagList>(
             localVariableConfig
@@ -391,12 +391,12 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1RegistryTags
+     * To obtain the request config of the operation getRegistryTags
      *
      * @param image Image is the repository name inside the org&#39;s namespace, as returned by the images op. It rides the query string. (optional)
      * @return RequestConfig
      */
-    fun getV1RegistryTagsRequestConfig(image: kotlin.String?) : RequestConfig<Unit> {
+    fun getRegistryTagsRequestConfig(image: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -431,8 +431,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RegistryToken(registryMint: RegistryMint) : RegistryToken {
-        val localVarResponse = postV1RegistryTokenWithHttpInfo(registryMint = registryMint)
+    fun postRegistryToken(registryMint: RegistryMint) : RegistryToken {
+        val localVarResponse = postRegistryTokenWithHttpInfo(registryMint = registryMint)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryToken
@@ -460,8 +460,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RegistryTokenWithHttpInfo(registryMint: RegistryMint) : ApiResponse<RegistryToken?> {
-        val localVariableConfig = postV1RegistryTokenRequestConfig(registryMint = registryMint)
+    fun postRegistryTokenWithHttpInfo(registryMint: RegistryMint) : ApiResponse<RegistryToken?> {
+        val localVariableConfig = postRegistryTokenRequestConfig(registryMint = registryMint)
 
         return request<RegistryMint, RegistryToken>(
             localVariableConfig
@@ -469,12 +469,12 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1RegistryToken
+     * To obtain the request config of the operation postRegistryToken
      *
      * @param registryMint 
      * @return RequestConfig
      */
-    fun postV1RegistryTokenRequestConfig(registryMint: RegistryMint) : RequestConfig<RegistryMint> {
+    fun postRegistryTokenRequestConfig(registryMint: RegistryMint) : RequestConfig<RegistryMint> {
         val localVariableBody = registryMint
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

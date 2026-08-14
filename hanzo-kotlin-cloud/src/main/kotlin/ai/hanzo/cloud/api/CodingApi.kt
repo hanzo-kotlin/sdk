@@ -49,7 +49,7 @@ class CodingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * POST /v1/coding
      * Start one autonomous coding run against a repo in the caller&#39;s org
-     * Is the app&#39;s door. It answers 202 with the run&#39;s handle the moment the run is ADMITTED — not when it finishes. A coding run takes minutes; holding a request open for one would tie a connection to a model loop and give the caller nothing it cannot get better from the session stream.  The handle is a session id, and that is deliberate: the session is already the run&#39;s durable record and its live stream (/v1/agents/sessions/{id}/stream), so this door does not grow a progress endpoint, a status endpoint or a cancel endpoint of its own. One way to watch a run, whoever started it.
+     * Runs a coding task on a repository: clones it into a sandbox, lets a model read and edit the code, run the tests, and push the work to a branch. Say the thing you want done — \&quot;fix the failing auth test in hanzoai/cloud\&quot; — and the run infers the repo, the branch and the plan. No prefix, no ceremony.  It answers 202 with the run&#39;s handle the moment the run is ADMITTED — not when it finishes. A coding run takes minutes; holding a request open for one would tie a connection to a model loop and give the caller nothing it cannot get better from the session stream.  The handle is a session id, and that is deliberate: the session is already the run&#39;s durable record and its live stream (/v1/agents/sessions/{id}/stream), so this door does not grow a progress endpoint, a status endpoint or a cancel endpoint of its own. One way to watch a run, whoever started it.  It is also how work CONTINUES. Pass an earlier run&#39;s session as &#x60;after&#x60; and this one starts from where that one stopped, so \&quot;now add tests for it\&quot; builds on the branch already pushed instead of a fresh clone. The follow-up still gets its own branch and its own session — one run, one branch, always reviewable on its own.
      * @param codingStartIn 
      * @return CodingStarted
      * @throws IllegalStateException If the request is not correctly configured
@@ -60,8 +60,8 @@ class CodingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Coding(codingStartIn: CodingStartIn) : CodingStarted {
-        val localVarResponse = postV1CodingWithHttpInfo(codingStartIn = codingStartIn)
+    fun postCoding(codingStartIn: CodingStartIn) : CodingStarted {
+        val localVarResponse = postCodingWithHttpInfo(codingStartIn = codingStartIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CodingStarted
@@ -81,7 +81,7 @@ class CodingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * POST /v1/coding
      * Start one autonomous coding run against a repo in the caller&#39;s org
-     * Is the app&#39;s door. It answers 202 with the run&#39;s handle the moment the run is ADMITTED — not when it finishes. A coding run takes minutes; holding a request open for one would tie a connection to a model loop and give the caller nothing it cannot get better from the session stream.  The handle is a session id, and that is deliberate: the session is already the run&#39;s durable record and its live stream (/v1/agents/sessions/{id}/stream), so this door does not grow a progress endpoint, a status endpoint or a cancel endpoint of its own. One way to watch a run, whoever started it.
+     * Runs a coding task on a repository: clones it into a sandbox, lets a model read and edit the code, run the tests, and push the work to a branch. Say the thing you want done — \&quot;fix the failing auth test in hanzoai/cloud\&quot; — and the run infers the repo, the branch and the plan. No prefix, no ceremony.  It answers 202 with the run&#39;s handle the moment the run is ADMITTED — not when it finishes. A coding run takes minutes; holding a request open for one would tie a connection to a model loop and give the caller nothing it cannot get better from the session stream.  The handle is a session id, and that is deliberate: the session is already the run&#39;s durable record and its live stream (/v1/agents/sessions/{id}/stream), so this door does not grow a progress endpoint, a status endpoint or a cancel endpoint of its own. One way to watch a run, whoever started it.  It is also how work CONTINUES. Pass an earlier run&#39;s session as &#x60;after&#x60; and this one starts from where that one stopped, so \&quot;now add tests for it\&quot; builds on the branch already pushed instead of a fresh clone. The follow-up still gets its own branch and its own session — one run, one branch, always reviewable on its own.
      * @param codingStartIn 
      * @return ApiResponse<CodingStarted?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -89,8 +89,8 @@ class CodingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodingWithHttpInfo(codingStartIn: CodingStartIn) : ApiResponse<CodingStarted?> {
-        val localVariableConfig = postV1CodingRequestConfig(codingStartIn = codingStartIn)
+    fun postCodingWithHttpInfo(codingStartIn: CodingStartIn) : ApiResponse<CodingStarted?> {
+        val localVariableConfig = postCodingRequestConfig(codingStartIn = codingStartIn)
 
         return request<CodingStartIn, CodingStarted>(
             localVariableConfig
@@ -98,12 +98,12 @@ class CodingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Coding
+     * To obtain the request config of the operation postCoding
      *
      * @param codingStartIn 
      * @return RequestConfig
      */
-    fun postV1CodingRequestConfig(codingStartIn: CodingStartIn) : RequestConfig<CodingStartIn> {
+    fun postCodingRequestConfig(codingStartIn: CodingStartIn) : RequestConfig<CodingStartIn> {
         val localVariableBody = codingStartIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

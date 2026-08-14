@@ -63,8 +63,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1TeamAccountCookie() : CookieAck {
-        val localVarResponse = deleteV1TeamAccountCookieWithHttpInfo()
+    fun deleteTeamAccountCookie() : CookieAck {
+        val localVarResponse = deleteTeamAccountCookieWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CookieAck
@@ -91,8 +91,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1TeamAccountCookieWithHttpInfo() : ApiResponse<CookieAck?> {
-        val localVariableConfig = deleteV1TeamAccountCookieRequestConfig()
+    fun deleteTeamAccountCookieWithHttpInfo() : ApiResponse<CookieAck?> {
+        val localVariableConfig = deleteTeamAccountCookieRequestConfig()
 
         return request<Unit, CookieAck>(
             localVariableConfig
@@ -100,11 +100,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1TeamAccountCookie
+     * To obtain the request config of the operation deleteTeamAccountCookie
      *
      * @return RequestConfig
      */
-    fun deleteV1TeamAccountCookieRequestConfig() : RequestConfig<Unit> {
+    fun deleteTeamAccountCookieRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -135,8 +135,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1TeamFilesByWorkspaceByFilename(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String? = null) : Unit {
-        val localVarResponse = deleteV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace = workspace, filename = filename, file = file)
+    fun deleteTeamFilesByWorkspaceByFilename(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String? = null) : Unit {
+        val localVarResponse = deleteTeamFilesByWorkspaceByFilenameWithHttpInfo(workspace = workspace, filename = filename, file = file)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -165,8 +165,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String?) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace = workspace, filename = filename, file = file)
+    fun deleteTeamFilesByWorkspaceByFilenameWithHttpInfo(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String?) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteTeamFilesByWorkspaceByFilenameRequestConfig(workspace = workspace, filename = filename, file = file)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -174,14 +174,14 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1TeamFilesByWorkspaceByFilename
+     * To obtain the request config of the operation deleteTeamFilesByWorkspaceByFilename
      *
      * @param workspace Workspace is the workspace uuid the blob belongs to, from the path.
      * @param filename Filename is the last path segment, which the front sets to the blob id when it sends no explicit &#x60;file&#x60;.
      * @param file File is the blob id, and wins over the path segment when both are present. (optional)
      * @return RequestConfig
      */
-    fun deleteV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String?) : RequestConfig<Unit> {
+    fun deleteTeamFilesByWorkspaceByFilenameRequestConfig(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -214,8 +214,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamAccountAuthByProvider(provider: kotlin.String) : Unit {
-        val localVarResponse = getV1TeamAccountAuthByProviderWithHttpInfo(provider = provider)
+    fun getTeamAccountAuthByProvider(provider: kotlin.String) : Unit {
+        val localVarResponse = getTeamAccountAuthByProviderWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -242,8 +242,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamAccountAuthByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TeamAccountAuthByProviderRequestConfig(provider = provider)
+    fun getTeamAccountAuthByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getTeamAccountAuthByProviderRequestConfig(provider = provider)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -251,12 +251,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamAccountAuthByProvider
+     * To obtain the request config of the operation getTeamAccountAuthByProvider
      *
      * @param provider 
      * @return RequestConfig
      */
-    fun getV1TeamAccountAuthByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getTeamAccountAuthByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -284,8 +284,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamAccountAuthByProviderCallback(provider: kotlin.String) : Unit {
-        val localVarResponse = getV1TeamAccountAuthByProviderCallbackWithHttpInfo(provider = provider)
+    fun getTeamAccountAuthByProviderCallback(provider: kotlin.String) : Unit {
+        val localVarResponse = getTeamAccountAuthByProviderCallbackWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -312,8 +312,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamAccountAuthByProviderCallbackWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TeamAccountAuthByProviderCallbackRequestConfig(provider = provider)
+    fun getTeamAccountAuthByProviderCallbackWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getTeamAccountAuthByProviderCallbackRequestConfig(provider = provider)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -321,12 +321,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamAccountAuthByProviderCallback
+     * To obtain the request config of the operation getTeamAccountAuthByProviderCallback
      *
      * @param provider 
      * @return RequestConfig
      */
-    fun getV1TeamAccountAuthByProviderCallbackRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getTeamAccountAuthByProviderCallbackRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -354,8 +354,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamAccountProviders() : kotlin.collections.List<ProviderInfo> {
-        val localVarResponse = getV1TeamAccountProvidersWithHttpInfo()
+    fun getTeamAccountProviders() : kotlin.collections.List<ProviderInfo> {
+        val localVarResponse = getTeamAccountProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProviderInfo>
@@ -382,8 +382,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamAccountProvidersWithHttpInfo() : ApiResponse<kotlin.collections.List<ProviderInfo>?> {
-        val localVariableConfig = getV1TeamAccountProvidersRequestConfig()
+    fun getTeamAccountProvidersWithHttpInfo() : ApiResponse<kotlin.collections.List<ProviderInfo>?> {
+        val localVariableConfig = getTeamAccountProvidersRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProviderInfo>>(
             localVariableConfig
@@ -391,11 +391,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamAccountProviders
+     * To obtain the request config of the operation getTeamAccountProviders
      *
      * @return RequestConfig
      */
-    fun getV1TeamAccountProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getTeamAccountProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -424,8 +424,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamBillingPlan() : PlanInfo {
-        val localVarResponse = getV1TeamBillingPlanWithHttpInfo()
+    fun getTeamBillingPlan() : PlanInfo {
+        val localVarResponse = getTeamBillingPlanWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlanInfo
@@ -452,8 +452,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamBillingPlanWithHttpInfo() : ApiResponse<PlanInfo?> {
-        val localVariableConfig = getV1TeamBillingPlanRequestConfig()
+    fun getTeamBillingPlanWithHttpInfo() : ApiResponse<PlanInfo?> {
+        val localVariableConfig = getTeamBillingPlanRequestConfig()
 
         return request<Unit, PlanInfo>(
             localVariableConfig
@@ -461,11 +461,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamBillingPlan
+     * To obtain the request config of the operation getTeamBillingPlan
      *
      * @return RequestConfig
      */
-    fun getV1TeamBillingPlanRequestConfig() : RequestConfig<Unit> {
+    fun getTeamBillingPlanRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -493,8 +493,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamBillingUi() : Unit {
-        val localVarResponse = getV1TeamBillingUiWithHttpInfo()
+    fun getTeamBillingUi() : Unit {
+        val localVarResponse = getTeamBillingUiWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -520,8 +520,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamBillingUiWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TeamBillingUiRequestConfig()
+    fun getTeamBillingUiWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getTeamBillingUiRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -529,11 +529,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamBillingUi
+     * To obtain the request config of the operation getTeamBillingUi
      *
      * @return RequestConfig
      */
-    fun getV1TeamBillingUiRequestConfig() : RequestConfig<Unit> {
+    fun getTeamBillingUiRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -561,8 +561,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamBillingUiByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1TeamBillingUiByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getTeamBillingUiByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getTeamBillingUiByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -589,8 +589,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamBillingUiByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TeamBillingUiByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getTeamBillingUiByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getTeamBillingUiByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -598,12 +598,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamBillingUiByWildcard1
+     * To obtain the request config of the operation getTeamBillingUiByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1TeamBillingUiByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getTeamBillingUiByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -631,8 +631,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamBots() : BotRoster {
-        val localVarResponse = getV1TeamBotsWithHttpInfo()
+    fun getTeamBots() : BotRoster {
+        val localVarResponse = getTeamBotsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BotRoster
@@ -659,8 +659,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamBotsWithHttpInfo() : ApiResponse<BotRoster?> {
-        val localVariableConfig = getV1TeamBotsRequestConfig()
+    fun getTeamBotsWithHttpInfo() : ApiResponse<BotRoster?> {
+        val localVariableConfig = getTeamBotsRequestConfig()
 
         return request<Unit, BotRoster>(
             localVariableConfig
@@ -668,11 +668,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamBots
+     * To obtain the request config of the operation getTeamBots
      *
      * @return RequestConfig
      */
-    fun getV1TeamBotsRequestConfig() : RequestConfig<Unit> {
+    fun getTeamBotsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -702,8 +702,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamFilesByWorkspaceByFilename(workspace: kotlin.String, filename: kotlin.String) : Unit {
-        val localVarResponse = getV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace = workspace, filename = filename)
+    fun getTeamFilesByWorkspaceByFilename(workspace: kotlin.String, filename: kotlin.String) : Unit {
+        val localVarResponse = getTeamFilesByWorkspaceByFilenameWithHttpInfo(workspace = workspace, filename = filename)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -731,8 +731,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace: kotlin.String, filename: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace = workspace, filename = filename)
+    fun getTeamFilesByWorkspaceByFilenameWithHttpInfo(workspace: kotlin.String, filename: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getTeamFilesByWorkspaceByFilenameRequestConfig(workspace = workspace, filename = filename)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -740,13 +740,13 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamFilesByWorkspaceByFilename
+     * To obtain the request config of the operation getTeamFilesByWorkspaceByFilename
      *
      * @param workspace 
      * @param filename 
      * @return RequestConfig
      */
-    fun getV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace: kotlin.String, filename: kotlin.String) : RequestConfig<Unit> {
+    fun getTeamFilesByWorkspaceByFilenameRequestConfig(workspace: kotlin.String, filename: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -775,8 +775,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamTransactorApiV1Statistics(token: kotlin.String? = null) : StatsOut {
-        val localVarResponse = getV1TeamTransactorApiV1StatisticsWithHttpInfo(token = token)
+    fun getTeamTransactorApiV1Statistics(token: kotlin.String? = null) : StatsOut {
+        val localVarResponse = getTeamTransactorApiV1StatisticsWithHttpInfo(token = token)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StatsOut
@@ -804,8 +804,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamTransactorApiV1StatisticsWithHttpInfo(token: kotlin.String?) : ApiResponse<StatsOut?> {
-        val localVariableConfig = getV1TeamTransactorApiV1StatisticsRequestConfig(token = token)
+    fun getTeamTransactorApiV1StatisticsWithHttpInfo(token: kotlin.String?) : ApiResponse<StatsOut?> {
+        val localVariableConfig = getTeamTransactorApiV1StatisticsRequestConfig(token = token)
 
         return request<Unit, StatsOut>(
             localVariableConfig
@@ -813,12 +813,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamTransactorApiV1Statistics
+     * To obtain the request config of the operation getTeamTransactorApiV1Statistics
      *
      * @param token Token is the workspace token minted by selectWorkspace. (optional)
      * @return RequestConfig
      */
-    fun getV1TeamTransactorApiV1StatisticsRequestConfig(token: kotlin.String?) : RequestConfig<Unit> {
+    fun getTeamTransactorApiV1StatisticsRequestConfig(token: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -852,8 +852,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamTransactorByToken(token: kotlin.String) : Unit {
-        val localVarResponse = getV1TeamTransactorByTokenWithHttpInfo(token = token)
+    fun getTeamTransactorByToken(token: kotlin.String) : Unit {
+        val localVarResponse = getTeamTransactorByTokenWithHttpInfo(token = token)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -880,8 +880,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamTransactorByTokenWithHttpInfo(token: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1TeamTransactorByTokenRequestConfig(token = token)
+    fun getTeamTransactorByTokenWithHttpInfo(token: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getTeamTransactorByTokenRequestConfig(token = token)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -889,12 +889,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamTransactorByToken
+     * To obtain the request config of the operation getTeamTransactorByToken
      *
      * @param token 
      * @return RequestConfig
      */
-    fun getV1TeamTransactorByTokenRequestConfig(token: kotlin.String) : RequestConfig<Unit> {
+    fun getTeamTransactorByTokenRequestConfig(token: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -923,8 +923,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TeamTransactorStatistics(token: kotlin.String? = null) : StatsOut {
-        val localVarResponse = getV1TeamTransactorStatisticsWithHttpInfo(token = token)
+    fun getTeamTransactorStatistics(token: kotlin.String? = null) : StatsOut {
+        val localVarResponse = getTeamTransactorStatisticsWithHttpInfo(token = token)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StatsOut
@@ -952,8 +952,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TeamTransactorStatisticsWithHttpInfo(token: kotlin.String?) : ApiResponse<StatsOut?> {
-        val localVariableConfig = getV1TeamTransactorStatisticsRequestConfig(token = token)
+    fun getTeamTransactorStatisticsWithHttpInfo(token: kotlin.String?) : ApiResponse<StatsOut?> {
+        val localVariableConfig = getTeamTransactorStatisticsRequestConfig(token = token)
 
         return request<Unit, StatsOut>(
             localVariableConfig
@@ -961,12 +961,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1TeamTransactorStatistics
+     * To obtain the request config of the operation getTeamTransactorStatistics
      *
      * @param token Token is the workspace token minted by selectWorkspace. (optional)
      * @return RequestConfig
      */
-    fun getV1TeamTransactorStatisticsRequestConfig(token: kotlin.String?) : RequestConfig<Unit> {
+    fun getTeamTransactorStatisticsRequestConfig(token: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -999,8 +999,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1TeamAccount() : Unit {
-        val localVarResponse = postV1TeamAccountWithHttpInfo()
+    fun postTeamAccount() : Unit {
+        val localVarResponse = postTeamAccountWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1026,8 +1026,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1TeamAccountWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1TeamAccountRequestConfig()
+    fun postTeamAccountWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postTeamAccountRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1035,11 +1035,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1TeamAccount
+     * To obtain the request config of the operation postTeamAccount
      *
      * @return RequestConfig
      */
-    fun postV1TeamAccountRequestConfig() : RequestConfig<Unit> {
+    fun postTeamAccountRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1067,8 +1067,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1TeamBotsSync() : BotSync {
-        val localVarResponse = postV1TeamBotsSyncWithHttpInfo()
+    fun postTeamBotsSync() : BotSync {
+        val localVarResponse = postTeamBotsSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BotSync
@@ -1095,8 +1095,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1TeamBotsSyncWithHttpInfo() : ApiResponse<BotSync?> {
-        val localVariableConfig = postV1TeamBotsSyncRequestConfig()
+    fun postTeamBotsSyncWithHttpInfo() : ApiResponse<BotSync?> {
+        val localVariableConfig = postTeamBotsSyncRequestConfig()
 
         return request<Unit, BotSync>(
             localVariableConfig
@@ -1104,11 +1104,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1TeamBotsSync
+     * To obtain the request config of the operation postTeamBotsSync
      *
      * @return RequestConfig
      */
-    fun postV1TeamBotsSyncRequestConfig() : RequestConfig<Unit> {
+    fun postTeamBotsSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1137,8 +1137,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1TeamFilesByWorkspace(workspace: kotlin.String) : Unit {
-        val localVarResponse = postV1TeamFilesByWorkspaceWithHttpInfo(workspace = workspace)
+    fun postTeamFilesByWorkspace(workspace: kotlin.String) : Unit {
+        val localVarResponse = postTeamFilesByWorkspaceWithHttpInfo(workspace = workspace)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1165,8 +1165,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1TeamFilesByWorkspaceWithHttpInfo(workspace: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1TeamFilesByWorkspaceRequestConfig(workspace = workspace)
+    fun postTeamFilesByWorkspaceWithHttpInfo(workspace: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postTeamFilesByWorkspaceRequestConfig(workspace = workspace)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1174,12 +1174,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1TeamFilesByWorkspace
+     * To obtain the request config of the operation postTeamFilesByWorkspace
      *
      * @param workspace 
      * @return RequestConfig
      */
-    fun postV1TeamFilesByWorkspaceRequestConfig(workspace: kotlin.String) : RequestConfig<Unit> {
+    fun postTeamFilesByWorkspaceRequestConfig(workspace: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1206,8 +1206,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1TeamAccountCookie() : Unit {
-        val localVarResponse = putV1TeamAccountCookieWithHttpInfo()
+    fun putTeamAccountCookie() : Unit {
+        val localVarResponse = putTeamAccountCookieWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1233,8 +1233,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1TeamAccountCookieWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1TeamAccountCookieRequestConfig()
+    fun putTeamAccountCookieWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putTeamAccountCookieRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1242,11 +1242,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation putV1TeamAccountCookie
+     * To obtain the request config of the operation putTeamAccountCookie
      *
      * @return RequestConfig
      */
-    fun putV1TeamAccountCookieRequestConfig() : RequestConfig<Unit> {
+    fun putTeamAccountCookieRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

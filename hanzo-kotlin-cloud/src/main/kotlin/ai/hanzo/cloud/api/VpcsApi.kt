@@ -60,8 +60,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1VpcsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1VpcsByIdWithHttpInfo(id = id)
+    fun deleteVpcsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteVpcsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -88,8 +88,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1VpcsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1VpcsByIdRequestConfig(id = id)
+    fun deleteVpcsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteVpcsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -97,12 +97,12 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1VpcsById
+     * To obtain the request config of the operation deleteVpcsById
      *
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
      * @return RequestConfig
      */
-    fun deleteV1VpcsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteVpcsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -130,8 +130,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Vpcs() : VpcList {
-        val localVarResponse = getV1VpcsWithHttpInfo()
+    fun getVpcs() : VpcList {
+        val localVarResponse = getVpcsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VpcList
@@ -158,8 +158,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1VpcsWithHttpInfo() : ApiResponse<VpcList?> {
-        val localVariableConfig = getV1VpcsRequestConfig()
+    fun getVpcsWithHttpInfo() : ApiResponse<VpcList?> {
+        val localVariableConfig = getVpcsRequestConfig()
 
         return request<Unit, VpcList>(
             localVariableConfig
@@ -167,11 +167,11 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1Vpcs
+     * To obtain the request config of the operation getVpcs
      *
      * @return RequestConfig
      */
-    fun getV1VpcsRequestConfig() : RequestConfig<Unit> {
+    fun getVpcsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -201,8 +201,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1VpcsById(id: kotlin.String) : VpcView {
-        val localVarResponse = getV1VpcsByIdWithHttpInfo(id = id)
+    fun getVpcsById(id: kotlin.String) : VpcView {
+        val localVarResponse = getVpcsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VpcView
@@ -230,8 +230,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1VpcsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<VpcView?> {
-        val localVariableConfig = getV1VpcsByIdRequestConfig(id = id)
+    fun getVpcsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<VpcView?> {
+        val localVariableConfig = getVpcsByIdRequestConfig(id = id)
 
         return request<Unit, VpcView>(
             localVariableConfig
@@ -239,12 +239,12 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1VpcsById
+     * To obtain the request config of the operation getVpcsById
      *
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
      * @return RequestConfig
      */
-    fun getV1VpcsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getVpcsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -274,8 +274,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Vpcs(createVPCReq: CreateVPCReq) : VpcView {
-        val localVarResponse = postV1VpcsWithHttpInfo(createVPCReq = createVPCReq)
+    fun postVpcs(createVPCReq: CreateVPCReq) : VpcView {
+        val localVarResponse = postVpcsWithHttpInfo(createVPCReq = createVPCReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VpcView
@@ -303,8 +303,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1VpcsWithHttpInfo(createVPCReq: CreateVPCReq) : ApiResponse<VpcView?> {
-        val localVariableConfig = postV1VpcsRequestConfig(createVPCReq = createVPCReq)
+    fun postVpcsWithHttpInfo(createVPCReq: CreateVPCReq) : ApiResponse<VpcView?> {
+        val localVariableConfig = postVpcsRequestConfig(createVPCReq = createVPCReq)
 
         return request<CreateVPCReq, VpcView>(
             localVariableConfig
@@ -312,12 +312,12 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1Vpcs
+     * To obtain the request config of the operation postVpcs
      *
      * @param createVPCReq 
      * @return RequestConfig
      */
-    fun postV1VpcsRequestConfig(createVPCReq: CreateVPCReq) : RequestConfig<CreateVPCReq> {
+    fun postVpcsRequestConfig(createVPCReq: CreateVPCReq) : RequestConfig<CreateVPCReq> {
         val localVariableBody = createVPCReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

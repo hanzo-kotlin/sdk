@@ -56,8 +56,8 @@ class HealthApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Health() : Unit {
-        val localVarResponse = getV1HealthWithHttpInfo()
+    fun getHealth() : Unit {
+        val localVarResponse = getHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class HealthApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1HealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1HealthRequestConfig()
+    fun getHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class HealthApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Health
+     * To obtain the request config of the operation getHealth
      *
      * @return RequestConfig
      */
-    fun getV1HealthRequestConfig() : RequestConfig<Unit> {
+    fun getHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

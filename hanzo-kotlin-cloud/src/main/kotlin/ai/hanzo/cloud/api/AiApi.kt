@@ -21,53 +21,53 @@ import okhttp3.HttpUrl
 
 import ai.hanzo.cloud.model.AiMCPSurface
 import ai.hanzo.cloud.model.Envelope
-import ai.hanzo.cloud.model.GetV1AiActivities200Response
-import ai.hanzo.cloud.model.GetV1AiArticles200Response
-import ai.hanzo.cloud.model.GetV1AiAssets200Response
-import ai.hanzo.cloud.model.GetV1AiChats200Response
-import ai.hanzo.cloud.model.GetV1AiDeployments200Response
-import ai.hanzo.cloud.model.GetV1AiFiles200Response
-import ai.hanzo.cloud.model.GetV1AiForms200Response
-import ai.hanzo.cloud.model.GetV1AiGraphs200Response
-import ai.hanzo.cloud.model.GetV1AiMessages200Response
-import ai.hanzo.cloud.model.GetV1AiNodes200Response
-import ai.hanzo.cloud.model.GetV1AiProviders200Response
-import ai.hanzo.cloud.model.GetV1AiRecords200Response
-import ai.hanzo.cloud.model.GetV1AiRemoteConnections200Response
-import ai.hanzo.cloud.model.GetV1AiRoutes200Response
-import ai.hanzo.cloud.model.GetV1AiScales200Response
-import ai.hanzo.cloud.model.GetV1AiScans200Response
-import ai.hanzo.cloud.model.GetV1AiSigninSessions200Response
-import ai.hanzo.cloud.model.GetV1AiStores200Response
-import ai.hanzo.cloud.model.GetV1AiTasks200Response
-import ai.hanzo.cloud.model.GetV1AiTemplates200Response
-import ai.hanzo.cloud.model.GetV1AiUsages200Response
-import ai.hanzo.cloud.model.GetV1AiVectors200Response
-import ai.hanzo.cloud.model.GetV1AiVideos200Response
-import ai.hanzo.cloud.model.GetV1AiWorkflows200Response
-import ai.hanzo.cloud.model.PostV1AiArticles200Response
-import ai.hanzo.cloud.model.PostV1AiAssets200Response
-import ai.hanzo.cloud.model.PostV1AiChats200Response
-import ai.hanzo.cloud.model.PostV1AiDeployments200Response
-import ai.hanzo.cloud.model.PostV1AiFiles200Response
-import ai.hanzo.cloud.model.PostV1AiForms200Response
-import ai.hanzo.cloud.model.PostV1AiGraphs200Response
-import ai.hanzo.cloud.model.PostV1AiMessages200Response
-import ai.hanzo.cloud.model.PostV1AiNodes200Response
-import ai.hanzo.cloud.model.PostV1AiProviders200Response
-import ai.hanzo.cloud.model.PostV1AiRecords200Response
-import ai.hanzo.cloud.model.PostV1AiRemoteConnections200Response
-import ai.hanzo.cloud.model.PostV1AiRoutes200Response
-import ai.hanzo.cloud.model.PostV1AiScales200Response
-import ai.hanzo.cloud.model.PostV1AiScans200Response
-import ai.hanzo.cloud.model.PostV1AiSigninSessions200Response
-import ai.hanzo.cloud.model.PostV1AiStores200Response
-import ai.hanzo.cloud.model.PostV1AiTasks200Response
-import ai.hanzo.cloud.model.PostV1AiTemplates200Response
-import ai.hanzo.cloud.model.PostV1AiTreeFiles200Response
-import ai.hanzo.cloud.model.PostV1AiVectors200Response
-import ai.hanzo.cloud.model.PostV1AiVideos200Response
-import ai.hanzo.cloud.model.PostV1AiWorkflows200Response
+import ai.hanzo.cloud.model.GetAiActivities200Response
+import ai.hanzo.cloud.model.GetAiArticles200Response
+import ai.hanzo.cloud.model.GetAiAssets200Response
+import ai.hanzo.cloud.model.GetAiChats200Response
+import ai.hanzo.cloud.model.GetAiDeployments200Response
+import ai.hanzo.cloud.model.GetAiFiles200Response
+import ai.hanzo.cloud.model.GetAiForms200Response
+import ai.hanzo.cloud.model.GetAiGraphs200Response
+import ai.hanzo.cloud.model.GetAiMessages200Response
+import ai.hanzo.cloud.model.GetAiNodes200Response
+import ai.hanzo.cloud.model.GetAiProviders200Response
+import ai.hanzo.cloud.model.GetAiRecords200Response
+import ai.hanzo.cloud.model.GetAiRemoteConnections200Response
+import ai.hanzo.cloud.model.GetAiRoutes200Response
+import ai.hanzo.cloud.model.GetAiScales200Response
+import ai.hanzo.cloud.model.GetAiScans200Response
+import ai.hanzo.cloud.model.GetAiSigninSessions200Response
+import ai.hanzo.cloud.model.GetAiStores200Response
+import ai.hanzo.cloud.model.GetAiTasks200Response
+import ai.hanzo.cloud.model.GetAiTemplates200Response
+import ai.hanzo.cloud.model.GetAiUsages200Response
+import ai.hanzo.cloud.model.GetAiVectors200Response
+import ai.hanzo.cloud.model.GetAiVideos200Response
+import ai.hanzo.cloud.model.GetAiWorkflows200Response
+import ai.hanzo.cloud.model.PostAiArticles200Response
+import ai.hanzo.cloud.model.PostAiAssets200Response
+import ai.hanzo.cloud.model.PostAiChats200Response
+import ai.hanzo.cloud.model.PostAiDeployments200Response
+import ai.hanzo.cloud.model.PostAiFiles200Response
+import ai.hanzo.cloud.model.PostAiForms200Response
+import ai.hanzo.cloud.model.PostAiGraphs200Response
+import ai.hanzo.cloud.model.PostAiMessages200Response
+import ai.hanzo.cloud.model.PostAiNodes200Response
+import ai.hanzo.cloud.model.PostAiProviders200Response
+import ai.hanzo.cloud.model.PostAiRecords200Response
+import ai.hanzo.cloud.model.PostAiRemoteConnections200Response
+import ai.hanzo.cloud.model.PostAiRoutes200Response
+import ai.hanzo.cloud.model.PostAiScales200Response
+import ai.hanzo.cloud.model.PostAiScans200Response
+import ai.hanzo.cloud.model.PostAiSigninSessions200Response
+import ai.hanzo.cloud.model.PostAiStores200Response
+import ai.hanzo.cloud.model.PostAiTasks200Response
+import ai.hanzo.cloud.model.PostAiTemplates200Response
+import ai.hanzo.cloud.model.PostAiTreeFiles200Response
+import ai.hanzo.cloud.model.PostAiVectors200Response
+import ai.hanzo.cloud.model.PostAiVideos200Response
+import ai.hanzo.cloud.model.PostAiWorkflows200Response
 
 import com.google.gson.annotations.SerializedName
 
@@ -177,7 +177,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one article.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiArticles200Response
+     * @return PostAiArticles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -186,11 +186,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiArticlesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiArticles200Response {
-        val localVarResponse = deleteV1AiArticlesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiArticlesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiArticles200Response {
+        val localVarResponse = deleteAiArticlesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiArticles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiArticles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -210,28 +210,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one article.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiArticles200Response?>
+     * @return ApiResponse<PostAiArticles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiArticlesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiArticles200Response?> {
-        val localVariableConfig = deleteV1AiArticlesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiArticlesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiArticles200Response?> {
+        val localVariableConfig = deleteAiArticlesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiArticles200Response>(
+        return request<Unit, PostAiArticles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiArticlesByOwnerByName
+     * To obtain the request config of the operation deleteAiArticlesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiArticlesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiArticlesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -253,7 +253,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one asset.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiAssets200Response
+     * @return PostAiAssets200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -262,11 +262,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiAssetsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiAssets200Response {
-        val localVarResponse = deleteV1AiAssetsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiAssetsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiAssets200Response {
+        val localVarResponse = deleteAiAssetsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiAssets200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiAssets200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -286,28 +286,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one asset.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiAssets200Response?>
+     * @return ApiResponse<PostAiAssets200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiAssetsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiAssets200Response?> {
-        val localVariableConfig = deleteV1AiAssetsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiAssetsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiAssets200Response?> {
+        val localVariableConfig = deleteAiAssetsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiAssets200Response>(
+        return request<Unit, PostAiAssets200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiAssetsByOwnerByName
+     * To obtain the request config of the operation deleteAiAssetsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiAssetsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiAssetsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -329,7 +329,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one chat.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiChats200Response
+     * @return PostAiChats200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -338,11 +338,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiChatsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiChats200Response {
-        val localVarResponse = deleteV1AiChatsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiChatsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiChats200Response {
+        val localVarResponse = deleteAiChatsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiChats200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiChats200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -362,28 +362,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one chat.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiChats200Response?>
+     * @return ApiResponse<PostAiChats200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiChatsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiChats200Response?> {
-        val localVariableConfig = deleteV1AiChatsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiChatsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiChats200Response?> {
+        val localVariableConfig = deleteAiChatsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiChats200Response>(
+        return request<Unit, PostAiChats200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiChatsByOwnerByName
+     * To obtain the request config of the operation deleteAiChatsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiChatsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiChatsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -411,8 +411,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiConnectionsByProvider() : Unit {
-        val localVarResponse = deleteV1AiConnectionsByProviderWithHttpInfo()
+    fun deleteAiConnectionsByProvider() : Unit {
+        val localVarResponse = deleteAiConnectionsByProviderWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -438,8 +438,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiConnectionsByProviderWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1AiConnectionsByProviderRequestConfig()
+    fun deleteAiConnectionsByProviderWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteAiConnectionsByProviderRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -447,11 +447,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiConnectionsByProvider
+     * To obtain the request config of the operation deleteAiConnectionsByProvider
      *
      * @return RequestConfig
      */
-    fun deleteV1AiConnectionsByProviderRequestConfig() : RequestConfig<Unit> {
+    fun deleteAiConnectionsByProviderRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -472,7 +472,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one application.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiDeployments200Response
+     * @return PostAiDeployments200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -481,11 +481,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiDeploymentsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiDeployments200Response {
-        val localVarResponse = deleteV1AiDeploymentsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiDeploymentsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiDeployments200Response {
+        val localVarResponse = deleteAiDeploymentsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiDeployments200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiDeployments200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -505,28 +505,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one application.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiDeployments200Response?>
+     * @return ApiResponse<PostAiDeployments200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiDeploymentsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiDeployments200Response?> {
-        val localVariableConfig = deleteV1AiDeploymentsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiDeploymentsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiDeployments200Response?> {
+        val localVariableConfig = deleteAiDeploymentsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiDeployments200Response>(
+        return request<Unit, PostAiDeployments200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiDeploymentsByOwnerByName
+     * To obtain the request config of the operation deleteAiDeploymentsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiDeploymentsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiDeploymentsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -548,7 +548,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one file.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiFiles200Response
+     * @return PostAiFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -557,11 +557,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiFilesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiFiles200Response {
-        val localVarResponse = deleteV1AiFilesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiFilesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiFiles200Response {
+        val localVarResponse = deleteAiFilesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -581,28 +581,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one file.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiFiles200Response?>
+     * @return ApiResponse<PostAiFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiFiles200Response?> {
-        val localVariableConfig = deleteV1AiFilesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiFiles200Response?> {
+        val localVariableConfig = deleteAiFilesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiFiles200Response>(
+        return request<Unit, PostAiFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiFilesByOwnerByName
+     * To obtain the request config of the operation deleteAiFilesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -624,7 +624,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one form.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiForms200Response
+     * @return PostAiForms200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -633,11 +633,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiFormsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiForms200Response {
-        val localVarResponse = deleteV1AiFormsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiFormsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiForms200Response {
+        val localVarResponse = deleteAiFormsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiForms200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiForms200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -657,28 +657,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one form.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiForms200Response?>
+     * @return ApiResponse<PostAiForms200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiFormsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiForms200Response?> {
-        val localVariableConfig = deleteV1AiFormsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiFormsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiForms200Response?> {
+        val localVariableConfig = deleteAiFormsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiForms200Response>(
+        return request<Unit, PostAiForms200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiFormsByOwnerByName
+     * To obtain the request config of the operation deleteAiFormsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiFormsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiFormsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -700,7 +700,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one graph.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiGraphs200Response
+     * @return PostAiGraphs200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -709,11 +709,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiGraphsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiGraphs200Response {
-        val localVarResponse = deleteV1AiGraphsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiGraphsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiGraphs200Response {
+        val localVarResponse = deleteAiGraphsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiGraphs200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiGraphs200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -733,28 +733,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one graph.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiGraphs200Response?>
+     * @return ApiResponse<PostAiGraphs200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiGraphsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiGraphs200Response?> {
-        val localVariableConfig = deleteV1AiGraphsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiGraphsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiGraphs200Response?> {
+        val localVariableConfig = deleteAiGraphsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiGraphs200Response>(
+        return request<Unit, PostAiGraphs200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiGraphsByOwnerByName
+     * To obtain the request config of the operation deleteAiGraphsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiGraphsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiGraphsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -776,7 +776,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one message.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiMessages200Response
+     * @return PostAiMessages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -785,11 +785,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiMessagesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiMessages200Response {
-        val localVarResponse = deleteV1AiMessagesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiMessagesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiMessages200Response {
+        val localVarResponse = deleteAiMessagesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiMessages200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiMessages200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -809,28 +809,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one message.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiMessages200Response?>
+     * @return ApiResponse<PostAiMessages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiMessagesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiMessages200Response?> {
-        val localVariableConfig = deleteV1AiMessagesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiMessagesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiMessages200Response?> {
+        val localVariableConfig = deleteAiMessagesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiMessages200Response>(
+        return request<Unit, PostAiMessages200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiMessagesByOwnerByName
+     * To obtain the request config of the operation deleteAiMessagesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiMessagesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiMessagesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -859,8 +859,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiMessagesWelcome() : Envelope {
-        val localVarResponse = deleteV1AiMessagesWelcomeWithHttpInfo()
+    fun deleteAiMessagesWelcome() : Envelope {
+        val localVarResponse = deleteAiMessagesWelcomeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -887,8 +887,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiMessagesWelcomeWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = deleteV1AiMessagesWelcomeRequestConfig()
+    fun deleteAiMessagesWelcomeWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = deleteAiMessagesWelcomeRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -896,11 +896,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiMessagesWelcome
+     * To obtain the request config of the operation deleteAiMessagesWelcome
      *
      * @return RequestConfig
      */
-    fun deleteV1AiMessagesWelcomeRequestConfig() : RequestConfig<Unit> {
+    fun deleteAiMessagesWelcomeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -922,7 +922,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one node.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiNodes200Response
+     * @return PostAiNodes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -931,11 +931,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiNodesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiNodes200Response {
-        val localVarResponse = deleteV1AiNodesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiNodesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiNodes200Response {
+        val localVarResponse = deleteAiNodesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiNodes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiNodes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -955,28 +955,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one node.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiNodes200Response?>
+     * @return ApiResponse<PostAiNodes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiNodesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiNodes200Response?> {
-        val localVariableConfig = deleteV1AiNodesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiNodesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiNodes200Response?> {
+        val localVariableConfig = deleteAiNodesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiNodes200Response>(
+        return request<Unit, PostAiNodes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiNodesByOwnerByName
+     * To obtain the request config of the operation deleteAiNodesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiNodesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiNodesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -998,7 +998,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one provider.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiProviders200Response
+     * @return PostAiProviders200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1007,11 +1007,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiProvidersByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiProviders200Response {
-        val localVarResponse = deleteV1AiProvidersByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiProvidersByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiProviders200Response {
+        val localVarResponse = deleteAiProvidersByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiProviders200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiProviders200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1031,28 +1031,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one provider.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiProviders200Response?>
+     * @return ApiResponse<PostAiProviders200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiProvidersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiProviders200Response?> {
-        val localVariableConfig = deleteV1AiProvidersByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiProvidersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiProviders200Response?> {
+        val localVariableConfig = deleteAiProvidersByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiProviders200Response>(
+        return request<Unit, PostAiProviders200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiProvidersByOwnerByName
+     * To obtain the request config of the operation deleteAiProvidersByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiProvidersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiProvidersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1074,7 +1074,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one record.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiRecords200Response
+     * @return PostAiRecords200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1083,11 +1083,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiRecordsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiRecords200Response {
-        val localVarResponse = deleteV1AiRecordsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiRecordsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiRecords200Response {
+        val localVarResponse = deleteAiRecordsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRecords200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRecords200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1107,28 +1107,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one record.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiRecords200Response?>
+     * @return ApiResponse<PostAiRecords200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiRecordsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiRecords200Response?> {
-        val localVariableConfig = deleteV1AiRecordsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiRecordsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiRecords200Response?> {
+        val localVariableConfig = deleteAiRecordsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiRecords200Response>(
+        return request<Unit, PostAiRecords200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiRecordsByOwnerByName
+     * To obtain the request config of the operation deleteAiRecordsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiRecordsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiRecordsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1150,7 +1150,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one connection.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiRemoteConnections200Response
+     * @return PostAiRemoteConnections200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1159,11 +1159,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiRemoteConnectionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiRemoteConnections200Response {
-        val localVarResponse = deleteV1AiRemoteConnectionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiRemoteConnectionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiRemoteConnections200Response {
+        val localVarResponse = deleteAiRemoteConnectionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRemoteConnections200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRemoteConnections200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1183,28 +1183,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one connection.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiRemoteConnections200Response?>
+     * @return ApiResponse<PostAiRemoteConnections200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiRemoteConnectionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiRemoteConnections200Response?> {
-        val localVariableConfig = deleteV1AiRemoteConnectionsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiRemoteConnectionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiRemoteConnections200Response?> {
+        val localVariableConfig = deleteAiRemoteConnectionsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiRemoteConnections200Response>(
+        return request<Unit, PostAiRemoteConnections200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiRemoteConnectionsByOwnerByName
+     * To obtain the request config of the operation deleteAiRemoteConnectionsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiRemoteConnectionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiRemoteConnectionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1226,7 +1226,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one model-route.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiRoutes200Response
+     * @return PostAiRoutes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1235,11 +1235,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiRoutesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiRoutes200Response {
-        val localVarResponse = deleteV1AiRoutesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiRoutesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiRoutes200Response {
+        val localVarResponse = deleteAiRoutesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRoutes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRoutes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1259,28 +1259,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one model-route.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiRoutes200Response?>
+     * @return ApiResponse<PostAiRoutes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiRoutesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiRoutes200Response?> {
-        val localVariableConfig = deleteV1AiRoutesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiRoutesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiRoutes200Response?> {
+        val localVariableConfig = deleteAiRoutesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiRoutes200Response>(
+        return request<Unit, PostAiRoutes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiRoutesByOwnerByName
+     * To obtain the request config of the operation deleteAiRoutesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiRoutesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiRoutesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1302,7 +1302,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one scale.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiScales200Response
+     * @return PostAiScales200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1311,11 +1311,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiScalesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiScales200Response {
-        val localVarResponse = deleteV1AiScalesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiScalesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiScales200Response {
+        val localVarResponse = deleteAiScalesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScales200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScales200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1335,28 +1335,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one scale.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiScales200Response?>
+     * @return ApiResponse<PostAiScales200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiScalesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiScales200Response?> {
-        val localVariableConfig = deleteV1AiScalesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiScalesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiScales200Response?> {
+        val localVariableConfig = deleteAiScalesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiScales200Response>(
+        return request<Unit, PostAiScales200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiScalesByOwnerByName
+     * To obtain the request config of the operation deleteAiScalesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiScalesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiScalesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1378,7 +1378,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one scan.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiScans200Response
+     * @return PostAiScans200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1387,11 +1387,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiScansByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiScans200Response {
-        val localVarResponse = deleteV1AiScansByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiScansByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiScans200Response {
+        val localVarResponse = deleteAiScansByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScans200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScans200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1411,28 +1411,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one scan.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiScans200Response?>
+     * @return ApiResponse<PostAiScans200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiScansByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiScans200Response?> {
-        val localVariableConfig = deleteV1AiScansByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiScansByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiScans200Response?> {
+        val localVariableConfig = deleteAiScansByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiScans200Response>(
+        return request<Unit, PostAiScans200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiScansByOwnerByName
+     * To obtain the request config of the operation deleteAiScansByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiScansByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiScansByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1454,7 +1454,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one session.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiSigninSessions200Response
+     * @return PostAiSigninSessions200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1463,11 +1463,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiSigninSessionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiSigninSessions200Response {
-        val localVarResponse = deleteV1AiSigninSessionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiSigninSessionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiSigninSessions200Response {
+        val localVarResponse = deleteAiSigninSessionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiSigninSessions200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiSigninSessions200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1487,28 +1487,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one session.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiSigninSessions200Response?>
+     * @return ApiResponse<PostAiSigninSessions200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiSigninSessionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiSigninSessions200Response?> {
-        val localVariableConfig = deleteV1AiSigninSessionsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiSigninSessionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiSigninSessions200Response?> {
+        val localVariableConfig = deleteAiSigninSessionsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiSigninSessions200Response>(
+        return request<Unit, PostAiSigninSessions200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiSigninSessionsByOwnerByName
+     * To obtain the request config of the operation deleteAiSigninSessionsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiSigninSessionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiSigninSessionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1530,7 +1530,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one store.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiStores200Response
+     * @return PostAiStores200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1539,11 +1539,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiStoresByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiStores200Response {
-        val localVarResponse = deleteV1AiStoresByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiStoresByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiStores200Response {
+        val localVarResponse = deleteAiStoresByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiStores200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiStores200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1563,28 +1563,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one store.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiStores200Response?>
+     * @return ApiResponse<PostAiStores200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiStoresByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiStores200Response?> {
-        val localVariableConfig = deleteV1AiStoresByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiStoresByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiStores200Response?> {
+        val localVariableConfig = deleteAiStoresByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiStores200Response>(
+        return request<Unit, PostAiStores200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiStoresByOwnerByName
+     * To obtain the request config of the operation deleteAiStoresByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiStoresByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiStoresByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1606,7 +1606,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one task.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiTasks200Response
+     * @return PostAiTasks200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1615,11 +1615,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiTasksByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiTasks200Response {
-        val localVarResponse = deleteV1AiTasksByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiTasksByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiTasks200Response {
+        val localVarResponse = deleteAiTasksByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTasks200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTasks200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1639,28 +1639,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one task.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiTasks200Response?>
+     * @return ApiResponse<PostAiTasks200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiTasksByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiTasks200Response?> {
-        val localVariableConfig = deleteV1AiTasksByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiTasksByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiTasks200Response?> {
+        val localVariableConfig = deleteAiTasksByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiTasks200Response>(
+        return request<Unit, PostAiTasks200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiTasksByOwnerByName
+     * To obtain the request config of the operation deleteAiTasksByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiTasksByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiTasksByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1682,7 +1682,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one template.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiTemplates200Response
+     * @return PostAiTemplates200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1691,11 +1691,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiTemplatesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiTemplates200Response {
-        val localVarResponse = deleteV1AiTemplatesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiTemplatesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiTemplates200Response {
+        val localVarResponse = deleteAiTemplatesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTemplates200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTemplates200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1715,28 +1715,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one template.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiTemplates200Response?>
+     * @return ApiResponse<PostAiTemplates200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiTemplatesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiTemplates200Response?> {
-        val localVariableConfig = deleteV1AiTemplatesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiTemplatesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiTemplates200Response?> {
+        val localVariableConfig = deleteAiTemplatesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiTemplates200Response>(
+        return request<Unit, PostAiTemplates200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiTemplatesByOwnerByName
+     * To obtain the request config of the operation deleteAiTemplatesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiTemplatesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiTemplatesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1758,7 +1758,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one tree-file.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiTreeFiles200Response
+     * @return PostAiTreeFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1767,11 +1767,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiTreeFilesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiTreeFiles200Response {
-        val localVarResponse = deleteV1AiTreeFilesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiTreeFilesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiTreeFiles200Response {
+        val localVarResponse = deleteAiTreeFilesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTreeFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTreeFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1791,28 +1791,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one tree-file.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiTreeFiles200Response?>
+     * @return ApiResponse<PostAiTreeFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiTreeFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiTreeFiles200Response?> {
-        val localVariableConfig = deleteV1AiTreeFilesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiTreeFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiTreeFiles200Response?> {
+        val localVariableConfig = deleteAiTreeFilesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiTreeFiles200Response>(
+        return request<Unit, PostAiTreeFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiTreeFilesByOwnerByName
+     * To obtain the request config of the operation deleteAiTreeFilesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiTreeFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiTreeFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1841,8 +1841,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiVectorsAll() : Envelope {
-        val localVarResponse = deleteV1AiVectorsAllWithHttpInfo()
+    fun deleteAiVectorsAll() : Envelope {
+        val localVarResponse = deleteAiVectorsAllWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -1869,8 +1869,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiVectorsAllWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = deleteV1AiVectorsAllRequestConfig()
+    fun deleteAiVectorsAllWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = deleteAiVectorsAllRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -1878,11 +1878,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiVectorsAll
+     * To obtain the request config of the operation deleteAiVectorsAll
      *
      * @return RequestConfig
      */
-    fun deleteV1AiVectorsAllRequestConfig() : RequestConfig<Unit> {
+    fun deleteAiVectorsAllRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1904,7 +1904,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one vector.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiVectors200Response
+     * @return PostAiVectors200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1913,11 +1913,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiVectorsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiVectors200Response {
-        val localVarResponse = deleteV1AiVectorsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiVectorsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiVectors200Response {
+        val localVarResponse = deleteAiVectorsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVectors200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVectors200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1937,28 +1937,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one vector.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiVectors200Response?>
+     * @return ApiResponse<PostAiVectors200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiVectorsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiVectors200Response?> {
-        val localVariableConfig = deleteV1AiVectorsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiVectorsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiVectors200Response?> {
+        val localVariableConfig = deleteAiVectorsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiVectors200Response>(
+        return request<Unit, PostAiVectors200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiVectorsByOwnerByName
+     * To obtain the request config of the operation deleteAiVectorsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiVectorsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiVectorsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1980,7 +1980,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one video.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiVideos200Response
+     * @return PostAiVideos200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1989,11 +1989,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiVideosByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiVideos200Response {
-        val localVarResponse = deleteV1AiVideosByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiVideosByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiVideos200Response {
+        val localVarResponse = deleteAiVideosByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVideos200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVideos200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2013,28 +2013,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one video.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiVideos200Response?>
+     * @return ApiResponse<PostAiVideos200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiVideosByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiVideos200Response?> {
-        val localVariableConfig = deleteV1AiVideosByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiVideosByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiVideos200Response?> {
+        val localVariableConfig = deleteAiVideosByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiVideos200Response>(
+        return request<Unit, PostAiVideos200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiVideosByOwnerByName
+     * To obtain the request config of the operation deleteAiVideosByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiVideosByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiVideosByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2056,7 +2056,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one workflow.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiWorkflows200Response
+     * @return PostAiWorkflows200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2065,11 +2065,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AiWorkflowsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiWorkflows200Response {
-        val localVarResponse = deleteV1AiWorkflowsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun deleteAiWorkflowsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiWorkflows200Response {
+        val localVarResponse = deleteAiWorkflowsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiWorkflows200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiWorkflows200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2089,28 +2089,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Delete one workflow.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiWorkflows200Response?>
+     * @return ApiResponse<PostAiWorkflows200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AiWorkflowsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiWorkflows200Response?> {
-        val localVariableConfig = deleteV1AiWorkflowsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun deleteAiWorkflowsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiWorkflows200Response?> {
+        val localVariableConfig = deleteAiWorkflowsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiWorkflows200Response>(
+        return request<Unit, PostAiWorkflows200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AiWorkflowsByOwnerByName
+     * To obtain the request config of the operation deleteAiWorkflowsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun deleteV1AiWorkflowsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAiWorkflowsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2139,8 +2139,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiAccount() : Envelope {
-        val localVarResponse = getV1AiAccountWithHttpInfo()
+    fun getAiAccount() : Envelope {
+        val localVarResponse = getAiAccountWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -2167,8 +2167,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiAccountWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiAccountRequestConfig()
+    fun getAiAccountWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiAccountRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -2176,11 +2176,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiAccount
+     * To obtain the request config of the operation getAiAccount
      *
      * @return RequestConfig
      */
-    fun getV1AiAccountRequestConfig() : RequestConfig<Unit> {
+    fun getAiAccountRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2200,7 +2200,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/activities
      * List activities
      * List the caller&#39;s activities.
-     * @return GetV1AiActivities200Response
+     * @return GetAiActivities200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2209,11 +2209,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiActivities() : GetV1AiActivities200Response {
-        val localVarResponse = getV1AiActivitiesWithHttpInfo()
+    fun getAiActivities() : GetAiActivities200Response {
+        val localVarResponse = getAiActivitiesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiActivities200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiActivities200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2231,26 +2231,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/activities
      * List activities
      * List the caller&#39;s activities.
-     * @return ApiResponse<GetV1AiActivities200Response?>
+     * @return ApiResponse<GetAiActivities200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiActivitiesWithHttpInfo() : ApiResponse<GetV1AiActivities200Response?> {
-        val localVariableConfig = getV1AiActivitiesRequestConfig()
+    fun getAiActivitiesWithHttpInfo() : ApiResponse<GetAiActivities200Response?> {
+        val localVariableConfig = getAiActivitiesRequestConfig()
 
-        return request<Unit, GetV1AiActivities200Response>(
+        return request<Unit, GetAiActivities200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiActivities
+     * To obtain the request config of the operation getAiActivities
      *
      * @return RequestConfig
      */
-    fun getV1AiActivitiesRequestConfig() : RequestConfig<Unit> {
+    fun getAiActivitiesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2279,8 +2279,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiAnswer() : Envelope {
-        val localVarResponse = getV1AiAnswerWithHttpInfo()
+    fun getAiAnswer() : Envelope {
+        val localVarResponse = getAiAnswerWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -2307,8 +2307,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiAnswerWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiAnswerRequestConfig()
+    fun getAiAnswerWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiAnswerRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -2316,11 +2316,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiAnswer
+     * To obtain the request config of the operation getAiAnswer
      *
      * @return RequestConfig
      */
-    fun getV1AiAnswerRequestConfig() : RequestConfig<Unit> {
+    fun getAiAnswerRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2340,7 +2340,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/articles
      * List articles
      * List the caller&#39;s articles.
-     * @return GetV1AiArticles200Response
+     * @return GetAiArticles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2349,11 +2349,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiArticles() : GetV1AiArticles200Response {
-        val localVarResponse = getV1AiArticlesWithHttpInfo()
+    fun getAiArticles() : GetAiArticles200Response {
+        val localVarResponse = getAiArticlesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiArticles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiArticles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2371,26 +2371,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/articles
      * List articles
      * List the caller&#39;s articles.
-     * @return ApiResponse<GetV1AiArticles200Response?>
+     * @return ApiResponse<GetAiArticles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiArticlesWithHttpInfo() : ApiResponse<GetV1AiArticles200Response?> {
-        val localVariableConfig = getV1AiArticlesRequestConfig()
+    fun getAiArticlesWithHttpInfo() : ApiResponse<GetAiArticles200Response?> {
+        val localVariableConfig = getAiArticlesRequestConfig()
 
-        return request<Unit, GetV1AiArticles200Response>(
+        return request<Unit, GetAiArticles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiArticles
+     * To obtain the request config of the operation getAiArticles
      *
      * @return RequestConfig
      */
-    fun getV1AiArticlesRequestConfig() : RequestConfig<Unit> {
+    fun getAiArticlesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2412,7 +2412,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one article by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiArticles200Response
+     * @return PostAiArticles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2421,11 +2421,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiArticlesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiArticles200Response {
-        val localVarResponse = getV1AiArticlesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiArticlesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiArticles200Response {
+        val localVarResponse = getAiArticlesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiArticles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiArticles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2445,28 +2445,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one article by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiArticles200Response?>
+     * @return ApiResponse<PostAiArticles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiArticlesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiArticles200Response?> {
-        val localVariableConfig = getV1AiArticlesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiArticlesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiArticles200Response?> {
+        val localVariableConfig = getAiArticlesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiArticles200Response>(
+        return request<Unit, PostAiArticles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiArticlesByOwnerByName
+     * To obtain the request config of the operation getAiArticlesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiArticlesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiArticlesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2486,7 +2486,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/articles/global
      * List articles across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiArticles200Response
+     * @return GetAiArticles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2495,11 +2495,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiArticlesGlobal() : GetV1AiArticles200Response {
-        val localVarResponse = getV1AiArticlesGlobalWithHttpInfo()
+    fun getAiArticlesGlobal() : GetAiArticles200Response {
+        val localVarResponse = getAiArticlesGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiArticles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiArticles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2517,26 +2517,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/articles/global
      * List articles across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiArticles200Response?>
+     * @return ApiResponse<GetAiArticles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiArticlesGlobalWithHttpInfo() : ApiResponse<GetV1AiArticles200Response?> {
-        val localVariableConfig = getV1AiArticlesGlobalRequestConfig()
+    fun getAiArticlesGlobalWithHttpInfo() : ApiResponse<GetAiArticles200Response?> {
+        val localVariableConfig = getAiArticlesGlobalRequestConfig()
 
-        return request<Unit, GetV1AiArticles200Response>(
+        return request<Unit, GetAiArticles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiArticlesGlobal
+     * To obtain the request config of the operation getAiArticlesGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiArticlesGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiArticlesGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2556,7 +2556,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/assets
      * List assets
      * List the caller&#39;s assets.
-     * @return GetV1AiAssets200Response
+     * @return GetAiAssets200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2565,11 +2565,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiAssets() : GetV1AiAssets200Response {
-        val localVarResponse = getV1AiAssetsWithHttpInfo()
+    fun getAiAssets() : GetAiAssets200Response {
+        val localVarResponse = getAiAssetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiAssets200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiAssets200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2587,26 +2587,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/assets
      * List assets
      * List the caller&#39;s assets.
-     * @return ApiResponse<GetV1AiAssets200Response?>
+     * @return ApiResponse<GetAiAssets200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiAssetsWithHttpInfo() : ApiResponse<GetV1AiAssets200Response?> {
-        val localVariableConfig = getV1AiAssetsRequestConfig()
+    fun getAiAssetsWithHttpInfo() : ApiResponse<GetAiAssets200Response?> {
+        val localVariableConfig = getAiAssetsRequestConfig()
 
-        return request<Unit, GetV1AiAssets200Response>(
+        return request<Unit, GetAiAssets200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiAssets
+     * To obtain the request config of the operation getAiAssets
      *
      * @return RequestConfig
      */
-    fun getV1AiAssetsRequestConfig() : RequestConfig<Unit> {
+    fun getAiAssetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2628,7 +2628,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one asset by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiAssets200Response
+     * @return PostAiAssets200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2637,11 +2637,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiAssetsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiAssets200Response {
-        val localVarResponse = getV1AiAssetsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiAssetsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiAssets200Response {
+        val localVarResponse = getAiAssetsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiAssets200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiAssets200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2661,28 +2661,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one asset by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiAssets200Response?>
+     * @return ApiResponse<PostAiAssets200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiAssetsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiAssets200Response?> {
-        val localVariableConfig = getV1AiAssetsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiAssetsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiAssets200Response?> {
+        val localVariableConfig = getAiAssetsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiAssets200Response>(
+        return request<Unit, PostAiAssets200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiAssetsByOwnerByName
+     * To obtain the request config of the operation getAiAssetsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiAssetsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiAssetsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2702,7 +2702,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/chats
      * List chats
      * List the caller&#39;s chats.
-     * @return GetV1AiChats200Response
+     * @return GetAiChats200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2711,11 +2711,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiChats() : GetV1AiChats200Response {
-        val localVarResponse = getV1AiChatsWithHttpInfo()
+    fun getAiChats() : GetAiChats200Response {
+        val localVarResponse = getAiChatsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiChats200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiChats200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2733,26 +2733,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/chats
      * List chats
      * List the caller&#39;s chats.
-     * @return ApiResponse<GetV1AiChats200Response?>
+     * @return ApiResponse<GetAiChats200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiChatsWithHttpInfo() : ApiResponse<GetV1AiChats200Response?> {
-        val localVariableConfig = getV1AiChatsRequestConfig()
+    fun getAiChatsWithHttpInfo() : ApiResponse<GetAiChats200Response?> {
+        val localVariableConfig = getAiChatsRequestConfig()
 
-        return request<Unit, GetV1AiChats200Response>(
+        return request<Unit, GetAiChats200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiChats
+     * To obtain the request config of the operation getAiChats
      *
      * @return RequestConfig
      */
-    fun getV1AiChatsRequestConfig() : RequestConfig<Unit> {
+    fun getAiChatsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2774,7 +2774,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one chat by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiChats200Response
+     * @return PostAiChats200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2783,11 +2783,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiChatsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiChats200Response {
-        val localVarResponse = getV1AiChatsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiChatsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiChats200Response {
+        val localVarResponse = getAiChatsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiChats200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiChats200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2807,28 +2807,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one chat by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiChats200Response?>
+     * @return ApiResponse<PostAiChats200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiChatsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiChats200Response?> {
-        val localVariableConfig = getV1AiChatsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiChatsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiChats200Response?> {
+        val localVariableConfig = getAiChatsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiChats200Response>(
+        return request<Unit, PostAiChats200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiChatsByOwnerByName
+     * To obtain the request config of the operation getAiChatsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiChatsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiChatsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2848,7 +2848,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/chats/global
      * List chats across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiChats200Response
+     * @return GetAiChats200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2857,11 +2857,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiChatsGlobal() : GetV1AiChats200Response {
-        val localVarResponse = getV1AiChatsGlobalWithHttpInfo()
+    fun getAiChatsGlobal() : GetAiChats200Response {
+        val localVarResponse = getAiChatsGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiChats200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiChats200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2879,26 +2879,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/chats/global
      * List chats across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiChats200Response?>
+     * @return ApiResponse<GetAiChats200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiChatsGlobalWithHttpInfo() : ApiResponse<GetV1AiChats200Response?> {
-        val localVariableConfig = getV1AiChatsGlobalRequestConfig()
+    fun getAiChatsGlobalWithHttpInfo() : ApiResponse<GetAiChats200Response?> {
+        val localVariableConfig = getAiChatsGlobalRequestConfig()
 
-        return request<Unit, GetV1AiChats200Response>(
+        return request<Unit, GetAiChats200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiChatsGlobal
+     * To obtain the request config of the operation getAiChatsGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiChatsGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiChatsGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2926,8 +2926,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiConnections() : Unit {
-        val localVarResponse = getV1AiConnectionsWithHttpInfo()
+    fun getAiConnections() : Unit {
+        val localVarResponse = getAiConnectionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2953,8 +2953,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiConnectionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AiConnectionsRequestConfig()
+    fun getAiConnectionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAiConnectionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2962,11 +2962,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiConnections
+     * To obtain the request config of the operation getAiConnections
      *
      * @return RequestConfig
      */
-    fun getV1AiConnectionsRequestConfig() : RequestConfig<Unit> {
+    fun getAiConnectionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2993,8 +2993,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiConnectionsByProviderAuthorize() : Unit {
-        val localVarResponse = getV1AiConnectionsByProviderAuthorizeWithHttpInfo()
+    fun getAiConnectionsByProviderAuthorize() : Unit {
+        val localVarResponse = getAiConnectionsByProviderAuthorizeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3020,8 +3020,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiConnectionsByProviderAuthorizeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AiConnectionsByProviderAuthorizeRequestConfig()
+    fun getAiConnectionsByProviderAuthorizeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAiConnectionsByProviderAuthorizeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3029,11 +3029,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiConnectionsByProviderAuthorize
+     * To obtain the request config of the operation getAiConnectionsByProviderAuthorize
      *
      * @return RequestConfig
      */
-    fun getV1AiConnectionsByProviderAuthorizeRequestConfig() : RequestConfig<Unit> {
+    fun getAiConnectionsByProviderAuthorizeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3060,8 +3060,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiConnectionsByProviderCallback() : Unit {
-        val localVarResponse = getV1AiConnectionsByProviderCallbackWithHttpInfo()
+    fun getAiConnectionsByProviderCallback() : Unit {
+        val localVarResponse = getAiConnectionsByProviderCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3087,8 +3087,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiConnectionsByProviderCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AiConnectionsByProviderCallbackRequestConfig()
+    fun getAiConnectionsByProviderCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAiConnectionsByProviderCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3096,11 +3096,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiConnectionsByProviderCallback
+     * To obtain the request config of the operation getAiConnectionsByProviderCallback
      *
      * @return RequestConfig
      */
-    fun getV1AiConnectionsByProviderCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getAiConnectionsByProviderCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3127,8 +3127,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiConnectionsByProviderUsage() : Unit {
-        val localVarResponse = getV1AiConnectionsByProviderUsageWithHttpInfo()
+    fun getAiConnectionsByProviderUsage() : Unit {
+        val localVarResponse = getAiConnectionsByProviderUsageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3154,8 +3154,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiConnectionsByProviderUsageWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AiConnectionsByProviderUsageRequestConfig()
+    fun getAiConnectionsByProviderUsageWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAiConnectionsByProviderUsageRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3163,11 +3163,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiConnectionsByProviderUsage
+     * To obtain the request config of the operation getAiConnectionsByProviderUsage
      *
      * @return RequestConfig
      */
-    fun getV1AiConnectionsByProviderUsageRequestConfig() : RequestConfig<Unit> {
+    fun getAiConnectionsByProviderUsageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3195,8 +3195,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiDashboardsAgents() : Envelope {
-        val localVarResponse = getV1AiDashboardsAgentsWithHttpInfo()
+    fun getAiDashboardsAgents() : Envelope {
+        val localVarResponse = getAiDashboardsAgentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -3223,8 +3223,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiDashboardsAgentsWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiDashboardsAgentsRequestConfig()
+    fun getAiDashboardsAgentsWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiDashboardsAgentsRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -3232,11 +3232,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiDashboardsAgents
+     * To obtain the request config of the operation getAiDashboardsAgents
      *
      * @return RequestConfig
      */
-    fun getV1AiDashboardsAgentsRequestConfig() : RequestConfig<Unit> {
+    fun getAiDashboardsAgentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3265,8 +3265,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiDashboardsVm() : Envelope {
-        val localVarResponse = getV1AiDashboardsVmWithHttpInfo()
+    fun getAiDashboardsVm() : Envelope {
+        val localVarResponse = getAiDashboardsVmWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -3293,8 +3293,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiDashboardsVmWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiDashboardsVmRequestConfig()
+    fun getAiDashboardsVmWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiDashboardsVmRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -3302,11 +3302,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiDashboardsVm
+     * To obtain the request config of the operation getAiDashboardsVm
      *
      * @return RequestConfig
      */
-    fun getV1AiDashboardsVmRequestConfig() : RequestConfig<Unit> {
+    fun getAiDashboardsVmRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3326,7 +3326,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/deployments
      * List deployments
      * List the caller&#39;s deployments.
-     * @return GetV1AiDeployments200Response
+     * @return GetAiDeployments200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3335,11 +3335,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiDeployments() : GetV1AiDeployments200Response {
-        val localVarResponse = getV1AiDeploymentsWithHttpInfo()
+    fun getAiDeployments() : GetAiDeployments200Response {
+        val localVarResponse = getAiDeploymentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiDeployments200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiDeployments200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3357,26 +3357,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/deployments
      * List deployments
      * List the caller&#39;s deployments.
-     * @return ApiResponse<GetV1AiDeployments200Response?>
+     * @return ApiResponse<GetAiDeployments200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiDeploymentsWithHttpInfo() : ApiResponse<GetV1AiDeployments200Response?> {
-        val localVariableConfig = getV1AiDeploymentsRequestConfig()
+    fun getAiDeploymentsWithHttpInfo() : ApiResponse<GetAiDeployments200Response?> {
+        val localVariableConfig = getAiDeploymentsRequestConfig()
 
-        return request<Unit, GetV1AiDeployments200Response>(
+        return request<Unit, GetAiDeployments200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiDeployments
+     * To obtain the request config of the operation getAiDeployments
      *
      * @return RequestConfig
      */
-    fun getV1AiDeploymentsRequestConfig() : RequestConfig<Unit> {
+    fun getAiDeploymentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3398,7 +3398,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one application by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiDeployments200Response
+     * @return PostAiDeployments200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3407,11 +3407,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiDeploymentsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiDeployments200Response {
-        val localVarResponse = getV1AiDeploymentsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiDeploymentsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiDeployments200Response {
+        val localVarResponse = getAiDeploymentsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiDeployments200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiDeployments200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3431,28 +3431,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one application by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiDeployments200Response?>
+     * @return ApiResponse<PostAiDeployments200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiDeploymentsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiDeployments200Response?> {
-        val localVariableConfig = getV1AiDeploymentsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiDeploymentsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiDeployments200Response?> {
+        val localVariableConfig = getAiDeploymentsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiDeployments200Response>(
+        return request<Unit, PostAiDeployments200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiDeploymentsByOwnerByName
+     * To obtain the request config of the operation getAiDeploymentsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiDeploymentsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiDeploymentsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3472,7 +3472,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/files
      * List files
      * List the caller&#39;s files.
-     * @return GetV1AiFiles200Response
+     * @return GetAiFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3481,11 +3481,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiFiles() : GetV1AiFiles200Response {
-        val localVarResponse = getV1AiFilesWithHttpInfo()
+    fun getAiFiles() : GetAiFiles200Response {
+        val localVarResponse = getAiFilesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3503,26 +3503,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/files
      * List files
      * List the caller&#39;s files.
-     * @return ApiResponse<GetV1AiFiles200Response?>
+     * @return ApiResponse<GetAiFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiFilesWithHttpInfo() : ApiResponse<GetV1AiFiles200Response?> {
-        val localVariableConfig = getV1AiFilesRequestConfig()
+    fun getAiFilesWithHttpInfo() : ApiResponse<GetAiFiles200Response?> {
+        val localVariableConfig = getAiFilesRequestConfig()
 
-        return request<Unit, GetV1AiFiles200Response>(
+        return request<Unit, GetAiFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiFiles
+     * To obtain the request config of the operation getAiFiles
      *
      * @return RequestConfig
      */
-    fun getV1AiFilesRequestConfig() : RequestConfig<Unit> {
+    fun getAiFilesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3551,8 +3551,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiFilesActive() : Envelope {
-        val localVarResponse = getV1AiFilesActiveWithHttpInfo()
+    fun getAiFilesActive() : Envelope {
+        val localVarResponse = getAiFilesActiveWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -3579,8 +3579,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiFilesActiveWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiFilesActiveRequestConfig()
+    fun getAiFilesActiveWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiFilesActiveRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -3588,11 +3588,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiFilesActive
+     * To obtain the request config of the operation getAiFilesActive
      *
      * @return RequestConfig
      */
-    fun getV1AiFilesActiveRequestConfig() : RequestConfig<Unit> {
+    fun getAiFilesActiveRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3614,7 +3614,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one file by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiFiles200Response
+     * @return PostAiFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3623,11 +3623,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiFilesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiFiles200Response {
-        val localVarResponse = getV1AiFilesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiFilesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiFiles200Response {
+        val localVarResponse = getAiFilesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3647,28 +3647,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one file by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiFiles200Response?>
+     * @return ApiResponse<PostAiFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiFiles200Response?> {
-        val localVariableConfig = getV1AiFilesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiFiles200Response?> {
+        val localVariableConfig = getAiFilesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiFiles200Response>(
+        return request<Unit, PostAiFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiFilesByOwnerByName
+     * To obtain the request config of the operation getAiFilesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3688,7 +3688,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/files/global
      * List files across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiFiles200Response
+     * @return GetAiFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3697,11 +3697,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiFilesGlobal() : GetV1AiFiles200Response {
-        val localVarResponse = getV1AiFilesGlobalWithHttpInfo()
+    fun getAiFilesGlobal() : GetAiFiles200Response {
+        val localVarResponse = getAiFilesGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3719,26 +3719,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/files/global
      * List files across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiFiles200Response?>
+     * @return ApiResponse<GetAiFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiFilesGlobalWithHttpInfo() : ApiResponse<GetV1AiFiles200Response?> {
-        val localVariableConfig = getV1AiFilesGlobalRequestConfig()
+    fun getAiFilesGlobalWithHttpInfo() : ApiResponse<GetAiFiles200Response?> {
+        val localVariableConfig = getAiFilesGlobalRequestConfig()
 
-        return request<Unit, GetV1AiFiles200Response>(
+        return request<Unit, GetAiFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiFilesGlobal
+     * To obtain the request config of the operation getAiFilesGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiFilesGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiFilesGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3758,7 +3758,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/forms
      * List forms
      * List the caller&#39;s forms.
-     * @return GetV1AiForms200Response
+     * @return GetAiForms200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3767,11 +3767,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiForms() : GetV1AiForms200Response {
-        val localVarResponse = getV1AiFormsWithHttpInfo()
+    fun getAiForms() : GetAiForms200Response {
+        val localVarResponse = getAiFormsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiForms200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiForms200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3789,26 +3789,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/forms
      * List forms
      * List the caller&#39;s forms.
-     * @return ApiResponse<GetV1AiForms200Response?>
+     * @return ApiResponse<GetAiForms200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiFormsWithHttpInfo() : ApiResponse<GetV1AiForms200Response?> {
-        val localVariableConfig = getV1AiFormsRequestConfig()
+    fun getAiFormsWithHttpInfo() : ApiResponse<GetAiForms200Response?> {
+        val localVariableConfig = getAiFormsRequestConfig()
 
-        return request<Unit, GetV1AiForms200Response>(
+        return request<Unit, GetAiForms200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiForms
+     * To obtain the request config of the operation getAiForms
      *
      * @return RequestConfig
      */
-    fun getV1AiFormsRequestConfig() : RequestConfig<Unit> {
+    fun getAiFormsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3830,7 +3830,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one form by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiForms200Response
+     * @return PostAiForms200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3839,11 +3839,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiFormsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiForms200Response {
-        val localVarResponse = getV1AiFormsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiFormsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiForms200Response {
+        val localVarResponse = getAiFormsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiForms200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiForms200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3863,28 +3863,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one form by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiForms200Response?>
+     * @return ApiResponse<PostAiForms200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiFormsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiForms200Response?> {
-        val localVariableConfig = getV1AiFormsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiFormsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiForms200Response?> {
+        val localVariableConfig = getAiFormsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiForms200Response>(
+        return request<Unit, PostAiForms200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiFormsByOwnerByName
+     * To obtain the request config of the operation getAiFormsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiFormsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiFormsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3913,8 +3913,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiFormsData() : Envelope {
-        val localVarResponse = getV1AiFormsDataWithHttpInfo()
+    fun getAiFormsData() : Envelope {
+        val localVarResponse = getAiFormsDataWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -3941,8 +3941,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiFormsDataWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiFormsDataRequestConfig()
+    fun getAiFormsDataWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiFormsDataRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -3950,11 +3950,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiFormsData
+     * To obtain the request config of the operation getAiFormsData
      *
      * @return RequestConfig
      */
-    fun getV1AiFormsDataRequestConfig() : RequestConfig<Unit> {
+    fun getAiFormsDataRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3974,7 +3974,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/forms/global
      * List forms across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiForms200Response
+     * @return GetAiForms200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3983,11 +3983,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiFormsGlobal() : GetV1AiForms200Response {
-        val localVarResponse = getV1AiFormsGlobalWithHttpInfo()
+    fun getAiFormsGlobal() : GetAiForms200Response {
+        val localVarResponse = getAiFormsGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiForms200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiForms200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4005,26 +4005,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/forms/global
      * List forms across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiForms200Response?>
+     * @return ApiResponse<GetAiForms200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiFormsGlobalWithHttpInfo() : ApiResponse<GetV1AiForms200Response?> {
-        val localVariableConfig = getV1AiFormsGlobalRequestConfig()
+    fun getAiFormsGlobalWithHttpInfo() : ApiResponse<GetAiForms200Response?> {
+        val localVariableConfig = getAiFormsGlobalRequestConfig()
 
-        return request<Unit, GetV1AiForms200Response>(
+        return request<Unit, GetAiForms200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiFormsGlobal
+     * To obtain the request config of the operation getAiFormsGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiFormsGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiFormsGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4044,7 +4044,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/graphs
      * List graphs
      * List the caller&#39;s graphs.
-     * @return GetV1AiGraphs200Response
+     * @return GetAiGraphs200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4053,11 +4053,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiGraphs() : GetV1AiGraphs200Response {
-        val localVarResponse = getV1AiGraphsWithHttpInfo()
+    fun getAiGraphs() : GetAiGraphs200Response {
+        val localVarResponse = getAiGraphsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiGraphs200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiGraphs200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4075,26 +4075,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/graphs
      * List graphs
      * List the caller&#39;s graphs.
-     * @return ApiResponse<GetV1AiGraphs200Response?>
+     * @return ApiResponse<GetAiGraphs200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiGraphsWithHttpInfo() : ApiResponse<GetV1AiGraphs200Response?> {
-        val localVariableConfig = getV1AiGraphsRequestConfig()
+    fun getAiGraphsWithHttpInfo() : ApiResponse<GetAiGraphs200Response?> {
+        val localVariableConfig = getAiGraphsRequestConfig()
 
-        return request<Unit, GetV1AiGraphs200Response>(
+        return request<Unit, GetAiGraphs200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiGraphs
+     * To obtain the request config of the operation getAiGraphs
      *
      * @return RequestConfig
      */
-    fun getV1AiGraphsRequestConfig() : RequestConfig<Unit> {
+    fun getAiGraphsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4116,7 +4116,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one graph by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiGraphs200Response
+     * @return PostAiGraphs200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4125,11 +4125,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiGraphsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiGraphs200Response {
-        val localVarResponse = getV1AiGraphsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiGraphsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiGraphs200Response {
+        val localVarResponse = getAiGraphsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiGraphs200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiGraphs200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4149,28 +4149,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one graph by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiGraphs200Response?>
+     * @return ApiResponse<PostAiGraphs200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiGraphsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiGraphs200Response?> {
-        val localVariableConfig = getV1AiGraphsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiGraphsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiGraphs200Response?> {
+        val localVariableConfig = getAiGraphsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiGraphs200Response>(
+        return request<Unit, PostAiGraphs200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiGraphsByOwnerByName
+     * To obtain the request config of the operation getAiGraphsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiGraphsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiGraphsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4190,7 +4190,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/graphs/global
      * List graphs across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiGraphs200Response
+     * @return GetAiGraphs200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4199,11 +4199,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiGraphsGlobal() : GetV1AiGraphs200Response {
-        val localVarResponse = getV1AiGraphsGlobalWithHttpInfo()
+    fun getAiGraphsGlobal() : GetAiGraphs200Response {
+        val localVarResponse = getAiGraphsGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiGraphs200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiGraphs200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4221,26 +4221,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/graphs/global
      * List graphs across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiGraphs200Response?>
+     * @return ApiResponse<GetAiGraphs200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiGraphsGlobalWithHttpInfo() : ApiResponse<GetV1AiGraphs200Response?> {
-        val localVariableConfig = getV1AiGraphsGlobalRequestConfig()
+    fun getAiGraphsGlobalWithHttpInfo() : ApiResponse<GetAiGraphs200Response?> {
+        val localVariableConfig = getAiGraphsGlobalRequestConfig()
 
-        return request<Unit, GetV1AiGraphs200Response>(
+        return request<Unit, GetAiGraphs200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiGraphsGlobal
+     * To obtain the request config of the operation getAiGraphsGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiGraphsGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiGraphsGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4269,8 +4269,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiK8sStatus() : Envelope {
-        val localVarResponse = getV1AiK8sStatusWithHttpInfo()
+    fun getAiK8sStatus() : Envelope {
+        val localVarResponse = getAiK8sStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -4297,8 +4297,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiK8sStatusWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiK8sStatusRequestConfig()
+    fun getAiK8sStatusWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiK8sStatusRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -4306,11 +4306,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiK8sStatus
+     * To obtain the request config of the operation getAiK8sStatus
      *
      * @return RequestConfig
      */
-    fun getV1AiK8sStatusRequestConfig() : RequestConfig<Unit> {
+    fun getAiK8sStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4330,7 +4330,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/messages
      * List messages
      * List the caller&#39;s messages.
-     * @return GetV1AiMessages200Response
+     * @return GetAiMessages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4339,11 +4339,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiMessages() : GetV1AiMessages200Response {
-        val localVarResponse = getV1AiMessagesWithHttpInfo()
+    fun getAiMessages() : GetAiMessages200Response {
+        val localVarResponse = getAiMessagesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiMessages200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiMessages200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4361,26 +4361,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/messages
      * List messages
      * List the caller&#39;s messages.
-     * @return ApiResponse<GetV1AiMessages200Response?>
+     * @return ApiResponse<GetAiMessages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiMessagesWithHttpInfo() : ApiResponse<GetV1AiMessages200Response?> {
-        val localVariableConfig = getV1AiMessagesRequestConfig()
+    fun getAiMessagesWithHttpInfo() : ApiResponse<GetAiMessages200Response?> {
+        val localVariableConfig = getAiMessagesRequestConfig()
 
-        return request<Unit, GetV1AiMessages200Response>(
+        return request<Unit, GetAiMessages200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiMessages
+     * To obtain the request config of the operation getAiMessages
      *
      * @return RequestConfig
      */
-    fun getV1AiMessagesRequestConfig() : RequestConfig<Unit> {
+    fun getAiMessagesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4402,7 +4402,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one message by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiMessages200Response
+     * @return PostAiMessages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4411,11 +4411,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiMessagesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiMessages200Response {
-        val localVarResponse = getV1AiMessagesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiMessagesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiMessages200Response {
+        val localVarResponse = getAiMessagesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiMessages200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiMessages200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4435,28 +4435,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one message by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiMessages200Response?>
+     * @return ApiResponse<PostAiMessages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiMessagesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiMessages200Response?> {
-        val localVariableConfig = getV1AiMessagesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiMessagesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiMessages200Response?> {
+        val localVariableConfig = getAiMessagesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiMessages200Response>(
+        return request<Unit, PostAiMessages200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiMessagesByOwnerByName
+     * To obtain the request config of the operation getAiMessagesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiMessagesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiMessagesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4487,8 +4487,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiMessagesByOwnerByNameAnswer(owner: kotlin.String, name: kotlin.String) : Envelope {
-        val localVarResponse = getV1AiMessagesByOwnerByNameAnswerWithHttpInfo(owner = owner, name = name)
+    fun getAiMessagesByOwnerByNameAnswer(owner: kotlin.String, name: kotlin.String) : Envelope {
+        val localVarResponse = getAiMessagesByOwnerByNameAnswerWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -4517,8 +4517,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiMessagesByOwnerByNameAnswerWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiMessagesByOwnerByNameAnswerRequestConfig(owner = owner, name = name)
+    fun getAiMessagesByOwnerByNameAnswerWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiMessagesByOwnerByNameAnswerRequestConfig(owner = owner, name = name)
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -4526,13 +4526,13 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiMessagesByOwnerByNameAnswer
+     * To obtain the request config of the operation getAiMessagesByOwnerByNameAnswer
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiMessagesByOwnerByNameAnswerRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiMessagesByOwnerByNameAnswerRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4552,7 +4552,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/messages/global
      * List messages across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiMessages200Response
+     * @return GetAiMessages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4561,11 +4561,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiMessagesGlobal() : GetV1AiMessages200Response {
-        val localVarResponse = getV1AiMessagesGlobalWithHttpInfo()
+    fun getAiMessagesGlobal() : GetAiMessages200Response {
+        val localVarResponse = getAiMessagesGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiMessages200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiMessages200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4583,26 +4583,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/messages/global
      * List messages across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiMessages200Response?>
+     * @return ApiResponse<GetAiMessages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiMessagesGlobalWithHttpInfo() : ApiResponse<GetV1AiMessages200Response?> {
-        val localVariableConfig = getV1AiMessagesGlobalRequestConfig()
+    fun getAiMessagesGlobalWithHttpInfo() : ApiResponse<GetAiMessages200Response?> {
+        val localVariableConfig = getAiMessagesGlobalRequestConfig()
 
-        return request<Unit, GetV1AiMessages200Response>(
+        return request<Unit, GetAiMessages200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiMessagesGlobal
+     * To obtain the request config of the operation getAiMessagesGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiMessagesGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiMessagesGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4622,7 +4622,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/nodes
      * List nodes
      * List the caller&#39;s nodes.
-     * @return GetV1AiNodes200Response
+     * @return GetAiNodes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4631,11 +4631,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiNodes() : GetV1AiNodes200Response {
-        val localVarResponse = getV1AiNodesWithHttpInfo()
+    fun getAiNodes() : GetAiNodes200Response {
+        val localVarResponse = getAiNodesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiNodes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiNodes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4653,26 +4653,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/nodes
      * List nodes
      * List the caller&#39;s nodes.
-     * @return ApiResponse<GetV1AiNodes200Response?>
+     * @return ApiResponse<GetAiNodes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiNodesWithHttpInfo() : ApiResponse<GetV1AiNodes200Response?> {
-        val localVariableConfig = getV1AiNodesRequestConfig()
+    fun getAiNodesWithHttpInfo() : ApiResponse<GetAiNodes200Response?> {
+        val localVariableConfig = getAiNodesRequestConfig()
 
-        return request<Unit, GetV1AiNodes200Response>(
+        return request<Unit, GetAiNodes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiNodes
+     * To obtain the request config of the operation getAiNodes
      *
      * @return RequestConfig
      */
-    fun getV1AiNodesRequestConfig() : RequestConfig<Unit> {
+    fun getAiNodesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4694,7 +4694,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one node by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiNodes200Response
+     * @return PostAiNodes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4703,11 +4703,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiNodesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiNodes200Response {
-        val localVarResponse = getV1AiNodesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiNodesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiNodes200Response {
+        val localVarResponse = getAiNodesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiNodes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiNodes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4727,28 +4727,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one node by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiNodes200Response?>
+     * @return ApiResponse<PostAiNodes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiNodesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiNodes200Response?> {
-        val localVariableConfig = getV1AiNodesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiNodesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiNodes200Response?> {
+        val localVariableConfig = getAiNodesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiNodes200Response>(
+        return request<Unit, PostAiNodes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiNodesByOwnerByName
+     * To obtain the request config of the operation getAiNodesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiNodesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiNodesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4779,8 +4779,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiNodesByOwnerByNameTunnel(owner: kotlin.String, name: kotlin.String) : Envelope {
-        val localVarResponse = getV1AiNodesByOwnerByNameTunnelWithHttpInfo(owner = owner, name = name)
+    fun getAiNodesByOwnerByNameTunnel(owner: kotlin.String, name: kotlin.String) : Envelope {
+        val localVarResponse = getAiNodesByOwnerByNameTunnelWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -4809,8 +4809,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiNodesByOwnerByNameTunnelWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiNodesByOwnerByNameTunnelRequestConfig(owner = owner, name = name)
+    fun getAiNodesByOwnerByNameTunnelWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiNodesByOwnerByNameTunnelRequestConfig(owner = owner, name = name)
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -4818,13 +4818,13 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiNodesByOwnerByNameTunnel
+     * To obtain the request config of the operation getAiNodesByOwnerByNameTunnel
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiNodesByOwnerByNameTunnelRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiNodesByOwnerByNameTunnelRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4853,8 +4853,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiPrometheus() : Envelope {
-        val localVarResponse = getV1AiPrometheusWithHttpInfo()
+    fun getAiPrometheus() : Envelope {
+        val localVarResponse = getAiPrometheusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -4881,8 +4881,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiPrometheusWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiPrometheusRequestConfig()
+    fun getAiPrometheusWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiPrometheusRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -4890,11 +4890,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiPrometheus
+     * To obtain the request config of the operation getAiPrometheus
      *
      * @return RequestConfig
      */
-    fun getV1AiPrometheusRequestConfig() : RequestConfig<Unit> {
+    fun getAiPrometheusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4914,7 +4914,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/providers
      * List providers
      * List the caller&#39;s providers.
-     * @return GetV1AiProviders200Response
+     * @return GetAiProviders200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4923,11 +4923,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiProviders() : GetV1AiProviders200Response {
-        val localVarResponse = getV1AiProvidersWithHttpInfo()
+    fun getAiProviders() : GetAiProviders200Response {
+        val localVarResponse = getAiProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiProviders200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiProviders200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4945,26 +4945,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/providers
      * List providers
      * List the caller&#39;s providers.
-     * @return ApiResponse<GetV1AiProviders200Response?>
+     * @return ApiResponse<GetAiProviders200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiProvidersWithHttpInfo() : ApiResponse<GetV1AiProviders200Response?> {
-        val localVariableConfig = getV1AiProvidersRequestConfig()
+    fun getAiProvidersWithHttpInfo() : ApiResponse<GetAiProviders200Response?> {
+        val localVariableConfig = getAiProvidersRequestConfig()
 
-        return request<Unit, GetV1AiProviders200Response>(
+        return request<Unit, GetAiProviders200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiProviders
+     * To obtain the request config of the operation getAiProviders
      *
      * @return RequestConfig
      */
-    fun getV1AiProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getAiProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4986,7 +4986,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one provider by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiProviders200Response
+     * @return PostAiProviders200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4995,11 +4995,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiProvidersByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiProviders200Response {
-        val localVarResponse = getV1AiProvidersByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiProvidersByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiProviders200Response {
+        val localVarResponse = getAiProvidersByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiProviders200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiProviders200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5019,28 +5019,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one provider by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiProviders200Response?>
+     * @return ApiResponse<PostAiProviders200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiProvidersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiProviders200Response?> {
-        val localVariableConfig = getV1AiProvidersByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiProvidersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiProviders200Response?> {
+        val localVariableConfig = getAiProvidersByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiProviders200Response>(
+        return request<Unit, PostAiProviders200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiProvidersByOwnerByName
+     * To obtain the request config of the operation getAiProvidersByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiProvidersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiProvidersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5060,7 +5060,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/providers/global
      * List providers across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiProviders200Response
+     * @return GetAiProviders200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5069,11 +5069,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiProvidersGlobal() : GetV1AiProviders200Response {
-        val localVarResponse = getV1AiProvidersGlobalWithHttpInfo()
+    fun getAiProvidersGlobal() : GetAiProviders200Response {
+        val localVarResponse = getAiProvidersGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiProviders200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiProviders200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5091,26 +5091,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/providers/global
      * List providers across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiProviders200Response?>
+     * @return ApiResponse<GetAiProviders200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiProvidersGlobalWithHttpInfo() : ApiResponse<GetV1AiProviders200Response?> {
-        val localVariableConfig = getV1AiProvidersGlobalRequestConfig()
+    fun getAiProvidersGlobalWithHttpInfo() : ApiResponse<GetAiProviders200Response?> {
+        val localVariableConfig = getAiProvidersGlobalRequestConfig()
 
-        return request<Unit, GetV1AiProviders200Response>(
+        return request<Unit, GetAiProviders200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiProvidersGlobal
+     * To obtain the request config of the operation getAiProvidersGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiProvidersGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiProvidersGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5130,7 +5130,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/records
      * List records
      * List the caller&#39;s records.
-     * @return GetV1AiRecords200Response
+     * @return GetAiRecords200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5139,11 +5139,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiRecords() : GetV1AiRecords200Response {
-        val localVarResponse = getV1AiRecordsWithHttpInfo()
+    fun getAiRecords() : GetAiRecords200Response {
+        val localVarResponse = getAiRecordsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiRecords200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiRecords200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5161,26 +5161,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/records
      * List records
      * List the caller&#39;s records.
-     * @return ApiResponse<GetV1AiRecords200Response?>
+     * @return ApiResponse<GetAiRecords200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiRecordsWithHttpInfo() : ApiResponse<GetV1AiRecords200Response?> {
-        val localVariableConfig = getV1AiRecordsRequestConfig()
+    fun getAiRecordsWithHttpInfo() : ApiResponse<GetAiRecords200Response?> {
+        val localVariableConfig = getAiRecordsRequestConfig()
 
-        return request<Unit, GetV1AiRecords200Response>(
+        return request<Unit, GetAiRecords200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiRecords
+     * To obtain the request config of the operation getAiRecords
      *
      * @return RequestConfig
      */
-    fun getV1AiRecordsRequestConfig() : RequestConfig<Unit> {
+    fun getAiRecordsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5202,7 +5202,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one record by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiRecords200Response
+     * @return PostAiRecords200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5211,11 +5211,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiRecordsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiRecords200Response {
-        val localVarResponse = getV1AiRecordsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiRecordsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiRecords200Response {
+        val localVarResponse = getAiRecordsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRecords200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRecords200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5235,28 +5235,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one record by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiRecords200Response?>
+     * @return ApiResponse<PostAiRecords200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiRecordsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiRecords200Response?> {
-        val localVariableConfig = getV1AiRecordsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiRecordsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiRecords200Response?> {
+        val localVariableConfig = getAiRecordsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiRecords200Response>(
+        return request<Unit, PostAiRecords200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiRecordsByOwnerByName
+     * To obtain the request config of the operation getAiRecordsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiRecordsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiRecordsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5285,8 +5285,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiRecordsQuery() : Envelope {
-        val localVarResponse = getV1AiRecordsQueryWithHttpInfo()
+    fun getAiRecordsQuery() : Envelope {
+        val localVarResponse = getAiRecordsQueryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -5313,8 +5313,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiRecordsQueryWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiRecordsQueryRequestConfig()
+    fun getAiRecordsQueryWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiRecordsQueryRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -5322,11 +5322,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiRecordsQuery
+     * To obtain the request config of the operation getAiRecordsQuery
      *
      * @return RequestConfig
      */
-    fun getV1AiRecordsQueryRequestConfig() : RequestConfig<Unit> {
+    fun getAiRecordsQueryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5355,8 +5355,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiRecordsQuerySecond() : Envelope {
-        val localVarResponse = getV1AiRecordsQuerySecondWithHttpInfo()
+    fun getAiRecordsQuerySecond() : Envelope {
+        val localVarResponse = getAiRecordsQuerySecondWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -5383,8 +5383,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiRecordsQuerySecondWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiRecordsQuerySecondRequestConfig()
+    fun getAiRecordsQuerySecondWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiRecordsQuerySecondRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -5392,11 +5392,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiRecordsQuerySecond
+     * To obtain the request config of the operation getAiRecordsQuerySecond
      *
      * @return RequestConfig
      */
-    fun getV1AiRecordsQuerySecondRequestConfig() : RequestConfig<Unit> {
+    fun getAiRecordsQuerySecondRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5416,7 +5416,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/remote-connections
      * List remote-connections
      * List the caller&#39;s remote-connections.
-     * @return GetV1AiRemoteConnections200Response
+     * @return GetAiRemoteConnections200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5425,11 +5425,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiRemoteConnections() : GetV1AiRemoteConnections200Response {
-        val localVarResponse = getV1AiRemoteConnectionsWithHttpInfo()
+    fun getAiRemoteConnections() : GetAiRemoteConnections200Response {
+        val localVarResponse = getAiRemoteConnectionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiRemoteConnections200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiRemoteConnections200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5447,26 +5447,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/remote-connections
      * List remote-connections
      * List the caller&#39;s remote-connections.
-     * @return ApiResponse<GetV1AiRemoteConnections200Response?>
+     * @return ApiResponse<GetAiRemoteConnections200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiRemoteConnectionsWithHttpInfo() : ApiResponse<GetV1AiRemoteConnections200Response?> {
-        val localVariableConfig = getV1AiRemoteConnectionsRequestConfig()
+    fun getAiRemoteConnectionsWithHttpInfo() : ApiResponse<GetAiRemoteConnections200Response?> {
+        val localVariableConfig = getAiRemoteConnectionsRequestConfig()
 
-        return request<Unit, GetV1AiRemoteConnections200Response>(
+        return request<Unit, GetAiRemoteConnections200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiRemoteConnections
+     * To obtain the request config of the operation getAiRemoteConnections
      *
      * @return RequestConfig
      */
-    fun getV1AiRemoteConnectionsRequestConfig() : RequestConfig<Unit> {
+    fun getAiRemoteConnectionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5488,7 +5488,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one connection by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiRemoteConnections200Response
+     * @return PostAiRemoteConnections200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5497,11 +5497,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiRemoteConnectionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiRemoteConnections200Response {
-        val localVarResponse = getV1AiRemoteConnectionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiRemoteConnectionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiRemoteConnections200Response {
+        val localVarResponse = getAiRemoteConnectionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRemoteConnections200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRemoteConnections200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5521,28 +5521,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one connection by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiRemoteConnections200Response?>
+     * @return ApiResponse<PostAiRemoteConnections200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiRemoteConnectionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiRemoteConnections200Response?> {
-        val localVariableConfig = getV1AiRemoteConnectionsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiRemoteConnectionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiRemoteConnections200Response?> {
+        val localVariableConfig = getAiRemoteConnectionsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiRemoteConnections200Response>(
+        return request<Unit, PostAiRemoteConnections200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiRemoteConnectionsByOwnerByName
+     * To obtain the request config of the operation getAiRemoteConnectionsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiRemoteConnectionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiRemoteConnectionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5562,7 +5562,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/routes
      * List routes
      * List the caller&#39;s routes.
-     * @return GetV1AiRoutes200Response
+     * @return GetAiRoutes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5571,11 +5571,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiRoutes() : GetV1AiRoutes200Response {
-        val localVarResponse = getV1AiRoutesWithHttpInfo()
+    fun getAiRoutes() : GetAiRoutes200Response {
+        val localVarResponse = getAiRoutesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiRoutes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiRoutes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5593,26 +5593,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/routes
      * List routes
      * List the caller&#39;s routes.
-     * @return ApiResponse<GetV1AiRoutes200Response?>
+     * @return ApiResponse<GetAiRoutes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiRoutesWithHttpInfo() : ApiResponse<GetV1AiRoutes200Response?> {
-        val localVariableConfig = getV1AiRoutesRequestConfig()
+    fun getAiRoutesWithHttpInfo() : ApiResponse<GetAiRoutes200Response?> {
+        val localVariableConfig = getAiRoutesRequestConfig()
 
-        return request<Unit, GetV1AiRoutes200Response>(
+        return request<Unit, GetAiRoutes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiRoutes
+     * To obtain the request config of the operation getAiRoutes
      *
      * @return RequestConfig
      */
-    fun getV1AiRoutesRequestConfig() : RequestConfig<Unit> {
+    fun getAiRoutesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5634,7 +5634,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one model-route by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiRoutes200Response
+     * @return PostAiRoutes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5643,11 +5643,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiRoutesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiRoutes200Response {
-        val localVarResponse = getV1AiRoutesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiRoutesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiRoutes200Response {
+        val localVarResponse = getAiRoutesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRoutes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRoutes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5667,28 +5667,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one model-route by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiRoutes200Response?>
+     * @return ApiResponse<PostAiRoutes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiRoutesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiRoutes200Response?> {
-        val localVariableConfig = getV1AiRoutesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiRoutesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiRoutes200Response?> {
+        val localVariableConfig = getAiRoutesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiRoutes200Response>(
+        return request<Unit, PostAiRoutes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiRoutesByOwnerByName
+     * To obtain the request config of the operation getAiRoutesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiRoutesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiRoutesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5708,7 +5708,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/scales
      * List scales
      * List the caller&#39;s scales.
-     * @return GetV1AiScales200Response
+     * @return GetAiScales200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5717,11 +5717,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiScales() : GetV1AiScales200Response {
-        val localVarResponse = getV1AiScalesWithHttpInfo()
+    fun getAiScales() : GetAiScales200Response {
+        val localVarResponse = getAiScalesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiScales200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiScales200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5739,26 +5739,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/scales
      * List scales
      * List the caller&#39;s scales.
-     * @return ApiResponse<GetV1AiScales200Response?>
+     * @return ApiResponse<GetAiScales200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiScalesWithHttpInfo() : ApiResponse<GetV1AiScales200Response?> {
-        val localVariableConfig = getV1AiScalesRequestConfig()
+    fun getAiScalesWithHttpInfo() : ApiResponse<GetAiScales200Response?> {
+        val localVariableConfig = getAiScalesRequestConfig()
 
-        return request<Unit, GetV1AiScales200Response>(
+        return request<Unit, GetAiScales200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiScales
+     * To obtain the request config of the operation getAiScales
      *
      * @return RequestConfig
      */
-    fun getV1AiScalesRequestConfig() : RequestConfig<Unit> {
+    fun getAiScalesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5780,7 +5780,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one scale by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiScales200Response
+     * @return PostAiScales200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5789,11 +5789,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiScalesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiScales200Response {
-        val localVarResponse = getV1AiScalesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiScalesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiScales200Response {
+        val localVarResponse = getAiScalesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScales200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScales200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5813,28 +5813,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one scale by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiScales200Response?>
+     * @return ApiResponse<PostAiScales200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiScalesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiScales200Response?> {
-        val localVariableConfig = getV1AiScalesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiScalesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiScales200Response?> {
+        val localVariableConfig = getAiScalesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiScales200Response>(
+        return request<Unit, PostAiScales200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiScalesByOwnerByName
+     * To obtain the request config of the operation getAiScalesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiScalesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiScalesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5854,7 +5854,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/scales/global
      * List scales across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiScales200Response
+     * @return GetAiScales200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5863,11 +5863,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiScalesGlobal() : GetV1AiScales200Response {
-        val localVarResponse = getV1AiScalesGlobalWithHttpInfo()
+    fun getAiScalesGlobal() : GetAiScales200Response {
+        val localVarResponse = getAiScalesGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiScales200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiScales200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5885,26 +5885,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/scales/global
      * List scales across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiScales200Response?>
+     * @return ApiResponse<GetAiScales200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiScalesGlobalWithHttpInfo() : ApiResponse<GetV1AiScales200Response?> {
-        val localVariableConfig = getV1AiScalesGlobalRequestConfig()
+    fun getAiScalesGlobalWithHttpInfo() : ApiResponse<GetAiScales200Response?> {
+        val localVariableConfig = getAiScalesGlobalRequestConfig()
 
-        return request<Unit, GetV1AiScales200Response>(
+        return request<Unit, GetAiScales200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiScalesGlobal
+     * To obtain the request config of the operation getAiScalesGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiScalesGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiScalesGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5933,8 +5933,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiScalesPublic() : Envelope {
-        val localVarResponse = getV1AiScalesPublicWithHttpInfo()
+    fun getAiScalesPublic() : Envelope {
+        val localVarResponse = getAiScalesPublicWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -5961,8 +5961,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiScalesPublicWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiScalesPublicRequestConfig()
+    fun getAiScalesPublicWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiScalesPublicRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -5970,11 +5970,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiScalesPublic
+     * To obtain the request config of the operation getAiScalesPublic
      *
      * @return RequestConfig
      */
-    fun getV1AiScalesPublicRequestConfig() : RequestConfig<Unit> {
+    fun getAiScalesPublicRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5994,7 +5994,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/scans
      * List scans
      * List the caller&#39;s scans.
-     * @return GetV1AiScans200Response
+     * @return GetAiScans200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6003,11 +6003,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiScans() : GetV1AiScans200Response {
-        val localVarResponse = getV1AiScansWithHttpInfo()
+    fun getAiScans() : GetAiScans200Response {
+        val localVarResponse = getAiScansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiScans200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiScans200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6025,26 +6025,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/scans
      * List scans
      * List the caller&#39;s scans.
-     * @return ApiResponse<GetV1AiScans200Response?>
+     * @return ApiResponse<GetAiScans200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiScansWithHttpInfo() : ApiResponse<GetV1AiScans200Response?> {
-        val localVariableConfig = getV1AiScansRequestConfig()
+    fun getAiScansWithHttpInfo() : ApiResponse<GetAiScans200Response?> {
+        val localVariableConfig = getAiScansRequestConfig()
 
-        return request<Unit, GetV1AiScans200Response>(
+        return request<Unit, GetAiScans200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiScans
+     * To obtain the request config of the operation getAiScans
      *
      * @return RequestConfig
      */
-    fun getV1AiScansRequestConfig() : RequestConfig<Unit> {
+    fun getAiScansRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6066,7 +6066,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one scan by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiScans200Response
+     * @return PostAiScans200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6075,11 +6075,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiScansByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiScans200Response {
-        val localVarResponse = getV1AiScansByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiScansByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiScans200Response {
+        val localVarResponse = getAiScansByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScans200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScans200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6099,28 +6099,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one scan by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiScans200Response?>
+     * @return ApiResponse<PostAiScans200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiScansByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiScans200Response?> {
-        val localVariableConfig = getV1AiScansByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiScansByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiScans200Response?> {
+        val localVariableConfig = getAiScansByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiScans200Response>(
+        return request<Unit, PostAiScans200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiScansByOwnerByName
+     * To obtain the request config of the operation getAiScansByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiScansByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiScansByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6140,7 +6140,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/signin-sessions
      * List signin-sessions
      * List the caller&#39;s signin-sessions.
-     * @return GetV1AiSigninSessions200Response
+     * @return GetAiSigninSessions200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6149,11 +6149,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiSigninSessions() : GetV1AiSigninSessions200Response {
-        val localVarResponse = getV1AiSigninSessionsWithHttpInfo()
+    fun getAiSigninSessions() : GetAiSigninSessions200Response {
+        val localVarResponse = getAiSigninSessionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiSigninSessions200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiSigninSessions200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6171,26 +6171,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/signin-sessions
      * List signin-sessions
      * List the caller&#39;s signin-sessions.
-     * @return ApiResponse<GetV1AiSigninSessions200Response?>
+     * @return ApiResponse<GetAiSigninSessions200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiSigninSessionsWithHttpInfo() : ApiResponse<GetV1AiSigninSessions200Response?> {
-        val localVariableConfig = getV1AiSigninSessionsRequestConfig()
+    fun getAiSigninSessionsWithHttpInfo() : ApiResponse<GetAiSigninSessions200Response?> {
+        val localVariableConfig = getAiSigninSessionsRequestConfig()
 
-        return request<Unit, GetV1AiSigninSessions200Response>(
+        return request<Unit, GetAiSigninSessions200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiSigninSessions
+     * To obtain the request config of the operation getAiSigninSessions
      *
      * @return RequestConfig
      */
-    fun getV1AiSigninSessionsRequestConfig() : RequestConfig<Unit> {
+    fun getAiSigninSessionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6212,7 +6212,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one session by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiSigninSessions200Response
+     * @return PostAiSigninSessions200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6221,11 +6221,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiSigninSessionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiSigninSessions200Response {
-        val localVarResponse = getV1AiSigninSessionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiSigninSessionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiSigninSessions200Response {
+        val localVarResponse = getAiSigninSessionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiSigninSessions200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiSigninSessions200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6245,28 +6245,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one session by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiSigninSessions200Response?>
+     * @return ApiResponse<PostAiSigninSessions200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiSigninSessionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiSigninSessions200Response?> {
-        val localVariableConfig = getV1AiSigninSessionsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiSigninSessionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiSigninSessions200Response?> {
+        val localVariableConfig = getAiSigninSessionsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiSigninSessions200Response>(
+        return request<Unit, PostAiSigninSessions200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiSigninSessionsByOwnerByName
+     * To obtain the request config of the operation getAiSigninSessionsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiSigninSessionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiSigninSessionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6295,8 +6295,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiSigninSessionsDuplicated() : Envelope {
-        val localVarResponse = getV1AiSigninSessionsDuplicatedWithHttpInfo()
+    fun getAiSigninSessionsDuplicated() : Envelope {
+        val localVarResponse = getAiSigninSessionsDuplicatedWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -6323,8 +6323,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiSigninSessionsDuplicatedWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiSigninSessionsDuplicatedRequestConfig()
+    fun getAiSigninSessionsDuplicatedWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiSigninSessionsDuplicatedRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -6332,11 +6332,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiSigninSessionsDuplicated
+     * To obtain the request config of the operation getAiSigninSessionsDuplicated
      *
      * @return RequestConfig
      */
-    fun getV1AiSigninSessionsDuplicatedRequestConfig() : RequestConfig<Unit> {
+    fun getAiSigninSessionsDuplicatedRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6356,7 +6356,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/stores
      * List stores
      * List the caller&#39;s stores.
-     * @return GetV1AiStores200Response
+     * @return GetAiStores200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6365,11 +6365,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiStores() : GetV1AiStores200Response {
-        val localVarResponse = getV1AiStoresWithHttpInfo()
+    fun getAiStores() : GetAiStores200Response {
+        val localVarResponse = getAiStoresWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiStores200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiStores200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6387,26 +6387,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/stores
      * List stores
      * List the caller&#39;s stores.
-     * @return ApiResponse<GetV1AiStores200Response?>
+     * @return ApiResponse<GetAiStores200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiStoresWithHttpInfo() : ApiResponse<GetV1AiStores200Response?> {
-        val localVariableConfig = getV1AiStoresRequestConfig()
+    fun getAiStoresWithHttpInfo() : ApiResponse<GetAiStores200Response?> {
+        val localVariableConfig = getAiStoresRequestConfig()
 
-        return request<Unit, GetV1AiStores200Response>(
+        return request<Unit, GetAiStores200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiStores
+     * To obtain the request config of the operation getAiStores
      *
      * @return RequestConfig
      */
-    fun getV1AiStoresRequestConfig() : RequestConfig<Unit> {
+    fun getAiStoresRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6428,7 +6428,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one store by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiStores200Response
+     * @return PostAiStores200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6437,11 +6437,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiStoresByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiStores200Response {
-        val localVarResponse = getV1AiStoresByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiStoresByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiStores200Response {
+        val localVarResponse = getAiStoresByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiStores200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiStores200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6461,28 +6461,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one store by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiStores200Response?>
+     * @return ApiResponse<PostAiStores200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiStoresByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiStores200Response?> {
-        val localVariableConfig = getV1AiStoresByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiStoresByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiStores200Response?> {
+        val localVariableConfig = getAiStoresByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiStores200Response>(
+        return request<Unit, PostAiStores200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiStoresByOwnerByName
+     * To obtain the request config of the operation getAiStoresByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiStoresByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiStoresByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6502,7 +6502,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/stores/global
      * List stores across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiStores200Response
+     * @return GetAiStores200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6511,11 +6511,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiStoresGlobal() : GetV1AiStores200Response {
-        val localVarResponse = getV1AiStoresGlobalWithHttpInfo()
+    fun getAiStoresGlobal() : GetAiStores200Response {
+        val localVarResponse = getAiStoresGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiStores200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiStores200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6533,26 +6533,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/stores/global
      * List stores across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiStores200Response?>
+     * @return ApiResponse<GetAiStores200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiStoresGlobalWithHttpInfo() : ApiResponse<GetV1AiStores200Response?> {
-        val localVariableConfig = getV1AiStoresGlobalRequestConfig()
+    fun getAiStoresGlobalWithHttpInfo() : ApiResponse<GetAiStores200Response?> {
+        val localVariableConfig = getAiStoresGlobalRequestConfig()
 
-        return request<Unit, GetV1AiStores200Response>(
+        return request<Unit, GetAiStores200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiStoresGlobal
+     * To obtain the request config of the operation getAiStoresGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiStoresGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiStoresGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6581,8 +6581,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiStoresNames() : Envelope {
-        val localVarResponse = getV1AiStoresNamesWithHttpInfo()
+    fun getAiStoresNames() : Envelope {
+        val localVarResponse = getAiStoresNamesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -6609,8 +6609,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiStoresNamesWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiStoresNamesRequestConfig()
+    fun getAiStoresNamesWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiStoresNamesRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -6618,11 +6618,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiStoresNames
+     * To obtain the request config of the operation getAiStoresNames
      *
      * @return RequestConfig
      */
-    fun getV1AiStoresNamesRequestConfig() : RequestConfig<Unit> {
+    fun getAiStoresNamesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6651,8 +6651,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiStoresProviders() : Envelope {
-        val localVarResponse = getV1AiStoresProvidersWithHttpInfo()
+    fun getAiStoresProviders() : Envelope {
+        val localVarResponse = getAiStoresProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -6679,8 +6679,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiStoresProvidersWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiStoresProvidersRequestConfig()
+    fun getAiStoresProvidersWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiStoresProvidersRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -6688,11 +6688,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiStoresProviders
+     * To obtain the request config of the operation getAiStoresProviders
      *
      * @return RequestConfig
      */
-    fun getV1AiStoresProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getAiStoresProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6721,8 +6721,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiSystem() : Envelope {
-        val localVarResponse = getV1AiSystemWithHttpInfo()
+    fun getAiSystem() : Envelope {
+        val localVarResponse = getAiSystemWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -6749,8 +6749,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiSystemWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiSystemRequestConfig()
+    fun getAiSystemWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiSystemRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -6758,11 +6758,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiSystem
+     * To obtain the request config of the operation getAiSystem
      *
      * @return RequestConfig
      */
-    fun getV1AiSystemRequestConfig() : RequestConfig<Unit> {
+    fun getAiSystemRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6782,7 +6782,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/tasks
      * List tasks
      * List the caller&#39;s tasks.
-     * @return GetV1AiTasks200Response
+     * @return GetAiTasks200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6791,11 +6791,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiTasks() : GetV1AiTasks200Response {
-        val localVarResponse = getV1AiTasksWithHttpInfo()
+    fun getAiTasks() : GetAiTasks200Response {
+        val localVarResponse = getAiTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiTasks200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiTasks200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6813,26 +6813,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/tasks
      * List tasks
      * List the caller&#39;s tasks.
-     * @return ApiResponse<GetV1AiTasks200Response?>
+     * @return ApiResponse<GetAiTasks200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiTasksWithHttpInfo() : ApiResponse<GetV1AiTasks200Response?> {
-        val localVariableConfig = getV1AiTasksRequestConfig()
+    fun getAiTasksWithHttpInfo() : ApiResponse<GetAiTasks200Response?> {
+        val localVariableConfig = getAiTasksRequestConfig()
 
-        return request<Unit, GetV1AiTasks200Response>(
+        return request<Unit, GetAiTasks200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiTasks
+     * To obtain the request config of the operation getAiTasks
      *
      * @return RequestConfig
      */
-    fun getV1AiTasksRequestConfig() : RequestConfig<Unit> {
+    fun getAiTasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6854,7 +6854,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one task by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiTasks200Response
+     * @return PostAiTasks200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6863,11 +6863,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiTasksByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiTasks200Response {
-        val localVarResponse = getV1AiTasksByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiTasksByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiTasks200Response {
+        val localVarResponse = getAiTasksByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTasks200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTasks200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6887,28 +6887,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one task by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiTasks200Response?>
+     * @return ApiResponse<PostAiTasks200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiTasksByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiTasks200Response?> {
-        val localVariableConfig = getV1AiTasksByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiTasksByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiTasks200Response?> {
+        val localVariableConfig = getAiTasksByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiTasks200Response>(
+        return request<Unit, PostAiTasks200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiTasksByOwnerByName
+     * To obtain the request config of the operation getAiTasksByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiTasksByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiTasksByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6928,7 +6928,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/tasks/global
      * List tasks across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiTasks200Response
+     * @return GetAiTasks200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6937,11 +6937,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiTasksGlobal() : GetV1AiTasks200Response {
-        val localVarResponse = getV1AiTasksGlobalWithHttpInfo()
+    fun getAiTasksGlobal() : GetAiTasks200Response {
+        val localVarResponse = getAiTasksGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiTasks200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiTasks200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6959,26 +6959,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/tasks/global
      * List tasks across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiTasks200Response?>
+     * @return ApiResponse<GetAiTasks200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiTasksGlobalWithHttpInfo() : ApiResponse<GetV1AiTasks200Response?> {
-        val localVariableConfig = getV1AiTasksGlobalRequestConfig()
+    fun getAiTasksGlobalWithHttpInfo() : ApiResponse<GetAiTasks200Response?> {
+        val localVariableConfig = getAiTasksGlobalRequestConfig()
 
-        return request<Unit, GetV1AiTasks200Response>(
+        return request<Unit, GetAiTasks200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiTasksGlobal
+     * To obtain the request config of the operation getAiTasksGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiTasksGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiTasksGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6998,7 +6998,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/templates
      * List templates
      * List the caller&#39;s templates.
-     * @return GetV1AiTemplates200Response
+     * @return GetAiTemplates200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7007,11 +7007,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiTemplates() : GetV1AiTemplates200Response {
-        val localVarResponse = getV1AiTemplatesWithHttpInfo()
+    fun getAiTemplates() : GetAiTemplates200Response {
+        val localVarResponse = getAiTemplatesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiTemplates200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiTemplates200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7029,26 +7029,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/templates
      * List templates
      * List the caller&#39;s templates.
-     * @return ApiResponse<GetV1AiTemplates200Response?>
+     * @return ApiResponse<GetAiTemplates200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiTemplatesWithHttpInfo() : ApiResponse<GetV1AiTemplates200Response?> {
-        val localVariableConfig = getV1AiTemplatesRequestConfig()
+    fun getAiTemplatesWithHttpInfo() : ApiResponse<GetAiTemplates200Response?> {
+        val localVariableConfig = getAiTemplatesRequestConfig()
 
-        return request<Unit, GetV1AiTemplates200Response>(
+        return request<Unit, GetAiTemplates200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiTemplates
+     * To obtain the request config of the operation getAiTemplates
      *
      * @return RequestConfig
      */
-    fun getV1AiTemplatesRequestConfig() : RequestConfig<Unit> {
+    fun getAiTemplatesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7070,7 +7070,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one template by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiTemplates200Response
+     * @return PostAiTemplates200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7079,11 +7079,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiTemplatesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiTemplates200Response {
-        val localVarResponse = getV1AiTemplatesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiTemplatesByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiTemplates200Response {
+        val localVarResponse = getAiTemplatesByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTemplates200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTemplates200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7103,28 +7103,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one template by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiTemplates200Response?>
+     * @return ApiResponse<PostAiTemplates200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiTemplatesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiTemplates200Response?> {
-        val localVariableConfig = getV1AiTemplatesByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiTemplatesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiTemplates200Response?> {
+        val localVariableConfig = getAiTemplatesByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiTemplates200Response>(
+        return request<Unit, PostAiTemplates200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiTemplatesByOwnerByName
+     * To obtain the request config of the operation getAiTemplatesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiTemplatesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiTemplatesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7153,8 +7153,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiTrainingContribution() : Envelope {
-        val localVarResponse = getV1AiTrainingContributionWithHttpInfo()
+    fun getAiTrainingContribution() : Envelope {
+        val localVarResponse = getAiTrainingContributionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -7181,8 +7181,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiTrainingContributionWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiTrainingContributionRequestConfig()
+    fun getAiTrainingContributionWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiTrainingContributionRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -7190,11 +7190,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiTrainingContribution
+     * To obtain the request config of the operation getAiTrainingContribution
      *
      * @return RequestConfig
      */
-    fun getV1AiTrainingContributionRequestConfig() : RequestConfig<Unit> {
+    fun getAiTrainingContributionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7214,7 +7214,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/usages
      * List usages
      * List the caller&#39;s usages.
-     * @return GetV1AiUsages200Response
+     * @return GetAiUsages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7223,11 +7223,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiUsages() : GetV1AiUsages200Response {
-        val localVarResponse = getV1AiUsagesWithHttpInfo()
+    fun getAiUsages() : GetAiUsages200Response {
+        val localVarResponse = getAiUsagesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiUsages200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiUsages200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7245,26 +7245,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/usages
      * List usages
      * List the caller&#39;s usages.
-     * @return ApiResponse<GetV1AiUsages200Response?>
+     * @return ApiResponse<GetAiUsages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiUsagesWithHttpInfo() : ApiResponse<GetV1AiUsages200Response?> {
-        val localVariableConfig = getV1AiUsagesRequestConfig()
+    fun getAiUsagesWithHttpInfo() : ApiResponse<GetAiUsages200Response?> {
+        val localVariableConfig = getAiUsagesRequestConfig()
 
-        return request<Unit, GetV1AiUsages200Response>(
+        return request<Unit, GetAiUsages200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiUsages
+     * To obtain the request config of the operation getAiUsages
      *
      * @return RequestConfig
      */
-    fun getV1AiUsagesRequestConfig() : RequestConfig<Unit> {
+    fun getAiUsagesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7293,8 +7293,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiUsagesByUser() : Envelope {
-        val localVarResponse = getV1AiUsagesByUserWithHttpInfo()
+    fun getAiUsagesByUser() : Envelope {
+        val localVarResponse = getAiUsagesByUserWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -7321,8 +7321,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiUsagesByUserWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiUsagesByUserRequestConfig()
+    fun getAiUsagesByUserWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiUsagesByUserRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -7330,11 +7330,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiUsagesByUser
+     * To obtain the request config of the operation getAiUsagesByUser
      *
      * @return RequestConfig
      */
-    fun getV1AiUsagesByUserRequestConfig() : RequestConfig<Unit> {
+    fun getAiUsagesByUserRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7363,8 +7363,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiUsagesCloud() : Envelope {
-        val localVarResponse = getV1AiUsagesCloudWithHttpInfo()
+    fun getAiUsagesCloud() : Envelope {
+        val localVarResponse = getAiUsagesCloudWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -7391,8 +7391,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiUsagesCloudWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiUsagesCloudRequestConfig()
+    fun getAiUsagesCloudWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiUsagesCloudRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -7400,11 +7400,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiUsagesCloud
+     * To obtain the request config of the operation getAiUsagesCloud
      *
      * @return RequestConfig
      */
-    fun getV1AiUsagesCloudRequestConfig() : RequestConfig<Unit> {
+    fun getAiUsagesCloudRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7433,8 +7433,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiUsagesRange() : Envelope {
-        val localVarResponse = getV1AiUsagesRangeWithHttpInfo()
+    fun getAiUsagesRange() : Envelope {
+        val localVarResponse = getAiUsagesRangeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -7461,8 +7461,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiUsagesRangeWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiUsagesRangeRequestConfig()
+    fun getAiUsagesRangeWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiUsagesRangeRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -7470,11 +7470,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiUsagesRange
+     * To obtain the request config of the operation getAiUsagesRange
      *
      * @return RequestConfig
      */
-    fun getV1AiUsagesRangeRequestConfig() : RequestConfig<Unit> {
+    fun getAiUsagesRangeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7503,8 +7503,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiUsagesUserNames() : Envelope {
-        val localVarResponse = getV1AiUsagesUserNamesWithHttpInfo()
+    fun getAiUsagesUserNames() : Envelope {
+        val localVarResponse = getAiUsagesUserNamesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -7531,8 +7531,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiUsagesUserNamesWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiUsagesUserNamesRequestConfig()
+    fun getAiUsagesUserNamesWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiUsagesUserNamesRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -7540,11 +7540,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiUsagesUserNames
+     * To obtain the request config of the operation getAiUsagesUserNames
      *
      * @return RequestConfig
      */
-    fun getV1AiUsagesUserNamesRequestConfig() : RequestConfig<Unit> {
+    fun getAiUsagesUserNamesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7564,7 +7564,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/vectors
      * List vectors
      * List the caller&#39;s vectors.
-     * @return GetV1AiVectors200Response
+     * @return GetAiVectors200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7573,11 +7573,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiVectors() : GetV1AiVectors200Response {
-        val localVarResponse = getV1AiVectorsWithHttpInfo()
+    fun getAiVectors() : GetAiVectors200Response {
+        val localVarResponse = getAiVectorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiVectors200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiVectors200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7595,26 +7595,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/vectors
      * List vectors
      * List the caller&#39;s vectors.
-     * @return ApiResponse<GetV1AiVectors200Response?>
+     * @return ApiResponse<GetAiVectors200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiVectorsWithHttpInfo() : ApiResponse<GetV1AiVectors200Response?> {
-        val localVariableConfig = getV1AiVectorsRequestConfig()
+    fun getAiVectorsWithHttpInfo() : ApiResponse<GetAiVectors200Response?> {
+        val localVariableConfig = getAiVectorsRequestConfig()
 
-        return request<Unit, GetV1AiVectors200Response>(
+        return request<Unit, GetAiVectors200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiVectors
+     * To obtain the request config of the operation getAiVectors
      *
      * @return RequestConfig
      */
-    fun getV1AiVectorsRequestConfig() : RequestConfig<Unit> {
+    fun getAiVectorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7636,7 +7636,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one vector by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiVectors200Response
+     * @return PostAiVectors200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7645,11 +7645,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiVectorsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiVectors200Response {
-        val localVarResponse = getV1AiVectorsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiVectorsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiVectors200Response {
+        val localVarResponse = getAiVectorsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVectors200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVectors200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7669,28 +7669,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one vector by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiVectors200Response?>
+     * @return ApiResponse<PostAiVectors200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiVectorsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiVectors200Response?> {
-        val localVariableConfig = getV1AiVectorsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiVectorsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiVectors200Response?> {
+        val localVariableConfig = getAiVectorsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiVectors200Response>(
+        return request<Unit, PostAiVectors200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiVectorsByOwnerByName
+     * To obtain the request config of the operation getAiVectorsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiVectorsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiVectorsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7710,7 +7710,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/vectors/global
      * List vectors across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiVectors200Response
+     * @return GetAiVectors200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7719,11 +7719,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiVectorsGlobal() : GetV1AiVectors200Response {
-        val localVarResponse = getV1AiVectorsGlobalWithHttpInfo()
+    fun getAiVectorsGlobal() : GetAiVectors200Response {
+        val localVarResponse = getAiVectorsGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiVectors200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiVectors200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7741,26 +7741,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/vectors/global
      * List vectors across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiVectors200Response?>
+     * @return ApiResponse<GetAiVectors200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiVectorsGlobalWithHttpInfo() : ApiResponse<GetV1AiVectors200Response?> {
-        val localVariableConfig = getV1AiVectorsGlobalRequestConfig()
+    fun getAiVectorsGlobalWithHttpInfo() : ApiResponse<GetAiVectors200Response?> {
+        val localVariableConfig = getAiVectorsGlobalRequestConfig()
 
-        return request<Unit, GetV1AiVectors200Response>(
+        return request<Unit, GetAiVectors200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiVectorsGlobal
+     * To obtain the request config of the operation getAiVectorsGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiVectorsGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiVectorsGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7789,8 +7789,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiVersion() : Envelope {
-        val localVarResponse = getV1AiVersionWithHttpInfo()
+    fun getAiVersion() : Envelope {
+        val localVarResponse = getAiVersionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -7817,8 +7817,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiVersionWithHttpInfo() : ApiResponse<Envelope?> {
-        val localVariableConfig = getV1AiVersionRequestConfig()
+    fun getAiVersionWithHttpInfo() : ApiResponse<Envelope?> {
+        val localVariableConfig = getAiVersionRequestConfig()
 
         return request<Unit, Envelope>(
             localVariableConfig
@@ -7826,11 +7826,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1AiVersion
+     * To obtain the request config of the operation getAiVersion
      *
      * @return RequestConfig
      */
-    fun getV1AiVersionRequestConfig() : RequestConfig<Unit> {
+    fun getAiVersionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7850,7 +7850,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/videos
      * List videos
      * List the caller&#39;s videos.
-     * @return GetV1AiVideos200Response
+     * @return GetAiVideos200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7859,11 +7859,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiVideos() : GetV1AiVideos200Response {
-        val localVarResponse = getV1AiVideosWithHttpInfo()
+    fun getAiVideos() : GetAiVideos200Response {
+        val localVarResponse = getAiVideosWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiVideos200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiVideos200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7881,26 +7881,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/videos
      * List videos
      * List the caller&#39;s videos.
-     * @return ApiResponse<GetV1AiVideos200Response?>
+     * @return ApiResponse<GetAiVideos200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiVideosWithHttpInfo() : ApiResponse<GetV1AiVideos200Response?> {
-        val localVariableConfig = getV1AiVideosRequestConfig()
+    fun getAiVideosWithHttpInfo() : ApiResponse<GetAiVideos200Response?> {
+        val localVariableConfig = getAiVideosRequestConfig()
 
-        return request<Unit, GetV1AiVideos200Response>(
+        return request<Unit, GetAiVideos200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiVideos
+     * To obtain the request config of the operation getAiVideos
      *
      * @return RequestConfig
      */
-    fun getV1AiVideosRequestConfig() : RequestConfig<Unit> {
+    fun getAiVideosRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7922,7 +7922,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one video by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiVideos200Response
+     * @return PostAiVideos200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7931,11 +7931,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiVideosByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiVideos200Response {
-        val localVarResponse = getV1AiVideosByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiVideosByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiVideos200Response {
+        val localVarResponse = getAiVideosByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVideos200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVideos200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7955,28 +7955,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one video by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiVideos200Response?>
+     * @return ApiResponse<PostAiVideos200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiVideosByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiVideos200Response?> {
-        val localVariableConfig = getV1AiVideosByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiVideosByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiVideos200Response?> {
+        val localVariableConfig = getAiVideosByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiVideos200Response>(
+        return request<Unit, PostAiVideos200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiVideosByOwnerByName
+     * To obtain the request config of the operation getAiVideosByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiVideosByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiVideosByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7996,7 +7996,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/videos/global
      * List videos across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiVideos200Response
+     * @return GetAiVideos200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8005,11 +8005,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiVideosGlobal() : GetV1AiVideos200Response {
-        val localVarResponse = getV1AiVideosGlobalWithHttpInfo()
+    fun getAiVideosGlobal() : GetAiVideos200Response {
+        val localVarResponse = getAiVideosGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiVideos200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiVideos200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8027,26 +8027,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/videos/global
      * List videos across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiVideos200Response?>
+     * @return ApiResponse<GetAiVideos200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiVideosGlobalWithHttpInfo() : ApiResponse<GetV1AiVideos200Response?> {
-        val localVariableConfig = getV1AiVideosGlobalRequestConfig()
+    fun getAiVideosGlobalWithHttpInfo() : ApiResponse<GetAiVideos200Response?> {
+        val localVariableConfig = getAiVideosGlobalRequestConfig()
 
-        return request<Unit, GetV1AiVideos200Response>(
+        return request<Unit, GetAiVideos200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiVideosGlobal
+     * To obtain the request config of the operation getAiVideosGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiVideosGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiVideosGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8066,7 +8066,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/workflows
      * List workflows
      * List the caller&#39;s workflows.
-     * @return GetV1AiWorkflows200Response
+     * @return GetAiWorkflows200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8075,11 +8075,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiWorkflows() : GetV1AiWorkflows200Response {
-        val localVarResponse = getV1AiWorkflowsWithHttpInfo()
+    fun getAiWorkflows() : GetAiWorkflows200Response {
+        val localVarResponse = getAiWorkflowsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiWorkflows200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiWorkflows200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8097,26 +8097,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/workflows
      * List workflows
      * List the caller&#39;s workflows.
-     * @return ApiResponse<GetV1AiWorkflows200Response?>
+     * @return ApiResponse<GetAiWorkflows200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiWorkflowsWithHttpInfo() : ApiResponse<GetV1AiWorkflows200Response?> {
-        val localVariableConfig = getV1AiWorkflowsRequestConfig()
+    fun getAiWorkflowsWithHttpInfo() : ApiResponse<GetAiWorkflows200Response?> {
+        val localVariableConfig = getAiWorkflowsRequestConfig()
 
-        return request<Unit, GetV1AiWorkflows200Response>(
+        return request<Unit, GetAiWorkflows200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiWorkflows
+     * To obtain the request config of the operation getAiWorkflows
      *
      * @return RequestConfig
      */
-    fun getV1AiWorkflowsRequestConfig() : RequestConfig<Unit> {
+    fun getAiWorkflowsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8138,7 +8138,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one workflow by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return PostV1AiWorkflows200Response
+     * @return PostAiWorkflows200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8147,11 +8147,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiWorkflowsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostV1AiWorkflows200Response {
-        val localVarResponse = getV1AiWorkflowsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+    fun getAiWorkflowsByOwnerByName(owner: kotlin.String, name: kotlin.String) : PostAiWorkflows200Response {
+        val localVarResponse = getAiWorkflowsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiWorkflows200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiWorkflows200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8171,28 +8171,28 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Read one workflow by its (owner, name) key.
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
-     * @return ApiResponse<PostV1AiWorkflows200Response?>
+     * @return ApiResponse<PostAiWorkflows200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiWorkflowsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostV1AiWorkflows200Response?> {
-        val localVariableConfig = getV1AiWorkflowsByOwnerByNameRequestConfig(owner = owner, name = name)
+    fun getAiWorkflowsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<PostAiWorkflows200Response?> {
+        val localVariableConfig = getAiWorkflowsByOwnerByNameRequestConfig(owner = owner, name = name)
 
-        return request<Unit, PostV1AiWorkflows200Response>(
+        return request<Unit, PostAiWorkflows200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiWorkflowsByOwnerByName
+     * To obtain the request config of the operation getAiWorkflowsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun getV1AiWorkflowsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getAiWorkflowsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8212,7 +8212,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/workflows/global
      * List workflows across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return GetV1AiWorkflows200Response
+     * @return GetAiWorkflows200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8221,11 +8221,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AiWorkflowsGlobal() : GetV1AiWorkflows200Response {
-        val localVarResponse = getV1AiWorkflowsGlobalWithHttpInfo()
+    fun getAiWorkflowsGlobal() : GetAiWorkflows200Response {
+        val localVarResponse = getAiWorkflowsGlobalWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GetV1AiWorkflows200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAiWorkflows200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8243,26 +8243,26 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/ai/workflows/global
      * List workflows across tenants
      * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<GetV1AiWorkflows200Response?>
+     * @return ApiResponse<GetAiWorkflows200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AiWorkflowsGlobalWithHttpInfo() : ApiResponse<GetV1AiWorkflows200Response?> {
-        val localVariableConfig = getV1AiWorkflowsGlobalRequestConfig()
+    fun getAiWorkflowsGlobalWithHttpInfo() : ApiResponse<GetAiWorkflows200Response?> {
+        val localVariableConfig = getAiWorkflowsGlobalRequestConfig()
 
-        return request<Unit, GetV1AiWorkflows200Response>(
+        return request<Unit, GetAiWorkflows200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getV1AiWorkflowsGlobal
+     * To obtain the request config of the operation getAiWorkflowsGlobal
      *
      * @return RequestConfig
      */
-    fun getV1AiWorkflowsGlobalRequestConfig() : RequestConfig<Unit> {
+    fun getAiWorkflowsGlobalRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8285,7 +8285,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiArticles200Response
+     * @return PostAiArticles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8294,11 +8294,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiArticlesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiArticles200Response {
-        val localVarResponse = patchV1AiArticlesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiArticlesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiArticles200Response {
+        val localVarResponse = patchAiArticlesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiArticles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiArticles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8319,29 +8319,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiArticles200Response?>
+     * @return ApiResponse<PostAiArticles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiArticlesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiArticles200Response?> {
-        val localVariableConfig = patchV1AiArticlesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiArticlesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiArticles200Response?> {
+        val localVariableConfig = patchAiArticlesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiArticles200Response>(
+        return request<kotlin.Any, PostAiArticles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiArticlesByOwnerByName
+     * To obtain the request config of the operation patchAiArticlesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiArticlesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiArticlesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8365,7 +8365,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiAssets200Response
+     * @return PostAiAssets200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8374,11 +8374,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiAssetsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiAssets200Response {
-        val localVarResponse = patchV1AiAssetsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiAssetsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiAssets200Response {
+        val localVarResponse = patchAiAssetsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiAssets200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiAssets200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8399,29 +8399,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiAssets200Response?>
+     * @return ApiResponse<PostAiAssets200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiAssetsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiAssets200Response?> {
-        val localVariableConfig = patchV1AiAssetsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiAssetsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiAssets200Response?> {
+        val localVariableConfig = patchAiAssetsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiAssets200Response>(
+        return request<kotlin.Any, PostAiAssets200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiAssetsByOwnerByName
+     * To obtain the request config of the operation patchAiAssetsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiAssetsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiAssetsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8445,7 +8445,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiChats200Response
+     * @return PostAiChats200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8454,11 +8454,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiChatsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiChats200Response {
-        val localVarResponse = patchV1AiChatsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiChatsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiChats200Response {
+        val localVarResponse = patchAiChatsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiChats200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiChats200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8479,29 +8479,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiChats200Response?>
+     * @return ApiResponse<PostAiChats200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiChatsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiChats200Response?> {
-        val localVariableConfig = patchV1AiChatsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiChatsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiChats200Response?> {
+        val localVariableConfig = patchAiChatsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiChats200Response>(
+        return request<kotlin.Any, PostAiChats200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiChatsByOwnerByName
+     * To obtain the request config of the operation patchAiChatsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiChatsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiChatsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8525,7 +8525,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiDeployments200Response
+     * @return PostAiDeployments200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8534,11 +8534,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiDeploymentsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiDeployments200Response {
-        val localVarResponse = patchV1AiDeploymentsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiDeploymentsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiDeployments200Response {
+        val localVarResponse = patchAiDeploymentsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiDeployments200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiDeployments200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8559,29 +8559,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiDeployments200Response?>
+     * @return ApiResponse<PostAiDeployments200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiDeploymentsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiDeployments200Response?> {
-        val localVariableConfig = patchV1AiDeploymentsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiDeploymentsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiDeployments200Response?> {
+        val localVariableConfig = patchAiDeploymentsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiDeployments200Response>(
+        return request<kotlin.Any, PostAiDeployments200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiDeploymentsByOwnerByName
+     * To obtain the request config of the operation patchAiDeploymentsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiDeploymentsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiDeploymentsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8605,7 +8605,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiFiles200Response
+     * @return PostAiFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8614,11 +8614,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiFilesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiFiles200Response {
-        val localVarResponse = patchV1AiFilesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiFilesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiFiles200Response {
+        val localVarResponse = patchAiFilesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8639,29 +8639,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiFiles200Response?>
+     * @return ApiResponse<PostAiFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiFiles200Response?> {
-        val localVariableConfig = patchV1AiFilesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiFiles200Response?> {
+        val localVariableConfig = patchAiFilesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiFiles200Response>(
+        return request<kotlin.Any, PostAiFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiFilesByOwnerByName
+     * To obtain the request config of the operation patchAiFilesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8685,7 +8685,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiForms200Response
+     * @return PostAiForms200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8694,11 +8694,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiFormsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiForms200Response {
-        val localVarResponse = patchV1AiFormsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiFormsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiForms200Response {
+        val localVarResponse = patchAiFormsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiForms200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiForms200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8719,29 +8719,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiForms200Response?>
+     * @return ApiResponse<PostAiForms200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiFormsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiForms200Response?> {
-        val localVariableConfig = patchV1AiFormsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiFormsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiForms200Response?> {
+        val localVariableConfig = patchAiFormsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiForms200Response>(
+        return request<kotlin.Any, PostAiForms200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiFormsByOwnerByName
+     * To obtain the request config of the operation patchAiFormsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiFormsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiFormsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8765,7 +8765,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiGraphs200Response
+     * @return PostAiGraphs200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8774,11 +8774,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiGraphsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiGraphs200Response {
-        val localVarResponse = patchV1AiGraphsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiGraphsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiGraphs200Response {
+        val localVarResponse = patchAiGraphsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiGraphs200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiGraphs200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8799,29 +8799,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiGraphs200Response?>
+     * @return ApiResponse<PostAiGraphs200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiGraphsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiGraphs200Response?> {
-        val localVariableConfig = patchV1AiGraphsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiGraphsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiGraphs200Response?> {
+        val localVariableConfig = patchAiGraphsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiGraphs200Response>(
+        return request<kotlin.Any, PostAiGraphs200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiGraphsByOwnerByName
+     * To obtain the request config of the operation patchAiGraphsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiGraphsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiGraphsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8845,7 +8845,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiMessages200Response
+     * @return PostAiMessages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8854,11 +8854,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiMessagesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiMessages200Response {
-        val localVarResponse = patchV1AiMessagesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiMessagesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiMessages200Response {
+        val localVarResponse = patchAiMessagesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiMessages200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiMessages200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8879,29 +8879,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiMessages200Response?>
+     * @return ApiResponse<PostAiMessages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiMessagesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiMessages200Response?> {
-        val localVariableConfig = patchV1AiMessagesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiMessagesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiMessages200Response?> {
+        val localVariableConfig = patchAiMessagesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiMessages200Response>(
+        return request<kotlin.Any, PostAiMessages200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiMessagesByOwnerByName
+     * To obtain the request config of the operation patchAiMessagesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiMessagesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiMessagesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8925,7 +8925,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiNodes200Response
+     * @return PostAiNodes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -8934,11 +8934,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiNodesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiNodes200Response {
-        val localVarResponse = patchV1AiNodesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiNodesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiNodes200Response {
+        val localVarResponse = patchAiNodesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiNodes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiNodes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -8959,29 +8959,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiNodes200Response?>
+     * @return ApiResponse<PostAiNodes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiNodesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiNodes200Response?> {
-        val localVariableConfig = patchV1AiNodesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiNodesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiNodes200Response?> {
+        val localVariableConfig = patchAiNodesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiNodes200Response>(
+        return request<kotlin.Any, PostAiNodes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiNodesByOwnerByName
+     * To obtain the request config of the operation patchAiNodesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiNodesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiNodesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9012,8 +9012,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiPreferences(body: kotlin.Any) : Envelope {
-        val localVarResponse = patchV1AiPreferencesWithHttpInfo(body = body)
+    fun patchAiPreferences(body: kotlin.Any) : Envelope {
+        val localVarResponse = patchAiPreferencesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -9041,8 +9041,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiPreferencesWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = patchV1AiPreferencesRequestConfig(body = body)
+    fun patchAiPreferencesWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = patchAiPreferencesRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -9050,12 +9050,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiPreferences
+     * To obtain the request config of the operation patchAiPreferences
      *
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiPreferencesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiPreferencesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9079,7 +9079,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiProviders200Response
+     * @return PostAiProviders200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9088,11 +9088,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiProvidersByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiProviders200Response {
-        val localVarResponse = patchV1AiProvidersByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiProvidersByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiProviders200Response {
+        val localVarResponse = patchAiProvidersByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiProviders200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiProviders200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9113,29 +9113,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiProviders200Response?>
+     * @return ApiResponse<PostAiProviders200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiProvidersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiProviders200Response?> {
-        val localVariableConfig = patchV1AiProvidersByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiProvidersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiProviders200Response?> {
+        val localVariableConfig = patchAiProvidersByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiProviders200Response>(
+        return request<kotlin.Any, PostAiProviders200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiProvidersByOwnerByName
+     * To obtain the request config of the operation patchAiProvidersByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiProvidersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiProvidersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9159,7 +9159,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiRecords200Response
+     * @return PostAiRecords200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9168,11 +9168,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiRecordsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiRecords200Response {
-        val localVarResponse = patchV1AiRecordsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiRecordsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiRecords200Response {
+        val localVarResponse = patchAiRecordsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRecords200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRecords200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9193,29 +9193,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiRecords200Response?>
+     * @return ApiResponse<PostAiRecords200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiRecordsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiRecords200Response?> {
-        val localVariableConfig = patchV1AiRecordsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiRecordsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiRecords200Response?> {
+        val localVariableConfig = patchAiRecordsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiRecords200Response>(
+        return request<kotlin.Any, PostAiRecords200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiRecordsByOwnerByName
+     * To obtain the request config of the operation patchAiRecordsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiRecordsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiRecordsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9239,7 +9239,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiRemoteConnections200Response
+     * @return PostAiRemoteConnections200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9248,11 +9248,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiRemoteConnectionsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiRemoteConnections200Response {
-        val localVarResponse = patchV1AiRemoteConnectionsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiRemoteConnectionsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiRemoteConnections200Response {
+        val localVarResponse = patchAiRemoteConnectionsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRemoteConnections200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRemoteConnections200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9273,29 +9273,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiRemoteConnections200Response?>
+     * @return ApiResponse<PostAiRemoteConnections200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiRemoteConnectionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiRemoteConnections200Response?> {
-        val localVariableConfig = patchV1AiRemoteConnectionsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiRemoteConnectionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiRemoteConnections200Response?> {
+        val localVariableConfig = patchAiRemoteConnectionsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiRemoteConnections200Response>(
+        return request<kotlin.Any, PostAiRemoteConnections200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiRemoteConnectionsByOwnerByName
+     * To obtain the request config of the operation patchAiRemoteConnectionsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiRemoteConnectionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiRemoteConnectionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9319,7 +9319,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiRoutes200Response
+     * @return PostAiRoutes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9328,11 +9328,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiRoutesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiRoutes200Response {
-        val localVarResponse = patchV1AiRoutesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiRoutesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiRoutes200Response {
+        val localVarResponse = patchAiRoutesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRoutes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRoutes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9353,29 +9353,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiRoutes200Response?>
+     * @return ApiResponse<PostAiRoutes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiRoutesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiRoutes200Response?> {
-        val localVariableConfig = patchV1AiRoutesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiRoutesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiRoutes200Response?> {
+        val localVariableConfig = patchAiRoutesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiRoutes200Response>(
+        return request<kotlin.Any, PostAiRoutes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiRoutesByOwnerByName
+     * To obtain the request config of the operation patchAiRoutesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiRoutesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiRoutesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9399,7 +9399,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiScales200Response
+     * @return PostAiScales200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9408,11 +9408,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiScalesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiScales200Response {
-        val localVarResponse = patchV1AiScalesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiScalesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiScales200Response {
+        val localVarResponse = patchAiScalesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScales200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScales200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9433,29 +9433,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiScales200Response?>
+     * @return ApiResponse<PostAiScales200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiScalesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiScales200Response?> {
-        val localVariableConfig = patchV1AiScalesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiScalesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiScales200Response?> {
+        val localVariableConfig = patchAiScalesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiScales200Response>(
+        return request<kotlin.Any, PostAiScales200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiScalesByOwnerByName
+     * To obtain the request config of the operation patchAiScalesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiScalesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiScalesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9479,7 +9479,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiScans200Response
+     * @return PostAiScans200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9488,11 +9488,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiScansByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiScans200Response {
-        val localVarResponse = patchV1AiScansByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiScansByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiScans200Response {
+        val localVarResponse = patchAiScansByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScans200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScans200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9513,29 +9513,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiScans200Response?>
+     * @return ApiResponse<PostAiScans200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiScansByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiScans200Response?> {
-        val localVariableConfig = patchV1AiScansByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiScansByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiScans200Response?> {
+        val localVariableConfig = patchAiScansByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiScans200Response>(
+        return request<kotlin.Any, PostAiScans200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiScansByOwnerByName
+     * To obtain the request config of the operation patchAiScansByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiScansByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiScansByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9559,7 +9559,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiSigninSessions200Response
+     * @return PostAiSigninSessions200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9568,11 +9568,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiSigninSessionsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiSigninSessions200Response {
-        val localVarResponse = patchV1AiSigninSessionsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiSigninSessionsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiSigninSessions200Response {
+        val localVarResponse = patchAiSigninSessionsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiSigninSessions200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiSigninSessions200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9593,29 +9593,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiSigninSessions200Response?>
+     * @return ApiResponse<PostAiSigninSessions200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiSigninSessionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiSigninSessions200Response?> {
-        val localVariableConfig = patchV1AiSigninSessionsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiSigninSessionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiSigninSessions200Response?> {
+        val localVariableConfig = patchAiSigninSessionsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiSigninSessions200Response>(
+        return request<kotlin.Any, PostAiSigninSessions200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiSigninSessionsByOwnerByName
+     * To obtain the request config of the operation patchAiSigninSessionsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiSigninSessionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiSigninSessionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9639,7 +9639,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiStores200Response
+     * @return PostAiStores200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9648,11 +9648,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiStoresByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiStores200Response {
-        val localVarResponse = patchV1AiStoresByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiStoresByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiStores200Response {
+        val localVarResponse = patchAiStoresByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiStores200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiStores200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9673,29 +9673,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiStores200Response?>
+     * @return ApiResponse<PostAiStores200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiStoresByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiStores200Response?> {
-        val localVariableConfig = patchV1AiStoresByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiStoresByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiStores200Response?> {
+        val localVariableConfig = patchAiStoresByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiStores200Response>(
+        return request<kotlin.Any, PostAiStores200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiStoresByOwnerByName
+     * To obtain the request config of the operation patchAiStoresByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiStoresByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiStoresByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9719,7 +9719,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiTasks200Response
+     * @return PostAiTasks200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9728,11 +9728,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiTasksByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiTasks200Response {
-        val localVarResponse = patchV1AiTasksByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiTasksByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiTasks200Response {
+        val localVarResponse = patchAiTasksByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTasks200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTasks200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9753,29 +9753,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiTasks200Response?>
+     * @return ApiResponse<PostAiTasks200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiTasksByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiTasks200Response?> {
-        val localVariableConfig = patchV1AiTasksByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiTasksByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiTasks200Response?> {
+        val localVariableConfig = patchAiTasksByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiTasks200Response>(
+        return request<kotlin.Any, PostAiTasks200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiTasksByOwnerByName
+     * To obtain the request config of the operation patchAiTasksByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiTasksByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiTasksByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9799,7 +9799,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiTemplates200Response
+     * @return PostAiTemplates200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9808,11 +9808,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiTemplatesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiTemplates200Response {
-        val localVarResponse = patchV1AiTemplatesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiTemplatesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiTemplates200Response {
+        val localVarResponse = patchAiTemplatesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTemplates200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTemplates200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9833,29 +9833,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiTemplates200Response?>
+     * @return ApiResponse<PostAiTemplates200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiTemplatesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiTemplates200Response?> {
-        val localVariableConfig = patchV1AiTemplatesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiTemplatesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiTemplates200Response?> {
+        val localVariableConfig = patchAiTemplatesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiTemplates200Response>(
+        return request<kotlin.Any, PostAiTemplates200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiTemplatesByOwnerByName
+     * To obtain the request config of the operation patchAiTemplatesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiTemplatesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiTemplatesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9886,8 +9886,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiTrainingContribution(body: kotlin.Any) : Envelope {
-        val localVarResponse = patchV1AiTrainingContributionWithHttpInfo(body = body)
+    fun patchAiTrainingContribution(body: kotlin.Any) : Envelope {
+        val localVarResponse = patchAiTrainingContributionWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -9915,8 +9915,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiTrainingContributionWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = patchV1AiTrainingContributionRequestConfig(body = body)
+    fun patchAiTrainingContributionWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = patchAiTrainingContributionRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -9924,12 +9924,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiTrainingContribution
+     * To obtain the request config of the operation patchAiTrainingContribution
      *
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiTrainingContributionRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiTrainingContributionRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -9953,7 +9953,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiTreeFiles200Response
+     * @return PostAiTreeFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -9962,11 +9962,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiTreeFilesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiTreeFiles200Response {
-        val localVarResponse = patchV1AiTreeFilesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiTreeFilesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiTreeFiles200Response {
+        val localVarResponse = patchAiTreeFilesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTreeFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTreeFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -9987,29 +9987,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiTreeFiles200Response?>
+     * @return ApiResponse<PostAiTreeFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiTreeFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiTreeFiles200Response?> {
-        val localVariableConfig = patchV1AiTreeFilesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiTreeFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiTreeFiles200Response?> {
+        val localVariableConfig = patchAiTreeFilesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiTreeFiles200Response>(
+        return request<kotlin.Any, PostAiTreeFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiTreeFilesByOwnerByName
+     * To obtain the request config of the operation patchAiTreeFilesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiTreeFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiTreeFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10033,7 +10033,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiVectors200Response
+     * @return PostAiVectors200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -10042,11 +10042,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiVectorsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiVectors200Response {
-        val localVarResponse = patchV1AiVectorsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiVectorsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiVectors200Response {
+        val localVarResponse = patchAiVectorsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVectors200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVectors200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -10067,29 +10067,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiVectors200Response?>
+     * @return ApiResponse<PostAiVectors200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiVectorsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiVectors200Response?> {
-        val localVariableConfig = patchV1AiVectorsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiVectorsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiVectors200Response?> {
+        val localVariableConfig = patchAiVectorsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiVectors200Response>(
+        return request<kotlin.Any, PostAiVectors200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiVectorsByOwnerByName
+     * To obtain the request config of the operation patchAiVectorsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiVectorsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiVectorsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10113,7 +10113,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiVideos200Response
+     * @return PostAiVideos200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -10122,11 +10122,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiVideosByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiVideos200Response {
-        val localVarResponse = patchV1AiVideosByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiVideosByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiVideos200Response {
+        val localVarResponse = patchAiVideosByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVideos200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVideos200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -10147,29 +10147,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiVideos200Response?>
+     * @return ApiResponse<PostAiVideos200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiVideosByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiVideos200Response?> {
-        val localVariableConfig = patchV1AiVideosByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiVideosByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiVideos200Response?> {
+        val localVariableConfig = patchAiVideosByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiVideos200Response>(
+        return request<kotlin.Any, PostAiVideos200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiVideosByOwnerByName
+     * To obtain the request config of the operation patchAiVideosByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiVideosByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiVideosByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10193,7 +10193,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiWorkflows200Response
+     * @return PostAiWorkflows200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -10202,11 +10202,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AiWorkflowsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiWorkflows200Response {
-        val localVarResponse = patchV1AiWorkflowsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun patchAiWorkflowsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiWorkflows200Response {
+        val localVarResponse = patchAiWorkflowsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiWorkflows200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiWorkflows200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -10227,29 +10227,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiWorkflows200Response?>
+     * @return ApiResponse<PostAiWorkflows200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AiWorkflowsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiWorkflows200Response?> {
-        val localVariableConfig = patchV1AiWorkflowsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun patchAiWorkflowsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiWorkflows200Response?> {
+        val localVariableConfig = patchAiWorkflowsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiWorkflows200Response>(
+        return request<kotlin.Any, PostAiWorkflows200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation patchV1AiWorkflowsByOwnerByName
+     * To obtain the request config of the operation patchAiWorkflowsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun patchV1AiWorkflowsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun patchAiWorkflowsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10271,7 +10271,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a article
      * Create one article.
      * @param body 
-     * @return PostV1AiArticles200Response
+     * @return PostAiArticles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -10280,11 +10280,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiArticles(body: kotlin.Any) : PostV1AiArticles200Response {
-        val localVarResponse = postV1AiArticlesWithHttpInfo(body = body)
+    fun postAiArticles(body: kotlin.Any) : PostAiArticles200Response {
+        val localVarResponse = postAiArticlesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiArticles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiArticles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -10303,27 +10303,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a article
      * Create one article.
      * @param body 
-     * @return ApiResponse<PostV1AiArticles200Response?>
+     * @return ApiResponse<PostAiArticles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiArticlesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiArticles200Response?> {
-        val localVariableConfig = postV1AiArticlesRequestConfig(body = body)
+    fun postAiArticlesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiArticles200Response?> {
+        val localVariableConfig = postAiArticlesRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiArticles200Response>(
+        return request<kotlin.Any, PostAiArticles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiArticles
+     * To obtain the request config of the operation postAiArticles
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiArticlesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiArticlesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10345,7 +10345,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a asset
      * Create one asset.
      * @param body 
-     * @return PostV1AiAssets200Response
+     * @return PostAiAssets200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -10354,11 +10354,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiAssets(body: kotlin.Any) : PostV1AiAssets200Response {
-        val localVarResponse = postV1AiAssetsWithHttpInfo(body = body)
+    fun postAiAssets(body: kotlin.Any) : PostAiAssets200Response {
+        val localVarResponse = postAiAssetsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiAssets200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiAssets200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -10377,27 +10377,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a asset
      * Create one asset.
      * @param body 
-     * @return ApiResponse<PostV1AiAssets200Response?>
+     * @return ApiResponse<PostAiAssets200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiAssetsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiAssets200Response?> {
-        val localVariableConfig = postV1AiAssetsRequestConfig(body = body)
+    fun postAiAssetsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiAssets200Response?> {
+        val localVariableConfig = postAiAssetsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiAssets200Response>(
+        return request<kotlin.Any, PostAiAssets200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiAssets
+     * To obtain the request config of the operation postAiAssets
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiAssetsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiAssetsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10430,8 +10430,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiAssetsByOwnerByNameScan(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiAssetsByOwnerByNameScanWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiAssetsByOwnerByNameScan(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiAssetsByOwnerByNameScanWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -10461,8 +10461,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiAssetsByOwnerByNameScanWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiAssetsByOwnerByNameScanRequestConfig(owner = owner, name = name, body = body)
+    fun postAiAssetsByOwnerByNameScanWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiAssetsByOwnerByNameScanRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -10470,14 +10470,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiAssetsByOwnerByNameScan
+     * To obtain the request config of the operation postAiAssetsByOwnerByNameScan
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiAssetsByOwnerByNameScanRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiAssetsByOwnerByNameScanRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10508,8 +10508,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiAssetsScan(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiAssetsScanWithHttpInfo(body = body)
+    fun postAiAssetsScan(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiAssetsScanWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -10537,8 +10537,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiAssetsScanWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiAssetsScanRequestConfig(body = body)
+    fun postAiAssetsScanWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiAssetsScanRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -10546,12 +10546,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiAssetsScan
+     * To obtain the request config of the operation postAiAssetsScan
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiAssetsScanRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiAssetsScanRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10573,7 +10573,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a chat
      * Create one chat.
      * @param body 
-     * @return PostV1AiChats200Response
+     * @return PostAiChats200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -10582,11 +10582,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiChats(body: kotlin.Any) : PostV1AiChats200Response {
-        val localVarResponse = postV1AiChatsWithHttpInfo(body = body)
+    fun postAiChats(body: kotlin.Any) : PostAiChats200Response {
+        val localVarResponse = postAiChatsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiChats200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiChats200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -10605,27 +10605,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a chat
      * Create one chat.
      * @param body 
-     * @return ApiResponse<PostV1AiChats200Response?>
+     * @return ApiResponse<PostAiChats200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiChatsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiChats200Response?> {
-        val localVariableConfig = postV1AiChatsRequestConfig(body = body)
+    fun postAiChatsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiChats200Response?> {
+        val localVariableConfig = postAiChatsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiChats200Response>(
+        return request<kotlin.Any, PostAiChats200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiChats
+     * To obtain the request config of the operation postAiChats
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiChatsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiChatsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10654,8 +10654,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiConnections() : Unit {
-        val localVarResponse = postV1AiConnectionsWithHttpInfo()
+    fun postAiConnections() : Unit {
+        val localVarResponse = postAiConnectionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -10681,8 +10681,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiConnectionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AiConnectionsRequestConfig()
+    fun postAiConnectionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAiConnectionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -10690,11 +10690,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiConnections
+     * To obtain the request config of the operation postAiConnections
      *
      * @return RequestConfig
      */
-    fun postV1AiConnectionsRequestConfig() : RequestConfig<Unit> {
+    fun postAiConnectionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10721,8 +10721,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiConnectionsByProvider() : Unit {
-        val localVarResponse = postV1AiConnectionsByProviderWithHttpInfo()
+    fun postAiConnectionsByProvider() : Unit {
+        val localVarResponse = postAiConnectionsByProviderWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -10748,8 +10748,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiConnectionsByProviderWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AiConnectionsByProviderRequestConfig()
+    fun postAiConnectionsByProviderWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAiConnectionsByProviderRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -10757,11 +10757,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiConnectionsByProvider
+     * To obtain the request config of the operation postAiConnectionsByProvider
      *
      * @return RequestConfig
      */
-    fun postV1AiConnectionsByProviderRequestConfig() : RequestConfig<Unit> {
+    fun postAiConnectionsByProviderRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10781,7 +10781,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a application
      * Create one application.
      * @param body 
-     * @return PostV1AiDeployments200Response
+     * @return PostAiDeployments200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -10790,11 +10790,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiDeployments(body: kotlin.Any) : PostV1AiDeployments200Response {
-        val localVarResponse = postV1AiDeploymentsWithHttpInfo(body = body)
+    fun postAiDeployments(body: kotlin.Any) : PostAiDeployments200Response {
+        val localVarResponse = postAiDeploymentsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiDeployments200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiDeployments200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -10813,27 +10813,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a application
      * Create one application.
      * @param body 
-     * @return ApiResponse<PostV1AiDeployments200Response?>
+     * @return ApiResponse<PostAiDeployments200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiDeploymentsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiDeployments200Response?> {
-        val localVariableConfig = postV1AiDeploymentsRequestConfig(body = body)
+    fun postAiDeploymentsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiDeployments200Response?> {
+        val localVariableConfig = postAiDeploymentsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiDeployments200Response>(
+        return request<kotlin.Any, PostAiDeployments200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiDeployments
+     * To obtain the request config of the operation postAiDeployments
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiDeploymentsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiDeploymentsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10866,8 +10866,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiDeploymentsByOwnerByNameDeploy(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiDeploymentsByOwnerByNameDeployWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiDeploymentsByOwnerByNameDeploy(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiDeploymentsByOwnerByNameDeployWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -10897,8 +10897,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiDeploymentsByOwnerByNameDeployWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiDeploymentsByOwnerByNameDeployRequestConfig(owner = owner, name = name, body = body)
+    fun postAiDeploymentsByOwnerByNameDeployWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiDeploymentsByOwnerByNameDeployRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -10906,14 +10906,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiDeploymentsByOwnerByNameDeploy
+     * To obtain the request config of the operation postAiDeploymentsByOwnerByNameDeploy
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiDeploymentsByOwnerByNameDeployRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiDeploymentsByOwnerByNameDeployRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -10946,8 +10946,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiDeploymentsByOwnerByNameUndeploy(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiDeploymentsByOwnerByNameUndeployWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiDeploymentsByOwnerByNameUndeploy(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiDeploymentsByOwnerByNameUndeployWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -10977,8 +10977,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiDeploymentsByOwnerByNameUndeployWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiDeploymentsByOwnerByNameUndeployRequestConfig(owner = owner, name = name, body = body)
+    fun postAiDeploymentsByOwnerByNameUndeployWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiDeploymentsByOwnerByNameUndeployRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -10986,14 +10986,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiDeploymentsByOwnerByNameUndeploy
+     * To obtain the request config of the operation postAiDeploymentsByOwnerByNameUndeploy
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiDeploymentsByOwnerByNameUndeployRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiDeploymentsByOwnerByNameUndeployRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11015,7 +11015,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a file
      * Create one file.
      * @param body 
-     * @return PostV1AiFiles200Response
+     * @return PostAiFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -11024,11 +11024,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiFiles(body: kotlin.Any) : PostV1AiFiles200Response {
-        val localVarResponse = postV1AiFilesWithHttpInfo(body = body)
+    fun postAiFiles(body: kotlin.Any) : PostAiFiles200Response {
+        val localVarResponse = postAiFilesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -11047,27 +11047,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a file
      * Create one file.
      * @param body 
-     * @return ApiResponse<PostV1AiFiles200Response?>
+     * @return ApiResponse<PostAiFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiFilesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiFiles200Response?> {
-        val localVariableConfig = postV1AiFilesRequestConfig(body = body)
+    fun postAiFilesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiFiles200Response?> {
+        val localVariableConfig = postAiFilesRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiFiles200Response>(
+        return request<kotlin.Any, PostAiFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiFiles
+     * To obtain the request config of the operation postAiFiles
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiFilesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiFilesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11098,8 +11098,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiFilesActivate(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiFilesActivateWithHttpInfo(body = body)
+    fun postAiFilesActivate(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiFilesActivateWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -11127,8 +11127,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiFilesActivateWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiFilesActivateRequestConfig(body = body)
+    fun postAiFilesActivateWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiFilesActivateRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -11136,12 +11136,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiFilesActivate
+     * To obtain the request config of the operation postAiFilesActivate
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiFilesActivateRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiFilesActivateRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11174,8 +11174,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiFilesByOwnerByNameVectors(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiFilesByOwnerByNameVectorsWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiFilesByOwnerByNameVectors(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiFilesByOwnerByNameVectorsWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -11205,8 +11205,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiFilesByOwnerByNameVectorsWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiFilesByOwnerByNameVectorsRequestConfig(owner = owner, name = name, body = body)
+    fun postAiFilesByOwnerByNameVectorsWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiFilesByOwnerByNameVectorsRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -11214,14 +11214,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiFilesByOwnerByNameVectors
+     * To obtain the request config of the operation postAiFilesByOwnerByNameVectors
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiFilesByOwnerByNameVectorsRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiFilesByOwnerByNameVectorsRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11252,8 +11252,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiFilesUpload(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiFilesUploadWithHttpInfo(body = body)
+    fun postAiFilesUpload(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiFilesUploadWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -11281,8 +11281,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiFilesUploadWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiFilesUploadRequestConfig(body = body)
+    fun postAiFilesUploadWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiFilesUploadRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -11290,12 +11290,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiFilesUpload
+     * To obtain the request config of the operation postAiFilesUpload
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiFilesUploadRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiFilesUploadRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11317,7 +11317,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a form
      * Create one form.
      * @param body 
-     * @return PostV1AiForms200Response
+     * @return PostAiForms200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -11326,11 +11326,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiForms(body: kotlin.Any) : PostV1AiForms200Response {
-        val localVarResponse = postV1AiFormsWithHttpInfo(body = body)
+    fun postAiForms(body: kotlin.Any) : PostAiForms200Response {
+        val localVarResponse = postAiFormsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiForms200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiForms200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -11349,27 +11349,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a form
      * Create one form.
      * @param body 
-     * @return ApiResponse<PostV1AiForms200Response?>
+     * @return ApiResponse<PostAiForms200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiFormsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiForms200Response?> {
-        val localVariableConfig = postV1AiFormsRequestConfig(body = body)
+    fun postAiFormsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiForms200Response?> {
+        val localVariableConfig = postAiFormsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiForms200Response>(
+        return request<kotlin.Any, PostAiForms200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiForms
+     * To obtain the request config of the operation postAiForms
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiFormsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiFormsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11391,7 +11391,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a graph
      * Create one graph.
      * @param body 
-     * @return PostV1AiGraphs200Response
+     * @return PostAiGraphs200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -11400,11 +11400,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiGraphs(body: kotlin.Any) : PostV1AiGraphs200Response {
-        val localVarResponse = postV1AiGraphsWithHttpInfo(body = body)
+    fun postAiGraphs(body: kotlin.Any) : PostAiGraphs200Response {
+        val localVarResponse = postAiGraphsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiGraphs200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiGraphs200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -11423,27 +11423,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a graph
      * Create one graph.
      * @param body 
-     * @return ApiResponse<PostV1AiGraphs200Response?>
+     * @return ApiResponse<PostAiGraphs200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiGraphsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiGraphs200Response?> {
-        val localVariableConfig = postV1AiGraphsRequestConfig(body = body)
+    fun postAiGraphsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiGraphs200Response?> {
+        val localVariableConfig = postAiGraphsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiGraphs200Response>(
+        return request<kotlin.Any, PostAiGraphs200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiGraphs
+     * To obtain the request config of the operation postAiGraphs
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiGraphsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiGraphsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11465,7 +11465,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a message
      * Create one message.
      * @param body 
-     * @return PostV1AiMessages200Response
+     * @return PostAiMessages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -11474,11 +11474,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiMessages(body: kotlin.Any) : PostV1AiMessages200Response {
-        val localVarResponse = postV1AiMessagesWithHttpInfo(body = body)
+    fun postAiMessages(body: kotlin.Any) : PostAiMessages200Response {
+        val localVarResponse = postAiMessagesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiMessages200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiMessages200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -11497,27 +11497,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a message
      * Create one message.
      * @param body 
-     * @return ApiResponse<PostV1AiMessages200Response?>
+     * @return ApiResponse<PostAiMessages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiMessagesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiMessages200Response?> {
-        val localVariableConfig = postV1AiMessagesRequestConfig(body = body)
+    fun postAiMessagesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiMessages200Response?> {
+        val localVariableConfig = postAiMessagesRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiMessages200Response>(
+        return request<kotlin.Any, PostAiMessages200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiMessages
+     * To obtain the request config of the operation postAiMessages
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiMessagesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiMessagesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11539,7 +11539,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a node
      * Create one node.
      * @param body 
-     * @return PostV1AiNodes200Response
+     * @return PostAiNodes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -11548,11 +11548,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiNodes(body: kotlin.Any) : PostV1AiNodes200Response {
-        val localVarResponse = postV1AiNodesWithHttpInfo(body = body)
+    fun postAiNodes(body: kotlin.Any) : PostAiNodes200Response {
+        val localVarResponse = postAiNodesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiNodes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiNodes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -11571,27 +11571,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a node
      * Create one node.
      * @param body 
-     * @return ApiResponse<PostV1AiNodes200Response?>
+     * @return ApiResponse<PostAiNodes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiNodesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiNodes200Response?> {
-        val localVariableConfig = postV1AiNodesRequestConfig(body = body)
+    fun postAiNodesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiNodes200Response?> {
+        val localVariableConfig = postAiNodesRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiNodes200Response>(
+        return request<kotlin.Any, PostAiNodes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiNodes
+     * To obtain the request config of the operation postAiNodes
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiNodesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiNodesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11624,8 +11624,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiNodesByOwnerByNameTunnel(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiNodesByOwnerByNameTunnelWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiNodesByOwnerByNameTunnel(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiNodesByOwnerByNameTunnelWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -11655,8 +11655,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiNodesByOwnerByNameTunnelWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiNodesByOwnerByNameTunnelRequestConfig(owner = owner, name = name, body = body)
+    fun postAiNodesByOwnerByNameTunnelWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiNodesByOwnerByNameTunnelRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -11664,14 +11664,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiNodesByOwnerByNameTunnel
+     * To obtain the request config of the operation postAiNodesByOwnerByNameTunnel
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiNodesByOwnerByNameTunnelRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiNodesByOwnerByNameTunnelRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11693,7 +11693,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a provider
      * Create one provider.
      * @param body 
-     * @return PostV1AiProviders200Response
+     * @return PostAiProviders200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -11702,11 +11702,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiProviders(body: kotlin.Any) : PostV1AiProviders200Response {
-        val localVarResponse = postV1AiProvidersWithHttpInfo(body = body)
+    fun postAiProviders(body: kotlin.Any) : PostAiProviders200Response {
+        val localVarResponse = postAiProvidersWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiProviders200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiProviders200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -11725,27 +11725,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a provider
      * Create one provider.
      * @param body 
-     * @return ApiResponse<PostV1AiProviders200Response?>
+     * @return ApiResponse<PostAiProviders200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiProvidersWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiProviders200Response?> {
-        val localVariableConfig = postV1AiProvidersRequestConfig(body = body)
+    fun postAiProvidersWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiProviders200Response?> {
+        val localVariableConfig = postAiProvidersRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiProviders200Response>(
+        return request<kotlin.Any, PostAiProviders200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiProviders
+     * To obtain the request config of the operation postAiProviders
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiProvidersRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiProvidersRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11776,8 +11776,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiProvidersMcpTools(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiProvidersMcpToolsWithHttpInfo(body = body)
+    fun postAiProvidersMcpTools(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiProvidersMcpToolsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -11805,8 +11805,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiProvidersMcpToolsWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiProvidersMcpToolsRequestConfig(body = body)
+    fun postAiProvidersMcpToolsWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiProvidersMcpToolsRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -11814,12 +11814,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiProvidersMcpTools
+     * To obtain the request config of the operation postAiProvidersMcpTools
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiProvidersMcpToolsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiProvidersMcpToolsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11841,7 +11841,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a record
      * Create one record.
      * @param body 
-     * @return PostV1AiRecords200Response
+     * @return PostAiRecords200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -11850,11 +11850,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiRecords(body: kotlin.Any) : PostV1AiRecords200Response {
-        val localVarResponse = postV1AiRecordsWithHttpInfo(body = body)
+    fun postAiRecords(body: kotlin.Any) : PostAiRecords200Response {
+        val localVarResponse = postAiRecordsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRecords200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRecords200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -11873,27 +11873,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a record
      * Create one record.
      * @param body 
-     * @return ApiResponse<PostV1AiRecords200Response?>
+     * @return ApiResponse<PostAiRecords200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiRecordsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiRecords200Response?> {
-        val localVariableConfig = postV1AiRecordsRequestConfig(body = body)
+    fun postAiRecordsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiRecords200Response?> {
+        val localVariableConfig = postAiRecordsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiRecords200Response>(
+        return request<kotlin.Any, PostAiRecords200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiRecords
+     * To obtain the request config of the operation postAiRecords
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiRecordsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiRecordsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11924,8 +11924,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiRecordsBatch(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiRecordsBatchWithHttpInfo(body = body)
+    fun postAiRecordsBatch(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiRecordsBatchWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -11953,8 +11953,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiRecordsBatchWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiRecordsBatchRequestConfig(body = body)
+    fun postAiRecordsBatchWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiRecordsBatchRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -11962,12 +11962,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiRecordsBatch
+     * To obtain the request config of the operation postAiRecordsBatch
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiRecordsBatchRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiRecordsBatchRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -11998,8 +11998,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiRecordsCommit(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiRecordsCommitWithHttpInfo(body = body)
+    fun postAiRecordsCommit(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiRecordsCommitWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -12027,8 +12027,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiRecordsCommitWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiRecordsCommitRequestConfig(body = body)
+    fun postAiRecordsCommitWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiRecordsCommitRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -12036,12 +12036,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiRecordsCommit
+     * To obtain the request config of the operation postAiRecordsCommit
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiRecordsCommitRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiRecordsCommitRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12072,8 +12072,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiRecordsCommitSecond(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiRecordsCommitSecondWithHttpInfo(body = body)
+    fun postAiRecordsCommitSecond(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiRecordsCommitSecondWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -12101,8 +12101,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiRecordsCommitSecondWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiRecordsCommitSecondRequestConfig(body = body)
+    fun postAiRecordsCommitSecondWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiRecordsCommitSecondRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -12110,12 +12110,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiRecordsCommitSecond
+     * To obtain the request config of the operation postAiRecordsCommitSecond
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiRecordsCommitSecondRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiRecordsCommitSecondRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12137,7 +12137,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a connection
      * Create one connection.
      * @param body 
-     * @return PostV1AiRemoteConnections200Response
+     * @return PostAiRemoteConnections200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -12146,11 +12146,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiRemoteConnections(body: kotlin.Any) : PostV1AiRemoteConnections200Response {
-        val localVarResponse = postV1AiRemoteConnectionsWithHttpInfo(body = body)
+    fun postAiRemoteConnections(body: kotlin.Any) : PostAiRemoteConnections200Response {
+        val localVarResponse = postAiRemoteConnectionsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRemoteConnections200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRemoteConnections200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -12169,27 +12169,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a connection
      * Create one connection.
      * @param body 
-     * @return ApiResponse<PostV1AiRemoteConnections200Response?>
+     * @return ApiResponse<PostAiRemoteConnections200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiRemoteConnectionsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiRemoteConnections200Response?> {
-        val localVariableConfig = postV1AiRemoteConnectionsRequestConfig(body = body)
+    fun postAiRemoteConnectionsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiRemoteConnections200Response?> {
+        val localVariableConfig = postAiRemoteConnectionsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiRemoteConnections200Response>(
+        return request<kotlin.Any, PostAiRemoteConnections200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiRemoteConnections
+     * To obtain the request config of the operation postAiRemoteConnections
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiRemoteConnectionsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiRemoteConnectionsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12222,8 +12222,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiRemoteConnectionsByOwnerByNameStart(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiRemoteConnectionsByOwnerByNameStartWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiRemoteConnectionsByOwnerByNameStart(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiRemoteConnectionsByOwnerByNameStartWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -12253,8 +12253,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiRemoteConnectionsByOwnerByNameStartWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiRemoteConnectionsByOwnerByNameStartRequestConfig(owner = owner, name = name, body = body)
+    fun postAiRemoteConnectionsByOwnerByNameStartWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiRemoteConnectionsByOwnerByNameStartRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -12262,14 +12262,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiRemoteConnectionsByOwnerByNameStart
+     * To obtain the request config of the operation postAiRemoteConnectionsByOwnerByNameStart
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiRemoteConnectionsByOwnerByNameStartRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiRemoteConnectionsByOwnerByNameStartRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12302,8 +12302,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiRemoteConnectionsByOwnerByNameStop(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiRemoteConnectionsByOwnerByNameStopWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiRemoteConnectionsByOwnerByNameStop(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiRemoteConnectionsByOwnerByNameStopWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -12333,8 +12333,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiRemoteConnectionsByOwnerByNameStopWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiRemoteConnectionsByOwnerByNameStopRequestConfig(owner = owner, name = name, body = body)
+    fun postAiRemoteConnectionsByOwnerByNameStopWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiRemoteConnectionsByOwnerByNameStopRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -12342,14 +12342,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiRemoteConnectionsByOwnerByNameStop
+     * To obtain the request config of the operation postAiRemoteConnectionsByOwnerByNameStop
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiRemoteConnectionsByOwnerByNameStopRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiRemoteConnectionsByOwnerByNameStopRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12371,7 +12371,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a model-route
      * Create one model-route.
      * @param body 
-     * @return PostV1AiRoutes200Response
+     * @return PostAiRoutes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -12380,11 +12380,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiRoutes(body: kotlin.Any) : PostV1AiRoutes200Response {
-        val localVarResponse = postV1AiRoutesWithHttpInfo(body = body)
+    fun postAiRoutes(body: kotlin.Any) : PostAiRoutes200Response {
+        val localVarResponse = postAiRoutesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRoutes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRoutes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -12403,27 +12403,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a model-route
      * Create one model-route.
      * @param body 
-     * @return ApiResponse<PostV1AiRoutes200Response?>
+     * @return ApiResponse<PostAiRoutes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiRoutesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiRoutes200Response?> {
-        val localVariableConfig = postV1AiRoutesRequestConfig(body = body)
+    fun postAiRoutesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiRoutes200Response?> {
+        val localVariableConfig = postAiRoutesRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiRoutes200Response>(
+        return request<kotlin.Any, PostAiRoutes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiRoutes
+     * To obtain the request config of the operation postAiRoutes
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiRoutesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiRoutesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12445,7 +12445,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a scale
      * Create one scale.
      * @param body 
-     * @return PostV1AiScales200Response
+     * @return PostAiScales200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -12454,11 +12454,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiScales(body: kotlin.Any) : PostV1AiScales200Response {
-        val localVarResponse = postV1AiScalesWithHttpInfo(body = body)
+    fun postAiScales(body: kotlin.Any) : PostAiScales200Response {
+        val localVarResponse = postAiScalesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScales200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScales200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -12477,27 +12477,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a scale
      * Create one scale.
      * @param body 
-     * @return ApiResponse<PostV1AiScales200Response?>
+     * @return ApiResponse<PostAiScales200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiScalesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiScales200Response?> {
-        val localVariableConfig = postV1AiScalesRequestConfig(body = body)
+    fun postAiScalesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiScales200Response?> {
+        val localVariableConfig = postAiScalesRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiScales200Response>(
+        return request<kotlin.Any, PostAiScales200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiScales
+     * To obtain the request config of the operation postAiScales
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiScalesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiScalesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12519,7 +12519,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a scan
      * Create one scan.
      * @param body 
-     * @return PostV1AiScans200Response
+     * @return PostAiScans200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -12528,11 +12528,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiScans(body: kotlin.Any) : PostV1AiScans200Response {
-        val localVarResponse = postV1AiScansWithHttpInfo(body = body)
+    fun postAiScans(body: kotlin.Any) : PostAiScans200Response {
+        val localVarResponse = postAiScansWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScans200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScans200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -12551,27 +12551,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a scan
      * Create one scan.
      * @param body 
-     * @return ApiResponse<PostV1AiScans200Response?>
+     * @return ApiResponse<PostAiScans200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiScansWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiScans200Response?> {
-        val localVariableConfig = postV1AiScansRequestConfig(body = body)
+    fun postAiScansWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiScans200Response?> {
+        val localVariableConfig = postAiScansRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiScans200Response>(
+        return request<kotlin.Any, PostAiScans200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiScans
+     * To obtain the request config of the operation postAiScans
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiScansRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiScansRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12602,8 +12602,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiSignin(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiSigninWithHttpInfo(body = body)
+    fun postAiSignin(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiSigninWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -12631,8 +12631,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiSigninWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiSigninRequestConfig(body = body)
+    fun postAiSigninWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiSigninRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -12640,12 +12640,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiSignin
+     * To obtain the request config of the operation postAiSignin
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiSigninRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiSigninRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12667,7 +12667,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a session
      * Create one session.
      * @param body 
-     * @return PostV1AiSigninSessions200Response
+     * @return PostAiSigninSessions200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -12676,11 +12676,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiSigninSessions(body: kotlin.Any) : PostV1AiSigninSessions200Response {
-        val localVarResponse = postV1AiSigninSessionsWithHttpInfo(body = body)
+    fun postAiSigninSessions(body: kotlin.Any) : PostAiSigninSessions200Response {
+        val localVarResponse = postAiSigninSessionsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiSigninSessions200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiSigninSessions200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -12699,27 +12699,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a session
      * Create one session.
      * @param body 
-     * @return ApiResponse<PostV1AiSigninSessions200Response?>
+     * @return ApiResponse<PostAiSigninSessions200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiSigninSessionsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiSigninSessions200Response?> {
-        val localVariableConfig = postV1AiSigninSessionsRequestConfig(body = body)
+    fun postAiSigninSessionsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiSigninSessions200Response?> {
+        val localVariableConfig = postAiSigninSessionsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiSigninSessions200Response>(
+        return request<kotlin.Any, PostAiSigninSessions200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiSigninSessions
+     * To obtain the request config of the operation postAiSigninSessions
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiSigninSessionsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiSigninSessionsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12750,8 +12750,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiSignout(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiSignoutWithHttpInfo(body = body)
+    fun postAiSignout(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiSignoutWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -12779,8 +12779,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiSignoutWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiSignoutRequestConfig(body = body)
+    fun postAiSignoutWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiSignoutRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -12788,12 +12788,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiSignout
+     * To obtain the request config of the operation postAiSignout
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiSignoutRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiSignoutRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12815,7 +12815,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a store
      * Create one store.
      * @param body 
-     * @return PostV1AiStores200Response
+     * @return PostAiStores200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -12824,11 +12824,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiStores(body: kotlin.Any) : PostV1AiStores200Response {
-        val localVarResponse = postV1AiStoresWithHttpInfo(body = body)
+    fun postAiStores(body: kotlin.Any) : PostAiStores200Response {
+        val localVarResponse = postAiStoresWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiStores200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiStores200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -12847,27 +12847,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a store
      * Create one store.
      * @param body 
-     * @return ApiResponse<PostV1AiStores200Response?>
+     * @return ApiResponse<PostAiStores200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiStoresWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiStores200Response?> {
-        val localVariableConfig = postV1AiStoresRequestConfig(body = body)
+    fun postAiStoresWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiStores200Response?> {
+        val localVariableConfig = postAiStoresRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiStores200Response>(
+        return request<kotlin.Any, PostAiStores200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiStores
+     * To obtain the request config of the operation postAiStores
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiStoresRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiStoresRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12900,8 +12900,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiStoresByOwnerByNameVectors(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiStoresByOwnerByNameVectorsWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiStoresByOwnerByNameVectors(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiStoresByOwnerByNameVectorsWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -12931,8 +12931,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiStoresByOwnerByNameVectorsWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiStoresByOwnerByNameVectorsRequestConfig(owner = owner, name = name, body = body)
+    fun postAiStoresByOwnerByNameVectorsWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiStoresByOwnerByNameVectorsRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -12940,14 +12940,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiStoresByOwnerByNameVectors
+     * To obtain the request config of the operation postAiStoresByOwnerByNameVectors
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiStoresByOwnerByNameVectorsRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiStoresByOwnerByNameVectorsRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -12969,7 +12969,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a task
      * Create one task.
      * @param body 
-     * @return PostV1AiTasks200Response
+     * @return PostAiTasks200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -12978,11 +12978,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiTasks(body: kotlin.Any) : PostV1AiTasks200Response {
-        val localVarResponse = postV1AiTasksWithHttpInfo(body = body)
+    fun postAiTasks(body: kotlin.Any) : PostAiTasks200Response {
+        val localVarResponse = postAiTasksWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTasks200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTasks200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13001,27 +13001,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a task
      * Create one task.
      * @param body 
-     * @return ApiResponse<PostV1AiTasks200Response?>
+     * @return ApiResponse<PostAiTasks200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiTasksWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiTasks200Response?> {
-        val localVariableConfig = postV1AiTasksRequestConfig(body = body)
+    fun postAiTasksWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiTasks200Response?> {
+        val localVariableConfig = postAiTasksRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiTasks200Response>(
+        return request<kotlin.Any, PostAiTasks200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiTasks
+     * To obtain the request config of the operation postAiTasks
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiTasksRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiTasksRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13054,8 +13054,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiTasksByOwnerByNameAnalyze(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiTasksByOwnerByNameAnalyzeWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiTasksByOwnerByNameAnalyze(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiTasksByOwnerByNameAnalyzeWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -13085,8 +13085,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiTasksByOwnerByNameAnalyzeWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiTasksByOwnerByNameAnalyzeRequestConfig(owner = owner, name = name, body = body)
+    fun postAiTasksByOwnerByNameAnalyzeWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiTasksByOwnerByNameAnalyzeRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -13094,14 +13094,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiTasksByOwnerByNameAnalyze
+     * To obtain the request config of the operation postAiTasksByOwnerByNameAnalyze
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiTasksByOwnerByNameAnalyzeRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiTasksByOwnerByNameAnalyzeRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13134,8 +13134,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiTasksByOwnerByNameDocument(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiTasksByOwnerByNameDocumentWithHttpInfo(owner = owner, name = name, body = body)
+    fun postAiTasksByOwnerByNameDocument(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiTasksByOwnerByNameDocumentWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -13165,8 +13165,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiTasksByOwnerByNameDocumentWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiTasksByOwnerByNameDocumentRequestConfig(owner = owner, name = name, body = body)
+    fun postAiTasksByOwnerByNameDocumentWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiTasksByOwnerByNameDocumentRequestConfig(owner = owner, name = name, body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -13174,14 +13174,14 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiTasksByOwnerByNameDocument
+     * To obtain the request config of the operation postAiTasksByOwnerByNameDocument
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiTasksByOwnerByNameDocumentRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiTasksByOwnerByNameDocumentRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13203,7 +13203,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a template
      * Create one template.
      * @param body 
-     * @return PostV1AiTemplates200Response
+     * @return PostAiTemplates200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13212,11 +13212,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiTemplates(body: kotlin.Any) : PostV1AiTemplates200Response {
-        val localVarResponse = postV1AiTemplatesWithHttpInfo(body = body)
+    fun postAiTemplates(body: kotlin.Any) : PostAiTemplates200Response {
+        val localVarResponse = postAiTemplatesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTemplates200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTemplates200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13235,27 +13235,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a template
      * Create one template.
      * @param body 
-     * @return ApiResponse<PostV1AiTemplates200Response?>
+     * @return ApiResponse<PostAiTemplates200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiTemplatesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiTemplates200Response?> {
-        val localVariableConfig = postV1AiTemplatesRequestConfig(body = body)
+    fun postAiTemplatesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiTemplates200Response?> {
+        val localVariableConfig = postAiTemplatesRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiTemplates200Response>(
+        return request<kotlin.Any, PostAiTemplates200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiTemplates
+     * To obtain the request config of the operation postAiTemplates
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiTemplatesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiTemplatesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13277,7 +13277,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a tree-file
      * Create one tree-file.
      * @param body 
-     * @return PostV1AiTreeFiles200Response
+     * @return PostAiTreeFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13286,11 +13286,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiTreeFiles(body: kotlin.Any) : PostV1AiTreeFiles200Response {
-        val localVarResponse = postV1AiTreeFilesWithHttpInfo(body = body)
+    fun postAiTreeFiles(body: kotlin.Any) : PostAiTreeFiles200Response {
+        val localVarResponse = postAiTreeFilesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTreeFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTreeFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13309,27 +13309,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a tree-file
      * Create one tree-file.
      * @param body 
-     * @return ApiResponse<PostV1AiTreeFiles200Response?>
+     * @return ApiResponse<PostAiTreeFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiTreeFilesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiTreeFiles200Response?> {
-        val localVariableConfig = postV1AiTreeFilesRequestConfig(body = body)
+    fun postAiTreeFilesWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiTreeFiles200Response?> {
+        val localVariableConfig = postAiTreeFilesRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiTreeFiles200Response>(
+        return request<kotlin.Any, PostAiTreeFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiTreeFiles
+     * To obtain the request config of the operation postAiTreeFiles
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiTreeFilesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiTreeFilesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13351,7 +13351,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a vector
      * Create one vector.
      * @param body 
-     * @return PostV1AiVectors200Response
+     * @return PostAiVectors200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13360,11 +13360,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiVectors(body: kotlin.Any) : PostV1AiVectors200Response {
-        val localVarResponse = postV1AiVectorsWithHttpInfo(body = body)
+    fun postAiVectors(body: kotlin.Any) : PostAiVectors200Response {
+        val localVarResponse = postAiVectorsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVectors200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVectors200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13383,27 +13383,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a vector
      * Create one vector.
      * @param body 
-     * @return ApiResponse<PostV1AiVectors200Response?>
+     * @return ApiResponse<PostAiVectors200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiVectorsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiVectors200Response?> {
-        val localVariableConfig = postV1AiVectorsRequestConfig(body = body)
+    fun postAiVectorsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiVectors200Response?> {
+        val localVariableConfig = postAiVectorsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiVectors200Response>(
+        return request<kotlin.Any, PostAiVectors200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiVectors
+     * To obtain the request config of the operation postAiVectors
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiVectorsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiVectorsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13425,7 +13425,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a video
      * Create one video.
      * @param body 
-     * @return PostV1AiVideos200Response
+     * @return PostAiVideos200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13434,11 +13434,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiVideos(body: kotlin.Any) : PostV1AiVideos200Response {
-        val localVarResponse = postV1AiVideosWithHttpInfo(body = body)
+    fun postAiVideos(body: kotlin.Any) : PostAiVideos200Response {
+        val localVarResponse = postAiVideosWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVideos200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVideos200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13457,27 +13457,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a video
      * Create one video.
      * @param body 
-     * @return ApiResponse<PostV1AiVideos200Response?>
+     * @return ApiResponse<PostAiVideos200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiVideosWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiVideos200Response?> {
-        val localVariableConfig = postV1AiVideosRequestConfig(body = body)
+    fun postAiVideosWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiVideos200Response?> {
+        val localVariableConfig = postAiVideosRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiVideos200Response>(
+        return request<kotlin.Any, PostAiVideos200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiVideos
+     * To obtain the request config of the operation postAiVideos
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiVideosRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiVideosRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13508,8 +13508,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiVideosUpload(body: kotlin.Any) : Envelope {
-        val localVarResponse = postV1AiVideosUploadWithHttpInfo(body = body)
+    fun postAiVideosUpload(body: kotlin.Any) : Envelope {
+        val localVarResponse = postAiVideosUploadWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -13537,8 +13537,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiVideosUploadWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = postV1AiVideosUploadRequestConfig(body = body)
+    fun postAiVideosUploadWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = postAiVideosUploadRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -13546,12 +13546,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1AiVideosUpload
+     * To obtain the request config of the operation postAiVideosUpload
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiVideosUploadRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiVideosUploadRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13573,7 +13573,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a workflow
      * Create one workflow.
      * @param body 
-     * @return PostV1AiWorkflows200Response
+     * @return PostAiWorkflows200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13582,11 +13582,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AiWorkflows(body: kotlin.Any) : PostV1AiWorkflows200Response {
-        val localVarResponse = postV1AiWorkflowsWithHttpInfo(body = body)
+    fun postAiWorkflows(body: kotlin.Any) : PostAiWorkflows200Response {
+        val localVarResponse = postAiWorkflowsWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiWorkflows200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiWorkflows200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13605,27 +13605,27 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Create a workflow
      * Create one workflow.
      * @param body 
-     * @return ApiResponse<PostV1AiWorkflows200Response?>
+     * @return ApiResponse<PostAiWorkflows200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AiWorkflowsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostV1AiWorkflows200Response?> {
-        val localVariableConfig = postV1AiWorkflowsRequestConfig(body = body)
+    fun postAiWorkflowsWithHttpInfo(body: kotlin.Any) : ApiResponse<PostAiWorkflows200Response?> {
+        val localVariableConfig = postAiWorkflowsRequestConfig(body = body)
 
-        return request<kotlin.Any, PostV1AiWorkflows200Response>(
+        return request<kotlin.Any, PostAiWorkflows200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1AiWorkflows
+     * To obtain the request config of the operation postAiWorkflows
      *
      * @param body 
      * @return RequestConfig
      */
-    fun postV1AiWorkflowsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun postAiWorkflowsRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13649,7 +13649,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiArticles200Response
+     * @return PostAiArticles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13658,11 +13658,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiArticlesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiArticles200Response {
-        val localVarResponse = putV1AiArticlesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiArticlesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiArticles200Response {
+        val localVarResponse = putAiArticlesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiArticles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiArticles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13683,29 +13683,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiArticles200Response?>
+     * @return ApiResponse<PostAiArticles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiArticlesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiArticles200Response?> {
-        val localVariableConfig = putV1AiArticlesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiArticlesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiArticles200Response?> {
+        val localVariableConfig = putAiArticlesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiArticles200Response>(
+        return request<kotlin.Any, PostAiArticles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiArticlesByOwnerByName
+     * To obtain the request config of the operation putAiArticlesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiArticlesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiArticlesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13729,7 +13729,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiAssets200Response
+     * @return PostAiAssets200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13738,11 +13738,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiAssetsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiAssets200Response {
-        val localVarResponse = putV1AiAssetsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiAssetsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiAssets200Response {
+        val localVarResponse = putAiAssetsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiAssets200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiAssets200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13763,29 +13763,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiAssets200Response?>
+     * @return ApiResponse<PostAiAssets200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiAssetsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiAssets200Response?> {
-        val localVariableConfig = putV1AiAssetsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiAssetsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiAssets200Response?> {
+        val localVariableConfig = putAiAssetsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiAssets200Response>(
+        return request<kotlin.Any, PostAiAssets200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiAssetsByOwnerByName
+     * To obtain the request config of the operation putAiAssetsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiAssetsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiAssetsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13809,7 +13809,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiChats200Response
+     * @return PostAiChats200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13818,11 +13818,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiChatsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiChats200Response {
-        val localVarResponse = putV1AiChatsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiChatsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiChats200Response {
+        val localVarResponse = putAiChatsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiChats200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiChats200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13843,29 +13843,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiChats200Response?>
+     * @return ApiResponse<PostAiChats200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiChatsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiChats200Response?> {
-        val localVariableConfig = putV1AiChatsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiChatsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiChats200Response?> {
+        val localVariableConfig = putAiChatsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiChats200Response>(
+        return request<kotlin.Any, PostAiChats200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiChatsByOwnerByName
+     * To obtain the request config of the operation putAiChatsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiChatsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiChatsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13889,7 +13889,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiDeployments200Response
+     * @return PostAiDeployments200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13898,11 +13898,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiDeploymentsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiDeployments200Response {
-        val localVarResponse = putV1AiDeploymentsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiDeploymentsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiDeployments200Response {
+        val localVarResponse = putAiDeploymentsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiDeployments200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiDeployments200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13923,29 +13923,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiDeployments200Response?>
+     * @return ApiResponse<PostAiDeployments200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiDeploymentsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiDeployments200Response?> {
-        val localVariableConfig = putV1AiDeploymentsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiDeploymentsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiDeployments200Response?> {
+        val localVariableConfig = putAiDeploymentsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiDeployments200Response>(
+        return request<kotlin.Any, PostAiDeployments200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiDeploymentsByOwnerByName
+     * To obtain the request config of the operation putAiDeploymentsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiDeploymentsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiDeploymentsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13969,7 +13969,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiFiles200Response
+     * @return PostAiFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13978,11 +13978,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiFilesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiFiles200Response {
-        val localVarResponse = putV1AiFilesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiFilesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiFiles200Response {
+        val localVarResponse = putAiFilesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14003,29 +14003,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiFiles200Response?>
+     * @return ApiResponse<PostAiFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiFiles200Response?> {
-        val localVariableConfig = putV1AiFilesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiFiles200Response?> {
+        val localVariableConfig = putAiFilesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiFiles200Response>(
+        return request<kotlin.Any, PostAiFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiFilesByOwnerByName
+     * To obtain the request config of the operation putAiFilesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14049,7 +14049,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiForms200Response
+     * @return PostAiForms200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14058,11 +14058,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiFormsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiForms200Response {
-        val localVarResponse = putV1AiFormsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiFormsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiForms200Response {
+        val localVarResponse = putAiFormsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiForms200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiForms200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14083,29 +14083,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiForms200Response?>
+     * @return ApiResponse<PostAiForms200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiFormsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiForms200Response?> {
-        val localVariableConfig = putV1AiFormsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiFormsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiForms200Response?> {
+        val localVariableConfig = putAiFormsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiForms200Response>(
+        return request<kotlin.Any, PostAiForms200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiFormsByOwnerByName
+     * To obtain the request config of the operation putAiFormsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiFormsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiFormsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14129,7 +14129,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiGraphs200Response
+     * @return PostAiGraphs200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14138,11 +14138,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiGraphsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiGraphs200Response {
-        val localVarResponse = putV1AiGraphsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiGraphsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiGraphs200Response {
+        val localVarResponse = putAiGraphsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiGraphs200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiGraphs200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14163,29 +14163,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiGraphs200Response?>
+     * @return ApiResponse<PostAiGraphs200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiGraphsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiGraphs200Response?> {
-        val localVariableConfig = putV1AiGraphsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiGraphsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiGraphs200Response?> {
+        val localVariableConfig = putAiGraphsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiGraphs200Response>(
+        return request<kotlin.Any, PostAiGraphs200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiGraphsByOwnerByName
+     * To obtain the request config of the operation putAiGraphsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiGraphsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiGraphsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14209,7 +14209,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiMessages200Response
+     * @return PostAiMessages200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14218,11 +14218,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiMessagesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiMessages200Response {
-        val localVarResponse = putV1AiMessagesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiMessagesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiMessages200Response {
+        val localVarResponse = putAiMessagesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiMessages200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiMessages200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14243,29 +14243,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiMessages200Response?>
+     * @return ApiResponse<PostAiMessages200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiMessagesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiMessages200Response?> {
-        val localVariableConfig = putV1AiMessagesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiMessagesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiMessages200Response?> {
+        val localVariableConfig = putAiMessagesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiMessages200Response>(
+        return request<kotlin.Any, PostAiMessages200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiMessagesByOwnerByName
+     * To obtain the request config of the operation putAiMessagesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiMessagesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiMessagesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14289,7 +14289,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiNodes200Response
+     * @return PostAiNodes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14298,11 +14298,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiNodesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiNodes200Response {
-        val localVarResponse = putV1AiNodesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiNodesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiNodes200Response {
+        val localVarResponse = putAiNodesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiNodes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiNodes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14323,29 +14323,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiNodes200Response?>
+     * @return ApiResponse<PostAiNodes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiNodesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiNodes200Response?> {
-        val localVariableConfig = putV1AiNodesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiNodesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiNodes200Response?> {
+        val localVariableConfig = putAiNodesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiNodes200Response>(
+        return request<kotlin.Any, PostAiNodes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiNodesByOwnerByName
+     * To obtain the request config of the operation putAiNodesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiNodesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiNodesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14376,8 +14376,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiPreferences(body: kotlin.Any) : Envelope {
-        val localVarResponse = putV1AiPreferencesWithHttpInfo(body = body)
+    fun putAiPreferences(body: kotlin.Any) : Envelope {
+        val localVarResponse = putAiPreferencesWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -14405,8 +14405,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiPreferencesWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = putV1AiPreferencesRequestConfig(body = body)
+    fun putAiPreferencesWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = putAiPreferencesRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -14414,12 +14414,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation putV1AiPreferences
+     * To obtain the request config of the operation putAiPreferences
      *
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiPreferencesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiPreferencesRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14443,7 +14443,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiProviders200Response
+     * @return PostAiProviders200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14452,11 +14452,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiProvidersByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiProviders200Response {
-        val localVarResponse = putV1AiProvidersByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiProvidersByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiProviders200Response {
+        val localVarResponse = putAiProvidersByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiProviders200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiProviders200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14477,29 +14477,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiProviders200Response?>
+     * @return ApiResponse<PostAiProviders200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiProvidersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiProviders200Response?> {
-        val localVariableConfig = putV1AiProvidersByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiProvidersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiProviders200Response?> {
+        val localVariableConfig = putAiProvidersByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiProviders200Response>(
+        return request<kotlin.Any, PostAiProviders200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiProvidersByOwnerByName
+     * To obtain the request config of the operation putAiProvidersByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiProvidersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiProvidersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14523,7 +14523,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiRecords200Response
+     * @return PostAiRecords200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14532,11 +14532,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiRecordsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiRecords200Response {
-        val localVarResponse = putV1AiRecordsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiRecordsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiRecords200Response {
+        val localVarResponse = putAiRecordsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRecords200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRecords200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14557,29 +14557,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiRecords200Response?>
+     * @return ApiResponse<PostAiRecords200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiRecordsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiRecords200Response?> {
-        val localVariableConfig = putV1AiRecordsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiRecordsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiRecords200Response?> {
+        val localVariableConfig = putAiRecordsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiRecords200Response>(
+        return request<kotlin.Any, PostAiRecords200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiRecordsByOwnerByName
+     * To obtain the request config of the operation putAiRecordsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiRecordsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiRecordsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14603,7 +14603,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiRemoteConnections200Response
+     * @return PostAiRemoteConnections200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14612,11 +14612,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiRemoteConnectionsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiRemoteConnections200Response {
-        val localVarResponse = putV1AiRemoteConnectionsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiRemoteConnectionsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiRemoteConnections200Response {
+        val localVarResponse = putAiRemoteConnectionsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRemoteConnections200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRemoteConnections200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14637,29 +14637,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiRemoteConnections200Response?>
+     * @return ApiResponse<PostAiRemoteConnections200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiRemoteConnectionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiRemoteConnections200Response?> {
-        val localVariableConfig = putV1AiRemoteConnectionsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiRemoteConnectionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiRemoteConnections200Response?> {
+        val localVariableConfig = putAiRemoteConnectionsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiRemoteConnections200Response>(
+        return request<kotlin.Any, PostAiRemoteConnections200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiRemoteConnectionsByOwnerByName
+     * To obtain the request config of the operation putAiRemoteConnectionsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiRemoteConnectionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiRemoteConnectionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14683,7 +14683,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiRoutes200Response
+     * @return PostAiRoutes200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14692,11 +14692,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiRoutesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiRoutes200Response {
-        val localVarResponse = putV1AiRoutesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiRoutesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiRoutes200Response {
+        val localVarResponse = putAiRoutesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiRoutes200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiRoutes200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14717,29 +14717,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiRoutes200Response?>
+     * @return ApiResponse<PostAiRoutes200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiRoutesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiRoutes200Response?> {
-        val localVariableConfig = putV1AiRoutesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiRoutesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiRoutes200Response?> {
+        val localVariableConfig = putAiRoutesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiRoutes200Response>(
+        return request<kotlin.Any, PostAiRoutes200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiRoutesByOwnerByName
+     * To obtain the request config of the operation putAiRoutesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiRoutesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiRoutesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14763,7 +14763,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiScales200Response
+     * @return PostAiScales200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14772,11 +14772,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiScalesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiScales200Response {
-        val localVarResponse = putV1AiScalesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiScalesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiScales200Response {
+        val localVarResponse = putAiScalesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScales200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScales200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14797,29 +14797,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiScales200Response?>
+     * @return ApiResponse<PostAiScales200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiScalesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiScales200Response?> {
-        val localVariableConfig = putV1AiScalesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiScalesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiScales200Response?> {
+        val localVariableConfig = putAiScalesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiScales200Response>(
+        return request<kotlin.Any, PostAiScales200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiScalesByOwnerByName
+     * To obtain the request config of the operation putAiScalesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiScalesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiScalesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14843,7 +14843,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiScans200Response
+     * @return PostAiScans200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14852,11 +14852,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiScansByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiScans200Response {
-        val localVarResponse = putV1AiScansByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiScansByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiScans200Response {
+        val localVarResponse = putAiScansByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiScans200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiScans200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14877,29 +14877,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiScans200Response?>
+     * @return ApiResponse<PostAiScans200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiScansByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiScans200Response?> {
-        val localVariableConfig = putV1AiScansByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiScansByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiScans200Response?> {
+        val localVariableConfig = putAiScansByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiScans200Response>(
+        return request<kotlin.Any, PostAiScans200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiScansByOwnerByName
+     * To obtain the request config of the operation putAiScansByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiScansByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiScansByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -14923,7 +14923,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiSigninSessions200Response
+     * @return PostAiSigninSessions200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -14932,11 +14932,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiSigninSessionsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiSigninSessions200Response {
-        val localVarResponse = putV1AiSigninSessionsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiSigninSessionsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiSigninSessions200Response {
+        val localVarResponse = putAiSigninSessionsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiSigninSessions200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiSigninSessions200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -14957,29 +14957,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiSigninSessions200Response?>
+     * @return ApiResponse<PostAiSigninSessions200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiSigninSessionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiSigninSessions200Response?> {
-        val localVariableConfig = putV1AiSigninSessionsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiSigninSessionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiSigninSessions200Response?> {
+        val localVariableConfig = putAiSigninSessionsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiSigninSessions200Response>(
+        return request<kotlin.Any, PostAiSigninSessions200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiSigninSessionsByOwnerByName
+     * To obtain the request config of the operation putAiSigninSessionsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiSigninSessionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiSigninSessionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -15003,7 +15003,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiStores200Response
+     * @return PostAiStores200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -15012,11 +15012,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiStoresByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiStores200Response {
-        val localVarResponse = putV1AiStoresByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiStoresByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiStores200Response {
+        val localVarResponse = putAiStoresByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiStores200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiStores200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -15037,29 +15037,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiStores200Response?>
+     * @return ApiResponse<PostAiStores200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiStoresByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiStores200Response?> {
-        val localVariableConfig = putV1AiStoresByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiStoresByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiStores200Response?> {
+        val localVariableConfig = putAiStoresByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiStores200Response>(
+        return request<kotlin.Any, PostAiStores200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiStoresByOwnerByName
+     * To obtain the request config of the operation putAiStoresByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiStoresByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiStoresByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -15083,7 +15083,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiTasks200Response
+     * @return PostAiTasks200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -15092,11 +15092,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiTasksByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiTasks200Response {
-        val localVarResponse = putV1AiTasksByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiTasksByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiTasks200Response {
+        val localVarResponse = putAiTasksByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTasks200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTasks200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -15117,29 +15117,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiTasks200Response?>
+     * @return ApiResponse<PostAiTasks200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiTasksByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiTasks200Response?> {
-        val localVariableConfig = putV1AiTasksByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiTasksByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiTasks200Response?> {
+        val localVariableConfig = putAiTasksByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiTasks200Response>(
+        return request<kotlin.Any, PostAiTasks200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiTasksByOwnerByName
+     * To obtain the request config of the operation putAiTasksByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiTasksByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiTasksByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -15163,7 +15163,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiTemplates200Response
+     * @return PostAiTemplates200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -15172,11 +15172,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiTemplatesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiTemplates200Response {
-        val localVarResponse = putV1AiTemplatesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiTemplatesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiTemplates200Response {
+        val localVarResponse = putAiTemplatesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTemplates200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTemplates200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -15197,29 +15197,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiTemplates200Response?>
+     * @return ApiResponse<PostAiTemplates200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiTemplatesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiTemplates200Response?> {
-        val localVariableConfig = putV1AiTemplatesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiTemplatesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiTemplates200Response?> {
+        val localVariableConfig = putAiTemplatesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiTemplates200Response>(
+        return request<kotlin.Any, PostAiTemplates200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiTemplatesByOwnerByName
+     * To obtain the request config of the operation putAiTemplatesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiTemplatesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiTemplatesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -15250,8 +15250,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiTrainingContribution(body: kotlin.Any) : Envelope {
-        val localVarResponse = putV1AiTrainingContributionWithHttpInfo(body = body)
+    fun putAiTrainingContribution(body: kotlin.Any) : Envelope {
+        val localVarResponse = putAiTrainingContributionWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Envelope
@@ -15279,8 +15279,8 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiTrainingContributionWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
-        val localVariableConfig = putV1AiTrainingContributionRequestConfig(body = body)
+    fun putAiTrainingContributionWithHttpInfo(body: kotlin.Any) : ApiResponse<Envelope?> {
+        val localVariableConfig = putAiTrainingContributionRequestConfig(body = body)
 
         return request<kotlin.Any, Envelope>(
             localVariableConfig
@@ -15288,12 +15288,12 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation putV1AiTrainingContribution
+     * To obtain the request config of the operation putAiTrainingContribution
      *
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiTrainingContributionRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiTrainingContributionRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -15317,7 +15317,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiTreeFiles200Response
+     * @return PostAiTreeFiles200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -15326,11 +15326,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiTreeFilesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiTreeFiles200Response {
-        val localVarResponse = putV1AiTreeFilesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiTreeFilesByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiTreeFiles200Response {
+        val localVarResponse = putAiTreeFilesByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiTreeFiles200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiTreeFiles200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -15351,29 +15351,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiTreeFiles200Response?>
+     * @return ApiResponse<PostAiTreeFiles200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiTreeFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiTreeFiles200Response?> {
-        val localVariableConfig = putV1AiTreeFilesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiTreeFilesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiTreeFiles200Response?> {
+        val localVariableConfig = putAiTreeFilesByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiTreeFiles200Response>(
+        return request<kotlin.Any, PostAiTreeFiles200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiTreeFilesByOwnerByName
+     * To obtain the request config of the operation putAiTreeFilesByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiTreeFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiTreeFilesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -15397,7 +15397,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiVectors200Response
+     * @return PostAiVectors200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -15406,11 +15406,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiVectorsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiVectors200Response {
-        val localVarResponse = putV1AiVectorsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiVectorsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiVectors200Response {
+        val localVarResponse = putAiVectorsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVectors200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVectors200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -15431,29 +15431,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiVectors200Response?>
+     * @return ApiResponse<PostAiVectors200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiVectorsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiVectors200Response?> {
-        val localVariableConfig = putV1AiVectorsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiVectorsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiVectors200Response?> {
+        val localVariableConfig = putAiVectorsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiVectors200Response>(
+        return request<kotlin.Any, PostAiVectors200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiVectorsByOwnerByName
+     * To obtain the request config of the operation putAiVectorsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiVectorsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiVectorsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -15477,7 +15477,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiVideos200Response
+     * @return PostAiVideos200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -15486,11 +15486,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiVideosByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiVideos200Response {
-        val localVarResponse = putV1AiVideosByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiVideosByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiVideos200Response {
+        val localVarResponse = putAiVideosByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiVideos200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiVideos200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -15511,29 +15511,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiVideos200Response?>
+     * @return ApiResponse<PostAiVideos200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiVideosByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiVideos200Response?> {
-        val localVariableConfig = putV1AiVideosByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiVideosByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiVideos200Response?> {
+        val localVariableConfig = putAiVideosByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiVideos200Response>(
+        return request<kotlin.Any, PostAiVideos200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiVideosByOwnerByName
+     * To obtain the request config of the operation putAiVideosByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiVideosByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiVideosByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -15557,7 +15557,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return PostV1AiWorkflows200Response
+     * @return PostAiWorkflows200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -15566,11 +15566,11 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1AiWorkflowsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostV1AiWorkflows200Response {
-        val localVarResponse = putV1AiWorkflowsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
+    fun putAiWorkflowsByOwnerByName(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : PostAiWorkflows200Response {
+        val localVarResponse = putAiWorkflowsByOwnerByNameWithHttpInfo(owner = owner, name = name, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostV1AiWorkflows200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostAiWorkflows200Response
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -15591,29 +15591,29 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
-     * @return ApiResponse<PostV1AiWorkflows200Response?>
+     * @return ApiResponse<PostAiWorkflows200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1AiWorkflowsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostV1AiWorkflows200Response?> {
-        val localVariableConfig = putV1AiWorkflowsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
+    fun putAiWorkflowsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<PostAiWorkflows200Response?> {
+        val localVariableConfig = putAiWorkflowsByOwnerByNameRequestConfig(owner = owner, name = name, body = body)
 
-        return request<kotlin.Any, PostV1AiWorkflows200Response>(
+        return request<kotlin.Any, PostAiWorkflows200Response>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation putV1AiWorkflowsByOwnerByName
+     * To obtain the request config of the operation putAiWorkflowsByOwnerByName
      *
      * @param owner Owning organization.
      * @param name Resource name, unique within the owner.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1AiWorkflowsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putAiWorkflowsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

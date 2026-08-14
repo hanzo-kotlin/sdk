@@ -67,8 +67,8 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Audit(sub: kotlin.String? = null, action: kotlin.String? = null, resource: kotlin.String? = null, resourceId: kotlin.String? = null, result: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, pageSize: kotlin.String? = null, p: kotlin.String? = null) : TrailPage {
-        val localVarResponse = getV1AuditWithHttpInfo(sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
+    fun getAudit(sub: kotlin.String? = null, action: kotlin.String? = null, resource: kotlin.String? = null, resourceId: kotlin.String? = null, result: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, pageSize: kotlin.String? = null, p: kotlin.String? = null) : TrailPage {
+        val localVarResponse = getAuditWithHttpInfo(sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TrailPage
@@ -104,8 +104,8 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AuditWithHttpInfo(sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : ApiResponse<TrailPage?> {
-        val localVariableConfig = getV1AuditRequestConfig(sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
+    fun getAuditWithHttpInfo(sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : ApiResponse<TrailPage?> {
+        val localVariableConfig = getAuditRequestConfig(sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
 
         return request<Unit, TrailPage>(
             localVariableConfig
@@ -113,7 +113,7 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Audit
+     * To obtain the request config of the operation getAudit
      *
      * @param sub Sub narrows the trail to one actor — the validated subject that made the request. Blank means every actor in the org. (optional)
      * @param action Action narrows it to one action name, e.g. \&quot;machine.create\&quot;. (optional)
@@ -126,7 +126,7 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param p Page is the 1-based page number, driving the offset. Anything below 2 reads the first page. (optional)
      * @return RequestConfig
      */
-    fun getV1AuditRequestConfig(sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : RequestConfig<Unit> {
+    fun getAuditRequestConfig(sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {

@@ -58,8 +58,8 @@ class BaseApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BaseHealth() : BaseHealth {
-        val localVarResponse = getV1BaseHealthWithHttpInfo()
+    fun getBaseHealth() : BaseHealth {
+        val localVarResponse = getBaseHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BaseHealth
@@ -86,8 +86,8 @@ class BaseApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BaseHealthWithHttpInfo() : ApiResponse<BaseHealth?> {
-        val localVariableConfig = getV1BaseHealthRequestConfig()
+    fun getBaseHealthWithHttpInfo() : ApiResponse<BaseHealth?> {
+        val localVariableConfig = getBaseHealthRequestConfig()
 
         return request<Unit, BaseHealth>(
             localVariableConfig
@@ -95,11 +95,11 @@ class BaseApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1BaseHealth
+     * To obtain the request config of the operation getBaseHealth
      *
      * @return RequestConfig
      */
-    fun getV1BaseHealthRequestConfig() : RequestConfig<Unit> {
+    fun getBaseHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

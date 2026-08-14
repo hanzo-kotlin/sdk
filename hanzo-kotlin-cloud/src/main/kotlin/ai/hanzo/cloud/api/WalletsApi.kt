@@ -70,8 +70,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Wallets(project: kotlin.String? = null, agent: kotlin.String? = null, account: kotlin.String? = null) : WalletList {
-        val localVarResponse = getV1WalletsWithHttpInfo(project = project, agent = agent, account = account)
+    fun getWallets(project: kotlin.String? = null, agent: kotlin.String? = null, account: kotlin.String? = null) : WalletList {
+        val localVarResponse = getWalletsWithHttpInfo(project = project, agent = agent, account = account)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as WalletList
@@ -101,8 +101,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WalletsWithHttpInfo(project: kotlin.String?, agent: kotlin.String?, account: kotlin.String?) : ApiResponse<WalletList?> {
-        val localVariableConfig = getV1WalletsRequestConfig(project = project, agent = agent, account = account)
+    fun getWalletsWithHttpInfo(project: kotlin.String?, agent: kotlin.String?, account: kotlin.String?) : ApiResponse<WalletList?> {
+        val localVariableConfig = getWalletsRequestConfig(project = project, agent = agent, account = account)
 
         return request<Unit, WalletList>(
             localVariableConfig
@@ -110,14 +110,14 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Wallets
+     * To obtain the request config of the operation getWallets
      *
      * @param project Project narrows to wallets scoped to one project. Must be a url-safe segment. (optional)
      * @param agent Agent narrows to wallets scoped to one agent. Must be a url-safe segment. (optional)
      * @param account Account narrows to wallets under one account id. Must be a url-safe segment. (optional)
      * @return RequestConfig
      */
-    fun getV1WalletsRequestConfig(project: kotlin.String?, agent: kotlin.String?, account: kotlin.String?) : RequestConfig<Unit> {
+    fun getWalletsRequestConfig(project: kotlin.String?, agent: kotlin.String?, account: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -157,8 +157,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WalletsAccounts() : AccountList {
-        val localVarResponse = getV1WalletsAccountsWithHttpInfo()
+    fun getWalletsAccounts() : AccountList {
+        val localVarResponse = getWalletsAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccountList
@@ -185,8 +185,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WalletsAccountsWithHttpInfo() : ApiResponse<AccountList?> {
-        val localVariableConfig = getV1WalletsAccountsRequestConfig()
+    fun getWalletsAccountsWithHttpInfo() : ApiResponse<AccountList?> {
+        val localVariableConfig = getWalletsAccountsRequestConfig()
 
         return request<Unit, AccountList>(
             localVariableConfig
@@ -194,11 +194,11 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1WalletsAccounts
+     * To obtain the request config of the operation getWalletsAccounts
      *
      * @return RequestConfig
      */
-    fun getV1WalletsAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getWalletsAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -228,8 +228,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WalletsById(id: kotlin.String) : Wallet {
-        val localVarResponse = getV1WalletsByIdWithHttpInfo(id = id)
+    fun getWalletsById(id: kotlin.String) : Wallet {
+        val localVarResponse = getWalletsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Wallet
@@ -257,8 +257,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WalletsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Wallet?> {
-        val localVariableConfig = getV1WalletsByIdRequestConfig(id = id)
+    fun getWalletsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Wallet?> {
+        val localVariableConfig = getWalletsByIdRequestConfig(id = id)
 
         return request<Unit, Wallet>(
             localVariableConfig
@@ -266,12 +266,12 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1WalletsById
+     * To obtain the request config of the operation getWalletsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1WalletsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getWalletsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -301,8 +301,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Wallets(createWalletIn: CreateWalletIn) : Wallet {
-        val localVarResponse = postV1WalletsWithHttpInfo(createWalletIn = createWalletIn)
+    fun postWallets(createWalletIn: CreateWalletIn) : Wallet {
+        val localVarResponse = postWalletsWithHttpInfo(createWalletIn = createWalletIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Wallet
@@ -330,8 +330,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WalletsWithHttpInfo(createWalletIn: CreateWalletIn) : ApiResponse<Wallet?> {
-        val localVariableConfig = postV1WalletsRequestConfig(createWalletIn = createWalletIn)
+    fun postWalletsWithHttpInfo(createWalletIn: CreateWalletIn) : ApiResponse<Wallet?> {
+        val localVariableConfig = postWalletsRequestConfig(createWalletIn = createWalletIn)
 
         return request<CreateWalletIn, Wallet>(
             localVariableConfig
@@ -339,12 +339,12 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1Wallets
+     * To obtain the request config of the operation postWallets
      *
      * @param createWalletIn 
      * @return RequestConfig
      */
-    fun postV1WalletsRequestConfig(createWalletIn: CreateWalletIn) : RequestConfig<CreateWalletIn> {
+    fun postWalletsRequestConfig(createWalletIn: CreateWalletIn) : RequestConfig<CreateWalletIn> {
         val localVariableBody = createWalletIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -375,8 +375,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1WalletsAccounts(createAccountIn: CreateAccountIn) : WalletAccount {
-        val localVarResponse = postV1WalletsAccountsWithHttpInfo(createAccountIn = createAccountIn)
+    fun postWalletsAccounts(createAccountIn: CreateAccountIn) : WalletAccount {
+        val localVarResponse = postWalletsAccountsWithHttpInfo(createAccountIn = createAccountIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as WalletAccount
@@ -404,8 +404,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WalletsAccountsWithHttpInfo(createAccountIn: CreateAccountIn) : ApiResponse<WalletAccount?> {
-        val localVariableConfig = postV1WalletsAccountsRequestConfig(createAccountIn = createAccountIn)
+    fun postWalletsAccountsWithHttpInfo(createAccountIn: CreateAccountIn) : ApiResponse<WalletAccount?> {
+        val localVariableConfig = postWalletsAccountsRequestConfig(createAccountIn = createAccountIn)
 
         return request<CreateAccountIn, WalletAccount>(
             localVariableConfig
@@ -413,12 +413,12 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1WalletsAccounts
+     * To obtain the request config of the operation postWalletsAccounts
      *
      * @param createAccountIn 
      * @return RequestConfig
      */
-    fun postV1WalletsAccountsRequestConfig(createAccountIn: CreateAccountIn) : RequestConfig<CreateAccountIn> {
+    fun postWalletsAccountsRequestConfig(createAccountIn: CreateAccountIn) : RequestConfig<CreateAccountIn> {
         val localVariableBody = createAccountIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -449,8 +449,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1WalletsByIdKeys(id: kotlin.String) : Wallet {
-        val localVarResponse = postV1WalletsByIdKeysWithHttpInfo(id = id)
+    fun postWalletsByIdKeys(id: kotlin.String) : Wallet {
+        val localVarResponse = postWalletsByIdKeysWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Wallet
@@ -478,8 +478,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WalletsByIdKeysWithHttpInfo(id: kotlin.String) : ApiResponse<Wallet?> {
-        val localVariableConfig = postV1WalletsByIdKeysRequestConfig(id = id)
+    fun postWalletsByIdKeysWithHttpInfo(id: kotlin.String) : ApiResponse<Wallet?> {
+        val localVariableConfig = postWalletsByIdKeysRequestConfig(id = id)
 
         return request<Unit, Wallet>(
             localVariableConfig
@@ -487,12 +487,12 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1WalletsByIdKeys
+     * To obtain the request config of the operation postWalletsByIdKeys
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1WalletsByIdKeysRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postWalletsByIdKeysRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -523,8 +523,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1WalletsByIdSign(id: kotlin.String, signIn: SignIn) : Signature {
-        val localVarResponse = postV1WalletsByIdSignWithHttpInfo(id = id, signIn = signIn)
+    fun postWalletsByIdSign(id: kotlin.String, signIn: SignIn) : Signature {
+        val localVarResponse = postWalletsByIdSignWithHttpInfo(id = id, signIn = signIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Signature
@@ -553,8 +553,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WalletsByIdSignWithHttpInfo(id: kotlin.String, signIn: SignIn) : ApiResponse<Signature?> {
-        val localVariableConfig = postV1WalletsByIdSignRequestConfig(id = id, signIn = signIn)
+    fun postWalletsByIdSignWithHttpInfo(id: kotlin.String, signIn: SignIn) : ApiResponse<Signature?> {
+        val localVariableConfig = postWalletsByIdSignRequestConfig(id = id, signIn = signIn)
 
         return request<SignIn, Signature>(
             localVariableConfig
@@ -562,13 +562,13 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1WalletsByIdSign
+     * To obtain the request config of the operation postWalletsByIdSign
      *
      * @param id 
      * @param signIn 
      * @return RequestConfig
      */
-    fun postV1WalletsByIdSignRequestConfig(id: kotlin.String, signIn: SignIn) : RequestConfig<SignIn> {
+    fun postWalletsByIdSignRequestConfig(id: kotlin.String, signIn: SignIn) : RequestConfig<SignIn> {
         val localVariableBody = signIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -600,8 +600,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1WalletsByIdTransactions(id: kotlin.String, safeTxIn: SafeTxIn) : SafeProposal {
-        val localVarResponse = postV1WalletsByIdTransactionsWithHttpInfo(id = id, safeTxIn = safeTxIn)
+    fun postWalletsByIdTransactions(id: kotlin.String, safeTxIn: SafeTxIn) : SafeProposal {
+        val localVarResponse = postWalletsByIdTransactionsWithHttpInfo(id = id, safeTxIn = safeTxIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SafeProposal
@@ -630,8 +630,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WalletsByIdTransactionsWithHttpInfo(id: kotlin.String, safeTxIn: SafeTxIn) : ApiResponse<SafeProposal?> {
-        val localVariableConfig = postV1WalletsByIdTransactionsRequestConfig(id = id, safeTxIn = safeTxIn)
+    fun postWalletsByIdTransactionsWithHttpInfo(id: kotlin.String, safeTxIn: SafeTxIn) : ApiResponse<SafeProposal?> {
+        val localVariableConfig = postWalletsByIdTransactionsRequestConfig(id = id, safeTxIn = safeTxIn)
 
         return request<SafeTxIn, SafeProposal>(
             localVariableConfig
@@ -639,13 +639,13 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1WalletsByIdTransactions
+     * To obtain the request config of the operation postWalletsByIdTransactions
      *
      * @param id 
      * @param safeTxIn 
      * @return RequestConfig
      */
-    fun postV1WalletsByIdTransactionsRequestConfig(id: kotlin.String, safeTxIn: SafeTxIn) : RequestConfig<SafeTxIn> {
+    fun postWalletsByIdTransactionsRequestConfig(id: kotlin.String, safeTxIn: SafeTxIn) : RequestConfig<SafeTxIn> {
         val localVariableBody = safeTxIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

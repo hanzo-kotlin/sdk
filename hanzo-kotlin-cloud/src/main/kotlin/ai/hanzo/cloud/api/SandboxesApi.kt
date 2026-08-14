@@ -68,8 +68,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1SandboxesById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1SandboxesByIdWithHttpInfo(id = id)
+    fun deleteSandboxesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteSandboxesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -96,8 +96,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1SandboxesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1SandboxesByIdRequestConfig(id = id)
+    fun deleteSandboxesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteSandboxesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -105,12 +105,12 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1SandboxesById
+     * To obtain the request config of the operation deleteSandboxesById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun deleteV1SandboxesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteSandboxesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -208,8 +208,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Sandboxes() : Unit {
-        val localVarResponse = getV1SandboxesWithHttpInfo()
+    fun getSandboxes() : Unit {
+        val localVarResponse = getSandboxesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -235,8 +235,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SandboxesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SandboxesRequestConfig()
+    fun getSandboxesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getSandboxesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -244,11 +244,11 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1Sandboxes
+     * To obtain the request config of the operation getSandboxes
      *
      * @return RequestConfig
      */
-    fun getV1SandboxesRequestConfig() : RequestConfig<Unit> {
+    fun getSandboxesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -276,8 +276,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SandboxesById(id: kotlin.String) : Unit {
-        val localVarResponse = getV1SandboxesByIdWithHttpInfo(id = id)
+    fun getSandboxesById(id: kotlin.String) : Unit {
+        val localVarResponse = getSandboxesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -304,8 +304,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SandboxesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SandboxesByIdRequestConfig(id = id)
+    fun getSandboxesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSandboxesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -313,12 +313,12 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1SandboxesById
+     * To obtain the request config of the operation getSandboxesById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1SandboxesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSandboxesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -346,8 +346,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SandboxesByIdFs(id: kotlin.String) : Unit {
-        val localVarResponse = getV1SandboxesByIdFsWithHttpInfo(id = id)
+    fun getSandboxesByIdFs(id: kotlin.String) : Unit {
+        val localVarResponse = getSandboxesByIdFsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -374,8 +374,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SandboxesByIdFsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SandboxesByIdFsRequestConfig(id = id)
+    fun getSandboxesByIdFsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSandboxesByIdFsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -383,12 +383,12 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1SandboxesByIdFs
+     * To obtain the request config of the operation getSandboxesByIdFs
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1SandboxesByIdFsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSandboxesByIdFsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -396,6 +396,146 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/sandboxes/{id}/fs".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sandboxes/{id}/screen
+     * The screen, as a page
+     * A complete, self-contained desktop — noVNC inline, no other origin — that opens its own socket and draws this sandbox&#39;s display. Embed it in an iframe and there is nothing else to build.  &#x60;ticket&#x60; is the credential from the POST above, carried through to the socket. The page is NOT gated: it is inert markup and does not redeem the ticket, because a ticket is spent once and a page that spent it would hold a credential that no longer opens anything. &#x60;frame-ancestors&#x60; admits our own brands&#39; hosts and nothing further.  It is served for every class, not only for &#x60;desktop&#x60;. The class is a fact about the image, and a sandbox with no VNC server already fails exactly — the connection is refused and the page says so — where a check here would be a second opinion about what is running inside a pod, formed from a label rather than from the pod.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getSandboxesByIdScreen(id: kotlin.String) : Unit {
+        val localVarResponse = getSandboxesByIdScreenWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sandboxes/{id}/screen
+     * The screen, as a page
+     * A complete, self-contained desktop — noVNC inline, no other origin — that opens its own socket and draws this sandbox&#39;s display. Embed it in an iframe and there is nothing else to build.  &#x60;ticket&#x60; is the credential from the POST above, carried through to the socket. The page is NOT gated: it is inert markup and does not redeem the ticket, because a ticket is spent once and a page that spent it would hold a credential that no longer opens anything. &#x60;frame-ancestors&#x60; admits our own brands&#39; hosts and nothing further.  It is served for every class, not only for &#x60;desktop&#x60;. The class is a fact about the image, and a sandbox with no VNC server already fails exactly — the connection is refused and the page says so — where a check here would be a second opinion about what is running inside a pod, formed from a label rather than from the pod.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getSandboxesByIdScreenWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSandboxesByIdScreenRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getSandboxesByIdScreen
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun getSandboxesByIdScreenRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sandboxes/{id}/screen".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sandboxes/{id}/screen/ws
+     * The screen, as a socket
+     * Upgrades to a WebSocket carrying RFB — the VNC wire protocol — from the sandbox&#39;s display, for a host that brings its own client. Requires &#x60;ticket&#x60;; a missing, expired or already-spent one answers 401 without upgrading.  THE WIRE IS RFB, in BINARY frames both ways, and it is not interpreted here: this is a pipe between the caller&#39;s client and the server inside the pod.  THE PIXELS COME OUT THROUGH THE EXEC CHANNEL. The display binds 127.0.0.1 only and deliberately nothing else, so there is no address to dial — &#x60;socat&#x60; joins the stream to that loopback port over the same Kubernetes exec subresource every other call into a sandbox uses. One way in, one thing to authorize, nothing further exposed.  The window size is ignored. A browser pane is not the X server&#39;s geometry, and the client scales what it is given rather than asking a server with no RandR to resize itself.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getSandboxesByIdScreenWs(id: kotlin.String) : Unit {
+        val localVarResponse = getSandboxesByIdScreenWsWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sandboxes/{id}/screen/ws
+     * The screen, as a socket
+     * Upgrades to a WebSocket carrying RFB — the VNC wire protocol — from the sandbox&#39;s display, for a host that brings its own client. Requires &#x60;ticket&#x60;; a missing, expired or already-spent one answers 401 without upgrading.  THE WIRE IS RFB, in BINARY frames both ways, and it is not interpreted here: this is a pipe between the caller&#39;s client and the server inside the pod.  THE PIXELS COME OUT THROUGH THE EXEC CHANNEL. The display binds 127.0.0.1 only and deliberately nothing else, so there is no address to dial — &#x60;socat&#x60; joins the stream to that loopback port over the same Kubernetes exec subresource every other call into a sandbox uses. One way in, one thing to authorize, nothing further exposed.  The window size is ignored. A browser pane is not the X server&#39;s geometry, and the client scales what it is given rather than asking a server with no RandR to resize itself.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getSandboxesByIdScreenWsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSandboxesByIdScreenWsRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getSandboxesByIdScreenWs
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun getSandboxesByIdScreenWsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sandboxes/{id}/screen/ws".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -416,8 +556,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SandboxesByIdTerminal(id: kotlin.String) : Unit {
-        val localVarResponse = getV1SandboxesByIdTerminalWithHttpInfo(id = id)
+    fun getSandboxesByIdTerminal(id: kotlin.String) : Unit {
+        val localVarResponse = getSandboxesByIdTerminalWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -444,8 +584,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SandboxesByIdTerminalWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SandboxesByIdTerminalRequestConfig(id = id)
+    fun getSandboxesByIdTerminalWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSandboxesByIdTerminalRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -453,12 +593,12 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1SandboxesByIdTerminal
+     * To obtain the request config of the operation getSandboxesByIdTerminal
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1SandboxesByIdTerminalRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSandboxesByIdTerminalRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -486,8 +626,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SandboxesByIdTerminalWs(id: kotlin.String) : Unit {
-        val localVarResponse = getV1SandboxesByIdTerminalWsWithHttpInfo(id = id)
+    fun getSandboxesByIdTerminalWs(id: kotlin.String) : Unit {
+        val localVarResponse = getSandboxesByIdTerminalWsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -514,8 +654,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SandboxesByIdTerminalWsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SandboxesByIdTerminalWsRequestConfig(id = id)
+    fun getSandboxesByIdTerminalWsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSandboxesByIdTerminalWsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -523,12 +663,12 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1SandboxesByIdTerminalWs
+     * To obtain the request config of the operation getSandboxesByIdTerminalWs
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1SandboxesByIdTerminalWsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSandboxesByIdTerminalWsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -620,7 +760,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * POST /v1/sandboxes
      * Lease a sandbox
-     * Creates a sandbox and returns it. &#x60;class&#x60; is one of &#x60;exec&#x60;, &#x60;dev&#x60; or &#x60;desktop&#x60;; &#x60;dev&#x60; and &#x60;desktop&#x60; are attached to a &#x60;project&#x60;, which is required for them and names the volume the work persists on. &#x60;ttlSec&#x60; bounds the lease, and &#x60;image&#x60; overrides the class default.  This is the ONLY path that creates cluster objects. The isolation boundary is the pod&#39;s runtime class, one field, so what a sandbox is confined by is a deployment decision rather than anything this operation negotiates.
+     * Creates a sandbox and returns it. &#x60;class&#x60; is one of &#x60;exec&#x60;, &#x60;dev&#x60;, &#x60;desktop&#x60; or &#x60;android&#x60;; &#x60;dev&#x60; and &#x60;desktop&#x60; are attached to a &#x60;project&#x60;, which is required for them and names the volume the work persists on. &#x60;ttlSec&#x60; bounds the lease, and &#x60;image&#x60; overrides the class default.  This is the ONLY path that creates cluster objects. The isolation boundary is the pod&#39;s runtime class, one field, so what a sandbox is confined by is a deployment decision rather than anything this operation negotiates.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -629,8 +769,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Sandboxes() : Unit {
-        val localVarResponse = postV1SandboxesWithHttpInfo()
+    fun postSandboxes() : Unit {
+        val localVarResponse = postSandboxesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -650,14 +790,14 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * POST /v1/sandboxes
      * Lease a sandbox
-     * Creates a sandbox and returns it. &#x60;class&#x60; is one of &#x60;exec&#x60;, &#x60;dev&#x60; or &#x60;desktop&#x60;; &#x60;dev&#x60; and &#x60;desktop&#x60; are attached to a &#x60;project&#x60;, which is required for them and names the volume the work persists on. &#x60;ttlSec&#x60; bounds the lease, and &#x60;image&#x60; overrides the class default.  This is the ONLY path that creates cluster objects. The isolation boundary is the pod&#39;s runtime class, one field, so what a sandbox is confined by is a deployment decision rather than anything this operation negotiates.
+     * Creates a sandbox and returns it. &#x60;class&#x60; is one of &#x60;exec&#x60;, &#x60;dev&#x60;, &#x60;desktop&#x60; or &#x60;android&#x60;; &#x60;dev&#x60; and &#x60;desktop&#x60; are attached to a &#x60;project&#x60;, which is required for them and names the volume the work persists on. &#x60;ttlSec&#x60; bounds the lease, and &#x60;image&#x60; overrides the class default.  This is the ONLY path that creates cluster objects. The isolation boundary is the pod&#39;s runtime class, one field, so what a sandbox is confined by is a deployment decision rather than anything this operation negotiates.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SandboxesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SandboxesRequestConfig()
+    fun postSandboxesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postSandboxesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -665,11 +805,11 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1Sandboxes
+     * To obtain the request config of the operation postSandboxes
      *
      * @return RequestConfig
      */
-    fun postV1SandboxesRequestConfig() : RequestConfig<Unit> {
+    fun postSandboxesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -697,8 +837,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SandboxesByIdExec(id: kotlin.String) : Unit {
-        val localVarResponse = postV1SandboxesByIdExecWithHttpInfo(id = id)
+    fun postSandboxesByIdExec(id: kotlin.String) : Unit {
+        val localVarResponse = postSandboxesByIdExecWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -725,8 +865,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SandboxesByIdExecWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SandboxesByIdExecRequestConfig(id = id)
+    fun postSandboxesByIdExecWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postSandboxesByIdExecRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -734,12 +874,12 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1SandboxesByIdExec
+     * To obtain the request config of the operation postSandboxesByIdExec
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1SandboxesByIdExecRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postSandboxesByIdExecRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -767,8 +907,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SandboxesByIdFs(id: kotlin.String) : Unit {
-        val localVarResponse = postV1SandboxesByIdFsWithHttpInfo(id = id)
+    fun postSandboxesByIdFs(id: kotlin.String) : Unit {
+        val localVarResponse = postSandboxesByIdFsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -795,8 +935,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SandboxesByIdFsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SandboxesByIdFsRequestConfig(id = id)
+    fun postSandboxesByIdFsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postSandboxesByIdFsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -804,12 +944,12 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1SandboxesByIdFs
+     * To obtain the request config of the operation postSandboxesByIdFs
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1SandboxesByIdFsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postSandboxesByIdFsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -817,6 +957,76 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/sandboxes/{id}/fs".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/sandboxes/{id}/screen/ticket
+     * Open a screen
+     * Mints a SINGLE-USE ticket for this sandbox&#39;s DISPLAY and returns &#x60;{ticket, expiresIn, url}&#x60;, where url is the desktop PAGE with the ticket already on it. The same ticket as the terminal&#39;s, minted for a different door.  A ticket says which org and which sandbox, and the terminal and the screen are two views of one machine: a caller who may type in a sandbox may look at it. What the door decides is the URL handed back, which is the only part that differs.  Mint one per screen, and mint a fresh one to reconnect.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postSandboxesByIdScreenTicket(id: kotlin.String) : Unit {
+        val localVarResponse = postSandboxesByIdScreenTicketWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/sandboxes/{id}/screen/ticket
+     * Open a screen
+     * Mints a SINGLE-USE ticket for this sandbox&#39;s DISPLAY and returns &#x60;{ticket, expiresIn, url}&#x60;, where url is the desktop PAGE with the ticket already on it. The same ticket as the terminal&#39;s, minted for a different door.  A ticket says which org and which sandbox, and the terminal and the screen are two views of one machine: a caller who may type in a sandbox may look at it. What the door decides is the URL handed back, which is the only part that differs.  Mint one per screen, and mint a fresh one to reconnect.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postSandboxesByIdScreenTicketWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postSandboxesByIdScreenTicketRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postSandboxesByIdScreenTicket
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun postSandboxesByIdScreenTicketRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/sandboxes/{id}/screen/ticket".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -837,8 +1047,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SandboxesByIdTerminalTicket(id: kotlin.String) : Unit {
-        val localVarResponse = postV1SandboxesByIdTerminalTicketWithHttpInfo(id = id)
+    fun postSandboxesByIdTerminalTicket(id: kotlin.String) : Unit {
+        val localVarResponse = postSandboxesByIdTerminalTicketWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -865,8 +1075,8 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SandboxesByIdTerminalTicketWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1SandboxesByIdTerminalTicketRequestConfig(id = id)
+    fun postSandboxesByIdTerminalTicketWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postSandboxesByIdTerminalTicketRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -874,12 +1084,12 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1SandboxesByIdTerminalTicket
+     * To obtain the request config of the operation postSandboxesByIdTerminalTicket
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1SandboxesByIdTerminalTicketRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postSandboxesByIdTerminalTicketRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

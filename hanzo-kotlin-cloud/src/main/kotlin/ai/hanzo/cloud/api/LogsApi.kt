@@ -56,8 +56,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LogsHealth() : Unit {
-        val localVarResponse = getV1LogsHealthWithHttpInfo()
+    fun getLogsHealth() : Unit {
+        val localVarResponse = getLogsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LogsHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1LogsHealthRequestConfig()
+    fun getLogsHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getLogsHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1LogsHealth
+     * To obtain the request config of the operation getLogsHealth
      *
      * @return RequestConfig
      */
-    fun getV1LogsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getLogsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1LogsQuery() : Unit {
-        val localVarResponse = getV1LogsQueryWithHttpInfo()
+    fun getLogsQuery() : Unit {
+        val localVarResponse = getLogsQueryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1LogsQueryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1LogsQueryRequestConfig()
+    fun getLogsQueryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getLogsQueryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1LogsQuery
+     * To obtain the request config of the operation getLogsQuery
      *
      * @return RequestConfig
      */
-    fun getV1LogsQueryRequestConfig() : RequestConfig<Unit> {
+    fun getLogsQueryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1LogsWrite() : Unit {
-        val localVarResponse = postV1LogsWriteWithHttpInfo()
+    fun postLogsWrite() : Unit {
+        val localVarResponse = postLogsWriteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1LogsWriteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1LogsWriteRequestConfig()
+    fun postLogsWriteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postLogsWriteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1LogsWrite
+     * To obtain the request config of the operation postLogsWrite
      *
      * @return RequestConfig
      */
-    fun postV1LogsWriteRequestConfig() : RequestConfig<Unit> {
+    fun postLogsWriteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

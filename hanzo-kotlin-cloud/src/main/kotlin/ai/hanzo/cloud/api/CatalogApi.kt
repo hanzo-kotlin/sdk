@@ -58,8 +58,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CatalogEntriesByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteCatalogEntriesByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteCatalogEntriesByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -86,8 +86,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CatalogEntriesByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteCatalogEntriesByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCatalogEntriesByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -95,12 +95,12 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CatalogEntriesByWildcard1
+     * To obtain the request config of the operation deleteCatalogEntriesByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteV1CatalogEntriesByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCatalogEntriesByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -138,8 +138,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Catalog(q: kotlin.String? = null, org: kotlin.String? = null, kind: kotlin.String? = null, origin: kotlin.String? = null, archetype: kotlin.String? = null, language: kotlin.String? = null, template: kotlin.String? = null, forkable: kotlin.String? = null, limit: kotlin.String? = null, offset: kotlin.String? = null) : CatalogPage {
-        val localVarResponse = getV1CatalogWithHttpInfo(q = q, org = org, kind = kind, origin = origin, archetype = archetype, language = language, template = template, forkable = forkable, limit = limit, offset = offset)
+    fun getCatalog(q: kotlin.String? = null, org: kotlin.String? = null, kind: kotlin.String? = null, origin: kotlin.String? = null, archetype: kotlin.String? = null, language: kotlin.String? = null, template: kotlin.String? = null, forkable: kotlin.String? = null, limit: kotlin.String? = null, offset: kotlin.String? = null) : CatalogPage {
+        val localVarResponse = getCatalogWithHttpInfo(q = q, org = org, kind = kind, origin = origin, archetype = archetype, language = language, template = template, forkable = forkable, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CatalogPage
@@ -176,8 +176,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CatalogWithHttpInfo(q: kotlin.String?, org: kotlin.String?, kind: kotlin.String?, origin: kotlin.String?, archetype: kotlin.String?, language: kotlin.String?, template: kotlin.String?, forkable: kotlin.String?, limit: kotlin.String?, offset: kotlin.String?) : ApiResponse<CatalogPage?> {
-        val localVariableConfig = getV1CatalogRequestConfig(q = q, org = org, kind = kind, origin = origin, archetype = archetype, language = language, template = template, forkable = forkable, limit = limit, offset = offset)
+    fun getCatalogWithHttpInfo(q: kotlin.String?, org: kotlin.String?, kind: kotlin.String?, origin: kotlin.String?, archetype: kotlin.String?, language: kotlin.String?, template: kotlin.String?, forkable: kotlin.String?, limit: kotlin.String?, offset: kotlin.String?) : ApiResponse<CatalogPage?> {
+        val localVariableConfig = getCatalogRequestConfig(q = q, org = org, kind = kind, origin = origin, archetype = archetype, language = language, template = template, forkable = forkable, limit = limit, offset = offset)
 
         return request<Unit, CatalogPage>(
             localVariableConfig
@@ -185,7 +185,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Catalog
+     * To obtain the request config of the operation getCatalog
      *
      * @param q Q is the free-text query the lexical index scores relevance on. Empty is a browse rather than a search — the same request either way. (optional)
      * @param org Org narrows to one builder org: hanzo | lux | zoo. Case-insensitive. (optional)
@@ -199,7 +199,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param offset Offset is where the page starts, default 0, with the same tolerance. (optional)
      * @return RequestConfig
      */
-    fun getV1CatalogRequestConfig(q: kotlin.String?, org: kotlin.String?, kind: kotlin.String?, origin: kotlin.String?, archetype: kotlin.String?, language: kotlin.String?, template: kotlin.String?, forkable: kotlin.String?, limit: kotlin.String?, offset: kotlin.String?) : RequestConfig<Unit> {
+    fun getCatalogRequestConfig(q: kotlin.String?, org: kotlin.String?, kind: kotlin.String?, origin: kotlin.String?, archetype: kotlin.String?, language: kotlin.String?, template: kotlin.String?, forkable: kotlin.String?, limit: kotlin.String?, offset: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -259,8 +259,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CatalogEntries() : Unit {
-        val localVarResponse = getV1CatalogEntriesWithHttpInfo()
+    fun getCatalogEntries() : Unit {
+        val localVarResponse = getCatalogEntriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -286,8 +286,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CatalogEntriesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CatalogEntriesRequestConfig()
+    fun getCatalogEntriesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCatalogEntriesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -295,11 +295,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1CatalogEntries
+     * To obtain the request config of the operation getCatalogEntries
      *
      * @return RequestConfig
      */
-    fun getV1CatalogEntriesRequestConfig() : RequestConfig<Unit> {
+    fun getCatalogEntriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -326,8 +326,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CatalogEntries() : Unit {
-        val localVarResponse = postV1CatalogEntriesWithHttpInfo()
+    fun postCatalogEntries() : Unit {
+        val localVarResponse = postCatalogEntriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -353,8 +353,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CatalogEntriesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CatalogEntriesRequestConfig()
+    fun postCatalogEntriesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCatalogEntriesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -362,11 +362,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CatalogEntries
+     * To obtain the request config of the operation postCatalogEntries
      *
      * @return RequestConfig
      */
-    fun postV1CatalogEntriesRequestConfig() : RequestConfig<Unit> {
+    fun postCatalogEntriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -393,8 +393,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CatalogModels() : Unit {
-        val localVarResponse = postV1CatalogModelsWithHttpInfo()
+    fun postCatalogModels() : Unit {
+        val localVarResponse = postCatalogModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -420,8 +420,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CatalogModelsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CatalogModelsRequestConfig()
+    fun postCatalogModelsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCatalogModelsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -429,11 +429,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CatalogModels
+     * To obtain the request config of the operation postCatalogModels
      *
      * @return RequestConfig
      */
-    fun postV1CatalogModelsRequestConfig() : RequestConfig<Unit> {
+    fun postCatalogModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -460,8 +460,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CatalogModelsRefresh() : Unit {
-        val localVarResponse = postV1CatalogModelsRefreshWithHttpInfo()
+    fun postCatalogModelsRefresh() : Unit {
+        val localVarResponse = postCatalogModelsRefreshWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -487,8 +487,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CatalogModelsRefreshWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CatalogModelsRefreshRequestConfig()
+    fun postCatalogModelsRefreshWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCatalogModelsRefreshRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -496,11 +496,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CatalogModelsRefresh
+     * To obtain the request config of the operation postCatalogModelsRefresh
      *
      * @return RequestConfig
      */
-    fun postV1CatalogModelsRefreshRequestConfig() : RequestConfig<Unit> {
+    fun postCatalogModelsRefreshRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -527,8 +527,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CatalogSeed() : Unit {
-        val localVarResponse = postV1CatalogSeedWithHttpInfo()
+    fun postCatalogSeed() : Unit {
+        val localVarResponse = postCatalogSeedWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -554,8 +554,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CatalogSeedWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CatalogSeedRequestConfig()
+    fun postCatalogSeedWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCatalogSeedRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -563,11 +563,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1CatalogSeed
+     * To obtain the request config of the operation postCatalogSeed
      *
      * @return RequestConfig
      */
-    fun postV1CatalogSeedRequestConfig() : RequestConfig<Unit> {
+    fun postCatalogSeedRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -595,8 +595,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CatalogEntriesByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = putV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putCatalogEntriesByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putCatalogEntriesByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -623,8 +623,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CatalogEntriesByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putCatalogEntriesByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCatalogEntriesByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -632,12 +632,12 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putV1CatalogEntriesByWildcard1
+     * To obtain the request config of the operation putCatalogEntriesByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun putV1CatalogEntriesByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putCatalogEntriesByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

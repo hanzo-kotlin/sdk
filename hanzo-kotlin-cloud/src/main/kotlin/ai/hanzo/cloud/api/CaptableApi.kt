@@ -75,8 +75,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CaptableConvertiblesById(id: kotlin.String) : CaptableDeleted {
-        val localVarResponse = deleteV1CaptableConvertiblesByIdWithHttpInfo(id = id)
+    fun deleteCaptableConvertiblesById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteCaptableConvertiblesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
@@ -104,8 +104,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CaptableConvertiblesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
-        val localVariableConfig = deleteV1CaptableConvertiblesByIdRequestConfig(id = id)
+    fun deleteCaptableConvertiblesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteCaptableConvertiblesByIdRequestConfig(id = id)
 
         return request<Unit, CaptableDeleted>(
             localVariableConfig
@@ -113,12 +113,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CaptableConvertiblesById
+     * To obtain the request config of the operation deleteCaptableConvertiblesById
      *
      * @param id ID is the convertible note to delete.
      * @return RequestConfig
      */
-    fun deleteV1CaptableConvertiblesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCaptableConvertiblesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -148,8 +148,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CaptableOptionsById(id: kotlin.String) : CaptableDeleted {
-        val localVarResponse = deleteV1CaptableOptionsByIdWithHttpInfo(id = id)
+    fun deleteCaptableOptionsById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteCaptableOptionsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
@@ -177,8 +177,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CaptableOptionsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
-        val localVariableConfig = deleteV1CaptableOptionsByIdRequestConfig(id = id)
+    fun deleteCaptableOptionsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteCaptableOptionsByIdRequestConfig(id = id)
 
         return request<Unit, CaptableDeleted>(
             localVariableConfig
@@ -186,12 +186,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CaptableOptionsById
+     * To obtain the request config of the operation deleteCaptableOptionsById
      *
      * @param id ID is the option grant to delete.
      * @return RequestConfig
      */
-    fun deleteV1CaptableOptionsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCaptableOptionsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -221,8 +221,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CaptableSafesById(id: kotlin.String) : CaptableDeleted {
-        val localVarResponse = deleteV1CaptableSafesByIdWithHttpInfo(id = id)
+    fun deleteCaptableSafesById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteCaptableSafesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
@@ -250,8 +250,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CaptableSafesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
-        val localVariableConfig = deleteV1CaptableSafesByIdRequestConfig(id = id)
+    fun deleteCaptableSafesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteCaptableSafesByIdRequestConfig(id = id)
 
         return request<Unit, CaptableDeleted>(
             localVariableConfig
@@ -259,12 +259,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CaptableSafesById
+     * To obtain the request config of the operation deleteCaptableSafesById
      *
      * @param id ID is the SAFE to delete.
      * @return RequestConfig
      */
-    fun deleteV1CaptableSafesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCaptableSafesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -294,8 +294,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CaptableSharesById(id: kotlin.String) : CaptableDeleted {
-        val localVarResponse = deleteV1CaptableSharesByIdWithHttpInfo(id = id)
+    fun deleteCaptableSharesById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteCaptableSharesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
@@ -323,8 +323,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CaptableSharesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
-        val localVariableConfig = deleteV1CaptableSharesByIdRequestConfig(id = id)
+    fun deleteCaptableSharesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteCaptableSharesByIdRequestConfig(id = id)
 
         return request<Unit, CaptableDeleted>(
             localVariableConfig
@@ -332,12 +332,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CaptableSharesById
+     * To obtain the request config of the operation deleteCaptableSharesById
      *
      * @param id ID is the share certificate to delete.
      * @return RequestConfig
      */
-    fun deleteV1CaptableSharesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCaptableSharesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -367,8 +367,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CaptableStakeholdersById(id: kotlin.String) : CaptableDeleted {
-        val localVarResponse = deleteV1CaptableStakeholdersByIdWithHttpInfo(id = id)
+    fun deleteCaptableStakeholdersById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteCaptableStakeholdersByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
@@ -396,8 +396,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CaptableStakeholdersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
-        val localVariableConfig = deleteV1CaptableStakeholdersByIdRequestConfig(id = id)
+    fun deleteCaptableStakeholdersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteCaptableStakeholdersByIdRequestConfig(id = id)
 
         return request<Unit, CaptableDeleted>(
             localVariableConfig
@@ -405,12 +405,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CaptableStakeholdersById
+     * To obtain the request config of the operation deleteCaptableStakeholdersById
      *
      * @param id ID is the stakeholder to delete.
      * @return RequestConfig
      */
-    fun deleteV1CaptableStakeholdersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCaptableStakeholdersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -439,8 +439,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableClasses() : kotlin.collections.List<CaptableShareClass> {
-        val localVarResponse = getV1CaptableClassesWithHttpInfo()
+    fun getCaptableClasses() : kotlin.collections.List<CaptableShareClass> {
+        val localVarResponse = getCaptableClassesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CaptableShareClass>
@@ -467,8 +467,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableClassesWithHttpInfo() : ApiResponse<kotlin.collections.List<CaptableShareClass>?> {
-        val localVariableConfig = getV1CaptableClassesRequestConfig()
+    fun getCaptableClassesWithHttpInfo() : ApiResponse<kotlin.collections.List<CaptableShareClass>?> {
+        val localVariableConfig = getCaptableClassesRequestConfig()
 
         return request<Unit, kotlin.collections.List<CaptableShareClass>>(
             localVariableConfig
@@ -476,11 +476,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableClasses
+     * To obtain the request config of the operation getCaptableClasses
      *
      * @return RequestConfig
      */
-    fun getV1CaptableClassesRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableClassesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -509,8 +509,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableCompany() : CaptableCompany {
-        val localVarResponse = getV1CaptableCompanyWithHttpInfo()
+    fun getCaptableCompany() : CaptableCompany {
+        val localVarResponse = getCaptableCompanyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCompany
@@ -537,8 +537,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableCompanyWithHttpInfo() : ApiResponse<CaptableCompany?> {
-        val localVariableConfig = getV1CaptableCompanyRequestConfig()
+    fun getCaptableCompanyWithHttpInfo() : ApiResponse<CaptableCompany?> {
+        val localVariableConfig = getCaptableCompanyRequestConfig()
 
         return request<Unit, CaptableCompany>(
             localVariableConfig
@@ -546,11 +546,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableCompany
+     * To obtain the request config of the operation getCaptableCompany
      *
      * @return RequestConfig
      */
-    fun getV1CaptableCompanyRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableCompanyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -579,8 +579,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableConvertibles() : CaptableNotes {
-        val localVarResponse = getV1CaptableConvertiblesWithHttpInfo()
+    fun getCaptableConvertibles() : CaptableNotes {
+        val localVarResponse = getCaptableConvertiblesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableNotes
@@ -607,8 +607,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableConvertiblesWithHttpInfo() : ApiResponse<CaptableNotes?> {
-        val localVariableConfig = getV1CaptableConvertiblesRequestConfig()
+    fun getCaptableConvertiblesWithHttpInfo() : ApiResponse<CaptableNotes?> {
+        val localVariableConfig = getCaptableConvertiblesRequestConfig()
 
         return request<Unit, CaptableNotes>(
             localVariableConfig
@@ -616,11 +616,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableConvertibles
+     * To obtain the request config of the operation getCaptableConvertibles
      *
      * @return RequestConfig
      */
-    fun getV1CaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -649,8 +649,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableInvestments() : CaptableInvestments {
-        val localVarResponse = getV1CaptableInvestmentsWithHttpInfo()
+    fun getCaptableInvestments() : CaptableInvestments {
+        val localVarResponse = getCaptableInvestmentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableInvestments
@@ -677,8 +677,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableInvestmentsWithHttpInfo() : ApiResponse<CaptableInvestments?> {
-        val localVariableConfig = getV1CaptableInvestmentsRequestConfig()
+    fun getCaptableInvestmentsWithHttpInfo() : ApiResponse<CaptableInvestments?> {
+        val localVariableConfig = getCaptableInvestmentsRequestConfig()
 
         return request<Unit, CaptableInvestments>(
             localVariableConfig
@@ -686,11 +686,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableInvestments
+     * To obtain the request config of the operation getCaptableInvestments
      *
      * @return RequestConfig
      */
-    fun getV1CaptableInvestmentsRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableInvestmentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -719,8 +719,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableOptions() : CaptableOptions {
-        val localVarResponse = getV1CaptableOptionsWithHttpInfo()
+    fun getCaptableOptions() : CaptableOptions {
+        val localVarResponse = getCaptableOptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableOptions
@@ -747,8 +747,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableOptionsWithHttpInfo() : ApiResponse<CaptableOptions?> {
-        val localVariableConfig = getV1CaptableOptionsRequestConfig()
+    fun getCaptableOptionsWithHttpInfo() : ApiResponse<CaptableOptions?> {
+        val localVariableConfig = getCaptableOptionsRequestConfig()
 
         return request<Unit, CaptableOptions>(
             localVariableConfig
@@ -756,11 +756,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableOptions
+     * To obtain the request config of the operation getCaptableOptions
      *
      * @return RequestConfig
      */
-    fun getV1CaptableOptionsRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableOptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -789,8 +789,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptablePlans() : CaptableEquityPlans {
-        val localVarResponse = getV1CaptablePlansWithHttpInfo()
+    fun getCaptablePlans() : CaptableEquityPlans {
+        val localVarResponse = getCaptablePlansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableEquityPlans
@@ -817,8 +817,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptablePlansWithHttpInfo() : ApiResponse<CaptableEquityPlans?> {
-        val localVariableConfig = getV1CaptablePlansRequestConfig()
+    fun getCaptablePlansWithHttpInfo() : ApiResponse<CaptableEquityPlans?> {
+        val localVariableConfig = getCaptablePlansRequestConfig()
 
         return request<Unit, CaptableEquityPlans>(
             localVariableConfig
@@ -826,11 +826,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptablePlans
+     * To obtain the request config of the operation getCaptablePlans
      *
      * @return RequestConfig
      */
-    fun getV1CaptablePlansRequestConfig() : RequestConfig<Unit> {
+    fun getCaptablePlansRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -859,8 +859,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableRounds() : CaptableRounds {
-        val localVarResponse = getV1CaptableRoundsWithHttpInfo()
+    fun getCaptableRounds() : CaptableRounds {
+        val localVarResponse = getCaptableRoundsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableRounds
@@ -887,8 +887,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableRoundsWithHttpInfo() : ApiResponse<CaptableRounds?> {
-        val localVariableConfig = getV1CaptableRoundsRequestConfig()
+    fun getCaptableRoundsWithHttpInfo() : ApiResponse<CaptableRounds?> {
+        val localVariableConfig = getCaptableRoundsRequestConfig()
 
         return request<Unit, CaptableRounds>(
             localVariableConfig
@@ -896,11 +896,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableRounds
+     * To obtain the request config of the operation getCaptableRounds
      *
      * @return RequestConfig
      */
-    fun getV1CaptableRoundsRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableRoundsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -930,8 +930,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableRoundsById(id: kotlin.String) : CaptableRoundDetail {
-        val localVarResponse = getV1CaptableRoundsByIdWithHttpInfo(id = id)
+    fun getCaptableRoundsById(id: kotlin.String) : CaptableRoundDetail {
+        val localVarResponse = getCaptableRoundsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableRoundDetail
@@ -959,8 +959,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableRoundsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableRoundDetail?> {
-        val localVariableConfig = getV1CaptableRoundsByIdRequestConfig(id = id)
+    fun getCaptableRoundsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableRoundDetail?> {
+        val localVariableConfig = getCaptableRoundsByIdRequestConfig(id = id)
 
         return request<Unit, CaptableRoundDetail>(
             localVariableConfig
@@ -968,12 +968,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableRoundsById
+     * To obtain the request config of the operation getCaptableRoundsById
      *
      * @param id ID is the round to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @return RequestConfig
      */
-    fun getV1CaptableRoundsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getCaptableRoundsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1002,8 +1002,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableSafes() : CaptableSafes {
-        val localVarResponse = getV1CaptableSafesWithHttpInfo()
+    fun getCaptableSafes() : CaptableSafes {
+        val localVarResponse = getCaptableSafesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableSafes
@@ -1030,8 +1030,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableSafesWithHttpInfo() : ApiResponse<CaptableSafes?> {
-        val localVariableConfig = getV1CaptableSafesRequestConfig()
+    fun getCaptableSafesWithHttpInfo() : ApiResponse<CaptableSafes?> {
+        val localVariableConfig = getCaptableSafesRequestConfig()
 
         return request<Unit, CaptableSafes>(
             localVariableConfig
@@ -1039,11 +1039,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableSafes
+     * To obtain the request config of the operation getCaptableSafes
      *
      * @return RequestConfig
      */
-    fun getV1CaptableSafesRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableSafesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1072,8 +1072,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableShares() : CaptableShares {
-        val localVarResponse = getV1CaptableSharesWithHttpInfo()
+    fun getCaptableShares() : CaptableShares {
+        val localVarResponse = getCaptableSharesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableShares
@@ -1100,8 +1100,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableSharesWithHttpInfo() : ApiResponse<CaptableShares?> {
-        val localVariableConfig = getV1CaptableSharesRequestConfig()
+    fun getCaptableSharesWithHttpInfo() : ApiResponse<CaptableShares?> {
+        val localVariableConfig = getCaptableSharesRequestConfig()
 
         return request<Unit, CaptableShares>(
             localVariableConfig
@@ -1109,11 +1109,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableShares
+     * To obtain the request config of the operation getCaptableShares
      *
      * @return RequestConfig
      */
-    fun getV1CaptableSharesRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableSharesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1142,8 +1142,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableStakeholders() : kotlin.collections.List<CaptableStakeholder> {
-        val localVarResponse = getV1CaptableStakeholdersWithHttpInfo()
+    fun getCaptableStakeholders() : kotlin.collections.List<CaptableStakeholder> {
+        val localVarResponse = getCaptableStakeholdersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CaptableStakeholder>
@@ -1170,8 +1170,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableStakeholdersWithHttpInfo() : ApiResponse<kotlin.collections.List<CaptableStakeholder>?> {
-        val localVariableConfig = getV1CaptableStakeholdersRequestConfig()
+    fun getCaptableStakeholdersWithHttpInfo() : ApiResponse<kotlin.collections.List<CaptableStakeholder>?> {
+        val localVariableConfig = getCaptableStakeholdersRequestConfig()
 
         return request<Unit, kotlin.collections.List<CaptableStakeholder>>(
             localVariableConfig
@@ -1179,11 +1179,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableStakeholders
+     * To obtain the request config of the operation getCaptableStakeholders
      *
      * @return RequestConfig
      */
-    fun getV1CaptableStakeholdersRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableStakeholdersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1212,8 +1212,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CaptableSummary() : CaptableSummary {
-        val localVarResponse = getV1CaptableSummaryWithHttpInfo()
+    fun getCaptableSummary() : CaptableSummary {
+        val localVarResponse = getCaptableSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableSummary
@@ -1240,8 +1240,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CaptableSummaryWithHttpInfo() : ApiResponse<CaptableSummary?> {
-        val localVariableConfig = getV1CaptableSummaryRequestConfig()
+    fun getCaptableSummaryWithHttpInfo() : ApiResponse<CaptableSummary?> {
+        val localVariableConfig = getCaptableSummaryRequestConfig()
 
         return request<Unit, CaptableSummary>(
             localVariableConfig
@@ -1249,11 +1249,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CaptableSummary
+     * To obtain the request config of the operation getCaptableSummary
      *
      * @return RequestConfig
      */
-    fun getV1CaptableSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getCaptableSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1282,8 +1282,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CaptableClassesById(id: kotlin.String) : Unit {
-        val localVarResponse = patchV1CaptableClassesByIdWithHttpInfo(id = id)
+    fun patchCaptableClassesById(id: kotlin.String) : Unit {
+        val localVarResponse = patchCaptableClassesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1310,8 +1310,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CaptableClassesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CaptableClassesByIdRequestConfig(id = id)
+    fun patchCaptableClassesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCaptableClassesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1319,12 +1319,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CaptableClassesById
+     * To obtain the request config of the operation patchCaptableClassesById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun patchV1CaptableClassesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun patchCaptableClassesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1354,8 +1354,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CaptableStakeholdersById(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : CaptableUpdated {
-        val localVarResponse = patchV1CaptableStakeholdersByIdWithHttpInfo(id = id, captableStakeholderPatch = captableStakeholderPatch)
+    fun patchCaptableStakeholdersById(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : CaptableUpdated {
+        val localVarResponse = patchCaptableStakeholdersByIdWithHttpInfo(id = id, captableStakeholderPatch = captableStakeholderPatch)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableUpdated
@@ -1384,8 +1384,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CaptableStakeholdersByIdWithHttpInfo(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : ApiResponse<CaptableUpdated?> {
-        val localVariableConfig = patchV1CaptableStakeholdersByIdRequestConfig(id = id, captableStakeholderPatch = captableStakeholderPatch)
+    fun patchCaptableStakeholdersByIdWithHttpInfo(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : ApiResponse<CaptableUpdated?> {
+        val localVariableConfig = patchCaptableStakeholdersByIdRequestConfig(id = id, captableStakeholderPatch = captableStakeholderPatch)
 
         return request<CaptableStakeholderPatch, CaptableUpdated>(
             localVariableConfig
@@ -1393,13 +1393,13 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CaptableStakeholdersById
+     * To obtain the request config of the operation patchCaptableStakeholdersById
      *
      * @param id ID is the stakeholder to update. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @param captableStakeholderPatch 
      * @return RequestConfig
      */
-    fun patchV1CaptableStakeholdersByIdRequestConfig(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : RequestConfig<CaptableStakeholderPatch> {
+    fun patchCaptableStakeholdersByIdRequestConfig(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : RequestConfig<CaptableStakeholderPatch> {
         val localVariableBody = captableStakeholderPatch
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1428,8 +1428,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableClasses() : Unit {
-        val localVarResponse = postV1CaptableClassesWithHttpInfo()
+    fun postCaptableClasses() : Unit {
+        val localVarResponse = postCaptableClassesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1455,8 +1455,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableClassesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableClassesRequestConfig()
+    fun postCaptableClassesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableClassesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1464,11 +1464,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableClasses
+     * To obtain the request config of the operation postCaptableClasses
      *
      * @return RequestConfig
      */
-    fun postV1CaptableClassesRequestConfig() : RequestConfig<Unit> {
+    fun postCaptableClassesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1495,8 +1495,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableConvertibles() : Unit {
-        val localVarResponse = postV1CaptableConvertiblesWithHttpInfo()
+    fun postCaptableConvertibles() : Unit {
+        val localVarResponse = postCaptableConvertiblesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1522,8 +1522,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableConvertiblesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableConvertiblesRequestConfig()
+    fun postCaptableConvertiblesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableConvertiblesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1531,11 +1531,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableConvertibles
+     * To obtain the request config of the operation postCaptableConvertibles
      *
      * @return RequestConfig
      */
-    fun postV1CaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
+    fun postCaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1562,8 +1562,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableOptions() : Unit {
-        val localVarResponse = postV1CaptableOptionsWithHttpInfo()
+    fun postCaptableOptions() : Unit {
+        val localVarResponse = postCaptableOptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1589,8 +1589,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableOptionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableOptionsRequestConfig()
+    fun postCaptableOptionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableOptionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1598,11 +1598,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableOptions
+     * To obtain the request config of the operation postCaptableOptions
      *
      * @return RequestConfig
      */
-    fun postV1CaptableOptionsRequestConfig() : RequestConfig<Unit> {
+    fun postCaptableOptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1629,8 +1629,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptablePlans() : Unit {
-        val localVarResponse = postV1CaptablePlansWithHttpInfo()
+    fun postCaptablePlans() : Unit {
+        val localVarResponse = postCaptablePlansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1656,8 +1656,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptablePlansWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptablePlansRequestConfig()
+    fun postCaptablePlansWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptablePlansRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1665,11 +1665,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptablePlans
+     * To obtain the request config of the operation postCaptablePlans
      *
      * @return RequestConfig
      */
-    fun postV1CaptablePlansRequestConfig() : RequestConfig<Unit> {
+    fun postCaptablePlansRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1696,8 +1696,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableRounds() : Unit {
-        val localVarResponse = postV1CaptableRoundsWithHttpInfo()
+    fun postCaptableRounds() : Unit {
+        val localVarResponse = postCaptableRoundsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1723,8 +1723,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableRoundsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableRoundsRequestConfig()
+    fun postCaptableRoundsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableRoundsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1732,11 +1732,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableRounds
+     * To obtain the request config of the operation postCaptableRounds
      *
      * @return RequestConfig
      */
-    fun postV1CaptableRoundsRequestConfig() : RequestConfig<Unit> {
+    fun postCaptableRoundsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1766,8 +1766,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableRoundsByIdClose(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : CaptableUpdated {
-        val localVarResponse = postV1CaptableRoundsByIdCloseWithHttpInfo(id = id, captableRoundCloseRequest = captableRoundCloseRequest)
+    fun postCaptableRoundsByIdClose(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : CaptableUpdated {
+        val localVarResponse = postCaptableRoundsByIdCloseWithHttpInfo(id = id, captableRoundCloseRequest = captableRoundCloseRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableUpdated
@@ -1796,8 +1796,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableRoundsByIdCloseWithHttpInfo(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : ApiResponse<CaptableUpdated?> {
-        val localVariableConfig = postV1CaptableRoundsByIdCloseRequestConfig(id = id, captableRoundCloseRequest = captableRoundCloseRequest)
+    fun postCaptableRoundsByIdCloseWithHttpInfo(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : ApiResponse<CaptableUpdated?> {
+        val localVariableConfig = postCaptableRoundsByIdCloseRequestConfig(id = id, captableRoundCloseRequest = captableRoundCloseRequest)
 
         return request<CaptableRoundCloseRequest, CaptableUpdated>(
             localVariableConfig
@@ -1805,13 +1805,13 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableRoundsByIdClose
+     * To obtain the request config of the operation postCaptableRoundsByIdClose
      *
      * @param id ID is the round to close. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @param captableRoundCloseRequest 
      * @return RequestConfig
      */
-    fun postV1CaptableRoundsByIdCloseRequestConfig(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : RequestConfig<CaptableRoundCloseRequest> {
+    fun postCaptableRoundsByIdCloseRequestConfig(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : RequestConfig<CaptableRoundCloseRequest> {
         val localVariableBody = captableRoundCloseRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1841,8 +1841,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableRoundsByIdInvestments(id: kotlin.String) : Unit {
-        val localVarResponse = postV1CaptableRoundsByIdInvestmentsWithHttpInfo(id = id)
+    fun postCaptableRoundsByIdInvestments(id: kotlin.String) : Unit {
+        val localVarResponse = postCaptableRoundsByIdInvestmentsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1869,8 +1869,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableRoundsByIdInvestmentsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableRoundsByIdInvestmentsRequestConfig(id = id)
+    fun postCaptableRoundsByIdInvestmentsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableRoundsByIdInvestmentsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1878,12 +1878,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableRoundsByIdInvestments
+     * To obtain the request config of the operation postCaptableRoundsByIdInvestments
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1CaptableRoundsByIdInvestmentsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postCaptableRoundsByIdInvestmentsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1910,8 +1910,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableSafes() : Unit {
-        val localVarResponse = postV1CaptableSafesWithHttpInfo()
+    fun postCaptableSafes() : Unit {
+        val localVarResponse = postCaptableSafesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1937,8 +1937,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableSafesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableSafesRequestConfig()
+    fun postCaptableSafesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableSafesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1946,11 +1946,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableSafes
+     * To obtain the request config of the operation postCaptableSafes
      *
      * @return RequestConfig
      */
-    fun postV1CaptableSafesRequestConfig() : RequestConfig<Unit> {
+    fun postCaptableSafesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1977,8 +1977,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableShares() : Unit {
-        val localVarResponse = postV1CaptableSharesWithHttpInfo()
+    fun postCaptableShares() : Unit {
+        val localVarResponse = postCaptableSharesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2004,8 +2004,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableSharesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableSharesRequestConfig()
+    fun postCaptableSharesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableSharesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2013,11 +2013,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableShares
+     * To obtain the request config of the operation postCaptableShares
      *
      * @return RequestConfig
      */
-    fun postV1CaptableSharesRequestConfig() : RequestConfig<Unit> {
+    fun postCaptableSharesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2044,8 +2044,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableSharesTransfer() : Unit {
-        val localVarResponse = postV1CaptableSharesTransferWithHttpInfo()
+    fun postCaptableSharesTransfer() : Unit {
+        val localVarResponse = postCaptableSharesTransferWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2071,8 +2071,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableSharesTransferWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableSharesTransferRequestConfig()
+    fun postCaptableSharesTransferWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableSharesTransferRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2080,11 +2080,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableSharesTransfer
+     * To obtain the request config of the operation postCaptableSharesTransfer
      *
      * @return RequestConfig
      */
-    fun postV1CaptableSharesTransferRequestConfig() : RequestConfig<Unit> {
+    fun postCaptableSharesTransferRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2111,8 +2111,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CaptableStakeholders() : Unit {
-        val localVarResponse = postV1CaptableStakeholdersWithHttpInfo()
+    fun postCaptableStakeholders() : Unit {
+        val localVarResponse = postCaptableStakeholdersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2138,8 +2138,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CaptableStakeholdersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CaptableStakeholdersRequestConfig()
+    fun postCaptableStakeholdersWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCaptableStakeholdersRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2147,11 +2147,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CaptableStakeholders
+     * To obtain the request config of the operation postCaptableStakeholders
      *
      * @return RequestConfig
      */
-    fun postV1CaptableStakeholdersRequestConfig() : RequestConfig<Unit> {
+    fun postCaptableStakeholdersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2180,8 +2180,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CaptableCompany(captableCompanyUpdate: CaptableCompanyUpdate) : CaptableUpdated {
-        val localVarResponse = putV1CaptableCompanyWithHttpInfo(captableCompanyUpdate = captableCompanyUpdate)
+    fun putCaptableCompany(captableCompanyUpdate: CaptableCompanyUpdate) : CaptableUpdated {
+        val localVarResponse = putCaptableCompanyWithHttpInfo(captableCompanyUpdate = captableCompanyUpdate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableUpdated
@@ -2209,8 +2209,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CaptableCompanyWithHttpInfo(captableCompanyUpdate: CaptableCompanyUpdate) : ApiResponse<CaptableUpdated?> {
-        val localVariableConfig = putV1CaptableCompanyRequestConfig(captableCompanyUpdate = captableCompanyUpdate)
+    fun putCaptableCompanyWithHttpInfo(captableCompanyUpdate: CaptableCompanyUpdate) : ApiResponse<CaptableUpdated?> {
+        val localVariableConfig = putCaptableCompanyRequestConfig(captableCompanyUpdate = captableCompanyUpdate)
 
         return request<CaptableCompanyUpdate, CaptableUpdated>(
             localVariableConfig
@@ -2218,12 +2218,12 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CaptableCompany
+     * To obtain the request config of the operation putCaptableCompany
      *
      * @param captableCompanyUpdate 
      * @return RequestConfig
      */
-    fun putV1CaptableCompanyRequestConfig(captableCompanyUpdate: CaptableCompanyUpdate) : RequestConfig<CaptableCompanyUpdate> {
+    fun putCaptableCompanyRequestConfig(captableCompanyUpdate: CaptableCompanyUpdate) : RequestConfig<CaptableCompanyUpdate> {
         val localVariableBody = captableCompanyUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

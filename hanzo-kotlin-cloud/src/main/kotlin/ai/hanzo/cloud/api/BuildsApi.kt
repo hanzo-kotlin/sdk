@@ -58,8 +58,8 @@ class BuildsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Builds() : BuildBoard {
-        val localVarResponse = getV1BuildsWithHttpInfo()
+    fun getBuilds() : BuildBoard {
+        val localVarResponse = getBuildsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BuildBoard
@@ -86,8 +86,8 @@ class BuildsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BuildsWithHttpInfo() : ApiResponse<BuildBoard?> {
-        val localVariableConfig = getV1BuildsRequestConfig()
+    fun getBuildsWithHttpInfo() : ApiResponse<BuildBoard?> {
+        val localVariableConfig = getBuildsRequestConfig()
 
         return request<Unit, BuildBoard>(
             localVariableConfig
@@ -95,11 +95,11 @@ class BuildsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Builds
+     * To obtain the request config of the operation getBuilds
      *
      * @return RequestConfig
      */
-    fun getV1BuildsRequestConfig() : RequestConfig<Unit> {
+    fun getBuildsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

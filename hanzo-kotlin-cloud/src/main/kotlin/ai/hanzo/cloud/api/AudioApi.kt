@@ -56,8 +56,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AudioFoley() : Unit {
-        val localVarResponse = postV1AudioFoleyWithHttpInfo()
+    fun postAudioFoley() : Unit {
+        val localVarResponse = postAudioFoleyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AudioFoleyWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AudioFoleyRequestConfig()
+    fun postAudioFoleyWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAudioFoleyRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AudioFoley
+     * To obtain the request config of the operation postAudioFoley
      *
      * @return RequestConfig
      */
-    fun postV1AudioFoleyRequestConfig() : RequestConfig<Unit> {
+    fun postAudioFoleyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AudioMusic() : Unit {
-        val localVarResponse = postV1AudioMusicWithHttpInfo()
+    fun postAudioMusic() : Unit {
+        val localVarResponse = postAudioMusicWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AudioMusicWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AudioMusicRequestConfig()
+    fun postAudioMusicWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAudioMusicRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AudioMusic
+     * To obtain the request config of the operation postAudioMusic
      *
      * @return RequestConfig
      */
-    fun postV1AudioMusicRequestConfig() : RequestConfig<Unit> {
+    fun postAudioMusicRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AudioSpeech() : Unit {
-        val localVarResponse = postV1AudioSpeechWithHttpInfo()
+    fun postAudioSpeech() : Unit {
+        val localVarResponse = postAudioSpeechWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AudioSpeechWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AudioSpeechRequestConfig()
+    fun postAudioSpeechWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAudioSpeechRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AudioSpeech
+     * To obtain the request config of the operation postAudioSpeech
      *
      * @return RequestConfig
      */
-    fun postV1AudioSpeechRequestConfig() : RequestConfig<Unit> {
+    fun postAudioSpeechRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -257,8 +257,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AudioTranscriptions() : Unit {
-        val localVarResponse = postV1AudioTranscriptionsWithHttpInfo()
+    fun postAudioTranscriptions() : Unit {
+        val localVarResponse = postAudioTranscriptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,8 +284,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AudioTranscriptionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AudioTranscriptionsRequestConfig()
+    fun postAudioTranscriptionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAudioTranscriptionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +293,11 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AudioTranscriptions
+     * To obtain the request config of the operation postAudioTranscriptions
      *
      * @return RequestConfig
      */
-    fun postV1AudioTranscriptionsRequestConfig() : RequestConfig<Unit> {
+    fun postAudioTranscriptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -324,8 +324,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AudioVoice() : Unit {
-        val localVarResponse = postV1AudioVoiceWithHttpInfo()
+    fun postAudioVoice() : Unit {
+        val localVarResponse = postAudioVoiceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -351,8 +351,8 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AudioVoiceWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AudioVoiceRequestConfig()
+    fun postAudioVoiceWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAudioVoiceRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -360,11 +360,11 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1AudioVoice
+     * To obtain the request config of the operation postAudioVoice
      *
      * @return RequestConfig
      */
-    fun postV1AudioVoiceRequestConfig() : RequestConfig<Unit> {
+    fun postAudioVoiceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -63,8 +63,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1VectorByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1VectorByNameWithHttpInfo(name = name)
+    fun deleteVectorByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteVectorByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -91,8 +91,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1VectorByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1VectorByNameRequestConfig(name = name)
+    fun deleteVectorByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteVectorByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -100,12 +100,12 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1VectorByName
+     * To obtain the request config of the operation deleteVectorByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun deleteV1VectorByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteVectorByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -133,8 +133,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Vector() : kotlin.collections.List<ProvisionedSummary> {
-        val localVarResponse = getV1VectorWithHttpInfo()
+    fun getVector() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getVectorWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
@@ -161,8 +161,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1VectorWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
-        val localVariableConfig = getV1VectorRequestConfig()
+    fun getVectorWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getVectorRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
@@ -170,11 +170,11 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Vector
+     * To obtain the request config of the operation getVector
      *
      * @return RequestConfig
      */
-    fun getV1VectorRequestConfig() : RequestConfig<Unit> {
+    fun getVectorRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -204,8 +204,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1VectorByName(name: kotlin.String) : ProvisionedResource {
-        val localVarResponse = getV1VectorByNameWithHttpInfo(name = name)
+    fun getVectorByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getVectorByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
@@ -233,8 +233,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1VectorByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
-        val localVariableConfig = getV1VectorByNameRequestConfig(name = name)
+    fun getVectorByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getVectorByNameRequestConfig(name = name)
 
         return request<Unit, ProvisionedResource>(
             localVariableConfig
@@ -242,12 +242,12 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1VectorByName
+     * To obtain the request config of the operation getVectorByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun getV1VectorByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getVectorByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -277,8 +277,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1VectorCollections(authorization: kotlin.String? = null) : VectorCollectionList {
-        val localVarResponse = getV1VectorCollectionsWithHttpInfo(authorization = authorization)
+    fun getVectorCollections(authorization: kotlin.String? = null) : VectorCollectionList {
+        val localVarResponse = getVectorCollectionsWithHttpInfo(authorization = authorization)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VectorCollectionList
@@ -306,8 +306,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1VectorCollectionsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<VectorCollectionList?> {
-        val localVariableConfig = getV1VectorCollectionsRequestConfig(authorization = authorization)
+    fun getVectorCollectionsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<VectorCollectionList?> {
+        val localVariableConfig = getVectorCollectionsRequestConfig(authorization = authorization)
 
         return request<Unit, VectorCollectionList>(
             localVariableConfig
@@ -315,12 +315,12 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1VectorCollections
+     * To obtain the request config of the operation getVectorCollections
      *
      * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
      * @return RequestConfig
      */
-    fun getV1VectorCollectionsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
+    fun getVectorCollectionsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -351,8 +351,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1VectorStats(authorization: kotlin.String? = null) : VectorStats {
-        val localVarResponse = getV1VectorStatsWithHttpInfo(authorization = authorization)
+    fun getVectorStats(authorization: kotlin.String? = null) : VectorStats {
+        val localVarResponse = getVectorStatsWithHttpInfo(authorization = authorization)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VectorStats
@@ -380,8 +380,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1VectorStatsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<VectorStats?> {
-        val localVariableConfig = getV1VectorStatsRequestConfig(authorization = authorization)
+    fun getVectorStatsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<VectorStats?> {
+        val localVariableConfig = getVectorStatsRequestConfig(authorization = authorization)
 
         return request<Unit, VectorStats>(
             localVariableConfig
@@ -389,12 +389,12 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1VectorStats
+     * To obtain the request config of the operation getVectorStats
      *
      * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
      * @return RequestConfig
      */
-    fun getV1VectorStatsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
+    fun getVectorStatsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -425,8 +425,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Vector(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
-        val localVarResponse = postV1VectorWithHttpInfo(provisionRequest = provisionRequest)
+    fun postVector(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postVectorWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
@@ -454,8 +454,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1VectorWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
-        val localVariableConfig = postV1VectorRequestConfig(provisionRequest = provisionRequest)
+    fun postVectorWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postVectorRequestConfig(provisionRequest = provisionRequest)
 
         return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
@@ -463,12 +463,12 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Vector
+     * To obtain the request config of the operation postVector
      *
      * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun postV1VectorRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+    fun postVectorRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
         val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

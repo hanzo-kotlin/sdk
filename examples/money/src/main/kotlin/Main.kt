@@ -21,6 +21,6 @@ import ai.hanzo.cloud.api.BillingApi
 fun main() {
     val billing = Hanzo().api(::BillingApi)
 
-    println("balance  HTTP ${billing.getV1BillingBalanceWithHttpInfo().statusCode}")
-    println("usage    HTTP ${billing.getV1BillingUsageWithHttpInfo().statusCode}")
+    println("balance  HTTP ${billing.getBillingBalanceWithHttpInfo().statusCode}")
+    println("usage    HTTP ${billing.getBillingUsageWithHttpInfo().statusCode}")
 }

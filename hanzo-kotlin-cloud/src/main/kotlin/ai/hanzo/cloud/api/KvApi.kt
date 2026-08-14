@@ -61,8 +61,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1KvByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1KvByNameWithHttpInfo(name = name)
+    fun deleteKvByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteKvByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -89,8 +89,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1KvByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1KvByNameRequestConfig(name = name)
+    fun deleteKvByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteKvByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +98,12 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1KvByName
+     * To obtain the request config of the operation deleteKvByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun deleteV1KvByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteKvByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,8 +131,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Kv() : kotlin.collections.List<ProvisionedSummary> {
-        val localVarResponse = getV1KvWithHttpInfo()
+    fun getKv() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getKvWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
@@ -159,8 +159,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KvWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
-        val localVariableConfig = getV1KvRequestConfig()
+    fun getKvWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getKvRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
@@ -168,11 +168,11 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1Kv
+     * To obtain the request config of the operation getKv
      *
      * @return RequestConfig
      */
-    fun getV1KvRequestConfig() : RequestConfig<Unit> {
+    fun getKvRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -202,8 +202,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KvByName(name: kotlin.String) : ProvisionedResource {
-        val localVarResponse = getV1KvByNameWithHttpInfo(name = name)
+    fun getKvByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getKvByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
@@ -231,8 +231,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KvByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
-        val localVariableConfig = getV1KvByNameRequestConfig(name = name)
+    fun getKvByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getKvByNameRequestConfig(name = name)
 
         return request<Unit, ProvisionedResource>(
             localVariableConfig
@@ -240,12 +240,12 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1KvByName
+     * To obtain the request config of the operation getKvByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun getV1KvByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getKvByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -275,8 +275,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Kv(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
-        val localVarResponse = postV1KvWithHttpInfo(provisionRequest = provisionRequest)
+    fun postKv(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postKvWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
@@ -304,8 +304,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1KvWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
-        val localVariableConfig = postV1KvRequestConfig(provisionRequest = provisionRequest)
+    fun postKvWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postKvRequestConfig(provisionRequest = provisionRequest)
 
         return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
@@ -313,12 +313,12 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1Kv
+     * To obtain the request config of the operation postKv
      *
      * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun postV1KvRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+    fun postKvRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
         val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

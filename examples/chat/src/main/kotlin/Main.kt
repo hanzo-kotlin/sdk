@@ -24,5 +24,5 @@ import ai.hanzo.cloud.api.ChatApi
 fun main() {
     val chat = Hanzo().api(::ChatApi)
 
-    println("completion  HTTP ${chat.postV1ChatCompletionsWithHttpInfo().statusCode}")
+    println("completion  HTTP ${chat.postChatCompletionsWithHttpInfo().statusCode}")
 }

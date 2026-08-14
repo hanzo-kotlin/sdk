@@ -129,8 +129,8 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GatewayConfig() : Policy {
-        val localVarResponse = getV1GatewayConfigWithHttpInfo()
+    fun getGatewayConfig() : Policy {
+        val localVarResponse = getGatewayConfigWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Policy
@@ -157,8 +157,8 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GatewayConfigWithHttpInfo() : ApiResponse<Policy?> {
-        val localVariableConfig = getV1GatewayConfigRequestConfig()
+    fun getGatewayConfigWithHttpInfo() : ApiResponse<Policy?> {
+        val localVariableConfig = getGatewayConfigRequestConfig()
 
         return request<Unit, Policy>(
             localVariableConfig
@@ -166,11 +166,11 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1GatewayConfig
+     * To obtain the request config of the operation getGatewayConfig
      *
      * @return RequestConfig
      */
-    fun getV1GatewayConfigRequestConfig() : RequestConfig<Unit> {
+    fun getGatewayConfigRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -200,8 +200,8 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1GatewayConfig(policy: Policy) : Policy {
-        val localVarResponse = putV1GatewayConfigWithHttpInfo(policy = policy)
+    fun putGatewayConfig(policy: Policy) : Policy {
+        val localVarResponse = putGatewayConfigWithHttpInfo(policy = policy)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Policy
@@ -229,8 +229,8 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1GatewayConfigWithHttpInfo(policy: Policy) : ApiResponse<Policy?> {
-        val localVariableConfig = putV1GatewayConfigRequestConfig(policy = policy)
+    fun putGatewayConfigWithHttpInfo(policy: Policy) : ApiResponse<Policy?> {
+        val localVariableConfig = putGatewayConfigRequestConfig(policy = policy)
 
         return request<Policy, Policy>(
             localVariableConfig
@@ -238,12 +238,12 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putV1GatewayConfig
+     * To obtain the request config of the operation putGatewayConfig
      *
      * @param policy 
      * @return RequestConfig
      */
-    fun putV1GatewayConfigRequestConfig(policy: Policy) : RequestConfig<Policy> {
+    fun putGatewayConfigRequestConfig(policy: Policy) : RequestConfig<Policy> {
         val localVariableBody = policy
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

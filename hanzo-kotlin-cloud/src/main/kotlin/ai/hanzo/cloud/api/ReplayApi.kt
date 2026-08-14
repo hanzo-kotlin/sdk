@@ -60,8 +60,8 @@ class ReplayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Replay(replayBody: ReplayBody? = null) : CaptureResult {
-        val localVarResponse = postV1ReplayWithHttpInfo(replayBody = replayBody)
+    fun postReplay(replayBody: ReplayBody? = null) : CaptureResult {
+        val localVarResponse = postReplayWithHttpInfo(replayBody = replayBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CaptureResult
@@ -89,8 +89,8 @@ class ReplayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ReplayWithHttpInfo(replayBody: ReplayBody?) : ApiResponse<CaptureResult?> {
-        val localVariableConfig = postV1ReplayRequestConfig(replayBody = replayBody)
+    fun postReplayWithHttpInfo(replayBody: ReplayBody?) : ApiResponse<CaptureResult?> {
+        val localVariableConfig = postReplayRequestConfig(replayBody = replayBody)
 
         return request<ReplayBody, CaptureResult>(
             localVariableConfig
@@ -98,12 +98,12 @@ class ReplayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Replay
+     * To obtain the request config of the operation postReplay
      *
      * @param replayBody  (optional)
      * @return RequestConfig
      */
-    fun postV1ReplayRequestConfig(replayBody: ReplayBody?) : RequestConfig<ReplayBody> {
+    fun postReplayRequestConfig(replayBody: ReplayBody?) : RequestConfig<ReplayBody> {
         val localVariableBody = replayBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -62,8 +62,8 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1Keys(type: kotlin.String? = null) : RevokedKey {
-        val localVarResponse = deleteV1KeysWithHttpInfo(type = type)
+    fun deleteKeys(type: kotlin.String? = null) : RevokedKey {
+        val localVarResponse = deleteKeysWithHttpInfo(type = type)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RevokedKey
@@ -91,8 +91,8 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1KeysWithHttpInfo(type: kotlin.String?) : ApiResponse<RevokedKey?> {
-        val localVariableConfig = deleteV1KeysRequestConfig(type = type)
+    fun deleteKeysWithHttpInfo(type: kotlin.String?) : ApiResponse<RevokedKey?> {
+        val localVariableConfig = deleteKeysRequestConfig(type = type)
 
         return request<Unit, RevokedKey>(
             localVariableConfig
@@ -100,12 +100,12 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1Keys
+     * To obtain the request config of the operation deleteKeys
      *
      * @param type Type is the key class to act on: \&quot;secret\&quot; (sk-, session-equivalent, belongs on a server) or \&quot;publishable\&quot; (pk-, org-identifying, safe in a browser bundle). Omitted means secret, which is what every existing caller means. (optional)
      * @return RequestConfig
      */
-    fun deleteV1KeysRequestConfig(type: kotlin.String?) : RequestConfig<Unit> {
+    fun deleteKeysRequestConfig(type: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -139,8 +139,8 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Keys() : ApiKeyList {
-        val localVarResponse = getV1KeysWithHttpInfo()
+    fun getKeys() : ApiKeyList {
+        val localVarResponse = getKeysWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ApiKeyList
@@ -167,8 +167,8 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KeysWithHttpInfo() : ApiResponse<ApiKeyList?> {
-        val localVariableConfig = getV1KeysRequestConfig()
+    fun getKeysWithHttpInfo() : ApiResponse<ApiKeyList?> {
+        val localVariableConfig = getKeysRequestConfig()
 
         return request<Unit, ApiKeyList>(
             localVariableConfig
@@ -176,11 +176,11 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1Keys
+     * To obtain the request config of the operation getKeys
      *
      * @return RequestConfig
      */
-    fun getV1KeysRequestConfig() : RequestConfig<Unit> {
+    fun getKeysRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -210,8 +210,8 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Keys(keyTypeIn: KeyTypeIn) : MintedKey {
-        val localVarResponse = postV1KeysWithHttpInfo(keyTypeIn = keyTypeIn)
+    fun postKeys(keyTypeIn: KeyTypeIn) : MintedKey {
+        val localVarResponse = postKeysWithHttpInfo(keyTypeIn = keyTypeIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MintedKey
@@ -239,8 +239,8 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1KeysWithHttpInfo(keyTypeIn: KeyTypeIn) : ApiResponse<MintedKey?> {
-        val localVariableConfig = postV1KeysRequestConfig(keyTypeIn = keyTypeIn)
+    fun postKeysWithHttpInfo(keyTypeIn: KeyTypeIn) : ApiResponse<MintedKey?> {
+        val localVariableConfig = postKeysRequestConfig(keyTypeIn = keyTypeIn)
 
         return request<KeyTypeIn, MintedKey>(
             localVariableConfig
@@ -248,12 +248,12 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1Keys
+     * To obtain the request config of the operation postKeys
      *
      * @param keyTypeIn 
      * @return RequestConfig
      */
-    fun postV1KeysRequestConfig(keyTypeIn: KeyTypeIn) : RequestConfig<KeyTypeIn> {
+    fun postKeysRequestConfig(keyTypeIn: KeyTypeIn) : RequestConfig<KeyTypeIn> {
         val localVariableBody = keyTypeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

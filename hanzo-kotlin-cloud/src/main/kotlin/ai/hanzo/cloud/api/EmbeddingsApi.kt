@@ -56,8 +56,8 @@ class EmbeddingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Embeddings() : Unit {
-        val localVarResponse = postV1EmbeddingsWithHttpInfo()
+    fun postEmbeddings() : Unit {
+        val localVarResponse = postEmbeddingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class EmbeddingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EmbeddingsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1EmbeddingsRequestConfig()
+    fun postEmbeddingsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postEmbeddingsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class EmbeddingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1Embeddings
+     * To obtain the request config of the operation postEmbeddings
      *
      * @return RequestConfig
      */
-    fun postV1EmbeddingsRequestConfig() : RequestConfig<Unit> {
+    fun postEmbeddingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

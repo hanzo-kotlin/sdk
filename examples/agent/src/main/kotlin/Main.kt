@@ -31,7 +31,7 @@ fun main() {
 
     val name = "sdk-example-${System.nanoTime().toString(36)}"
     val agent =
-        agents.postV1Agents(
+        agents.postAgents(
             CreateAgentIn(
                 name = name,
                 model = model,
@@ -43,12 +43,12 @@ fun main() {
     // The run endpoint takes no body and returns none, so the input is the
     // agent's own instructions and the new run is the one that was not in the
     // list beforehand.
-    val before = agents.getV1AgentsByRefRuns(name).runs.orEmpty().map { it.id }.toSet()
-    agents.postV1AgentsByRefRun(name)
+    val before = agents.getAgentsByRefRuns(name).runs.orEmpty().map { it.id }.toSet()
+    agents.postAgentsByRefRun(name)
     println("started  a run of $name")
 
     repeat(60) {
-        val run = agents.getV1AgentsByRefRuns(name).runs.orEmpty().firstOrNull { it.id !in before }
+        val run = agents.getAgentsByRefRuns(name).runs.orEmpty().firstOrNull { it.id !in before }
         val status = run?.status?.lowercase().orEmpty()
         if (run != null && status in TERMINAL) {
             println("run      ${run.id} $status in ${run.durationMs}ms")

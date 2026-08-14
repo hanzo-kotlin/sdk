@@ -56,8 +56,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Models() : Unit {
-        val localVarResponse = getV1ModelsWithHttpInfo()
+    fun getModels() : Unit {
+        val localVarResponse = getModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ModelsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1ModelsRequestConfig()
+    fun getModelsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getModelsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Models
+     * To obtain the request config of the operation getModels
      *
      * @return RequestConfig
      */
-    fun getV1ModelsRequestConfig() : RequestConfig<Unit> {
+    fun getModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -124,8 +124,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ModelsByModelAccess(model: kotlin.String) : Unit {
-        val localVarResponse = getV1ModelsByModelAccessWithHttpInfo(model = model)
+    fun getModelsByModelAccess(model: kotlin.String) : Unit {
+        val localVarResponse = getModelsByModelAccessWithHttpInfo(model = model)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -152,8 +152,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ModelsByModelAccessWithHttpInfo(model: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1ModelsByModelAccessRequestConfig(model = model)
+    fun getModelsByModelAccessWithHttpInfo(model: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getModelsByModelAccessRequestConfig(model = model)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -161,12 +161,12 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1ModelsByModelAccess
+     * To obtain the request config of the operation getModelsByModelAccess
      *
      * @param model 
      * @return RequestConfig
      */
-    fun getV1ModelsByModelAccessRequestConfig(model: kotlin.String) : RequestConfig<Unit> {
+    fun getModelsByModelAccessRequestConfig(model: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -193,8 +193,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ModelsProviders() : Unit {
-        val localVarResponse = getV1ModelsProvidersWithHttpInfo()
+    fun getModelsProviders() : Unit {
+        val localVarResponse = getModelsProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -220,8 +220,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ModelsProvidersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1ModelsProvidersRequestConfig()
+    fun getModelsProvidersWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getModelsProvidersRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -229,11 +229,11 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1ModelsProviders
+     * To obtain the request config of the operation getModelsProviders
      *
      * @return RequestConfig
      */
-    fun getV1ModelsProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getModelsProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -261,8 +261,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ModelsByModelAccess(model: kotlin.String) : Unit {
-        val localVarResponse = postV1ModelsByModelAccessWithHttpInfo(model = model)
+    fun postModelsByModelAccess(model: kotlin.String) : Unit {
+        val localVarResponse = postModelsByModelAccessWithHttpInfo(model = model)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -289,8 +289,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ModelsByModelAccessWithHttpInfo(model: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ModelsByModelAccessRequestConfig(model = model)
+    fun postModelsByModelAccessWithHttpInfo(model: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postModelsByModelAccessRequestConfig(model = model)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -298,12 +298,12 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1ModelsByModelAccess
+     * To obtain the request config of the operation postModelsByModelAccess
      *
      * @param model 
      * @return RequestConfig
      */
-    fun postV1ModelsByModelAccessRequestConfig(model: kotlin.String) : RequestConfig<Unit> {
+    fun postModelsByModelAccessRequestConfig(model: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

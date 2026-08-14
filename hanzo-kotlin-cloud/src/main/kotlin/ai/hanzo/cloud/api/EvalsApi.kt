@@ -78,8 +78,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1EvalsDatasetsByName(name: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1EvalsDatasetsByNameWithHttpInfo(name = name)
+    fun deleteEvalsDatasetsByName(name: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteEvalsDatasetsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -107,8 +107,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1EvalsDatasetsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1EvalsDatasetsByNameRequestConfig(name = name)
+    fun deleteEvalsDatasetsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteEvalsDatasetsByNameRequestConfig(name = name)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -116,12 +116,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1EvalsDatasetsByName
+     * To obtain the request config of the operation deleteEvalsDatasetsByName
      *
      * @param name Name is the dataset the URL names.
      * @return RequestConfig
      */
-    fun deleteV1EvalsDatasetsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteEvalsDatasetsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -151,8 +151,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsDatasets(limit: kotlin.Int? = null) : DatasetList {
-        val localVarResponse = getV1EvalsDatasetsWithHttpInfo(limit = limit)
+    fun getEvalsDatasets(limit: kotlin.Int? = null) : DatasetList {
+        val localVarResponse = getEvalsDatasetsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DatasetList
@@ -180,8 +180,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsDatasetsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DatasetList?> {
-        val localVariableConfig = getV1EvalsDatasetsRequestConfig(limit = limit)
+    fun getEvalsDatasetsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DatasetList?> {
+        val localVariableConfig = getEvalsDatasetsRequestConfig(limit = limit)
 
         return request<Unit, DatasetList>(
             localVariableConfig
@@ -189,12 +189,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsDatasets
+     * To obtain the request config of the operation getEvalsDatasets
      *
      * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
      * @return RequestConfig
      */
-    fun getV1EvalsDatasetsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getEvalsDatasetsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -229,8 +229,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsDatasetsByName(name: kotlin.String) : DatasetView {
-        val localVarResponse = getV1EvalsDatasetsByNameWithHttpInfo(name = name)
+    fun getEvalsDatasetsByName(name: kotlin.String) : DatasetView {
+        val localVarResponse = getEvalsDatasetsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DatasetView
@@ -258,8 +258,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsDatasetsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<DatasetView?> {
-        val localVariableConfig = getV1EvalsDatasetsByNameRequestConfig(name = name)
+    fun getEvalsDatasetsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<DatasetView?> {
+        val localVariableConfig = getEvalsDatasetsByNameRequestConfig(name = name)
 
         return request<Unit, DatasetView>(
             localVariableConfig
@@ -267,12 +267,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsDatasetsByName
+     * To obtain the request config of the operation getEvalsDatasetsByName
      *
      * @param name Name is the dataset the URL names.
      * @return RequestConfig
      */
-    fun getV1EvalsDatasetsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getEvalsDatasetsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -303,8 +303,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsDatasetsByNameItems(name: kotlin.String, limit: kotlin.Int? = null) : ItemList {
-        val localVarResponse = getV1EvalsDatasetsByNameItemsWithHttpInfo(name = name, limit = limit)
+    fun getEvalsDatasetsByNameItems(name: kotlin.String, limit: kotlin.Int? = null) : ItemList {
+        val localVarResponse = getEvalsDatasetsByNameItemsWithHttpInfo(name = name, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ItemList
@@ -333,8 +333,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsDatasetsByNameItemsWithHttpInfo(name: kotlin.String, limit: kotlin.Int?) : ApiResponse<ItemList?> {
-        val localVariableConfig = getV1EvalsDatasetsByNameItemsRequestConfig(name = name, limit = limit)
+    fun getEvalsDatasetsByNameItemsWithHttpInfo(name: kotlin.String, limit: kotlin.Int?) : ApiResponse<ItemList?> {
+        val localVariableConfig = getEvalsDatasetsByNameItemsRequestConfig(name = name, limit = limit)
 
         return request<Unit, ItemList>(
             localVariableConfig
@@ -342,13 +342,13 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsDatasetsByNameItems
+     * To obtain the request config of the operation getEvalsDatasetsByNameItems
      *
      * @param name Dataset is the set to read, from the path — this collection only exists inside one.
      * @param limit  (optional)
      * @return RequestConfig
      */
-    fun getV1EvalsDatasetsByNameItemsRequestConfig(name: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getEvalsDatasetsByNameItemsRequestConfig(name: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -383,8 +383,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsEvaluators(limit: kotlin.Int? = null) : EvaluatorList {
-        val localVarResponse = getV1EvalsEvaluatorsWithHttpInfo(limit = limit)
+    fun getEvalsEvaluators(limit: kotlin.Int? = null) : EvaluatorList {
+        val localVarResponse = getEvalsEvaluatorsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EvaluatorList
@@ -412,8 +412,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsEvaluatorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<EvaluatorList?> {
-        val localVariableConfig = getV1EvalsEvaluatorsRequestConfig(limit = limit)
+    fun getEvalsEvaluatorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<EvaluatorList?> {
+        val localVariableConfig = getEvalsEvaluatorsRequestConfig(limit = limit)
 
         return request<Unit, EvaluatorList>(
             localVariableConfig
@@ -421,12 +421,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsEvaluators
+     * To obtain the request config of the operation getEvalsEvaluators
      *
      * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
      * @return RequestConfig
      */
-    fun getV1EvalsEvaluatorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getEvalsEvaluatorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -462,8 +462,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsMetrics(range: kotlin.String? = null, interval: kotlin.String? = null) : Board {
-        val localVarResponse = getV1EvalsMetricsWithHttpInfo(range = range, interval = interval)
+    fun getEvalsMetrics(range: kotlin.String? = null, interval: kotlin.String? = null) : Board {
+        val localVarResponse = getEvalsMetricsWithHttpInfo(range = range, interval = interval)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Board
@@ -492,8 +492,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsMetricsWithHttpInfo(range: kotlin.String?, interval: kotlin.String?) : ApiResponse<Board?> {
-        val localVariableConfig = getV1EvalsMetricsRequestConfig(range = range, interval = interval)
+    fun getEvalsMetricsWithHttpInfo(range: kotlin.String?, interval: kotlin.String?) : ApiResponse<Board?> {
+        val localVariableConfig = getEvalsMetricsRequestConfig(range = range, interval = interval)
 
         return request<Unit, Board>(
             localVariableConfig
@@ -501,13 +501,13 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsMetrics
+     * To obtain the request config of the operation getEvalsMetrics
      *
      * @param range Range is 24h (the default), 7d or 30d. Anything else normalises to 24h rather than failing, so the board always has a valid window. (optional)
      * @param interval Interval overrides the bucket the series is grouped into: \&quot;hour\&quot; or \&quot;day\&quot;. Any other value leaves the range&#39;s own default in place. (optional)
      * @return RequestConfig
      */
-    fun getV1EvalsMetricsRequestConfig(range: kotlin.String?, interval: kotlin.String?) : RequestConfig<Unit> {
+    fun getEvalsMetricsRequestConfig(range: kotlin.String?, interval: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -545,8 +545,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsRubrics(limit: kotlin.Int? = null) : ScoreConfigList {
-        val localVarResponse = getV1EvalsRubricsWithHttpInfo(limit = limit)
+    fun getEvalsRubrics(limit: kotlin.Int? = null) : ScoreConfigList {
+        val localVarResponse = getEvalsRubricsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ScoreConfigList
@@ -574,8 +574,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsRubricsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ScoreConfigList?> {
-        val localVariableConfig = getV1EvalsRubricsRequestConfig(limit = limit)
+    fun getEvalsRubricsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ScoreConfigList?> {
+        val localVariableConfig = getEvalsRubricsRequestConfig(limit = limit)
 
         return request<Unit, ScoreConfigList>(
             localVariableConfig
@@ -583,12 +583,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsRubrics
+     * To obtain the request config of the operation getEvalsRubrics
      *
      * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
      * @return RequestConfig
      */
-    fun getV1EvalsRubricsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getEvalsRubricsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -624,8 +624,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsRuns(datasetName: kotlin.String? = null, limit: kotlin.Int? = null) : Runs {
-        val localVarResponse = getV1EvalsRunsWithHttpInfo(datasetName = datasetName, limit = limit)
+    fun getEvalsRuns(datasetName: kotlin.String? = null, limit: kotlin.Int? = null) : Runs {
+        val localVarResponse = getEvalsRunsWithHttpInfo(datasetName = datasetName, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Runs
@@ -654,8 +654,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsRunsWithHttpInfo(datasetName: kotlin.String?, limit: kotlin.Int?) : ApiResponse<Runs?> {
-        val localVariableConfig = getV1EvalsRunsRequestConfig(datasetName = datasetName, limit = limit)
+    fun getEvalsRunsWithHttpInfo(datasetName: kotlin.String?, limit: kotlin.Int?) : ApiResponse<Runs?> {
+        val localVariableConfig = getEvalsRunsRequestConfig(datasetName = datasetName, limit = limit)
 
         return request<Unit, Runs>(
             localVariableConfig
@@ -663,13 +663,13 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsRuns
+     * To obtain the request config of the operation getEvalsRuns
      *
      * @param datasetName Dataset narrows to the runs against one dataset. (optional)
      * @param limit  (optional)
      * @return RequestConfig
      */
-    fun getV1EvalsRunsRequestConfig(datasetName: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getEvalsRunsRequestConfig(datasetName: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -710,8 +710,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsScores(name: kotlin.String? = null, runName: kotlin.String? = null, traceId: kotlin.String? = null, limit: kotlin.Int? = null) : ScoreList {
-        val localVarResponse = getV1EvalsScoresWithHttpInfo(name = name, runName = runName, traceId = traceId, limit = limit)
+    fun getEvalsScores(name: kotlin.String? = null, runName: kotlin.String? = null, traceId: kotlin.String? = null, limit: kotlin.Int? = null) : ScoreList {
+        val localVarResponse = getEvalsScoresWithHttpInfo(name = name, runName = runName, traceId = traceId, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ScoreList
@@ -742,8 +742,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsScoresWithHttpInfo(name: kotlin.String?, runName: kotlin.String?, traceId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ScoreList?> {
-        val localVariableConfig = getV1EvalsScoresRequestConfig(name = name, runName = runName, traceId = traceId, limit = limit)
+    fun getEvalsScoresWithHttpInfo(name: kotlin.String?, runName: kotlin.String?, traceId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ScoreList?> {
+        val localVariableConfig = getEvalsScoresRequestConfig(name = name, runName = runName, traceId = traceId, limit = limit)
 
         return request<Unit, ScoreList>(
             localVariableConfig
@@ -751,7 +751,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsScores
+     * To obtain the request config of the operation getEvalsScores
      *
      * @param name Name narrows to one score name. (optional)
      * @param runName RunName narrows to the scores of one run. (optional)
@@ -759,7 +759,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param limit  (optional)
      * @return RequestConfig
      */
-    fun getV1EvalsScoresRequestConfig(name: kotlin.String?, runName: kotlin.String?, traceId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getEvalsScoresRequestConfig(name: kotlin.String?, runName: kotlin.String?, traceId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -806,8 +806,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1EvalsTraces(sessionId: kotlin.String? = null, runName: kotlin.String? = null, datasetName: kotlin.String? = null, limit: kotlin.Int? = null) : TraceList {
-        val localVarResponse = getV1EvalsTracesWithHttpInfo(sessionId = sessionId, runName = runName, datasetName = datasetName, limit = limit)
+    fun getEvalsTraces(sessionId: kotlin.String? = null, runName: kotlin.String? = null, datasetName: kotlin.String? = null, limit: kotlin.Int? = null) : TraceList {
+        val localVarResponse = getEvalsTracesWithHttpInfo(sessionId = sessionId, runName = runName, datasetName = datasetName, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TraceList
@@ -838,8 +838,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EvalsTracesWithHttpInfo(sessionId: kotlin.String?, runName: kotlin.String?, datasetName: kotlin.String?, limit: kotlin.Int?) : ApiResponse<TraceList?> {
-        val localVariableConfig = getV1EvalsTracesRequestConfig(sessionId = sessionId, runName = runName, datasetName = datasetName, limit = limit)
+    fun getEvalsTracesWithHttpInfo(sessionId: kotlin.String?, runName: kotlin.String?, datasetName: kotlin.String?, limit: kotlin.Int?) : ApiResponse<TraceList?> {
+        val localVariableConfig = getEvalsTracesRequestConfig(sessionId = sessionId, runName = runName, datasetName = datasetName, limit = limit)
 
         return request<Unit, TraceList>(
             localVariableConfig
@@ -847,7 +847,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1EvalsTraces
+     * To obtain the request config of the operation getEvalsTraces
      *
      * @param sessionId SessionID narrows to one session, which for an evaluation is one run. (optional)
      * @param runName RunName narrows to the calls one run made. (optional)
@@ -855,7 +855,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param limit  (optional)
      * @return RequestConfig
      */
-    fun getV1EvalsTracesRequestConfig(sessionId: kotlin.String?, runName: kotlin.String?, datasetName: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getEvalsTracesRequestConfig(sessionId: kotlin.String?, runName: kotlin.String?, datasetName: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -899,8 +899,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EvalsDatasets(datasetReq: DatasetReq) : DatasetView {
-        val localVarResponse = postV1EvalsDatasetsWithHttpInfo(datasetReq = datasetReq)
+    fun postEvalsDatasets(datasetReq: DatasetReq) : DatasetView {
+        val localVarResponse = postEvalsDatasetsWithHttpInfo(datasetReq = datasetReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DatasetView
@@ -928,8 +928,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EvalsDatasetsWithHttpInfo(datasetReq: DatasetReq) : ApiResponse<DatasetView?> {
-        val localVariableConfig = postV1EvalsDatasetsRequestConfig(datasetReq = datasetReq)
+    fun postEvalsDatasetsWithHttpInfo(datasetReq: DatasetReq) : ApiResponse<DatasetView?> {
+        val localVariableConfig = postEvalsDatasetsRequestConfig(datasetReq = datasetReq)
 
         return request<DatasetReq, DatasetView>(
             localVariableConfig
@@ -937,12 +937,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EvalsDatasets
+     * To obtain the request config of the operation postEvalsDatasets
      *
      * @param datasetReq 
      * @return RequestConfig
      */
-    fun postV1EvalsDatasetsRequestConfig(datasetReq: DatasetReq) : RequestConfig<DatasetReq> {
+    fun postEvalsDatasetsRequestConfig(datasetReq: DatasetReq) : RequestConfig<DatasetReq> {
         val localVariableBody = datasetReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -974,8 +974,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EvalsDatasetsByNameItems(name: kotlin.String, itemReq: ItemReq) : ItemView {
-        val localVarResponse = postV1EvalsDatasetsByNameItemsWithHttpInfo(name = name, itemReq = itemReq)
+    fun postEvalsDatasetsByNameItems(name: kotlin.String, itemReq: ItemReq) : ItemView {
+        val localVarResponse = postEvalsDatasetsByNameItemsWithHttpInfo(name = name, itemReq = itemReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ItemView
@@ -1004,8 +1004,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EvalsDatasetsByNameItemsWithHttpInfo(name: kotlin.String, itemReq: ItemReq) : ApiResponse<ItemView?> {
-        val localVariableConfig = postV1EvalsDatasetsByNameItemsRequestConfig(name = name, itemReq = itemReq)
+    fun postEvalsDatasetsByNameItemsWithHttpInfo(name: kotlin.String, itemReq: ItemReq) : ApiResponse<ItemView?> {
+        val localVariableConfig = postEvalsDatasetsByNameItemsRequestConfig(name = name, itemReq = itemReq)
 
         return request<ItemReq, ItemView>(
             localVariableConfig
@@ -1013,13 +1013,13 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EvalsDatasetsByNameItems
+     * To obtain the request config of the operation postEvalsDatasetsByNameItems
      *
      * @param name 
      * @param itemReq 
      * @return RequestConfig
      */
-    fun postV1EvalsDatasetsByNameItemsRequestConfig(name: kotlin.String, itemReq: ItemReq) : RequestConfig<ItemReq> {
+    fun postEvalsDatasetsByNameItemsRequestConfig(name: kotlin.String, itemReq: ItemReq) : RequestConfig<ItemReq> {
         val localVariableBody = itemReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1050,8 +1050,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EvalsEvaluators(evaluatorReq: EvaluatorReq) : EvaluatorView {
-        val localVarResponse = postV1EvalsEvaluatorsWithHttpInfo(evaluatorReq = evaluatorReq)
+    fun postEvalsEvaluators(evaluatorReq: EvaluatorReq) : EvaluatorView {
+        val localVarResponse = postEvalsEvaluatorsWithHttpInfo(evaluatorReq = evaluatorReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EvaluatorView
@@ -1079,8 +1079,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EvalsEvaluatorsWithHttpInfo(evaluatorReq: EvaluatorReq) : ApiResponse<EvaluatorView?> {
-        val localVariableConfig = postV1EvalsEvaluatorsRequestConfig(evaluatorReq = evaluatorReq)
+    fun postEvalsEvaluatorsWithHttpInfo(evaluatorReq: EvaluatorReq) : ApiResponse<EvaluatorView?> {
+        val localVariableConfig = postEvalsEvaluatorsRequestConfig(evaluatorReq = evaluatorReq)
 
         return request<EvaluatorReq, EvaluatorView>(
             localVariableConfig
@@ -1088,12 +1088,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EvalsEvaluators
+     * To obtain the request config of the operation postEvalsEvaluators
      *
      * @param evaluatorReq 
      * @return RequestConfig
      */
-    fun postV1EvalsEvaluatorsRequestConfig(evaluatorReq: EvaluatorReq) : RequestConfig<EvaluatorReq> {
+    fun postEvalsEvaluatorsRequestConfig(evaluatorReq: EvaluatorReq) : RequestConfig<EvaluatorReq> {
         val localVariableBody = evaluatorReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1124,8 +1124,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EvalsRubrics(scoreConfigReq: ScoreConfigReq) : ScoreConfigView {
-        val localVarResponse = postV1EvalsRubricsWithHttpInfo(scoreConfigReq = scoreConfigReq)
+    fun postEvalsRubrics(scoreConfigReq: ScoreConfigReq) : ScoreConfigView {
+        val localVarResponse = postEvalsRubricsWithHttpInfo(scoreConfigReq = scoreConfigReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ScoreConfigView
@@ -1153,8 +1153,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EvalsRubricsWithHttpInfo(scoreConfigReq: ScoreConfigReq) : ApiResponse<ScoreConfigView?> {
-        val localVariableConfig = postV1EvalsRubricsRequestConfig(scoreConfigReq = scoreConfigReq)
+    fun postEvalsRubricsWithHttpInfo(scoreConfigReq: ScoreConfigReq) : ApiResponse<ScoreConfigView?> {
+        val localVariableConfig = postEvalsRubricsRequestConfig(scoreConfigReq = scoreConfigReq)
 
         return request<ScoreConfigReq, ScoreConfigView>(
             localVariableConfig
@@ -1162,12 +1162,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EvalsRubrics
+     * To obtain the request config of the operation postEvalsRubrics
      *
      * @param scoreConfigReq 
      * @return RequestConfig
      */
-    fun postV1EvalsRubricsRequestConfig(scoreConfigReq: ScoreConfigReq) : RequestConfig<ScoreConfigReq> {
+    fun postEvalsRubricsRequestConfig(scoreConfigReq: ScoreConfigReq) : RequestConfig<ScoreConfigReq> {
         val localVariableBody = scoreConfigReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1199,8 +1199,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EvalsRuns(runRequest: RunRequest, authorization: kotlin.String? = null) : RunSummary {
-        val localVarResponse = postV1EvalsRunsWithHttpInfo(runRequest = runRequest, authorization = authorization)
+    fun postEvalsRuns(runRequest: RunRequest, authorization: kotlin.String? = null) : RunSummary {
+        val localVarResponse = postEvalsRunsWithHttpInfo(runRequest = runRequest, authorization = authorization)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RunSummary
@@ -1229,8 +1229,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EvalsRunsWithHttpInfo(runRequest: RunRequest, authorization: kotlin.String?) : ApiResponse<RunSummary?> {
-        val localVariableConfig = postV1EvalsRunsRequestConfig(runRequest = runRequest, authorization = authorization)
+    fun postEvalsRunsWithHttpInfo(runRequest: RunRequest, authorization: kotlin.String?) : ApiResponse<RunSummary?> {
+        val localVariableConfig = postEvalsRunsRequestConfig(runRequest = runRequest, authorization = authorization)
 
         return request<RunRequest, RunSummary>(
             localVariableConfig
@@ -1238,13 +1238,13 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EvalsRuns
+     * To obtain the request config of the operation postEvalsRuns
      *
      * @param runRequest 
      * @param authorization  (optional)
      * @return RequestConfig
      */
-    fun postV1EvalsRunsRequestConfig(runRequest: RunRequest, authorization: kotlin.String?) : RequestConfig<RunRequest> {
+    fun postEvalsRunsRequestConfig(runRequest: RunRequest, authorization: kotlin.String?) : RequestConfig<RunRequest> {
         val localVariableBody = runRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1276,8 +1276,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EvalsScores(scoreReq: ScoreReq) : ScoreView {
-        val localVarResponse = postV1EvalsScoresWithHttpInfo(scoreReq = scoreReq)
+    fun postEvalsScores(scoreReq: ScoreReq) : ScoreView {
+        val localVarResponse = postEvalsScoresWithHttpInfo(scoreReq = scoreReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ScoreView
@@ -1305,8 +1305,8 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EvalsScoresWithHttpInfo(scoreReq: ScoreReq) : ApiResponse<ScoreView?> {
-        val localVariableConfig = postV1EvalsScoresRequestConfig(scoreReq = scoreReq)
+    fun postEvalsScoresWithHttpInfo(scoreReq: ScoreReq) : ApiResponse<ScoreView?> {
+        val localVariableConfig = postEvalsScoresRequestConfig(scoreReq = scoreReq)
 
         return request<ScoreReq, ScoreView>(
             localVariableConfig
@@ -1314,12 +1314,12 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1EvalsScores
+     * To obtain the request config of the operation postEvalsScores
      *
      * @param scoreReq 
      * @return RequestConfig
      */
-    fun postV1EvalsScoresRequestConfig(scoreReq: ScoreReq) : RequestConfig<ScoreReq> {
+    fun postEvalsScoresRequestConfig(scoreReq: ScoreReq) : RequestConfig<ScoreReq> {
         val localVariableBody = scoreReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -62,8 +62,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1World() : WorldIndex {
-        val localVarResponse = getV1WorldWithHttpInfo()
+    fun getWorld() : WorldIndex {
+        val localVarResponse = getWorldWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as WorldIndex
@@ -90,8 +90,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WorldWithHttpInfo() : ApiResponse<WorldIndex?> {
-        val localVariableConfig = getV1WorldRequestConfig()
+    fun getWorldWithHttpInfo() : ApiResponse<WorldIndex?> {
+        val localVariableConfig = getWorldRequestConfig()
 
         return request<Unit, WorldIndex>(
             localVariableConfig
@@ -99,11 +99,11 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1World
+     * To obtain the request config of the operation getWorld
      *
      * @return RequestConfig
      */
-    fun getV1WorldRequestConfig() : RequestConfig<Unit> {
+    fun getWorldRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -133,8 +133,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WorldLimits(plan: kotlin.String? = null) : LimitsView {
-        val localVarResponse = getV1WorldLimitsWithHttpInfo(plan = plan)
+    fun getWorldLimits(plan: kotlin.String? = null) : LimitsView {
+        val localVarResponse = getWorldLimitsWithHttpInfo(plan = plan)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LimitsView
@@ -162,8 +162,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WorldLimitsWithHttpInfo(plan: kotlin.String?) : ApiResponse<LimitsView?> {
-        val localVariableConfig = getV1WorldLimitsRequestConfig(plan = plan)
+    fun getWorldLimitsWithHttpInfo(plan: kotlin.String?) : ApiResponse<LimitsView?> {
+        val localVariableConfig = getWorldLimitsRequestConfig(plan = plan)
 
         return request<Unit, LimitsView>(
             localVariableConfig
@@ -171,12 +171,12 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1WorldLimits
+     * To obtain the request config of the operation getWorldLimits
      *
      * @param plan Plan is a World plan id from the live @hanzo/plans catalog, e.g. world-pro. Empty means world-free, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
      * @return RequestConfig
      */
-    fun getV1WorldLimitsRequestConfig(plan: kotlin.String?) : RequestConfig<Unit> {
+    fun getWorldLimitsRequestConfig(plan: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -210,8 +210,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WorldNews() : NewsResponse {
-        val localVarResponse = getV1WorldNewsWithHttpInfo()
+    fun getWorldNews() : NewsResponse {
+        val localVarResponse = getWorldNewsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as NewsResponse
@@ -238,8 +238,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WorldNewsWithHttpInfo() : ApiResponse<NewsResponse?> {
-        val localVariableConfig = getV1WorldNewsRequestConfig()
+    fun getWorldNewsWithHttpInfo() : ApiResponse<NewsResponse?> {
+        val localVariableConfig = getWorldNewsRequestConfig()
 
         return request<Unit, NewsResponse>(
             localVariableConfig
@@ -247,11 +247,11 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1WorldNews
+     * To obtain the request config of the operation getWorldNews
      *
      * @return RequestConfig
      */
-    fun getV1WorldNewsRequestConfig() : RequestConfig<Unit> {
+    fun getWorldNewsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -280,8 +280,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WorldPipeline() : PipelineView {
-        val localVarResponse = getV1WorldPipelineWithHttpInfo()
+    fun getWorldPipeline() : PipelineView {
+        val localVarResponse = getWorldPipelineWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PipelineView
@@ -308,8 +308,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WorldPipelineWithHttpInfo() : ApiResponse<PipelineView?> {
-        val localVariableConfig = getV1WorldPipelineRequestConfig()
+    fun getWorldPipelineWithHttpInfo() : ApiResponse<PipelineView?> {
+        val localVariableConfig = getWorldPipelineRequestConfig()
 
         return request<Unit, PipelineView>(
             localVariableConfig
@@ -317,11 +317,11 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1WorldPipeline
+     * To obtain the request config of the operation getWorldPipeline
      *
      * @return RequestConfig
      */
-    fun getV1WorldPipelineRequestConfig() : RequestConfig<Unit> {
+    fun getWorldPipelineRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -349,8 +349,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WorldStream() : Unit {
-        val localVarResponse = getV1WorldStreamWithHttpInfo()
+    fun getWorldStream() : Unit {
+        val localVarResponse = getWorldStreamWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -376,8 +376,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WorldStreamWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1WorldStreamRequestConfig()
+    fun getWorldStreamWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getWorldStreamRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -385,11 +385,11 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1WorldStream
+     * To obtain the request config of the operation getWorldStream
      *
      * @return RequestConfig
      */
-    fun getV1WorldStreamRequestConfig() : RequestConfig<Unit> {
+    fun getWorldStreamRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -418,8 +418,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1WorldPipeline(pipelineReq: PipelineReq) : PipelineView {
-        val localVarResponse = putV1WorldPipelineWithHttpInfo(pipelineReq = pipelineReq)
+    fun putWorldPipeline(pipelineReq: PipelineReq) : PipelineView {
+        val localVarResponse = putWorldPipelineWithHttpInfo(pipelineReq = pipelineReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PipelineView
@@ -447,8 +447,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1WorldPipelineWithHttpInfo(pipelineReq: PipelineReq) : ApiResponse<PipelineView?> {
-        val localVariableConfig = putV1WorldPipelineRequestConfig(pipelineReq = pipelineReq)
+    fun putWorldPipelineWithHttpInfo(pipelineReq: PipelineReq) : ApiResponse<PipelineView?> {
+        val localVariableConfig = putWorldPipelineRequestConfig(pipelineReq = pipelineReq)
 
         return request<PipelineReq, PipelineView>(
             localVariableConfig
@@ -456,12 +456,12 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1WorldPipeline
+     * To obtain the request config of the operation putWorldPipeline
      *
      * @param pipelineReq 
      * @return RequestConfig
      */
-    fun putV1WorldPipelineRequestConfig(pipelineReq: PipelineReq) : RequestConfig<PipelineReq> {
+    fun putWorldPipelineRequestConfig(pipelineReq: PipelineReq) : RequestConfig<PipelineReq> {
         val localVariableBody = pipelineReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

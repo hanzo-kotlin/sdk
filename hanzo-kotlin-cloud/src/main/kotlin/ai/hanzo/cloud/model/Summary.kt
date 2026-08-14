@@ -21,28 +21,22 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param active 
- * @param budget Budget and Spend are the summed campaign budget and spend, in cents.
- * @param campaigns Campaigns is how many campaigns the org has, Active how many are running.
- * @param spend 
+ * @param calls 
+ * @param messages 
+ * @param numbers 
  */
 
 
 data class Summary (
 
-    @SerializedName("active")
-    val active: kotlin.Int? = null,
+    @SerializedName("calls")
+    val calls: kotlin.Int? = null,
 
-    /* Budget and Spend are the summed campaign budget and spend, in cents. */
-    @SerializedName("budget")
-    val budget: kotlin.Int? = null,
+    @SerializedName("messages")
+    val messages: kotlin.Int? = null,
 
-    /* Campaigns is how many campaigns the org has, Active how many are running. */
-    @SerializedName("campaigns")
-    val campaigns: kotlin.Int? = null,
-
-    @SerializedName("spend")
-    val spend: kotlin.Int? = null
+    @SerializedName("numbers")
+    val numbers: kotlin.Int? = null
 
 ) {
 

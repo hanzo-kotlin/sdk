@@ -58,8 +58,8 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Prefs() : PrefsView {
-        val localVarResponse = getV1PrefsWithHttpInfo()
+    fun getPrefs() : PrefsView {
+        val localVarResponse = getPrefsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PrefsView
@@ -86,8 +86,8 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PrefsWithHttpInfo() : ApiResponse<PrefsView?> {
-        val localVariableConfig = getV1PrefsRequestConfig()
+    fun getPrefsWithHttpInfo() : ApiResponse<PrefsView?> {
+        val localVariableConfig = getPrefsRequestConfig()
 
         return request<Unit, PrefsView>(
             localVariableConfig
@@ -95,11 +95,11 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Prefs
+     * To obtain the request config of the operation getPrefs
      *
      * @return RequestConfig
      */
-    fun getV1PrefsRequestConfig() : RequestConfig<Unit> {
+    fun getPrefsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -127,8 +127,8 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1Prefs() : Unit {
-        val localVarResponse = patchV1PrefsWithHttpInfo()
+    fun patchPrefs() : Unit {
+        val localVarResponse = patchPrefsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -154,8 +154,8 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1PrefsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1PrefsRequestConfig()
+    fun patchPrefsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchPrefsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -163,11 +163,11 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1Prefs
+     * To obtain the request config of the operation patchPrefs
      *
      * @return RequestConfig
      */
-    fun patchV1PrefsRequestConfig() : RequestConfig<Unit> {
+    fun patchPrefsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

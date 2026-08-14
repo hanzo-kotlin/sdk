@@ -22,6 +22,7 @@ import okhttp3.HttpUrl
 import ai.hanzo.cloud.model.ProjectsBoundDomains
 import ai.hanzo.cloud.model.ProjectsComplete
 import ai.hanzo.cloud.model.ProjectsCreate
+import ai.hanzo.cloud.model.ProjectsDeployStart
 import ai.hanzo.cloud.model.ProjectsDeployment
 import ai.hanzo.cloud.model.ProjectsDomain
 import ai.hanzo.cloud.model.ProjectsDomains
@@ -57,7 +58,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * DELETE /v1/projects/{slug}
      * Deletes a project and takes its site off the internet.
-     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
+     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the git source is retired on every copy it has so a reclaimed slug never adopts a repository left behind (visibility.go), the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -67,8 +68,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1ProjectsBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = deleteV1ProjectsBySlugWithHttpInfo(slug = slug)
+    fun deleteProjectsBySlug(slug: kotlin.String) : Unit {
+        val localVarResponse = deleteProjectsBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -88,15 +89,15 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * DELETE /v1/projects/{slug}
      * Deletes a project and takes its site off the internet.
-     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
+     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the git source is retired on every copy it has so a reclaimed slug never adopts a repository left behind (visibility.go), the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1ProjectsBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1ProjectsBySlugRequestConfig(slug = slug)
+    fun deleteProjectsBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteProjectsBySlugRequestConfig(slug = slug)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -104,12 +105,12 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1ProjectsBySlug
+     * To obtain the request config of the operation deleteProjectsBySlug
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun deleteV1ProjectsBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun deleteProjectsBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -138,8 +139,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1ProjectsBySlugDomainsByHost(slug: kotlin.String, host: kotlin.String) : Unit {
-        val localVarResponse = deleteV1ProjectsBySlugDomainsByHostWithHttpInfo(slug = slug, host = host)
+    fun deleteProjectsBySlugDomainsByHost(slug: kotlin.String, host: kotlin.String) : Unit {
+        val localVarResponse = deleteProjectsBySlugDomainsByHostWithHttpInfo(slug = slug, host = host)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -167,8 +168,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1ProjectsBySlugDomainsByHostWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1ProjectsBySlugDomainsByHostRequestConfig(slug = slug, host = host)
+    fun deleteProjectsBySlugDomainsByHostWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteProjectsBySlugDomainsByHostRequestConfig(slug = slug, host = host)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -176,13 +177,13 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1ProjectsBySlugDomainsByHost
+     * To obtain the request config of the operation deleteProjectsBySlugDomainsByHost
      *
      * @param slug Slug is the project the host is attached to, from the path.
      * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
      * @return RequestConfig
      */
-    fun deleteV1ProjectsBySlugDomainsByHostRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
+    fun deleteProjectsBySlugDomainsByHostRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -210,8 +211,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Projects() : kotlin.collections.List<ProjectsProject> {
-        val localVarResponse = getV1ProjectsWithHttpInfo()
+    fun getProjects() : kotlin.collections.List<ProjectsProject> {
+        val localVarResponse = getProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectsProject>
@@ -238,8 +239,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ProjectsWithHttpInfo() : ApiResponse<kotlin.collections.List<ProjectsProject>?> {
-        val localVariableConfig = getV1ProjectsRequestConfig()
+    fun getProjectsWithHttpInfo() : ApiResponse<kotlin.collections.List<ProjectsProject>?> {
+        val localVariableConfig = getProjectsRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProjectsProject>>(
             localVariableConfig
@@ -247,11 +248,11 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1Projects
+     * To obtain the request config of the operation getProjects
      *
      * @return RequestConfig
      */
-    fun getV1ProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -281,8 +282,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ProjectsBySlug(slug: kotlin.String) : ProjectsProject {
-        val localVarResponse = getV1ProjectsBySlugWithHttpInfo(slug = slug)
+    fun getProjectsBySlug(slug: kotlin.String) : ProjectsProject {
+        val localVarResponse = getProjectsBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -310,8 +311,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ProjectsBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = getV1ProjectsBySlugRequestConfig(slug = slug)
+    fun getProjectsBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = getProjectsBySlugRequestConfig(slug = slug)
 
         return request<Unit, ProjectsProject>(
             localVariableConfig
@@ -319,12 +320,12 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ProjectsBySlug
+     * To obtain the request config of the operation getProjectsBySlug
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun getV1ProjectsBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getProjectsBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -354,8 +355,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ProjectsBySlugDeployments(slug: kotlin.String) : kotlin.collections.List<ProjectsDeployment> {
-        val localVarResponse = getV1ProjectsBySlugDeploymentsWithHttpInfo(slug = slug)
+    fun getProjectsBySlugDeployments(slug: kotlin.String) : kotlin.collections.List<ProjectsDeployment> {
+        val localVarResponse = getProjectsBySlugDeploymentsWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectsDeployment>
@@ -383,8 +384,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ProjectsBySlugDeploymentsWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.collections.List<ProjectsDeployment>?> {
-        val localVariableConfig = getV1ProjectsBySlugDeploymentsRequestConfig(slug = slug)
+    fun getProjectsBySlugDeploymentsWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.collections.List<ProjectsDeployment>?> {
+        val localVariableConfig = getProjectsBySlugDeploymentsRequestConfig(slug = slug)
 
         return request<Unit, kotlin.collections.List<ProjectsDeployment>>(
             localVariableConfig
@@ -392,12 +393,12 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ProjectsBySlugDeployments
+     * To obtain the request config of the operation getProjectsBySlugDeployments
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun getV1ProjectsBySlugDeploymentsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getProjectsBySlugDeploymentsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -428,8 +429,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ProjectsBySlugDeploymentsById(slug: kotlin.String, id: kotlin.String) : ProjectsDeployment {
-        val localVarResponse = getV1ProjectsBySlugDeploymentsByIdWithHttpInfo(slug = slug, id = id)
+    fun getProjectsBySlugDeploymentsById(slug: kotlin.String, id: kotlin.String) : ProjectsDeployment {
+        val localVarResponse = getProjectsBySlugDeploymentsByIdWithHttpInfo(slug = slug, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
@@ -458,8 +459,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ProjectsBySlugDeploymentsByIdWithHttpInfo(slug: kotlin.String, id: kotlin.String) : ApiResponse<ProjectsDeployment?> {
-        val localVariableConfig = getV1ProjectsBySlugDeploymentsByIdRequestConfig(slug = slug, id = id)
+    fun getProjectsBySlugDeploymentsByIdWithHttpInfo(slug: kotlin.String, id: kotlin.String) : ApiResponse<ProjectsDeployment?> {
+        val localVariableConfig = getProjectsBySlugDeploymentsByIdRequestConfig(slug = slug, id = id)
 
         return request<Unit, ProjectsDeployment>(
             localVariableConfig
@@ -467,13 +468,13 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ProjectsBySlugDeploymentsById
+     * To obtain the request config of the operation getProjectsBySlugDeploymentsById
      *
      * @param slug Slug is the project the deployment belongs to, from the path.
      * @param id ID is the deployment id, from the path. A deployment of another project — or of another tenant&#39;s project — is not found.
      * @return RequestConfig
      */
-    fun getV1ProjectsBySlugDeploymentsByIdRequestConfig(slug: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun getProjectsBySlugDeploymentsByIdRequestConfig(slug: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -503,8 +504,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ProjectsBySlugDomains(slug: kotlin.String) : ProjectsDomains {
-        val localVarResponse = getV1ProjectsBySlugDomainsWithHttpInfo(slug = slug)
+    fun getProjectsBySlugDomains(slug: kotlin.String) : ProjectsDomains {
+        val localVarResponse = getProjectsBySlugDomainsWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDomains
@@ -532,8 +533,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ProjectsBySlugDomainsWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsDomains?> {
-        val localVariableConfig = getV1ProjectsBySlugDomainsRequestConfig(slug = slug)
+    fun getProjectsBySlugDomainsWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsDomains?> {
+        val localVariableConfig = getProjectsBySlugDomainsRequestConfig(slug = slug)
 
         return request<Unit, ProjectsDomains>(
             localVariableConfig
@@ -541,12 +542,12 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1ProjectsBySlugDomains
+     * To obtain the request config of the operation getProjectsBySlugDomains
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun getV1ProjectsBySlugDomainsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getProjectsBySlugDomainsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -577,8 +578,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1ProjectsBySlug(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ProjectsProject {
-        val localVarResponse = patchV1ProjectsBySlugWithHttpInfo(slug = slug, projectsUpdate = projectsUpdate)
+    fun patchProjectsBySlug(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ProjectsProject {
+        val localVarResponse = patchProjectsBySlugWithHttpInfo(slug = slug, projectsUpdate = projectsUpdate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -607,8 +608,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1ProjectsBySlugWithHttpInfo(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = patchV1ProjectsBySlugRequestConfig(slug = slug, projectsUpdate = projectsUpdate)
+    fun patchProjectsBySlugWithHttpInfo(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = patchProjectsBySlugRequestConfig(slug = slug, projectsUpdate = projectsUpdate)
 
         return request<ProjectsUpdate, ProjectsProject>(
             localVariableConfig
@@ -616,13 +617,13 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1ProjectsBySlug
+     * To obtain the request config of the operation patchProjectsBySlug
      *
      * @param slug Slug is the project to update, from the path. The URL is the addressing authority — a &#x60;slug&#x60; in the body cannot move the write to another project.
      * @param projectsUpdate 
      * @return RequestConfig
      */
-    fun patchV1ProjectsBySlugRequestConfig(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : RequestConfig<ProjectsUpdate> {
+    fun patchProjectsBySlugRequestConfig(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : RequestConfig<ProjectsUpdate> {
         val localVariableBody = projectsUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -653,8 +654,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Projects(projectsCreate: ProjectsCreate) : ProjectsProject {
-        val localVarResponse = postV1ProjectsWithHttpInfo(projectsCreate = projectsCreate)
+    fun postProjects(projectsCreate: ProjectsCreate) : ProjectsProject {
+        val localVarResponse = postProjectsWithHttpInfo(projectsCreate = projectsCreate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -682,8 +683,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ProjectsWithHttpInfo(projectsCreate: ProjectsCreate) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = postV1ProjectsRequestConfig(projectsCreate = projectsCreate)
+    fun postProjectsWithHttpInfo(projectsCreate: ProjectsCreate) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = postProjectsRequestConfig(projectsCreate = projectsCreate)
 
         return request<ProjectsCreate, ProjectsProject>(
             localVariableConfig
@@ -691,12 +692,12 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1Projects
+     * To obtain the request config of the operation postProjects
      *
      * @param projectsCreate 
      * @return RequestConfig
      */
-    fun postV1ProjectsRequestConfig(projectsCreate: ProjectsCreate) : RequestConfig<ProjectsCreate> {
+    fun postProjectsRequestConfig(projectsCreate: ProjectsCreate) : RequestConfig<ProjectsCreate> {
         val localVariableBody = projectsCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -715,22 +716,24 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/projects/{slug}/deploy
-     * Deploy a build — upload an archive, or trigger a build from the linked repo
-     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60;. It accepts BOTH shapes on one address and the content type decides which: a &#x60;zip&#x60; or &#x60;tar.gz&#x60; archive — raw in the body or as a multipart file part — is uploaded and served immediately, answering 200 with the finished deployment; a JSON body instead queues a build from the project&#39;s linked repo and answers 202 with a queued deployment and, where one could be minted, a scoped upload grant for CI to write with. The git path needs a linked repo (400 without one) and is finished later by the completion hook.  Billing is fail-closed and fails FIRST: the hosting gate runs before anything is parsed or uploaded, so an unfunded org is 402 and an unreachable commerce is 503 with nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site, and a queued build is billed at completion rather than at queue time. A redeploy returns the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured, else 503; an archive that does not walk is a 400 and one over the size cap is a 413.
+     * Upload a built site as one archive and serve it
+     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60; in one call. The body is the site itself — a &#x60;zip&#x60; or &#x60;tar.gz&#x60; holding &#x60;index.html&#x60; at its root (or a single wrapper directory that does), sent raw or as a multipart file part. It is unpacked to the site&#39;s own storage prefix and served immediately, answering the finished deployment.  It is bounded by the edge body limit (16 MiB by default), and that bound is the whole reason the other path exists: an oversized POST is refused by the server BEFORE any handler runs and surfaces as an opaque &#x60;400 Error when parsing request&#x60; that reads like a malformed payload rather than a size cap. A site too large for one archive opens a deployment with &#x60;POST /v1/sites/{slug}/deployments&#x60; instead and writes its files straight to storage against the scoped grant that answers with — no body limit, and no bytes through this API at all.  Billing is fail-closed and fails FIRST: the hosting gate runs before anything is parsed or uploaded, so an unfunded org is 402 and an unreachable commerce is 503 with nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site — and a redeploy answers the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured (503); an archive that does not walk is a 400 and one over the size cap is a 413.
      * @param slug 
-     * @return void
+     * @param body  (optional)
+     * @return ProjectsDeployment
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ProjectsBySlugDeploy(slug: kotlin.String) : Unit {
-        val localVarResponse = postV1ProjectsBySlugDeployWithHttpInfo(slug = slug)
+    fun postProjectsBySlugDeploy(slug: kotlin.String, body: java.io.File? = null) : ProjectsDeployment {
+        val localVarResponse = postProjectsBySlugDeployWithHttpInfo(slug = slug, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -746,36 +749,118 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/projects/{slug}/deploy
-     * Deploy a build — upload an archive, or trigger a build from the linked repo
-     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60;. It accepts BOTH shapes on one address and the content type decides which: a &#x60;zip&#x60; or &#x60;tar.gz&#x60; archive — raw in the body or as a multipart file part — is uploaded and served immediately, answering 200 with the finished deployment; a JSON body instead queues a build from the project&#39;s linked repo and answers 202 with a queued deployment and, where one could be minted, a scoped upload grant for CI to write with. The git path needs a linked repo (400 without one) and is finished later by the completion hook.  Billing is fail-closed and fails FIRST: the hosting gate runs before anything is parsed or uploaded, so an unfunded org is 402 and an unreachable commerce is 503 with nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site, and a queued build is billed at completion rather than at queue time. A redeploy returns the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured, else 503; an archive that does not walk is a 400 and one over the size cap is a 413.
+     * Upload a built site as one archive and serve it
+     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60; in one call. The body is the site itself — a &#x60;zip&#x60; or &#x60;tar.gz&#x60; holding &#x60;index.html&#x60; at its root (or a single wrapper directory that does), sent raw or as a multipart file part. It is unpacked to the site&#39;s own storage prefix and served immediately, answering the finished deployment.  It is bounded by the edge body limit (16 MiB by default), and that bound is the whole reason the other path exists: an oversized POST is refused by the server BEFORE any handler runs and surfaces as an opaque &#x60;400 Error when parsing request&#x60; that reads like a malformed payload rather than a size cap. A site too large for one archive opens a deployment with &#x60;POST /v1/sites/{slug}/deployments&#x60; instead and writes its files straight to storage against the scoped grant that answers with — no body limit, and no bytes through this API at all.  Billing is fail-closed and fails FIRST: the hosting gate runs before anything is parsed or uploaded, so an unfunded org is 402 and an unreachable commerce is 503 with nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site — and a redeploy answers the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured (503); an archive that does not walk is a 400 and one over the size cap is a 413.
      * @param slug 
-     * @return ApiResponse<Unit?>
+     * @param body  (optional)
+     * @return ApiResponse<ProjectsDeployment?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ProjectsBySlugDeployWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ProjectsBySlugDeployRequestConfig(slug = slug)
+    fun postProjectsBySlugDeployWithHttpInfo(slug: kotlin.String, body: java.io.File?) : ApiResponse<ProjectsDeployment?> {
+        val localVariableConfig = postProjectsBySlugDeployRequestConfig(slug = slug, body = body)
 
-        return request<Unit, Unit>(
+        return request<java.io.File, ProjectsDeployment>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1ProjectsBySlugDeploy
+     * To obtain the request config of the operation postProjectsBySlugDeploy
      *
      * @param slug 
+     * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1ProjectsBySlugDeployRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postProjectsBySlugDeployRequestConfig(slug: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+        val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/octet-stream"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/projects/{slug}/deploy".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/projects/{slug}/deployments
+     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage.
+     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage. Answers 202.  This is the path for a site too large to send as one archive: a real export is hundreds of megabytes against a 16 MiB body limit, so the bytes deliberately do NOT pass through the API. The answer carries &#x60;bucket&#x60;, &#x60;prefix&#x60; and &#x60;upload&#x60; — a presigned POST policy that S3 itself confines to this site&#39;s prefix (starts-with &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60;), expires in 30 minutes and bounds each object. So a build writes its own files and holds no standing bucket credential; there is nothing to rotate and nothing that leaks between tenants. Never guess the prefix — it is server-derived, and a guessed one lands where nothing is served.  The deployment is &#x60;queued&#x60; until POST .../deployments/{id}/complete flips it live (or error). That completion is also where DELETION happens: the grant authorizes writes only, so a build cannot remove a file, and cloud reconciles the prefix against the &#x60;keys&#x60; manifest the completion carries. A build that dies before completing leaves the deployment queued rather than a half-live site.  The grant is on the 202 and NOWHERE else — it is never stored and never replayed on a later read, so it cannot outlive the build it was minted for. A deployment whose grant could not be minted is still created and still completable; it simply carries no &#x60;upload&#x60;, and a caller with no other way to write should treat that as the failure it is.  Billing: the hosting gate runs BEFORE anything is created (402 unfunded, 503 commerce unreachable), and the debit lands on the completion that goes live — never on a queued or failed build.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
+     * @param slug Slug is the site to deploy, from the path.
+     * @param projectsDeployStart 
+     * @return ProjectsDeployment
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postProjectsBySlugDeployments(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : ProjectsDeployment {
+        val localVarResponse = postProjectsBySlugDeploymentsWithHttpInfo(slug = slug, projectsDeployStart = projectsDeployStart)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/projects/{slug}/deployments
+     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage.
+     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage. Answers 202.  This is the path for a site too large to send as one archive: a real export is hundreds of megabytes against a 16 MiB body limit, so the bytes deliberately do NOT pass through the API. The answer carries &#x60;bucket&#x60;, &#x60;prefix&#x60; and &#x60;upload&#x60; — a presigned POST policy that S3 itself confines to this site&#39;s prefix (starts-with &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60;), expires in 30 minutes and bounds each object. So a build writes its own files and holds no standing bucket credential; there is nothing to rotate and nothing that leaks between tenants. Never guess the prefix — it is server-derived, and a guessed one lands where nothing is served.  The deployment is &#x60;queued&#x60; until POST .../deployments/{id}/complete flips it live (or error). That completion is also where DELETION happens: the grant authorizes writes only, so a build cannot remove a file, and cloud reconciles the prefix against the &#x60;keys&#x60; manifest the completion carries. A build that dies before completing leaves the deployment queued rather than a half-live site.  The grant is on the 202 and NOWHERE else — it is never stored and never replayed on a later read, so it cannot outlive the build it was minted for. A deployment whose grant could not be minted is still created and still completable; it simply carries no &#x60;upload&#x60;, and a caller with no other way to write should treat that as the failure it is.  Billing: the hosting gate runs BEFORE anything is created (402 unfunded, 503 commerce unreachable), and the debit lands on the completion that goes live — never on a queued or failed build.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
+     * @param slug Slug is the site to deploy, from the path.
+     * @param projectsDeployStart 
+     * @return ApiResponse<ProjectsDeployment?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postProjectsBySlugDeploymentsWithHttpInfo(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : ApiResponse<ProjectsDeployment?> {
+        val localVariableConfig = postProjectsBySlugDeploymentsRequestConfig(slug = slug, projectsDeployStart = projectsDeployStart)
+
+        return request<ProjectsDeployStart, ProjectsDeployment>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postProjectsBySlugDeployments
+     *
+     * @param slug Slug is the site to deploy, from the path.
+     * @param projectsDeployStart 
+     * @return RequestConfig
+     */
+    fun postProjectsBySlugDeploymentsRequestConfig(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : RequestConfig<ProjectsDeployStart> {
+        val localVariableBody = projectsDeployStart
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/projects/{slug}/deployments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -799,8 +884,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ProjectsBySlugDeploymentsByIdComplete(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : ProjectsDeployment {
-        val localVarResponse = postV1ProjectsBySlugDeploymentsByIdCompleteWithHttpInfo(slug = slug, id = id, projectsComplete = projectsComplete)
+    fun postProjectsBySlugDeploymentsByIdComplete(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : ProjectsDeployment {
+        val localVarResponse = postProjectsBySlugDeploymentsByIdCompleteWithHttpInfo(slug = slug, id = id, projectsComplete = projectsComplete)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
@@ -830,8 +915,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ProjectsBySlugDeploymentsByIdCompleteWithHttpInfo(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : ApiResponse<ProjectsDeployment?> {
-        val localVariableConfig = postV1ProjectsBySlugDeploymentsByIdCompleteRequestConfig(slug = slug, id = id, projectsComplete = projectsComplete)
+    fun postProjectsBySlugDeploymentsByIdCompleteWithHttpInfo(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : ApiResponse<ProjectsDeployment?> {
+        val localVariableConfig = postProjectsBySlugDeploymentsByIdCompleteRequestConfig(slug = slug, id = id, projectsComplete = projectsComplete)
 
         return request<ProjectsComplete, ProjectsDeployment>(
             localVariableConfig
@@ -839,14 +924,14 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ProjectsBySlugDeploymentsByIdComplete
+     * To obtain the request config of the operation postProjectsBySlugDeploymentsByIdComplete
      *
      * @param slug Slug is the project the deployment belongs to, from the path.
      * @param id ID is the queued deployment to complete, from the path.
      * @param projectsComplete 
      * @return RequestConfig
      */
-    fun postV1ProjectsBySlugDeploymentsByIdCompleteRequestConfig(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : RequestConfig<ProjectsComplete> {
+    fun postProjectsBySlugDeploymentsByIdCompleteRequestConfig(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : RequestConfig<ProjectsComplete> {
         val localVariableBody = projectsComplete
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -878,8 +963,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ProjectsBySlugDomains(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ProjectsBoundDomains {
-        val localVarResponse = postV1ProjectsBySlugDomainsWithHttpInfo(slug = slug, projectsDomainsBind = projectsDomainsBind)
+    fun postProjectsBySlugDomains(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ProjectsBoundDomains {
+        val localVarResponse = postProjectsBySlugDomainsWithHttpInfo(slug = slug, projectsDomainsBind = projectsDomainsBind)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsBoundDomains
@@ -908,8 +993,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ProjectsBySlugDomainsWithHttpInfo(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ApiResponse<ProjectsBoundDomains?> {
-        val localVariableConfig = postV1ProjectsBySlugDomainsRequestConfig(slug = slug, projectsDomainsBind = projectsDomainsBind)
+    fun postProjectsBySlugDomainsWithHttpInfo(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ApiResponse<ProjectsBoundDomains?> {
+        val localVariableConfig = postProjectsBySlugDomainsRequestConfig(slug = slug, projectsDomainsBind = projectsDomainsBind)
 
         return request<ProjectsDomainsBind, ProjectsBoundDomains>(
             localVariableConfig
@@ -917,13 +1002,13 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ProjectsBySlugDomains
+     * To obtain the request config of the operation postProjectsBySlugDomains
      *
      * @param slug Slug is the site the hosts attach to, from the path.
      * @param projectsDomainsBind 
      * @return RequestConfig
      */
-    fun postV1ProjectsBySlugDomainsRequestConfig(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : RequestConfig<ProjectsDomainsBind> {
+    fun postProjectsBySlugDomainsRequestConfig(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : RequestConfig<ProjectsDomainsBind> {
         val localVariableBody = projectsDomainsBind
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -955,8 +1040,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ProjectsBySlugDomainsByHostVerify(slug: kotlin.String, host: kotlin.String) : ProjectsDomain {
-        val localVarResponse = postV1ProjectsBySlugDomainsByHostVerifyWithHttpInfo(slug = slug, host = host)
+    fun postProjectsBySlugDomainsByHostVerify(slug: kotlin.String, host: kotlin.String) : ProjectsDomain {
+        val localVarResponse = postProjectsBySlugDomainsByHostVerifyWithHttpInfo(slug = slug, host = host)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDomain
@@ -985,8 +1070,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ProjectsBySlugDomainsByHostVerifyWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<ProjectsDomain?> {
-        val localVariableConfig = postV1ProjectsBySlugDomainsByHostVerifyRequestConfig(slug = slug, host = host)
+    fun postProjectsBySlugDomainsByHostVerifyWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<ProjectsDomain?> {
+        val localVariableConfig = postProjectsBySlugDomainsByHostVerifyRequestConfig(slug = slug, host = host)
 
         return request<Unit, ProjectsDomain>(
             localVariableConfig
@@ -994,13 +1079,13 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ProjectsBySlugDomainsByHostVerify
+     * To obtain the request config of the operation postProjectsBySlugDomainsByHostVerify
      *
      * @param slug Slug is the project the host is attached to, from the path.
      * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
      * @return RequestConfig
      */
-    fun postV1ProjectsBySlugDomainsByHostVerifyRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
+    fun postProjectsBySlugDomainsByHostVerifyRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1030,8 +1115,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ProjectsBySlugPurge(slug: kotlin.String) : ProjectsProject {
-        val localVarResponse = postV1ProjectsBySlugPurgeWithHttpInfo(slug = slug)
+    fun postProjectsBySlugPurge(slug: kotlin.String) : ProjectsProject {
+        val localVarResponse = postProjectsBySlugPurgeWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -1059,8 +1144,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ProjectsBySlugPurgeWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = postV1ProjectsBySlugPurgeRequestConfig(slug = slug)
+    fun postProjectsBySlugPurgeWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = postProjectsBySlugPurgeRequestConfig(slug = slug)
 
         return request<Unit, ProjectsProject>(
             localVariableConfig
@@ -1068,12 +1153,12 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ProjectsBySlugPurge
+     * To obtain the request config of the operation postProjectsBySlugPurge
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun postV1ProjectsBySlugPurgeRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun postProjectsBySlugPurgeRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1103,8 +1188,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ProjectsFork(projectsFork: ProjectsFork) : ProjectsProject {
-        val localVarResponse = postV1ProjectsForkWithHttpInfo(projectsFork = projectsFork)
+    fun postProjectsFork(projectsFork: ProjectsFork) : ProjectsProject {
+        val localVarResponse = postProjectsForkWithHttpInfo(projectsFork = projectsFork)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -1132,8 +1217,8 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ProjectsForkWithHttpInfo(projectsFork: ProjectsFork) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = postV1ProjectsForkRequestConfig(projectsFork = projectsFork)
+    fun postProjectsForkWithHttpInfo(projectsFork: ProjectsFork) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = postProjectsForkRequestConfig(projectsFork = projectsFork)
 
         return request<ProjectsFork, ProjectsProject>(
             localVariableConfig
@@ -1141,12 +1226,12 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1ProjectsFork
+     * To obtain the request config of the operation postProjectsFork
      *
      * @param projectsFork 
      * @return RequestConfig
      */
-    fun postV1ProjectsForkRequestConfig(projectsFork: ProjectsFork) : RequestConfig<ProjectsFork> {
+    fun postProjectsForkRequestConfig(projectsFork: ProjectsFork) : RequestConfig<ProjectsFork> {
         val localVariableBody = projectsFork
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -85,8 +85,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1GitKeysById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1GitKeysByIdWithHttpInfo(id = id)
+    fun deleteGitKeysById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteGitKeysByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -113,8 +113,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1GitKeysByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1GitKeysByIdRequestConfig(id = id)
+    fun deleteGitKeysByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteGitKeysByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -122,12 +122,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1GitKeysById
+     * To obtain the request config of the operation deleteGitKeysById
      *
      * @param id ID is the key&#39;s identifier (\&quot;gitkey_…\&quot;), from the :id path segment.
      * @return RequestConfig
      */
-    fun deleteV1GitKeysByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteGitKeysByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -155,8 +155,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1GitReposByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1GitReposByNameWithHttpInfo(name = name)
+    fun deleteGitReposByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteGitReposByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -183,8 +183,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1GitReposByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1GitReposByNameRequestConfig(name = name)
+    fun deleteGitReposByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteGitReposByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -192,12 +192,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1GitReposByName
+     * To obtain the request config of the operation deleteGitReposByName
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun deleteV1GitReposByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteGitReposByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -226,8 +226,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1GitReposByNameMirrorsById(name: kotlin.String, id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1GitReposByNameMirrorsByIdWithHttpInfo(name = name, id = id)
+    fun deleteGitReposByNameMirrorsById(name: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = deleteGitReposByNameMirrorsByIdWithHttpInfo(name = name, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -255,8 +255,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1GitReposByNameMirrorsByIdWithHttpInfo(name: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1GitReposByNameMirrorsByIdRequestConfig(name = name, id = id)
+    fun deleteGitReposByNameMirrorsByIdWithHttpInfo(name: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteGitReposByNameMirrorsByIdRequestConfig(name = name, id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -264,13 +264,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1GitReposByNameMirrorsById
+     * To obtain the request config of the operation deleteGitReposByNameMirrorsById
      *
      * @param name Name is the repo, from the :name path segment.
      * @param id ID is the row to remove, from the :id path segment.
      * @return RequestConfig
      */
-    fun deleteV1GitReposByNameMirrorsByIdRequestConfig(name: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteGitReposByNameMirrorsByIdRequestConfig(name: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -299,8 +299,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1GitReposByNameSubscriptionsById(name: kotlin.String, id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1GitReposByNameSubscriptionsByIdWithHttpInfo(name = name, id = id)
+    fun deleteGitReposByNameSubscriptionsById(name: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = deleteGitReposByNameSubscriptionsByIdWithHttpInfo(name = name, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -328,8 +328,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1GitReposByNameSubscriptionsByIdWithHttpInfo(name: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1GitReposByNameSubscriptionsByIdRequestConfig(name = name, id = id)
+    fun deleteGitReposByNameSubscriptionsByIdWithHttpInfo(name: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteGitReposByNameSubscriptionsByIdRequestConfig(name = name, id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -337,13 +337,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1GitReposByNameSubscriptionsById
+     * To obtain the request config of the operation deleteGitReposByNameSubscriptionsById
      *
      * @param name Name is the repo, from the :name path segment.
      * @param id ID is the row to remove, from the :id path segment.
      * @return RequestConfig
      */
-    fun deleteV1GitReposByNameSubscriptionsByIdRequestConfig(name: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteGitReposByNameSubscriptionsByIdRequestConfig(name: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -373,8 +373,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitByOrgByProjectByRepoInfoRefs(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : Unit {
-        val localVarResponse = getV1GitByOrgByProjectByRepoInfoRefsWithHttpInfo(org = org, project = project, repo = repo)
+    fun getGitByOrgByProjectByRepoInfoRefs(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : Unit {
+        val localVarResponse = getGitByOrgByProjectByRepoInfoRefsWithHttpInfo(org = org, project = project, repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -403,8 +403,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitByOrgByProjectByRepoInfoRefsWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1GitByOrgByProjectByRepoInfoRefsRequestConfig(org = org, project = project, repo = repo)
+    fun getGitByOrgByProjectByRepoInfoRefsWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getGitByOrgByProjectByRepoInfoRefsRequestConfig(org = org, project = project, repo = repo)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -412,14 +412,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitByOrgByProjectByRepoInfoRefs
+     * To obtain the request config of the operation getGitByOrgByProjectByRepoInfoRefs
      *
      * @param org 
      * @param project 
      * @param repo 
      * @return RequestConfig
      */
-    fun getV1GitByOrgByProjectByRepoInfoRefsRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : RequestConfig<Unit> {
+    fun getGitByOrgByProjectByRepoInfoRefsRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -448,8 +448,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitByOrgByRepoInfoRefs(org: kotlin.String, repo: kotlin.String) : Unit {
-        val localVarResponse = getV1GitByOrgByRepoInfoRefsWithHttpInfo(org = org, repo = repo)
+    fun getGitByOrgByRepoInfoRefs(org: kotlin.String, repo: kotlin.String) : Unit {
+        val localVarResponse = getGitByOrgByRepoInfoRefsWithHttpInfo(org = org, repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -477,8 +477,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitByOrgByRepoInfoRefsWithHttpInfo(org: kotlin.String, repo: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1GitByOrgByRepoInfoRefsRequestConfig(org = org, repo = repo)
+    fun getGitByOrgByRepoInfoRefsWithHttpInfo(org: kotlin.String, repo: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getGitByOrgByRepoInfoRefsRequestConfig(org = org, repo = repo)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -486,13 +486,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitByOrgByRepoInfoRefs
+     * To obtain the request config of the operation getGitByOrgByRepoInfoRefs
      *
      * @param org 
      * @param repo 
      * @return RequestConfig
      */
-    fun getV1GitByOrgByRepoInfoRefsRequestConfig(org: kotlin.String, repo: kotlin.String) : RequestConfig<Unit> {
+    fun getGitByOrgByRepoInfoRefsRequestConfig(org: kotlin.String, repo: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -520,8 +520,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitKeys() : KeyList {
-        val localVarResponse = getV1GitKeysWithHttpInfo()
+    fun getGitKeys() : KeyList {
+        val localVarResponse = getGitKeysWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KeyList
@@ -548,8 +548,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitKeysWithHttpInfo() : ApiResponse<KeyList?> {
-        val localVariableConfig = getV1GitKeysRequestConfig()
+    fun getGitKeysWithHttpInfo() : ApiResponse<KeyList?> {
+        val localVariableConfig = getGitKeysRequestConfig()
 
         return request<Unit, KeyList>(
             localVariableConfig
@@ -557,11 +557,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitKeys
+     * To obtain the request config of the operation getGitKeys
      *
      * @return RequestConfig
      */
-    fun getV1GitKeysRequestConfig() : RequestConfig<Unit> {
+    fun getGitKeysRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -590,8 +590,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitRepos() : RepoList {
-        val localVarResponse = getV1GitReposWithHttpInfo()
+    fun getGitRepos() : RepoList {
+        val localVarResponse = getGitReposWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RepoList
@@ -618,8 +618,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposWithHttpInfo() : ApiResponse<RepoList?> {
-        val localVariableConfig = getV1GitReposRequestConfig()
+    fun getGitReposWithHttpInfo() : ApiResponse<RepoList?> {
+        val localVariableConfig = getGitReposRequestConfig()
 
         return request<Unit, RepoList>(
             localVariableConfig
@@ -627,11 +627,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitRepos
+     * To obtain the request config of the operation getGitRepos
      *
      * @return RequestConfig
      */
-    fun getV1GitReposRequestConfig() : RequestConfig<Unit> {
+    fun getGitReposRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -661,8 +661,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByName(name: kotlin.String) : RepoView {
-        val localVarResponse = getV1GitReposByNameWithHttpInfo(name = name)
+    fun getGitReposByName(name: kotlin.String) : RepoView {
+        val localVarResponse = getGitReposByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RepoView
@@ -690,8 +690,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameWithHttpInfo(name: kotlin.String) : ApiResponse<RepoView?> {
-        val localVariableConfig = getV1GitReposByNameRequestConfig(name = name)
+    fun getGitReposByNameWithHttpInfo(name: kotlin.String) : ApiResponse<RepoView?> {
+        val localVariableConfig = getGitReposByNameRequestConfig(name = name)
 
         return request<Unit, RepoView>(
             localVariableConfig
@@ -699,12 +699,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByName
+     * To obtain the request config of the operation getGitReposByName
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun getV1GitReposByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getGitReposByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -736,8 +736,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNameBlob(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null) : BlobJSON {
-        val localVarResponse = getV1GitReposByNameBlobWithHttpInfo(name = name, ref = ref, path = path)
+    fun getGitReposByNameBlob(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null) : BlobJSON {
+        val localVarResponse = getGitReposByNameBlobWithHttpInfo(name = name, ref = ref, path = path)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BlobJSON
@@ -767,8 +767,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameBlobWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : ApiResponse<BlobJSON?> {
-        val localVariableConfig = getV1GitReposByNameBlobRequestConfig(name = name, ref = ref, path = path)
+    fun getGitReposByNameBlobWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : ApiResponse<BlobJSON?> {
+        val localVariableConfig = getGitReposByNameBlobRequestConfig(name = name, ref = ref, path = path)
 
         return request<Unit, BlobJSON>(
             localVariableConfig
@@ -776,14 +776,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNameBlob
+     * To obtain the request config of the operation getGitReposByNameBlob
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param path Path is repo-relative; empty is the tree root. Traversal is stripped. (optional)
      * @return RequestConfig
      */
-    fun getV1GitReposByNameBlobRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : RequestConfig<Unit> {
+    fun getGitReposByNameBlobRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -824,8 +824,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNameCommits(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null, limit: kotlin.Int? = null) : CommitsJSON {
-        val localVarResponse = getV1GitReposByNameCommitsWithHttpInfo(name = name, ref = ref, path = path, limit = limit)
+    fun getGitReposByNameCommits(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null, limit: kotlin.Int? = null) : CommitsJSON {
+        val localVarResponse = getGitReposByNameCommitsWithHttpInfo(name = name, ref = ref, path = path, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CommitsJSON
@@ -856,8 +856,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameCommitsWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CommitsJSON?> {
-        val localVariableConfig = getV1GitReposByNameCommitsRequestConfig(name = name, ref = ref, path = path, limit = limit)
+    fun getGitReposByNameCommitsWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CommitsJSON?> {
+        val localVariableConfig = getGitReposByNameCommitsRequestConfig(name = name, ref = ref, path = path, limit = limit)
 
         return request<Unit, CommitsJSON>(
             localVariableConfig
@@ -865,7 +865,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNameCommits
+     * To obtain the request config of the operation getGitReposByNameCommits
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is the branch, tag or commit to walk back from; empty means HEAD. (optional)
@@ -873,7 +873,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param limit Limit caps the page. Anything not positive means 50; the cap is 100. (optional)
      * @return RequestConfig
      */
-    fun getV1GitReposByNameCommitsRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getGitReposByNameCommitsRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -916,8 +916,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNameFiles(name: kotlin.String, ref: kotlin.String? = null, glob: kotlin.String? = null) : FilesJSON {
-        val localVarResponse = getV1GitReposByNameFilesWithHttpInfo(name = name, ref = ref, glob = glob)
+    fun getGitReposByNameFiles(name: kotlin.String, ref: kotlin.String? = null, glob: kotlin.String? = null) : FilesJSON {
+        val localVarResponse = getGitReposByNameFilesWithHttpInfo(name = name, ref = ref, glob = glob)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FilesJSON
@@ -947,8 +947,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameFilesWithHttpInfo(name: kotlin.String, ref: kotlin.String?, glob: kotlin.String?) : ApiResponse<FilesJSON?> {
-        val localVariableConfig = getV1GitReposByNameFilesRequestConfig(name = name, ref = ref, glob = glob)
+    fun getGitReposByNameFilesWithHttpInfo(name: kotlin.String, ref: kotlin.String?, glob: kotlin.String?) : ApiResponse<FilesJSON?> {
+        val localVariableConfig = getGitReposByNameFilesRequestConfig(name = name, ref = ref, glob = glob)
 
         return request<Unit, FilesJSON>(
             localVariableConfig
@@ -956,14 +956,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNameFiles
+     * To obtain the request config of the operation getGitReposByNameFiles
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param glob Glob selects files, matched segment by segment so &#x60;*&#x60; never crosses a &#x60;/&#x60;. &#x60;**&#x60; matches zero or more whole segments. (optional)
      * @return RequestConfig
      */
-    fun getV1GitReposByNameFilesRequestConfig(name: kotlin.String, ref: kotlin.String?, glob: kotlin.String?) : RequestConfig<Unit> {
+    fun getGitReposByNameFilesRequestConfig(name: kotlin.String, ref: kotlin.String?, glob: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1001,8 +1001,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNameMirrors(name: kotlin.String) : MirrorList {
-        val localVarResponse = getV1GitReposByNameMirrorsWithHttpInfo(name = name)
+    fun getGitReposByNameMirrors(name: kotlin.String) : MirrorList {
+        val localVarResponse = getGitReposByNameMirrorsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MirrorList
@@ -1030,8 +1030,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameMirrorsWithHttpInfo(name: kotlin.String) : ApiResponse<MirrorList?> {
-        val localVariableConfig = getV1GitReposByNameMirrorsRequestConfig(name = name)
+    fun getGitReposByNameMirrorsWithHttpInfo(name: kotlin.String) : ApiResponse<MirrorList?> {
+        val localVariableConfig = getGitReposByNameMirrorsRequestConfig(name = name)
 
         return request<Unit, MirrorList>(
             localVariableConfig
@@ -1039,12 +1039,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNameMirrors
+     * To obtain the request config of the operation getGitReposByNameMirrors
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun getV1GitReposByNameMirrorsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getGitReposByNameMirrorsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1075,8 +1075,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNamePulls(name: kotlin.String, state: kotlin.String? = null) : PullList {
-        val localVarResponse = getV1GitReposByNamePullsWithHttpInfo(name = name, state = state)
+    fun getGitReposByNamePulls(name: kotlin.String, state: kotlin.String? = null) : PullList {
+        val localVarResponse = getGitReposByNamePullsWithHttpInfo(name = name, state = state)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PullList
@@ -1105,8 +1105,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNamePullsWithHttpInfo(name: kotlin.String, state: kotlin.String?) : ApiResponse<PullList?> {
-        val localVariableConfig = getV1GitReposByNamePullsRequestConfig(name = name, state = state)
+    fun getGitReposByNamePullsWithHttpInfo(name: kotlin.String, state: kotlin.String?) : ApiResponse<PullList?> {
+        val localVariableConfig = getGitReposByNamePullsRequestConfig(name = name, state = state)
 
         return request<Unit, PullList>(
             localVariableConfig
@@ -1114,13 +1114,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNamePulls
+     * To obtain the request config of the operation getGitReposByNamePulls
      *
      * @param name Name is the repo, from the :name path segment.
      * @param state State narrows the list to \&quot;open\&quot; or \&quot;merged\&quot;. Omit it for every proposal. (optional)
      * @return RequestConfig
      */
-    fun getV1GitReposByNamePullsRequestConfig(name: kotlin.String, state: kotlin.String?) : RequestConfig<Unit> {
+    fun getGitReposByNamePullsRequestConfig(name: kotlin.String, state: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1156,8 +1156,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNamePullsByNumber(name: kotlin.String, number: kotlin.Int) : PullView {
-        val localVarResponse = getV1GitReposByNamePullsByNumberWithHttpInfo(name = name, number = number)
+    fun getGitReposByNamePullsByNumber(name: kotlin.String, number: kotlin.Int) : PullView {
+        val localVarResponse = getGitReposByNamePullsByNumberWithHttpInfo(name = name, number = number)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PullView
@@ -1186,8 +1186,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNamePullsByNumberWithHttpInfo(name: kotlin.String, number: kotlin.Int) : ApiResponse<PullView?> {
-        val localVariableConfig = getV1GitReposByNamePullsByNumberRequestConfig(name = name, number = number)
+    fun getGitReposByNamePullsByNumberWithHttpInfo(name: kotlin.String, number: kotlin.Int) : ApiResponse<PullView?> {
+        val localVariableConfig = getGitReposByNamePullsByNumberRequestConfig(name = name, number = number)
 
         return request<Unit, PullView>(
             localVariableConfig
@@ -1195,13 +1195,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNamePullsByNumber
+     * To obtain the request config of the operation getGitReposByNamePullsByNumber
      *
      * @param name Name is the repo, from the :name path segment.
      * @param number Number is the proposal&#39;s per-repo number, from the :number path segment.
      * @return RequestConfig
      */
-    fun getV1GitReposByNamePullsByNumberRequestConfig(name: kotlin.String, number: kotlin.Int) : RequestConfig<Unit> {
+    fun getGitReposByNamePullsByNumberRequestConfig(name: kotlin.String, number: kotlin.Int) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1232,8 +1232,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNameReadme(name: kotlin.String, ref: kotlin.String? = null) : ReadmeJSON {
-        val localVarResponse = getV1GitReposByNameReadmeWithHttpInfo(name = name, ref = ref)
+    fun getGitReposByNameReadme(name: kotlin.String, ref: kotlin.String? = null) : ReadmeJSON {
+        val localVarResponse = getGitReposByNameReadmeWithHttpInfo(name = name, ref = ref)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReadmeJSON
@@ -1262,8 +1262,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameReadmeWithHttpInfo(name: kotlin.String, ref: kotlin.String?) : ApiResponse<ReadmeJSON?> {
-        val localVariableConfig = getV1GitReposByNameReadmeRequestConfig(name = name, ref = ref)
+    fun getGitReposByNameReadmeWithHttpInfo(name: kotlin.String, ref: kotlin.String?) : ApiResponse<ReadmeJSON?> {
+        val localVariableConfig = getGitReposByNameReadmeRequestConfig(name = name, ref = ref)
 
         return request<Unit, ReadmeJSON>(
             localVariableConfig
@@ -1271,13 +1271,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNameReadme
+     * To obtain the request config of the operation getGitReposByNameReadme
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @return RequestConfig
      */
-    fun getV1GitReposByNameReadmeRequestConfig(name: kotlin.String, ref: kotlin.String?) : RequestConfig<Unit> {
+    fun getGitReposByNameReadmeRequestConfig(name: kotlin.String, ref: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1312,8 +1312,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNameRefs(name: kotlin.String) : RefsJSON {
-        val localVarResponse = getV1GitReposByNameRefsWithHttpInfo(name = name)
+    fun getGitReposByNameRefs(name: kotlin.String) : RefsJSON {
+        val localVarResponse = getGitReposByNameRefsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RefsJSON
@@ -1341,8 +1341,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameRefsWithHttpInfo(name: kotlin.String) : ApiResponse<RefsJSON?> {
-        val localVariableConfig = getV1GitReposByNameRefsRequestConfig(name = name)
+    fun getGitReposByNameRefsWithHttpInfo(name: kotlin.String) : ApiResponse<RefsJSON?> {
+        val localVariableConfig = getGitReposByNameRefsRequestConfig(name = name)
 
         return request<Unit, RefsJSON>(
             localVariableConfig
@@ -1350,12 +1350,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNameRefs
+     * To obtain the request config of the operation getGitReposByNameRefs
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun getV1GitReposByNameRefsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getGitReposByNameRefsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1385,8 +1385,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNameSubscriptions(name: kotlin.String) : SubscriptionList {
-        val localVarResponse = getV1GitReposByNameSubscriptionsWithHttpInfo(name = name)
+    fun getGitReposByNameSubscriptions(name: kotlin.String) : SubscriptionList {
+        val localVarResponse = getGitReposByNameSubscriptionsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SubscriptionList
@@ -1414,8 +1414,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameSubscriptionsWithHttpInfo(name: kotlin.String) : ApiResponse<SubscriptionList?> {
-        val localVariableConfig = getV1GitReposByNameSubscriptionsRequestConfig(name = name)
+    fun getGitReposByNameSubscriptionsWithHttpInfo(name: kotlin.String) : ApiResponse<SubscriptionList?> {
+        val localVariableConfig = getGitReposByNameSubscriptionsRequestConfig(name = name)
 
         return request<Unit, SubscriptionList>(
             localVariableConfig
@@ -1423,12 +1423,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNameSubscriptions
+     * To obtain the request config of the operation getGitReposByNameSubscriptions
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun getV1GitReposByNameSubscriptionsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getGitReposByNameSubscriptionsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1460,8 +1460,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitReposByNameTree(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null) : TreeJSON {
-        val localVarResponse = getV1GitReposByNameTreeWithHttpInfo(name = name, ref = ref, path = path)
+    fun getGitReposByNameTree(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null) : TreeJSON {
+        val localVarResponse = getGitReposByNameTreeWithHttpInfo(name = name, ref = ref, path = path)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TreeJSON
@@ -1491,8 +1491,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitReposByNameTreeWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : ApiResponse<TreeJSON?> {
-        val localVariableConfig = getV1GitReposByNameTreeRequestConfig(name = name, ref = ref, path = path)
+    fun getGitReposByNameTreeWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : ApiResponse<TreeJSON?> {
+        val localVariableConfig = getGitReposByNameTreeRequestConfig(name = name, ref = ref, path = path)
 
         return request<Unit, TreeJSON>(
             localVariableConfig
@@ -1500,14 +1500,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitReposByNameTree
+     * To obtain the request config of the operation getGitReposByNameTree
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param path Path is repo-relative; empty is the tree root. Traversal is stripped. (optional)
      * @return RequestConfig
      */
-    fun getV1GitReposByNameTreeRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : RequestConfig<Unit> {
+    fun getGitReposByNameTreeRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1544,8 +1544,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1GitUsage() : UsageView {
-        val localVarResponse = getV1GitUsageWithHttpInfo()
+    fun getGitUsage() : UsageView {
+        val localVarResponse = getGitUsageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UsageView
@@ -1572,8 +1572,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1GitUsageWithHttpInfo() : ApiResponse<UsageView?> {
-        val localVariableConfig = getV1GitUsageRequestConfig()
+    fun getGitUsageWithHttpInfo() : ApiResponse<UsageView?> {
+        val localVariableConfig = getGitUsageRequestConfig()
 
         return request<Unit, UsageView>(
             localVariableConfig
@@ -1581,11 +1581,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1GitUsage
+     * To obtain the request config of the operation getGitUsage
      *
      * @return RequestConfig
      */
-    fun getV1GitUsageRequestConfig() : RequestConfig<Unit> {
+    fun getGitUsageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1616,8 +1616,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1GitReposByName(name: kotlin.String, patchIn: PatchIn) : RepoView {
-        val localVarResponse = patchV1GitReposByNameWithHttpInfo(name = name, patchIn = patchIn)
+    fun patchGitReposByName(name: kotlin.String, patchIn: PatchIn) : RepoView {
+        val localVarResponse = patchGitReposByNameWithHttpInfo(name = name, patchIn = patchIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RepoView
@@ -1646,8 +1646,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1GitReposByNameWithHttpInfo(name: kotlin.String, patchIn: PatchIn) : ApiResponse<RepoView?> {
-        val localVariableConfig = patchV1GitReposByNameRequestConfig(name = name, patchIn = patchIn)
+    fun patchGitReposByNameWithHttpInfo(name: kotlin.String, patchIn: PatchIn) : ApiResponse<RepoView?> {
+        val localVariableConfig = patchGitReposByNameRequestConfig(name = name, patchIn = patchIn)
 
         return request<PatchIn, RepoView>(
             localVariableConfig
@@ -1655,13 +1655,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation patchV1GitReposByName
+     * To obtain the request config of the operation patchGitReposByName
      *
      * @param name Name is the repo to update, from the :name path segment.
      * @param patchIn 
      * @return RequestConfig
      */
-    fun patchV1GitReposByNameRequestConfig(name: kotlin.String, patchIn: PatchIn) : RequestConfig<PatchIn> {
+    fun patchGitReposByNameRequestConfig(name: kotlin.String, patchIn: PatchIn) : RequestConfig<PatchIn> {
         val localVariableBody = patchIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1694,8 +1694,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitByOrgByProjectByRepoGitReceivePack(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = postV1GitByOrgByProjectByRepoGitReceivePackWithHttpInfo(org = org, project = project, repo = repo, body = body)
+    fun postGitByOrgByProjectByRepoGitReceivePack(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postGitByOrgByProjectByRepoGitReceivePackWithHttpInfo(org = org, project = project, repo = repo, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1725,8 +1725,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitByOrgByProjectByRepoGitReceivePackWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitByOrgByProjectByRepoGitReceivePackRequestConfig(org = org, project = project, repo = repo, body = body)
+    fun postGitByOrgByProjectByRepoGitReceivePackWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postGitByOrgByProjectByRepoGitReceivePackRequestConfig(org = org, project = project, repo = repo, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -1734,7 +1734,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitByOrgByProjectByRepoGitReceivePack
+     * To obtain the request config of the operation postGitByOrgByProjectByRepoGitReceivePack
      *
      * @param org 
      * @param project 
@@ -1742,7 +1742,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1GitByOrgByProjectByRepoGitReceivePackRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postGitByOrgByProjectByRepoGitReceivePackRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1774,8 +1774,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitByOrgByProjectByRepoGitUploadPack(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = postV1GitByOrgByProjectByRepoGitUploadPackWithHttpInfo(org = org, project = project, repo = repo, body = body)
+    fun postGitByOrgByProjectByRepoGitUploadPack(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postGitByOrgByProjectByRepoGitUploadPackWithHttpInfo(org = org, project = project, repo = repo, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1805,8 +1805,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitByOrgByProjectByRepoGitUploadPackWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitByOrgByProjectByRepoGitUploadPackRequestConfig(org = org, project = project, repo = repo, body = body)
+    fun postGitByOrgByProjectByRepoGitUploadPackWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postGitByOrgByProjectByRepoGitUploadPackRequestConfig(org = org, project = project, repo = repo, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -1814,7 +1814,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitByOrgByProjectByRepoGitUploadPack
+     * To obtain the request config of the operation postGitByOrgByProjectByRepoGitUploadPack
      *
      * @param org 
      * @param project 
@@ -1822,7 +1822,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1GitByOrgByProjectByRepoGitUploadPackRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postGitByOrgByProjectByRepoGitUploadPackRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1853,8 +1853,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitByOrgByRepoGitReceivePack(org: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = postV1GitByOrgByRepoGitReceivePackWithHttpInfo(org = org, repo = repo, body = body)
+    fun postGitByOrgByRepoGitReceivePack(org: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postGitByOrgByRepoGitReceivePackWithHttpInfo(org = org, repo = repo, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1883,8 +1883,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitByOrgByRepoGitReceivePackWithHttpInfo(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitByOrgByRepoGitReceivePackRequestConfig(org = org, repo = repo, body = body)
+    fun postGitByOrgByRepoGitReceivePackWithHttpInfo(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postGitByOrgByRepoGitReceivePackRequestConfig(org = org, repo = repo, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -1892,14 +1892,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitByOrgByRepoGitReceivePack
+     * To obtain the request config of the operation postGitByOrgByRepoGitReceivePack
      *
      * @param org 
      * @param repo 
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1GitByOrgByRepoGitReceivePackRequestConfig(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postGitByOrgByRepoGitReceivePackRequestConfig(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1930,8 +1930,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitByOrgByRepoGitUploadPack(org: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = postV1GitByOrgByRepoGitUploadPackWithHttpInfo(org = org, repo = repo, body = body)
+    fun postGitByOrgByRepoGitUploadPack(org: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postGitByOrgByRepoGitUploadPackWithHttpInfo(org = org, repo = repo, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1960,8 +1960,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitByOrgByRepoGitUploadPackWithHttpInfo(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitByOrgByRepoGitUploadPackRequestConfig(org = org, repo = repo, body = body)
+    fun postGitByOrgByRepoGitUploadPackWithHttpInfo(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postGitByOrgByRepoGitUploadPackRequestConfig(org = org, repo = repo, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -1969,14 +1969,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitByOrgByRepoGitUploadPack
+     * To obtain the request config of the operation postGitByOrgByRepoGitUploadPack
      *
      * @param org 
      * @param repo 
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1GitByOrgByRepoGitUploadPackRequestConfig(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postGitByOrgByRepoGitUploadPackRequestConfig(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2006,8 +2006,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitKeys(registerKeyReq: RegisterKeyReq) : KeyView {
-        val localVarResponse = postV1GitKeysWithHttpInfo(registerKeyReq = registerKeyReq)
+    fun postGitKeys(registerKeyReq: RegisterKeyReq) : KeyView {
+        val localVarResponse = postGitKeysWithHttpInfo(registerKeyReq = registerKeyReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KeyView
@@ -2035,8 +2035,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitKeysWithHttpInfo(registerKeyReq: RegisterKeyReq) : ApiResponse<KeyView?> {
-        val localVariableConfig = postV1GitKeysRequestConfig(registerKeyReq = registerKeyReq)
+    fun postGitKeysWithHttpInfo(registerKeyReq: RegisterKeyReq) : ApiResponse<KeyView?> {
+        val localVariableConfig = postGitKeysRequestConfig(registerKeyReq = registerKeyReq)
 
         return request<RegisterKeyReq, KeyView>(
             localVariableConfig
@@ -2044,12 +2044,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitKeys
+     * To obtain the request config of the operation postGitKeys
      *
      * @param registerKeyReq 
      * @return RequestConfig
      */
-    fun postV1GitKeysRequestConfig(registerKeyReq: RegisterKeyReq) : RequestConfig<RegisterKeyReq> {
+    fun postGitKeysRequestConfig(registerKeyReq: RegisterKeyReq) : RequestConfig<RegisterKeyReq> {
         val localVariableBody = registerKeyReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2080,8 +2080,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitRepos(createReq: CreateReq) : RepoView {
-        val localVarResponse = postV1GitReposWithHttpInfo(createReq = createReq)
+    fun postGitRepos(createReq: CreateReq) : RepoView {
+        val localVarResponse = postGitReposWithHttpInfo(createReq = createReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RepoView
@@ -2109,8 +2109,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitReposWithHttpInfo(createReq: CreateReq) : ApiResponse<RepoView?> {
-        val localVariableConfig = postV1GitReposRequestConfig(createReq = createReq)
+    fun postGitReposWithHttpInfo(createReq: CreateReq) : ApiResponse<RepoView?> {
+        val localVariableConfig = postGitReposRequestConfig(createReq = createReq)
 
         return request<CreateReq, RepoView>(
             localVariableConfig
@@ -2118,12 +2118,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitRepos
+     * To obtain the request config of the operation postGitRepos
      *
      * @param createReq 
      * @return RequestConfig
      */
-    fun postV1GitReposRequestConfig(createReq: CreateReq) : RequestConfig<CreateReq> {
+    fun postGitReposRequestConfig(createReq: CreateReq) : RequestConfig<CreateReq> {
         val localVariableBody = createReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2154,8 +2154,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitReposByNameGc(name: kotlin.String) : GcOut {
-        val localVarResponse = postV1GitReposByNameGcWithHttpInfo(name = name)
+    fun postGitReposByNameGc(name: kotlin.String) : GcOut {
+        val localVarResponse = postGitReposByNameGcWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GcOut
@@ -2183,8 +2183,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitReposByNameGcWithHttpInfo(name: kotlin.String) : ApiResponse<GcOut?> {
-        val localVariableConfig = postV1GitReposByNameGcRequestConfig(name = name)
+    fun postGitReposByNameGcWithHttpInfo(name: kotlin.String) : ApiResponse<GcOut?> {
+        val localVariableConfig = postGitReposByNameGcRequestConfig(name = name)
 
         return request<Unit, GcOut>(
             localVariableConfig
@@ -2192,12 +2192,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitReposByNameGc
+     * To obtain the request config of the operation postGitReposByNameGc
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun postV1GitReposByNameGcRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun postGitReposByNameGcRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2228,8 +2228,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitReposByNameMirror(name: kotlin.String, mirrorReq: MirrorReq) : RepoView {
-        val localVarResponse = postV1GitReposByNameMirrorWithHttpInfo(name = name, mirrorReq = mirrorReq)
+    fun postGitReposByNameMirror(name: kotlin.String, mirrorReq: MirrorReq) : RepoView {
+        val localVarResponse = postGitReposByNameMirrorWithHttpInfo(name = name, mirrorReq = mirrorReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RepoView
@@ -2258,8 +2258,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitReposByNameMirrorWithHttpInfo(name: kotlin.String, mirrorReq: MirrorReq) : ApiResponse<RepoView?> {
-        val localVariableConfig = postV1GitReposByNameMirrorRequestConfig(name = name, mirrorReq = mirrorReq)
+    fun postGitReposByNameMirrorWithHttpInfo(name: kotlin.String, mirrorReq: MirrorReq) : ApiResponse<RepoView?> {
+        val localVariableConfig = postGitReposByNameMirrorRequestConfig(name = name, mirrorReq = mirrorReq)
 
         return request<MirrorReq, RepoView>(
             localVariableConfig
@@ -2267,13 +2267,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitReposByNameMirror
+     * To obtain the request config of the operation postGitReposByNameMirror
      *
      * @param name Name is the local repo to mirror into, from the :name path segment. It is CREATED on first use.
      * @param mirrorReq 
      * @return RequestConfig
      */
-    fun postV1GitReposByNameMirrorRequestConfig(name: kotlin.String, mirrorReq: MirrorReq) : RequestConfig<MirrorReq> {
+    fun postGitReposByNameMirrorRequestConfig(name: kotlin.String, mirrorReq: MirrorReq) : RequestConfig<MirrorReq> {
         val localVariableBody = mirrorReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2305,8 +2305,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitReposByNameMirrors(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : MirrorTargetView {
-        val localVarResponse = postV1GitReposByNameMirrorsWithHttpInfo(name = name, mirrorTargetReq = mirrorTargetReq)
+    fun postGitReposByNameMirrors(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : MirrorTargetView {
+        val localVarResponse = postGitReposByNameMirrorsWithHttpInfo(name = name, mirrorTargetReq = mirrorTargetReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MirrorTargetView
@@ -2335,8 +2335,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitReposByNameMirrorsWithHttpInfo(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : ApiResponse<MirrorTargetView?> {
-        val localVariableConfig = postV1GitReposByNameMirrorsRequestConfig(name = name, mirrorTargetReq = mirrorTargetReq)
+    fun postGitReposByNameMirrorsWithHttpInfo(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : ApiResponse<MirrorTargetView?> {
+        val localVariableConfig = postGitReposByNameMirrorsRequestConfig(name = name, mirrorTargetReq = mirrorTargetReq)
 
         return request<MirrorTargetReq, MirrorTargetView>(
             localVariableConfig
@@ -2344,13 +2344,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitReposByNameMirrors
+     * To obtain the request config of the operation postGitReposByNameMirrors
      *
      * @param name Name is the repo whose advanced refs are pushed downstream, from the :name path segment.
      * @param mirrorTargetReq 
      * @return RequestConfig
      */
-    fun postV1GitReposByNameMirrorsRequestConfig(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : RequestConfig<MirrorTargetReq> {
+    fun postGitReposByNameMirrorsRequestConfig(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : RequestConfig<MirrorTargetReq> {
         val localVariableBody = mirrorTargetReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2382,8 +2382,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitReposByNamePulls(name: kotlin.String, openReq: OpenReq) : PullView {
-        val localVarResponse = postV1GitReposByNamePullsWithHttpInfo(name = name, openReq = openReq)
+    fun postGitReposByNamePulls(name: kotlin.String, openReq: OpenReq) : PullView {
+        val localVarResponse = postGitReposByNamePullsWithHttpInfo(name = name, openReq = openReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PullView
@@ -2412,8 +2412,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitReposByNamePullsWithHttpInfo(name: kotlin.String, openReq: OpenReq) : ApiResponse<PullView?> {
-        val localVariableConfig = postV1GitReposByNamePullsRequestConfig(name = name, openReq = openReq)
+    fun postGitReposByNamePullsWithHttpInfo(name: kotlin.String, openReq: OpenReq) : ApiResponse<PullView?> {
+        val localVariableConfig = postGitReposByNamePullsRequestConfig(name = name, openReq = openReq)
 
         return request<OpenReq, PullView>(
             localVariableConfig
@@ -2421,13 +2421,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitReposByNamePulls
+     * To obtain the request config of the operation postGitReposByNamePulls
      *
      * @param name Name is the repo the proposal belongs to, from the :name path segment.
      * @param openReq 
      * @return RequestConfig
      */
-    fun postV1GitReposByNamePullsRequestConfig(name: kotlin.String, openReq: OpenReq) : RequestConfig<OpenReq> {
+    fun postGitReposByNamePullsRequestConfig(name: kotlin.String, openReq: OpenReq) : RequestConfig<OpenReq> {
         val localVariableBody = openReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2459,8 +2459,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitReposByNamePullsByNumberMerge(name: kotlin.String, number: kotlin.Int) : PullView {
-        val localVarResponse = postV1GitReposByNamePullsByNumberMergeWithHttpInfo(name = name, number = number)
+    fun postGitReposByNamePullsByNumberMerge(name: kotlin.String, number: kotlin.Int) : PullView {
+        val localVarResponse = postGitReposByNamePullsByNumberMergeWithHttpInfo(name = name, number = number)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PullView
@@ -2489,8 +2489,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitReposByNamePullsByNumberMergeWithHttpInfo(name: kotlin.String, number: kotlin.Int) : ApiResponse<PullView?> {
-        val localVariableConfig = postV1GitReposByNamePullsByNumberMergeRequestConfig(name = name, number = number)
+    fun postGitReposByNamePullsByNumberMergeWithHttpInfo(name: kotlin.String, number: kotlin.Int) : ApiResponse<PullView?> {
+        val localVariableConfig = postGitReposByNamePullsByNumberMergeRequestConfig(name = name, number = number)
 
         return request<Unit, PullView>(
             localVariableConfig
@@ -2498,13 +2498,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitReposByNamePullsByNumberMerge
+     * To obtain the request config of the operation postGitReposByNamePullsByNumberMerge
      *
      * @param name Name is the repo, from the :name path segment.
      * @param number Number is the proposal&#39;s per-repo number, from the :number path segment.
      * @return RequestConfig
      */
-    fun postV1GitReposByNamePullsByNumberMergeRequestConfig(name: kotlin.String, number: kotlin.Int) : RequestConfig<Unit> {
+    fun postGitReposByNamePullsByNumberMergeRequestConfig(name: kotlin.String, number: kotlin.Int) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2535,8 +2535,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitReposByNamePush(name: kotlin.String, pushReq: PushReq) : PushResp {
-        val localVarResponse = postV1GitReposByNamePushWithHttpInfo(name = name, pushReq = pushReq)
+    fun postGitReposByNamePush(name: kotlin.String, pushReq: PushReq) : PushResp {
+        val localVarResponse = postGitReposByNamePushWithHttpInfo(name = name, pushReq = pushReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PushResp
@@ -2565,8 +2565,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitReposByNamePushWithHttpInfo(name: kotlin.String, pushReq: PushReq) : ApiResponse<PushResp?> {
-        val localVariableConfig = postV1GitReposByNamePushRequestConfig(name = name, pushReq = pushReq)
+    fun postGitReposByNamePushWithHttpInfo(name: kotlin.String, pushReq: PushReq) : ApiResponse<PushResp?> {
+        val localVariableConfig = postGitReposByNamePushRequestConfig(name = name, pushReq = pushReq)
 
         return request<PushReq, PushResp>(
             localVariableConfig
@@ -2574,13 +2574,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitReposByNamePush
+     * To obtain the request config of the operation postGitReposByNamePush
      *
      * @param name Name is the repo to push into, from the :name path segment. It is CREATED on first push if it does not exist.
      * @param pushReq 
      * @return RequestConfig
      */
-    fun postV1GitReposByNamePushRequestConfig(name: kotlin.String, pushReq: PushReq) : RequestConfig<PushReq> {
+    fun postGitReposByNamePushRequestConfig(name: kotlin.String, pushReq: PushReq) : RequestConfig<PushReq> {
         val localVariableBody = pushReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2612,8 +2612,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitReposByNameSubscriptions(name: kotlin.String, subscribeReq: SubscribeReq) : SubscriptionView {
-        val localVarResponse = postV1GitReposByNameSubscriptionsWithHttpInfo(name = name, subscribeReq = subscribeReq)
+    fun postGitReposByNameSubscriptions(name: kotlin.String, subscribeReq: SubscribeReq) : SubscriptionView {
+        val localVarResponse = postGitReposByNameSubscriptionsWithHttpInfo(name = name, subscribeReq = subscribeReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SubscriptionView
@@ -2642,8 +2642,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitReposByNameSubscriptionsWithHttpInfo(name: kotlin.String, subscribeReq: SubscribeReq) : ApiResponse<SubscriptionView?> {
-        val localVariableConfig = postV1GitReposByNameSubscriptionsRequestConfig(name = name, subscribeReq = subscribeReq)
+    fun postGitReposByNameSubscriptionsWithHttpInfo(name: kotlin.String, subscribeReq: SubscribeReq) : ApiResponse<SubscriptionView?> {
+        val localVariableConfig = postGitReposByNameSubscriptionsRequestConfig(name = name, subscribeReq = subscribeReq)
 
         return request<SubscribeReq, SubscriptionView>(
             localVariableConfig
@@ -2651,13 +2651,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitReposByNameSubscriptions
+     * To obtain the request config of the operation postGitReposByNameSubscriptions
      *
      * @param name Name is the repo to subscribe, from the :name path segment.
      * @param subscribeReq 
      * @return RequestConfig
      */
-    fun postV1GitReposByNameSubscriptionsRequestConfig(name: kotlin.String, subscribeReq: SubscribeReq) : RequestConfig<SubscribeReq> {
+    fun postGitReposByNameSubscriptionsRequestConfig(name: kotlin.String, subscribeReq: SubscribeReq) : RequestConfig<SubscribeReq> {
         val localVariableBody = subscribeReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2686,8 +2686,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitWebhook() : Unit {
-        val localVarResponse = postV1GitWebhookWithHttpInfo()
+    fun postGitWebhook() : Unit {
+        val localVarResponse = postGitWebhookWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2713,8 +2713,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitWebhookWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitWebhookRequestConfig()
+    fun postGitWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postGitWebhookRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2722,11 +2722,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitWebhook
+     * To obtain the request config of the operation postGitWebhook
      *
      * @return RequestConfig
      */
-    fun postV1GitWebhookRequestConfig() : RequestConfig<Unit> {
+    fun postGitWebhookRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2754,8 +2754,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitZapCreaterepo(zapProcReq: ZapProcReq? = null) : Unit {
-        val localVarResponse = postV1GitZapCreaterepoWithHttpInfo(zapProcReq = zapProcReq)
+    fun postGitZapCreaterepo(zapProcReq: ZapProcReq? = null) : Unit {
+        val localVarResponse = postGitZapCreaterepoWithHttpInfo(zapProcReq = zapProcReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2782,8 +2782,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitZapCreaterepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitZapCreaterepoRequestConfig(zapProcReq = zapProcReq)
+    fun postGitZapCreaterepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
+        val localVariableConfig = postGitZapCreaterepoRequestConfig(zapProcReq = zapProcReq)
 
         return request<ZapProcReq, Unit>(
             localVariableConfig
@@ -2791,12 +2791,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitZapCreaterepo
+     * To obtain the request config of the operation postGitZapCreaterepo
      *
      * @param zapProcReq  (optional)
      * @return RequestConfig
      */
-    fun postV1GitZapCreaterepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
+    fun postGitZapCreaterepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
         val localVariableBody = zapProcReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2825,8 +2825,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitZapDeleterepo(zapProcReq: ZapProcReq? = null) : Unit {
-        val localVarResponse = postV1GitZapDeleterepoWithHttpInfo(zapProcReq = zapProcReq)
+    fun postGitZapDeleterepo(zapProcReq: ZapProcReq? = null) : Unit {
+        val localVarResponse = postGitZapDeleterepoWithHttpInfo(zapProcReq = zapProcReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2853,8 +2853,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitZapDeleterepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitZapDeleterepoRequestConfig(zapProcReq = zapProcReq)
+    fun postGitZapDeleterepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
+        val localVariableConfig = postGitZapDeleterepoRequestConfig(zapProcReq = zapProcReq)
 
         return request<ZapProcReq, Unit>(
             localVariableConfig
@@ -2862,12 +2862,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitZapDeleterepo
+     * To obtain the request config of the operation postGitZapDeleterepo
      *
      * @param zapProcReq  (optional)
      * @return RequestConfig
      */
-    fun postV1GitZapDeleterepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
+    fun postGitZapDeleterepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
         val localVariableBody = zapProcReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2896,8 +2896,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitZapGetrepo(zapProcReq: ZapProcReq? = null) : Unit {
-        val localVarResponse = postV1GitZapGetrepoWithHttpInfo(zapProcReq = zapProcReq)
+    fun postGitZapGetrepo(zapProcReq: ZapProcReq? = null) : Unit {
+        val localVarResponse = postGitZapGetrepoWithHttpInfo(zapProcReq = zapProcReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2924,8 +2924,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitZapGetrepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitZapGetrepoRequestConfig(zapProcReq = zapProcReq)
+    fun postGitZapGetrepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
+        val localVariableConfig = postGitZapGetrepoRequestConfig(zapProcReq = zapProcReq)
 
         return request<ZapProcReq, Unit>(
             localVariableConfig
@@ -2933,12 +2933,12 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitZapGetrepo
+     * To obtain the request config of the operation postGitZapGetrepo
      *
      * @param zapProcReq  (optional)
      * @return RequestConfig
      */
-    fun postV1GitZapGetrepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
+    fun postGitZapGetrepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
         val localVariableBody = zapProcReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2966,8 +2966,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitZapListrepos() : Unit {
-        val localVarResponse = postV1GitZapListreposWithHttpInfo()
+    fun postGitZapListrepos() : Unit {
+        val localVarResponse = postGitZapListreposWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2993,8 +2993,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitZapListreposWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitZapListreposRequestConfig()
+    fun postGitZapListreposWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postGitZapListreposRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3002,11 +3002,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitZapListrepos
+     * To obtain the request config of the operation postGitZapListrepos
      *
      * @return RequestConfig
      */
-    fun postV1GitZapListreposRequestConfig() : RequestConfig<Unit> {
+    fun postGitZapListreposRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3033,8 +3033,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1GitZapUsage() : Unit {
-        val localVarResponse = postV1GitZapUsageWithHttpInfo()
+    fun postGitZapUsage() : Unit {
+        val localVarResponse = postGitZapUsageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3060,8 +3060,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1GitZapUsageWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1GitZapUsageRequestConfig()
+    fun postGitZapUsageWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postGitZapUsageRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3069,11 +3069,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1GitZapUsage
+     * To obtain the request config of the operation postGitZapUsage
      *
      * @return RequestConfig
      */
-    fun postV1GitZapUsageRequestConfig() : RequestConfig<Unit> {
+    fun postGitZapUsageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

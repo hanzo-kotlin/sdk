@@ -58,8 +58,8 @@ class MeshApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MeshServices() : MeshServiceList {
-        val localVarResponse = getV1MeshServicesWithHttpInfo()
+    fun getMeshServices() : MeshServiceList {
+        val localVarResponse = getMeshServicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MeshServiceList
@@ -86,8 +86,8 @@ class MeshApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MeshServicesWithHttpInfo() : ApiResponse<MeshServiceList?> {
-        val localVariableConfig = getV1MeshServicesRequestConfig()
+    fun getMeshServicesWithHttpInfo() : ApiResponse<MeshServiceList?> {
+        val localVariableConfig = getMeshServicesRequestConfig()
 
         return request<Unit, MeshServiceList>(
             localVariableConfig
@@ -95,11 +95,11 @@ class MeshApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1MeshServices
+     * To obtain the request config of the operation getMeshServices
      *
      * @return RequestConfig
      */
-    fun getV1MeshServicesRequestConfig() : RequestConfig<Unit> {
+    fun getMeshServicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -66,8 +66,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1IngressMiddlewaresById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1IngressMiddlewaresByIdWithHttpInfo(id = id)
+    fun deleteIngressMiddlewaresById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteIngressMiddlewaresByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -94,8 +94,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1IngressMiddlewaresByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1IngressMiddlewaresByIdRequestConfig(id = id)
+    fun deleteIngressMiddlewaresByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteIngressMiddlewaresByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -103,12 +103,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteV1IngressMiddlewaresById
+     * To obtain the request config of the operation deleteIngressMiddlewaresById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1IngressMiddlewaresByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteIngressMiddlewaresByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -136,8 +136,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1IngressRoutesById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1IngressRoutesByIdWithHttpInfo(id = id)
+    fun deleteIngressRoutesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteIngressRoutesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -164,8 +164,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1IngressRoutesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1IngressRoutesByIdRequestConfig(id = id)
+    fun deleteIngressRoutesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteIngressRoutesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -173,12 +173,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteV1IngressRoutesById
+     * To obtain the request config of the operation deleteIngressRoutesById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1IngressRoutesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteIngressRoutesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -206,8 +206,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1IngressServicesById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1IngressServicesByIdWithHttpInfo(id = id)
+    fun deleteIngressServicesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteIngressServicesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -234,8 +234,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1IngressServicesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1IngressServicesByIdRequestConfig(id = id)
+    fun deleteIngressServicesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteIngressServicesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -243,12 +243,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation deleteV1IngressServicesById
+     * To obtain the request config of the operation deleteIngressServicesById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1IngressServicesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteIngressServicesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -276,8 +276,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IngressMiddlewares() : IngressMiddlewares {
-        val localVarResponse = getV1IngressMiddlewaresWithHttpInfo()
+    fun getIngressMiddlewares() : IngressMiddlewares {
+        val localVarResponse = getIngressMiddlewaresWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IngressMiddlewares
@@ -304,8 +304,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IngressMiddlewaresWithHttpInfo() : ApiResponse<IngressMiddlewares?> {
-        val localVariableConfig = getV1IngressMiddlewaresRequestConfig()
+    fun getIngressMiddlewaresWithHttpInfo() : ApiResponse<IngressMiddlewares?> {
+        val localVariableConfig = getIngressMiddlewaresRequestConfig()
 
         return request<Unit, IngressMiddlewares>(
             localVariableConfig
@@ -313,11 +313,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1IngressMiddlewares
+     * To obtain the request config of the operation getIngressMiddlewares
      *
      * @return RequestConfig
      */
-    fun getV1IngressMiddlewaresRequestConfig() : RequestConfig<Unit> {
+    fun getIngressMiddlewaresRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -347,8 +347,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IngressMiddlewaresById(id: kotlin.String) : Middleware {
-        val localVarResponse = getV1IngressMiddlewaresByIdWithHttpInfo(id = id)
+    fun getIngressMiddlewaresById(id: kotlin.String) : Middleware {
+        val localVarResponse = getIngressMiddlewaresByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Middleware
@@ -376,8 +376,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IngressMiddlewaresByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Middleware?> {
-        val localVariableConfig = getV1IngressMiddlewaresByIdRequestConfig(id = id)
+    fun getIngressMiddlewaresByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Middleware?> {
+        val localVariableConfig = getIngressMiddlewaresByIdRequestConfig(id = id)
 
         return request<Unit, Middleware>(
             localVariableConfig
@@ -385,12 +385,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1IngressMiddlewaresById
+     * To obtain the request config of the operation getIngressMiddlewaresById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1IngressMiddlewaresByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getIngressMiddlewaresByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -419,8 +419,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IngressRoutes() : IngressRoutes {
-        val localVarResponse = getV1IngressRoutesWithHttpInfo()
+    fun getIngressRoutes() : IngressRoutes {
+        val localVarResponse = getIngressRoutesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IngressRoutes
@@ -447,8 +447,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IngressRoutesWithHttpInfo() : ApiResponse<IngressRoutes?> {
-        val localVariableConfig = getV1IngressRoutesRequestConfig()
+    fun getIngressRoutesWithHttpInfo() : ApiResponse<IngressRoutes?> {
+        val localVariableConfig = getIngressRoutesRequestConfig()
 
         return request<Unit, IngressRoutes>(
             localVariableConfig
@@ -456,11 +456,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1IngressRoutes
+     * To obtain the request config of the operation getIngressRoutes
      *
      * @return RequestConfig
      */
-    fun getV1IngressRoutesRequestConfig() : RequestConfig<Unit> {
+    fun getIngressRoutesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -490,8 +490,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IngressRoutesById(id: kotlin.String) : Route {
-        val localVarResponse = getV1IngressRoutesByIdWithHttpInfo(id = id)
+    fun getIngressRoutesById(id: kotlin.String) : Route {
+        val localVarResponse = getIngressRoutesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Route
@@ -519,8 +519,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IngressRoutesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Route?> {
-        val localVariableConfig = getV1IngressRoutesByIdRequestConfig(id = id)
+    fun getIngressRoutesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Route?> {
+        val localVariableConfig = getIngressRoutesByIdRequestConfig(id = id)
 
         return request<Unit, Route>(
             localVariableConfig
@@ -528,12 +528,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1IngressRoutesById
+     * To obtain the request config of the operation getIngressRoutesById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1IngressRoutesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getIngressRoutesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -562,8 +562,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IngressServices() : IngressServices {
-        val localVarResponse = getV1IngressServicesWithHttpInfo()
+    fun getIngressServices() : IngressServices {
+        val localVarResponse = getIngressServicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IngressServices
@@ -590,8 +590,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IngressServicesWithHttpInfo() : ApiResponse<IngressServices?> {
-        val localVariableConfig = getV1IngressServicesRequestConfig()
+    fun getIngressServicesWithHttpInfo() : ApiResponse<IngressServices?> {
+        val localVariableConfig = getIngressServicesRequestConfig()
 
         return request<Unit, IngressServices>(
             localVariableConfig
@@ -599,11 +599,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1IngressServices
+     * To obtain the request config of the operation getIngressServices
      *
      * @return RequestConfig
      */
-    fun getV1IngressServicesRequestConfig() : RequestConfig<Unit> {
+    fun getIngressServicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -633,8 +633,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IngressServicesById(id: kotlin.String) : Upstream {
-        val localVarResponse = getV1IngressServicesByIdWithHttpInfo(id = id)
+    fun getIngressServicesById(id: kotlin.String) : Upstream {
+        val localVarResponse = getIngressServicesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Upstream
@@ -662,8 +662,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IngressServicesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Upstream?> {
-        val localVariableConfig = getV1IngressServicesByIdRequestConfig(id = id)
+    fun getIngressServicesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Upstream?> {
+        val localVariableConfig = getIngressServicesByIdRequestConfig(id = id)
 
         return request<Unit, Upstream>(
             localVariableConfig
@@ -671,12 +671,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1IngressServicesById
+     * To obtain the request config of the operation getIngressServicesById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1IngressServicesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getIngressServicesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -705,8 +705,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IngressStatus() : IngressStatus {
-        val localVarResponse = getV1IngressStatusWithHttpInfo()
+    fun getIngressStatus() : IngressStatus {
+        val localVarResponse = getIngressStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IngressStatus
@@ -733,8 +733,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IngressStatusWithHttpInfo() : ApiResponse<IngressStatus?> {
-        val localVariableConfig = getV1IngressStatusRequestConfig()
+    fun getIngressStatusWithHttpInfo() : ApiResponse<IngressStatus?> {
+        val localVariableConfig = getIngressStatusRequestConfig()
 
         return request<Unit, IngressStatus>(
             localVariableConfig
@@ -742,11 +742,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1IngressStatus
+     * To obtain the request config of the operation getIngressStatus
      *
      * @return RequestConfig
      */
-    fun getV1IngressStatusRequestConfig() : RequestConfig<Unit> {
+    fun getIngressStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -775,8 +775,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IngressTls() : IngressTLS {
-        val localVarResponse = getV1IngressTlsWithHttpInfo()
+    fun getIngressTls() : IngressTLS {
+        val localVarResponse = getIngressTlsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IngressTLS
@@ -803,8 +803,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IngressTlsWithHttpInfo() : ApiResponse<IngressTLS?> {
-        val localVariableConfig = getV1IngressTlsRequestConfig()
+    fun getIngressTlsWithHttpInfo() : ApiResponse<IngressTLS?> {
+        val localVariableConfig = getIngressTlsRequestConfig()
 
         return request<Unit, IngressTLS>(
             localVariableConfig
@@ -812,11 +812,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1IngressTls
+     * To obtain the request config of the operation getIngressTls
      *
      * @return RequestConfig
      */
-    fun getV1IngressTlsRequestConfig() : RequestConfig<Unit> {
+    fun getIngressTlsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -846,8 +846,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IngressMiddlewares(middleware: Middleware) : Middleware {
-        val localVarResponse = postV1IngressMiddlewaresWithHttpInfo(middleware = middleware)
+    fun postIngressMiddlewares(middleware: Middleware) : Middleware {
+        val localVarResponse = postIngressMiddlewaresWithHttpInfo(middleware = middleware)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Middleware
@@ -875,8 +875,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IngressMiddlewaresWithHttpInfo(middleware: Middleware) : ApiResponse<Middleware?> {
-        val localVariableConfig = postV1IngressMiddlewaresRequestConfig(middleware = middleware)
+    fun postIngressMiddlewaresWithHttpInfo(middleware: Middleware) : ApiResponse<Middleware?> {
+        val localVariableConfig = postIngressMiddlewaresRequestConfig(middleware = middleware)
 
         return request<Middleware, Middleware>(
             localVariableConfig
@@ -884,12 +884,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1IngressMiddlewares
+     * To obtain the request config of the operation postIngressMiddlewares
      *
      * @param middleware 
      * @return RequestConfig
      */
-    fun postV1IngressMiddlewaresRequestConfig(middleware: Middleware) : RequestConfig<Middleware> {
+    fun postIngressMiddlewaresRequestConfig(middleware: Middleware) : RequestConfig<Middleware> {
         val localVariableBody = middleware
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -920,8 +920,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IngressRoutes(route: Route) : Route {
-        val localVarResponse = postV1IngressRoutesWithHttpInfo(route = route)
+    fun postIngressRoutes(route: Route) : Route {
+        val localVarResponse = postIngressRoutesWithHttpInfo(route = route)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Route
@@ -949,8 +949,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IngressRoutesWithHttpInfo(route: Route) : ApiResponse<Route?> {
-        val localVariableConfig = postV1IngressRoutesRequestConfig(route = route)
+    fun postIngressRoutesWithHttpInfo(route: Route) : ApiResponse<Route?> {
+        val localVariableConfig = postIngressRoutesRequestConfig(route = route)
 
         return request<Route, Route>(
             localVariableConfig
@@ -958,12 +958,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1IngressRoutes
+     * To obtain the request config of the operation postIngressRoutes
      *
      * @param route 
      * @return RequestConfig
      */
-    fun postV1IngressRoutesRequestConfig(route: Route) : RequestConfig<Route> {
+    fun postIngressRoutesRequestConfig(route: Route) : RequestConfig<Route> {
         val localVariableBody = route
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -994,8 +994,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IngressServices(upstream: Upstream) : Upstream {
-        val localVarResponse = postV1IngressServicesWithHttpInfo(upstream = upstream)
+    fun postIngressServices(upstream: Upstream) : Upstream {
+        val localVarResponse = postIngressServicesWithHttpInfo(upstream = upstream)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Upstream
@@ -1023,8 +1023,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IngressServicesWithHttpInfo(upstream: Upstream) : ApiResponse<Upstream?> {
-        val localVariableConfig = postV1IngressServicesRequestConfig(upstream = upstream)
+    fun postIngressServicesWithHttpInfo(upstream: Upstream) : ApiResponse<Upstream?> {
+        val localVariableConfig = postIngressServicesRequestConfig(upstream = upstream)
 
         return request<Upstream, Upstream>(
             localVariableConfig
@@ -1032,12 +1032,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1IngressServices
+     * To obtain the request config of the operation postIngressServices
      *
      * @param upstream 
      * @return RequestConfig
      */
-    fun postV1IngressServicesRequestConfig(upstream: Upstream) : RequestConfig<Upstream> {
+    fun postIngressServicesRequestConfig(upstream: Upstream) : RequestConfig<Upstream> {
         val localVariableBody = upstream
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1069,8 +1069,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1IngressMiddlewaresById(id: kotlin.String, middleware: Middleware) : Middleware {
-        val localVarResponse = putV1IngressMiddlewaresByIdWithHttpInfo(id = id, middleware = middleware)
+    fun putIngressMiddlewaresById(id: kotlin.String, middleware: Middleware) : Middleware {
+        val localVarResponse = putIngressMiddlewaresByIdWithHttpInfo(id = id, middleware = middleware)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Middleware
@@ -1099,8 +1099,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1IngressMiddlewaresByIdWithHttpInfo(id: kotlin.String, middleware: Middleware) : ApiResponse<Middleware?> {
-        val localVariableConfig = putV1IngressMiddlewaresByIdRequestConfig(id = id, middleware = middleware)
+    fun putIngressMiddlewaresByIdWithHttpInfo(id: kotlin.String, middleware: Middleware) : ApiResponse<Middleware?> {
+        val localVariableConfig = putIngressMiddlewaresByIdRequestConfig(id = id, middleware = middleware)
 
         return request<Middleware, Middleware>(
             localVariableConfig
@@ -1108,13 +1108,13 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putV1IngressMiddlewaresById
+     * To obtain the request config of the operation putIngressMiddlewaresById
      *
      * @param id ID identifies the transform within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one. Routes reference it by this id.
      * @param middleware 
      * @return RequestConfig
      */
-    fun putV1IngressMiddlewaresByIdRequestConfig(id: kotlin.String, middleware: Middleware) : RequestConfig<Middleware> {
+    fun putIngressMiddlewaresByIdRequestConfig(id: kotlin.String, middleware: Middleware) : RequestConfig<Middleware> {
         val localVariableBody = middleware
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1146,8 +1146,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1IngressRoutesById(id: kotlin.String, route: Route) : Route {
-        val localVarResponse = putV1IngressRoutesByIdWithHttpInfo(id = id, route = route)
+    fun putIngressRoutesById(id: kotlin.String, route: Route) : Route {
+        val localVarResponse = putIngressRoutesByIdWithHttpInfo(id = id, route = route)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Route
@@ -1176,8 +1176,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1IngressRoutesByIdWithHttpInfo(id: kotlin.String, route: Route) : ApiResponse<Route?> {
-        val localVariableConfig = putV1IngressRoutesByIdRequestConfig(id = id, route = route)
+    fun putIngressRoutesByIdWithHttpInfo(id: kotlin.String, route: Route) : ApiResponse<Route?> {
+        val localVariableConfig = putIngressRoutesByIdRequestConfig(id = id, route = route)
 
         return request<Route, Route>(
             localVariableConfig
@@ -1185,13 +1185,13 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putV1IngressRoutesById
+     * To obtain the request config of the operation putIngressRoutesById
      *
      * @param id ID identifies the route within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one.
      * @param route 
      * @return RequestConfig
      */
-    fun putV1IngressRoutesByIdRequestConfig(id: kotlin.String, route: Route) : RequestConfig<Route> {
+    fun putIngressRoutesByIdRequestConfig(id: kotlin.String, route: Route) : RequestConfig<Route> {
         val localVariableBody = route
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1223,8 +1223,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1IngressServicesById(id: kotlin.String, upstream: Upstream) : Upstream {
-        val localVarResponse = putV1IngressServicesByIdWithHttpInfo(id = id, upstream = upstream)
+    fun putIngressServicesById(id: kotlin.String, upstream: Upstream) : Upstream {
+        val localVarResponse = putIngressServicesByIdWithHttpInfo(id = id, upstream = upstream)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Upstream
@@ -1253,8 +1253,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1IngressServicesByIdWithHttpInfo(id: kotlin.String, upstream: Upstream) : ApiResponse<Upstream?> {
-        val localVariableConfig = putV1IngressServicesByIdRequestConfig(id = id, upstream = upstream)
+    fun putIngressServicesByIdWithHttpInfo(id: kotlin.String, upstream: Upstream) : ApiResponse<Upstream?> {
+        val localVariableConfig = putIngressServicesByIdRequestConfig(id = id, upstream = upstream)
 
         return request<Upstream, Upstream>(
             localVariableConfig
@@ -1262,13 +1262,13 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putV1IngressServicesById
+     * To obtain the request config of the operation putIngressServicesById
      *
      * @param id ID identifies the pool within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one. Routes reference it by this id.
      * @param upstream 
      * @return RequestConfig
      */
-    fun putV1IngressServicesByIdRequestConfig(id: kotlin.String, upstream: Upstream) : RequestConfig<Upstream> {
+    fun putIngressServicesByIdRequestConfig(id: kotlin.String, upstream: Upstream) : RequestConfig<Upstream> {
         val localVariableBody = upstream
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1299,8 +1299,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1IngressTls(tlSConfig: TLSConfig) : TLSConfig {
-        val localVarResponse = putV1IngressTlsWithHttpInfo(tlSConfig = tlSConfig)
+    fun putIngressTls(tlSConfig: TLSConfig) : TLSConfig {
+        val localVarResponse = putIngressTlsWithHttpInfo(tlSConfig = tlSConfig)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TLSConfig
@@ -1328,8 +1328,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1IngressTlsWithHttpInfo(tlSConfig: TLSConfig) : ApiResponse<TLSConfig?> {
-        val localVariableConfig = putV1IngressTlsRequestConfig(tlSConfig = tlSConfig)
+    fun putIngressTlsWithHttpInfo(tlSConfig: TLSConfig) : ApiResponse<TLSConfig?> {
+        val localVariableConfig = putIngressTlsRequestConfig(tlSConfig = tlSConfig)
 
         return request<TLSConfig, TLSConfig>(
             localVariableConfig
@@ -1337,12 +1337,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation putV1IngressTls
+     * To obtain the request config of the operation putIngressTls
      *
      * @param tlSConfig 
      * @return RequestConfig
      */
-    fun putV1IngressTlsRequestConfig(tlSConfig: TLSConfig) : RequestConfig<TLSConfig> {
+    fun putIngressTlsRequestConfig(tlSConfig: TLSConfig) : RequestConfig<TLSConfig> {
         val localVariableBody = tlSConfig
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

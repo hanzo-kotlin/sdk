@@ -56,8 +56,8 @@ class QueryMultipleApi(basePath: kotlin.String = defaultBasePath, client: Call.F
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1QueryMultiple() : Unit {
-        val localVarResponse = postV1QueryMultipleWithHttpInfo()
+    fun postQueryMultiple() : Unit {
+        val localVarResponse = postQueryMultipleWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class QueryMultipleApi(basePath: kotlin.String = defaultBasePath, client: Call.F
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1QueryMultipleWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1QueryMultipleRequestConfig()
+    fun postQueryMultipleWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postQueryMultipleRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class QueryMultipleApi(basePath: kotlin.String = defaultBasePath, client: Call.F
     }
 
     /**
-     * To obtain the request config of the operation postV1QueryMultiple
+     * To obtain the request config of the operation postQueryMultiple
      *
      * @return RequestConfig
      */
-    fun postV1QueryMultipleRequestConfig() : RequestConfig<Unit> {
+    fun postQueryMultipleRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

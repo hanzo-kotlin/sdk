@@ -56,8 +56,8 @@ class ResponsesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Responses() : Unit {
-        val localVarResponse = postV1ResponsesWithHttpInfo()
+    fun postResponses() : Unit {
+        val localVarResponse = postResponsesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class ResponsesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ResponsesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ResponsesRequestConfig()
+    fun postResponsesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postResponsesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class ResponsesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1Responses
+     * To obtain the request config of the operation postResponses
      *
      * @return RequestConfig
      */
-    fun postV1ResponsesRequestConfig() : RequestConfig<Unit> {
+    fun postResponsesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

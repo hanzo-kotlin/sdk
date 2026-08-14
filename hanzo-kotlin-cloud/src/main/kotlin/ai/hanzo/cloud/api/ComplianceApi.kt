@@ -73,8 +73,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceAccreditation(limit: kotlin.Int? = null) : AccList {
-        val localVarResponse = getV1ComplianceAccreditationWithHttpInfo(limit = limit)
+    fun getComplianceAccreditation(limit: kotlin.Int? = null) : AccList {
+        val localVarResponse = getComplianceAccreditationWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccList
@@ -102,8 +102,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceAccreditationWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AccList?> {
-        val localVariableConfig = getV1ComplianceAccreditationRequestConfig(limit = limit)
+    fun getComplianceAccreditationWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AccList?> {
+        val localVariableConfig = getComplianceAccreditationRequestConfig(limit = limit)
 
         return request<Unit, AccList>(
             localVariableConfig
@@ -111,12 +111,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceAccreditation
+     * To obtain the request config of the operation getComplianceAccreditation
      *
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
      * @return RequestConfig
      */
-    fun getV1ComplianceAccreditationRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getComplianceAccreditationRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -151,8 +151,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceAccreditationById(id: kotlin.String) : AccView {
-        val localVarResponse = getV1ComplianceAccreditationByIdWithHttpInfo(id = id)
+    fun getComplianceAccreditationById(id: kotlin.String) : AccView {
+        val localVarResponse = getComplianceAccreditationByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccView
@@ -180,8 +180,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceAccreditationByIdWithHttpInfo(id: kotlin.String) : ApiResponse<AccView?> {
-        val localVariableConfig = getV1ComplianceAccreditationByIdRequestConfig(id = id)
+    fun getComplianceAccreditationByIdWithHttpInfo(id: kotlin.String) : ApiResponse<AccView?> {
+        val localVariableConfig = getComplianceAccreditationByIdRequestConfig(id = id)
 
         return request<Unit, AccView>(
             localVariableConfig
@@ -189,12 +189,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceAccreditationById
+     * To obtain the request config of the operation getComplianceAccreditationById
      *
      * @param id ID is the accreditation record to read, from the path.
      * @return RequestConfig
      */
-    fun getV1ComplianceAccreditationByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getComplianceAccreditationByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -224,8 +224,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceAudit(result: kotlin.String? = null) : AuditList {
-        val localVarResponse = getV1ComplianceAuditWithHttpInfo(result = result)
+    fun getComplianceAudit(result: kotlin.String? = null) : AuditList {
+        val localVarResponse = getComplianceAuditWithHttpInfo(result = result)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AuditList
@@ -253,8 +253,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceAuditWithHttpInfo(result: kotlin.String?) : ApiResponse<AuditList?> {
-        val localVariableConfig = getV1ComplianceAuditRequestConfig(result = result)
+    fun getComplianceAuditWithHttpInfo(result: kotlin.String?) : ApiResponse<AuditList?> {
+        val localVariableConfig = getComplianceAuditRequestConfig(result = result)
 
         return request<Unit, AuditList>(
             localVariableConfig
@@ -262,12 +262,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceAudit
+     * To obtain the request config of the operation getComplianceAudit
      *
      * @param result Result filters rows by outcome result: success, deny, or error; empty means all. (optional)
      * @return RequestConfig
      */
-    fun getV1ComplianceAuditRequestConfig(result: kotlin.String?) : RequestConfig<Unit> {
+    fun getComplianceAuditRequestConfig(result: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -301,8 +301,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceHealth() : HealthView {
-        val localVarResponse = getV1ComplianceHealthWithHttpInfo()
+    fun getComplianceHealth() : HealthView {
+        val localVarResponse = getComplianceHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as HealthView
@@ -329,8 +329,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceHealthWithHttpInfo() : ApiResponse<HealthView?> {
-        val localVariableConfig = getV1ComplianceHealthRequestConfig()
+    fun getComplianceHealthWithHttpInfo() : ApiResponse<HealthView?> {
+        val localVariableConfig = getComplianceHealthRequestConfig()
 
         return request<Unit, HealthView>(
             localVariableConfig
@@ -338,11 +338,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceHealth
+     * To obtain the request config of the operation getComplianceHealth
      *
      * @return RequestConfig
      */
-    fun getV1ComplianceHealthRequestConfig() : RequestConfig<Unit> {
+    fun getComplianceHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -372,8 +372,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceRecords(limit: kotlin.Int? = null) : RecordList {
-        val localVarResponse = getV1ComplianceRecordsWithHttpInfo(limit = limit)
+    fun getComplianceRecords(limit: kotlin.Int? = null) : RecordList {
+        val localVarResponse = getComplianceRecordsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RecordList
@@ -401,8 +401,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceRecordsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<RecordList?> {
-        val localVariableConfig = getV1ComplianceRecordsRequestConfig(limit = limit)
+    fun getComplianceRecordsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<RecordList?> {
+        val localVariableConfig = getComplianceRecordsRequestConfig(limit = limit)
 
         return request<Unit, RecordList>(
             localVariableConfig
@@ -410,12 +410,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceRecords
+     * To obtain the request config of the operation getComplianceRecords
      *
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
      * @return RequestConfig
      */
-    fun getV1ComplianceRecordsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getComplianceRecordsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -449,8 +449,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceStatus() : StatusView {
-        val localVarResponse = getV1ComplianceStatusWithHttpInfo()
+    fun getComplianceStatus() : StatusView {
+        val localVarResponse = getComplianceStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as StatusView
@@ -477,8 +477,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceStatusWithHttpInfo() : ApiResponse<StatusView?> {
-        val localVariableConfig = getV1ComplianceStatusRequestConfig()
+    fun getComplianceStatusWithHttpInfo() : ApiResponse<StatusView?> {
+        val localVariableConfig = getComplianceStatusRequestConfig()
 
         return request<Unit, StatusView>(
             localVariableConfig
@@ -486,11 +486,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceStatus
+     * To obtain the request config of the operation getComplianceStatus
      *
      * @return RequestConfig
      */
-    fun getV1ComplianceStatusRequestConfig() : RequestConfig<Unit> {
+    fun getComplianceStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -520,8 +520,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceSubjects(limit: kotlin.Int? = null) : SubjectList {
-        val localVarResponse = getV1ComplianceSubjectsWithHttpInfo(limit = limit)
+    fun getComplianceSubjects(limit: kotlin.Int? = null) : SubjectList {
+        val localVarResponse = getComplianceSubjectsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SubjectList
@@ -549,8 +549,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceSubjectsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SubjectList?> {
-        val localVariableConfig = getV1ComplianceSubjectsRequestConfig(limit = limit)
+    fun getComplianceSubjectsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SubjectList?> {
+        val localVariableConfig = getComplianceSubjectsRequestConfig(limit = limit)
 
         return request<Unit, SubjectList>(
             localVariableConfig
@@ -558,12 +558,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceSubjects
+     * To obtain the request config of the operation getComplianceSubjects
      *
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
      * @return RequestConfig
      */
-    fun getV1ComplianceSubjectsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getComplianceSubjectsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -598,8 +598,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceSubjectsById(id: kotlin.String) : Subject {
-        val localVarResponse = getV1ComplianceSubjectsByIdWithHttpInfo(id = id)
+    fun getComplianceSubjectsById(id: kotlin.String) : Subject {
+        val localVarResponse = getComplianceSubjectsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Subject
@@ -627,8 +627,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceSubjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Subject?> {
-        val localVariableConfig = getV1ComplianceSubjectsByIdRequestConfig(id = id)
+    fun getComplianceSubjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Subject?> {
+        val localVariableConfig = getComplianceSubjectsByIdRequestConfig(id = id)
 
         return request<Unit, Subject>(
             localVariableConfig
@@ -636,12 +636,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceSubjectsById
+     * To obtain the request config of the operation getComplianceSubjectsById
      *
      * @param id ID is the subject to read, from the path.
      * @return RequestConfig
      */
-    fun getV1ComplianceSubjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getComplianceSubjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -671,8 +671,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceVerifications(limit: kotlin.Int? = null) : CheckList {
-        val localVarResponse = getV1ComplianceVerificationsWithHttpInfo(limit = limit)
+    fun getComplianceVerifications(limit: kotlin.Int? = null) : CheckList {
+        val localVarResponse = getComplianceVerificationsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CheckList
@@ -700,8 +700,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceVerificationsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CheckList?> {
-        val localVariableConfig = getV1ComplianceVerificationsRequestConfig(limit = limit)
+    fun getComplianceVerificationsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CheckList?> {
+        val localVariableConfig = getComplianceVerificationsRequestConfig(limit = limit)
 
         return request<Unit, CheckList>(
             localVariableConfig
@@ -709,12 +709,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceVerifications
+     * To obtain the request config of the operation getComplianceVerifications
      *
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
      * @return RequestConfig
      */
-    fun getV1ComplianceVerificationsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getComplianceVerificationsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -749,8 +749,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ComplianceVerificationsById(id: kotlin.String) : CheckView {
-        val localVarResponse = getV1ComplianceVerificationsByIdWithHttpInfo(id = id)
+    fun getComplianceVerificationsById(id: kotlin.String) : CheckView {
+        val localVarResponse = getComplianceVerificationsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CheckView
@@ -778,8 +778,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ComplianceVerificationsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CheckView?> {
-        val localVariableConfig = getV1ComplianceVerificationsByIdRequestConfig(id = id)
+    fun getComplianceVerificationsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CheckView?> {
+        val localVariableConfig = getComplianceVerificationsByIdRequestConfig(id = id)
 
         return request<Unit, CheckView>(
             localVariableConfig
@@ -787,12 +787,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ComplianceVerificationsById
+     * To obtain the request config of the operation getComplianceVerificationsById
      *
      * @param id ID is the verification to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1ComplianceVerificationsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getComplianceVerificationsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -822,8 +822,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComplianceAccreditation(accreditationReq: AccreditationReq) : AccView {
-        val localVarResponse = postV1ComplianceAccreditationWithHttpInfo(accreditationReq = accreditationReq)
+    fun postComplianceAccreditation(accreditationReq: AccreditationReq) : AccView {
+        val localVarResponse = postComplianceAccreditationWithHttpInfo(accreditationReq = accreditationReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccView
@@ -851,8 +851,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComplianceAccreditationWithHttpInfo(accreditationReq: AccreditationReq) : ApiResponse<AccView?> {
-        val localVariableConfig = postV1ComplianceAccreditationRequestConfig(accreditationReq = accreditationReq)
+    fun postComplianceAccreditationWithHttpInfo(accreditationReq: AccreditationReq) : ApiResponse<AccView?> {
+        val localVariableConfig = postComplianceAccreditationRequestConfig(accreditationReq = accreditationReq)
 
         return request<AccreditationReq, AccView>(
             localVariableConfig
@@ -860,12 +860,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ComplianceAccreditation
+     * To obtain the request config of the operation postComplianceAccreditation
      *
      * @param accreditationReq 
      * @return RequestConfig
      */
-    fun postV1ComplianceAccreditationRequestConfig(accreditationReq: AccreditationReq) : RequestConfig<AccreditationReq> {
+    fun postComplianceAccreditationRequestConfig(accreditationReq: AccreditationReq) : RequestConfig<AccreditationReq> {
         val localVariableBody = accreditationReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -897,8 +897,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComplianceAccreditationByIdDecision(id: kotlin.String, accreditationDecision: AccreditationDecision) : AccView {
-        val localVarResponse = postV1ComplianceAccreditationByIdDecisionWithHttpInfo(id = id, accreditationDecision = accreditationDecision)
+    fun postComplianceAccreditationByIdDecision(id: kotlin.String, accreditationDecision: AccreditationDecision) : AccView {
+        val localVarResponse = postComplianceAccreditationByIdDecisionWithHttpInfo(id = id, accreditationDecision = accreditationDecision)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AccView
@@ -927,8 +927,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComplianceAccreditationByIdDecisionWithHttpInfo(id: kotlin.String, accreditationDecision: AccreditationDecision) : ApiResponse<AccView?> {
-        val localVariableConfig = postV1ComplianceAccreditationByIdDecisionRequestConfig(id = id, accreditationDecision = accreditationDecision)
+    fun postComplianceAccreditationByIdDecisionWithHttpInfo(id: kotlin.String, accreditationDecision: AccreditationDecision) : ApiResponse<AccView?> {
+        val localVariableConfig = postComplianceAccreditationByIdDecisionRequestConfig(id = id, accreditationDecision = accreditationDecision)
 
         return request<AccreditationDecision, AccView>(
             localVariableConfig
@@ -936,13 +936,13 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ComplianceAccreditationByIdDecision
+     * To obtain the request config of the operation postComplianceAccreditationByIdDecision
      *
      * @param id ID is the accreditation record to decide, from the path.
      * @param accreditationDecision 
      * @return RequestConfig
      */
-    fun postV1ComplianceAccreditationByIdDecisionRequestConfig(id: kotlin.String, accreditationDecision: AccreditationDecision) : RequestConfig<AccreditationDecision> {
+    fun postComplianceAccreditationByIdDecisionRequestConfig(id: kotlin.String, accreditationDecision: AccreditationDecision) : RequestConfig<AccreditationDecision> {
         val localVariableBody = accreditationDecision
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -973,8 +973,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComplianceSubjects(subjectReq: SubjectReq) : Subject {
-        val localVarResponse = postV1ComplianceSubjectsWithHttpInfo(subjectReq = subjectReq)
+    fun postComplianceSubjects(subjectReq: SubjectReq) : Subject {
+        val localVarResponse = postComplianceSubjectsWithHttpInfo(subjectReq = subjectReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Subject
@@ -1002,8 +1002,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComplianceSubjectsWithHttpInfo(subjectReq: SubjectReq) : ApiResponse<Subject?> {
-        val localVariableConfig = postV1ComplianceSubjectsRequestConfig(subjectReq = subjectReq)
+    fun postComplianceSubjectsWithHttpInfo(subjectReq: SubjectReq) : ApiResponse<Subject?> {
+        val localVariableConfig = postComplianceSubjectsRequestConfig(subjectReq = subjectReq)
 
         return request<SubjectReq, Subject>(
             localVariableConfig
@@ -1011,12 +1011,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ComplianceSubjects
+     * To obtain the request config of the operation postComplianceSubjects
      *
      * @param subjectReq 
      * @return RequestConfig
      */
-    fun postV1ComplianceSubjectsRequestConfig(subjectReq: SubjectReq) : RequestConfig<SubjectReq> {
+    fun postComplianceSubjectsRequestConfig(subjectReq: SubjectReq) : RequestConfig<SubjectReq> {
         val localVariableBody = subjectReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1047,8 +1047,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComplianceVerifications(verificationReq: VerificationReq) : CheckView {
-        val localVarResponse = postV1ComplianceVerificationsWithHttpInfo(verificationReq = verificationReq)
+    fun postComplianceVerifications(verificationReq: VerificationReq) : CheckView {
+        val localVarResponse = postComplianceVerificationsWithHttpInfo(verificationReq = verificationReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CheckView
@@ -1076,8 +1076,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComplianceVerificationsWithHttpInfo(verificationReq: VerificationReq) : ApiResponse<CheckView?> {
-        val localVariableConfig = postV1ComplianceVerificationsRequestConfig(verificationReq = verificationReq)
+    fun postComplianceVerificationsWithHttpInfo(verificationReq: VerificationReq) : ApiResponse<CheckView?> {
+        val localVariableConfig = postComplianceVerificationsRequestConfig(verificationReq = verificationReq)
 
         return request<VerificationReq, CheckView>(
             localVariableConfig
@@ -1085,12 +1085,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ComplianceVerifications
+     * To obtain the request config of the operation postComplianceVerifications
      *
      * @param verificationReq 
      * @return RequestConfig
      */
-    fun postV1ComplianceVerificationsRequestConfig(verificationReq: VerificationReq) : RequestConfig<VerificationReq> {
+    fun postComplianceVerificationsRequestConfig(verificationReq: VerificationReq) : RequestConfig<VerificationReq> {
         val localVariableBody = verificationReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1122,8 +1122,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComplianceVerificationsByIdDecision(id: kotlin.String, verificationDecision: VerificationDecision) : CheckView {
-        val localVarResponse = postV1ComplianceVerificationsByIdDecisionWithHttpInfo(id = id, verificationDecision = verificationDecision)
+    fun postComplianceVerificationsByIdDecision(id: kotlin.String, verificationDecision: VerificationDecision) : CheckView {
+        val localVarResponse = postComplianceVerificationsByIdDecisionWithHttpInfo(id = id, verificationDecision = verificationDecision)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CheckView
@@ -1152,8 +1152,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComplianceVerificationsByIdDecisionWithHttpInfo(id: kotlin.String, verificationDecision: VerificationDecision) : ApiResponse<CheckView?> {
-        val localVariableConfig = postV1ComplianceVerificationsByIdDecisionRequestConfig(id = id, verificationDecision = verificationDecision)
+    fun postComplianceVerificationsByIdDecisionWithHttpInfo(id: kotlin.String, verificationDecision: VerificationDecision) : ApiResponse<CheckView?> {
+        val localVariableConfig = postComplianceVerificationsByIdDecisionRequestConfig(id = id, verificationDecision = verificationDecision)
 
         return request<VerificationDecision, CheckView>(
             localVariableConfig
@@ -1161,13 +1161,13 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ComplianceVerificationsByIdDecision
+     * To obtain the request config of the operation postComplianceVerificationsByIdDecision
      *
      * @param id ID is the verification to decide, from the path.
      * @param verificationDecision 
      * @return RequestConfig
      */
-    fun postV1ComplianceVerificationsByIdDecisionRequestConfig(id: kotlin.String, verificationDecision: VerificationDecision) : RequestConfig<VerificationDecision> {
+    fun postComplianceVerificationsByIdDecisionRequestConfig(id: kotlin.String, verificationDecision: VerificationDecision) : RequestConfig<VerificationDecision> {
         val localVariableBody = verificationDecision
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1198,8 +1198,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComplianceVerificationsByIdRefresh(id: kotlin.String) : CheckView {
-        val localVarResponse = postV1ComplianceVerificationsByIdRefreshWithHttpInfo(id = id)
+    fun postComplianceVerificationsByIdRefresh(id: kotlin.String) : CheckView {
+        val localVarResponse = postComplianceVerificationsByIdRefreshWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CheckView
@@ -1227,8 +1227,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComplianceVerificationsByIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<CheckView?> {
-        val localVariableConfig = postV1ComplianceVerificationsByIdRefreshRequestConfig(id = id)
+    fun postComplianceVerificationsByIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<CheckView?> {
+        val localVariableConfig = postComplianceVerificationsByIdRefreshRequestConfig(id = id)
 
         return request<Unit, CheckView>(
             localVariableConfig
@@ -1236,12 +1236,12 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ComplianceVerificationsByIdRefresh
+     * To obtain the request config of the operation postComplianceVerificationsByIdRefresh
      *
      * @param id ID is the verification to act on, from the path.
      * @return RequestConfig
      */
-    fun postV1ComplianceVerificationsByIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postComplianceVerificationsByIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1269,8 +1269,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ComplianceVerificationsWebhook() : Unit {
-        val localVarResponse = postV1ComplianceVerificationsWebhookWithHttpInfo()
+    fun postComplianceVerificationsWebhook() : Unit {
+        val localVarResponse = postComplianceVerificationsWebhookWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1296,8 +1296,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ComplianceVerificationsWebhookWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ComplianceVerificationsWebhookRequestConfig()
+    fun postComplianceVerificationsWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postComplianceVerificationsWebhookRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1305,11 +1305,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1ComplianceVerificationsWebhook
+     * To obtain the request config of the operation postComplianceVerificationsWebhook
      *
      * @return RequestConfig
      */
-    fun postV1ComplianceVerificationsWebhookRequestConfig() : RequestConfig<Unit> {
+    fun postComplianceVerificationsWebhookRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

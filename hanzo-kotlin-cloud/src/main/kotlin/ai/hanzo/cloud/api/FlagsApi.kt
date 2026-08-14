@@ -65,8 +65,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1FlagsDefsByKey(key: kotlin.String) : DeletedOut {
-        val localVarResponse = deleteV1FlagsDefsByKeyWithHttpInfo(key = key)
+    fun deleteFlagsDefsByKey(key: kotlin.String) : DeletedOut {
+        val localVarResponse = deleteFlagsDefsByKeyWithHttpInfo(key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeletedOut
@@ -94,8 +94,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1FlagsDefsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<DeletedOut?> {
-        val localVariableConfig = deleteV1FlagsDefsByKeyRequestConfig(key = key)
+    fun deleteFlagsDefsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<DeletedOut?> {
+        val localVariableConfig = deleteFlagsDefsByKeyRequestConfig(key = key)
 
         return request<Unit, DeletedOut>(
             localVariableConfig
@@ -103,12 +103,12 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1FlagsDefsByKey
+     * To obtain the request config of the operation deleteFlagsDefsByKey
      *
      * @param key Key is the flag key to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1FlagsDefsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
+    fun deleteFlagsDefsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -138,8 +138,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlagsActivity(limit: kotlin.Int? = null) : ActivityOut {
-        val localVarResponse = getV1FlagsActivityWithHttpInfo(limit = limit)
+    fun getFlagsActivity(limit: kotlin.Int? = null) : ActivityOut {
+        val localVarResponse = getFlagsActivityWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ActivityOut
@@ -167,8 +167,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlagsActivityWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ActivityOut?> {
-        val localVariableConfig = getV1FlagsActivityRequestConfig(limit = limit)
+    fun getFlagsActivityWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ActivityOut?> {
+        val localVariableConfig = getFlagsActivityRequestConfig(limit = limit)
 
         return request<Unit, ActivityOut>(
             localVariableConfig
@@ -176,12 +176,12 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1FlagsActivity
+     * To obtain the request config of the operation getFlagsActivity
      *
      * @param limit Limit caps the rows returned. 1–500; anything else takes the default 100. (optional)
      * @return RequestConfig
      */
-    fun getV1FlagsActivityRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getFlagsActivityRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -215,8 +215,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlagsDefs() : DefsOut {
-        val localVarResponse = getV1FlagsDefsWithHttpInfo()
+    fun getFlagsDefs() : DefsOut {
+        val localVarResponse = getFlagsDefsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DefsOut
@@ -243,8 +243,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlagsDefsWithHttpInfo() : ApiResponse<DefsOut?> {
-        val localVariableConfig = getV1FlagsDefsRequestConfig()
+    fun getFlagsDefsWithHttpInfo() : ApiResponse<DefsOut?> {
+        val localVariableConfig = getFlagsDefsRequestConfig()
 
         return request<Unit, DefsOut>(
             localVariableConfig
@@ -252,11 +252,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1FlagsDefs
+     * To obtain the request config of the operation getFlagsDefs
      *
      * @return RequestConfig
      */
-    fun getV1FlagsDefsRequestConfig() : RequestConfig<Unit> {
+    fun getFlagsDefsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -286,8 +286,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlagsDefsByKey(key: kotlin.String) : DefRow {
-        val localVarResponse = getV1FlagsDefsByKeyWithHttpInfo(key = key)
+    fun getFlagsDefsByKey(key: kotlin.String) : DefRow {
+        val localVarResponse = getFlagsDefsByKeyWithHttpInfo(key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DefRow
@@ -315,8 +315,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlagsDefsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<DefRow?> {
-        val localVariableConfig = getV1FlagsDefsByKeyRequestConfig(key = key)
+    fun getFlagsDefsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<DefRow?> {
+        val localVariableConfig = getFlagsDefsByKeyRequestConfig(key = key)
 
         return request<Unit, DefRow>(
             localVariableConfig
@@ -324,12 +324,12 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1FlagsDefsByKey
+     * To obtain the request config of the operation getFlagsDefsByKey
      *
      * @param key Key is the flag key to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1FlagsDefsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
+    fun getFlagsDefsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -358,8 +358,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlagsHealth() : HealthOut {
-        val localVarResponse = getV1FlagsHealthWithHttpInfo()
+    fun getFlagsHealth() : HealthOut {
+        val localVarResponse = getFlagsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as HealthOut
@@ -386,8 +386,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlagsHealthWithHttpInfo() : ApiResponse<HealthOut?> {
-        val localVariableConfig = getV1FlagsHealthRequestConfig()
+    fun getFlagsHealthWithHttpInfo() : ApiResponse<HealthOut?> {
+        val localVariableConfig = getFlagsHealthRequestConfig()
 
         return request<Unit, HealthOut>(
             localVariableConfig
@@ -395,11 +395,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1FlagsHealth
+     * To obtain the request config of the operation getFlagsHealth
      *
      * @return RequestConfig
      */
-    fun getV1FlagsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getFlagsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -429,8 +429,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlagsWaitlist(host: kotlin.String? = null) : WaitlistModeView {
-        val localVarResponse = getV1FlagsWaitlistWithHttpInfo(host = host)
+    fun getFlagsWaitlist(host: kotlin.String? = null) : WaitlistModeView {
+        val localVarResponse = getFlagsWaitlistWithHttpInfo(host = host)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as WaitlistModeView
@@ -458,8 +458,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlagsWaitlistWithHttpInfo(host: kotlin.String?) : ApiResponse<WaitlistModeView?> {
-        val localVariableConfig = getV1FlagsWaitlistRequestConfig(host = host)
+    fun getFlagsWaitlistWithHttpInfo(host: kotlin.String?) : ApiResponse<WaitlistModeView?> {
+        val localVariableConfig = getFlagsWaitlistRequestConfig(host = host)
 
         return request<Unit, WaitlistModeView>(
             localVariableConfig
@@ -467,12 +467,12 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1FlagsWaitlist
+     * To obtain the request config of the operation getFlagsWaitlist
      *
      * @param host Host is the host to resolve, e.g. \&quot;chat.hanzo.ai\&quot;. Defaults to the request&#39;s own Host header when omitted, which is what lets a guard running on the governed host ask about itself with no argument. (optional)
      * @return RequestConfig
      */
-    fun getV1FlagsWaitlistRequestConfig(host: kotlin.String?) : RequestConfig<Unit> {
+    fun getFlagsWaitlistRequestConfig(host: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -507,8 +507,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Flags(evaluateIn: EvaluateIn) : kotlin.Any {
-        val localVarResponse = postV1FlagsWithHttpInfo(evaluateIn = evaluateIn)
+    fun postFlags(evaluateIn: EvaluateIn) : kotlin.Any {
+        val localVarResponse = postFlagsWithHttpInfo(evaluateIn = evaluateIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -536,8 +536,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FlagsWithHttpInfo(evaluateIn: EvaluateIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1FlagsRequestConfig(evaluateIn = evaluateIn)
+    fun postFlagsWithHttpInfo(evaluateIn: EvaluateIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postFlagsRequestConfig(evaluateIn = evaluateIn)
 
         return request<EvaluateIn, kotlin.Any>(
             localVariableConfig
@@ -545,12 +545,12 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1Flags
+     * To obtain the request config of the operation postFlags
      *
      * @param evaluateIn 
      * @return RequestConfig
      */
-    fun postV1FlagsRequestConfig(evaluateIn: EvaluateIn) : RequestConfig<EvaluateIn> {
+    fun postFlagsRequestConfig(evaluateIn: EvaluateIn) : RequestConfig<EvaluateIn> {
         val localVariableBody = evaluateIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -581,8 +581,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FlagsDecide(evaluateIn: EvaluateIn) : kotlin.Any {
-        val localVarResponse = postV1FlagsDecideWithHttpInfo(evaluateIn = evaluateIn)
+    fun postFlagsDecide(evaluateIn: EvaluateIn) : kotlin.Any {
+        val localVarResponse = postFlagsDecideWithHttpInfo(evaluateIn = evaluateIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -610,8 +610,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FlagsDecideWithHttpInfo(evaluateIn: EvaluateIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1FlagsDecideRequestConfig(evaluateIn = evaluateIn)
+    fun postFlagsDecideWithHttpInfo(evaluateIn: EvaluateIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postFlagsDecideRequestConfig(evaluateIn = evaluateIn)
 
         return request<EvaluateIn, kotlin.Any>(
             localVariableConfig
@@ -619,12 +619,12 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1FlagsDecide
+     * To obtain the request config of the operation postFlagsDecide
      *
      * @param evaluateIn 
      * @return RequestConfig
      */
-    fun postV1FlagsDecideRequestConfig(evaluateIn: EvaluateIn) : RequestConfig<EvaluateIn> {
+    fun postFlagsDecideRequestConfig(evaluateIn: EvaluateIn) : RequestConfig<EvaluateIn> {
         val localVariableBody = evaluateIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -656,8 +656,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1FlagsDefsByKey(key: kotlin.String, body: kotlin.Any) : DefRow {
-        val localVarResponse = putV1FlagsDefsByKeyWithHttpInfo(key = key, body = body)
+    fun putFlagsDefsByKey(key: kotlin.String, body: kotlin.Any) : DefRow {
+        val localVarResponse = putFlagsDefsByKeyWithHttpInfo(key = key, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DefRow
@@ -686,8 +686,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1FlagsDefsByKeyWithHttpInfo(key: kotlin.String, body: kotlin.Any) : ApiResponse<DefRow?> {
-        val localVariableConfig = putV1FlagsDefsByKeyRequestConfig(key = key, body = body)
+    fun putFlagsDefsByKeyWithHttpInfo(key: kotlin.String, body: kotlin.Any) : ApiResponse<DefRow?> {
+        val localVariableConfig = putFlagsDefsByKeyRequestConfig(key = key, body = body)
 
         return request<kotlin.Any, DefRow>(
             localVariableConfig
@@ -695,13 +695,13 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1FlagsDefsByKey
+     * To obtain the request config of the operation putFlagsDefsByKey
      *
      * @param key Key is the flag key to write, from the path.
      * @param body 
      * @return RequestConfig
      */
-    fun putV1FlagsDefsByKeyRequestConfig(key: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putFlagsDefsByKeyRequestConfig(key: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -56,8 +56,8 @@ class FeedbackApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Feedback() : Unit {
-        val localVarResponse = postV1FeedbackWithHttpInfo()
+    fun postFeedback() : Unit {
+        val localVarResponse = postFeedbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class FeedbackApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FeedbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1FeedbackRequestConfig()
+    fun postFeedbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postFeedbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class FeedbackApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1Feedback
+     * To obtain the request config of the operation postFeedback
      *
      * @return RequestConfig
      */
-    fun postV1FeedbackRequestConfig() : RequestConfig<Unit> {
+    fun postFeedbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

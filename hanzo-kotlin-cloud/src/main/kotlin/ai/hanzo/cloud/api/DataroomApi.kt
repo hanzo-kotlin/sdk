@@ -71,8 +71,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomAnalyticsDataroomByDataroomid(dataroomId: kotlin.String) : DataroomStats {
-        val localVarResponse = getV1DataroomAnalyticsDataroomByDataroomidWithHttpInfo(dataroomId = dataroomId)
+    fun getDataroomAnalyticsDataroomByDataroomid(dataroomId: kotlin.String) : DataroomStats {
+        val localVarResponse = getDataroomAnalyticsDataroomByDataroomidWithHttpInfo(dataroomId = dataroomId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomStats
@@ -100,8 +100,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomAnalyticsDataroomByDataroomidWithHttpInfo(dataroomId: kotlin.String) : ApiResponse<DataroomStats?> {
-        val localVariableConfig = getV1DataroomAnalyticsDataroomByDataroomidRequestConfig(dataroomId = dataroomId)
+    fun getDataroomAnalyticsDataroomByDataroomidWithHttpInfo(dataroomId: kotlin.String) : ApiResponse<DataroomStats?> {
+        val localVariableConfig = getDataroomAnalyticsDataroomByDataroomidRequestConfig(dataroomId = dataroomId)
 
         return request<Unit, DataroomStats>(
             localVariableConfig
@@ -109,12 +109,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomAnalyticsDataroomByDataroomid
+     * To obtain the request config of the operation getDataroomAnalyticsDataroomByDataroomid
      *
      * @param dataroomId DataroomID is the room to report on. It is the path segment, resolved in the caller&#39;s own tenant store.
      * @return RequestConfig
      */
-    fun getV1DataroomAnalyticsDataroomByDataroomidRequestConfig(dataroomId: kotlin.String) : RequestConfig<Unit> {
+    fun getDataroomAnalyticsDataroomByDataroomidRequestConfig(dataroomId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -144,8 +144,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomAnalyticsLinkByLinkid(linkId: kotlin.String) : DataroomLinkStats {
-        val localVarResponse = getV1DataroomAnalyticsLinkByLinkidWithHttpInfo(linkId = linkId)
+    fun getDataroomAnalyticsLinkByLinkid(linkId: kotlin.String) : DataroomLinkStats {
+        val localVarResponse = getDataroomAnalyticsLinkByLinkidWithHttpInfo(linkId = linkId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomLinkStats
@@ -173,8 +173,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomAnalyticsLinkByLinkidWithHttpInfo(linkId: kotlin.String) : ApiResponse<DataroomLinkStats?> {
-        val localVariableConfig = getV1DataroomAnalyticsLinkByLinkidRequestConfig(linkId = linkId)
+    fun getDataroomAnalyticsLinkByLinkidWithHttpInfo(linkId: kotlin.String) : ApiResponse<DataroomLinkStats?> {
+        val localVariableConfig = getDataroomAnalyticsLinkByLinkidRequestConfig(linkId = linkId)
 
         return request<Unit, DataroomLinkStats>(
             localVariableConfig
@@ -182,12 +182,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomAnalyticsLinkByLinkid
+     * To obtain the request config of the operation getDataroomAnalyticsLinkByLinkid
      *
      * @param linkId LinkID is the link to report on. It is the path segment, resolved in the caller&#39;s own tenant store.
      * @return RequestConfig
      */
-    fun getV1DataroomAnalyticsLinkByLinkidRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
+    fun getDataroomAnalyticsLinkByLinkidRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -216,8 +216,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomDatarooms() : DataroomRooms {
-        val localVarResponse = getV1DataroomDataroomsWithHttpInfo()
+    fun getDataroomDatarooms() : DataroomRooms {
+        val localVarResponse = getDataroomDataroomsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomRooms
@@ -244,8 +244,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomDataroomsWithHttpInfo() : ApiResponse<DataroomRooms?> {
-        val localVariableConfig = getV1DataroomDataroomsRequestConfig()
+    fun getDataroomDataroomsWithHttpInfo() : ApiResponse<DataroomRooms?> {
+        val localVariableConfig = getDataroomDataroomsRequestConfig()
 
         return request<Unit, DataroomRooms>(
             localVariableConfig
@@ -253,11 +253,11 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomDatarooms
+     * To obtain the request config of the operation getDataroomDatarooms
      *
      * @return RequestConfig
      */
-    fun getV1DataroomDataroomsRequestConfig() : RequestConfig<Unit> {
+    fun getDataroomDataroomsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -287,8 +287,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomDataroomsById(id: kotlin.String) : DataroomRoomDetailOne {
-        val localVarResponse = getV1DataroomDataroomsByIdWithHttpInfo(id = id)
+    fun getDataroomDataroomsById(id: kotlin.String) : DataroomRoomDetailOne {
+        val localVarResponse = getDataroomDataroomsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomRoomDetailOne
@@ -316,8 +316,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomDataroomsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DataroomRoomDetailOne?> {
-        val localVariableConfig = getV1DataroomDataroomsByIdRequestConfig(id = id)
+    fun getDataroomDataroomsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DataroomRoomDetailOne?> {
+        val localVariableConfig = getDataroomDataroomsByIdRequestConfig(id = id)
 
         return request<Unit, DataroomRoomDetailOne>(
             localVariableConfig
@@ -325,12 +325,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomDataroomsById
+     * To obtain the request config of the operation getDataroomDataroomsById
      *
      * @param id ID is the room to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @return RequestConfig
      */
-    fun getV1DataroomDataroomsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getDataroomDataroomsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -359,8 +359,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomDocuments() : DataroomDocuments {
-        val localVarResponse = getV1DataroomDocumentsWithHttpInfo()
+    fun getDataroomDocuments() : DataroomDocuments {
+        val localVarResponse = getDataroomDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomDocuments
@@ -387,8 +387,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomDocumentsWithHttpInfo() : ApiResponse<DataroomDocuments?> {
-        val localVariableConfig = getV1DataroomDocumentsRequestConfig()
+    fun getDataroomDocumentsWithHttpInfo() : ApiResponse<DataroomDocuments?> {
+        val localVariableConfig = getDataroomDocumentsRequestConfig()
 
         return request<Unit, DataroomDocuments>(
             localVariableConfig
@@ -396,11 +396,11 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomDocuments
+     * To obtain the request config of the operation getDataroomDocuments
      *
      * @return RequestConfig
      */
-    fun getV1DataroomDocumentsRequestConfig() : RequestConfig<Unit> {
+    fun getDataroomDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -430,8 +430,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomDocumentsById(id: kotlin.String) : DataroomDocumentOne {
-        val localVarResponse = getV1DataroomDocumentsByIdWithHttpInfo(id = id)
+    fun getDataroomDocumentsById(id: kotlin.String) : DataroomDocumentOne {
+        val localVarResponse = getDataroomDocumentsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomDocumentOne
@@ -459,8 +459,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DataroomDocumentOne?> {
-        val localVariableConfig = getV1DataroomDocumentsByIdRequestConfig(id = id)
+    fun getDataroomDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DataroomDocumentOne?> {
+        val localVariableConfig = getDataroomDocumentsByIdRequestConfig(id = id)
 
         return request<Unit, DataroomDocumentOne>(
             localVariableConfig
@@ -468,12 +468,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomDocumentsById
+     * To obtain the request config of the operation getDataroomDocumentsById
      *
      * @param id ID is the document to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @return RequestConfig
      */
-    fun getV1DataroomDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getDataroomDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -502,8 +502,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomDocumentsByIdFile(id: kotlin.String) : Unit {
-        val localVarResponse = getV1DataroomDocumentsByIdFileWithHttpInfo(id = id)
+    fun getDataroomDocumentsByIdFile(id: kotlin.String) : Unit {
+        val localVarResponse = getDataroomDocumentsByIdFileWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -530,8 +530,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomDocumentsByIdFileWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DataroomDocumentsByIdFileRequestConfig(id = id)
+    fun getDataroomDocumentsByIdFileWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getDataroomDocumentsByIdFileRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -539,12 +539,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomDocumentsByIdFile
+     * To obtain the request config of the operation getDataroomDocumentsByIdFile
      *
      * @param id 
      * @return RequestConfig
      */
-    fun getV1DataroomDocumentsByIdFileRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getDataroomDocumentsByIdFileRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -571,8 +571,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomHealth() : Unit {
-        val localVarResponse = getV1DataroomHealthWithHttpInfo()
+    fun getDataroomHealth() : Unit {
+        val localVarResponse = getDataroomHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -598,8 +598,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DataroomHealthRequestConfig()
+    fun getDataroomHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getDataroomHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -607,11 +607,11 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomHealth
+     * To obtain the request config of the operation getDataroomHealth
      *
      * @return RequestConfig
      */
-    fun getV1DataroomHealthRequestConfig() : RequestConfig<Unit> {
+    fun getDataroomHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -639,8 +639,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomLinks() : DataroomLinks {
-        val localVarResponse = getV1DataroomLinksWithHttpInfo()
+    fun getDataroomLinks() : DataroomLinks {
+        val localVarResponse = getDataroomLinksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomLinks
@@ -667,8 +667,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomLinksWithHttpInfo() : ApiResponse<DataroomLinks?> {
-        val localVariableConfig = getV1DataroomLinksRequestConfig()
+    fun getDataroomLinksWithHttpInfo() : ApiResponse<DataroomLinks?> {
+        val localVariableConfig = getDataroomLinksRequestConfig()
 
         return request<Unit, DataroomLinks>(
             localVariableConfig
@@ -676,11 +676,11 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomLinks
+     * To obtain the request config of the operation getDataroomLinks
      *
      * @return RequestConfig
      */
-    fun getV1DataroomLinksRequestConfig() : RequestConfig<Unit> {
+    fun getDataroomLinksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -709,8 +709,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomViewByLinkid(linkId: kotlin.String) : Unit {
-        val localVarResponse = getV1DataroomViewByLinkidWithHttpInfo(linkId = linkId)
+    fun getDataroomViewByLinkid(linkId: kotlin.String) : Unit {
+        val localVarResponse = getDataroomViewByLinkidWithHttpInfo(linkId = linkId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -737,8 +737,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomViewByLinkidWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DataroomViewByLinkidRequestConfig(linkId = linkId)
+    fun getDataroomViewByLinkidWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getDataroomViewByLinkidRequestConfig(linkId = linkId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -746,12 +746,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomViewByLinkid
+     * To obtain the request config of the operation getDataroomViewByLinkid
      *
      * @param linkId 
      * @return RequestConfig
      */
-    fun getV1DataroomViewByLinkidRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
+    fun getDataroomViewByLinkidRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -780,8 +780,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DataroomViewByLinkidDocumentByDocumentidFile(linkId: kotlin.String, documentId: kotlin.String) : Unit {
-        val localVarResponse = getV1DataroomViewByLinkidDocumentByDocumentidFileWithHttpInfo(linkId = linkId, documentId = documentId)
+    fun getDataroomViewByLinkidDocumentByDocumentidFile(linkId: kotlin.String, documentId: kotlin.String) : Unit {
+        val localVarResponse = getDataroomViewByLinkidDocumentByDocumentidFileWithHttpInfo(linkId = linkId, documentId = documentId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -809,8 +809,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DataroomViewByLinkidDocumentByDocumentidFileWithHttpInfo(linkId: kotlin.String, documentId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1DataroomViewByLinkidDocumentByDocumentidFileRequestConfig(linkId = linkId, documentId = documentId)
+    fun getDataroomViewByLinkidDocumentByDocumentidFileWithHttpInfo(linkId: kotlin.String, documentId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getDataroomViewByLinkidDocumentByDocumentidFileRequestConfig(linkId = linkId, documentId = documentId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -818,13 +818,13 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1DataroomViewByLinkidDocumentByDocumentidFile
+     * To obtain the request config of the operation getDataroomViewByLinkidDocumentByDocumentidFile
      *
      * @param linkId 
      * @param documentId 
      * @return RequestConfig
      */
-    fun getV1DataroomViewByLinkidDocumentByDocumentidFileRequestConfig(linkId: kotlin.String, documentId: kotlin.String) : RequestConfig<Unit> {
+    fun getDataroomViewByLinkidDocumentByDocumentidFileRequestConfig(linkId: kotlin.String, documentId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -853,8 +853,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DataroomDatarooms(dataroomCreate: DataroomCreate) : DataroomRoomOne {
-        val localVarResponse = postV1DataroomDataroomsWithHttpInfo(dataroomCreate = dataroomCreate)
+    fun postDataroomDatarooms(dataroomCreate: DataroomCreate) : DataroomRoomOne {
+        val localVarResponse = postDataroomDataroomsWithHttpInfo(dataroomCreate = dataroomCreate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomRoomOne
@@ -882,8 +882,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DataroomDataroomsWithHttpInfo(dataroomCreate: DataroomCreate) : ApiResponse<DataroomRoomOne?> {
-        val localVariableConfig = postV1DataroomDataroomsRequestConfig(dataroomCreate = dataroomCreate)
+    fun postDataroomDataroomsWithHttpInfo(dataroomCreate: DataroomCreate) : ApiResponse<DataroomRoomOne?> {
+        val localVariableConfig = postDataroomDataroomsRequestConfig(dataroomCreate = dataroomCreate)
 
         return request<DataroomCreate, DataroomRoomOne>(
             localVariableConfig
@@ -891,12 +891,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1DataroomDatarooms
+     * To obtain the request config of the operation postDataroomDatarooms
      *
      * @param dataroomCreate 
      * @return RequestConfig
      */
-    fun postV1DataroomDataroomsRequestConfig(dataroomCreate: DataroomCreate) : RequestConfig<DataroomCreate> {
+    fun postDataroomDataroomsRequestConfig(dataroomCreate: DataroomCreate) : RequestConfig<DataroomCreate> {
         val localVariableBody = dataroomCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -928,8 +928,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DataroomDataroomsByIdDocuments(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : DataroomMembership {
-        val localVarResponse = postV1DataroomDataroomsByIdDocumentsWithHttpInfo(id = id, dataroomAddDocument = dataroomAddDocument)
+    fun postDataroomDataroomsByIdDocuments(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : DataroomMembership {
+        val localVarResponse = postDataroomDataroomsByIdDocumentsWithHttpInfo(id = id, dataroomAddDocument = dataroomAddDocument)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomMembership
@@ -958,8 +958,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DataroomDataroomsByIdDocumentsWithHttpInfo(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : ApiResponse<DataroomMembership?> {
-        val localVariableConfig = postV1DataroomDataroomsByIdDocumentsRequestConfig(id = id, dataroomAddDocument = dataroomAddDocument)
+    fun postDataroomDataroomsByIdDocumentsWithHttpInfo(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : ApiResponse<DataroomMembership?> {
+        val localVariableConfig = postDataroomDataroomsByIdDocumentsRequestConfig(id = id, dataroomAddDocument = dataroomAddDocument)
 
         return request<DataroomAddDocument, DataroomMembership>(
             localVariableConfig
@@ -967,13 +967,13 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1DataroomDataroomsByIdDocuments
+     * To obtain the request config of the operation postDataroomDataroomsByIdDocuments
      *
      * @param id ID is the room to add to. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @param dataroomAddDocument 
      * @return RequestConfig
      */
-    fun postV1DataroomDataroomsByIdDocumentsRequestConfig(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : RequestConfig<DataroomAddDocument> {
+    fun postDataroomDataroomsByIdDocumentsRequestConfig(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : RequestConfig<DataroomAddDocument> {
         val localVariableBody = dataroomAddDocument
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1002,8 +1002,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DataroomDocuments() : Unit {
-        val localVarResponse = postV1DataroomDocumentsWithHttpInfo()
+    fun postDataroomDocuments() : Unit {
+        val localVarResponse = postDataroomDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1029,8 +1029,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DataroomDocumentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DataroomDocumentsRequestConfig()
+    fun postDataroomDocumentsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postDataroomDocumentsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1038,11 +1038,11 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1DataroomDocuments
+     * To obtain the request config of the operation postDataroomDocuments
      *
      * @return RequestConfig
      */
-    fun postV1DataroomDocumentsRequestConfig() : RequestConfig<Unit> {
+    fun postDataroomDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1071,8 +1071,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DataroomLinks(dataroomLinkCreate: DataroomLinkCreate) : DataroomLinkOne {
-        val localVarResponse = postV1DataroomLinksWithHttpInfo(dataroomLinkCreate = dataroomLinkCreate)
+    fun postDataroomLinks(dataroomLinkCreate: DataroomLinkCreate) : DataroomLinkOne {
+        val localVarResponse = postDataroomLinksWithHttpInfo(dataroomLinkCreate = dataroomLinkCreate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomLinkOne
@@ -1100,8 +1100,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DataroomLinksWithHttpInfo(dataroomLinkCreate: DataroomLinkCreate) : ApiResponse<DataroomLinkOne?> {
-        val localVariableConfig = postV1DataroomLinksRequestConfig(dataroomLinkCreate = dataroomLinkCreate)
+    fun postDataroomLinksWithHttpInfo(dataroomLinkCreate: DataroomLinkCreate) : ApiResponse<DataroomLinkOne?> {
+        val localVariableConfig = postDataroomLinksRequestConfig(dataroomLinkCreate = dataroomLinkCreate)
 
         return request<DataroomLinkCreate, DataroomLinkOne>(
             localVariableConfig
@@ -1109,12 +1109,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1DataroomLinks
+     * To obtain the request config of the operation postDataroomLinks
      *
      * @param dataroomLinkCreate 
      * @return RequestConfig
      */
-    fun postV1DataroomLinksRequestConfig(dataroomLinkCreate: DataroomLinkCreate) : RequestConfig<DataroomLinkCreate> {
+    fun postDataroomLinksRequestConfig(dataroomLinkCreate: DataroomLinkCreate) : RequestConfig<DataroomLinkCreate> {
         val localVariableBody = dataroomLinkCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1144,8 +1144,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DataroomViewByLinkidAuthenticate(linkId: kotlin.String) : Unit {
-        val localVarResponse = postV1DataroomViewByLinkidAuthenticateWithHttpInfo(linkId = linkId)
+    fun postDataroomViewByLinkidAuthenticate(linkId: kotlin.String) : Unit {
+        val localVarResponse = postDataroomViewByLinkidAuthenticateWithHttpInfo(linkId = linkId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1172,8 +1172,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DataroomViewByLinkidAuthenticateWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DataroomViewByLinkidAuthenticateRequestConfig(linkId = linkId)
+    fun postDataroomViewByLinkidAuthenticateWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postDataroomViewByLinkidAuthenticateRequestConfig(linkId = linkId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1181,12 +1181,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1DataroomViewByLinkidAuthenticate
+     * To obtain the request config of the operation postDataroomViewByLinkidAuthenticate
      *
      * @param linkId 
      * @return RequestConfig
      */
-    fun postV1DataroomViewByLinkidAuthenticateRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
+    fun postDataroomViewByLinkidAuthenticateRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1214,8 +1214,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DataroomViewByLinkidPageview(linkId: kotlin.String) : Unit {
-        val localVarResponse = postV1DataroomViewByLinkidPageviewWithHttpInfo(linkId = linkId)
+    fun postDataroomViewByLinkidPageview(linkId: kotlin.String) : Unit {
+        val localVarResponse = postDataroomViewByLinkidPageviewWithHttpInfo(linkId = linkId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1242,8 +1242,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DataroomViewByLinkidPageviewWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1DataroomViewByLinkidPageviewRequestConfig(linkId = linkId)
+    fun postDataroomViewByLinkidPageviewWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postDataroomViewByLinkidPageviewRequestConfig(linkId = linkId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1251,12 +1251,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1DataroomViewByLinkidPageview
+     * To obtain the request config of the operation postDataroomViewByLinkidPageview
      *
      * @param linkId 
      * @return RequestConfig
      */
-    fun postV1DataroomViewByLinkidPageviewRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
+    fun postDataroomViewByLinkidPageviewRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

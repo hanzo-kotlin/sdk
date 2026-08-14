@@ -60,8 +60,8 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Exec(codeRun: CodeRun) : CodeResult {
-        val localVarResponse = postV1ExecWithHttpInfo(codeRun = codeRun)
+    fun postExec(codeRun: CodeRun) : CodeResult {
+        val localVarResponse = postExecWithHttpInfo(codeRun = codeRun)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CodeResult
@@ -89,8 +89,8 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ExecWithHttpInfo(codeRun: CodeRun) : ApiResponse<CodeResult?> {
-        val localVariableConfig = postV1ExecRequestConfig(codeRun = codeRun)
+    fun postExecWithHttpInfo(codeRun: CodeRun) : ApiResponse<CodeResult?> {
+        val localVariableConfig = postExecRequestConfig(codeRun = codeRun)
 
         return request<CodeRun, CodeResult>(
             localVariableConfig
@@ -98,12 +98,12 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1Exec
+     * To obtain the request config of the operation postExec
      *
      * @param codeRun 
      * @return RequestConfig
      */
-    fun postV1ExecRequestConfig(codeRun: CodeRun) : RequestConfig<CodeRun> {
+    fun postExecRequestConfig(codeRun: CodeRun) : RequestConfig<CodeRun> {
         val localVariableBody = codeRun
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -132,8 +132,8 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ExecProgrammatic() : Unit {
-        val localVarResponse = postV1ExecProgrammaticWithHttpInfo()
+    fun postExecProgrammatic() : Unit {
+        val localVarResponse = postExecProgrammaticWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -159,8 +159,8 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ExecProgrammaticWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ExecProgrammaticRequestConfig()
+    fun postExecProgrammaticWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postExecProgrammaticRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -168,11 +168,11 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1ExecProgrammatic
+     * To obtain the request config of the operation postExecProgrammatic
      *
      * @return RequestConfig
      */
-    fun postV1ExecProgrammaticRequestConfig() : RequestConfig<Unit> {
+    fun postExecProgrammaticRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

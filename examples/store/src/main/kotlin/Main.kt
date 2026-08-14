@@ -24,16 +24,16 @@ fun main() {
     // Names are org-unique, so a hardcoded one collides with the last run.
     val name = "sdk-example-${System.nanoTime().toString(36)}"
 
-    val created = kv.postV1Kv(ProvisionRequest(name = name))
+    val created = kv.postKv(ProvisionRequest(name = name))
     println("created  ${created.name} (${created.id}) status=${created.status}")
 
     try {
-        val store = kv.getV1KvByName(name)
+        val store = kv.getKvByName(name)
         println("read     ${store.name} kind=${store.kind} at ${store.host}:${store.port}")
     } finally {
         // In a `finally`, so a failed read still cleans up instead of leaving
         // the store behind for the next run to collide with.
-        kv.deleteV1KvByName(name)
+        kv.deleteKvByName(name)
         println("deleted  $name")
     }
 }

@@ -72,8 +72,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Affiliates() : AffiliateStanding {
-        val localVarResponse = getV1AffiliatesWithHttpInfo()
+    fun getAffiliates() : AffiliateStanding {
+        val localVarResponse = getAffiliatesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateStanding
@@ -100,8 +100,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AffiliatesWithHttpInfo() : ApiResponse<AffiliateStanding?> {
-        val localVariableConfig = getV1AffiliatesRequestConfig()
+    fun getAffiliatesWithHttpInfo() : ApiResponse<AffiliateStanding?> {
+        val localVariableConfig = getAffiliatesRequestConfig()
 
         return request<Unit, AffiliateStanding>(
             localVariableConfig
@@ -109,11 +109,11 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1Affiliates
+     * To obtain the request config of the operation getAffiliates
      *
      * @return RequestConfig
      */
-    fun getV1AffiliatesRequestConfig() : RequestConfig<Unit> {
+    fun getAffiliatesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -142,8 +142,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AffiliatesLeaderboard() : AffiliateBoard {
-        val localVarResponse = getV1AffiliatesLeaderboardWithHttpInfo()
+    fun getAffiliatesLeaderboard() : AffiliateBoard {
+        val localVarResponse = getAffiliatesLeaderboardWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateBoard
@@ -170,8 +170,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AffiliatesLeaderboardWithHttpInfo() : ApiResponse<AffiliateBoard?> {
-        val localVariableConfig = getV1AffiliatesLeaderboardRequestConfig()
+    fun getAffiliatesLeaderboardWithHttpInfo() : ApiResponse<AffiliateBoard?> {
+        val localVariableConfig = getAffiliatesLeaderboardRequestConfig()
 
         return request<Unit, AffiliateBoard>(
             localVariableConfig
@@ -179,11 +179,11 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1AffiliatesLeaderboard
+     * To obtain the request config of the operation getAffiliatesLeaderboard
      *
      * @return RequestConfig
      */
-    fun getV1AffiliatesLeaderboardRequestConfig() : RequestConfig<Unit> {
+    fun getAffiliatesLeaderboardRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -212,8 +212,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AffiliatesMe() : AffiliateSelf {
-        val localVarResponse = getV1AffiliatesMeWithHttpInfo()
+    fun getAffiliatesMe() : AffiliateSelf {
+        val localVarResponse = getAffiliatesMeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateSelf
@@ -240,8 +240,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AffiliatesMeWithHttpInfo() : ApiResponse<AffiliateSelf?> {
-        val localVariableConfig = getV1AffiliatesMeRequestConfig()
+    fun getAffiliatesMeWithHttpInfo() : ApiResponse<AffiliateSelf?> {
+        val localVariableConfig = getAffiliatesMeRequestConfig()
 
         return request<Unit, AffiliateSelf>(
             localVariableConfig
@@ -249,11 +249,11 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1AffiliatesMe
+     * To obtain the request config of the operation getAffiliatesMe
      *
      * @return RequestConfig
      */
-    fun getV1AffiliatesMeRequestConfig() : RequestConfig<Unit> {
+    fun getAffiliatesMeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -282,8 +282,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AffiliatesMeEarnings() : AffiliateEarnings {
-        val localVarResponse = getV1AffiliatesMeEarningsWithHttpInfo()
+    fun getAffiliatesMeEarnings() : AffiliateEarnings {
+        val localVarResponse = getAffiliatesMeEarningsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateEarnings
@@ -310,8 +310,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AffiliatesMeEarningsWithHttpInfo() : ApiResponse<AffiliateEarnings?> {
-        val localVariableConfig = getV1AffiliatesMeEarningsRequestConfig()
+    fun getAffiliatesMeEarningsWithHttpInfo() : ApiResponse<AffiliateEarnings?> {
+        val localVariableConfig = getAffiliatesMeEarningsRequestConfig()
 
         return request<Unit, AffiliateEarnings>(
             localVariableConfig
@@ -319,11 +319,11 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1AffiliatesMeEarnings
+     * To obtain the request config of the operation getAffiliatesMeEarnings
      *
      * @return RequestConfig
      */
-    fun getV1AffiliatesMeEarningsRequestConfig() : RequestConfig<Unit> {
+    fun getAffiliatesMeEarningsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -352,8 +352,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AffiliatesMeLinks() : AffiliateLinks {
-        val localVarResponse = getV1AffiliatesMeLinksWithHttpInfo()
+    fun getAffiliatesMeLinks() : AffiliateLinks {
+        val localVarResponse = getAffiliatesMeLinksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateLinks
@@ -380,8 +380,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AffiliatesMeLinksWithHttpInfo() : ApiResponse<AffiliateLinks?> {
-        val localVariableConfig = getV1AffiliatesMeLinksRequestConfig()
+    fun getAffiliatesMeLinksWithHttpInfo() : ApiResponse<AffiliateLinks?> {
+        val localVariableConfig = getAffiliatesMeLinksRequestConfig()
 
         return request<Unit, AffiliateLinks>(
             localVariableConfig
@@ -389,11 +389,11 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1AffiliatesMeLinks
+     * To obtain the request config of the operation getAffiliatesMeLinks
      *
      * @return RequestConfig
      */
-    fun getV1AffiliatesMeLinksRequestConfig() : RequestConfig<Unit> {
+    fun getAffiliatesMeLinksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -423,8 +423,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AffiliatesApply(applyRequest: ApplyRequest) : Application {
-        val localVarResponse = postV1AffiliatesApplyWithHttpInfo(applyRequest = applyRequest)
+    fun postAffiliatesApply(applyRequest: ApplyRequest) : Application {
+        val localVarResponse = postAffiliatesApplyWithHttpInfo(applyRequest = applyRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Application
@@ -452,8 +452,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AffiliatesApplyWithHttpInfo(applyRequest: ApplyRequest) : ApiResponse<Application?> {
-        val localVariableConfig = postV1AffiliatesApplyRequestConfig(applyRequest = applyRequest)
+    fun postAffiliatesApplyWithHttpInfo(applyRequest: ApplyRequest) : ApiResponse<Application?> {
+        val localVariableConfig = postAffiliatesApplyRequestConfig(applyRequest = applyRequest)
 
         return request<ApplyRequest, Application>(
             localVariableConfig
@@ -461,12 +461,12 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1AffiliatesApply
+     * To obtain the request config of the operation postAffiliatesApply
      *
      * @param applyRequest 
      * @return RequestConfig
      */
-    fun postV1AffiliatesApplyRequestConfig(applyRequest: ApplyRequest) : RequestConfig<ApplyRequest> {
+    fun postAffiliatesApplyRequestConfig(applyRequest: ApplyRequest) : RequestConfig<ApplyRequest> {
         val localVariableBody = applyRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -497,8 +497,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AffiliatesAttribute(attributeRequest: AttributeRequest) : Attribution {
-        val localVarResponse = postV1AffiliatesAttributeWithHttpInfo(attributeRequest = attributeRequest)
+    fun postAffiliatesAttribute(attributeRequest: AttributeRequest) : Attribution {
+        val localVarResponse = postAffiliatesAttributeWithHttpInfo(attributeRequest = attributeRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Attribution
@@ -526,8 +526,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AffiliatesAttributeWithHttpInfo(attributeRequest: AttributeRequest) : ApiResponse<Attribution?> {
-        val localVariableConfig = postV1AffiliatesAttributeRequestConfig(attributeRequest = attributeRequest)
+    fun postAffiliatesAttributeWithHttpInfo(attributeRequest: AttributeRequest) : ApiResponse<Attribution?> {
+        val localVariableConfig = postAffiliatesAttributeRequestConfig(attributeRequest = attributeRequest)
 
         return request<AttributeRequest, Attribution>(
             localVariableConfig
@@ -535,12 +535,12 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1AffiliatesAttribute
+     * To obtain the request config of the operation postAffiliatesAttribute
      *
      * @param attributeRequest 
      * @return RequestConfig
      */
-    fun postV1AffiliatesAttributeRequestConfig(attributeRequest: AttributeRequest) : RequestConfig<AttributeRequest> {
+    fun postAffiliatesAttributeRequestConfig(attributeRequest: AttributeRequest) : RequestConfig<AttributeRequest> {
         val localVariableBody = attributeRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -571,8 +571,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AffiliatesClick(clickRequest: ClickRequest) : ClickCount {
-        val localVarResponse = postV1AffiliatesClickWithHttpInfo(clickRequest = clickRequest)
+    fun postAffiliatesClick(clickRequest: ClickRequest) : ClickCount {
+        val localVarResponse = postAffiliatesClickWithHttpInfo(clickRequest = clickRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ClickCount
@@ -600,8 +600,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AffiliatesClickWithHttpInfo(clickRequest: ClickRequest) : ApiResponse<ClickCount?> {
-        val localVariableConfig = postV1AffiliatesClickRequestConfig(clickRequest = clickRequest)
+    fun postAffiliatesClickWithHttpInfo(clickRequest: ClickRequest) : ApiResponse<ClickCount?> {
+        val localVariableConfig = postAffiliatesClickRequestConfig(clickRequest = clickRequest)
 
         return request<ClickRequest, ClickCount>(
             localVariableConfig
@@ -609,12 +609,12 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1AffiliatesClick
+     * To obtain the request config of the operation postAffiliatesClick
      *
      * @param clickRequest 
      * @return RequestConfig
      */
-    fun postV1AffiliatesClickRequestConfig(clickRequest: ClickRequest) : RequestConfig<ClickRequest> {
+    fun postAffiliatesClickRequestConfig(clickRequest: ClickRequest) : RequestConfig<ClickRequest> {
         val localVariableBody = clickRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -645,8 +645,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AffiliatesMeHandle(handleRequest: HandleRequest) : HandleSet {
-        val localVarResponse = postV1AffiliatesMeHandleWithHttpInfo(handleRequest = handleRequest)
+    fun postAffiliatesMeHandle(handleRequest: HandleRequest) : HandleSet {
+        val localVarResponse = postAffiliatesMeHandleWithHttpInfo(handleRequest = handleRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as HandleSet
@@ -674,8 +674,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AffiliatesMeHandleWithHttpInfo(handleRequest: HandleRequest) : ApiResponse<HandleSet?> {
-        val localVariableConfig = postV1AffiliatesMeHandleRequestConfig(handleRequest = handleRequest)
+    fun postAffiliatesMeHandleWithHttpInfo(handleRequest: HandleRequest) : ApiResponse<HandleSet?> {
+        val localVariableConfig = postAffiliatesMeHandleRequestConfig(handleRequest = handleRequest)
 
         return request<HandleRequest, HandleSet>(
             localVariableConfig
@@ -683,12 +683,12 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1AffiliatesMeHandle
+     * To obtain the request config of the operation postAffiliatesMeHandle
      *
      * @param handleRequest 
      * @return RequestConfig
      */
-    fun postV1AffiliatesMeHandleRequestConfig(handleRequest: HandleRequest) : RequestConfig<HandleRequest> {
+    fun postAffiliatesMeHandleRequestConfig(handleRequest: HandleRequest) : RequestConfig<HandleRequest> {
         val localVariableBody = handleRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -719,8 +719,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AffiliatesMeLinks(createLinkRequest: CreateLinkRequest) : LinkMint {
-        val localVarResponse = postV1AffiliatesMeLinksWithHttpInfo(createLinkRequest = createLinkRequest)
+    fun postAffiliatesMeLinks(createLinkRequest: CreateLinkRequest) : LinkMint {
+        val localVarResponse = postAffiliatesMeLinksWithHttpInfo(createLinkRequest = createLinkRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LinkMint
@@ -748,8 +748,8 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AffiliatesMeLinksWithHttpInfo(createLinkRequest: CreateLinkRequest) : ApiResponse<LinkMint?> {
-        val localVariableConfig = postV1AffiliatesMeLinksRequestConfig(createLinkRequest = createLinkRequest)
+    fun postAffiliatesMeLinksWithHttpInfo(createLinkRequest: CreateLinkRequest) : ApiResponse<LinkMint?> {
+        val localVariableConfig = postAffiliatesMeLinksRequestConfig(createLinkRequest = createLinkRequest)
 
         return request<CreateLinkRequest, LinkMint>(
             localVariableConfig
@@ -757,12 +757,12 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1AffiliatesMeLinks
+     * To obtain the request config of the operation postAffiliatesMeLinks
      *
      * @param createLinkRequest 
      * @return RequestConfig
      */
-    fun postV1AffiliatesMeLinksRequestConfig(createLinkRequest: CreateLinkRequest) : RequestConfig<CreateLinkRequest> {
+    fun postAffiliatesMeLinksRequestConfig(createLinkRequest: CreateLinkRequest) : RequestConfig<CreateLinkRequest> {
         val localVariableBody = createLinkRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

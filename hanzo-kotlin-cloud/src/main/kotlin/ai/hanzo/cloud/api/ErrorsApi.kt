@@ -59,8 +59,8 @@ class ErrorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Errors(limit: kotlin.Int? = null) : ErrorList {
-        val localVarResponse = getV1ErrorsWithHttpInfo(limit = limit)
+    fun getErrors(limit: kotlin.Int? = null) : ErrorList {
+        val localVarResponse = getErrorsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ErrorList
@@ -88,8 +88,8 @@ class ErrorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ErrorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ErrorList?> {
-        val localVariableConfig = getV1ErrorsRequestConfig(limit = limit)
+    fun getErrorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ErrorList?> {
+        val localVariableConfig = getErrorsRequestConfig(limit = limit)
 
         return request<Unit, ErrorList>(
             localVariableConfig
@@ -97,12 +97,12 @@ class ErrorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Errors
+     * To obtain the request config of the operation getErrors
      *
      * @param limit Limit is how many rows to return, newest first. Default 50, maximum 200; a value at or below zero, or one that is not a number, takes the default. (optional)
      * @return RequestConfig
      */
-    fun getV1ErrorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getErrorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {

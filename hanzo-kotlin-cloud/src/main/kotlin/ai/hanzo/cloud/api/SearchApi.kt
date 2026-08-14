@@ -63,8 +63,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1SearchByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1SearchByNameWithHttpInfo(name = name)
+    fun deleteSearchByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteSearchByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -91,8 +91,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1SearchByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1SearchByNameRequestConfig(name = name)
+    fun deleteSearchByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteSearchByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -100,12 +100,12 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1SearchByName
+     * To obtain the request config of the operation deleteSearchByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun deleteV1SearchByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteSearchByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -133,8 +133,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Search() : kotlin.collections.List<ProvisionedSummary> {
-        val localVarResponse = getV1SearchWithHttpInfo()
+    fun getSearch() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
@@ -161,8 +161,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SearchWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
-        val localVariableConfig = getV1SearchRequestConfig()
+    fun getSearchWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getSearchRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
@@ -170,11 +170,11 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Search
+     * To obtain the request config of the operation getSearch
      *
      * @return RequestConfig
      */
-    fun getV1SearchRequestConfig() : RequestConfig<Unit> {
+    fun getSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -204,8 +204,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SearchByName(name: kotlin.String) : ProvisionedResource {
-        val localVarResponse = getV1SearchByNameWithHttpInfo(name = name)
+    fun getSearchByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getSearchByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
@@ -233,8 +233,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SearchByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
-        val localVariableConfig = getV1SearchByNameRequestConfig(name = name)
+    fun getSearchByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getSearchByNameRequestConfig(name = name)
 
         return request<Unit, ProvisionedResource>(
             localVariableConfig
@@ -242,12 +242,12 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SearchByName
+     * To obtain the request config of the operation getSearchByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun getV1SearchByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getSearchByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -277,8 +277,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SearchIndexes(authorization: kotlin.String? = null) : SearchIndexList {
-        val localVarResponse = getV1SearchIndexesWithHttpInfo(authorization = authorization)
+    fun getSearchIndexes(authorization: kotlin.String? = null) : SearchIndexList {
+        val localVarResponse = getSearchIndexesWithHttpInfo(authorization = authorization)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SearchIndexList
@@ -306,8 +306,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SearchIndexesWithHttpInfo(authorization: kotlin.String?) : ApiResponse<SearchIndexList?> {
-        val localVariableConfig = getV1SearchIndexesRequestConfig(authorization = authorization)
+    fun getSearchIndexesWithHttpInfo(authorization: kotlin.String?) : ApiResponse<SearchIndexList?> {
+        val localVariableConfig = getSearchIndexesRequestConfig(authorization = authorization)
 
         return request<Unit, SearchIndexList>(
             localVariableConfig
@@ -315,12 +315,12 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SearchIndexes
+     * To obtain the request config of the operation getSearchIndexes
      *
      * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
      * @return RequestConfig
      */
-    fun getV1SearchIndexesRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
+    fun getSearchIndexesRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -351,8 +351,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SearchStats(authorization: kotlin.String? = null) : SearchStats {
-        val localVarResponse = getV1SearchStatsWithHttpInfo(authorization = authorization)
+    fun getSearchStats(authorization: kotlin.String? = null) : SearchStats {
+        val localVarResponse = getSearchStatsWithHttpInfo(authorization = authorization)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SearchStats
@@ -380,8 +380,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SearchStatsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<SearchStats?> {
-        val localVariableConfig = getV1SearchStatsRequestConfig(authorization = authorization)
+    fun getSearchStatsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<SearchStats?> {
+        val localVariableConfig = getSearchStatsRequestConfig(authorization = authorization)
 
         return request<Unit, SearchStats>(
             localVariableConfig
@@ -389,12 +389,12 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SearchStats
+     * To obtain the request config of the operation getSearchStats
      *
      * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
      * @return RequestConfig
      */
-    fun getV1SearchStatsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
+    fun getSearchStatsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -425,8 +425,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Search(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
-        val localVarResponse = postV1SearchWithHttpInfo(provisionRequest = provisionRequest)
+    fun postSearch(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postSearchWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
@@ -454,8 +454,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SearchWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
-        val localVariableConfig = postV1SearchRequestConfig(provisionRequest = provisionRequest)
+    fun postSearchWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postSearchRequestConfig(provisionRequest = provisionRequest)
 
         return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
@@ -463,12 +463,12 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Search
+     * To obtain the request config of the operation postSearch
      *
      * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun postV1SearchRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+    fun postSearchRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
         val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

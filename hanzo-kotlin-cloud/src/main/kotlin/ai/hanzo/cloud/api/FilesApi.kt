@@ -57,8 +57,8 @@ class FilesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FilesBySid(sid: kotlin.String) : Unit {
-        val localVarResponse = getV1FilesBySidWithHttpInfo(sid = sid)
+    fun getFilesBySid(sid: kotlin.String) : Unit {
+        val localVarResponse = getFilesBySidWithHttpInfo(sid = sid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -85,8 +85,8 @@ class FilesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FilesBySidWithHttpInfo(sid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1FilesBySidRequestConfig(sid = sid)
+    fun getFilesBySidWithHttpInfo(sid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getFilesBySidRequestConfig(sid = sid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class FilesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1FilesBySid
+     * To obtain the request config of the operation getFilesBySid
      *
      * @param sid 
      * @return RequestConfig
      */
-    fun getV1FilesBySidRequestConfig(sid: kotlin.String) : RequestConfig<Unit> {
+    fun getFilesBySidRequestConfig(sid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

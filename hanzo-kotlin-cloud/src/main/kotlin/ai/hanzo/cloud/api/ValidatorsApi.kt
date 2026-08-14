@@ -62,8 +62,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Validators(limit: kotlin.String? = null) : ValidatorList {
-        val localVarResponse = getV1ValidatorsWithHttpInfo(limit = limit)
+    fun getValidators(limit: kotlin.String? = null) : ValidatorList {
+        val localVarResponse = getValidatorsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ValidatorList
@@ -91,8 +91,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ValidatorsWithHttpInfo(limit: kotlin.String?) : ApiResponse<ValidatorList?> {
-        val localVariableConfig = getV1ValidatorsRequestConfig(limit = limit)
+    fun getValidatorsWithHttpInfo(limit: kotlin.String?) : ApiResponse<ValidatorList?> {
+        val localVariableConfig = getValidatorsRequestConfig(limit = limit)
 
         return request<Unit, ValidatorList>(
             localVariableConfig
@@ -100,12 +100,12 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1Validators
+     * To obtain the request config of the operation getValidators
      *
      * @param limit Limit is how many slots to return, as a decimal string in the &#x60;?limit&#x3D;&#x60; query. Absent, unparseable or non-positive means 200; over 1000 is clamped to 1000. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
      * @return RequestConfig
      */
-    fun getV1ValidatorsRequestConfig(limit: kotlin.String?) : RequestConfig<Unit> {
+    fun getValidatorsRequestConfig(limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -140,8 +140,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ValidatorsByTokenid(tokenId: kotlin.String) : SlotView {
-        val localVarResponse = getV1ValidatorsByTokenidWithHttpInfo(tokenId = tokenId)
+    fun getValidatorsByTokenid(tokenId: kotlin.String) : SlotView {
+        val localVarResponse = getValidatorsByTokenidWithHttpInfo(tokenId = tokenId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SlotView
@@ -169,8 +169,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ValidatorsByTokenidWithHttpInfo(tokenId: kotlin.String) : ApiResponse<SlotView?> {
-        val localVariableConfig = getV1ValidatorsByTokenidRequestConfig(tokenId = tokenId)
+    fun getValidatorsByTokenidWithHttpInfo(tokenId: kotlin.String) : ApiResponse<SlotView?> {
+        val localVariableConfig = getValidatorsByTokenidRequestConfig(tokenId = tokenId)
 
         return request<Unit, SlotView>(
             localVariableConfig
@@ -178,12 +178,12 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ValidatorsByTokenid
+     * To obtain the request config of the operation getValidatorsByTokenid
      *
      * @param tokenId TokenID is the slot&#39;s GenesisNFT token id, from the path, as a decimal string. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two.
      * @return RequestConfig
      */
-    fun getV1ValidatorsByTokenidRequestConfig(tokenId: kotlin.String) : RequestConfig<Unit> {
+    fun getValidatorsByTokenidRequestConfig(tokenId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -213,8 +213,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1ValidatorsChallenge(tokenId: kotlin.String? = null) : ChallengeView {
-        val localVarResponse = getV1ValidatorsChallengeWithHttpInfo(tokenId = tokenId)
+    fun getValidatorsChallenge(tokenId: kotlin.String? = null) : ChallengeView {
+        val localVarResponse = getValidatorsChallengeWithHttpInfo(tokenId = tokenId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ChallengeView
@@ -242,8 +242,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ValidatorsChallengeWithHttpInfo(tokenId: kotlin.String?) : ApiResponse<ChallengeView?> {
-        val localVariableConfig = getV1ValidatorsChallengeRequestConfig(tokenId = tokenId)
+    fun getValidatorsChallengeWithHttpInfo(tokenId: kotlin.String?) : ApiResponse<ChallengeView?> {
+        val localVariableConfig = getValidatorsChallengeRequestConfig(tokenId = tokenId)
 
         return request<Unit, ChallengeView>(
             localVariableConfig
@@ -251,12 +251,12 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1ValidatorsChallenge
+     * To obtain the request config of the operation getValidatorsChallenge
      *
      * @param tokenId TokenID is the Validator-tier GenesisNFT token id, as a decimal string in the &#x60;?tokenId&#x3D;&#x60; query. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
      * @return RequestConfig
      */
-    fun getV1ValidatorsChallengeRequestConfig(tokenId: kotlin.String?) : RequestConfig<Unit> {
+    fun getValidatorsChallengeRequestConfig(tokenId: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -291,8 +291,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Validators(validatorClaim: ValidatorClaim) : SlotView {
-        val localVarResponse = postV1ValidatorsWithHttpInfo(validatorClaim = validatorClaim)
+    fun postValidators(validatorClaim: ValidatorClaim) : SlotView {
+        val localVarResponse = postValidatorsWithHttpInfo(validatorClaim = validatorClaim)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SlotView
@@ -320,8 +320,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ValidatorsWithHttpInfo(validatorClaim: ValidatorClaim) : ApiResponse<SlotView?> {
-        val localVariableConfig = postV1ValidatorsRequestConfig(validatorClaim = validatorClaim)
+    fun postValidatorsWithHttpInfo(validatorClaim: ValidatorClaim) : ApiResponse<SlotView?> {
+        val localVariableConfig = postValidatorsRequestConfig(validatorClaim = validatorClaim)
 
         return request<ValidatorClaim, SlotView>(
             localVariableConfig
@@ -329,12 +329,12 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1Validators
+     * To obtain the request config of the operation postValidators
      *
      * @param validatorClaim 
      * @return RequestConfig
      */
-    fun postV1ValidatorsRequestConfig(validatorClaim: ValidatorClaim) : RequestConfig<ValidatorClaim> {
+    fun postValidatorsRequestConfig(validatorClaim: ValidatorClaim) : RequestConfig<ValidatorClaim> {
         val localVariableBody = validatorClaim
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

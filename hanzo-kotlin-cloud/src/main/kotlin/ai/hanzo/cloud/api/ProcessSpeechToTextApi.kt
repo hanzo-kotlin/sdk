@@ -56,8 +56,8 @@ class ProcessSpeechToTextApi(basePath: kotlin.String = defaultBasePath, client: 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ProcessSpeechToText() : Unit {
-        val localVarResponse = postV1ProcessSpeechToTextWithHttpInfo()
+    fun postProcessSpeechToText() : Unit {
+        val localVarResponse = postProcessSpeechToTextWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class ProcessSpeechToTextApi(basePath: kotlin.String = defaultBasePath, client: 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ProcessSpeechToTextWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1ProcessSpeechToTextRequestConfig()
+    fun postProcessSpeechToTextWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postProcessSpeechToTextRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class ProcessSpeechToTextApi(basePath: kotlin.String = defaultBasePath, client: 
     }
 
     /**
-     * To obtain the request config of the operation postV1ProcessSpeechToText
+     * To obtain the request config of the operation postProcessSpeechToText
      *
      * @return RequestConfig
      */
-    fun postV1ProcessSpeechToTextRequestConfig() : RequestConfig<Unit> {
+    fun postProcessSpeechToTextRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

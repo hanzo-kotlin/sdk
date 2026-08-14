@@ -60,8 +60,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SbomByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1SbomByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getSbomByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getSbomByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -88,8 +88,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SbomByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1SbomByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getSbomByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getSbomByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -97,12 +97,12 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1SbomByWildcard1
+     * To obtain the request config of the operation getSbomByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1SbomByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getSbomByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -130,8 +130,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SbomHealth() : SbomHealth {
-        val localVarResponse = getV1SbomHealthWithHttpInfo()
+    fun getSbomHealth() : SbomHealth {
+        val localVarResponse = getSbomHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SbomHealth
@@ -158,8 +158,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SbomHealthWithHttpInfo() : ApiResponse<SbomHealth?> {
-        val localVariableConfig = getV1SbomHealthRequestConfig()
+    fun getSbomHealthWithHttpInfo() : ApiResponse<SbomHealth?> {
+        val localVariableConfig = getSbomHealthRequestConfig()
 
         return request<Unit, SbomHealth>(
             localVariableConfig
@@ -167,11 +167,11 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1SbomHealth
+     * To obtain the request config of the operation getSbomHealth
      *
      * @return RequestConfig
      */
-    fun getV1SbomHealthRequestConfig() : RequestConfig<Unit> {
+    fun getSbomHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -201,8 +201,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Sbom(sbomIngest: SbomIngest) : SbomIngested {
-        val localVarResponse = postV1SbomWithHttpInfo(sbomIngest = sbomIngest)
+    fun postSbom(sbomIngest: SbomIngest) : SbomIngested {
+        val localVarResponse = postSbomWithHttpInfo(sbomIngest = sbomIngest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SbomIngested
@@ -230,8 +230,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SbomWithHttpInfo(sbomIngest: SbomIngest) : ApiResponse<SbomIngested?> {
-        val localVariableConfig = postV1SbomRequestConfig(sbomIngest = sbomIngest)
+    fun postSbomWithHttpInfo(sbomIngest: SbomIngest) : ApiResponse<SbomIngested?> {
+        val localVariableConfig = postSbomRequestConfig(sbomIngest = sbomIngest)
 
         return request<SbomIngest, SbomIngested>(
             localVariableConfig
@@ -239,12 +239,12 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1Sbom
+     * To obtain the request config of the operation postSbom
      *
      * @param sbomIngest 
      * @return RequestConfig
      */
-    fun postV1SbomRequestConfig(sbomIngest: SbomIngest) : RequestConfig<SbomIngest> {
+    fun postSbomRequestConfig(sbomIngest: SbomIngest) : RequestConfig<SbomIngest> {
         val localVariableBody = sbomIngest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

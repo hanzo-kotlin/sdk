@@ -31,7 +31,9 @@ import ai.hanzo.cloud.model.PreviewReq
 import ai.hanzo.cloud.model.PreviewView
 import ai.hanzo.cloud.model.ProjectView
 import ai.hanzo.cloud.model.ProjectsBoundDomains
+import ai.hanzo.cloud.model.ProjectsComplete
 import ai.hanzo.cloud.model.ProjectsCreate
+import ai.hanzo.cloud.model.ProjectsDeployStart
 import ai.hanzo.cloud.model.ProjectsDeployment
 import ai.hanzo.cloud.model.ProjectsDomain
 import ai.hanzo.cloud.model.ProjectsDomains
@@ -85,8 +87,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PlatformProjectsByProjectAppsByApp(project: kotlin.String, app: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PlatformProjectsByProjectAppsByAppWithHttpInfo(project = project, app = app)
+    fun deletePlatformProjectsByProjectAppsByApp(project: kotlin.String, app: kotlin.String) : Unit {
+        val localVarResponse = deletePlatformProjectsByProjectAppsByAppWithHttpInfo(project = project, app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -114,8 +116,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PlatformProjectsByProjectAppsByAppWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PlatformProjectsByProjectAppsByAppRequestConfig(project = project, app = app)
+    fun deletePlatformProjectsByProjectAppsByAppWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePlatformProjectsByProjectAppsByAppRequestConfig(project = project, app = app)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -123,13 +125,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PlatformProjectsByProjectAppsByApp
+     * To obtain the request config of the operation deletePlatformProjectsByProjectAppsByApp
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @return RequestConfig
      */
-    fun deleteV1PlatformProjectsByProjectAppsByAppRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
+    fun deletePlatformProjectsByProjectAppsByAppRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -159,8 +161,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PlatformProjectsByProjectAppsByAppDomainsByHost(project: kotlin.String, app: kotlin.String, host: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PlatformProjectsByProjectAppsByAppDomainsByHostWithHttpInfo(project = project, app = app, host = host)
+    fun deletePlatformProjectsByProjectAppsByAppDomainsByHost(project: kotlin.String, app: kotlin.String, host: kotlin.String) : Unit {
+        val localVarResponse = deletePlatformProjectsByProjectAppsByAppDomainsByHostWithHttpInfo(project = project, app = app, host = host)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -189,8 +191,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PlatformProjectsByProjectAppsByAppDomainsByHostWithHttpInfo(project: kotlin.String, app: kotlin.String, host: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PlatformProjectsByProjectAppsByAppDomainsByHostRequestConfig(project = project, app = app, host = host)
+    fun deletePlatformProjectsByProjectAppsByAppDomainsByHostWithHttpInfo(project: kotlin.String, app: kotlin.String, host: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePlatformProjectsByProjectAppsByAppDomainsByHostRequestConfig(project = project, app = app, host = host)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -198,14 +200,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PlatformProjectsByProjectAppsByAppDomainsByHost
+     * To obtain the request config of the operation deletePlatformProjectsByProjectAppsByAppDomainsByHost
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param host Host is the hostname, from the path.
      * @return RequestConfig
      */
-    fun deleteV1PlatformProjectsByProjectAppsByAppDomainsByHostRequestConfig(project: kotlin.String, app: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
+    fun deletePlatformProjectsByProjectAppsByAppDomainsByHostRequestConfig(project: kotlin.String, app: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -223,7 +225,7 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * DELETE /v1/platform/sites/{slug}
      * Deletes a project and takes its site off the internet.
-     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
+     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the git source is retired on every copy it has so a reclaimed slug never adopts a repository left behind (visibility.go), the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -233,8 +235,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PlatformSitesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PlatformSitesBySlugWithHttpInfo(slug = slug)
+    fun deletePlatformSitesBySlug(slug: kotlin.String) : Unit {
+        val localVarResponse = deletePlatformSitesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -254,15 +256,15 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * DELETE /v1/platform/sites/{slug}
      * Deletes a project and takes its site off the internet.
-     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
+     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the git source is retired on every copy it has so a reclaimed slug never adopts a repository left behind (visibility.go), the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PlatformSitesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PlatformSitesBySlugRequestConfig(slug = slug)
+    fun deletePlatformSitesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePlatformSitesBySlugRequestConfig(slug = slug)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -270,12 +272,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PlatformSitesBySlug
+     * To obtain the request config of the operation deletePlatformSitesBySlug
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun deleteV1PlatformSitesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun deletePlatformSitesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -304,8 +306,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1PlatformSitesBySlugDomainsByHost(slug: kotlin.String, host: kotlin.String) : Unit {
-        val localVarResponse = deleteV1PlatformSitesBySlugDomainsByHostWithHttpInfo(slug = slug, host = host)
+    fun deletePlatformSitesBySlugDomainsByHost(slug: kotlin.String, host: kotlin.String) : Unit {
+        val localVarResponse = deletePlatformSitesBySlugDomainsByHostWithHttpInfo(slug = slug, host = host)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -333,8 +335,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1PlatformSitesBySlugDomainsByHostWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1PlatformSitesBySlugDomainsByHostRequestConfig(slug = slug, host = host)
+    fun deletePlatformSitesBySlugDomainsByHostWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deletePlatformSitesBySlugDomainsByHostRequestConfig(slug = slug, host = host)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -342,13 +344,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1PlatformSitesBySlugDomainsByHost
+     * To obtain the request config of the operation deletePlatformSitesBySlugDomainsByHost
      *
      * @param slug Slug is the project the host is attached to, from the path.
      * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
      * @return RequestConfig
      */
-    fun deleteV1PlatformSitesBySlugDomainsByHostRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
+    fun deletePlatformSitesBySlugDomainsByHostRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -375,8 +377,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformApps() : Unit {
-        val localVarResponse = getV1PlatformAppsWithHttpInfo()
+    fun getPlatformApps() : Unit {
+        val localVarResponse = getPlatformAppsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -402,8 +404,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformAppsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1PlatformAppsRequestConfig()
+    fun getPlatformAppsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getPlatformAppsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -411,11 +413,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformApps
+     * To obtain the request config of the operation getPlatformApps
      *
      * @return RequestConfig
      */
-    fun getV1PlatformAppsRequestConfig() : RequestConfig<Unit> {
+    fun getPlatformAppsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -443,8 +445,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformAppsByApp(app: kotlin.String) : Unit {
-        val localVarResponse = getV1PlatformAppsByAppWithHttpInfo(app = app)
+    fun getPlatformAppsByApp(app: kotlin.String) : Unit {
+        val localVarResponse = getPlatformAppsByAppWithHttpInfo(app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -471,8 +473,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformAppsByAppWithHttpInfo(app: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1PlatformAppsByAppRequestConfig(app = app)
+    fun getPlatformAppsByAppWithHttpInfo(app: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getPlatformAppsByAppRequestConfig(app = app)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -480,12 +482,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformAppsByApp
+     * To obtain the request config of the operation getPlatformAppsByApp
      *
      * @param app 
      * @return RequestConfig
      */
-    fun getV1PlatformAppsByAppRequestConfig(app: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformAppsByAppRequestConfig(app: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -513,8 +515,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformAppsByAppCd(app: kotlin.String) : Unit {
-        val localVarResponse = getV1PlatformAppsByAppCdWithHttpInfo(app = app)
+    fun getPlatformAppsByAppCd(app: kotlin.String) : Unit {
+        val localVarResponse = getPlatformAppsByAppCdWithHttpInfo(app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -541,8 +543,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformAppsByAppCdWithHttpInfo(app: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1PlatformAppsByAppCdRequestConfig(app = app)
+    fun getPlatformAppsByAppCdWithHttpInfo(app: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getPlatformAppsByAppCdRequestConfig(app = app)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -550,12 +552,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformAppsByAppCd
+     * To obtain the request config of the operation getPlatformAppsByAppCd
      *
      * @param app 
      * @return RequestConfig
      */
-    fun getV1PlatformAppsByAppCdRequestConfig(app: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformAppsByAppCdRequestConfig(app: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -582,8 +584,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformCd() : Unit {
-        val localVarResponse = getV1PlatformCdWithHttpInfo()
+    fun getPlatformCd() : Unit {
+        val localVarResponse = getPlatformCdWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -609,8 +611,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformCdWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1PlatformCdRequestConfig()
+    fun getPlatformCdWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getPlatformCdRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -618,11 +620,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformCd
+     * To obtain the request config of the operation getPlatformCd
      *
      * @return RequestConfig
      */
-    fun getV1PlatformCdRequestConfig() : RequestConfig<Unit> {
+    fun getPlatformCdRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -649,8 +651,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformCi() : Unit {
-        val localVarResponse = getV1PlatformCiWithHttpInfo()
+    fun getPlatformCi() : Unit {
+        val localVarResponse = getPlatformCiWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -676,8 +678,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformCiWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1PlatformCiRequestConfig()
+    fun getPlatformCiWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getPlatformCiRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -685,11 +687,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformCi
+     * To obtain the request config of the operation getPlatformCi
      *
      * @return RequestConfig
      */
-    fun getV1PlatformCiRequestConfig() : RequestConfig<Unit> {
+    fun getPlatformCiRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -721,8 +723,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformFleet(env: kotlin.String? = null, health: kotlin.String? = null, org: kotlin.String? = null, drift: kotlin.String? = null) : DriftBoard {
-        val localVarResponse = getV1PlatformFleetWithHttpInfo(env = env, health = health, org = org, drift = drift)
+    fun getPlatformFleet(env: kotlin.String? = null, health: kotlin.String? = null, org: kotlin.String? = null, drift: kotlin.String? = null) : DriftBoard {
+        val localVarResponse = getPlatformFleetWithHttpInfo(env = env, health = health, org = org, drift = drift)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DriftBoard
@@ -753,8 +755,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformFleetWithHttpInfo(env: kotlin.String?, health: kotlin.String?, org: kotlin.String?, drift: kotlin.String?) : ApiResponse<DriftBoard?> {
-        val localVariableConfig = getV1PlatformFleetRequestConfig(env = env, health = health, org = org, drift = drift)
+    fun getPlatformFleetWithHttpInfo(env: kotlin.String?, health: kotlin.String?, org: kotlin.String?, drift: kotlin.String?) : ApiResponse<DriftBoard?> {
+        val localVariableConfig = getPlatformFleetRequestConfig(env = env, health = health, org = org, drift = drift)
 
         return request<Unit, DriftBoard>(
             localVariableConfig
@@ -762,7 +764,7 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformFleet
+     * To obtain the request config of the operation getPlatformFleet
      *
      * @param env Env narrows to one lifecycle env: main, test or dev. (optional)
      * @param health Health narrows to one health colour: green, yellow or red. (optional)
@@ -770,7 +772,7 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param drift Drift is &#x60;1&#x60; or &#x60;true&#x60; to show only rows that have actually drifted. It is a STRING and not a bool because those two spellings are exactly what the board has always accepted, and a bool would silently widen that to &#x60;?drift&#x60; alone and to &#x60;TRUE&#x60; — a behaviour change wearing a type change&#39;s clothes. (optional)
      * @return RequestConfig
      */
-    fun getV1PlatformFleetRequestConfig(env: kotlin.String?, health: kotlin.String?, org: kotlin.String?, drift: kotlin.String?) : RequestConfig<Unit> {
+    fun getPlatformFleetRequestConfig(env: kotlin.String?, health: kotlin.String?, org: kotlin.String?, drift: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -815,8 +817,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformFleetByApp(app: kotlin.String, env: kotlin.String? = null) : AppView {
-        val localVarResponse = getV1PlatformFleetByAppWithHttpInfo(app = app, env = env)
+    fun getPlatformFleetByApp(app: kotlin.String, env: kotlin.String? = null) : AppView {
+        val localVarResponse = getPlatformFleetByAppWithHttpInfo(app = app, env = env)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AppView
@@ -845,8 +847,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformFleetByAppWithHttpInfo(app: kotlin.String, env: kotlin.String?) : ApiResponse<AppView?> {
-        val localVariableConfig = getV1PlatformFleetByAppRequestConfig(app = app, env = env)
+    fun getPlatformFleetByAppWithHttpInfo(app: kotlin.String, env: kotlin.String?) : ApiResponse<AppView?> {
+        val localVariableConfig = getPlatformFleetByAppRequestConfig(app = app, env = env)
 
         return request<Unit, AppView>(
             localVariableConfig
@@ -854,13 +856,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformFleetByApp
+     * To obtain the request config of the operation getPlatformFleetByApp
      *
      * @param app App is the service&#39;s CR name, from the path. It must be a DNS-1123 label.
      * @param env Env narrows the scan to one lifecycle env: main, test or dev. Omitted, the namespaces are scanned in lifecycle order and the first match wins, so a bare name resolves to PRODUCTION. (optional)
      * @return RequestConfig
      */
-    fun getV1PlatformFleetByAppRequestConfig(app: kotlin.String, env: kotlin.String?) : RequestConfig<Unit> {
+    fun getPlatformFleetByAppRequestConfig(app: kotlin.String, env: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -894,8 +896,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformHealth() : Readiness {
-        val localVarResponse = getV1PlatformHealthWithHttpInfo()
+    fun getPlatformHealth() : Readiness {
+        val localVarResponse = getPlatformHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Readiness
@@ -922,8 +924,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformHealthWithHttpInfo() : ApiResponse<Readiness?> {
-        val localVariableConfig = getV1PlatformHealthRequestConfig()
+    fun getPlatformHealthWithHttpInfo() : ApiResponse<Readiness?> {
+        val localVariableConfig = getPlatformHealthRequestConfig()
 
         return request<Unit, Readiness>(
             localVariableConfig
@@ -931,11 +933,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformHealth
+     * To obtain the request config of the operation getPlatformHealth
      *
      * @return RequestConfig
      */
-    fun getV1PlatformHealthRequestConfig() : RequestConfig<Unit> {
+    fun getPlatformHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -964,8 +966,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformProjects() : kotlin.collections.List<ProjectView> {
-        val localVarResponse = getV1PlatformProjectsWithHttpInfo()
+    fun getPlatformProjects() : kotlin.collections.List<ProjectView> {
+        val localVarResponse = getPlatformProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectView>
@@ -992,8 +994,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformProjectsWithHttpInfo() : ApiResponse<kotlin.collections.List<ProjectView>?> {
-        val localVariableConfig = getV1PlatformProjectsRequestConfig()
+    fun getPlatformProjectsWithHttpInfo() : ApiResponse<kotlin.collections.List<ProjectView>?> {
+        val localVariableConfig = getPlatformProjectsRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProjectView>>(
             localVariableConfig
@@ -1001,11 +1003,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformProjects
+     * To obtain the request config of the operation getPlatformProjects
      *
      * @return RequestConfig
      */
-    fun getV1PlatformProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getPlatformProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1035,8 +1037,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformProjectsByProject(project: kotlin.String) : ProjectView {
-        val localVarResponse = getV1PlatformProjectsByProjectWithHttpInfo(project = project)
+    fun getPlatformProjectsByProject(project: kotlin.String) : ProjectView {
+        val localVarResponse = getPlatformProjectsByProjectWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectView
@@ -1064,8 +1066,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformProjectsByProjectWithHttpInfo(project: kotlin.String) : ApiResponse<ProjectView?> {
-        val localVariableConfig = getV1PlatformProjectsByProjectRequestConfig(project = project)
+    fun getPlatformProjectsByProjectWithHttpInfo(project: kotlin.String) : ApiResponse<ProjectView?> {
+        val localVariableConfig = getPlatformProjectsByProjectRequestConfig(project = project)
 
         return request<Unit, ProjectView>(
             localVariableConfig
@@ -1073,12 +1075,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformProjectsByProject
+     * To obtain the request config of the operation getPlatformProjectsByProject
      *
      * @param project Project is the project&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun getV1PlatformProjectsByProjectRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformProjectsByProjectRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1108,8 +1110,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformProjectsByProjectApps(project: kotlin.String) : kotlin.collections.List<AppView> {
-        val localVarResponse = getV1PlatformProjectsByProjectAppsWithHttpInfo(project = project)
+    fun getPlatformProjectsByProjectApps(project: kotlin.String) : kotlin.collections.List<AppView> {
+        val localVarResponse = getPlatformProjectsByProjectAppsWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<AppView>
@@ -1137,8 +1139,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformProjectsByProjectAppsWithHttpInfo(project: kotlin.String) : ApiResponse<kotlin.collections.List<AppView>?> {
-        val localVariableConfig = getV1PlatformProjectsByProjectAppsRequestConfig(project = project)
+    fun getPlatformProjectsByProjectAppsWithHttpInfo(project: kotlin.String) : ApiResponse<kotlin.collections.List<AppView>?> {
+        val localVariableConfig = getPlatformProjectsByProjectAppsRequestConfig(project = project)
 
         return request<Unit, kotlin.collections.List<AppView>>(
             localVariableConfig
@@ -1146,12 +1148,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformProjectsByProjectApps
+     * To obtain the request config of the operation getPlatformProjectsByProjectApps
      *
      * @param project Project is the project&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun getV1PlatformProjectsByProjectAppsRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformProjectsByProjectAppsRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1182,8 +1184,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformProjectsByProjectAppsByApp(project: kotlin.String, app: kotlin.String) : AppView {
-        val localVarResponse = getV1PlatformProjectsByProjectAppsByAppWithHttpInfo(project = project, app = app)
+    fun getPlatformProjectsByProjectAppsByApp(project: kotlin.String, app: kotlin.String) : AppView {
+        val localVarResponse = getPlatformProjectsByProjectAppsByAppWithHttpInfo(project = project, app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AppView
@@ -1212,8 +1214,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<AppView?> {
-        val localVariableConfig = getV1PlatformProjectsByProjectAppsByAppRequestConfig(project = project, app = app)
+    fun getPlatformProjectsByProjectAppsByAppWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<AppView?> {
+        val localVariableConfig = getPlatformProjectsByProjectAppsByAppRequestConfig(project = project, app = app)
 
         return request<Unit, AppView>(
             localVariableConfig
@@ -1221,13 +1223,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformProjectsByProjectAppsByApp
+     * To obtain the request config of the operation getPlatformProjectsByProjectAppsByApp
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @return RequestConfig
      */
-    fun getV1PlatformProjectsByProjectAppsByAppRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformProjectsByProjectAppsByAppRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1258,8 +1260,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppDeployments(project: kotlin.String, app: kotlin.String) : kotlin.collections.List<DeploymentView> {
-        val localVarResponse = getV1PlatformProjectsByProjectAppsByAppDeploymentsWithHttpInfo(project = project, app = app)
+    fun getPlatformProjectsByProjectAppsByAppDeployments(project: kotlin.String, app: kotlin.String) : kotlin.collections.List<DeploymentView> {
+        val localVarResponse = getPlatformProjectsByProjectAppsByAppDeploymentsWithHttpInfo(project = project, app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<DeploymentView>
@@ -1288,8 +1290,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppDeploymentsWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<kotlin.collections.List<DeploymentView>?> {
-        val localVariableConfig = getV1PlatformProjectsByProjectAppsByAppDeploymentsRequestConfig(project = project, app = app)
+    fun getPlatformProjectsByProjectAppsByAppDeploymentsWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<kotlin.collections.List<DeploymentView>?> {
+        val localVariableConfig = getPlatformProjectsByProjectAppsByAppDeploymentsRequestConfig(project = project, app = app)
 
         return request<Unit, kotlin.collections.List<DeploymentView>>(
             localVariableConfig
@@ -1297,13 +1299,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformProjectsByProjectAppsByAppDeployments
+     * To obtain the request config of the operation getPlatformProjectsByProjectAppsByAppDeployments
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @return RequestConfig
      */
-    fun getV1PlatformProjectsByProjectAppsByAppDeploymentsRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformProjectsByProjectAppsByAppDeploymentsRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1335,8 +1337,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppDeploymentsById(project: kotlin.String, app: kotlin.String, id: kotlin.String) : DeploymentView {
-        val localVarResponse = getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdWithHttpInfo(project = project, app = app, id = id)
+    fun getPlatformProjectsByProjectAppsByAppDeploymentsById(project: kotlin.String, app: kotlin.String, id: kotlin.String) : DeploymentView {
+        val localVarResponse = getPlatformProjectsByProjectAppsByAppDeploymentsByIdWithHttpInfo(project = project, app = app, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeploymentView
@@ -1366,8 +1368,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdWithHttpInfo(project: kotlin.String, app: kotlin.String, id: kotlin.String) : ApiResponse<DeploymentView?> {
-        val localVariableConfig = getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdRequestConfig(project = project, app = app, id = id)
+    fun getPlatformProjectsByProjectAppsByAppDeploymentsByIdWithHttpInfo(project: kotlin.String, app: kotlin.String, id: kotlin.String) : ApiResponse<DeploymentView?> {
+        val localVariableConfig = getPlatformProjectsByProjectAppsByAppDeploymentsByIdRequestConfig(project = project, app = app, id = id)
 
         return request<Unit, DeploymentView>(
             localVariableConfig
@@ -1375,14 +1377,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformProjectsByProjectAppsByAppDeploymentsById
+     * To obtain the request config of the operation getPlatformProjectsByProjectAppsByAppDeploymentsById
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param id ID is the deployment&#39;s id, from the path.
      * @return RequestConfig
      */
-    fun getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdRequestConfig(project: kotlin.String, app: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformProjectsByProjectAppsByAppDeploymentsByIdRequestConfig(project: kotlin.String, app: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1414,8 +1416,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdLogs(project: kotlin.String, app: kotlin.String, id: kotlin.String) : DeployLogs {
-        val localVarResponse = getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdLogsWithHttpInfo(project = project, app = app, id = id)
+    fun getPlatformProjectsByProjectAppsByAppDeploymentsByIdLogs(project: kotlin.String, app: kotlin.String, id: kotlin.String) : DeployLogs {
+        val localVarResponse = getPlatformProjectsByProjectAppsByAppDeploymentsByIdLogsWithHttpInfo(project = project, app = app, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeployLogs
@@ -1445,8 +1447,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdLogsWithHttpInfo(project: kotlin.String, app: kotlin.String, id: kotlin.String) : ApiResponse<DeployLogs?> {
-        val localVariableConfig = getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdLogsRequestConfig(project = project, app = app, id = id)
+    fun getPlatformProjectsByProjectAppsByAppDeploymentsByIdLogsWithHttpInfo(project: kotlin.String, app: kotlin.String, id: kotlin.String) : ApiResponse<DeployLogs?> {
+        val localVariableConfig = getPlatformProjectsByProjectAppsByAppDeploymentsByIdLogsRequestConfig(project = project, app = app, id = id)
 
         return request<Unit, DeployLogs>(
             localVariableConfig
@@ -1454,14 +1456,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdLogs
+     * To obtain the request config of the operation getPlatformProjectsByProjectAppsByAppDeploymentsByIdLogs
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param id ID is the deployment&#39;s id, from the path.
      * @return RequestConfig
      */
-    fun getV1PlatformProjectsByProjectAppsByAppDeploymentsByIdLogsRequestConfig(project: kotlin.String, app: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformProjectsByProjectAppsByAppDeploymentsByIdLogsRequestConfig(project: kotlin.String, app: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1492,8 +1494,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppDomains(project: kotlin.String, app: kotlin.String) : kotlin.collections.List<DomainView> {
-        val localVarResponse = getV1PlatformProjectsByProjectAppsByAppDomainsWithHttpInfo(project = project, app = app)
+    fun getPlatformProjectsByProjectAppsByAppDomains(project: kotlin.String, app: kotlin.String) : kotlin.collections.List<DomainView> {
+        val localVarResponse = getPlatformProjectsByProjectAppsByAppDomainsWithHttpInfo(project = project, app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<DomainView>
@@ -1522,8 +1524,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformProjectsByProjectAppsByAppDomainsWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<kotlin.collections.List<DomainView>?> {
-        val localVariableConfig = getV1PlatformProjectsByProjectAppsByAppDomainsRequestConfig(project = project, app = app)
+    fun getPlatformProjectsByProjectAppsByAppDomainsWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<kotlin.collections.List<DomainView>?> {
+        val localVariableConfig = getPlatformProjectsByProjectAppsByAppDomainsRequestConfig(project = project, app = app)
 
         return request<Unit, kotlin.collections.List<DomainView>>(
             localVariableConfig
@@ -1531,13 +1533,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformProjectsByProjectAppsByAppDomains
+     * To obtain the request config of the operation getPlatformProjectsByProjectAppsByAppDomains
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @return RequestConfig
      */
-    fun getV1PlatformProjectsByProjectAppsByAppDomainsRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformProjectsByProjectAppsByAppDomainsRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1566,8 +1568,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformSites() : kotlin.collections.List<ProjectsProject> {
-        val localVarResponse = getV1PlatformSitesWithHttpInfo()
+    fun getPlatformSites() : kotlin.collections.List<ProjectsProject> {
+        val localVarResponse = getPlatformSitesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectsProject>
@@ -1594,8 +1596,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformSitesWithHttpInfo() : ApiResponse<kotlin.collections.List<ProjectsProject>?> {
-        val localVariableConfig = getV1PlatformSitesRequestConfig()
+    fun getPlatformSitesWithHttpInfo() : ApiResponse<kotlin.collections.List<ProjectsProject>?> {
+        val localVariableConfig = getPlatformSitesRequestConfig()
 
         return request<Unit, kotlin.collections.List<ProjectsProject>>(
             localVariableConfig
@@ -1603,11 +1605,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformSites
+     * To obtain the request config of the operation getPlatformSites
      *
      * @return RequestConfig
      */
-    fun getV1PlatformSitesRequestConfig() : RequestConfig<Unit> {
+    fun getPlatformSitesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1637,8 +1639,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformSitesBySlug(slug: kotlin.String) : ProjectsProject {
-        val localVarResponse = getV1PlatformSitesBySlugWithHttpInfo(slug = slug)
+    fun getPlatformSitesBySlug(slug: kotlin.String) : ProjectsProject {
+        val localVarResponse = getPlatformSitesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -1666,8 +1668,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformSitesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = getV1PlatformSitesBySlugRequestConfig(slug = slug)
+    fun getPlatformSitesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = getPlatformSitesBySlugRequestConfig(slug = slug)
 
         return request<Unit, ProjectsProject>(
             localVariableConfig
@@ -1675,12 +1677,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformSitesBySlug
+     * To obtain the request config of the operation getPlatformSitesBySlug
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun getV1PlatformSitesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformSitesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1710,8 +1712,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformSitesBySlugDeployments(slug: kotlin.String) : kotlin.collections.List<ProjectsDeployment> {
-        val localVarResponse = getV1PlatformSitesBySlugDeploymentsWithHttpInfo(slug = slug)
+    fun getPlatformSitesBySlugDeployments(slug: kotlin.String) : kotlin.collections.List<ProjectsDeployment> {
+        val localVarResponse = getPlatformSitesBySlugDeploymentsWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectsDeployment>
@@ -1739,8 +1741,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformSitesBySlugDeploymentsWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.collections.List<ProjectsDeployment>?> {
-        val localVariableConfig = getV1PlatformSitesBySlugDeploymentsRequestConfig(slug = slug)
+    fun getPlatformSitesBySlugDeploymentsWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.collections.List<ProjectsDeployment>?> {
+        val localVariableConfig = getPlatformSitesBySlugDeploymentsRequestConfig(slug = slug)
 
         return request<Unit, kotlin.collections.List<ProjectsDeployment>>(
             localVariableConfig
@@ -1748,12 +1750,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformSitesBySlugDeployments
+     * To obtain the request config of the operation getPlatformSitesBySlugDeployments
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun getV1PlatformSitesBySlugDeploymentsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformSitesBySlugDeploymentsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1784,8 +1786,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformSitesBySlugDeploymentsById(slug: kotlin.String, id: kotlin.String) : ProjectsDeployment {
-        val localVarResponse = getV1PlatformSitesBySlugDeploymentsByIdWithHttpInfo(slug = slug, id = id)
+    fun getPlatformSitesBySlugDeploymentsById(slug: kotlin.String, id: kotlin.String) : ProjectsDeployment {
+        val localVarResponse = getPlatformSitesBySlugDeploymentsByIdWithHttpInfo(slug = slug, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
@@ -1814,8 +1816,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformSitesBySlugDeploymentsByIdWithHttpInfo(slug: kotlin.String, id: kotlin.String) : ApiResponse<ProjectsDeployment?> {
-        val localVariableConfig = getV1PlatformSitesBySlugDeploymentsByIdRequestConfig(slug = slug, id = id)
+    fun getPlatformSitesBySlugDeploymentsByIdWithHttpInfo(slug: kotlin.String, id: kotlin.String) : ApiResponse<ProjectsDeployment?> {
+        val localVariableConfig = getPlatformSitesBySlugDeploymentsByIdRequestConfig(slug = slug, id = id)
 
         return request<Unit, ProjectsDeployment>(
             localVariableConfig
@@ -1823,13 +1825,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformSitesBySlugDeploymentsById
+     * To obtain the request config of the operation getPlatformSitesBySlugDeploymentsById
      *
      * @param slug Slug is the project the deployment belongs to, from the path.
      * @param id ID is the deployment id, from the path. A deployment of another project — or of another tenant&#39;s project — is not found.
      * @return RequestConfig
      */
-    fun getV1PlatformSitesBySlugDeploymentsByIdRequestConfig(slug: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformSitesBySlugDeploymentsByIdRequestConfig(slug: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1859,8 +1861,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformSitesBySlugDomains(slug: kotlin.String) : ProjectsDomains {
-        val localVarResponse = getV1PlatformSitesBySlugDomainsWithHttpInfo(slug = slug)
+    fun getPlatformSitesBySlugDomains(slug: kotlin.String) : ProjectsDomains {
+        val localVarResponse = getPlatformSitesBySlugDomainsWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDomains
@@ -1888,8 +1890,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformSitesBySlugDomainsWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsDomains?> {
-        val localVariableConfig = getV1PlatformSitesBySlugDomainsRequestConfig(slug = slug)
+    fun getPlatformSitesBySlugDomainsWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsDomains?> {
+        val localVariableConfig = getPlatformSitesBySlugDomainsRequestConfig(slug = slug)
 
         return request<Unit, ProjectsDomains>(
             localVariableConfig
@@ -1897,12 +1899,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformSitesBySlugDomains
+     * To obtain the request config of the operation getPlatformSitesBySlugDomains
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun getV1PlatformSitesBySlugDomainsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformSitesBySlugDomainsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1932,8 +1934,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PlatformSitesBySlugReleases(slug: kotlin.String) : kotlin.collections.List<ProjectsRelease> {
-        val localVarResponse = getV1PlatformSitesBySlugReleasesWithHttpInfo(slug = slug)
+    fun getPlatformSitesBySlugReleases(slug: kotlin.String) : kotlin.collections.List<ProjectsRelease> {
+        val localVarResponse = getPlatformSitesBySlugReleasesWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectsRelease>
@@ -1961,8 +1963,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PlatformSitesBySlugReleasesWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.collections.List<ProjectsRelease>?> {
-        val localVariableConfig = getV1PlatformSitesBySlugReleasesRequestConfig(slug = slug)
+    fun getPlatformSitesBySlugReleasesWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.collections.List<ProjectsRelease>?> {
+        val localVariableConfig = getPlatformSitesBySlugReleasesRequestConfig(slug = slug)
 
         return request<Unit, kotlin.collections.List<ProjectsRelease>>(
             localVariableConfig
@@ -1970,12 +1972,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1PlatformSitesBySlugReleases
+     * To obtain the request config of the operation getPlatformSitesBySlugReleases
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun getV1PlatformSitesBySlugReleasesRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformSitesBySlugReleasesRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2006,8 +2008,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1PlatformSitesBySlug(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ProjectsProject {
-        val localVarResponse = patchV1PlatformSitesBySlugWithHttpInfo(slug = slug, projectsUpdate = projectsUpdate)
+    fun patchPlatformSitesBySlug(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ProjectsProject {
+        val localVarResponse = patchPlatformSitesBySlugWithHttpInfo(slug = slug, projectsUpdate = projectsUpdate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -2036,8 +2038,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1PlatformSitesBySlugWithHttpInfo(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = patchV1PlatformSitesBySlugRequestConfig(slug = slug, projectsUpdate = projectsUpdate)
+    fun patchPlatformSitesBySlugWithHttpInfo(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = patchPlatformSitesBySlugRequestConfig(slug = slug, projectsUpdate = projectsUpdate)
 
         return request<ProjectsUpdate, ProjectsProject>(
             localVariableConfig
@@ -2045,13 +2047,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1PlatformSitesBySlug
+     * To obtain the request config of the operation patchPlatformSitesBySlug
      *
      * @param slug Slug is the project to update, from the path. The URL is the addressing authority — a &#x60;slug&#x60; in the body cannot move the write to another project.
      * @param projectsUpdate 
      * @return RequestConfig
      */
-    fun patchV1PlatformSitesBySlugRequestConfig(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : RequestConfig<ProjectsUpdate> {
+    fun patchPlatformSitesBySlugRequestConfig(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : RequestConfig<ProjectsUpdate> {
         val localVariableBody = projectsUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2080,8 +2082,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformApps() : Unit {
-        val localVarResponse = postV1PlatformAppsWithHttpInfo()
+    fun postPlatformApps() : Unit {
+        val localVarResponse = postPlatformAppsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2107,8 +2109,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformAppsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1PlatformAppsRequestConfig()
+    fun postPlatformAppsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postPlatformAppsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2116,11 +2118,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformApps
+     * To obtain the request config of the operation postPlatformApps
      *
      * @return RequestConfig
      */
-    fun postV1PlatformAppsRequestConfig() : RequestConfig<Unit> {
+    fun postPlatformAppsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2150,8 +2152,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformFleetByAppDeploy(app: kotlin.String, restartRef: RestartRef) : Restarted {
-        val localVarResponse = postV1PlatformFleetByAppDeployWithHttpInfo(app = app, restartRef = restartRef)
+    fun postPlatformFleetByAppDeploy(app: kotlin.String, restartRef: RestartRef) : Restarted {
+        val localVarResponse = postPlatformFleetByAppDeployWithHttpInfo(app = app, restartRef = restartRef)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Restarted
@@ -2180,8 +2182,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformFleetByAppDeployWithHttpInfo(app: kotlin.String, restartRef: RestartRef) : ApiResponse<Restarted?> {
-        val localVariableConfig = postV1PlatformFleetByAppDeployRequestConfig(app = app, restartRef = restartRef)
+    fun postPlatformFleetByAppDeployWithHttpInfo(app: kotlin.String, restartRef: RestartRef) : ApiResponse<Restarted?> {
+        val localVariableConfig = postPlatformFleetByAppDeployRequestConfig(app = app, restartRef = restartRef)
 
         return request<RestartRef, Restarted>(
             localVariableConfig
@@ -2189,13 +2191,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformFleetByAppDeploy
+     * To obtain the request config of the operation postPlatformFleetByAppDeploy
      *
      * @param app App is the service&#39;s CR name, from the path. It must be a DNS-1123 label.
      * @param restartRef 
      * @return RequestConfig
      */
-    fun postV1PlatformFleetByAppDeployRequestConfig(app: kotlin.String, restartRef: RestartRef) : RequestConfig<RestartRef> {
+    fun postPlatformFleetByAppDeployRequestConfig(app: kotlin.String, restartRef: RestartRef) : RequestConfig<RestartRef> {
         val localVariableBody = restartRef
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2227,8 +2229,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectApps(project: kotlin.String, createAppReq: CreateAppReq) : AppView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsWithHttpInfo(project = project, createAppReq = createAppReq)
+    fun postPlatformProjectsByProjectApps(project: kotlin.String, createAppReq: CreateAppReq) : AppView {
+        val localVarResponse = postPlatformProjectsByProjectAppsWithHttpInfo(project = project, createAppReq = createAppReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AppView
@@ -2257,8 +2259,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsWithHttpInfo(project: kotlin.String, createAppReq: CreateAppReq) : ApiResponse<AppView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsRequestConfig(project = project, createAppReq = createAppReq)
+    fun postPlatformProjectsByProjectAppsWithHttpInfo(project: kotlin.String, createAppReq: CreateAppReq) : ApiResponse<AppView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsRequestConfig(project = project, createAppReq = createAppReq)
 
         return request<CreateAppReq, AppView>(
             localVariableConfig
@@ -2266,13 +2268,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectApps
+     * To obtain the request config of the operation postPlatformProjectsByProjectApps
      *
      * @param project Project is the project to create the application under, from the path.
      * @param createAppReq 
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsRequestConfig(project: kotlin.String, createAppReq: CreateAppReq) : RequestConfig<CreateAppReq> {
+    fun postPlatformProjectsByProjectAppsRequestConfig(project: kotlin.String, createAppReq: CreateAppReq) : RequestConfig<CreateAppReq> {
         val localVariableBody = createAppReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2305,8 +2307,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppDeploy(project: kotlin.String, app: kotlin.String, deployReq: DeployReq) : DeploymentView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsByAppDeployWithHttpInfo(project = project, app = app, deployReq = deployReq)
+    fun postPlatformProjectsByProjectAppsByAppDeploy(project: kotlin.String, app: kotlin.String, deployReq: DeployReq) : DeploymentView {
+        val localVarResponse = postPlatformProjectsByProjectAppsByAppDeployWithHttpInfo(project = project, app = app, deployReq = deployReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeploymentView
@@ -2336,8 +2338,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppDeployWithHttpInfo(project: kotlin.String, app: kotlin.String, deployReq: DeployReq) : ApiResponse<DeploymentView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsByAppDeployRequestConfig(project = project, app = app, deployReq = deployReq)
+    fun postPlatformProjectsByProjectAppsByAppDeployWithHttpInfo(project: kotlin.String, app: kotlin.String, deployReq: DeployReq) : ApiResponse<DeploymentView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsByAppDeployRequestConfig(project = project, app = app, deployReq = deployReq)
 
         return request<DeployReq, DeploymentView>(
             localVariableConfig
@@ -2345,14 +2347,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectAppsByAppDeploy
+     * To obtain the request config of the operation postPlatformProjectsByProjectAppsByAppDeploy
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param deployReq 
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsByAppDeployRequestConfig(project: kotlin.String, app: kotlin.String, deployReq: DeployReq) : RequestConfig<DeployReq> {
+    fun postPlatformProjectsByProjectAppsByAppDeployRequestConfig(project: kotlin.String, app: kotlin.String, deployReq: DeployReq) : RequestConfig<DeployReq> {
         val localVariableBody = deployReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2385,8 +2387,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppDomains(project: kotlin.String, app: kotlin.String, addDomainReq: AddDomainReq) : DomainView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsByAppDomainsWithHttpInfo(project = project, app = app, addDomainReq = addDomainReq)
+    fun postPlatformProjectsByProjectAppsByAppDomains(project: kotlin.String, app: kotlin.String, addDomainReq: AddDomainReq) : DomainView {
+        val localVarResponse = postPlatformProjectsByProjectAppsByAppDomainsWithHttpInfo(project = project, app = app, addDomainReq = addDomainReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DomainView
@@ -2416,8 +2418,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppDomainsWithHttpInfo(project: kotlin.String, app: kotlin.String, addDomainReq: AddDomainReq) : ApiResponse<DomainView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsByAppDomainsRequestConfig(project = project, app = app, addDomainReq = addDomainReq)
+    fun postPlatformProjectsByProjectAppsByAppDomainsWithHttpInfo(project: kotlin.String, app: kotlin.String, addDomainReq: AddDomainReq) : ApiResponse<DomainView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsByAppDomainsRequestConfig(project = project, app = app, addDomainReq = addDomainReq)
 
         return request<AddDomainReq, DomainView>(
             localVariableConfig
@@ -2425,14 +2427,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectAppsByAppDomains
+     * To obtain the request config of the operation postPlatformProjectsByProjectAppsByAppDomains
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param addDomainReq 
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsByAppDomainsRequestConfig(project: kotlin.String, app: kotlin.String, addDomainReq: AddDomainReq) : RequestConfig<AddDomainReq> {
+    fun postPlatformProjectsByProjectAppsByAppDomainsRequestConfig(project: kotlin.String, app: kotlin.String, addDomainReq: AddDomainReq) : RequestConfig<AddDomainReq> {
         val localVariableBody = addDomainReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2465,8 +2467,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppDomainsByHostVerify(project: kotlin.String, app: kotlin.String, host: kotlin.String) : DomainView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsByAppDomainsByHostVerifyWithHttpInfo(project = project, app = app, host = host)
+    fun postPlatformProjectsByProjectAppsByAppDomainsByHostVerify(project: kotlin.String, app: kotlin.String, host: kotlin.String) : DomainView {
+        val localVarResponse = postPlatformProjectsByProjectAppsByAppDomainsByHostVerifyWithHttpInfo(project = project, app = app, host = host)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DomainView
@@ -2496,8 +2498,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppDomainsByHostVerifyWithHttpInfo(project: kotlin.String, app: kotlin.String, host: kotlin.String) : ApiResponse<DomainView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsByAppDomainsByHostVerifyRequestConfig(project = project, app = app, host = host)
+    fun postPlatformProjectsByProjectAppsByAppDomainsByHostVerifyWithHttpInfo(project: kotlin.String, app: kotlin.String, host: kotlin.String) : ApiResponse<DomainView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsByAppDomainsByHostVerifyRequestConfig(project = project, app = app, host = host)
 
         return request<Unit, DomainView>(
             localVariableConfig
@@ -2505,14 +2507,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectAppsByAppDomainsByHostVerify
+     * To obtain the request config of the operation postPlatformProjectsByProjectAppsByAppDomainsByHostVerify
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param host Host is the hostname, from the path.
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsByAppDomainsByHostVerifyRequestConfig(project: kotlin.String, app: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
+    fun postPlatformProjectsByProjectAppsByAppDomainsByHostVerifyRequestConfig(project: kotlin.String, app: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2544,8 +2546,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppPreview(project: kotlin.String, app: kotlin.String, previewReq: PreviewReq) : PreviewView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsByAppPreviewWithHttpInfo(project = project, app = app, previewReq = previewReq)
+    fun postPlatformProjectsByProjectAppsByAppPreview(project: kotlin.String, app: kotlin.String, previewReq: PreviewReq) : PreviewView {
+        val localVarResponse = postPlatformProjectsByProjectAppsByAppPreviewWithHttpInfo(project = project, app = app, previewReq = previewReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PreviewView
@@ -2575,8 +2577,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppPreviewWithHttpInfo(project: kotlin.String, app: kotlin.String, previewReq: PreviewReq) : ApiResponse<PreviewView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsByAppPreviewRequestConfig(project = project, app = app, previewReq = previewReq)
+    fun postPlatformProjectsByProjectAppsByAppPreviewWithHttpInfo(project: kotlin.String, app: kotlin.String, previewReq: PreviewReq) : ApiResponse<PreviewView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsByAppPreviewRequestConfig(project = project, app = app, previewReq = previewReq)
 
         return request<PreviewReq, PreviewView>(
             localVariableConfig
@@ -2584,14 +2586,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectAppsByAppPreview
+     * To obtain the request config of the operation postPlatformProjectsByProjectAppsByAppPreview
      *
      * @param project Project is the project the parent application lives under, from the path.
      * @param app App is the parent application&#39;s slug, from the path.
      * @param previewReq 
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsByAppPreviewRequestConfig(project: kotlin.String, app: kotlin.String, previewReq: PreviewReq) : RequestConfig<PreviewReq> {
+    fun postPlatformProjectsByProjectAppsByAppPreviewRequestConfig(project: kotlin.String, app: kotlin.String, previewReq: PreviewReq) : RequestConfig<PreviewReq> {
         val localVariableBody = previewReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2624,8 +2626,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppPromote(project: kotlin.String, app: kotlin.String, promoteReq: PromoteReq) : DeploymentView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsByAppPromoteWithHttpInfo(project = project, app = app, promoteReq = promoteReq)
+    fun postPlatformProjectsByProjectAppsByAppPromote(project: kotlin.String, app: kotlin.String, promoteReq: PromoteReq) : DeploymentView {
+        val localVarResponse = postPlatformProjectsByProjectAppsByAppPromoteWithHttpInfo(project = project, app = app, promoteReq = promoteReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeploymentView
@@ -2655,8 +2657,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppPromoteWithHttpInfo(project: kotlin.String, app: kotlin.String, promoteReq: PromoteReq) : ApiResponse<DeploymentView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsByAppPromoteRequestConfig(project = project, app = app, promoteReq = promoteReq)
+    fun postPlatformProjectsByProjectAppsByAppPromoteWithHttpInfo(project: kotlin.String, app: kotlin.String, promoteReq: PromoteReq) : ApiResponse<DeploymentView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsByAppPromoteRequestConfig(project = project, app = app, promoteReq = promoteReq)
 
         return request<PromoteReq, DeploymentView>(
             localVariableConfig
@@ -2664,14 +2666,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectAppsByAppPromote
+     * To obtain the request config of the operation postPlatformProjectsByProjectAppsByAppPromote
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param promoteReq 
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsByAppPromoteRequestConfig(project: kotlin.String, app: kotlin.String, promoteReq: PromoteReq) : RequestConfig<PromoteReq> {
+    fun postPlatformProjectsByProjectAppsByAppPromoteRequestConfig(project: kotlin.String, app: kotlin.String, promoteReq: PromoteReq) : RequestConfig<PromoteReq> {
         val localVariableBody = promoteReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2704,8 +2706,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppRollback(project: kotlin.String, app: kotlin.String, rollbackReq: RollbackReq) : DeploymentView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsByAppRollbackWithHttpInfo(project = project, app = app, rollbackReq = rollbackReq)
+    fun postPlatformProjectsByProjectAppsByAppRollback(project: kotlin.String, app: kotlin.String, rollbackReq: RollbackReq) : DeploymentView {
+        val localVarResponse = postPlatformProjectsByProjectAppsByAppRollbackWithHttpInfo(project = project, app = app, rollbackReq = rollbackReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DeploymentView
@@ -2735,8 +2737,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppRollbackWithHttpInfo(project: kotlin.String, app: kotlin.String, rollbackReq: RollbackReq) : ApiResponse<DeploymentView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsByAppRollbackRequestConfig(project = project, app = app, rollbackReq = rollbackReq)
+    fun postPlatformProjectsByProjectAppsByAppRollbackWithHttpInfo(project: kotlin.String, app: kotlin.String, rollbackReq: RollbackReq) : ApiResponse<DeploymentView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsByAppRollbackRequestConfig(project = project, app = app, rollbackReq = rollbackReq)
 
         return request<RollbackReq, DeploymentView>(
             localVariableConfig
@@ -2744,14 +2746,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectAppsByAppRollback
+     * To obtain the request config of the operation postPlatformProjectsByProjectAppsByAppRollback
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param rollbackReq 
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsByAppRollbackRequestConfig(project: kotlin.String, app: kotlin.String, rollbackReq: RollbackReq) : RequestConfig<RollbackReq> {
+    fun postPlatformProjectsByProjectAppsByAppRollbackRequestConfig(project: kotlin.String, app: kotlin.String, rollbackReq: RollbackReq) : RequestConfig<RollbackReq> {
         val localVariableBody = rollbackReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2783,8 +2785,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppStart(project: kotlin.String, app: kotlin.String) : AppView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsByAppStartWithHttpInfo(project = project, app = app)
+    fun postPlatformProjectsByProjectAppsByAppStart(project: kotlin.String, app: kotlin.String) : AppView {
+        val localVarResponse = postPlatformProjectsByProjectAppsByAppStartWithHttpInfo(project = project, app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AppView
@@ -2813,8 +2815,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppStartWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<AppView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsByAppStartRequestConfig(project = project, app = app)
+    fun postPlatformProjectsByProjectAppsByAppStartWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<AppView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsByAppStartRequestConfig(project = project, app = app)
 
         return request<Unit, AppView>(
             localVariableConfig
@@ -2822,13 +2824,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectAppsByAppStart
+     * To obtain the request config of the operation postPlatformProjectsByProjectAppsByAppStart
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsByAppStartRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
+    fun postPlatformProjectsByProjectAppsByAppStartRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2859,8 +2861,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppStop(project: kotlin.String, app: kotlin.String) : AppView {
-        val localVarResponse = postV1PlatformProjectsByProjectAppsByAppStopWithHttpInfo(project = project, app = app)
+    fun postPlatformProjectsByProjectAppsByAppStop(project: kotlin.String, app: kotlin.String) : AppView {
+        val localVarResponse = postPlatformProjectsByProjectAppsByAppStopWithHttpInfo(project = project, app = app)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AppView
@@ -2889,8 +2891,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformProjectsByProjectAppsByAppStopWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<AppView?> {
-        val localVariableConfig = postV1PlatformProjectsByProjectAppsByAppStopRequestConfig(project = project, app = app)
+    fun postPlatformProjectsByProjectAppsByAppStopWithHttpInfo(project: kotlin.String, app: kotlin.String) : ApiResponse<AppView?> {
+        val localVariableConfig = postPlatformProjectsByProjectAppsByAppStopRequestConfig(project = project, app = app)
 
         return request<Unit, AppView>(
             localVariableConfig
@@ -2898,13 +2900,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformProjectsByProjectAppsByAppStop
+     * To obtain the request config of the operation postPlatformProjectsByProjectAppsByAppStop
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @return RequestConfig
      */
-    fun postV1PlatformProjectsByProjectAppsByAppStopRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
+    fun postPlatformProjectsByProjectAppsByAppStopRequestConfig(project: kotlin.String, app: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2934,8 +2936,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformSites(projectsCreate: ProjectsCreate) : ProjectsProject {
-        val localVarResponse = postV1PlatformSitesWithHttpInfo(projectsCreate = projectsCreate)
+    fun postPlatformSites(projectsCreate: ProjectsCreate) : ProjectsProject {
+        val localVarResponse = postPlatformSitesWithHttpInfo(projectsCreate = projectsCreate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -2963,8 +2965,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformSitesWithHttpInfo(projectsCreate: ProjectsCreate) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = postV1PlatformSitesRequestConfig(projectsCreate = projectsCreate)
+    fun postPlatformSitesWithHttpInfo(projectsCreate: ProjectsCreate) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = postPlatformSitesRequestConfig(projectsCreate = projectsCreate)
 
         return request<ProjectsCreate, ProjectsProject>(
             localVariableConfig
@@ -2972,12 +2974,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformSites
+     * To obtain the request config of the operation postPlatformSites
      *
      * @param projectsCreate 
      * @return RequestConfig
      */
-    fun postV1PlatformSitesRequestConfig(projectsCreate: ProjectsCreate) : RequestConfig<ProjectsCreate> {
+    fun postPlatformSitesRequestConfig(projectsCreate: ProjectsCreate) : RequestConfig<ProjectsCreate> {
         val localVariableBody = projectsCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2996,22 +2998,24 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/platform/sites/{slug}/deploy
-     * Upload a built site — this is where a zip goes live
-     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60;. The content type decides the shape: a &#x60;zip&#x60; or &#x60;tar.gz&#x60; — raw in the body or as a multipart file part, which is what the platform&#39;s upload UI posts — is stored and served immediately, answering 200 with the finished deployment; a JSON body instead queues a build from the site&#39;s linked repo and answers 202 with a queued deployment plus, where one could be minted, a scoped upload grant for CI. The git path requires a linked repo (400 without one).  The hosting gate is fail-closed and runs first, before anything is parsed or uploaded: 402 for an unfunded org, 503 for unreachable commerce, nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site — and a redeploy answers the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured (503); an archive that does not walk is a 400 and one over the size cap is a 413.
+     * Upload a built site as one archive and serve it
+     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60; in one call. The body is the site itself — a &#x60;zip&#x60; or &#x60;tar.gz&#x60; holding &#x60;index.html&#x60; at its root (or a single wrapper directory that does), sent raw or as a multipart file part. It is unpacked to the site&#39;s own storage prefix and served immediately, answering the finished deployment.  It is bounded by the edge body limit (16 MiB by default), and that bound is the whole reason the other path exists: an oversized POST is refused by the server BEFORE any handler runs and surfaces as an opaque &#x60;400 Error when parsing request&#x60; that reads like a malformed payload rather than a size cap. A site too large for one archive opens a deployment with &#x60;POST /v1/sites/{slug}/deployments&#x60; instead and writes its files straight to storage against the scoped grant that answers with — no body limit, and no bytes through this API at all.  Billing is fail-closed and fails FIRST: the hosting gate runs before anything is parsed or uploaded, so an unfunded org is 402 and an unreachable commerce is 503 with nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site — and a redeploy answers the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured (503); an archive that does not walk is a 400 and one over the size cap is a 413.
      * @param slug 
-     * @return void
+     * @param body  (optional)
+     * @return ProjectsDeployment
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformSitesBySlugDeploy(slug: kotlin.String) : Unit {
-        val localVarResponse = postV1PlatformSitesBySlugDeployWithHttpInfo(slug = slug)
+    fun postPlatformSitesBySlugDeploy(slug: kotlin.String, body: java.io.File? = null) : ProjectsDeployment {
+        val localVarResponse = postPlatformSitesBySlugDeployWithHttpInfo(slug = slug, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3027,36 +3031,198 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/platform/sites/{slug}/deploy
-     * Upload a built site — this is where a zip goes live
-     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60;. The content type decides the shape: a &#x60;zip&#x60; or &#x60;tar.gz&#x60; — raw in the body or as a multipart file part, which is what the platform&#39;s upload UI posts — is stored and served immediately, answering 200 with the finished deployment; a JSON body instead queues a build from the site&#39;s linked repo and answers 202 with a queued deployment plus, where one could be minted, a scoped upload grant for CI. The git path requires a linked repo (400 without one).  The hosting gate is fail-closed and runs first, before anything is parsed or uploaded: 402 for an unfunded org, 503 for unreachable commerce, nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site — and a redeploy answers the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured (503); an archive that does not walk is a 400 and one over the size cap is a 413.
+     * Upload a built site as one archive and serve it
+     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60; in one call. The body is the site itself — a &#x60;zip&#x60; or &#x60;tar.gz&#x60; holding &#x60;index.html&#x60; at its root (or a single wrapper directory that does), sent raw or as a multipart file part. It is unpacked to the site&#39;s own storage prefix and served immediately, answering the finished deployment.  It is bounded by the edge body limit (16 MiB by default), and that bound is the whole reason the other path exists: an oversized POST is refused by the server BEFORE any handler runs and surfaces as an opaque &#x60;400 Error when parsing request&#x60; that reads like a malformed payload rather than a size cap. A site too large for one archive opens a deployment with &#x60;POST /v1/sites/{slug}/deployments&#x60; instead and writes its files straight to storage against the scoped grant that answers with — no body limit, and no bytes through this API at all.  Billing is fail-closed and fails FIRST: the hosting gate runs before anything is parsed or uploaded, so an unfunded org is 402 and an unreachable commerce is 503 with nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site — and a redeploy answers the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured (503); an archive that does not walk is a 400 and one over the size cap is a 413.
      * @param slug 
-     * @return ApiResponse<Unit?>
+     * @param body  (optional)
+     * @return ApiResponse<ProjectsDeployment?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformSitesBySlugDeployWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1PlatformSitesBySlugDeployRequestConfig(slug = slug)
+    fun postPlatformSitesBySlugDeployWithHttpInfo(slug: kotlin.String, body: java.io.File?) : ApiResponse<ProjectsDeployment?> {
+        val localVariableConfig = postPlatformSitesBySlugDeployRequestConfig(slug = slug, body = body)
 
-        return request<Unit, Unit>(
+        return request<java.io.File, ProjectsDeployment>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformSitesBySlugDeploy
+     * To obtain the request config of the operation postPlatformSitesBySlugDeploy
      *
      * @param slug 
+     * @param body  (optional)
      * @return RequestConfig
      */
-    fun postV1PlatformSitesBySlugDeployRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postPlatformSitesBySlugDeployRequestConfig(slug: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+        val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/octet-stream"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/platform/sites/{slug}/deploy".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/platform/sites/{slug}/deployments
+     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage.
+     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage. Answers 202.  This is the path for a site too large to send as one archive: a real export is hundreds of megabytes against a 16 MiB body limit, so the bytes deliberately do NOT pass through the API. The answer carries &#x60;bucket&#x60;, &#x60;prefix&#x60; and &#x60;upload&#x60; — a presigned POST policy that S3 itself confines to this site&#39;s prefix (starts-with &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60;), expires in 30 minutes and bounds each object. So a build writes its own files and holds no standing bucket credential; there is nothing to rotate and nothing that leaks between tenants. Never guess the prefix — it is server-derived, and a guessed one lands where nothing is served.  The deployment is &#x60;queued&#x60; until POST .../deployments/{id}/complete flips it live (or error). That completion is also where DELETION happens: the grant authorizes writes only, so a build cannot remove a file, and cloud reconciles the prefix against the &#x60;keys&#x60; manifest the completion carries. A build that dies before completing leaves the deployment queued rather than a half-live site.  The grant is on the 202 and NOWHERE else — it is never stored and never replayed on a later read, so it cannot outlive the build it was minted for. A deployment whose grant could not be minted is still created and still completable; it simply carries no &#x60;upload&#x60;, and a caller with no other way to write should treat that as the failure it is.  Billing: the hosting gate runs BEFORE anything is created (402 unfunded, 503 commerce unreachable), and the debit lands on the completion that goes live — never on a queued or failed build.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
+     * @param slug Slug is the site to deploy, from the path.
+     * @param projectsDeployStart 
+     * @return ProjectsDeployment
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postPlatformSitesBySlugDeployments(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : ProjectsDeployment {
+        val localVarResponse = postPlatformSitesBySlugDeploymentsWithHttpInfo(slug = slug, projectsDeployStart = projectsDeployStart)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/platform/sites/{slug}/deployments
+     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage.
+     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage. Answers 202.  This is the path for a site too large to send as one archive: a real export is hundreds of megabytes against a 16 MiB body limit, so the bytes deliberately do NOT pass through the API. The answer carries &#x60;bucket&#x60;, &#x60;prefix&#x60; and &#x60;upload&#x60; — a presigned POST policy that S3 itself confines to this site&#39;s prefix (starts-with &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60;), expires in 30 minutes and bounds each object. So a build writes its own files and holds no standing bucket credential; there is nothing to rotate and nothing that leaks between tenants. Never guess the prefix — it is server-derived, and a guessed one lands where nothing is served.  The deployment is &#x60;queued&#x60; until POST .../deployments/{id}/complete flips it live (or error). That completion is also where DELETION happens: the grant authorizes writes only, so a build cannot remove a file, and cloud reconciles the prefix against the &#x60;keys&#x60; manifest the completion carries. A build that dies before completing leaves the deployment queued rather than a half-live site.  The grant is on the 202 and NOWHERE else — it is never stored and never replayed on a later read, so it cannot outlive the build it was minted for. A deployment whose grant could not be minted is still created and still completable; it simply carries no &#x60;upload&#x60;, and a caller with no other way to write should treat that as the failure it is.  Billing: the hosting gate runs BEFORE anything is created (402 unfunded, 503 commerce unreachable), and the debit lands on the completion that goes live — never on a queued or failed build.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
+     * @param slug Slug is the site to deploy, from the path.
+     * @param projectsDeployStart 
+     * @return ApiResponse<ProjectsDeployment?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postPlatformSitesBySlugDeploymentsWithHttpInfo(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : ApiResponse<ProjectsDeployment?> {
+        val localVariableConfig = postPlatformSitesBySlugDeploymentsRequestConfig(slug = slug, projectsDeployStart = projectsDeployStart)
+
+        return request<ProjectsDeployStart, ProjectsDeployment>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postPlatformSitesBySlugDeployments
+     *
+     * @param slug Slug is the site to deploy, from the path.
+     * @param projectsDeployStart 
+     * @return RequestConfig
+     */
+    fun postPlatformSitesBySlugDeploymentsRequestConfig(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : RequestConfig<ProjectsDeployStart> {
+        val localVariableBody = projectsDeployStart
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/platform/sites/{slug}/deployments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/platform/sites/{slug}/deployments/{id}/complete
+     * CompleteDeployment is the CI completion hook that flips a queued git deployment to live (or error) once CI has synced the built site to S3.
+     * CompleteDeployment is the CI completion hook that flips a queued git deployment to live (or error) once CI has synced the built site to S3.  &#x60;status&#x60; must be &#x60;live&#x60; or &#x60;error&#x60;. On a LIVE completion the public host is claimed FIRST, so the deployment reports the URL it actually OWNS — a CI-supplied &#x60;liveUrl&#x60; is a hint that can refine that URL but can never assert a subdomain another tenant holds. &#x60;keys&#x60; is the manifest CI just uploaded, relative to the deployment prefix: cloud reconciles the prefix against it so a page deleted from the build actually stops serving. Omit &#x60;keys&#x60; and nothing is deleted — the prefix only grows. Reconciliation runs only on a live completion (pruning against a failed build&#39;s manifest would delete the site the last good build is still serving) and is best-effort, so a stale leftover never turns a successful deploy into a 500. A live completion is also the one billable moment on the git path; an error completion bills nothing.  Scope: a validated principal is required (403 without one). CI authenticates with an org-scoped token through the gateway, so the deployment is resolved within that principal&#39;s org and another tenant&#39;s slug or deployment id is a 404.
+     * @param slug Slug is the project the deployment belongs to, from the path.
+     * @param id ID is the queued deployment to complete, from the path.
+     * @param projectsComplete 
+     * @return ProjectsDeployment
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postPlatformSitesBySlugDeploymentsByIdComplete(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : ProjectsDeployment {
+        val localVarResponse = postPlatformSitesBySlugDeploymentsByIdCompleteWithHttpInfo(slug = slug, id = id, projectsComplete = projectsComplete)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/platform/sites/{slug}/deployments/{id}/complete
+     * CompleteDeployment is the CI completion hook that flips a queued git deployment to live (or error) once CI has synced the built site to S3.
+     * CompleteDeployment is the CI completion hook that flips a queued git deployment to live (or error) once CI has synced the built site to S3.  &#x60;status&#x60; must be &#x60;live&#x60; or &#x60;error&#x60;. On a LIVE completion the public host is claimed FIRST, so the deployment reports the URL it actually OWNS — a CI-supplied &#x60;liveUrl&#x60; is a hint that can refine that URL but can never assert a subdomain another tenant holds. &#x60;keys&#x60; is the manifest CI just uploaded, relative to the deployment prefix: cloud reconciles the prefix against it so a page deleted from the build actually stops serving. Omit &#x60;keys&#x60; and nothing is deleted — the prefix only grows. Reconciliation runs only on a live completion (pruning against a failed build&#39;s manifest would delete the site the last good build is still serving) and is best-effort, so a stale leftover never turns a successful deploy into a 500. A live completion is also the one billable moment on the git path; an error completion bills nothing.  Scope: a validated principal is required (403 without one). CI authenticates with an org-scoped token through the gateway, so the deployment is resolved within that principal&#39;s org and another tenant&#39;s slug or deployment id is a 404.
+     * @param slug Slug is the project the deployment belongs to, from the path.
+     * @param id ID is the queued deployment to complete, from the path.
+     * @param projectsComplete 
+     * @return ApiResponse<ProjectsDeployment?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postPlatformSitesBySlugDeploymentsByIdCompleteWithHttpInfo(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : ApiResponse<ProjectsDeployment?> {
+        val localVariableConfig = postPlatformSitesBySlugDeploymentsByIdCompleteRequestConfig(slug = slug, id = id, projectsComplete = projectsComplete)
+
+        return request<ProjectsComplete, ProjectsDeployment>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postPlatformSitesBySlugDeploymentsByIdComplete
+     *
+     * @param slug Slug is the project the deployment belongs to, from the path.
+     * @param id ID is the queued deployment to complete, from the path.
+     * @param projectsComplete 
+     * @return RequestConfig
+     */
+    fun postPlatformSitesBySlugDeploymentsByIdCompleteRequestConfig(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : RequestConfig<ProjectsComplete> {
+        val localVariableBody = projectsComplete
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/platform/sites/{slug}/deployments/{id}/complete".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -3079,8 +3245,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformSitesBySlugDomains(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ProjectsBoundDomains {
-        val localVarResponse = postV1PlatformSitesBySlugDomainsWithHttpInfo(slug = slug, projectsDomainsBind = projectsDomainsBind)
+    fun postPlatformSitesBySlugDomains(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ProjectsBoundDomains {
+        val localVarResponse = postPlatformSitesBySlugDomainsWithHttpInfo(slug = slug, projectsDomainsBind = projectsDomainsBind)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsBoundDomains
@@ -3109,8 +3275,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformSitesBySlugDomainsWithHttpInfo(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ApiResponse<ProjectsBoundDomains?> {
-        val localVariableConfig = postV1PlatformSitesBySlugDomainsRequestConfig(slug = slug, projectsDomainsBind = projectsDomainsBind)
+    fun postPlatformSitesBySlugDomainsWithHttpInfo(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ApiResponse<ProjectsBoundDomains?> {
+        val localVariableConfig = postPlatformSitesBySlugDomainsRequestConfig(slug = slug, projectsDomainsBind = projectsDomainsBind)
 
         return request<ProjectsDomainsBind, ProjectsBoundDomains>(
             localVariableConfig
@@ -3118,13 +3284,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformSitesBySlugDomains
+     * To obtain the request config of the operation postPlatformSitesBySlugDomains
      *
      * @param slug Slug is the site the hosts attach to, from the path.
      * @param projectsDomainsBind 
      * @return RequestConfig
      */
-    fun postV1PlatformSitesBySlugDomainsRequestConfig(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : RequestConfig<ProjectsDomainsBind> {
+    fun postPlatformSitesBySlugDomainsRequestConfig(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : RequestConfig<ProjectsDomainsBind> {
         val localVariableBody = projectsDomainsBind
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3156,8 +3322,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformSitesBySlugDomainsByHostVerify(slug: kotlin.String, host: kotlin.String) : ProjectsDomain {
-        val localVarResponse = postV1PlatformSitesBySlugDomainsByHostVerifyWithHttpInfo(slug = slug, host = host)
+    fun postPlatformSitesBySlugDomainsByHostVerify(slug: kotlin.String, host: kotlin.String) : ProjectsDomain {
+        val localVarResponse = postPlatformSitesBySlugDomainsByHostVerifyWithHttpInfo(slug = slug, host = host)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDomain
@@ -3186,8 +3352,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformSitesBySlugDomainsByHostVerifyWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<ProjectsDomain?> {
-        val localVariableConfig = postV1PlatformSitesBySlugDomainsByHostVerifyRequestConfig(slug = slug, host = host)
+    fun postPlatformSitesBySlugDomainsByHostVerifyWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<ProjectsDomain?> {
+        val localVariableConfig = postPlatformSitesBySlugDomainsByHostVerifyRequestConfig(slug = slug, host = host)
 
         return request<Unit, ProjectsDomain>(
             localVariableConfig
@@ -3195,13 +3361,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformSitesBySlugDomainsByHostVerify
+     * To obtain the request config of the operation postPlatformSitesBySlugDomainsByHostVerify
      *
      * @param slug Slug is the project the host is attached to, from the path.
      * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
      * @return RequestConfig
      */
-    fun postV1PlatformSitesBySlugDomainsByHostVerifyRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
+    fun postPlatformSitesBySlugDomainsByHostVerifyRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3232,8 +3398,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformSitesBySlugPublish(slug: kotlin.String, projectsPublish: ProjectsPublish) : ProjectsRelease {
-        val localVarResponse = postV1PlatformSitesBySlugPublishWithHttpInfo(slug = slug, projectsPublish = projectsPublish)
+    fun postPlatformSitesBySlugPublish(slug: kotlin.String, projectsPublish: ProjectsPublish) : ProjectsRelease {
+        val localVarResponse = postPlatformSitesBySlugPublishWithHttpInfo(slug = slug, projectsPublish = projectsPublish)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsRelease
@@ -3262,8 +3428,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformSitesBySlugPublishWithHttpInfo(slug: kotlin.String, projectsPublish: ProjectsPublish) : ApiResponse<ProjectsRelease?> {
-        val localVariableConfig = postV1PlatformSitesBySlugPublishRequestConfig(slug = slug, projectsPublish = projectsPublish)
+    fun postPlatformSitesBySlugPublishWithHttpInfo(slug: kotlin.String, projectsPublish: ProjectsPublish) : ApiResponse<ProjectsRelease?> {
+        val localVariableConfig = postPlatformSitesBySlugPublishRequestConfig(slug = slug, projectsPublish = projectsPublish)
 
         return request<ProjectsPublish, ProjectsRelease>(
             localVariableConfig
@@ -3271,13 +3437,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformSitesBySlugPublish
+     * To obtain the request config of the operation postPlatformSitesBySlugPublish
      *
      * @param slug Slug is the site to publish, from the path.
      * @param projectsPublish 
      * @return RequestConfig
      */
-    fun postV1PlatformSitesBySlugPublishRequestConfig(slug: kotlin.String, projectsPublish: ProjectsPublish) : RequestConfig<ProjectsPublish> {
+    fun postPlatformSitesBySlugPublishRequestConfig(slug: kotlin.String, projectsPublish: ProjectsPublish) : RequestConfig<ProjectsPublish> {
         val localVariableBody = projectsPublish
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3308,8 +3474,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformSitesBySlugPurge(slug: kotlin.String) : ProjectsProject {
-        val localVarResponse = postV1PlatformSitesBySlugPurgeWithHttpInfo(slug = slug)
+    fun postPlatformSitesBySlugPurge(slug: kotlin.String) : ProjectsProject {
+        val localVarResponse = postPlatformSitesBySlugPurgeWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
@@ -3337,8 +3503,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformSitesBySlugPurgeWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = postV1PlatformSitesBySlugPurgeRequestConfig(slug = slug)
+    fun postPlatformSitesBySlugPurgeWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
+        val localVariableConfig = postPlatformSitesBySlugPurgeRequestConfig(slug = slug)
 
         return request<Unit, ProjectsProject>(
             localVariableConfig
@@ -3346,12 +3512,12 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformSitesBySlugPurge
+     * To obtain the request config of the operation postPlatformSitesBySlugPurge
      *
      * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
      * @return RequestConfig
      */
-    fun postV1PlatformSitesBySlugPurgeRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun postPlatformSitesBySlugPurgeRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3382,8 +3548,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformSitesBySlugReleases(slug: kotlin.String, projectsPublish: ProjectsPublish) : ProjectsRelease {
-        val localVarResponse = postV1PlatformSitesBySlugReleasesWithHttpInfo(slug = slug, projectsPublish = projectsPublish)
+    fun postPlatformSitesBySlugReleases(slug: kotlin.String, projectsPublish: ProjectsPublish) : ProjectsRelease {
+        val localVarResponse = postPlatformSitesBySlugReleasesWithHttpInfo(slug = slug, projectsPublish = projectsPublish)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsRelease
@@ -3412,8 +3578,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformSitesBySlugReleasesWithHttpInfo(slug: kotlin.String, projectsPublish: ProjectsPublish) : ApiResponse<ProjectsRelease?> {
-        val localVariableConfig = postV1PlatformSitesBySlugReleasesRequestConfig(slug = slug, projectsPublish = projectsPublish)
+    fun postPlatformSitesBySlugReleasesWithHttpInfo(slug: kotlin.String, projectsPublish: ProjectsPublish) : ApiResponse<ProjectsRelease?> {
+        val localVariableConfig = postPlatformSitesBySlugReleasesRequestConfig(slug = slug, projectsPublish = projectsPublish)
 
         return request<ProjectsPublish, ProjectsRelease>(
             localVariableConfig
@@ -3421,13 +3587,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformSitesBySlugReleases
+     * To obtain the request config of the operation postPlatformSitesBySlugReleases
      *
      * @param slug Slug is the site to publish, from the path.
      * @param projectsPublish 
      * @return RequestConfig
      */
-    fun postV1PlatformSitesBySlugReleasesRequestConfig(slug: kotlin.String, projectsPublish: ProjectsPublish) : RequestConfig<ProjectsPublish> {
+    fun postPlatformSitesBySlugReleasesRequestConfig(slug: kotlin.String, projectsPublish: ProjectsPublish) : RequestConfig<ProjectsPublish> {
         val localVariableBody = projectsPublish
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3459,8 +3625,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PlatformSitesBySlugReleasesByReleaseActivate(slug: kotlin.String, release: kotlin.String) : ProjectsRelease {
-        val localVarResponse = postV1PlatformSitesBySlugReleasesByReleaseActivateWithHttpInfo(slug = slug, release = release)
+    fun postPlatformSitesBySlugReleasesByReleaseActivate(slug: kotlin.String, release: kotlin.String) : ProjectsRelease {
+        val localVarResponse = postPlatformSitesBySlugReleasesByReleaseActivateWithHttpInfo(slug = slug, release = release)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsRelease
@@ -3489,8 +3655,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PlatformSitesBySlugReleasesByReleaseActivateWithHttpInfo(slug: kotlin.String, release: kotlin.String) : ApiResponse<ProjectsRelease?> {
-        val localVariableConfig = postV1PlatformSitesBySlugReleasesByReleaseActivateRequestConfig(slug = slug, release = release)
+    fun postPlatformSitesBySlugReleasesByReleaseActivateWithHttpInfo(slug: kotlin.String, release: kotlin.String) : ApiResponse<ProjectsRelease?> {
+        val localVariableConfig = postPlatformSitesBySlugReleasesByReleaseActivateRequestConfig(slug = slug, release = release)
 
         return request<Unit, ProjectsRelease>(
             localVariableConfig
@@ -3498,13 +3664,13 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1PlatformSitesBySlugReleasesByReleaseActivate
+     * To obtain the request config of the operation postPlatformSitesBySlugReleasesByReleaseActivate
      *
      * @param slug Slug is the site the release belongs to, from the path.
      * @param release Release is the content-addressed release id (\&quot;rel_\&quot; + 32 hex chars), from the path. Anything that is not that shape is not found, rather than being interpolated into a storage prefix.
      * @return RequestConfig
      */
-    fun postV1PlatformSitesBySlugReleasesByReleaseActivateRequestConfig(slug: kotlin.String, release: kotlin.String) : RequestConfig<Unit> {
+    fun postPlatformSitesBySlugReleasesByReleaseActivateRequestConfig(slug: kotlin.String, release: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3536,8 +3702,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1PlatformProjectsByProjectAppsByAppEnv(project: kotlin.String, app: kotlin.String, setEnvReq: SetEnvReq) : AppView {
-        val localVarResponse = putV1PlatformProjectsByProjectAppsByAppEnvWithHttpInfo(project = project, app = app, setEnvReq = setEnvReq)
+    fun putPlatformProjectsByProjectAppsByAppEnv(project: kotlin.String, app: kotlin.String, setEnvReq: SetEnvReq) : AppView {
+        val localVarResponse = putPlatformProjectsByProjectAppsByAppEnvWithHttpInfo(project = project, app = app, setEnvReq = setEnvReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AppView
@@ -3567,8 +3733,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1PlatformProjectsByProjectAppsByAppEnvWithHttpInfo(project: kotlin.String, app: kotlin.String, setEnvReq: SetEnvReq) : ApiResponse<AppView?> {
-        val localVariableConfig = putV1PlatformProjectsByProjectAppsByAppEnvRequestConfig(project = project, app = app, setEnvReq = setEnvReq)
+    fun putPlatformProjectsByProjectAppsByAppEnvWithHttpInfo(project: kotlin.String, app: kotlin.String, setEnvReq: SetEnvReq) : ApiResponse<AppView?> {
+        val localVariableConfig = putPlatformProjectsByProjectAppsByAppEnvRequestConfig(project = project, app = app, setEnvReq = setEnvReq)
 
         return request<SetEnvReq, AppView>(
             localVariableConfig
@@ -3576,14 +3742,14 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1PlatformProjectsByProjectAppsByAppEnv
+     * To obtain the request config of the operation putPlatformProjectsByProjectAppsByAppEnv
      *
      * @param project Project is the project the application lives under, from the path.
      * @param app App is the application&#39;s slug, from the path.
      * @param setEnvReq 
      * @return RequestConfig
      */
-    fun putV1PlatformProjectsByProjectAppsByAppEnvRequestConfig(project: kotlin.String, app: kotlin.String, setEnvReq: SetEnvReq) : RequestConfig<SetEnvReq> {
+    fun putPlatformProjectsByProjectAppsByAppEnvRequestConfig(project: kotlin.String, app: kotlin.String, setEnvReq: SetEnvReq) : RequestConfig<SetEnvReq> {
         val localVariableBody = setEnvReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

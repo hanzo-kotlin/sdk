@@ -60,8 +60,8 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1McpServersById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1McpServersByIdWithHttpInfo(id = id)
+    fun deleteMcpServersById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteMcpServersByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -88,8 +88,8 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1McpServersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1McpServersByIdRequestConfig(id = id)
+    fun deleteMcpServersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMcpServersByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -97,12 +97,12 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1McpServersById
+     * To obtain the request config of the operation deleteMcpServersById
      *
      * @param id ID is the server to deregister, from the path.
      * @return RequestConfig
      */
-    fun deleteV1McpServersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMcpServersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -130,8 +130,8 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1McpServers() : McpServerList {
-        val localVarResponse = getV1McpServersWithHttpInfo()
+    fun getMcpServers() : McpServerList {
+        val localVarResponse = getMcpServersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as McpServerList
@@ -158,8 +158,8 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1McpServersWithHttpInfo() : ApiResponse<McpServerList?> {
-        val localVariableConfig = getV1McpServersRequestConfig()
+    fun getMcpServersWithHttpInfo() : ApiResponse<McpServerList?> {
+        val localVariableConfig = getMcpServersRequestConfig()
 
         return request<Unit, McpServerList>(
             localVariableConfig
@@ -167,11 +167,11 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1McpServers
+     * To obtain the request config of the operation getMcpServers
      *
      * @return RequestConfig
      */
-    fun getV1McpServersRequestConfig() : RequestConfig<Unit> {
+    fun getMcpServersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -201,8 +201,8 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1McpServers(createServerReq: CreateServerReq) : MCPServer {
-        val localVarResponse = postV1McpServersWithHttpInfo(createServerReq = createServerReq)
+    fun postMcpServers(createServerReq: CreateServerReq) : MCPServer {
+        val localVarResponse = postMcpServersWithHttpInfo(createServerReq = createServerReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MCPServer
@@ -230,8 +230,8 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1McpServersWithHttpInfo(createServerReq: CreateServerReq) : ApiResponse<MCPServer?> {
-        val localVariableConfig = postV1McpServersRequestConfig(createServerReq = createServerReq)
+    fun postMcpServersWithHttpInfo(createServerReq: CreateServerReq) : ApiResponse<MCPServer?> {
+        val localVariableConfig = postMcpServersRequestConfig(createServerReq = createServerReq)
 
         return request<CreateServerReq, MCPServer>(
             localVariableConfig
@@ -239,12 +239,12 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1McpServers
+     * To obtain the request config of the operation postMcpServers
      *
      * @param createServerReq 
      * @return RequestConfig
      */
-    fun postV1McpServersRequestConfig(createServerReq: CreateServerReq) : RequestConfig<CreateServerReq> {
+    fun postMcpServersRequestConfig(createServerReq: CreateServerReq) : RequestConfig<CreateServerReq> {
         val localVariableBody = createServerReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

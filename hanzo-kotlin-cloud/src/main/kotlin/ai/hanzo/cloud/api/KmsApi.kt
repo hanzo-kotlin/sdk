@@ -47,7 +47,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * DELETE /v1/kms/secrets/{wildcard1}
      * Delete one secret from your org
-     * Removes one secret from the caller&#39;s own org and confirms the name and environment that were removed. Deleting a secret that is not there is a 404, not a silent success, so a caller can tell a real deletion from a typo.  The trailing path is the secret&#39;s subpath and name beneath the caller&#39;s org root, and &#x60;env&#x60; selects the environment, defaulting when omitted. Scoped to the caller&#39;s own org — the store root comes from the validated claim, never from the request — under the same fail-closed admission as the reads.
+     * Removes one secret from the caller&#39;s own org and confirms the name and environment that were removed. Deleting a secret that is not there is a 404, not a silent success, so a caller can tell a real deletion from a typo.  The trailing path is the secret&#39;s subpath and name beneath the caller&#39;s org root, and &#x60;env&#x60; selects the environment, defaulting when omitted. Scoped to the caller&#39;s own org — the store root comes from the validated claim, never from the request.  Requires ADMIN authority over the org, like the write: destroying a secret is an administrative act, and a credential distributed to read one must not be able to remove it.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -57,8 +57,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1KmsSecretsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteV1KmsSecretsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteKmsSecretsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteKmsSecretsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -78,15 +78,15 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * DELETE /v1/kms/secrets/{wildcard1}
      * Delete one secret from your org
-     * Removes one secret from the caller&#39;s own org and confirms the name and environment that were removed. Deleting a secret that is not there is a 404, not a silent success, so a caller can tell a real deletion from a typo.  The trailing path is the secret&#39;s subpath and name beneath the caller&#39;s org root, and &#x60;env&#x60; selects the environment, defaulting when omitted. Scoped to the caller&#39;s own org — the store root comes from the validated claim, never from the request — under the same fail-closed admission as the reads.
+     * Removes one secret from the caller&#39;s own org and confirms the name and environment that were removed. Deleting a secret that is not there is a 404, not a silent success, so a caller can tell a real deletion from a typo.  The trailing path is the secret&#39;s subpath and name beneath the caller&#39;s org root, and &#x60;env&#x60; selects the environment, defaulting when omitted. Scoped to the caller&#39;s own org — the store root comes from the validated claim, never from the request.  Requires ADMIN authority over the org, like the write: destroying a secret is an administrative act, and a credential distributed to read one must not be able to remove it.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1KmsSecretsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1KmsSecretsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteKmsSecretsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteKmsSecretsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1KmsSecretsByWildcard1
+     * To obtain the request config of the operation deleteKmsSecretsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun deleteV1KmsSecretsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteKmsSecretsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -126,8 +126,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KmsConfig() : Unit {
-        val localVarResponse = getV1KmsConfigWithHttpInfo()
+    fun getKmsConfig() : Unit {
+        val localVarResponse = getKmsConfigWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -153,8 +153,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KmsConfigWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1KmsConfigRequestConfig()
+    fun getKmsConfigWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getKmsConfigRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -162,11 +162,11 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1KmsConfig
+     * To obtain the request config of the operation getKmsConfig
      *
      * @return RequestConfig
      */
-    fun getV1KmsConfigRequestConfig() : RequestConfig<Unit> {
+    fun getKmsConfigRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -193,8 +193,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KmsHealth() : Unit {
-        val localVarResponse = getV1KmsHealthWithHttpInfo()
+    fun getKmsHealth() : Unit {
+        val localVarResponse = getKmsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -220,8 +220,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KmsHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1KmsHealthRequestConfig()
+    fun getKmsHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getKmsHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -229,11 +229,11 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1KmsHealth
+     * To obtain the request config of the operation getKmsHealth
      *
      * @return RequestConfig
      */
-    fun getV1KmsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getKmsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -260,8 +260,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KmsSecrets() : Unit {
-        val localVarResponse = getV1KmsSecretsWithHttpInfo()
+    fun getKmsSecrets() : Unit {
+        val localVarResponse = getKmsSecretsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -287,8 +287,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KmsSecretsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1KmsSecretsRequestConfig()
+    fun getKmsSecretsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getKmsSecretsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -296,11 +296,11 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1KmsSecrets
+     * To obtain the request config of the operation getKmsSecrets
      *
      * @return RequestConfig
      */
-    fun getV1KmsSecretsRequestConfig() : RequestConfig<Unit> {
+    fun getKmsSecretsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,8 +328,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KmsSecretsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getV1KmsSecretsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getKmsSecretsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getKmsSecretsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -356,8 +356,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KmsSecretsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1KmsSecretsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getKmsSecretsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getKmsSecretsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -365,12 +365,12 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1KmsSecretsByWildcard1
+     * To obtain the request config of the operation getKmsSecretsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun getV1KmsSecretsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getKmsSecretsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -397,8 +397,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1KmsAuthLogin() : Unit {
-        val localVarResponse = postV1KmsAuthLoginWithHttpInfo()
+    fun postKmsAuthLogin() : Unit {
+        val localVarResponse = postKmsAuthLoginWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -424,8 +424,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1KmsAuthLoginWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1KmsAuthLoginRequestConfig()
+    fun postKmsAuthLoginWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postKmsAuthLoginRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -433,11 +433,11 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1KmsAuthLogin
+     * To obtain the request config of the operation postKmsAuthLogin
      *
      * @return RequestConfig
      */
-    fun postV1KmsAuthLoginRequestConfig() : RequestConfig<Unit> {
+    fun postKmsAuthLoginRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -455,7 +455,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/kms/secrets
      * Store or replace one secret in your org
-     * Upserts one secret under the caller&#39;s own org. The value is sealed before it is written — a fresh per-secret data key, itself wrapped by the master key — so plaintext never reaches disk. The receipt confirms the name and environment that were written and does not echo the value.  &#x60;env&#x60; is REQUIRED on a write and has no default, which is the rule most easily got wrong here: reads and deletes still fall back to the default environment for older callers, but a write must not, because the environment is part of the storage key. A silently defaulted write lands in a bucket the readers that resolve project, environment and path never look in, and the stale value keeps being served — so the write fails loudly instead.  &#x60;name&#x60; is required, &#x60;path&#x60; is an optional subpath beneath the org root, and the org is taken from the validated claim rather than the body. Same fail-closed admission as the rest of the secret surface: validated member, well-formed org, master key present.
+     * Upserts one secret under the caller&#39;s own org. The value is sealed before it is written — a fresh per-secret data key, itself wrapped by the master key — so plaintext never reaches disk. The receipt confirms the name and environment that were written and does not echo the value.  &#x60;env&#x60; is REQUIRED on a write and has no default, which is the rule most easily got wrong here: reads and deletes still fall back to the default environment for older callers, but a write must not, because the environment is part of the storage key. A silently defaulted write lands in a bucket the readers that resolve project, environment and path never look in, and the stale value keeps being served — so the write fails loudly instead.  &#x60;name&#x60; is required, &#x60;path&#x60; is an optional subpath beneath the org root, and the org is taken from the validated claim rather than the body.  Requires ADMIN authority over the org — a member reads, an admin writes. A machine credential holds no membership and so is never an org admin: it can read the secrets it was issued for and cannot replace one. Fail-closed admission, in order: admin of the org, well-formed org, master key present — 403, 400 and 503, all decided before any record is touched.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -464,8 +464,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1KmsSecrets() : Unit {
-        val localVarResponse = postV1KmsSecretsWithHttpInfo()
+    fun postKmsSecrets() : Unit {
+        val localVarResponse = postKmsSecretsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -485,14 +485,14 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/kms/secrets
      * Store or replace one secret in your org
-     * Upserts one secret under the caller&#39;s own org. The value is sealed before it is written — a fresh per-secret data key, itself wrapped by the master key — so plaintext never reaches disk. The receipt confirms the name and environment that were written and does not echo the value.  &#x60;env&#x60; is REQUIRED on a write and has no default, which is the rule most easily got wrong here: reads and deletes still fall back to the default environment for older callers, but a write must not, because the environment is part of the storage key. A silently defaulted write lands in a bucket the readers that resolve project, environment and path never look in, and the stale value keeps being served — so the write fails loudly instead.  &#x60;name&#x60; is required, &#x60;path&#x60; is an optional subpath beneath the org root, and the org is taken from the validated claim rather than the body. Same fail-closed admission as the rest of the secret surface: validated member, well-formed org, master key present.
+     * Upserts one secret under the caller&#39;s own org. The value is sealed before it is written — a fresh per-secret data key, itself wrapped by the master key — so plaintext never reaches disk. The receipt confirms the name and environment that were written and does not echo the value.  &#x60;env&#x60; is REQUIRED on a write and has no default, which is the rule most easily got wrong here: reads and deletes still fall back to the default environment for older callers, but a write must not, because the environment is part of the storage key. A silently defaulted write lands in a bucket the readers that resolve project, environment and path never look in, and the stale value keeps being served — so the write fails loudly instead.  &#x60;name&#x60; is required, &#x60;path&#x60; is an optional subpath beneath the org root, and the org is taken from the validated claim rather than the body.  Requires ADMIN authority over the org — a member reads, an admin writes. A machine credential holds no membership and so is never an org admin: it can read the secrets it was issued for and cannot replace one. Fail-closed admission, in order: admin of the org, well-formed org, master key present — 403, 400 and 503, all decided before any record is touched.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1KmsSecretsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1KmsSecretsRequestConfig()
+    fun postKmsSecretsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postKmsSecretsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -500,11 +500,11 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1KmsSecrets
+     * To obtain the request config of the operation postKmsSecrets
      *
      * @return RequestConfig
      */
-    fun postV1KmsSecretsRequestConfig() : RequestConfig<Unit> {
+    fun postKmsSecretsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

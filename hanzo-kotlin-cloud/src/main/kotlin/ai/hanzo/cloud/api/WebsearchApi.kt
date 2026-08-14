@@ -58,8 +58,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1WebsearchSearch() : Unit {
-        val localVarResponse = deleteV1WebsearchSearchWithHttpInfo()
+    fun deleteWebsearchSearch() : Unit {
+        val localVarResponse = deleteWebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -85,8 +85,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1WebsearchSearchRequestConfig()
+    fun deleteWebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteWebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,11 +94,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1WebsearchSearch
+     * To obtain the request config of the operation deleteWebsearchSearch
      *
      * @return RequestConfig
      */
-    fun deleteV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun deleteWebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -125,8 +125,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1WebsearchSearch() : Unit {
-        val localVarResponse = getV1WebsearchSearchWithHttpInfo()
+    fun getWebsearchSearch() : Unit {
+        val localVarResponse = getWebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -152,8 +152,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1WebsearchSearchRequestConfig()
+    fun getWebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getWebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -161,11 +161,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1WebsearchSearch
+     * To obtain the request config of the operation getWebsearchSearch
      *
      * @return RequestConfig
      */
-    fun getV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun getWebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -192,8 +192,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1WebsearchSearch() : Unit {
-        val localVarResponse = patchV1WebsearchSearchWithHttpInfo()
+    fun patchWebsearchSearch() : Unit {
+        val localVarResponse = patchWebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -219,8 +219,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1WebsearchSearchRequestConfig()
+    fun patchWebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchWebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -228,11 +228,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation patchV1WebsearchSearch
+     * To obtain the request config of the operation patchWebsearchSearch
      *
      * @return RequestConfig
      */
-    fun patchV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun patchWebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -259,8 +259,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1WebsearchSearch() : Unit {
-        val localVarResponse = postV1WebsearchSearchWithHttpInfo()
+    fun postWebsearchSearch() : Unit {
+        val localVarResponse = postWebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -286,8 +286,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1WebsearchSearchRequestConfig()
+    fun postWebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postWebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -295,11 +295,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1WebsearchSearch
+     * To obtain the request config of the operation postWebsearchSearch
      *
      * @return RequestConfig
      */
-    fun postV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun postWebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -326,8 +326,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1WebsearchSearch() : Unit {
-        val localVarResponse = putV1WebsearchSearchWithHttpInfo()
+    fun putWebsearchSearch() : Unit {
+        val localVarResponse = putWebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -353,8 +353,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1WebsearchSearchRequestConfig()
+    fun putWebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putWebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -362,11 +362,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation putV1WebsearchSearch
+     * To obtain the request config of the operation putWebsearchSearch
      *
      * @return RequestConfig
      */
-    fun putV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun putWebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

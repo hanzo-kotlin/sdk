@@ -60,8 +60,8 @@ class RunApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Run(runReq: RunReq) : RunView {
-        val localVarResponse = postV1RunWithHttpInfo(runReq = runReq)
+    fun postRun(runReq: RunReq) : RunView {
+        val localVarResponse = postRunWithHttpInfo(runReq = runReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RunView
@@ -89,8 +89,8 @@ class RunApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RunWithHttpInfo(runReq: RunReq) : ApiResponse<RunView?> {
-        val localVariableConfig = postV1RunRequestConfig(runReq = runReq)
+    fun postRunWithHttpInfo(runReq: RunReq) : ApiResponse<RunView?> {
+        val localVariableConfig = postRunRequestConfig(runReq = runReq)
 
         return request<RunReq, RunView>(
             localVariableConfig
@@ -98,12 +98,12 @@ class RunApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1Run
+     * To obtain the request config of the operation postRun
      *
      * @param runReq 
      * @return RequestConfig
      */
-    fun postV1RunRequestConfig(runReq: RunReq) : RequestConfig<RunReq> {
+    fun postRunRequestConfig(runReq: RunReq) : RequestConfig<RunReq> {
         val localVariableBody = runReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

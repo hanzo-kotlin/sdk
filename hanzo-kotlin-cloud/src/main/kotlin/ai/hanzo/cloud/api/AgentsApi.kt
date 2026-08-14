@@ -83,8 +83,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AgentsByRef(ref: kotlin.String) : Unit {
-        val localVarResponse = deleteV1AgentsByRefWithHttpInfo(ref = ref)
+    fun deleteAgentsByRef(ref: kotlin.String) : Unit {
+        val localVarResponse = deleteAgentsByRefWithHttpInfo(ref = ref)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -111,8 +111,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AgentsByRefWithHttpInfo(ref: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1AgentsByRefRequestConfig(ref = ref)
+    fun deleteAgentsByRefWithHttpInfo(ref: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteAgentsByRefRequestConfig(ref = ref)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -120,12 +120,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AgentsByRef
+     * To obtain the request config of the operation deleteAgentsByRef
      *
      * @param ref Ref is the agent&#39;s public id (the agent_… handle create and list return) or its org-unique name, from the path. Either resolves the same agent.
      * @return RequestConfig
      */
-    fun deleteV1AgentsByRefRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAgentsByRefRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -154,8 +154,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AgentsTargetsById(id: kotlin.String) : TargetDeleted {
-        val localVarResponse = deleteV1AgentsTargetsByIdWithHttpInfo(id = id)
+    fun deleteAgentsTargetsById(id: kotlin.String) : TargetDeleted {
+        val localVarResponse = deleteAgentsTargetsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TargetDeleted
@@ -183,8 +183,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AgentsTargetsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TargetDeleted?> {
-        val localVariableConfig = deleteV1AgentsTargetsByIdRequestConfig(id = id)
+    fun deleteAgentsTargetsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TargetDeleted?> {
+        val localVariableConfig = deleteAgentsTargetsByIdRequestConfig(id = id)
 
         return request<Unit, TargetDeleted>(
             localVariableConfig
@@ -192,12 +192,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AgentsTargetsById
+     * To obtain the request config of the operation deleteAgentsTargetsById
      *
      * @param id ID is the target to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1AgentsTargetsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAgentsTargetsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -226,8 +226,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Agents() : AgentList {
-        val localVarResponse = getV1AgentsWithHttpInfo()
+    fun getAgents() : AgentList {
+        val localVarResponse = getAgentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AgentList
@@ -254,8 +254,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsWithHttpInfo() : ApiResponse<AgentList?> {
-        val localVariableConfig = getV1AgentsRequestConfig()
+    fun getAgentsWithHttpInfo() : ApiResponse<AgentList?> {
+        val localVariableConfig = getAgentsRequestConfig()
 
         return request<Unit, AgentList>(
             localVariableConfig
@@ -263,11 +263,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Agents
+     * To obtain the request config of the operation getAgents
      *
      * @return RequestConfig
      */
-    fun getV1AgentsRequestConfig() : RequestConfig<Unit> {
+    fun getAgentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -296,8 +296,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsActivity() : ActivityFeed {
-        val localVarResponse = getV1AgentsActivityWithHttpInfo()
+    fun getAgentsActivity() : ActivityFeed {
+        val localVarResponse = getAgentsActivityWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ActivityFeed
@@ -324,8 +324,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsActivityWithHttpInfo() : ApiResponse<ActivityFeed?> {
-        val localVariableConfig = getV1AgentsActivityRequestConfig()
+    fun getAgentsActivityWithHttpInfo() : ApiResponse<ActivityFeed?> {
+        val localVariableConfig = getAgentsActivityRequestConfig()
 
         return request<Unit, ActivityFeed>(
             localVariableConfig
@@ -333,11 +333,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsActivity
+     * To obtain the request config of the operation getAgentsActivity
      *
      * @return RequestConfig
      */
-    fun getV1AgentsActivityRequestConfig() : RequestConfig<Unit> {
+    fun getAgentsActivityRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -367,8 +367,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsBuilds(limit: kotlin.Int? = null) : BuildList {
-        val localVarResponse = getV1AgentsBuildsWithHttpInfo(limit = limit)
+    fun getAgentsBuilds(limit: kotlin.Int? = null) : BuildList {
+        val localVarResponse = getAgentsBuildsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BuildList
@@ -396,8 +396,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsBuildsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<BuildList?> {
-        val localVariableConfig = getV1AgentsBuildsRequestConfig(limit = limit)
+    fun getAgentsBuildsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<BuildList?> {
+        val localVariableConfig = getAgentsBuildsRequestConfig(limit = limit)
 
         return request<Unit, BuildList>(
             localVariableConfig
@@ -405,12 +405,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsBuilds
+     * To obtain the request config of the operation getAgentsBuilds
      *
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return RequestConfig
      */
-    fun getV1AgentsBuildsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAgentsBuildsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -446,8 +446,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsBuildsByOrgByProject(org: kotlin.String, project: kotlin.String) : BuildView {
-        val localVarResponse = getV1AgentsBuildsByOrgByProjectWithHttpInfo(org = org, project = project)
+    fun getAgentsBuildsByOrgByProject(org: kotlin.String, project: kotlin.String) : BuildView {
+        val localVarResponse = getAgentsBuildsByOrgByProjectWithHttpInfo(org = org, project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BuildView
@@ -476,8 +476,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsBuildsByOrgByProjectWithHttpInfo(org: kotlin.String, project: kotlin.String) : ApiResponse<BuildView?> {
-        val localVariableConfig = getV1AgentsBuildsByOrgByProjectRequestConfig(org = org, project = project)
+    fun getAgentsBuildsByOrgByProjectWithHttpInfo(org: kotlin.String, project: kotlin.String) : ApiResponse<BuildView?> {
+        val localVariableConfig = getAgentsBuildsByOrgByProjectRequestConfig(org = org, project = project)
 
         return request<Unit, BuildView>(
             localVariableConfig
@@ -485,13 +485,13 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsBuildsByOrgByProject
+     * To obtain the request config of the operation getAgentsBuildsByOrgByProject
      *
      * @param org Org is the org that published the build, from the path.
      * @param project Project is the product&#39;s slug, from the path.
      * @return RequestConfig
      */
-    fun getV1AgentsBuildsByOrgByProjectRequestConfig(org: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
+    fun getAgentsBuildsByOrgByProjectRequestConfig(org: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -521,8 +521,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsByRef(ref: kotlin.String) : AgentDetail {
-        val localVarResponse = getV1AgentsByRefWithHttpInfo(ref = ref)
+    fun getAgentsByRef(ref: kotlin.String) : AgentDetail {
+        val localVarResponse = getAgentsByRefWithHttpInfo(ref = ref)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AgentDetail
@@ -550,8 +550,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsByRefWithHttpInfo(ref: kotlin.String) : ApiResponse<AgentDetail?> {
-        val localVariableConfig = getV1AgentsByRefRequestConfig(ref = ref)
+    fun getAgentsByRefWithHttpInfo(ref: kotlin.String) : ApiResponse<AgentDetail?> {
+        val localVariableConfig = getAgentsByRefRequestConfig(ref = ref)
 
         return request<Unit, AgentDetail>(
             localVariableConfig
@@ -559,12 +559,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsByRef
+     * To obtain the request config of the operation getAgentsByRef
      *
      * @param ref Ref is the agent&#39;s public id (the agent_… handle create and list return) or its org-unique name, from the path. Either resolves the same agent.
      * @return RequestConfig
      */
-    fun getV1AgentsByRefRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
+    fun getAgentsByRefRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -595,8 +595,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsByRefRuns(ref: kotlin.String, limit: kotlin.Int? = null) : RunList {
-        val localVarResponse = getV1AgentsByRefRunsWithHttpInfo(ref = ref, limit = limit)
+    fun getAgentsByRefRuns(ref: kotlin.String, limit: kotlin.Int? = null) : RunList {
+        val localVarResponse = getAgentsByRefRunsWithHttpInfo(ref = ref, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RunList
@@ -625,8 +625,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsByRefRunsWithHttpInfo(ref: kotlin.String, limit: kotlin.Int?) : ApiResponse<RunList?> {
-        val localVariableConfig = getV1AgentsByRefRunsRequestConfig(ref = ref, limit = limit)
+    fun getAgentsByRefRunsWithHttpInfo(ref: kotlin.String, limit: kotlin.Int?) : ApiResponse<RunList?> {
+        val localVariableConfig = getAgentsByRefRunsRequestConfig(ref = ref, limit = limit)
 
         return request<Unit, RunList>(
             localVariableConfig
@@ -634,13 +634,13 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsByRefRuns
+     * To obtain the request config of the operation getAgentsByRefRuns
      *
      * @param ref Ref is the agent&#39;s public id or its org-unique name, from the path.
      * @param limit Limit caps how many runs come back, newest first. Absent, zero or out of range (1..200) reads as 50. (optional)
      * @return RequestConfig
      */
-    fun getV1AgentsByRefRunsRequestConfig(ref: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAgentsByRefRunsRequestConfig(ref: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -675,8 +675,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsMetrics(range: kotlin.String? = null) : MetricsView {
-        val localVarResponse = getV1AgentsMetricsWithHttpInfo(range = range)
+    fun getAgentsMetrics(range: kotlin.String? = null) : MetricsView {
+        val localVarResponse = getAgentsMetricsWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MetricsView
@@ -704,8 +704,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<MetricsView?> {
-        val localVariableConfig = getV1AgentsMetricsRequestConfig(range = range)
+    fun getAgentsMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<MetricsView?> {
+        val localVariableConfig = getAgentsMetricsRequestConfig(range = range)
 
         return request<Unit, MetricsView>(
             localVariableConfig
@@ -713,12 +713,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsMetrics
+     * To obtain the request config of the operation getAgentsMetrics
      *
      * @param range Range is the window to bucket: 24H, 7D or 30D. Anything else reads as 30D. (optional)
      * @return RequestConfig
      */
-    fun getV1AgentsMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun getAgentsMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -754,8 +754,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsRuns(limit: kotlin.Int? = null, status: kotlin.String? = null) : RunList {
-        val localVarResponse = getV1AgentsRunsWithHttpInfo(limit = limit, status = status)
+    fun getAgentsRuns(limit: kotlin.Int? = null, status: kotlin.String? = null) : RunList {
+        val localVarResponse = getAgentsRunsWithHttpInfo(limit = limit, status = status)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RunList
@@ -784,8 +784,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsRunsWithHttpInfo(limit: kotlin.Int?, status: kotlin.String?) : ApiResponse<RunList?> {
-        val localVariableConfig = getV1AgentsRunsRequestConfig(limit = limit, status = status)
+    fun getAgentsRunsWithHttpInfo(limit: kotlin.Int?, status: kotlin.String?) : ApiResponse<RunList?> {
+        val localVariableConfig = getAgentsRunsRequestConfig(limit = limit, status = status)
 
         return request<Unit, RunList>(
             localVariableConfig
@@ -793,13 +793,13 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsRuns
+     * To obtain the request config of the operation getAgentsRuns
      *
      * @param limit Limit caps how many runs come back, newest first. Absent, zero or out of range (1..200) reads as 50. (optional)
      * @param status Status keeps only runs with this outcome (\&quot;ok\&quot; or \&quot;error\&quot;). Empty keeps both. It is the filter an operator reaches for first — \&quot;show me what broke\&quot; — and answering it here rather than by paging the whole history client-side is the difference between a usable feed and a download. (optional)
      * @return RequestConfig
      */
-    fun getV1AgentsRunsRequestConfig(limit: kotlin.Int?, status: kotlin.String?) : RequestConfig<Unit> {
+    fun getAgentsRunsRequestConfig(limit: kotlin.Int?, status: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -841,8 +841,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsSessions(root: kotlin.String? = null, parent: kotlin.String? = null, status: kotlin.String? = null, project: kotlin.String? = null, limit: kotlin.Int? = null) : SessionList {
-        val localVarResponse = getV1AgentsSessionsWithHttpInfo(root = root, parent = parent, status = status, project = project, limit = limit)
+    fun getAgentsSessions(root: kotlin.String? = null, parent: kotlin.String? = null, status: kotlin.String? = null, project: kotlin.String? = null, limit: kotlin.Int? = null) : SessionList {
+        val localVarResponse = getAgentsSessionsWithHttpInfo(root = root, parent = parent, status = status, project = project, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SessionList
@@ -874,8 +874,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsSessionsWithHttpInfo(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : ApiResponse<SessionList?> {
-        val localVariableConfig = getV1AgentsSessionsRequestConfig(root = root, parent = parent, status = status, project = project, limit = limit)
+    fun getAgentsSessionsWithHttpInfo(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : ApiResponse<SessionList?> {
+        val localVariableConfig = getAgentsSessionsRequestConfig(root = root, parent = parent, status = status, project = project, limit = limit)
 
         return request<Unit, SessionList>(
             localVariableConfig
@@ -883,7 +883,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsSessions
+     * To obtain the request config of the operation getAgentsSessions
      *
      * @param root Root scopes the page to one subagent tree (its root session id). (optional)
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
@@ -892,7 +892,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return RequestConfig
      */
-    fun getV1AgentsSessionsRequestConfig(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAgentsSessionsRequestConfig(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -939,8 +939,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsSessionsById(id: kotlin.String) : SessionDetail {
-        val localVarResponse = getV1AgentsSessionsByIdWithHttpInfo(id = id)
+    fun getAgentsSessionsById(id: kotlin.String) : SessionDetail {
+        val localVarResponse = getAgentsSessionsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SessionDetail
@@ -968,8 +968,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsSessionsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SessionDetail?> {
-        val localVariableConfig = getV1AgentsSessionsByIdRequestConfig(id = id)
+    fun getAgentsSessionsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SessionDetail?> {
+        val localVariableConfig = getAgentsSessionsByIdRequestConfig(id = id)
 
         return request<Unit, SessionDetail>(
             localVariableConfig
@@ -977,12 +977,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsSessionsById
+     * To obtain the request config of the operation getAgentsSessionsById
      *
      * @param id ID is the session to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1AgentsSessionsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getAgentsSessionsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1013,8 +1013,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsSessionsByIdControl(id: kotlin.String, after: kotlin.Int? = null) : ControlDrain {
-        val localVarResponse = getV1AgentsSessionsByIdControlWithHttpInfo(id = id, after = after)
+    fun getAgentsSessionsByIdControl(id: kotlin.String, after: kotlin.Int? = null) : ControlDrain {
+        val localVarResponse = getAgentsSessionsByIdControlWithHttpInfo(id = id, after = after)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ControlDrain
@@ -1043,8 +1043,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsSessionsByIdControlWithHttpInfo(id: kotlin.String, after: kotlin.Int?) : ApiResponse<ControlDrain?> {
-        val localVariableConfig = getV1AgentsSessionsByIdControlRequestConfig(id = id, after = after)
+    fun getAgentsSessionsByIdControlWithHttpInfo(id: kotlin.String, after: kotlin.Int?) : ApiResponse<ControlDrain?> {
+        val localVariableConfig = getAgentsSessionsByIdControlRequestConfig(id = id, after = after)
 
         return request<Unit, ControlDrain>(
             localVariableConfig
@@ -1052,13 +1052,13 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsSessionsByIdControl
+     * To obtain the request config of the operation getAgentsSessionsByIdControl
      *
      * @param id ID is the session whose commands are being drained, from the path.
      * @param after After is the last seq this poller applied; only commands newer than it come back. Absent or negative reads as 0, which drains from the beginning. (optional)
      * @return RequestConfig
      */
-    fun getV1AgentsSessionsByIdControlRequestConfig(id: kotlin.String, after: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAgentsSessionsByIdControlRequestConfig(id: kotlin.String, after: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1093,8 +1093,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsSessionsByIdTree(id: kotlin.String) : TreeNode {
-        val localVarResponse = getV1AgentsSessionsByIdTreeWithHttpInfo(id = id)
+    fun getAgentsSessionsByIdTree(id: kotlin.String) : TreeNode {
+        val localVarResponse = getAgentsSessionsByIdTreeWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TreeNode
@@ -1122,8 +1122,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsSessionsByIdTreeWithHttpInfo(id: kotlin.String) : ApiResponse<TreeNode?> {
-        val localVariableConfig = getV1AgentsSessionsByIdTreeRequestConfig(id = id)
+    fun getAgentsSessionsByIdTreeWithHttpInfo(id: kotlin.String) : ApiResponse<TreeNode?> {
+        val localVariableConfig = getAgentsSessionsByIdTreeRequestConfig(id = id)
 
         return request<Unit, TreeNode>(
             localVariableConfig
@@ -1131,12 +1131,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsSessionsByIdTree
+     * To obtain the request config of the operation getAgentsSessionsByIdTree
      *
      * @param id ID is the session to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1AgentsSessionsByIdTreeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getAgentsSessionsByIdTreeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1164,8 +1164,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsSessionsStream() : Unit {
-        val localVarResponse = getV1AgentsSessionsStreamWithHttpInfo()
+    fun getAgentsSessionsStream() : Unit {
+        val localVarResponse = getAgentsSessionsStreamWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1191,8 +1191,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsSessionsStreamWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1AgentsSessionsStreamRequestConfig()
+    fun getAgentsSessionsStreamWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getAgentsSessionsStreamRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1200,11 +1200,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsSessionsStream
+     * To obtain the request config of the operation getAgentsSessionsStream
      *
      * @return RequestConfig
      */
-    fun getV1AgentsSessionsStreamRequestConfig() : RequestConfig<Unit> {
+    fun getAgentsSessionsStreamRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1232,8 +1232,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsTargets() : TargetList {
-        val localVarResponse = getV1AgentsTargetsWithHttpInfo()
+    fun getAgentsTargets() : TargetList {
+        val localVarResponse = getAgentsTargetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TargetList
@@ -1260,8 +1260,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsTargetsWithHttpInfo() : ApiResponse<TargetList?> {
-        val localVariableConfig = getV1AgentsTargetsRequestConfig()
+    fun getAgentsTargetsWithHttpInfo() : ApiResponse<TargetList?> {
+        val localVariableConfig = getAgentsTargetsRequestConfig()
 
         return request<Unit, TargetList>(
             localVariableConfig
@@ -1269,11 +1269,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsTargets
+     * To obtain the request config of the operation getAgentsTargets
      *
      * @return RequestConfig
      */
-    fun getV1AgentsTargetsRequestConfig() : RequestConfig<Unit> {
+    fun getAgentsTargetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1303,8 +1303,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AgentsTargetsById(id: kotlin.String) : TargetView {
-        val localVarResponse = getV1AgentsTargetsByIdWithHttpInfo(id = id)
+    fun getAgentsTargetsById(id: kotlin.String) : TargetView {
+        val localVarResponse = getAgentsTargetsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TargetView
@@ -1332,8 +1332,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AgentsTargetsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TargetView?> {
-        val localVariableConfig = getV1AgentsTargetsByIdRequestConfig(id = id)
+    fun getAgentsTargetsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TargetView?> {
+        val localVariableConfig = getAgentsTargetsByIdRequestConfig(id = id)
 
         return request<Unit, TargetView>(
             localVariableConfig
@@ -1341,12 +1341,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1AgentsTargetsById
+     * To obtain the request config of the operation getAgentsTargetsById
      *
      * @param id ID is the target to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1AgentsTargetsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getAgentsTargetsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1377,8 +1377,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AgentsByRef(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : AgentView {
-        val localVarResponse = patchV1AgentsByRefWithHttpInfo(ref = ref, updateAgentIn = updateAgentIn)
+    fun patchAgentsByRef(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : AgentView {
+        val localVarResponse = patchAgentsByRefWithHttpInfo(ref = ref, updateAgentIn = updateAgentIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AgentView
@@ -1407,8 +1407,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AgentsByRefWithHttpInfo(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : ApiResponse<AgentView?> {
-        val localVariableConfig = patchV1AgentsByRefRequestConfig(ref = ref, updateAgentIn = updateAgentIn)
+    fun patchAgentsByRefWithHttpInfo(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : ApiResponse<AgentView?> {
+        val localVariableConfig = patchAgentsByRefRequestConfig(ref = ref, updateAgentIn = updateAgentIn)
 
         return request<UpdateAgentIn, AgentView>(
             localVariableConfig
@@ -1416,13 +1416,13 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1AgentsByRef
+     * To obtain the request config of the operation patchAgentsByRef
      *
      * @param ref Ref is the agent to update — its public id or org-unique name, from the path.
      * @param updateAgentIn 
      * @return RequestConfig
      */
-    fun patchV1AgentsByRefRequestConfig(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : RequestConfig<UpdateAgentIn> {
+    fun patchAgentsByRefRequestConfig(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : RequestConfig<UpdateAgentIn> {
         val localVariableBody = updateAgentIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1454,8 +1454,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AgentsSessionsById(id: kotlin.String, patchSessionIn: PatchSessionIn) : SessionView {
-        val localVarResponse = patchV1AgentsSessionsByIdWithHttpInfo(id = id, patchSessionIn = patchSessionIn)
+    fun patchAgentsSessionsById(id: kotlin.String, patchSessionIn: PatchSessionIn) : SessionView {
+        val localVarResponse = patchAgentsSessionsByIdWithHttpInfo(id = id, patchSessionIn = patchSessionIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SessionView
@@ -1484,8 +1484,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AgentsSessionsByIdWithHttpInfo(id: kotlin.String, patchSessionIn: PatchSessionIn) : ApiResponse<SessionView?> {
-        val localVariableConfig = patchV1AgentsSessionsByIdRequestConfig(id = id, patchSessionIn = patchSessionIn)
+    fun patchAgentsSessionsByIdWithHttpInfo(id: kotlin.String, patchSessionIn: PatchSessionIn) : ApiResponse<SessionView?> {
+        val localVariableConfig = patchAgentsSessionsByIdRequestConfig(id = id, patchSessionIn = patchSessionIn)
 
         return request<PatchSessionIn, SessionView>(
             localVariableConfig
@@ -1493,13 +1493,13 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1AgentsSessionsById
+     * To obtain the request config of the operation patchAgentsSessionsById
      *
      * @param id ID is the session to update, from the path.
      * @param patchSessionIn 
      * @return RequestConfig
      */
-    fun patchV1AgentsSessionsByIdRequestConfig(id: kotlin.String, patchSessionIn: PatchSessionIn) : RequestConfig<PatchSessionIn> {
+    fun patchAgentsSessionsByIdRequestConfig(id: kotlin.String, patchSessionIn: PatchSessionIn) : RequestConfig<PatchSessionIn> {
         val localVariableBody = patchSessionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1531,8 +1531,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AgentsTargetsById(id: kotlin.String, patchTargetIn: PatchTargetIn) : TargetView {
-        val localVarResponse = patchV1AgentsTargetsByIdWithHttpInfo(id = id, patchTargetIn = patchTargetIn)
+    fun patchAgentsTargetsById(id: kotlin.String, patchTargetIn: PatchTargetIn) : TargetView {
+        val localVarResponse = patchAgentsTargetsByIdWithHttpInfo(id = id, patchTargetIn = patchTargetIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TargetView
@@ -1561,8 +1561,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AgentsTargetsByIdWithHttpInfo(id: kotlin.String, patchTargetIn: PatchTargetIn) : ApiResponse<TargetView?> {
-        val localVariableConfig = patchV1AgentsTargetsByIdRequestConfig(id = id, patchTargetIn = patchTargetIn)
+    fun patchAgentsTargetsByIdWithHttpInfo(id: kotlin.String, patchTargetIn: PatchTargetIn) : ApiResponse<TargetView?> {
+        val localVariableConfig = patchAgentsTargetsByIdRequestConfig(id = id, patchTargetIn = patchTargetIn)
 
         return request<PatchTargetIn, TargetView>(
             localVariableConfig
@@ -1570,13 +1570,13 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation patchV1AgentsTargetsById
+     * To obtain the request config of the operation patchAgentsTargetsById
      *
      * @param id ID is the target to update, from the path.
      * @param patchTargetIn 
      * @return RequestConfig
      */
-    fun patchV1AgentsTargetsByIdRequestConfig(id: kotlin.String, patchTargetIn: PatchTargetIn) : RequestConfig<PatchTargetIn> {
+    fun patchAgentsTargetsByIdRequestConfig(id: kotlin.String, patchTargetIn: PatchTargetIn) : RequestConfig<PatchTargetIn> {
         val localVariableBody = patchTargetIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1607,8 +1607,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Agents(createAgentIn: CreateAgentIn) : AgentView {
-        val localVarResponse = postV1AgentsWithHttpInfo(createAgentIn = createAgentIn)
+    fun postAgents(createAgentIn: CreateAgentIn) : AgentView {
+        val localVarResponse = postAgentsWithHttpInfo(createAgentIn = createAgentIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AgentView
@@ -1636,8 +1636,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsWithHttpInfo(createAgentIn: CreateAgentIn) : ApiResponse<AgentView?> {
-        val localVariableConfig = postV1AgentsRequestConfig(createAgentIn = createAgentIn)
+    fun postAgentsWithHttpInfo(createAgentIn: CreateAgentIn) : ApiResponse<AgentView?> {
+        val localVariableConfig = postAgentsRequestConfig(createAgentIn = createAgentIn)
 
         return request<CreateAgentIn, AgentView>(
             localVariableConfig
@@ -1645,12 +1645,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Agents
+     * To obtain the request config of the operation postAgents
      *
      * @param createAgentIn 
      * @return RequestConfig
      */
-    fun postV1AgentsRequestConfig(createAgentIn: CreateAgentIn) : RequestConfig<CreateAgentIn> {
+    fun postAgentsRequestConfig(createAgentIn: CreateAgentIn) : RequestConfig<CreateAgentIn> {
         val localVariableBody = createAgentIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1680,8 +1680,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsByRefRun(ref: kotlin.String) : Unit {
-        val localVarResponse = postV1AgentsByRefRunWithHttpInfo(ref = ref)
+    fun postAgentsByRefRun(ref: kotlin.String) : Unit {
+        val localVarResponse = postAgentsByRefRunWithHttpInfo(ref = ref)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1708,8 +1708,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsByRefRunWithHttpInfo(ref: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AgentsByRefRunRequestConfig(ref = ref)
+    fun postAgentsByRefRunWithHttpInfo(ref: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAgentsByRefRunRequestConfig(ref = ref)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1717,12 +1717,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsByRefRun
+     * To obtain the request config of the operation postAgentsByRefRun
      *
      * @param ref 
      * @return RequestConfig
      */
-    fun postV1AgentsByRefRunRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
+    fun postAgentsByRefRunRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1751,8 +1751,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsSessions(registerReq: RegisterReq) : SessionView {
-        val localVarResponse = postV1AgentsSessionsWithHttpInfo(registerReq = registerReq)
+    fun postAgentsSessions(registerReq: RegisterReq) : SessionView {
+        val localVarResponse = postAgentsSessionsWithHttpInfo(registerReq = registerReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SessionView
@@ -1780,8 +1780,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsSessionsWithHttpInfo(registerReq: RegisterReq) : ApiResponse<SessionView?> {
-        val localVariableConfig = postV1AgentsSessionsRequestConfig(registerReq = registerReq)
+    fun postAgentsSessionsWithHttpInfo(registerReq: RegisterReq) : ApiResponse<SessionView?> {
+        val localVariableConfig = postAgentsSessionsRequestConfig(registerReq = registerReq)
 
         return request<RegisterReq, SessionView>(
             localVariableConfig
@@ -1789,12 +1789,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsSessions
+     * To obtain the request config of the operation postAgentsSessions
      *
      * @param registerReq 
      * @return RequestConfig
      */
-    fun postV1AgentsSessionsRequestConfig(registerReq: RegisterReq) : RequestConfig<RegisterReq> {
+    fun postAgentsSessionsRequestConfig(registerReq: RegisterReq) : RequestConfig<RegisterReq> {
         val localVariableBody = registerReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1824,8 +1824,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsSessionsByIdEvents(id: kotlin.String) : Unit {
-        val localVarResponse = postV1AgentsSessionsByIdEventsWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdEvents(id: kotlin.String) : Unit {
+        val localVarResponse = postAgentsSessionsByIdEventsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1852,8 +1852,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsSessionsByIdEventsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AgentsSessionsByIdEventsRequestConfig(id = id)
+    fun postAgentsSessionsByIdEventsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAgentsSessionsByIdEventsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1861,12 +1861,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsSessionsByIdEvents
+     * To obtain the request config of the operation postAgentsSessionsByIdEvents
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1AgentsSessionsByIdEventsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAgentsSessionsByIdEventsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1894,8 +1894,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsSessionsByIdMessage(id: kotlin.String) : Unit {
-        val localVarResponse = postV1AgentsSessionsByIdMessageWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdMessage(id: kotlin.String) : Unit {
+        val localVarResponse = postAgentsSessionsByIdMessageWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1922,8 +1922,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsSessionsByIdMessageWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AgentsSessionsByIdMessageRequestConfig(id = id)
+    fun postAgentsSessionsByIdMessageWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAgentsSessionsByIdMessageRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1931,12 +1931,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsSessionsByIdMessage
+     * To obtain the request config of the operation postAgentsSessionsByIdMessage
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1AgentsSessionsByIdMessageRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAgentsSessionsByIdMessageRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1964,8 +1964,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsSessionsByIdPause(id: kotlin.String) : Unit {
-        val localVarResponse = postV1AgentsSessionsByIdPauseWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdPause(id: kotlin.String) : Unit {
+        val localVarResponse = postAgentsSessionsByIdPauseWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1992,8 +1992,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsSessionsByIdPauseWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AgentsSessionsByIdPauseRequestConfig(id = id)
+    fun postAgentsSessionsByIdPauseWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAgentsSessionsByIdPauseRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2001,12 +2001,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsSessionsByIdPause
+     * To obtain the request config of the operation postAgentsSessionsByIdPause
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1AgentsSessionsByIdPauseRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAgentsSessionsByIdPauseRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2034,8 +2034,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsSessionsByIdResume(id: kotlin.String) : Unit {
-        val localVarResponse = postV1AgentsSessionsByIdResumeWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdResume(id: kotlin.String) : Unit {
+        val localVarResponse = postAgentsSessionsByIdResumeWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2062,8 +2062,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsSessionsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AgentsSessionsByIdResumeRequestConfig(id = id)
+    fun postAgentsSessionsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAgentsSessionsByIdResumeRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2071,12 +2071,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsSessionsByIdResume
+     * To obtain the request config of the operation postAgentsSessionsByIdResume
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1AgentsSessionsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAgentsSessionsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2104,8 +2104,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsSessionsByIdStop(id: kotlin.String) : Unit {
-        val localVarResponse = postV1AgentsSessionsByIdStopWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdStop(id: kotlin.String) : Unit {
+        val localVarResponse = postAgentsSessionsByIdStopWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2132,8 +2132,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsSessionsByIdStopWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AgentsSessionsByIdStopRequestConfig(id = id)
+    fun postAgentsSessionsByIdStopWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAgentsSessionsByIdStopRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2141,12 +2141,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsSessionsByIdStop
+     * To obtain the request config of the operation postAgentsSessionsByIdStop
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1AgentsSessionsByIdStopRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAgentsSessionsByIdStopRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2175,8 +2175,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsTargets(targetReq: TargetReq) : TargetView {
-        val localVarResponse = postV1AgentsTargetsWithHttpInfo(targetReq = targetReq)
+    fun postAgentsTargets(targetReq: TargetReq) : TargetView {
+        val localVarResponse = postAgentsTargetsWithHttpInfo(targetReq = targetReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TargetView
@@ -2204,8 +2204,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsTargetsWithHttpInfo(targetReq: TargetReq) : ApiResponse<TargetView?> {
-        val localVariableConfig = postV1AgentsTargetsRequestConfig(targetReq = targetReq)
+    fun postAgentsTargetsWithHttpInfo(targetReq: TargetReq) : ApiResponse<TargetView?> {
+        val localVariableConfig = postAgentsTargetsRequestConfig(targetReq = targetReq)
 
         return request<TargetReq, TargetView>(
             localVariableConfig
@@ -2213,12 +2213,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsTargets
+     * To obtain the request config of the operation postAgentsTargets
      *
      * @param targetReq 
      * @return RequestConfig
      */
-    fun postV1AgentsTargetsRequestConfig(targetReq: TargetReq) : RequestConfig<TargetReq> {
+    fun postAgentsTargetsRequestConfig(targetReq: TargetReq) : RequestConfig<TargetReq> {
         val localVariableBody = targetReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2249,8 +2249,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsTargetsByIdClaim(id: kotlin.String) : RoutedRunOut {
-        val localVarResponse = postV1AgentsTargetsByIdClaimWithHttpInfo(id = id)
+    fun postAgentsTargetsByIdClaim(id: kotlin.String) : RoutedRunOut {
+        val localVarResponse = postAgentsTargetsByIdClaimWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RoutedRunOut
@@ -2278,8 +2278,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsTargetsByIdClaimWithHttpInfo(id: kotlin.String) : ApiResponse<RoutedRunOut?> {
-        val localVariableConfig = postV1AgentsTargetsByIdClaimRequestConfig(id = id)
+    fun postAgentsTargetsByIdClaimWithHttpInfo(id: kotlin.String) : ApiResponse<RoutedRunOut?> {
+        val localVariableConfig = postAgentsTargetsByIdClaimRequestConfig(id = id)
 
         return request<Unit, RoutedRunOut>(
             localVariableConfig
@@ -2287,12 +2287,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsTargetsByIdClaim
+     * To obtain the request config of the operation postAgentsTargetsByIdClaim
      *
      * @param id ID is the target to act on, from the path.
      * @return RequestConfig
      */
-    fun postV1AgentsTargetsByIdClaimRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAgentsTargetsByIdClaimRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2322,8 +2322,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsTargetsByIdKey(id: kotlin.String) : ClaimKeyOut {
-        val localVarResponse = postV1AgentsTargetsByIdKeyWithHttpInfo(id = id)
+    fun postAgentsTargetsByIdKey(id: kotlin.String) : ClaimKeyOut {
+        val localVarResponse = postAgentsTargetsByIdKeyWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ClaimKeyOut
@@ -2351,8 +2351,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsTargetsByIdKeyWithHttpInfo(id: kotlin.String) : ApiResponse<ClaimKeyOut?> {
-        val localVariableConfig = postV1AgentsTargetsByIdKeyRequestConfig(id = id)
+    fun postAgentsTargetsByIdKeyWithHttpInfo(id: kotlin.String) : ApiResponse<ClaimKeyOut?> {
+        val localVariableConfig = postAgentsTargetsByIdKeyRequestConfig(id = id)
 
         return request<Unit, ClaimKeyOut>(
             localVariableConfig
@@ -2360,12 +2360,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsTargetsByIdKey
+     * To obtain the request config of the operation postAgentsTargetsByIdKey
      *
      * @param id ID is the target to act on, from the path.
      * @return RequestConfig
      */
-    fun postV1AgentsTargetsByIdKeyRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAgentsTargetsByIdKeyRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2397,8 +2397,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AgentsTargetsByIdRunsByRunidReport(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : ReportOut {
-        val localVarResponse = postV1AgentsTargetsByIdRunsByRunidReportWithHttpInfo(id = id, runId = runId, reportRunIn = reportRunIn)
+    fun postAgentsTargetsByIdRunsByRunidReport(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : ReportOut {
+        val localVarResponse = postAgentsTargetsByIdRunsByRunidReportWithHttpInfo(id = id, runId = runId, reportRunIn = reportRunIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReportOut
@@ -2428,8 +2428,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AgentsTargetsByIdRunsByRunidReportWithHttpInfo(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : ApiResponse<ReportOut?> {
-        val localVariableConfig = postV1AgentsTargetsByIdRunsByRunidReportRequestConfig(id = id, runId = runId, reportRunIn = reportRunIn)
+    fun postAgentsTargetsByIdRunsByRunidReportWithHttpInfo(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : ApiResponse<ReportOut?> {
+        val localVariableConfig = postAgentsTargetsByIdRunsByRunidReportRequestConfig(id = id, runId = runId, reportRunIn = reportRunIn)
 
         return request<ReportRunIn, ReportOut>(
             localVariableConfig
@@ -2437,14 +2437,14 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1AgentsTargetsByIdRunsByRunidReport
+     * To obtain the request config of the operation postAgentsTargetsByIdRunsByRunidReport
      *
      * @param id ID is the machine reporting, from the path.
      * @param runId RunID is the routed run being completed, from the path.
      * @param reportRunIn 
      * @return RequestConfig
      */
-    fun postV1AgentsTargetsByIdRunsByRunidReportRequestConfig(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : RequestConfig<ReportRunIn> {
+    fun postAgentsTargetsByIdRunsByRunidReportRequestConfig(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : RequestConfig<ReportRunIn> {
         val localVariableBody = reportRunIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

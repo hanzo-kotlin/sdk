@@ -60,8 +60,8 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Enablement() : EnablementBoard {
-        val localVarResponse = getV1EnablementWithHttpInfo()
+    fun getEnablement() : EnablementBoard {
+        val localVarResponse = getEnablementWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EnablementBoard
@@ -88,8 +88,8 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EnablementWithHttpInfo() : ApiResponse<EnablementBoard?> {
-        val localVariableConfig = getV1EnablementRequestConfig()
+    fun getEnablementWithHttpInfo() : ApiResponse<EnablementBoard?> {
+        val localVariableConfig = getEnablementRequestConfig()
 
         return request<Unit, EnablementBoard>(
             localVariableConfig
@@ -97,11 +97,11 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation getV1Enablement
+     * To obtain the request config of the operation getEnablement
      *
      * @return RequestConfig
      */
-    fun getV1EnablementRequestConfig() : RequestConfig<Unit> {
+    fun getEnablementRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,8 +131,8 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EnablementOptin(enablementOptRef: EnablementOptRef) : UserEnablementItem {
-        val localVarResponse = postV1EnablementOptinWithHttpInfo(enablementOptRef = enablementOptRef)
+    fun postEnablementOptin(enablementOptRef: EnablementOptRef) : UserEnablementItem {
+        val localVarResponse = postEnablementOptinWithHttpInfo(enablementOptRef = enablementOptRef)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UserEnablementItem
@@ -160,8 +160,8 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EnablementOptinWithHttpInfo(enablementOptRef: EnablementOptRef) : ApiResponse<UserEnablementItem?> {
-        val localVariableConfig = postV1EnablementOptinRequestConfig(enablementOptRef = enablementOptRef)
+    fun postEnablementOptinWithHttpInfo(enablementOptRef: EnablementOptRef) : ApiResponse<UserEnablementItem?> {
+        val localVariableConfig = postEnablementOptinRequestConfig(enablementOptRef = enablementOptRef)
 
         return request<EnablementOptRef, UserEnablementItem>(
             localVariableConfig
@@ -169,12 +169,12 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1EnablementOptin
+     * To obtain the request config of the operation postEnablementOptin
      *
      * @param enablementOptRef 
      * @return RequestConfig
      */
-    fun postV1EnablementOptinRequestConfig(enablementOptRef: EnablementOptRef) : RequestConfig<EnablementOptRef> {
+    fun postEnablementOptinRequestConfig(enablementOptRef: EnablementOptRef) : RequestConfig<EnablementOptRef> {
         val localVariableBody = enablementOptRef
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -205,8 +205,8 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1EnablementOptout(enablementOptRef: EnablementOptRef) : UserEnablementItem {
-        val localVarResponse = postV1EnablementOptoutWithHttpInfo(enablementOptRef = enablementOptRef)
+    fun postEnablementOptout(enablementOptRef: EnablementOptRef) : UserEnablementItem {
+        val localVarResponse = postEnablementOptoutWithHttpInfo(enablementOptRef = enablementOptRef)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UserEnablementItem
@@ -234,8 +234,8 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1EnablementOptoutWithHttpInfo(enablementOptRef: EnablementOptRef) : ApiResponse<UserEnablementItem?> {
-        val localVariableConfig = postV1EnablementOptoutRequestConfig(enablementOptRef = enablementOptRef)
+    fun postEnablementOptoutWithHttpInfo(enablementOptRef: EnablementOptRef) : ApiResponse<UserEnablementItem?> {
+        val localVariableConfig = postEnablementOptoutRequestConfig(enablementOptRef = enablementOptRef)
 
         return request<EnablementOptRef, UserEnablementItem>(
             localVariableConfig
@@ -243,12 +243,12 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation postV1EnablementOptout
+     * To obtain the request config of the operation postEnablementOptout
      *
      * @param enablementOptRef 
      * @return RequestConfig
      */
-    fun postV1EnablementOptoutRequestConfig(enablementOptRef: EnablementOptRef) : RequestConfig<EnablementOptRef> {
+    fun postEnablementOptoutRequestConfig(enablementOptRef: EnablementOptRef) : RequestConfig<EnablementOptRef> {
         val localVariableBody = enablementOptRef
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

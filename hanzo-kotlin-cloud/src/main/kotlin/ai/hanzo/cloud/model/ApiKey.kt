@@ -23,6 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param createdAt CreatedAt is when the key last changed, as IAM records it.
  * @param key Key is the FULL value, and is present for a publishable key only: it is public by construction and useless to its holder if it cannot be read back.
+ * @param limit Limit is what this key may reach, as `kind:name` entries — `model:zen5`, `project:acme`, `product:commerce`. Absent means the key reaches whatever its holder does, which is what every key minted before limits existed does and must keep doing.
  * @param prefix Prefix is the recognizable, non-secret head of the key — enough to tell two keys apart, never enough to use one.
  * @param type Type is the key class: secret (sk-) or publishable (pk-).
  */
@@ -37,6 +38,10 @@ data class ApiKey (
     /* Key is the FULL value, and is present for a publishable key only: it is public by construction and useless to its holder if it cannot be read back. */
     @SerializedName("key")
     val key: kotlin.String? = null,
+
+    /* Limit is what this key may reach, as `kind:name` entries — `model:zen5`, `project:acme`, `product:commerce`. Absent means the key reaches whatever its holder does, which is what every key minted before limits existed does and must keep doing. */
+    @SerializedName("limit")
+    val limit: kotlin.collections.List<kotlin.String>? = null,
 
     /* Prefix is the recognizable, non-secret head of the key — enough to tell two keys apart, never enough to use one. */
     @SerializedName("prefix")

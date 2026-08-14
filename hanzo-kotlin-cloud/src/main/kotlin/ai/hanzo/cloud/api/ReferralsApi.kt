@@ -60,8 +60,8 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Referrals() : MyReferrals {
-        val localVarResponse = getV1ReferralsWithHttpInfo()
+    fun getReferrals() : MyReferrals {
+        val localVarResponse = getReferralsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MyReferrals
@@ -88,8 +88,8 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ReferralsWithHttpInfo() : ApiResponse<MyReferrals?> {
-        val localVariableConfig = getV1ReferralsRequestConfig()
+    fun getReferralsWithHttpInfo() : ApiResponse<MyReferrals?> {
+        val localVariableConfig = getReferralsRequestConfig()
 
         return request<Unit, MyReferrals>(
             localVariableConfig
@@ -97,11 +97,11 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1Referrals
+     * To obtain the request config of the operation getReferrals
      *
      * @return RequestConfig
      */
-    fun getV1ReferralsRequestConfig() : RequestConfig<Unit> {
+    fun getReferralsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,8 +131,8 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ReferralsClaim(claimRequest: ClaimRequest) : ClaimView {
-        val localVarResponse = postV1ReferralsClaimWithHttpInfo(claimRequest = claimRequest)
+    fun postReferralsClaim(claimRequest: ClaimRequest) : ClaimView {
+        val localVarResponse = postReferralsClaimWithHttpInfo(claimRequest = claimRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ClaimView
@@ -160,8 +160,8 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ReferralsClaimWithHttpInfo(claimRequest: ClaimRequest) : ApiResponse<ClaimView?> {
-        val localVariableConfig = postV1ReferralsClaimRequestConfig(claimRequest = claimRequest)
+    fun postReferralsClaimWithHttpInfo(claimRequest: ClaimRequest) : ApiResponse<ClaimView?> {
+        val localVariableConfig = postReferralsClaimRequestConfig(claimRequest = claimRequest)
 
         return request<ClaimRequest, ClaimView>(
             localVariableConfig
@@ -169,12 +169,12 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1ReferralsClaim
+     * To obtain the request config of the operation postReferralsClaim
      *
      * @param claimRequest 
      * @return RequestConfig
      */
-    fun postV1ReferralsClaimRequestConfig(claimRequest: ClaimRequest) : RequestConfig<ClaimRequest> {
+    fun postReferralsClaimRequestConfig(claimRequest: ClaimRequest) : RequestConfig<ClaimRequest> {
         val localVariableBody = claimRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

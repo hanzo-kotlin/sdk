@@ -69,8 +69,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1FunctionsByName(name: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1FunctionsByNameWithHttpInfo(name = name)
+    fun deleteFunctionsByName(name: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteFunctionsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -98,8 +98,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1FunctionsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1FunctionsByNameRequestConfig(name = name)
+    fun deleteFunctionsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteFunctionsByNameRequestConfig(name = name)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -107,12 +107,12 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1FunctionsByName
+     * To obtain the request config of the operation deleteFunctionsByName
      *
      * @param name Name is the function the URL names.
      * @return RequestConfig
      */
-    fun deleteV1FunctionsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteFunctionsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -141,8 +141,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Functions() : FnList {
-        val localVarResponse = getV1FunctionsWithHttpInfo()
+    fun getFunctions() : FnList {
+        val localVarResponse = getFunctionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FnList
@@ -169,8 +169,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FunctionsWithHttpInfo() : ApiResponse<FnList?> {
-        val localVariableConfig = getV1FunctionsRequestConfig()
+    fun getFunctionsWithHttpInfo() : ApiResponse<FnList?> {
+        val localVariableConfig = getFunctionsRequestConfig()
 
         return request<Unit, FnList>(
             localVariableConfig
@@ -178,11 +178,11 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1Functions
+     * To obtain the request config of the operation getFunctions
      *
      * @return RequestConfig
      */
-    fun getV1FunctionsRequestConfig() : RequestConfig<Unit> {
+    fun getFunctionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -212,8 +212,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FunctionsByName(name: kotlin.String) : FunctionDetail {
-        val localVarResponse = getV1FunctionsByNameWithHttpInfo(name = name)
+    fun getFunctionsByName(name: kotlin.String) : FunctionDetail {
+        val localVarResponse = getFunctionsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FunctionDetail
@@ -241,8 +241,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FunctionsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<FunctionDetail?> {
-        val localVariableConfig = getV1FunctionsByNameRequestConfig(name = name)
+    fun getFunctionsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<FunctionDetail?> {
+        val localVariableConfig = getFunctionsByNameRequestConfig(name = name)
 
         return request<Unit, FunctionDetail>(
             localVariableConfig
@@ -250,12 +250,12 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FunctionsByName
+     * To obtain the request config of the operation getFunctionsByName
      *
      * @param name Name is the function the URL names.
      * @return RequestConfig
      */
-    fun getV1FunctionsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getFunctionsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -286,8 +286,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FunctionsByNameInvocations(name: kotlin.String, limit: kotlin.Int? = null) : InvocationList {
-        val localVarResponse = getV1FunctionsByNameInvocationsWithHttpInfo(name = name, limit = limit)
+    fun getFunctionsByNameInvocations(name: kotlin.String, limit: kotlin.Int? = null) : InvocationList {
+        val localVarResponse = getFunctionsByNameInvocationsWithHttpInfo(name = name, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InvocationList
@@ -316,8 +316,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FunctionsByNameInvocationsWithHttpInfo(name: kotlin.String, limit: kotlin.Int?) : ApiResponse<InvocationList?> {
-        val localVariableConfig = getV1FunctionsByNameInvocationsRequestConfig(name = name, limit = limit)
+    fun getFunctionsByNameInvocationsWithHttpInfo(name: kotlin.String, limit: kotlin.Int?) : ApiResponse<InvocationList?> {
+        val localVariableConfig = getFunctionsByNameInvocationsRequestConfig(name = name, limit = limit)
 
         return request<Unit, InvocationList>(
             localVariableConfig
@@ -325,13 +325,13 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FunctionsByNameInvocations
+     * To obtain the request config of the operation getFunctionsByNameInvocations
      *
      * @param name Name is the function the URL names.
      * @param limit Limit caps the page, defaulting to 100. (optional)
      * @return RequestConfig
      */
-    fun getV1FunctionsByNameInvocationsRequestConfig(name: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getFunctionsByNameInvocationsRequestConfig(name: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -366,8 +366,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FunctionsByNameLogs(name: kotlin.String) : LogLines {
-        val localVarResponse = getV1FunctionsByNameLogsWithHttpInfo(name = name)
+    fun getFunctionsByNameLogs(name: kotlin.String) : LogLines {
+        val localVarResponse = getFunctionsByNameLogsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as LogLines
@@ -395,8 +395,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FunctionsByNameLogsWithHttpInfo(name: kotlin.String) : ApiResponse<LogLines?> {
-        val localVariableConfig = getV1FunctionsByNameLogsRequestConfig(name = name)
+    fun getFunctionsByNameLogsWithHttpInfo(name: kotlin.String) : ApiResponse<LogLines?> {
+        val localVariableConfig = getFunctionsByNameLogsRequestConfig(name = name)
 
         return request<Unit, LogLines>(
             localVariableConfig
@@ -404,12 +404,12 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FunctionsByNameLogs
+     * To obtain the request config of the operation getFunctionsByNameLogs
      *
      * @param name Name is the function the URL names.
      * @return RequestConfig
      */
-    fun getV1FunctionsByNameLogsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getFunctionsByNameLogsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -438,8 +438,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FunctionsDeployments() : FnList {
-        val localVarResponse = getV1FunctionsDeploymentsWithHttpInfo()
+    fun getFunctionsDeployments() : FnList {
+        val localVarResponse = getFunctionsDeploymentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FnList
@@ -466,8 +466,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FunctionsDeploymentsWithHttpInfo() : ApiResponse<FnList?> {
-        val localVariableConfig = getV1FunctionsDeploymentsRequestConfig()
+    fun getFunctionsDeploymentsWithHttpInfo() : ApiResponse<FnList?> {
+        val localVariableConfig = getFunctionsDeploymentsRequestConfig()
 
         return request<Unit, FnList>(
             localVariableConfig
@@ -475,11 +475,11 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FunctionsDeployments
+     * To obtain the request config of the operation getFunctionsDeployments
      *
      * @return RequestConfig
      */
-    fun getV1FunctionsDeploymentsRequestConfig() : RequestConfig<Unit> {
+    fun getFunctionsDeploymentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -509,8 +509,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FunctionsMetrics(range: kotlin.String? = null) : Usage {
-        val localVarResponse = getV1FunctionsMetricsWithHttpInfo(range = range)
+    fun getFunctionsMetrics(range: kotlin.String? = null) : Usage {
+        val localVarResponse = getFunctionsMetricsWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Usage
@@ -538,8 +538,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FunctionsMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<Usage?> {
-        val localVariableConfig = getV1FunctionsMetricsRequestConfig(range = range)
+    fun getFunctionsMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<Usage?> {
+        val localVariableConfig = getFunctionsMetricsRequestConfig(range = range)
 
         return request<Unit, Usage>(
             localVariableConfig
@@ -547,12 +547,12 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FunctionsMetrics
+     * To obtain the request config of the operation getFunctionsMetrics
      *
      * @param range Range is 1H, 6H, 24H (the default), 7D or 30D. Anything else falls back to 24H rather than failing. (optional)
      * @return RequestConfig
      */
-    fun getV1FunctionsMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun getFunctionsMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -586,8 +586,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FunctionsSecrets() : SecretList {
-        val localVarResponse = getV1FunctionsSecretsWithHttpInfo()
+    fun getFunctionsSecrets() : SecretList {
+        val localVarResponse = getFunctionsSecretsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SecretList
@@ -614,8 +614,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FunctionsSecretsWithHttpInfo() : ApiResponse<SecretList?> {
-        val localVariableConfig = getV1FunctionsSecretsRequestConfig()
+    fun getFunctionsSecretsWithHttpInfo() : ApiResponse<SecretList?> {
+        val localVariableConfig = getFunctionsSecretsRequestConfig()
 
         return request<Unit, SecretList>(
             localVariableConfig
@@ -623,11 +623,11 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FunctionsSecrets
+     * To obtain the request config of the operation getFunctionsSecrets
      *
      * @return RequestConfig
      */
-    fun getV1FunctionsSecretsRequestConfig() : RequestConfig<Unit> {
+    fun getFunctionsSecretsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -656,8 +656,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FunctionsTriggers() : TriggerList {
-        val localVarResponse = getV1FunctionsTriggersWithHttpInfo()
+    fun getFunctionsTriggers() : TriggerList {
+        val localVarResponse = getFunctionsTriggersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TriggerList
@@ -684,8 +684,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FunctionsTriggersWithHttpInfo() : ApiResponse<TriggerList?> {
-        val localVariableConfig = getV1FunctionsTriggersRequestConfig()
+    fun getFunctionsTriggersWithHttpInfo() : ApiResponse<TriggerList?> {
+        val localVariableConfig = getFunctionsTriggersRequestConfig()
 
         return request<Unit, TriggerList>(
             localVariableConfig
@@ -693,11 +693,11 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FunctionsTriggers
+     * To obtain the request config of the operation getFunctionsTriggers
      *
      * @return RequestConfig
      */
-    fun getV1FunctionsTriggersRequestConfig() : RequestConfig<Unit> {
+    fun getFunctionsTriggersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -727,8 +727,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Functions(definition: Definition) : FunctionView {
-        val localVarResponse = postV1FunctionsWithHttpInfo(definition = definition)
+    fun postFunctions(definition: Definition) : FunctionView {
+        val localVarResponse = postFunctionsWithHttpInfo(definition = definition)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FunctionView
@@ -756,8 +756,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FunctionsWithHttpInfo(definition: Definition) : ApiResponse<FunctionView?> {
-        val localVariableConfig = postV1FunctionsRequestConfig(definition = definition)
+    fun postFunctionsWithHttpInfo(definition: Definition) : ApiResponse<FunctionView?> {
+        val localVariableConfig = postFunctionsRequestConfig(definition = definition)
 
         return request<Definition, FunctionView>(
             localVariableConfig
@@ -765,12 +765,12 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1Functions
+     * To obtain the request config of the operation postFunctions
      *
      * @param definition 
      * @return RequestConfig
      */
-    fun postV1FunctionsRequestConfig(definition: Definition) : RequestConfig<Definition> {
+    fun postFunctionsRequestConfig(definition: Definition) : RequestConfig<Definition> {
         val localVariableBody = definition
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -802,8 +802,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FunctionsByNameInvoke(name: kotlin.String, invokeReq: InvokeReq) : InvocationView {
-        val localVarResponse = postV1FunctionsByNameInvokeWithHttpInfo(name = name, invokeReq = invokeReq)
+    fun postFunctionsByNameInvoke(name: kotlin.String, invokeReq: InvokeReq) : InvocationView {
+        val localVarResponse = postFunctionsByNameInvokeWithHttpInfo(name = name, invokeReq = invokeReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InvocationView
@@ -832,8 +832,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FunctionsByNameInvokeWithHttpInfo(name: kotlin.String, invokeReq: InvokeReq) : ApiResponse<InvocationView?> {
-        val localVariableConfig = postV1FunctionsByNameInvokeRequestConfig(name = name, invokeReq = invokeReq)
+    fun postFunctionsByNameInvokeWithHttpInfo(name: kotlin.String, invokeReq: InvokeReq) : ApiResponse<InvocationView?> {
+        val localVariableConfig = postFunctionsByNameInvokeRequestConfig(name = name, invokeReq = invokeReq)
 
         return request<InvokeReq, InvocationView>(
             localVariableConfig
@@ -841,13 +841,13 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1FunctionsByNameInvoke
+     * To obtain the request config of the operation postFunctionsByNameInvoke
      *
      * @param name 
      * @param invokeReq 
      * @return RequestConfig
      */
-    fun postV1FunctionsByNameInvokeRequestConfig(name: kotlin.String, invokeReq: InvokeReq) : RequestConfig<InvokeReq> {
+    fun postFunctionsByNameInvokeRequestConfig(name: kotlin.String, invokeReq: InvokeReq) : RequestConfig<InvokeReq> {
         val localVariableBody = invokeReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

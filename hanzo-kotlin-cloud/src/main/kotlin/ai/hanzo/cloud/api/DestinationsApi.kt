@@ -62,8 +62,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1DestinationsByPlatform(platform: kotlin.String) : DestinationDisconnected {
-        val localVarResponse = deleteV1DestinationsByPlatformWithHttpInfo(platform = platform)
+    fun deleteDestinationsByPlatform(platform: kotlin.String) : DestinationDisconnected {
+        val localVarResponse = deleteDestinationsByPlatformWithHttpInfo(platform = platform)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationDisconnected
@@ -91,8 +91,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1DestinationsByPlatformWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationDisconnected?> {
-        val localVariableConfig = deleteV1DestinationsByPlatformRequestConfig(platform = platform)
+    fun deleteDestinationsByPlatformWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationDisconnected?> {
+        val localVariableConfig = deleteDestinationsByPlatformRequestConfig(platform = platform)
 
         return request<Unit, DestinationDisconnected>(
             localVariableConfig
@@ -100,12 +100,12 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation deleteV1DestinationsByPlatform
+     * To obtain the request config of the operation deleteDestinationsByPlatform
      *
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
      * @return RequestConfig
      */
-    fun deleteV1DestinationsByPlatformRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
+    fun deleteDestinationsByPlatformRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -134,8 +134,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Destinations() : DestinationList {
-        val localVarResponse = getV1DestinationsWithHttpInfo()
+    fun getDestinations() : DestinationList {
+        val localVarResponse = getDestinationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationList
@@ -162,8 +162,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DestinationsWithHttpInfo() : ApiResponse<DestinationList?> {
-        val localVariableConfig = getV1DestinationsRequestConfig()
+    fun getDestinationsWithHttpInfo() : ApiResponse<DestinationList?> {
+        val localVariableConfig = getDestinationsRequestConfig()
 
         return request<Unit, DestinationList>(
             localVariableConfig
@@ -171,11 +171,11 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1Destinations
+     * To obtain the request config of the operation getDestinations
      *
      * @return RequestConfig
      */
-    fun getV1DestinationsRequestConfig() : RequestConfig<Unit> {
+    fun getDestinationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -205,8 +205,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1DestinationsByPlatform(platform: kotlin.String) : DestinationStatus {
-        val localVarResponse = getV1DestinationsByPlatformWithHttpInfo(platform = platform)
+    fun getDestinationsByPlatform(platform: kotlin.String) : DestinationStatus {
+        val localVarResponse = getDestinationsByPlatformWithHttpInfo(platform = platform)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationStatus
@@ -234,8 +234,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1DestinationsByPlatformWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationStatus?> {
-        val localVariableConfig = getV1DestinationsByPlatformRequestConfig(platform = platform)
+    fun getDestinationsByPlatformWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationStatus?> {
+        val localVariableConfig = getDestinationsByPlatformRequestConfig(platform = platform)
 
         return request<Unit, DestinationStatus>(
             localVariableConfig
@@ -243,12 +243,12 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1DestinationsByPlatform
+     * To obtain the request config of the operation getDestinationsByPlatform
      *
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
      * @return RequestConfig
      */
-    fun getV1DestinationsByPlatformRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
+    fun getDestinationsByPlatformRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -279,8 +279,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DestinationsByPlatform(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null) : DestinationStatus {
-        val localVarResponse = postV1DestinationsByPlatformWithHttpInfo(platform = platform, requestBody = requestBody)
+    fun postDestinationsByPlatform(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null) : DestinationStatus {
+        val localVarResponse = postDestinationsByPlatformWithHttpInfo(platform = platform, requestBody = requestBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationStatus
@@ -309,8 +309,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DestinationsByPlatformWithHttpInfo(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : ApiResponse<DestinationStatus?> {
-        val localVariableConfig = postV1DestinationsByPlatformRequestConfig(platform = platform, requestBody = requestBody)
+    fun postDestinationsByPlatformWithHttpInfo(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : ApiResponse<DestinationStatus?> {
+        val localVariableConfig = postDestinationsByPlatformRequestConfig(platform = platform, requestBody = requestBody)
 
         return request<kotlin.collections.Map<kotlin.String, kotlin.Any>, DestinationStatus>(
             localVariableConfig
@@ -318,13 +318,13 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1DestinationsByPlatform
+     * To obtain the request config of the operation postDestinationsByPlatform
      *
      * @param platform 
      * @param requestBody  (optional)
      * @return RequestConfig
      */
-    fun postV1DestinationsByPlatformRequestConfig(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
+    fun postDestinationsByPlatformRequestConfig(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
         val localVariableBody = requestBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -355,8 +355,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1DestinationsByPlatformTest(platform: kotlin.String) : DestinationTest {
-        val localVarResponse = postV1DestinationsByPlatformTestWithHttpInfo(platform = platform)
+    fun postDestinationsByPlatformTest(platform: kotlin.String) : DestinationTest {
+        val localVarResponse = postDestinationsByPlatformTestWithHttpInfo(platform = platform)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationTest
@@ -384,8 +384,8 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1DestinationsByPlatformTestWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationTest?> {
-        val localVariableConfig = postV1DestinationsByPlatformTestRequestConfig(platform = platform)
+    fun postDestinationsByPlatformTestWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationTest?> {
+        val localVariableConfig = postDestinationsByPlatformTestRequestConfig(platform = platform)
 
         return request<Unit, DestinationTest>(
             localVariableConfig
@@ -393,12 +393,12 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation postV1DestinationsByPlatformTest
+     * To obtain the request config of the operation postDestinationsByPlatformTest
      *
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
      * @return RequestConfig
      */
-    fun postV1DestinationsByPlatformTestRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
+    fun postDestinationsByPlatformTestRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -58,8 +58,8 @@ class ReleasesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Releases() : ReleaseBoard {
-        val localVarResponse = getV1ReleasesWithHttpInfo()
+    fun getReleases() : ReleaseBoard {
+        val localVarResponse = getReleasesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReleaseBoard
@@ -86,8 +86,8 @@ class ReleasesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ReleasesWithHttpInfo() : ApiResponse<ReleaseBoard?> {
-        val localVariableConfig = getV1ReleasesRequestConfig()
+    fun getReleasesWithHttpInfo() : ApiResponse<ReleaseBoard?> {
+        val localVariableConfig = getReleasesRequestConfig()
 
         return request<Unit, ReleaseBoard>(
             localVariableConfig
@@ -95,11 +95,11 @@ class ReleasesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1Releases
+     * To obtain the request config of the operation getReleases
      *
      * @return RequestConfig
      */
-    fun getV1ReleasesRequestConfig() : RequestConfig<Unit> {
+    fun getReleasesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

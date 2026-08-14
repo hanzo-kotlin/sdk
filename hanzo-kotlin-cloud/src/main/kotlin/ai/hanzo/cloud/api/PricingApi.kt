@@ -66,8 +66,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Pricing() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingWithHttpInfo()
+    fun getPricing() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -94,8 +94,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingRequestConfig()
+    fun getPricingWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -103,11 +103,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1Pricing
+     * To obtain the request config of the operation getPricing
      *
      * @return RequestConfig
      */
-    fun getV1PricingRequestConfig() : RequestConfig<Unit> {
+    fun getPricingRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -136,8 +136,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingBase() : PricingPlanList {
-        val localVarResponse = getV1PricingBaseWithHttpInfo()
+    fun getPricingBase() : PricingPlanList {
+        val localVarResponse = getPricingBaseWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
@@ -164,8 +164,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingBaseWithHttpInfo() : ApiResponse<PricingPlanList?> {
-        val localVariableConfig = getV1PricingBaseRequestConfig()
+    fun getPricingBaseWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getPricingBaseRequestConfig()
 
         return request<Unit, PricingPlanList>(
             localVariableConfig
@@ -173,11 +173,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingBase
+     * To obtain the request config of the operation getPricingBase
      *
      * @return RequestConfig
      */
-    fun getV1PricingBaseRequestConfig() : RequestConfig<Unit> {
+    fun getPricingBaseRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -206,8 +206,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingBlockchain() : PricingPlanList {
-        val localVarResponse = getV1PricingBlockchainWithHttpInfo()
+    fun getPricingBlockchain() : PricingPlanList {
+        val localVarResponse = getPricingBlockchainWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
@@ -234,8 +234,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingBlockchainWithHttpInfo() : ApiResponse<PricingPlanList?> {
-        val localVariableConfig = getV1PricingBlockchainRequestConfig()
+    fun getPricingBlockchainWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getPricingBlockchainRequestConfig()
 
         return request<Unit, PricingPlanList>(
             localVariableConfig
@@ -243,11 +243,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingBlockchain
+     * To obtain the request config of the operation getPricingBlockchain
      *
      * @return RequestConfig
      */
-    fun getV1PricingBlockchainRequestConfig() : RequestConfig<Unit> {
+    fun getPricingBlockchainRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -276,8 +276,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingCloud() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingCloudWithHttpInfo()
+    fun getPricingCloud() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingCloudWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -304,8 +304,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingCloudWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingCloudRequestConfig()
+    fun getPricingCloudWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingCloudRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -313,11 +313,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingCloud
+     * To obtain the request config of the operation getPricingCloud
      *
      * @return RequestConfig
      */
-    fun getV1PricingCloudRequestConfig() : RequestConfig<Unit> {
+    fun getPricingCloudRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -346,8 +346,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingCloudPlans() : PricingPlanList {
-        val localVarResponse = getV1PricingCloudPlansWithHttpInfo()
+    fun getPricingCloudPlans() : PricingPlanList {
+        val localVarResponse = getPricingCloudPlansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
@@ -374,8 +374,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingCloudPlansWithHttpInfo() : ApiResponse<PricingPlanList?> {
-        val localVariableConfig = getV1PricingCloudPlansRequestConfig()
+    fun getPricingCloudPlansWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getPricingCloudPlansRequestConfig()
 
         return request<Unit, PricingPlanList>(
             localVariableConfig
@@ -383,11 +383,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingCloudPlans
+     * To obtain the request config of the operation getPricingCloudPlans
      *
      * @return RequestConfig
      */
-    fun getV1PricingCloudPlansRequestConfig() : RequestConfig<Unit> {
+    fun getPricingCloudPlansRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -416,8 +416,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingCloudRegions() : PricingRegionList {
-        val localVarResponse = getV1PricingCloudRegionsWithHttpInfo()
+    fun getPricingCloudRegions() : PricingRegionList {
+        val localVarResponse = getPricingCloudRegionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingRegionList
@@ -444,8 +444,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingCloudRegionsWithHttpInfo() : ApiResponse<PricingRegionList?> {
-        val localVariableConfig = getV1PricingCloudRegionsRequestConfig()
+    fun getPricingCloudRegionsWithHttpInfo() : ApiResponse<PricingRegionList?> {
+        val localVariableConfig = getPricingCloudRegionsRequestConfig()
 
         return request<Unit, PricingRegionList>(
             localVariableConfig
@@ -453,11 +453,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingCloudRegions
+     * To obtain the request config of the operation getPricingCloudRegions
      *
      * @return RequestConfig
      */
-    fun getV1PricingCloudRegionsRequestConfig() : RequestConfig<Unit> {
+    fun getPricingCloudRegionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -486,8 +486,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingCloudStorage() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingCloudStorageWithHttpInfo()
+    fun getPricingCloudStorage() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingCloudStorageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -514,8 +514,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingCloudStorageWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingCloudStorageRequestConfig()
+    fun getPricingCloudStorageWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingCloudStorageRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -523,11 +523,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingCloudStorage
+     * To obtain the request config of the operation getPricingCloudStorage
      *
      * @return RequestConfig
      */
-    fun getV1PricingCloudStorageRequestConfig() : RequestConfig<Unit> {
+    fun getPricingCloudStorageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -556,8 +556,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingCompute() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingComputeWithHttpInfo()
+    fun getPricingCompute() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingComputeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -584,8 +584,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingComputeWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingComputeRequestConfig()
+    fun getPricingComputeWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingComputeRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -593,11 +593,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingCompute
+     * To obtain the request config of the operation getPricingCompute
      *
      * @return RequestConfig
      */
-    fun getV1PricingComputeRequestConfig() : RequestConfig<Unit> {
+    fun getPricingComputeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -626,8 +626,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingComputePresets() : PricingPresetList {
-        val localVarResponse = getV1PricingComputePresetsWithHttpInfo()
+    fun getPricingComputePresets() : PricingPresetList {
+        val localVarResponse = getPricingComputePresetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPresetList
@@ -654,8 +654,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingComputePresetsWithHttpInfo() : ApiResponse<PricingPresetList?> {
-        val localVariableConfig = getV1PricingComputePresetsRequestConfig()
+    fun getPricingComputePresetsWithHttpInfo() : ApiResponse<PricingPresetList?> {
+        val localVariableConfig = getPricingComputePresetsRequestConfig()
 
         return request<Unit, PricingPresetList>(
             localVariableConfig
@@ -663,11 +663,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingComputePresets
+     * To obtain the request config of the operation getPricingComputePresets
      *
      * @return RequestConfig
      */
-    fun getV1PricingComputePresetsRequestConfig() : RequestConfig<Unit> {
+    fun getPricingComputePresetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -696,8 +696,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingDatastore() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingDatastoreWithHttpInfo()
+    fun getPricingDatastore() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingDatastoreWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -724,8 +724,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingDatastoreWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingDatastoreRequestConfig()
+    fun getPricingDatastoreWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingDatastoreRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -733,11 +733,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingDatastore
+     * To obtain the request config of the operation getPricingDatastore
      *
      * @return RequestConfig
      */
-    fun getV1PricingDatastoreRequestConfig() : RequestConfig<Unit> {
+    fun getPricingDatastoreRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -766,8 +766,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingFeatured() : PricingModelList {
-        val localVarResponse = getV1PricingFeaturedWithHttpInfo()
+    fun getPricingFeatured() : PricingModelList {
+        val localVarResponse = getPricingFeaturedWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingModelList
@@ -794,8 +794,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingFeaturedWithHttpInfo() : ApiResponse<PricingModelList?> {
-        val localVariableConfig = getV1PricingFeaturedRequestConfig()
+    fun getPricingFeaturedWithHttpInfo() : ApiResponse<PricingModelList?> {
+        val localVariableConfig = getPricingFeaturedRequestConfig()
 
         return request<Unit, PricingModelList>(
             localVariableConfig
@@ -803,11 +803,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingFeatured
+     * To obtain the request config of the operation getPricingFeatured
      *
      * @return RequestConfig
      */
-    fun getV1PricingFeaturedRequestConfig() : RequestConfig<Unit> {
+    fun getPricingFeaturedRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -836,8 +836,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingFree() : PricingModelList {
-        val localVarResponse = getV1PricingFreeWithHttpInfo()
+    fun getPricingFree() : PricingModelList {
+        val localVarResponse = getPricingFreeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingModelList
@@ -864,8 +864,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingFreeWithHttpInfo() : ApiResponse<PricingModelList?> {
-        val localVariableConfig = getV1PricingFreeRequestConfig()
+    fun getPricingFreeWithHttpInfo() : ApiResponse<PricingModelList?> {
+        val localVariableConfig = getPricingFreeRequestConfig()
 
         return request<Unit, PricingModelList>(
             localVariableConfig
@@ -873,11 +873,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingFree
+     * To obtain the request config of the operation getPricingFree
      *
      * @return RequestConfig
      */
-    fun getV1PricingFreeRequestConfig() : RequestConfig<Unit> {
+    fun getPricingFreeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -906,8 +906,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingGpu() : PricingTierList {
-        val localVarResponse = getV1PricingGpuWithHttpInfo()
+    fun getPricingGpu() : PricingTierList {
+        val localVarResponse = getPricingGpuWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingTierList
@@ -934,8 +934,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingGpuWithHttpInfo() : ApiResponse<PricingTierList?> {
-        val localVariableConfig = getV1PricingGpuRequestConfig()
+    fun getPricingGpuWithHttpInfo() : ApiResponse<PricingTierList?> {
+        val localVariableConfig = getPricingGpuRequestConfig()
 
         return request<Unit, PricingTierList>(
             localVariableConfig
@@ -943,11 +943,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingGpu
+     * To obtain the request config of the operation getPricingGpu
      *
      * @return RequestConfig
      */
-    fun getV1PricingGpuRequestConfig() : RequestConfig<Unit> {
+    fun getPricingGpuRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -976,8 +976,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingHealth() : PricingHealth {
-        val localVarResponse = getV1PricingHealthWithHttpInfo()
+    fun getPricingHealth() : PricingHealth {
+        val localVarResponse = getPricingHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingHealth
@@ -1004,8 +1004,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingHealthWithHttpInfo() : ApiResponse<PricingHealth?> {
-        val localVariableConfig = getV1PricingHealthRequestConfig()
+    fun getPricingHealthWithHttpInfo() : ApiResponse<PricingHealth?> {
+        val localVariableConfig = getPricingHealthRequestConfig()
 
         return request<Unit, PricingHealth>(
             localVariableConfig
@@ -1013,11 +1013,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingHealth
+     * To obtain the request config of the operation getPricingHealth
      *
      * @return RequestConfig
      */
-    fun getV1PricingHealthRequestConfig() : RequestConfig<Unit> {
+    fun getPricingHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1046,8 +1046,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingIam() : PricingPlanList {
-        val localVarResponse = getV1PricingIamWithHttpInfo()
+    fun getPricingIam() : PricingPlanList {
+        val localVarResponse = getPricingIamWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
@@ -1074,8 +1074,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingIamWithHttpInfo() : ApiResponse<PricingPlanList?> {
-        val localVariableConfig = getV1PricingIamRequestConfig()
+    fun getPricingIamWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getPricingIamRequestConfig()
 
         return request<Unit, PricingPlanList>(
             localVariableConfig
@@ -1083,11 +1083,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingIam
+     * To obtain the request config of the operation getPricingIam
      *
      * @return RequestConfig
      */
-    fun getV1PricingIamRequestConfig() : RequestConfig<Unit> {
+    fun getPricingIamRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1117,8 +1117,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingModelByName(name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingModelByNameWithHttpInfo(name = name)
+    fun getPricingModelByName(name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingModelByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1146,8 +1146,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingModelByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingModelByNameRequestConfig(name = name)
+    fun getPricingModelByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingModelByNameRequestConfig(name = name)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1155,12 +1155,12 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingModelByName
+     * To obtain the request config of the operation getPricingModelByName
      *
      * @param name Name is the model&#39;s name or its slugged id (\&quot;zen4\&quot;, \&quot;acme/some-model-1\&quot;), matched case-insensitively. It comes from the path: the URL is the addressing authority.
      * @return RequestConfig
      */
-    fun getV1PricingModelByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getPricingModelByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1178,8 +1178,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/models
-     * Returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see.
-     * Returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see. A model an admin has disabled is absent; one in beta appears only for an org granted it. A SuperAdmin sees every model, each annotated with its enablement state.
+     * Returns the whole model catalog — every model the gateway serves, Zen and third-party alike — filtered to what the caller&#39;s org may see.
+     * Returns the whole model catalog — every model the gateway serves, Zen and third-party alike — filtered to what the caller&#39;s org may see. A model an admin has disabled is absent; one in beta appears only for an org granted it. A SuperAdmin sees every model, each annotated with its enablement state.
      * @return PricingModelList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1189,8 +1189,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingModels() : PricingModelList {
-        val localVarResponse = getV1PricingModelsWithHttpInfo()
+    fun getPricingModels() : PricingModelList {
+        val localVarResponse = getPricingModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingModelList
@@ -1209,16 +1209,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/models
-     * Returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see.
-     * Returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see. A model an admin has disabled is absent; one in beta appears only for an org granted it. A SuperAdmin sees every model, each annotated with its enablement state.
+     * Returns the whole model catalog — every model the gateway serves, Zen and third-party alike — filtered to what the caller&#39;s org may see.
+     * Returns the whole model catalog — every model the gateway serves, Zen and third-party alike — filtered to what the caller&#39;s org may see. A model an admin has disabled is absent; one in beta appears only for an org granted it. A SuperAdmin sees every model, each annotated with its enablement state.
      * @return ApiResponse<PricingModelList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingModelsWithHttpInfo() : ApiResponse<PricingModelList?> {
-        val localVariableConfig = getV1PricingModelsRequestConfig()
+    fun getPricingModelsWithHttpInfo() : ApiResponse<PricingModelList?> {
+        val localVariableConfig = getPricingModelsRequestConfig()
 
         return request<Unit, PricingModelList>(
             localVariableConfig
@@ -1226,11 +1226,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingModels
+     * To obtain the request config of the operation getPricingModels
      *
      * @return RequestConfig
      */
-    fun getV1PricingModelsRequestConfig() : RequestConfig<Unit> {
+    fun getPricingModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1259,8 +1259,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingPaas() : PricingPlanList {
-        val localVarResponse = getV1PricingPaasWithHttpInfo()
+    fun getPricingPaas() : PricingPlanList {
+        val localVarResponse = getPricingPaasWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
@@ -1287,8 +1287,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingPaasWithHttpInfo() : ApiResponse<PricingPlanList?> {
-        val localVariableConfig = getV1PricingPaasRequestConfig()
+    fun getPricingPaasWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getPricingPaasRequestConfig()
 
         return request<Unit, PricingPlanList>(
             localVariableConfig
@@ -1296,11 +1296,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingPaas
+     * To obtain the request config of the operation getPricingPaas
      *
      * @return RequestConfig
      */
-    fun getV1PricingPaasRequestConfig() : RequestConfig<Unit> {
+    fun getPricingPaasRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1329,8 +1329,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingPolicy() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingPolicyWithHttpInfo()
+    fun getPricingPolicy() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1357,8 +1357,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingPolicyWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingPolicyRequestConfig()
+    fun getPricingPolicyWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingPolicyRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1366,11 +1366,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingPolicy
+     * To obtain the request config of the operation getPricingPolicy
      *
      * @return RequestConfig
      */
-    fun getV1PricingPolicyRequestConfig() : RequestConfig<Unit> {
+    fun getPricingPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1399,8 +1399,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingProviders() : PricingProviderList {
-        val localVarResponse = getV1PricingProvidersWithHttpInfo()
+    fun getPricingProviders() : PricingProviderList {
+        val localVarResponse = getPricingProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingProviderList
@@ -1427,8 +1427,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingProvidersWithHttpInfo() : ApiResponse<PricingProviderList?> {
-        val localVariableConfig = getV1PricingProvidersRequestConfig()
+    fun getPricingProvidersWithHttpInfo() : ApiResponse<PricingProviderList?> {
+        val localVariableConfig = getPricingProvidersRequestConfig()
 
         return request<Unit, PricingProviderList>(
             localVariableConfig
@@ -1436,11 +1436,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingProviders
+     * To obtain the request config of the operation getPricingProviders
      *
      * @return RequestConfig
      */
-    fun getV1PricingProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getPricingProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1469,8 +1469,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingServices() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingServicesWithHttpInfo()
+    fun getPricingServices() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingServicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1497,8 +1497,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingServicesWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingServicesRequestConfig()
+    fun getPricingServicesWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingServicesRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1506,11 +1506,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingServices
+     * To obtain the request config of the operation getPricingServices
      *
      * @return RequestConfig
      */
-    fun getV1PricingServicesRequestConfig() : RequestConfig<Unit> {
+    fun getPricingServicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1539,8 +1539,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingSubscriptions() : PricingPlanList {
-        val localVarResponse = getV1PricingSubscriptionsWithHttpInfo()
+    fun getPricingSubscriptions() : PricingPlanList {
+        val localVarResponse = getPricingSubscriptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
@@ -1567,8 +1567,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingSubscriptionsWithHttpInfo() : ApiResponse<PricingPlanList?> {
-        val localVariableConfig = getV1PricingSubscriptionsRequestConfig()
+    fun getPricingSubscriptionsWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getPricingSubscriptionsRequestConfig()
 
         return request<Unit, PricingPlanList>(
             localVariableConfig
@@ -1576,11 +1576,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingSubscriptions
+     * To obtain the request config of the operation getPricingSubscriptions
      *
      * @return RequestConfig
      */
-    fun getV1PricingSubscriptionsRequestConfig() : RequestConfig<Unit> {
+    fun getPricingSubscriptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1609,8 +1609,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingSummary() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1PricingSummaryWithHttpInfo()
+    fun getPricingSummary() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getPricingSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1637,8 +1637,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingSummaryWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1PricingSummaryRequestConfig()
+    fun getPricingSummaryWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getPricingSummaryRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1646,11 +1646,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingSummary
+     * To obtain the request config of the operation getPricingSummary
      *
      * @return RequestConfig
      */
-    fun getV1PricingSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getPricingSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1679,8 +1679,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1PricingTools() : PricingToolList {
-        val localVarResponse = getV1PricingToolsWithHttpInfo()
+    fun getPricingTools() : PricingToolList {
+        val localVarResponse = getPricingToolsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingToolList
@@ -1707,8 +1707,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1PricingToolsWithHttpInfo() : ApiResponse<PricingToolList?> {
-        val localVariableConfig = getV1PricingToolsRequestConfig()
+    fun getPricingToolsWithHttpInfo() : ApiResponse<PricingToolList?> {
+        val localVariableConfig = getPricingToolsRequestConfig()
 
         return request<Unit, PricingToolList>(
             localVariableConfig
@@ -1716,11 +1716,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation getV1PricingTools
+     * To obtain the request config of the operation getPricingTools
      *
      * @return RequestConfig
      */
-    fun getV1PricingToolsRequestConfig() : RequestConfig<Unit> {
+    fun getPricingToolsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1749,8 +1749,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1PricingSync() : PricingSyncOut {
-        val localVarResponse = postV1PricingSyncWithHttpInfo()
+    fun postPricingSync() : PricingSyncOut {
+        val localVarResponse = postPricingSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PricingSyncOut
@@ -1777,8 +1777,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1PricingSyncWithHttpInfo() : ApiResponse<PricingSyncOut?> {
-        val localVariableConfig = postV1PricingSyncRequestConfig()
+    fun postPricingSyncWithHttpInfo() : ApiResponse<PricingSyncOut?> {
+        val localVariableConfig = postPricingSyncRequestConfig()
 
         return request<Unit, PricingSyncOut>(
             localVariableConfig
@@ -1786,11 +1786,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation postV1PricingSync
+     * To obtain the request config of the operation postPricingSync
      *
      * @return RequestConfig
      */
-    fun postV1PricingSyncRequestConfig() : RequestConfig<Unit> {
+    fun postPricingSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

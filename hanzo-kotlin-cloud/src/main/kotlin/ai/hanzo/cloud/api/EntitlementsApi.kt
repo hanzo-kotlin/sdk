@@ -58,8 +58,8 @@ class EntitlementsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Entitlements() : ProjectionView {
-        val localVarResponse = getV1EntitlementsWithHttpInfo()
+    fun getEntitlements() : ProjectionView {
+        val localVarResponse = getEntitlementsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectionView
@@ -86,8 +86,8 @@ class EntitlementsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1EntitlementsWithHttpInfo() : ApiResponse<ProjectionView?> {
-        val localVariableConfig = getV1EntitlementsRequestConfig()
+    fun getEntitlementsWithHttpInfo() : ApiResponse<ProjectionView?> {
+        val localVariableConfig = getEntitlementsRequestConfig()
 
         return request<Unit, ProjectionView>(
             localVariableConfig
@@ -95,11 +95,11 @@ class EntitlementsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation getV1Entitlements
+     * To obtain the request config of the operation getEntitlements
      *
      * @return RequestConfig
      */
-    fun getV1EntitlementsRequestConfig() : RequestConfig<Unit> {
+    fun getEntitlementsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -56,8 +56,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1OrgSettings() : Unit {
-        val localVarResponse = deleteV1OrgSettingsWithHttpInfo()
+    fun deleteOrgSettings() : Unit {
+        val localVarResponse = deleteOrgSettingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1OrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1OrgSettingsRequestConfig()
+    fun deleteOrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteOrgSettingsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1OrgSettings
+     * To obtain the request config of the operation deleteOrgSettings
      *
      * @return RequestConfig
      */
-    fun deleteV1OrgSettingsRequestConfig() : RequestConfig<Unit> {
+    fun deleteOrgSettingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1OrgSettingsList() : Unit {
-        val localVarResponse = deleteV1OrgSettingsListWithHttpInfo()
+    fun deleteOrgSettingsList() : Unit {
+        val localVarResponse = deleteOrgSettingsListWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1OrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1OrgSettingsListRequestConfig()
+    fun deleteOrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteOrgSettingsListRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteV1OrgSettingsList
+     * To obtain the request config of the operation deleteOrgSettingsList
      *
      * @return RequestConfig
      */
-    fun deleteV1OrgSettingsListRequestConfig() : RequestConfig<Unit> {
+    fun deleteOrgSettingsListRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1OrgSettings() : Unit {
-        val localVarResponse = getV1OrgSettingsWithHttpInfo()
+    fun getOrgSettings() : Unit {
+        val localVarResponse = getOrgSettingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1OrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1OrgSettingsRequestConfig()
+    fun getOrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getOrgSettingsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1OrgSettings
+     * To obtain the request config of the operation getOrgSettings
      *
      * @return RequestConfig
      */
-    fun getV1OrgSettingsRequestConfig() : RequestConfig<Unit> {
+    fun getOrgSettingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -257,8 +257,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1OrgSettingsList() : Unit {
-        val localVarResponse = getV1OrgSettingsListWithHttpInfo()
+    fun getOrgSettingsList() : Unit {
+        val localVarResponse = getOrgSettingsListWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,8 +284,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1OrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1OrgSettingsListRequestConfig()
+    fun getOrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getOrgSettingsListRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +293,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getV1OrgSettingsList
+     * To obtain the request config of the operation getOrgSettingsList
      *
      * @return RequestConfig
      */
-    fun getV1OrgSettingsListRequestConfig() : RequestConfig<Unit> {
+    fun getOrgSettingsListRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -324,8 +324,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1OrgSettings() : Unit {
-        val localVarResponse = patchV1OrgSettingsWithHttpInfo()
+    fun patchOrgSettings() : Unit {
+        val localVarResponse = patchOrgSettingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -351,8 +351,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1OrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1OrgSettingsRequestConfig()
+    fun patchOrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchOrgSettingsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -360,11 +360,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation patchV1OrgSettings
+     * To obtain the request config of the operation patchOrgSettings
      *
      * @return RequestConfig
      */
-    fun patchV1OrgSettingsRequestConfig() : RequestConfig<Unit> {
+    fun patchOrgSettingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -391,8 +391,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1OrgSettingsList() : Unit {
-        val localVarResponse = patchV1OrgSettingsListWithHttpInfo()
+    fun patchOrgSettingsList() : Unit {
+        val localVarResponse = patchOrgSettingsListWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -418,8 +418,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1OrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1OrgSettingsListRequestConfig()
+    fun patchOrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchOrgSettingsListRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -427,11 +427,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation patchV1OrgSettingsList
+     * To obtain the request config of the operation patchOrgSettingsList
      *
      * @return RequestConfig
      */
-    fun patchV1OrgSettingsListRequestConfig() : RequestConfig<Unit> {
+    fun patchOrgSettingsListRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -458,8 +458,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1OrgSettings() : Unit {
-        val localVarResponse = postV1OrgSettingsWithHttpInfo()
+    fun postOrgSettings() : Unit {
+        val localVarResponse = postOrgSettingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -485,8 +485,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1OrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1OrgSettingsRequestConfig()
+    fun postOrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postOrgSettingsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -494,11 +494,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1OrgSettings
+     * To obtain the request config of the operation postOrgSettings
      *
      * @return RequestConfig
      */
-    fun postV1OrgSettingsRequestConfig() : RequestConfig<Unit> {
+    fun postOrgSettingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -525,8 +525,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1OrgSettingsList() : Unit {
-        val localVarResponse = postV1OrgSettingsListWithHttpInfo()
+    fun postOrgSettingsList() : Unit {
+        val localVarResponse = postOrgSettingsListWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -552,8 +552,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1OrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1OrgSettingsListRequestConfig()
+    fun postOrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postOrgSettingsListRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -561,11 +561,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1OrgSettingsList
+     * To obtain the request config of the operation postOrgSettingsList
      *
      * @return RequestConfig
      */
-    fun postV1OrgSettingsListRequestConfig() : RequestConfig<Unit> {
+    fun postOrgSettingsListRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -592,8 +592,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1OrgSettings() : Unit {
-        val localVarResponse = putV1OrgSettingsWithHttpInfo()
+    fun putOrgSettings() : Unit {
+        val localVarResponse = putOrgSettingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -619,8 +619,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1OrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1OrgSettingsRequestConfig()
+    fun putOrgSettingsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putOrgSettingsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -628,11 +628,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putV1OrgSettings
+     * To obtain the request config of the operation putOrgSettings
      *
      * @return RequestConfig
      */
-    fun putV1OrgSettingsRequestConfig() : RequestConfig<Unit> {
+    fun putOrgSettingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -659,8 +659,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1OrgSettingsList() : Unit {
-        val localVarResponse = putV1OrgSettingsListWithHttpInfo()
+    fun putOrgSettingsList() : Unit {
+        val localVarResponse = putOrgSettingsListWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -686,8 +686,8 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1OrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = putV1OrgSettingsListRequestConfig()
+    fun putOrgSettingsListWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putOrgSettingsListRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -695,11 +695,11 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putV1OrgSettingsList
+     * To obtain the request config of the operation putOrgSettingsList
      *
      * @return RequestConfig
      */
-    fun putV1OrgSettingsListRequestConfig() : RequestConfig<Unit> {
+    fun putOrgSettingsListRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

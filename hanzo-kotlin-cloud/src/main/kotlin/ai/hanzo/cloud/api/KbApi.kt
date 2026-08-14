@@ -66,8 +66,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1KbConnectorsByProvider(provider: kotlin.String) : ConnectionOut {
-        val localVarResponse = deleteV1KbConnectorsByProviderWithHttpInfo(provider = provider)
+    fun deleteKbConnectorsByProvider(provider: kotlin.String) : ConnectionOut {
+        val localVarResponse = deleteKbConnectorsByProviderWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectionOut
@@ -95,8 +95,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1KbConnectorsByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<ConnectionOut?> {
-        val localVariableConfig = deleteV1KbConnectorsByProviderRequestConfig(provider = provider)
+    fun deleteKbConnectorsByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<ConnectionOut?> {
+        val localVariableConfig = deleteKbConnectorsByProviderRequestConfig(provider = provider)
 
         return request<Unit, ConnectionOut>(
             localVariableConfig
@@ -104,12 +104,12 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteV1KbConnectorsByProvider
+     * To obtain the request config of the operation deleteKbConnectorsByProvider
      *
      * @param provider Provider is the connector to act on: github, slack, google or notion.
      * @return RequestConfig
      */
-    fun deleteV1KbConnectorsByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun deleteKbConnectorsByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -138,8 +138,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KbConnectors() : KbConnectorsOut {
-        val localVarResponse = getV1KbConnectorsWithHttpInfo()
+    fun getKbConnectors() : KbConnectorsOut {
+        val localVarResponse = getKbConnectorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KbConnectorsOut
@@ -166,8 +166,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KbConnectorsWithHttpInfo() : ApiResponse<KbConnectorsOut?> {
-        val localVariableConfig = getV1KbConnectorsRequestConfig()
+    fun getKbConnectorsWithHttpInfo() : ApiResponse<KbConnectorsOut?> {
+        val localVariableConfig = getKbConnectorsRequestConfig()
 
         return request<Unit, KbConnectorsOut>(
             localVariableConfig
@@ -175,11 +175,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1KbConnectors
+     * To obtain the request config of the operation getKbConnectors
      *
      * @return RequestConfig
      */
-    fun getV1KbConnectorsRequestConfig() : RequestConfig<Unit> {
+    fun getKbConnectorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -212,8 +212,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KbConnectorsByProviderCallback(provider: kotlin.String, code: kotlin.String? = null, state: kotlin.String? = null, error: kotlin.String? = null) : ConnectionOut {
-        val localVarResponse = getV1KbConnectorsByProviderCallbackWithHttpInfo(provider = provider, code = code, state = state, error = error)
+    fun getKbConnectorsByProviderCallback(provider: kotlin.String, code: kotlin.String? = null, state: kotlin.String? = null, error: kotlin.String? = null) : ConnectionOut {
+        val localVarResponse = getKbConnectorsByProviderCallbackWithHttpInfo(provider = provider, code = code, state = state, error = error)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectionOut
@@ -244,8 +244,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KbConnectorsByProviderCallbackWithHttpInfo(provider: kotlin.String, code: kotlin.String?, state: kotlin.String?, error: kotlin.String?) : ApiResponse<ConnectionOut?> {
-        val localVariableConfig = getV1KbConnectorsByProviderCallbackRequestConfig(provider = provider, code = code, state = state, error = error)
+    fun getKbConnectorsByProviderCallbackWithHttpInfo(provider: kotlin.String, code: kotlin.String?, state: kotlin.String?, error: kotlin.String?) : ApiResponse<ConnectionOut?> {
+        val localVariableConfig = getKbConnectorsByProviderCallbackRequestConfig(provider = provider, code = code, state = state, error = error)
 
         return request<Unit, ConnectionOut>(
             localVariableConfig
@@ -253,7 +253,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1KbConnectorsByProviderCallback
+     * To obtain the request config of the operation getKbConnectorsByProviderCallback
      *
      * @param provider Provider is the connector completing its flow, from the path.
      * @param code Code is the provider&#39;s authorization code, exchanged for a token. (optional)
@@ -261,7 +261,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param error Error is the provider&#39;s denial reason when the user refused consent. (optional)
      * @return RequestConfig
      */
-    fun getV1KbConnectorsByProviderCallbackRequestConfig(provider: kotlin.String, code: kotlin.String?, state: kotlin.String?, error: kotlin.String?) : RequestConfig<Unit> {
+    fun getKbConnectorsByProviderCallbackRequestConfig(provider: kotlin.String, code: kotlin.String?, state: kotlin.String?, error: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -302,8 +302,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KbConnectorsByProviderConnect(provider: kotlin.String) : KbAuthorizeOut {
-        val localVarResponse = getV1KbConnectorsByProviderConnectWithHttpInfo(provider = provider)
+    fun getKbConnectorsByProviderConnect(provider: kotlin.String) : KbAuthorizeOut {
+        val localVarResponse = getKbConnectorsByProviderConnectWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KbAuthorizeOut
@@ -331,8 +331,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KbConnectorsByProviderConnectWithHttpInfo(provider: kotlin.String) : ApiResponse<KbAuthorizeOut?> {
-        val localVariableConfig = getV1KbConnectorsByProviderConnectRequestConfig(provider = provider)
+    fun getKbConnectorsByProviderConnectWithHttpInfo(provider: kotlin.String) : ApiResponse<KbAuthorizeOut?> {
+        val localVariableConfig = getKbConnectorsByProviderConnectRequestConfig(provider = provider)
 
         return request<Unit, KbAuthorizeOut>(
             localVariableConfig
@@ -340,12 +340,12 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1KbConnectorsByProviderConnect
+     * To obtain the request config of the operation getKbConnectorsByProviderConnect
      *
      * @param provider Provider is the connector to act on: github, slack, google or notion.
      * @return RequestConfig
      */
-    fun getV1KbConnectorsByProviderConnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getKbConnectorsByProviderConnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -374,8 +374,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KbConnectorsCatalog() : CatalogOut {
-        val localVarResponse = getV1KbConnectorsCatalogWithHttpInfo()
+    fun getKbConnectorsCatalog() : CatalogOut {
+        val localVarResponse = getKbConnectorsCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CatalogOut
@@ -402,8 +402,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KbConnectorsCatalogWithHttpInfo() : ApiResponse<CatalogOut?> {
-        val localVariableConfig = getV1KbConnectorsCatalogRequestConfig()
+    fun getKbConnectorsCatalogWithHttpInfo() : ApiResponse<CatalogOut?> {
+        val localVariableConfig = getKbConnectorsCatalogRequestConfig()
 
         return request<Unit, CatalogOut>(
             localVariableConfig
@@ -411,11 +411,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1KbConnectorsCatalog
+     * To obtain the request config of the operation getKbConnectorsCatalog
      *
      * @return RequestConfig
      */
-    fun getV1KbConnectorsCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getKbConnectorsCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -445,8 +445,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1KbGraph(project: kotlin.String? = null) : GraphOut {
-        val localVarResponse = getV1KbGraphWithHttpInfo(project = project)
+    fun getKbGraph(project: kotlin.String? = null) : GraphOut {
+        val localVarResponse = getKbGraphWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GraphOut
@@ -474,8 +474,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1KbGraphWithHttpInfo(project: kotlin.String?) : ApiResponse<GraphOut?> {
-        val localVariableConfig = getV1KbGraphRequestConfig(project = project)
+    fun getKbGraphWithHttpInfo(project: kotlin.String?) : ApiResponse<GraphOut?> {
+        val localVariableConfig = getKbGraphRequestConfig(project = project)
 
         return request<Unit, GraphOut>(
             localVariableConfig
@@ -483,12 +483,12 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getV1KbGraph
+     * To obtain the request config of the operation getKbGraph
      *
      * @param project Project narrows the graph to one project scope. Empty reads the whole org. (optional)
      * @return RequestConfig
      */
-    fun getV1KbGraphRequestConfig(project: kotlin.String?) : RequestConfig<Unit> {
+    fun getKbGraphRequestConfig(project: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -523,8 +523,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1KbConnectorsByProviderSync(provider: kotlin.String) : KbSyncOut {
-        val localVarResponse = postV1KbConnectorsByProviderSyncWithHttpInfo(provider = provider)
+    fun postKbConnectorsByProviderSync(provider: kotlin.String) : KbSyncOut {
+        val localVarResponse = postKbConnectorsByProviderSyncWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as KbSyncOut
@@ -552,8 +552,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1KbConnectorsByProviderSyncWithHttpInfo(provider: kotlin.String) : ApiResponse<KbSyncOut?> {
-        val localVariableConfig = postV1KbConnectorsByProviderSyncRequestConfig(provider = provider)
+    fun postKbConnectorsByProviderSyncWithHttpInfo(provider: kotlin.String) : ApiResponse<KbSyncOut?> {
+        val localVariableConfig = postKbConnectorsByProviderSyncRequestConfig(provider = provider)
 
         return request<Unit, KbSyncOut>(
             localVariableConfig
@@ -561,12 +561,12 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1KbConnectorsByProviderSync
+     * To obtain the request config of the operation postKbConnectorsByProviderSync
      *
      * @param provider Provider is the connector to act on: github, slack, google or notion.
      * @return RequestConfig
      */
-    fun postV1KbConnectorsByProviderSyncRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun postKbConnectorsByProviderSyncRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -594,8 +594,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1KbImport() : Unit {
-        val localVarResponse = postV1KbImportWithHttpInfo()
+    fun postKbImport() : Unit {
+        val localVarResponse = postKbImportWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -621,8 +621,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1KbImportWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1KbImportRequestConfig()
+    fun postKbImportWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postKbImportRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -630,11 +630,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1KbImport
+     * To obtain the request config of the operation postKbImport
      *
      * @return RequestConfig
      */
-    fun postV1KbImportRequestConfig() : RequestConfig<Unit> {
+    fun postKbImportRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -663,8 +663,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1KbSearch(searchIn: SearchIn) : SearchOut {
-        val localVarResponse = postV1KbSearchWithHttpInfo(searchIn = searchIn)
+    fun postKbSearch(searchIn: SearchIn) : SearchOut {
+        val localVarResponse = postKbSearchWithHttpInfo(searchIn = searchIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SearchOut
@@ -692,8 +692,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1KbSearchWithHttpInfo(searchIn: SearchIn) : ApiResponse<SearchOut?> {
-        val localVariableConfig = postV1KbSearchRequestConfig(searchIn = searchIn)
+    fun postKbSearchWithHttpInfo(searchIn: SearchIn) : ApiResponse<SearchOut?> {
+        val localVariableConfig = postKbSearchRequestConfig(searchIn = searchIn)
 
         return request<SearchIn, SearchOut>(
             localVariableConfig
@@ -701,12 +701,12 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postV1KbSearch
+     * To obtain the request config of the operation postKbSearch
      *
      * @param searchIn 
      * @return RequestConfig
      */
-    fun postV1KbSearchRequestConfig(searchIn: SearchIn) : RequestConfig<SearchIn> {
+    fun postKbSearchRequestConfig(searchIn: SearchIn) : RequestConfig<SearchIn> {
         val localVariableBody = searchIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

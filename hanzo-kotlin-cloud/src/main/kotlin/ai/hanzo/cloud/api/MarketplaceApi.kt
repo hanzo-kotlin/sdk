@@ -63,8 +63,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1MarketplaceListingsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1MarketplaceListingsByIdWithHttpInfo(id = id)
+    fun deleteMarketplaceListingsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteMarketplaceListingsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -91,8 +91,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1MarketplaceListingsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1MarketplaceListingsByIdRequestConfig(id = id)
+    fun deleteMarketplaceListingsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMarketplaceListingsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -100,12 +100,12 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation deleteV1MarketplaceListingsById
+     * To obtain the request config of the operation deleteMarketplaceListingsById
      *
      * @param id ID is the listing to unpublish, from the path.
      * @return RequestConfig
      */
-    fun deleteV1MarketplaceListingsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMarketplaceListingsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -133,8 +133,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Marketplace() : MarketCatalog {
-        val localVarResponse = getV1MarketplaceWithHttpInfo()
+    fun getMarketplace() : MarketCatalog {
+        val localVarResponse = getMarketplaceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as MarketCatalog
@@ -161,8 +161,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketplaceWithHttpInfo() : ApiResponse<MarketCatalog?> {
-        val localVariableConfig = getV1MarketplaceRequestConfig()
+    fun getMarketplaceWithHttpInfo() : ApiResponse<MarketCatalog?> {
+        val localVariableConfig = getMarketplaceRequestConfig()
 
         return request<Unit, MarketCatalog>(
             localVariableConfig
@@ -170,11 +170,11 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1Marketplace
+     * To obtain the request config of the operation getMarketplace
      *
      * @return RequestConfig
      */
-    fun getV1MarketplaceRequestConfig() : RequestConfig<Unit> {
+    fun getMarketplaceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -203,8 +203,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1MarketplaceListings() : ListingPage {
-        val localVarResponse = getV1MarketplaceListingsWithHttpInfo()
+    fun getMarketplaceListings() : ListingPage {
+        val localVarResponse = getMarketplaceListingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ListingPage
@@ -231,8 +231,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1MarketplaceListingsWithHttpInfo() : ApiResponse<ListingPage?> {
-        val localVariableConfig = getV1MarketplaceListingsRequestConfig()
+    fun getMarketplaceListingsWithHttpInfo() : ApiResponse<ListingPage?> {
+        val localVariableConfig = getMarketplaceListingsRequestConfig()
 
         return request<Unit, ListingPage>(
             localVariableConfig
@@ -240,11 +240,11 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1MarketplaceListings
+     * To obtain the request config of the operation getMarketplaceListings
      *
      * @return RequestConfig
      */
-    fun getV1MarketplaceListingsRequestConfig() : RequestConfig<Unit> {
+    fun getMarketplaceListingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -274,8 +274,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketplaceInstall(installReq: InstallReq) : InstallState {
-        val localVarResponse = postV1MarketplaceInstallWithHttpInfo(installReq = installReq)
+    fun postMarketplaceInstall(installReq: InstallReq) : InstallState {
+        val localVarResponse = postMarketplaceInstallWithHttpInfo(installReq = installReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InstallState
@@ -303,8 +303,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketplaceInstallWithHttpInfo(installReq: InstallReq) : ApiResponse<InstallState?> {
-        val localVariableConfig = postV1MarketplaceInstallRequestConfig(installReq = installReq)
+    fun postMarketplaceInstallWithHttpInfo(installReq: InstallReq) : ApiResponse<InstallState?> {
+        val localVariableConfig = postMarketplaceInstallRequestConfig(installReq = installReq)
 
         return request<InstallReq, InstallState>(
             localVariableConfig
@@ -312,12 +312,12 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketplaceInstall
+     * To obtain the request config of the operation postMarketplaceInstall
      *
      * @param installReq 
      * @return RequestConfig
      */
-    fun postV1MarketplaceInstallRequestConfig(installReq: InstallReq) : RequestConfig<InstallReq> {
+    fun postMarketplaceInstallRequestConfig(installReq: InstallReq) : RequestConfig<InstallReq> {
         val localVariableBody = installReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -348,8 +348,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketplaceListings(publishReq: PublishReq) : Listing {
-        val localVarResponse = postV1MarketplaceListingsWithHttpInfo(publishReq = publishReq)
+    fun postMarketplaceListings(publishReq: PublishReq) : Listing {
+        val localVarResponse = postMarketplaceListingsWithHttpInfo(publishReq = publishReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Listing
@@ -377,8 +377,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketplaceListingsWithHttpInfo(publishReq: PublishReq) : ApiResponse<Listing?> {
-        val localVariableConfig = postV1MarketplaceListingsRequestConfig(publishReq = publishReq)
+    fun postMarketplaceListingsWithHttpInfo(publishReq: PublishReq) : ApiResponse<Listing?> {
+        val localVariableConfig = postMarketplaceListingsRequestConfig(publishReq = publishReq)
 
         return request<PublishReq, Listing>(
             localVariableConfig
@@ -386,12 +386,12 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketplaceListings
+     * To obtain the request config of the operation postMarketplaceListings
      *
      * @param publishReq 
      * @return RequestConfig
      */
-    fun postV1MarketplaceListingsRequestConfig(publishReq: PublishReq) : RequestConfig<PublishReq> {
+    fun postMarketplaceListingsRequestConfig(publishReq: PublishReq) : RequestConfig<PublishReq> {
         val localVariableBody = publishReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -422,8 +422,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1MarketplaceUninstall(installReq: InstallReq) : InstallState {
-        val localVarResponse = postV1MarketplaceUninstallWithHttpInfo(installReq = installReq)
+    fun postMarketplaceUninstall(installReq: InstallReq) : InstallState {
+        val localVarResponse = postMarketplaceUninstallWithHttpInfo(installReq = installReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as InstallState
@@ -451,8 +451,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MarketplaceUninstallWithHttpInfo(installReq: InstallReq) : ApiResponse<InstallState?> {
-        val localVariableConfig = postV1MarketplaceUninstallRequestConfig(installReq = installReq)
+    fun postMarketplaceUninstallWithHttpInfo(installReq: InstallReq) : ApiResponse<InstallState?> {
+        val localVariableConfig = postMarketplaceUninstallRequestConfig(installReq = installReq)
 
         return request<InstallReq, InstallState>(
             localVariableConfig
@@ -460,12 +460,12 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1MarketplaceUninstall
+     * To obtain the request config of the operation postMarketplaceUninstall
      *
      * @param installReq 
      * @return RequestConfig
      */
-    fun postV1MarketplaceUninstallRequestConfig(installReq: InstallReq) : RequestConfig<InstallReq> {
+    fun postMarketplaceUninstallRequestConfig(installReq: InstallReq) : RequestConfig<InstallReq> {
         val localVariableBody = installReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

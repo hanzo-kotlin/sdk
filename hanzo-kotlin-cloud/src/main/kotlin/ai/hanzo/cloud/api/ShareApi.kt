@@ -59,8 +59,8 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Share() : SharesOut {
-        val localVarResponse = getV1ShareWithHttpInfo()
+    fun getShare() : SharesOut {
+        val localVarResponse = getShareWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SharesOut
@@ -87,8 +87,8 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1ShareWithHttpInfo() : ApiResponse<SharesOut?> {
-        val localVariableConfig = getV1ShareRequestConfig()
+    fun getShareWithHttpInfo() : ApiResponse<SharesOut?> {
+        val localVariableConfig = getShareRequestConfig()
 
         return request<Unit, SharesOut>(
             localVariableConfig
@@ -96,11 +96,11 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Share
+     * To obtain the request config of the operation getShare
      *
      * @return RequestConfig
      */
-    fun getV1ShareRequestConfig() : RequestConfig<Unit> {
+    fun getShareRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -129,8 +129,8 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1ShareEnable() : EnableResp {
-        val localVarResponse = postV1ShareEnableWithHttpInfo()
+    fun postShareEnable() : EnableResp {
+        val localVarResponse = postShareEnableWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EnableResp
@@ -157,8 +157,8 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1ShareEnableWithHttpInfo() : ApiResponse<EnableResp?> {
-        val localVariableConfig = postV1ShareEnableRequestConfig()
+    fun postShareEnableWithHttpInfo() : ApiResponse<EnableResp?> {
+        val localVariableConfig = postShareEnableRequestConfig()
 
         return request<Unit, EnableResp>(
             localVariableConfig
@@ -166,11 +166,11 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1ShareEnable
+     * To obtain the request config of the operation postShareEnable
      *
      * @return RequestConfig
      */
-    fun postV1ShareEnableRequestConfig() : RequestConfig<Unit> {
+    fun postShareEnableRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

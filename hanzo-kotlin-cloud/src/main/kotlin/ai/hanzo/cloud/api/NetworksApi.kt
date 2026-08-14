@@ -60,8 +60,8 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Networks() : NetworkList {
-        val localVarResponse = getV1NetworksWithHttpInfo()
+    fun getNetworks() : NetworkList {
+        val localVarResponse = getNetworksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as NetworkList
@@ -88,8 +88,8 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1NetworksWithHttpInfo() : ApiResponse<NetworkList?> {
-        val localVariableConfig = getV1NetworksRequestConfig()
+    fun getNetworksWithHttpInfo() : ApiResponse<NetworkList?> {
+        val localVariableConfig = getNetworksRequestConfig()
 
         return request<Unit, NetworkList>(
             localVariableConfig
@@ -97,11 +97,11 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1Networks
+     * To obtain the request config of the operation getNetworks
      *
      * @return RequestConfig
      */
-    fun getV1NetworksRequestConfig() : RequestConfig<Unit> {
+    fun getNetworksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,8 +131,8 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1NetworksById(id: kotlin.String) : NetworkView {
-        val localVarResponse = getV1NetworksByIdWithHttpInfo(id = id)
+    fun getNetworksById(id: kotlin.String) : NetworkView {
+        val localVarResponse = getNetworksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as NetworkView
@@ -160,8 +160,8 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1NetworksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<NetworkView?> {
-        val localVariableConfig = getV1NetworksByIdRequestConfig(id = id)
+    fun getNetworksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<NetworkView?> {
+        val localVariableConfig = getNetworksByIdRequestConfig(id = id)
 
         return request<Unit, NetworkView>(
             localVariableConfig
@@ -169,12 +169,12 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1NetworksById
+     * To obtain the request config of the operation getNetworksById
      *
      * @param id ID is the network id from the path. The URL is the addressing authority, so it binds from there whatever else the request carries.
      * @return RequestConfig
      */
-    fun getV1NetworksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getNetworksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -203,8 +203,8 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1NetworksRouters() : RouterList {
-        val localVarResponse = getV1NetworksRoutersWithHttpInfo()
+    fun getNetworksRouters() : RouterList {
+        val localVarResponse = getNetworksRoutersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RouterList
@@ -231,8 +231,8 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1NetworksRoutersWithHttpInfo() : ApiResponse<RouterList?> {
-        val localVariableConfig = getV1NetworksRoutersRequestConfig()
+    fun getNetworksRoutersWithHttpInfo() : ApiResponse<RouterList?> {
+        val localVariableConfig = getNetworksRoutersRequestConfig()
 
         return request<Unit, RouterList>(
             localVariableConfig
@@ -240,11 +240,11 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1NetworksRouters
+     * To obtain the request config of the operation getNetworksRouters
      *
      * @return RequestConfig
      */
-    fun getV1NetworksRoutersRequestConfig() : RequestConfig<Unit> {
+    fun getNetworksRoutersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

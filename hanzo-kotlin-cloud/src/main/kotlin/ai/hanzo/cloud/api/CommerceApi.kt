@@ -57,8 +57,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+    fun deleteCommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -85,8 +85,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+    fun deleteCommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceCollectionByCollectionid
+     * To obtain the request config of the operation deleteCommerceCollectionByCollectionid
      *
      * @param collectionid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -127,8 +127,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+    fun deleteCommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -155,8 +155,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+    fun deleteCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,12 +164,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceDisclosureByDisclosureid
+     * To obtain the request config of the operation deleteCommerceDisclosureByDisclosureid
      *
      * @param disclosureid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -197,8 +197,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+    fun deleteCommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -225,8 +225,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+    fun deleteCommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceDiscountByDiscountidRequestConfig(discountid = discountid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -234,12 +234,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceDiscountByDiscountid
+     * To obtain the request config of the operation deleteCommerceDiscountByDiscountid
      *
      * @param discountid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -267,8 +267,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+    fun deleteCommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceMovieByMovieidWithHttpInfo(movieid = movieid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -295,8 +295,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+    fun deleteCommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceMovieByMovieidRequestConfig(movieid = movieid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -304,12 +304,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceMovieByMovieid
+     * To obtain the request config of the operation deleteCommerceMovieByMovieid
      *
      * @param movieid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -337,8 +337,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+    fun deleteCommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceNoteByNoteidWithHttpInfo(noteid = noteid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -365,8 +365,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+    fun deleteCommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceNoteByNoteidRequestConfig(noteid = noteid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -374,12 +374,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceNoteByNoteid
+     * To obtain the request config of the operation deleteCommerceNoteByNoteid
      *
      * @param noteid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -407,8 +407,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceProductByProductid(productid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceProductByProductidWithHttpInfo(productid = productid)
+    fun deleteCommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceProductByProductidWithHttpInfo(productid = productid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -435,8 +435,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceProductByProductidRequestConfig(productid = productid)
+    fun deleteCommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceProductByProductidRequestConfig(productid = productid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -444,12 +444,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceProductByProductid
+     * To obtain the request config of the operation deleteCommerceProductByProductid
      *
      * @param productid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -477,8 +477,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+    fun deleteCommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceReturnByReturnidWithHttpInfo(returnid = returnid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -505,8 +505,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+    fun deleteCommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceReturnByReturnidRequestConfig(returnid = returnid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -514,12 +514,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceReturnByReturnid
+     * To obtain the request config of the operation deleteCommerceReturnByReturnid
      *
      * @param returnid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -547,8 +547,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+    fun deleteCommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -575,8 +575,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+    fun deleteCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -584,12 +584,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceSaleschannelBySaleschannelid
+     * To obtain the request config of the operation deleteCommerceSaleschannelBySaleschannelid
      *
      * @param saleschannelid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -617,8 +617,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+    fun deleteCommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -645,8 +645,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+    fun deleteCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -654,12 +654,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceStocklocationByStocklocationid
+     * To obtain the request config of the operation deleteCommerceStocklocationByStocklocationid
      *
      * @param stocklocationid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -687,8 +687,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+    fun deleteCommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -715,8 +715,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+    fun deleteCommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -724,12 +724,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceSubmissionBySubmissionid
+     * To obtain the request config of the operation deleteCommerceSubmissionBySubmissionid
      *
      * @param submissionid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -757,8 +757,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+    fun deleteCommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -785,8 +785,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+    fun deleteCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -794,12 +794,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceSubscriberBySubscriberid
+     * To obtain the request config of the operation deleteCommerceSubscriberBySubscriberid
      *
      * @param subscriberid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -827,8 +827,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+    fun deleteCommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -855,8 +855,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+    fun deleteCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -864,12 +864,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceTokentransactionByTokentransactionid
+     * To obtain the request config of the operation deleteCommerceTokentransactionByTokentransactionid
      *
      * @param tokentransactionid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -897,8 +897,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+    fun deleteCommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceTransferByTransferidWithHttpInfo(transferid = transferid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -925,8 +925,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+    fun deleteCommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceTransferByTransferidRequestConfig(transferid = transferid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -934,12 +934,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceTransferByTransferid
+     * To obtain the request config of the operation deleteCommerceTransferByTransferid
      *
      * @param transferid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -967,8 +967,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+    fun deleteCommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceVariantByVariantidWithHttpInfo(variantid = variantid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -995,8 +995,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+    fun deleteCommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceVariantByVariantidRequestConfig(variantid = variantid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1004,12 +1004,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceVariantByVariantid
+     * To obtain the request config of the operation deleteCommerceVariantByVariantid
      *
      * @param variantid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1037,8 +1037,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+    fun deleteCommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceWalletByWalletidWithHttpInfo(walletid = walletid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1065,8 +1065,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+    fun deleteCommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceWalletByWalletidRequestConfig(walletid = walletid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1074,12 +1074,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceWalletByWalletid
+     * To obtain the request config of the operation deleteCommerceWalletByWalletid
      *
      * @param walletid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1107,8 +1107,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+    fun deleteCommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1135,8 +1135,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+    fun deleteCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1144,12 +1144,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceWatchlistByWatchlistid
+     * To obtain the request config of the operation deleteCommerceWatchlistByWatchlistid
      *
      * @param watchlistid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1177,8 +1177,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+    fun deleteCommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1205,8 +1205,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+    fun deleteCommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1214,12 +1214,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteV1CommerceWebhookByWebhookid
+     * To obtain the request config of the operation deleteCommerceWebhookByWebhookid
      *
      * @param webhookid 
      * @return RequestConfig
      */
-    fun deleteV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1246,8 +1246,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceAdminCatalog() : Unit {
-        val localVarResponse = getV1CommerceAdminCatalogWithHttpInfo()
+    fun getCommerceAdminCatalog() : Unit {
+        val localVarResponse = getCommerceAdminCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1273,8 +1273,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceAdminCatalogWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceAdminCatalogRequestConfig()
+    fun getCommerceAdminCatalogWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceAdminCatalogRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1282,11 +1282,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceAdminCatalog
+     * To obtain the request config of the operation getCommerceAdminCatalog
      *
      * @return RequestConfig
      */
-    fun getV1CommerceAdminCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceAdminCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1313,8 +1313,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceCatalog() : Unit {
-        val localVarResponse = getV1CommerceCatalogWithHttpInfo()
+    fun getCommerceCatalog() : Unit {
+        val localVarResponse = getCommerceCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1340,8 +1340,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceCatalogWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceCatalogRequestConfig()
+    fun getCommerceCatalogWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceCatalogRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1349,11 +1349,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceCatalog
+     * To obtain the request config of the operation getCommerceCatalog
      *
      * @return RequestConfig
      */
-    fun getV1CommerceCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1380,8 +1380,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceCollection() : Unit {
-        val localVarResponse = getV1CommerceCollectionWithHttpInfo()
+    fun getCommerceCollection() : Unit {
+        val localVarResponse = getCommerceCollectionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1407,8 +1407,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceCollectionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceCollectionRequestConfig()
+    fun getCommerceCollectionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceCollectionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1416,11 +1416,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceCollection
+     * To obtain the request config of the operation getCommerceCollection
      *
      * @return RequestConfig
      */
-    fun getV1CommerceCollectionRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceCollectionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1448,8 +1448,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+    fun getCommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1476,8 +1476,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+    fun getCommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1485,12 +1485,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceCollectionByCollectionid
+     * To obtain the request config of the operation getCommerceCollectionByCollectionid
      *
      * @param collectionid 
      * @return RequestConfig
      */
-    fun getV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1517,8 +1517,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceCurrencies() : Unit {
-        val localVarResponse = getV1CommerceCurrenciesWithHttpInfo()
+    fun getCommerceCurrencies() : Unit {
+        val localVarResponse = getCommerceCurrenciesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1544,8 +1544,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceCurrenciesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceCurrenciesRequestConfig()
+    fun getCommerceCurrenciesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceCurrenciesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1553,11 +1553,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceCurrencies
+     * To obtain the request config of the operation getCommerceCurrencies
      *
      * @return RequestConfig
      */
-    fun getV1CommerceCurrenciesRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceCurrenciesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1584,8 +1584,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceDisclosure() : Unit {
-        val localVarResponse = getV1CommerceDisclosureWithHttpInfo()
+    fun getCommerceDisclosure() : Unit {
+        val localVarResponse = getCommerceDisclosureWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1611,8 +1611,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceDisclosureWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceDisclosureRequestConfig()
+    fun getCommerceDisclosureWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceDisclosureRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1620,11 +1620,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceDisclosure
+     * To obtain the request config of the operation getCommerceDisclosure
      *
      * @return RequestConfig
      */
-    fun getV1CommerceDisclosureRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceDisclosureRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1652,8 +1652,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+    fun getCommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1680,8 +1680,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+    fun getCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1689,12 +1689,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceDisclosureByDisclosureid
+     * To obtain the request config of the operation getCommerceDisclosureByDisclosureid
      *
      * @param disclosureid 
      * @return RequestConfig
      */
-    fun getV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1721,8 +1721,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceDiscount() : Unit {
-        val localVarResponse = getV1CommerceDiscountWithHttpInfo()
+    fun getCommerceDiscount() : Unit {
+        val localVarResponse = getCommerceDiscountWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1748,8 +1748,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceDiscountWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceDiscountRequestConfig()
+    fun getCommerceDiscountWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceDiscountRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1757,11 +1757,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceDiscount
+     * To obtain the request config of the operation getCommerceDiscount
      *
      * @return RequestConfig
      */
-    fun getV1CommerceDiscountRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceDiscountRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1789,8 +1789,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+    fun getCommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1817,8 +1817,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+    fun getCommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceDiscountByDiscountidRequestConfig(discountid = discountid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1826,12 +1826,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceDiscountByDiscountid
+     * To obtain the request config of the operation getCommerceDiscountByDiscountid
      *
      * @param discountid 
      * @return RequestConfig
      */
-    fun getV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1858,8 +1858,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceMovie() : Unit {
-        val localVarResponse = getV1CommerceMovieWithHttpInfo()
+    fun getCommerceMovie() : Unit {
+        val localVarResponse = getCommerceMovieWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1885,8 +1885,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceMovieWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceMovieRequestConfig()
+    fun getCommerceMovieWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceMovieRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1894,11 +1894,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceMovie
+     * To obtain the request config of the operation getCommerceMovie
      *
      * @return RequestConfig
      */
-    fun getV1CommerceMovieRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceMovieRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1926,8 +1926,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+    fun getCommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceMovieByMovieidWithHttpInfo(movieid = movieid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1954,8 +1954,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+    fun getCommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceMovieByMovieidRequestConfig(movieid = movieid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1963,12 +1963,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceMovieByMovieid
+     * To obtain the request config of the operation getCommerceMovieByMovieid
      *
      * @param movieid 
      * @return RequestConfig
      */
-    fun getV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1995,8 +1995,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceNote() : Unit {
-        val localVarResponse = getV1CommerceNoteWithHttpInfo()
+    fun getCommerceNote() : Unit {
+        val localVarResponse = getCommerceNoteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2022,8 +2022,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceNoteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceNoteRequestConfig()
+    fun getCommerceNoteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceNoteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2031,11 +2031,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceNote
+     * To obtain the request config of the operation getCommerceNote
      *
      * @return RequestConfig
      */
-    fun getV1CommerceNoteRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceNoteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2063,8 +2063,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+    fun getCommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceNoteByNoteidWithHttpInfo(noteid = noteid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2091,8 +2091,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+    fun getCommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceNoteByNoteidRequestConfig(noteid = noteid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2100,12 +2100,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceNoteByNoteid
+     * To obtain the request config of the operation getCommerceNoteByNoteid
      *
      * @param noteid 
      * @return RequestConfig
      */
-    fun getV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2132,8 +2132,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceOrg() : Unit {
-        val localVarResponse = getV1CommerceOrgWithHttpInfo()
+    fun getCommerceOrg() : Unit {
+        val localVarResponse = getCommerceOrgWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2159,8 +2159,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceOrgWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceOrgRequestConfig()
+    fun getCommerceOrgWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceOrgRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2168,11 +2168,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceOrg
+     * To obtain the request config of the operation getCommerceOrg
      *
      * @return RequestConfig
      */
-    fun getV1CommerceOrgRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceOrgRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2199,8 +2199,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceProduct() : Unit {
-        val localVarResponse = getV1CommerceProductWithHttpInfo()
+    fun getCommerceProduct() : Unit {
+        val localVarResponse = getCommerceProductWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2226,8 +2226,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceProductWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceProductRequestConfig()
+    fun getCommerceProductWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceProductRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2235,11 +2235,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceProduct
+     * To obtain the request config of the operation getCommerceProduct
      *
      * @return RequestConfig
      */
-    fun getV1CommerceProductRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceProductRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2267,8 +2267,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceProductByProductid(productid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceProductByProductidWithHttpInfo(productid = productid)
+    fun getCommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceProductByProductidWithHttpInfo(productid = productid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2295,8 +2295,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceProductByProductidRequestConfig(productid = productid)
+    fun getCommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceProductByProductidRequestConfig(productid = productid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2304,12 +2304,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceProductByProductid
+     * To obtain the request config of the operation getCommerceProductByProductid
      *
      * @param productid 
      * @return RequestConfig
      */
-    fun getV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2336,8 +2336,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceReturn() : Unit {
-        val localVarResponse = getV1CommerceReturnWithHttpInfo()
+    fun getCommerceReturn() : Unit {
+        val localVarResponse = getCommerceReturnWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2363,8 +2363,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceReturnWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceReturnRequestConfig()
+    fun getCommerceReturnWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceReturnRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2372,11 +2372,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceReturn
+     * To obtain the request config of the operation getCommerceReturn
      *
      * @return RequestConfig
      */
-    fun getV1CommerceReturnRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceReturnRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2404,8 +2404,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+    fun getCommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceReturnByReturnidWithHttpInfo(returnid = returnid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2432,8 +2432,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+    fun getCommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceReturnByReturnidRequestConfig(returnid = returnid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2441,12 +2441,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceReturnByReturnid
+     * To obtain the request config of the operation getCommerceReturnByReturnid
      *
      * @param returnid 
      * @return RequestConfig
      */
-    fun getV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2473,8 +2473,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceSaleschannel() : Unit {
-        val localVarResponse = getV1CommerceSaleschannelWithHttpInfo()
+    fun getCommerceSaleschannel() : Unit {
+        val localVarResponse = getCommerceSaleschannelWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2500,8 +2500,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceSaleschannelWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceSaleschannelRequestConfig()
+    fun getCommerceSaleschannelWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceSaleschannelRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2509,11 +2509,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceSaleschannel
+     * To obtain the request config of the operation getCommerceSaleschannel
      *
      * @return RequestConfig
      */
-    fun getV1CommerceSaleschannelRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceSaleschannelRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2541,8 +2541,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+    fun getCommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2569,8 +2569,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+    fun getCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2578,12 +2578,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceSaleschannelBySaleschannelid
+     * To obtain the request config of the operation getCommerceSaleschannelBySaleschannelid
      *
      * @param saleschannelid 
      * @return RequestConfig
      */
-    fun getV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2610,8 +2610,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceStocklocation() : Unit {
-        val localVarResponse = getV1CommerceStocklocationWithHttpInfo()
+    fun getCommerceStocklocation() : Unit {
+        val localVarResponse = getCommerceStocklocationWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2637,8 +2637,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceStocklocationWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceStocklocationRequestConfig()
+    fun getCommerceStocklocationWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceStocklocationRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2646,11 +2646,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceStocklocation
+     * To obtain the request config of the operation getCommerceStocklocation
      *
      * @return RequestConfig
      */
-    fun getV1CommerceStocklocationRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceStocklocationRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2678,8 +2678,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+    fun getCommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2706,8 +2706,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+    fun getCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2715,12 +2715,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceStocklocationByStocklocationid
+     * To obtain the request config of the operation getCommerceStocklocationByStocklocationid
      *
      * @param stocklocationid 
      * @return RequestConfig
      */
-    fun getV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2747,8 +2747,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceSubmission() : Unit {
-        val localVarResponse = getV1CommerceSubmissionWithHttpInfo()
+    fun getCommerceSubmission() : Unit {
+        val localVarResponse = getCommerceSubmissionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2774,8 +2774,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceSubmissionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceSubmissionRequestConfig()
+    fun getCommerceSubmissionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceSubmissionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2783,11 +2783,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceSubmission
+     * To obtain the request config of the operation getCommerceSubmission
      *
      * @return RequestConfig
      */
-    fun getV1CommerceSubmissionRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceSubmissionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2815,8 +2815,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+    fun getCommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2843,8 +2843,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+    fun getCommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2852,12 +2852,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceSubmissionBySubmissionid
+     * To obtain the request config of the operation getCommerceSubmissionBySubmissionid
      *
      * @param submissionid 
      * @return RequestConfig
      */
-    fun getV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2884,8 +2884,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceSubscriber() : Unit {
-        val localVarResponse = getV1CommerceSubscriberWithHttpInfo()
+    fun getCommerceSubscriber() : Unit {
+        val localVarResponse = getCommerceSubscriberWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2911,8 +2911,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceSubscriberWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceSubscriberRequestConfig()
+    fun getCommerceSubscriberWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceSubscriberRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2920,11 +2920,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceSubscriber
+     * To obtain the request config of the operation getCommerceSubscriber
      *
      * @return RequestConfig
      */
-    fun getV1CommerceSubscriberRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceSubscriberRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2952,8 +2952,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+    fun getCommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2980,8 +2980,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+    fun getCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2989,12 +2989,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceSubscriberBySubscriberid
+     * To obtain the request config of the operation getCommerceSubscriberBySubscriberid
      *
      * @param subscriberid 
      * @return RequestConfig
      */
-    fun getV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3021,8 +3021,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceTokentransaction() : Unit {
-        val localVarResponse = getV1CommerceTokentransactionWithHttpInfo()
+    fun getCommerceTokentransaction() : Unit {
+        val localVarResponse = getCommerceTokentransactionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3048,8 +3048,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceTokentransactionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceTokentransactionRequestConfig()
+    fun getCommerceTokentransactionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceTokentransactionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3057,11 +3057,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceTokentransaction
+     * To obtain the request config of the operation getCommerceTokentransaction
      *
      * @return RequestConfig
      */
-    fun getV1CommerceTokentransactionRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceTokentransactionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3089,8 +3089,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+    fun getCommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3117,8 +3117,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+    fun getCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3126,12 +3126,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceTokentransactionByTokentransactionid
+     * To obtain the request config of the operation getCommerceTokentransactionByTokentransactionid
      *
      * @param tokentransactionid 
      * @return RequestConfig
      */
-    fun getV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3158,8 +3158,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceTransfer() : Unit {
-        val localVarResponse = getV1CommerceTransferWithHttpInfo()
+    fun getCommerceTransfer() : Unit {
+        val localVarResponse = getCommerceTransferWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3185,8 +3185,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceTransferWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceTransferRequestConfig()
+    fun getCommerceTransferWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceTransferRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3194,11 +3194,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceTransfer
+     * To obtain the request config of the operation getCommerceTransfer
      *
      * @return RequestConfig
      */
-    fun getV1CommerceTransferRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceTransferRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3226,8 +3226,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+    fun getCommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceTransferByTransferidWithHttpInfo(transferid = transferid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3254,8 +3254,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+    fun getCommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceTransferByTransferidRequestConfig(transferid = transferid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3263,12 +3263,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceTransferByTransferid
+     * To obtain the request config of the operation getCommerceTransferByTransferid
      *
      * @param transferid 
      * @return RequestConfig
      */
-    fun getV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3295,8 +3295,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceVariant() : Unit {
-        val localVarResponse = getV1CommerceVariantWithHttpInfo()
+    fun getCommerceVariant() : Unit {
+        val localVarResponse = getCommerceVariantWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3322,8 +3322,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceVariantWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceVariantRequestConfig()
+    fun getCommerceVariantWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceVariantRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3331,11 +3331,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceVariant
+     * To obtain the request config of the operation getCommerceVariant
      *
      * @return RequestConfig
      */
-    fun getV1CommerceVariantRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceVariantRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3363,8 +3363,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+    fun getCommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceVariantByVariantidWithHttpInfo(variantid = variantid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3391,8 +3391,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+    fun getCommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceVariantByVariantidRequestConfig(variantid = variantid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3400,12 +3400,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceVariantByVariantid
+     * To obtain the request config of the operation getCommerceVariantByVariantid
      *
      * @param variantid 
      * @return RequestConfig
      */
-    fun getV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3432,8 +3432,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceWallet() : Unit {
-        val localVarResponse = getV1CommerceWalletWithHttpInfo()
+    fun getCommerceWallet() : Unit {
+        val localVarResponse = getCommerceWalletWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3459,8 +3459,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceWalletWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceWalletRequestConfig()
+    fun getCommerceWalletWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceWalletRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3468,11 +3468,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceWallet
+     * To obtain the request config of the operation getCommerceWallet
      *
      * @return RequestConfig
      */
-    fun getV1CommerceWalletRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceWalletRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3500,8 +3500,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+    fun getCommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceWalletByWalletidWithHttpInfo(walletid = walletid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3528,8 +3528,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+    fun getCommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceWalletByWalletidRequestConfig(walletid = walletid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3537,12 +3537,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceWalletByWalletid
+     * To obtain the request config of the operation getCommerceWalletByWalletid
      *
      * @param walletid 
      * @return RequestConfig
      */
-    fun getV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3569,8 +3569,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceWatchlist() : Unit {
-        val localVarResponse = getV1CommerceWatchlistWithHttpInfo()
+    fun getCommerceWatchlist() : Unit {
+        val localVarResponse = getCommerceWatchlistWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3596,8 +3596,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceWatchlistWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceWatchlistRequestConfig()
+    fun getCommerceWatchlistWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceWatchlistRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3605,11 +3605,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceWatchlist
+     * To obtain the request config of the operation getCommerceWatchlist
      *
      * @return RequestConfig
      */
-    fun getV1CommerceWatchlistRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceWatchlistRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3637,8 +3637,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+    fun getCommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3665,8 +3665,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+    fun getCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3674,12 +3674,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceWatchlistByWatchlistid
+     * To obtain the request config of the operation getCommerceWatchlistByWatchlistid
      *
      * @param watchlistid 
      * @return RequestConfig
      */
-    fun getV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3706,8 +3706,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceWebhook() : Unit {
-        val localVarResponse = getV1CommerceWebhookWithHttpInfo()
+    fun getCommerceWebhook() : Unit {
+        val localVarResponse = getCommerceWebhookWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3733,8 +3733,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceWebhookWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceWebhookRequestConfig()
+    fun getCommerceWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceWebhookRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3742,11 +3742,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceWebhook
+     * To obtain the request config of the operation getCommerceWebhook
      *
      * @return RequestConfig
      */
-    fun getV1CommerceWebhookRequestConfig() : RequestConfig<Unit> {
+    fun getCommerceWebhookRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3774,8 +3774,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
-        val localVarResponse = getV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+    fun getCommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = getCommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3802,8 +3802,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+    fun getCommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getCommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3811,12 +3811,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1CommerceWebhookByWebhookid
+     * To obtain the request config of the operation getCommerceWebhookByWebhookid
      *
      * @param webhookid 
      * @return RequestConfig
      */
-    fun getV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+    fun getCommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3844,8 +3844,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+    fun patchCommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3872,8 +3872,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+    fun patchCommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3881,12 +3881,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceCollectionByCollectionid
+     * To obtain the request config of the operation patchCommerceCollectionByCollectionid
      *
      * @param collectionid 
      * @return RequestConfig
      */
-    fun patchV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3914,8 +3914,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+    fun patchCommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -3942,8 +3942,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+    fun patchCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -3951,12 +3951,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceDisclosureByDisclosureid
+     * To obtain the request config of the operation patchCommerceDisclosureByDisclosureid
      *
      * @param disclosureid 
      * @return RequestConfig
      */
-    fun patchV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3984,8 +3984,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+    fun patchCommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4012,8 +4012,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+    fun patchCommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceDiscountByDiscountidRequestConfig(discountid = discountid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4021,12 +4021,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceDiscountByDiscountid
+     * To obtain the request config of the operation patchCommerceDiscountByDiscountid
      *
      * @param discountid 
      * @return RequestConfig
      */
-    fun patchV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4054,8 +4054,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+    fun patchCommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceMovieByMovieidWithHttpInfo(movieid = movieid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4082,8 +4082,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+    fun patchCommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceMovieByMovieidRequestConfig(movieid = movieid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4091,12 +4091,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceMovieByMovieid
+     * To obtain the request config of the operation patchCommerceMovieByMovieid
      *
      * @param movieid 
      * @return RequestConfig
      */
-    fun patchV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4124,8 +4124,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+    fun patchCommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceNoteByNoteidWithHttpInfo(noteid = noteid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4152,8 +4152,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+    fun patchCommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceNoteByNoteidRequestConfig(noteid = noteid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4161,12 +4161,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceNoteByNoteid
+     * To obtain the request config of the operation patchCommerceNoteByNoteid
      *
      * @param noteid 
      * @return RequestConfig
      */
-    fun patchV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4194,8 +4194,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceProductByProductid(productid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceProductByProductidWithHttpInfo(productid = productid)
+    fun patchCommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceProductByProductidWithHttpInfo(productid = productid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4222,8 +4222,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceProductByProductidRequestConfig(productid = productid)
+    fun patchCommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceProductByProductidRequestConfig(productid = productid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4231,12 +4231,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceProductByProductid
+     * To obtain the request config of the operation patchCommerceProductByProductid
      *
      * @param productid 
      * @return RequestConfig
      */
-    fun patchV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4264,8 +4264,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+    fun patchCommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceReturnByReturnidWithHttpInfo(returnid = returnid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4292,8 +4292,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+    fun patchCommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceReturnByReturnidRequestConfig(returnid = returnid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4301,12 +4301,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceReturnByReturnid
+     * To obtain the request config of the operation patchCommerceReturnByReturnid
      *
      * @param returnid 
      * @return RequestConfig
      */
-    fun patchV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4334,8 +4334,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+    fun patchCommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4362,8 +4362,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+    fun patchCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4371,12 +4371,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceSaleschannelBySaleschannelid
+     * To obtain the request config of the operation patchCommerceSaleschannelBySaleschannelid
      *
      * @param saleschannelid 
      * @return RequestConfig
      */
-    fun patchV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4404,8 +4404,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+    fun patchCommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4432,8 +4432,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+    fun patchCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4441,12 +4441,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceStocklocationByStocklocationid
+     * To obtain the request config of the operation patchCommerceStocklocationByStocklocationid
      *
      * @param stocklocationid 
      * @return RequestConfig
      */
-    fun patchV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4474,8 +4474,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+    fun patchCommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4502,8 +4502,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+    fun patchCommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4511,12 +4511,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceSubmissionBySubmissionid
+     * To obtain the request config of the operation patchCommerceSubmissionBySubmissionid
      *
      * @param submissionid 
      * @return RequestConfig
      */
-    fun patchV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4544,8 +4544,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+    fun patchCommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4572,8 +4572,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+    fun patchCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4581,12 +4581,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceSubscriberBySubscriberid
+     * To obtain the request config of the operation patchCommerceSubscriberBySubscriberid
      *
      * @param subscriberid 
      * @return RequestConfig
      */
-    fun patchV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4614,8 +4614,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+    fun patchCommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4642,8 +4642,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+    fun patchCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4651,12 +4651,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceTokentransactionByTokentransactionid
+     * To obtain the request config of the operation patchCommerceTokentransactionByTokentransactionid
      *
      * @param tokentransactionid 
      * @return RequestConfig
      */
-    fun patchV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4684,8 +4684,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+    fun patchCommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceTransferByTransferidWithHttpInfo(transferid = transferid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4712,8 +4712,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+    fun patchCommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceTransferByTransferidRequestConfig(transferid = transferid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4721,12 +4721,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceTransferByTransferid
+     * To obtain the request config of the operation patchCommerceTransferByTransferid
      *
      * @param transferid 
      * @return RequestConfig
      */
-    fun patchV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4754,8 +4754,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+    fun patchCommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceVariantByVariantidWithHttpInfo(variantid = variantid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4782,8 +4782,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+    fun patchCommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceVariantByVariantidRequestConfig(variantid = variantid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4791,12 +4791,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceVariantByVariantid
+     * To obtain the request config of the operation patchCommerceVariantByVariantid
      *
      * @param variantid 
      * @return RequestConfig
      */
-    fun patchV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4824,8 +4824,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+    fun patchCommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceWalletByWalletidWithHttpInfo(walletid = walletid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4852,8 +4852,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+    fun patchCommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceWalletByWalletidRequestConfig(walletid = walletid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4861,12 +4861,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceWalletByWalletid
+     * To obtain the request config of the operation patchCommerceWalletByWalletid
      *
      * @param walletid 
      * @return RequestConfig
      */
-    fun patchV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4894,8 +4894,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+    fun patchCommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4922,8 +4922,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+    fun patchCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -4931,12 +4931,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceWatchlistByWatchlistid
+     * To obtain the request config of the operation patchCommerceWatchlistByWatchlistid
      *
      * @param watchlistid 
      * @return RequestConfig
      */
-    fun patchV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4964,8 +4964,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
-        val localVarResponse = patchV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+    fun patchCommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = patchCommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -4992,8 +4992,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+    fun patchCommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchCommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5001,12 +5001,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation patchV1CommerceWebhookByWebhookid
+     * To obtain the request config of the operation patchCommerceWebhookByWebhookid
      *
      * @param webhookid 
      * @return RequestConfig
      */
-    fun patchV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+    fun patchCommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5033,8 +5033,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceCollection() : Unit {
-        val localVarResponse = postV1CommerceCollectionWithHttpInfo()
+    fun postCommerceCollection() : Unit {
+        val localVarResponse = postCommerceCollectionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5060,8 +5060,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceCollectionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceCollectionRequestConfig()
+    fun postCommerceCollectionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceCollectionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5069,11 +5069,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceCollection
+     * To obtain the request config of the operation postCommerceCollection
      *
      * @return RequestConfig
      */
-    fun postV1CommerceCollectionRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceCollectionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5101,8 +5101,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+    fun postCommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5129,8 +5129,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+    fun postCommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5138,12 +5138,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceCollectionByCollectionid
+     * To obtain the request config of the operation postCommerceCollectionByCollectionid
      *
      * @param collectionid 
      * @return RequestConfig
      */
-    fun postV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5170,8 +5170,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceDisclosure() : Unit {
-        val localVarResponse = postV1CommerceDisclosureWithHttpInfo()
+    fun postCommerceDisclosure() : Unit {
+        val localVarResponse = postCommerceDisclosureWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5197,8 +5197,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceDisclosureWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceDisclosureRequestConfig()
+    fun postCommerceDisclosureWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceDisclosureRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5206,11 +5206,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceDisclosure
+     * To obtain the request config of the operation postCommerceDisclosure
      *
      * @return RequestConfig
      */
-    fun postV1CommerceDisclosureRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceDisclosureRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5238,8 +5238,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+    fun postCommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5266,8 +5266,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+    fun postCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5275,12 +5275,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceDisclosureByDisclosureid
+     * To obtain the request config of the operation postCommerceDisclosureByDisclosureid
      *
      * @param disclosureid 
      * @return RequestConfig
      */
-    fun postV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5307,8 +5307,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceDiscount() : Unit {
-        val localVarResponse = postV1CommerceDiscountWithHttpInfo()
+    fun postCommerceDiscount() : Unit {
+        val localVarResponse = postCommerceDiscountWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5334,8 +5334,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceDiscountWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceDiscountRequestConfig()
+    fun postCommerceDiscountWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceDiscountRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5343,11 +5343,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceDiscount
+     * To obtain the request config of the operation postCommerceDiscount
      *
      * @return RequestConfig
      */
-    fun postV1CommerceDiscountRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceDiscountRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5375,8 +5375,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+    fun postCommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5403,8 +5403,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+    fun postCommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceDiscountByDiscountidRequestConfig(discountid = discountid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5412,12 +5412,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceDiscountByDiscountid
+     * To obtain the request config of the operation postCommerceDiscountByDiscountid
      *
      * @param discountid 
      * @return RequestConfig
      */
-    fun postV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5444,8 +5444,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceMovie() : Unit {
-        val localVarResponse = postV1CommerceMovieWithHttpInfo()
+    fun postCommerceMovie() : Unit {
+        val localVarResponse = postCommerceMovieWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5471,8 +5471,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceMovieWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceMovieRequestConfig()
+    fun postCommerceMovieWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceMovieRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5480,11 +5480,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceMovie
+     * To obtain the request config of the operation postCommerceMovie
      *
      * @return RequestConfig
      */
-    fun postV1CommerceMovieRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceMovieRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5512,8 +5512,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+    fun postCommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceMovieByMovieidWithHttpInfo(movieid = movieid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5540,8 +5540,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+    fun postCommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceMovieByMovieidRequestConfig(movieid = movieid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5549,12 +5549,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceMovieByMovieid
+     * To obtain the request config of the operation postCommerceMovieByMovieid
      *
      * @param movieid 
      * @return RequestConfig
      */
-    fun postV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5581,8 +5581,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceNote() : Unit {
-        val localVarResponse = postV1CommerceNoteWithHttpInfo()
+    fun postCommerceNote() : Unit {
+        val localVarResponse = postCommerceNoteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5608,8 +5608,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceNoteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceNoteRequestConfig()
+    fun postCommerceNoteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceNoteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5617,11 +5617,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceNote
+     * To obtain the request config of the operation postCommerceNote
      *
      * @return RequestConfig
      */
-    fun postV1CommerceNoteRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceNoteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5649,8 +5649,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+    fun postCommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceNoteByNoteidWithHttpInfo(noteid = noteid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5677,8 +5677,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+    fun postCommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceNoteByNoteidRequestConfig(noteid = noteid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5686,12 +5686,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceNoteByNoteid
+     * To obtain the request config of the operation postCommerceNoteByNoteid
      *
      * @param noteid 
      * @return RequestConfig
      */
-    fun postV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5718,8 +5718,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceProduct() : Unit {
-        val localVarResponse = postV1CommerceProductWithHttpInfo()
+    fun postCommerceProduct() : Unit {
+        val localVarResponse = postCommerceProductWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5745,8 +5745,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceProductWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceProductRequestConfig()
+    fun postCommerceProductWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceProductRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5754,11 +5754,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceProduct
+     * To obtain the request config of the operation postCommerceProduct
      *
      * @return RequestConfig
      */
-    fun postV1CommerceProductRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceProductRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5786,8 +5786,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceProductByProductid(productid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceProductByProductidWithHttpInfo(productid = productid)
+    fun postCommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceProductByProductidWithHttpInfo(productid = productid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5814,8 +5814,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceProductByProductidRequestConfig(productid = productid)
+    fun postCommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceProductByProductidRequestConfig(productid = productid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5823,12 +5823,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceProductByProductid
+     * To obtain the request config of the operation postCommerceProductByProductid
      *
      * @param productid 
      * @return RequestConfig
      */
-    fun postV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5855,8 +5855,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceReturn() : Unit {
-        val localVarResponse = postV1CommerceReturnWithHttpInfo()
+    fun postCommerceReturn() : Unit {
+        val localVarResponse = postCommerceReturnWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5882,8 +5882,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceReturnWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceReturnRequestConfig()
+    fun postCommerceReturnWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceReturnRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5891,11 +5891,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceReturn
+     * To obtain the request config of the operation postCommerceReturn
      *
      * @return RequestConfig
      */
-    fun postV1CommerceReturnRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceReturnRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5923,8 +5923,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+    fun postCommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceReturnByReturnidWithHttpInfo(returnid = returnid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5951,8 +5951,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+    fun postCommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceReturnByReturnidRequestConfig(returnid = returnid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5960,12 +5960,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceReturnByReturnid
+     * To obtain the request config of the operation postCommerceReturnByReturnid
      *
      * @param returnid 
      * @return RequestConfig
      */
-    fun postV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5992,8 +5992,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceSaleschannel() : Unit {
-        val localVarResponse = postV1CommerceSaleschannelWithHttpInfo()
+    fun postCommerceSaleschannel() : Unit {
+        val localVarResponse = postCommerceSaleschannelWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6019,8 +6019,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceSaleschannelWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceSaleschannelRequestConfig()
+    fun postCommerceSaleschannelWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceSaleschannelRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6028,11 +6028,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceSaleschannel
+     * To obtain the request config of the operation postCommerceSaleschannel
      *
      * @return RequestConfig
      */
-    fun postV1CommerceSaleschannelRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceSaleschannelRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6060,8 +6060,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+    fun postCommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6088,8 +6088,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+    fun postCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6097,12 +6097,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceSaleschannelBySaleschannelid
+     * To obtain the request config of the operation postCommerceSaleschannelBySaleschannelid
      *
      * @param saleschannelid 
      * @return RequestConfig
      */
-    fun postV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6129,8 +6129,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceStocklocation() : Unit {
-        val localVarResponse = postV1CommerceStocklocationWithHttpInfo()
+    fun postCommerceStocklocation() : Unit {
+        val localVarResponse = postCommerceStocklocationWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6156,8 +6156,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceStocklocationWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceStocklocationRequestConfig()
+    fun postCommerceStocklocationWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceStocklocationRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6165,11 +6165,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceStocklocation
+     * To obtain the request config of the operation postCommerceStocklocation
      *
      * @return RequestConfig
      */
-    fun postV1CommerceStocklocationRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceStocklocationRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6197,8 +6197,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+    fun postCommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6225,8 +6225,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+    fun postCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6234,12 +6234,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceStocklocationByStocklocationid
+     * To obtain the request config of the operation postCommerceStocklocationByStocklocationid
      *
      * @param stocklocationid 
      * @return RequestConfig
      */
-    fun postV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6266,8 +6266,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceSubmission() : Unit {
-        val localVarResponse = postV1CommerceSubmissionWithHttpInfo()
+    fun postCommerceSubmission() : Unit {
+        val localVarResponse = postCommerceSubmissionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6293,8 +6293,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceSubmissionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceSubmissionRequestConfig()
+    fun postCommerceSubmissionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceSubmissionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6302,11 +6302,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceSubmission
+     * To obtain the request config of the operation postCommerceSubmission
      *
      * @return RequestConfig
      */
-    fun postV1CommerceSubmissionRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceSubmissionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6334,8 +6334,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+    fun postCommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6362,8 +6362,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+    fun postCommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6371,12 +6371,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceSubmissionBySubmissionid
+     * To obtain the request config of the operation postCommerceSubmissionBySubmissionid
      *
      * @param submissionid 
      * @return RequestConfig
      */
-    fun postV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6403,8 +6403,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceSubscriber() : Unit {
-        val localVarResponse = postV1CommerceSubscriberWithHttpInfo()
+    fun postCommerceSubscriber() : Unit {
+        val localVarResponse = postCommerceSubscriberWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6430,8 +6430,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceSubscriberWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceSubscriberRequestConfig()
+    fun postCommerceSubscriberWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceSubscriberRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6439,11 +6439,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceSubscriber
+     * To obtain the request config of the operation postCommerceSubscriber
      *
      * @return RequestConfig
      */
-    fun postV1CommerceSubscriberRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceSubscriberRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6471,8 +6471,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+    fun postCommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6499,8 +6499,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+    fun postCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6508,12 +6508,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceSubscriberBySubscriberid
+     * To obtain the request config of the operation postCommerceSubscriberBySubscriberid
      *
      * @param subscriberid 
      * @return RequestConfig
      */
-    fun postV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6540,8 +6540,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceTokentransaction() : Unit {
-        val localVarResponse = postV1CommerceTokentransactionWithHttpInfo()
+    fun postCommerceTokentransaction() : Unit {
+        val localVarResponse = postCommerceTokentransactionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6567,8 +6567,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceTokentransactionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceTokentransactionRequestConfig()
+    fun postCommerceTokentransactionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceTokentransactionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6576,11 +6576,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceTokentransaction
+     * To obtain the request config of the operation postCommerceTokentransaction
      *
      * @return RequestConfig
      */
-    fun postV1CommerceTokentransactionRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceTokentransactionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6608,8 +6608,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+    fun postCommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6636,8 +6636,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+    fun postCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6645,12 +6645,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceTokentransactionByTokentransactionid
+     * To obtain the request config of the operation postCommerceTokentransactionByTokentransactionid
      *
      * @param tokentransactionid 
      * @return RequestConfig
      */
-    fun postV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6677,8 +6677,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceTransfer() : Unit {
-        val localVarResponse = postV1CommerceTransferWithHttpInfo()
+    fun postCommerceTransfer() : Unit {
+        val localVarResponse = postCommerceTransferWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6704,8 +6704,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceTransferWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceTransferRequestConfig()
+    fun postCommerceTransferWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceTransferRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6713,11 +6713,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceTransfer
+     * To obtain the request config of the operation postCommerceTransfer
      *
      * @return RequestConfig
      */
-    fun postV1CommerceTransferRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceTransferRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6745,8 +6745,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+    fun postCommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceTransferByTransferidWithHttpInfo(transferid = transferid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6773,8 +6773,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+    fun postCommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceTransferByTransferidRequestConfig(transferid = transferid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6782,12 +6782,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceTransferByTransferid
+     * To obtain the request config of the operation postCommerceTransferByTransferid
      *
      * @param transferid 
      * @return RequestConfig
      */
-    fun postV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6814,8 +6814,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceVariant() : Unit {
-        val localVarResponse = postV1CommerceVariantWithHttpInfo()
+    fun postCommerceVariant() : Unit {
+        val localVarResponse = postCommerceVariantWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6841,8 +6841,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceVariantWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceVariantRequestConfig()
+    fun postCommerceVariantWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceVariantRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6850,11 +6850,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceVariant
+     * To obtain the request config of the operation postCommerceVariant
      *
      * @return RequestConfig
      */
-    fun postV1CommerceVariantRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceVariantRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6882,8 +6882,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+    fun postCommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceVariantByVariantidWithHttpInfo(variantid = variantid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6910,8 +6910,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+    fun postCommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceVariantByVariantidRequestConfig(variantid = variantid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6919,12 +6919,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceVariantByVariantid
+     * To obtain the request config of the operation postCommerceVariantByVariantid
      *
      * @param variantid 
      * @return RequestConfig
      */
-    fun postV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6951,8 +6951,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceWallet() : Unit {
-        val localVarResponse = postV1CommerceWalletWithHttpInfo()
+    fun postCommerceWallet() : Unit {
+        val localVarResponse = postCommerceWalletWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -6978,8 +6978,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceWalletWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceWalletRequestConfig()
+    fun postCommerceWalletWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceWalletRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -6987,11 +6987,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceWallet
+     * To obtain the request config of the operation postCommerceWallet
      *
      * @return RequestConfig
      */
-    fun postV1CommerceWalletRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceWalletRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7019,8 +7019,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+    fun postCommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceWalletByWalletidWithHttpInfo(walletid = walletid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7047,8 +7047,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+    fun postCommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceWalletByWalletidRequestConfig(walletid = walletid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7056,12 +7056,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceWalletByWalletid
+     * To obtain the request config of the operation postCommerceWalletByWalletid
      *
      * @param walletid 
      * @return RequestConfig
      */
-    fun postV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7088,8 +7088,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceWatchlist() : Unit {
-        val localVarResponse = postV1CommerceWatchlistWithHttpInfo()
+    fun postCommerceWatchlist() : Unit {
+        val localVarResponse = postCommerceWatchlistWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7115,8 +7115,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceWatchlistWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceWatchlistRequestConfig()
+    fun postCommerceWatchlistWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceWatchlistRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7124,11 +7124,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceWatchlist
+     * To obtain the request config of the operation postCommerceWatchlist
      *
      * @return RequestConfig
      */
-    fun postV1CommerceWatchlistRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceWatchlistRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7156,8 +7156,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+    fun postCommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7184,8 +7184,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+    fun postCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7193,12 +7193,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceWatchlistByWatchlistid
+     * To obtain the request config of the operation postCommerceWatchlistByWatchlistid
      *
      * @param watchlistid 
      * @return RequestConfig
      */
-    fun postV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7225,8 +7225,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceWebhook() : Unit {
-        val localVarResponse = postV1CommerceWebhookWithHttpInfo()
+    fun postCommerceWebhook() : Unit {
+        val localVarResponse = postCommerceWebhookWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7252,8 +7252,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceWebhookWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceWebhookRequestConfig()
+    fun postCommerceWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceWebhookRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7261,11 +7261,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceWebhook
+     * To obtain the request config of the operation postCommerceWebhook
      *
      * @return RequestConfig
      */
-    fun postV1CommerceWebhookRequestConfig() : RequestConfig<Unit> {
+    fun postCommerceWebhookRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7293,8 +7293,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
-        val localVarResponse = postV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+    fun postCommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = postCommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7321,8 +7321,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+    fun postCommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postCommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7330,12 +7330,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1CommerceWebhookByWebhookid
+     * To obtain the request config of the operation postCommerceWebhookByWebhookid
      *
      * @param webhookid 
      * @return RequestConfig
      */
-    fun postV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+    fun postCommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7363,8 +7363,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+    fun putCommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7391,8 +7391,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+    fun putCommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7400,12 +7400,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceCollectionByCollectionid
+     * To obtain the request config of the operation putCommerceCollectionByCollectionid
      *
      * @param collectionid 
      * @return RequestConfig
      */
-    fun putV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7433,8 +7433,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+    fun putCommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7461,8 +7461,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+    fun putCommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7470,12 +7470,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceDisclosureByDisclosureid
+     * To obtain the request config of the operation putCommerceDisclosureByDisclosureid
      *
      * @param disclosureid 
      * @return RequestConfig
      */
-    fun putV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7503,8 +7503,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+    fun putCommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7531,8 +7531,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+    fun putCommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceDiscountByDiscountidRequestConfig(discountid = discountid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7540,12 +7540,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceDiscountByDiscountid
+     * To obtain the request config of the operation putCommerceDiscountByDiscountid
      *
      * @param discountid 
      * @return RequestConfig
      */
-    fun putV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7573,8 +7573,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+    fun putCommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceMovieByMovieidWithHttpInfo(movieid = movieid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7601,8 +7601,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+    fun putCommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceMovieByMovieidRequestConfig(movieid = movieid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7610,12 +7610,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceMovieByMovieid
+     * To obtain the request config of the operation putCommerceMovieByMovieid
      *
      * @param movieid 
      * @return RequestConfig
      */
-    fun putV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7643,8 +7643,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+    fun putCommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceNoteByNoteidWithHttpInfo(noteid = noteid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7671,8 +7671,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+    fun putCommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceNoteByNoteidRequestConfig(noteid = noteid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7680,12 +7680,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceNoteByNoteid
+     * To obtain the request config of the operation putCommerceNoteByNoteid
      *
      * @param noteid 
      * @return RequestConfig
      */
-    fun putV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7713,8 +7713,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceProductByProductid(productid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceProductByProductidWithHttpInfo(productid = productid)
+    fun putCommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceProductByProductidWithHttpInfo(productid = productid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7741,8 +7741,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceProductByProductidRequestConfig(productid = productid)
+    fun putCommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceProductByProductidRequestConfig(productid = productid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7750,12 +7750,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceProductByProductid
+     * To obtain the request config of the operation putCommerceProductByProductid
      *
      * @param productid 
      * @return RequestConfig
      */
-    fun putV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7783,8 +7783,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+    fun putCommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceReturnByReturnidWithHttpInfo(returnid = returnid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7811,8 +7811,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+    fun putCommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceReturnByReturnidRequestConfig(returnid = returnid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7820,12 +7820,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceReturnByReturnid
+     * To obtain the request config of the operation putCommerceReturnByReturnid
      *
      * @param returnid 
      * @return RequestConfig
      */
-    fun putV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7853,8 +7853,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+    fun putCommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7881,8 +7881,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+    fun putCommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7890,12 +7890,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceSaleschannelBySaleschannelid
+     * To obtain the request config of the operation putCommerceSaleschannelBySaleschannelid
      *
      * @param saleschannelid 
      * @return RequestConfig
      */
-    fun putV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7923,8 +7923,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+    fun putCommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -7951,8 +7951,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+    fun putCommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -7960,12 +7960,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceStocklocationByStocklocationid
+     * To obtain the request config of the operation putCommerceStocklocationByStocklocationid
      *
      * @param stocklocationid 
      * @return RequestConfig
      */
-    fun putV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -7993,8 +7993,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+    fun putCommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -8021,8 +8021,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+    fun putCommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -8030,12 +8030,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceSubmissionBySubmissionid
+     * To obtain the request config of the operation putCommerceSubmissionBySubmissionid
      *
      * @param submissionid 
      * @return RequestConfig
      */
-    fun putV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8063,8 +8063,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+    fun putCommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -8091,8 +8091,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+    fun putCommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -8100,12 +8100,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceSubscriberBySubscriberid
+     * To obtain the request config of the operation putCommerceSubscriberBySubscriberid
      *
      * @param subscriberid 
      * @return RequestConfig
      */
-    fun putV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8133,8 +8133,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+    fun putCommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -8161,8 +8161,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+    fun putCommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -8170,12 +8170,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceTokentransactionByTokentransactionid
+     * To obtain the request config of the operation putCommerceTokentransactionByTokentransactionid
      *
      * @param tokentransactionid 
      * @return RequestConfig
      */
-    fun putV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8203,8 +8203,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+    fun putCommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceTransferByTransferidWithHttpInfo(transferid = transferid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -8231,8 +8231,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+    fun putCommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceTransferByTransferidRequestConfig(transferid = transferid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -8240,12 +8240,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceTransferByTransferid
+     * To obtain the request config of the operation putCommerceTransferByTransferid
      *
      * @param transferid 
      * @return RequestConfig
      */
-    fun putV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8273,8 +8273,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+    fun putCommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceVariantByVariantidWithHttpInfo(variantid = variantid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -8301,8 +8301,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+    fun putCommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceVariantByVariantidRequestConfig(variantid = variantid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -8310,12 +8310,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceVariantByVariantid
+     * To obtain the request config of the operation putCommerceVariantByVariantid
      *
      * @param variantid 
      * @return RequestConfig
      */
-    fun putV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8343,8 +8343,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+    fun putCommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceWalletByWalletidWithHttpInfo(walletid = walletid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -8371,8 +8371,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+    fun putCommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceWalletByWalletidRequestConfig(walletid = walletid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -8380,12 +8380,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceWalletByWalletid
+     * To obtain the request config of the operation putCommerceWalletByWalletid
      *
      * @param walletid 
      * @return RequestConfig
      */
-    fun putV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8413,8 +8413,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+    fun putCommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -8441,8 +8441,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+    fun putCommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -8450,12 +8450,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceWatchlistByWatchlistid
+     * To obtain the request config of the operation putCommerceWatchlistByWatchlistid
      *
      * @param watchlistid 
      * @return RequestConfig
      */
-    fun putV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -8483,8 +8483,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
-        val localVarResponse = putV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+    fun putCommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = putCommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -8511,8 +8511,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+    fun putCommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -8520,12 +8520,12 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putV1CommerceWebhookByWebhookid
+     * To obtain the request config of the operation putCommerceWebhookByWebhookid
      *
      * @param webhookid 
      * @return RequestConfig
      */
-    fun putV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

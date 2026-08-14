@@ -57,8 +57,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1StoreByStoreid(storeid: kotlin.String) : Unit {
-        val localVarResponse = deleteV1StoreByStoreidWithHttpInfo(storeid = storeid)
+    fun deleteStoreByStoreid(storeid: kotlin.String) : Unit {
+        val localVarResponse = deleteStoreByStoreidWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -85,8 +85,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1StoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1StoreByStoreidRequestConfig(storeid = storeid)
+    fun deleteStoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteStoreByStoreidRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1StoreByStoreid
+     * To obtain the request config of the operation deleteStoreByStoreid
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun deleteV1StoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteStoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -128,8 +128,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1StoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = deleteV1StoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
+    fun deleteStoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = deleteStoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -157,8 +157,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1StoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1StoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
+    fun deleteStoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteStoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -166,13 +166,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteV1StoreByStoreidListingByKey
+     * To obtain the request config of the operation deleteStoreByStoreidListingByKey
      *
      * @param storeid 
      * @param key 
      * @return RequestConfig
      */
-    fun deleteV1StoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun deleteStoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -199,8 +199,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Store() : Unit {
-        val localVarResponse = getV1StoreWithHttpInfo()
+    fun getStore() : Unit {
+        val localVarResponse = getStoreWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -226,8 +226,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreRequestConfig()
+    fun getStoreWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -235,11 +235,11 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1Store
+     * To obtain the request config of the operation getStore
      *
      * @return RequestConfig
      */
-    fun getV1StoreRequestConfig() : RequestConfig<Unit> {
+    fun getStoreRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -266,8 +266,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1StoreAccess() : Unit {
-        val localVarResponse = getV1StoreAccessWithHttpInfo()
+    fun getStoreAccess() : Unit {
+        val localVarResponse = getStoreAccessWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -293,8 +293,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreAccessWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreAccessRequestConfig()
+    fun getStoreAccessWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreAccessRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -302,11 +302,11 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1StoreAccess
+     * To obtain the request config of the operation getStoreAccess
      *
      * @return RequestConfig
      */
-    fun getV1StoreAccessRequestConfig() : RequestConfig<Unit> {
+    fun getStoreAccessRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -334,8 +334,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1StoreByStoreid(storeid: kotlin.String) : Unit {
-        val localVarResponse = getV1StoreByStoreidWithHttpInfo(storeid = storeid)
+    fun getStoreByStoreid(storeid: kotlin.String) : Unit {
+        val localVarResponse = getStoreByStoreidWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -362,8 +362,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreByStoreidRequestConfig(storeid = storeid)
+    fun getStoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreByStoreidRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -371,12 +371,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1StoreByStoreid
+     * To obtain the request config of the operation getStoreByStoreid
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun getV1StoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun getStoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -405,8 +405,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1StoreByStoreidBundleByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = getV1StoreByStoreidBundleByKeyWithHttpInfo(storeid = storeid, key = key)
+    fun getStoreByStoreidBundleByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = getStoreByStoreidBundleByKeyWithHttpInfo(storeid = storeid, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -434,8 +434,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreByStoreidBundleByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreByStoreidBundleByKeyRequestConfig(storeid = storeid, key = key)
+    fun getStoreByStoreidBundleByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreByStoreidBundleByKeyRequestConfig(storeid = storeid, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -443,13 +443,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1StoreByStoreidBundleByKey
+     * To obtain the request config of the operation getStoreByStoreidBundleByKey
      *
      * @param storeid 
      * @param key 
      * @return RequestConfig
      */
-    fun getV1StoreByStoreidBundleByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getStoreByStoreidBundleByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -477,8 +477,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1StoreByStoreidListing(storeid: kotlin.String) : Unit {
-        val localVarResponse = getV1StoreByStoreidListingWithHttpInfo(storeid = storeid)
+    fun getStoreByStoreidListing(storeid: kotlin.String) : Unit {
+        val localVarResponse = getStoreByStoreidListingWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -505,8 +505,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreByStoreidListingWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreByStoreidListingRequestConfig(storeid = storeid)
+    fun getStoreByStoreidListingWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreByStoreidListingRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -514,12 +514,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1StoreByStoreidListing
+     * To obtain the request config of the operation getStoreByStoreidListing
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun getV1StoreByStoreidListingRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun getStoreByStoreidListingRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -548,8 +548,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1StoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = getV1StoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
+    fun getStoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = getStoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -577,8 +577,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
+    fun getStoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -586,13 +586,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1StoreByStoreidListingByKey
+     * To obtain the request config of the operation getStoreByStoreidListingByKey
      *
      * @param storeid 
      * @param key 
      * @return RequestConfig
      */
-    fun getV1StoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getStoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -621,8 +621,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1StoreByStoreidProductByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = getV1StoreByStoreidProductByKeyWithHttpInfo(storeid = storeid, key = key)
+    fun getStoreByStoreidProductByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = getStoreByStoreidProductByKeyWithHttpInfo(storeid = storeid, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -650,8 +650,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreByStoreidProductByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreByStoreidProductByKeyRequestConfig(storeid = storeid, key = key)
+    fun getStoreByStoreidProductByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreByStoreidProductByKeyRequestConfig(storeid = storeid, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -659,13 +659,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1StoreByStoreidProductByKey
+     * To obtain the request config of the operation getStoreByStoreidProductByKey
      *
      * @param storeid 
      * @param key 
      * @return RequestConfig
      */
-    fun getV1StoreByStoreidProductByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getStoreByStoreidProductByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -694,8 +694,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1StoreByStoreidVariantByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = getV1StoreByStoreidVariantByKeyWithHttpInfo(storeid = storeid, key = key)
+    fun getStoreByStoreidVariantByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = getStoreByStoreidVariantByKeyWithHttpInfo(storeid = storeid, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -723,8 +723,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreByStoreidVariantByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreByStoreidVariantByKeyRequestConfig(storeid = storeid, key = key)
+    fun getStoreByStoreidVariantByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreByStoreidVariantByKeyRequestConfig(storeid = storeid, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -732,13 +732,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1StoreByStoreidVariantByKey
+     * To obtain the request config of the operation getStoreByStoreidVariantByKey
      *
      * @param storeid 
      * @param key 
      * @return RequestConfig
      */
-    fun getV1StoreByStoreidVariantByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getStoreByStoreidVariantByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -765,8 +765,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1StoreCurrent() : Unit {
-        val localVarResponse = getV1StoreCurrentWithHttpInfo()
+    fun getStoreCurrent() : Unit {
+        val localVarResponse = getStoreCurrentWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -792,8 +792,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1StoreCurrentWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1StoreCurrentRequestConfig()
+    fun getStoreCurrentWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getStoreCurrentRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -801,11 +801,11 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getV1StoreCurrent
+     * To obtain the request config of the operation getStoreCurrent
      *
      * @return RequestConfig
      */
-    fun getV1StoreCurrentRequestConfig() : RequestConfig<Unit> {
+    fun getStoreCurrentRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -833,8 +833,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1StoreByStoreid(storeid: kotlin.String) : Unit {
-        val localVarResponse = patchV1StoreByStoreidWithHttpInfo(storeid = storeid)
+    fun patchStoreByStoreid(storeid: kotlin.String) : Unit {
+        val localVarResponse = patchStoreByStoreidWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -861,8 +861,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1StoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1StoreByStoreidRequestConfig(storeid = storeid)
+    fun patchStoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchStoreByStoreidRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -870,12 +870,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1StoreByStoreid
+     * To obtain the request config of the operation patchStoreByStoreid
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun patchV1StoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun patchStoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -904,8 +904,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1StoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = patchV1StoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
+    fun patchStoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = patchStoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -933,8 +933,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1StoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchV1StoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
+    fun patchStoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchStoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -942,13 +942,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchV1StoreByStoreidListingByKey
+     * To obtain the request config of the operation patchStoreByStoreidListingByKey
      *
      * @param storeid 
      * @param key 
      * @return RequestConfig
      */
-    fun patchV1StoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun patchStoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -975,8 +975,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Store() : Unit {
-        val localVarResponse = postV1StoreWithHttpInfo()
+    fun postStore() : Unit {
+        val localVarResponse = postStoreWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1002,8 +1002,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreRequestConfig()
+    fun postStoreWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1011,11 +1011,11 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1Store
+     * To obtain the request config of the operation postStore
      *
      * @return RequestConfig
      */
-    fun postV1StoreRequestConfig() : RequestConfig<Unit> {
+    fun postStoreRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1043,8 +1043,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreid(storeid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidWithHttpInfo(storeid = storeid)
+    fun postStoreByStoreid(storeid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1071,8 +1071,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidRequestConfig(storeid = storeid)
+    fun postStoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1080,12 +1080,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreid
+     * To obtain the request config of the operation postStoreByStoreid
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1113,8 +1113,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidAuthorize(storeid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidAuthorizeWithHttpInfo(storeid = storeid)
+    fun postStoreByStoreidAuthorize(storeid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidAuthorizeWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1141,8 +1141,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidAuthorizeWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidAuthorizeRequestConfig(storeid = storeid)
+    fun postStoreByStoreidAuthorizeWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidAuthorizeRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1150,12 +1150,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidAuthorize
+     * To obtain the request config of the operation postStoreByStoreidAuthorize
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidAuthorizeRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidAuthorizeRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1184,8 +1184,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidAuthorizeByOrderid(storeid: kotlin.String, orderid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidAuthorizeByOrderidWithHttpInfo(storeid = storeid, orderid = orderid)
+    fun postStoreByStoreidAuthorizeByOrderid(storeid: kotlin.String, orderid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidAuthorizeByOrderidWithHttpInfo(storeid = storeid, orderid = orderid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1213,8 +1213,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidAuthorizeByOrderidWithHttpInfo(storeid: kotlin.String, orderid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidAuthorizeByOrderidRequestConfig(storeid = storeid, orderid = orderid)
+    fun postStoreByStoreidAuthorizeByOrderidWithHttpInfo(storeid: kotlin.String, orderid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidAuthorizeByOrderidRequestConfig(storeid = storeid, orderid = orderid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1222,13 +1222,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidAuthorizeByOrderid
+     * To obtain the request config of the operation postStoreByStoreidAuthorizeByOrderid
      *
      * @param storeid 
      * @param orderid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidAuthorizeByOrderidRequestConfig(storeid: kotlin.String, orderid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidAuthorizeByOrderidRequestConfig(storeid: kotlin.String, orderid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1257,8 +1257,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCaptureByOrderid(storeid: kotlin.String, orderid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidCaptureByOrderidWithHttpInfo(storeid = storeid, orderid = orderid)
+    fun postStoreByStoreidCaptureByOrderid(storeid: kotlin.String, orderid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidCaptureByOrderidWithHttpInfo(storeid = storeid, orderid = orderid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1286,8 +1286,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidCaptureByOrderidWithHttpInfo(storeid: kotlin.String, orderid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidCaptureByOrderidRequestConfig(storeid = storeid, orderid = orderid)
+    fun postStoreByStoreidCaptureByOrderidWithHttpInfo(storeid: kotlin.String, orderid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidCaptureByOrderidRequestConfig(storeid = storeid, orderid = orderid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1295,13 +1295,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCaptureByOrderid
+     * To obtain the request config of the operation postStoreByStoreidCaptureByOrderid
      *
      * @param storeid 
      * @param orderid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidCaptureByOrderidRequestConfig(storeid: kotlin.String, orderid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidCaptureByOrderidRequestConfig(storeid: kotlin.String, orderid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1329,8 +1329,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCharge(storeid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidChargeWithHttpInfo(storeid = storeid)
+    fun postStoreByStoreidCharge(storeid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidChargeWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1357,8 +1357,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidChargeWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidChargeRequestConfig(storeid = storeid)
+    fun postStoreByStoreidChargeWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidChargeRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1366,12 +1366,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCharge
+     * To obtain the request config of the operation postStoreByStoreidCharge
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidChargeRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidChargeRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1399,8 +1399,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCheckoutAuthorize(storeid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidCheckoutAuthorizeWithHttpInfo(storeid = storeid)
+    fun postStoreByStoreidCheckoutAuthorize(storeid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidCheckoutAuthorizeWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1427,8 +1427,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidCheckoutAuthorizeWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidCheckoutAuthorizeRequestConfig(storeid = storeid)
+    fun postStoreByStoreidCheckoutAuthorizeWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidCheckoutAuthorizeRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1436,12 +1436,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCheckoutAuthorize
+     * To obtain the request config of the operation postStoreByStoreidCheckoutAuthorize
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidCheckoutAuthorizeRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidCheckoutAuthorizeRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1470,8 +1470,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCheckoutAuthorizeByOrderid(storeid: kotlin.String, orderid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidCheckoutAuthorizeByOrderidWithHttpInfo(storeid = storeid, orderid = orderid)
+    fun postStoreByStoreidCheckoutAuthorizeByOrderid(storeid: kotlin.String, orderid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidCheckoutAuthorizeByOrderidWithHttpInfo(storeid = storeid, orderid = orderid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1499,8 +1499,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidCheckoutAuthorizeByOrderidWithHttpInfo(storeid: kotlin.String, orderid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidCheckoutAuthorizeByOrderidRequestConfig(storeid = storeid, orderid = orderid)
+    fun postStoreByStoreidCheckoutAuthorizeByOrderidWithHttpInfo(storeid: kotlin.String, orderid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidCheckoutAuthorizeByOrderidRequestConfig(storeid = storeid, orderid = orderid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1508,13 +1508,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCheckoutAuthorizeByOrderid
+     * To obtain the request config of the operation postStoreByStoreidCheckoutAuthorizeByOrderid
      *
      * @param storeid 
      * @param orderid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidCheckoutAuthorizeByOrderidRequestConfig(storeid: kotlin.String, orderid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidCheckoutAuthorizeByOrderidRequestConfig(storeid: kotlin.String, orderid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1543,8 +1543,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCheckoutCaptureByOrderid(storeid: kotlin.String, orderid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidCheckoutCaptureByOrderidWithHttpInfo(storeid = storeid, orderid = orderid)
+    fun postStoreByStoreidCheckoutCaptureByOrderid(storeid: kotlin.String, orderid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidCheckoutCaptureByOrderidWithHttpInfo(storeid = storeid, orderid = orderid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1572,8 +1572,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidCheckoutCaptureByOrderidWithHttpInfo(storeid: kotlin.String, orderid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidCheckoutCaptureByOrderidRequestConfig(storeid = storeid, orderid = orderid)
+    fun postStoreByStoreidCheckoutCaptureByOrderidWithHttpInfo(storeid: kotlin.String, orderid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidCheckoutCaptureByOrderidRequestConfig(storeid = storeid, orderid = orderid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1581,13 +1581,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCheckoutCaptureByOrderid
+     * To obtain the request config of the operation postStoreByStoreidCheckoutCaptureByOrderid
      *
      * @param storeid 
      * @param orderid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidCheckoutCaptureByOrderidRequestConfig(storeid: kotlin.String, orderid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidCheckoutCaptureByOrderidRequestConfig(storeid: kotlin.String, orderid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1615,8 +1615,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCheckoutCharge(storeid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidCheckoutChargeWithHttpInfo(storeid = storeid)
+    fun postStoreByStoreidCheckoutCharge(storeid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidCheckoutChargeWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1643,8 +1643,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidCheckoutChargeWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidCheckoutChargeRequestConfig(storeid = storeid)
+    fun postStoreByStoreidCheckoutChargeWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidCheckoutChargeRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1652,12 +1652,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCheckoutCharge
+     * To obtain the request config of the operation postStoreByStoreidCheckoutCharge
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidCheckoutChargeRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidCheckoutChargeRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1686,8 +1686,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCheckoutPaypalCancelByPaykey(storeid: kotlin.String, payKey: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidCheckoutPaypalCancelByPaykeyWithHttpInfo(storeid = storeid, payKey = payKey)
+    fun postStoreByStoreidCheckoutPaypalCancelByPaykey(storeid: kotlin.String, payKey: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidCheckoutPaypalCancelByPaykeyWithHttpInfo(storeid = storeid, payKey = payKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1715,8 +1715,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidCheckoutPaypalCancelByPaykeyWithHttpInfo(storeid: kotlin.String, payKey: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidCheckoutPaypalCancelByPaykeyRequestConfig(storeid = storeid, payKey = payKey)
+    fun postStoreByStoreidCheckoutPaypalCancelByPaykeyWithHttpInfo(storeid: kotlin.String, payKey: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidCheckoutPaypalCancelByPaykeyRequestConfig(storeid = storeid, payKey = payKey)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1724,13 +1724,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCheckoutPaypalCancelByPaykey
+     * To obtain the request config of the operation postStoreByStoreidCheckoutPaypalCancelByPaykey
      *
      * @param storeid 
      * @param payKey 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidCheckoutPaypalCancelByPaykeyRequestConfig(storeid: kotlin.String, payKey: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidCheckoutPaypalCancelByPaykeyRequestConfig(storeid: kotlin.String, payKey: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1759,8 +1759,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCheckoutPaypalConfirmByPaykey(storeid: kotlin.String, payKey: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidCheckoutPaypalConfirmByPaykeyWithHttpInfo(storeid = storeid, payKey = payKey)
+    fun postStoreByStoreidCheckoutPaypalConfirmByPaykey(storeid: kotlin.String, payKey: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidCheckoutPaypalConfirmByPaykeyWithHttpInfo(storeid = storeid, payKey = payKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1788,8 +1788,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidCheckoutPaypalConfirmByPaykeyWithHttpInfo(storeid: kotlin.String, payKey: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidCheckoutPaypalConfirmByPaykeyRequestConfig(storeid = storeid, payKey = payKey)
+    fun postStoreByStoreidCheckoutPaypalConfirmByPaykeyWithHttpInfo(storeid: kotlin.String, payKey: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidCheckoutPaypalConfirmByPaykeyRequestConfig(storeid = storeid, payKey = payKey)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1797,13 +1797,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCheckoutPaypalConfirmByPaykey
+     * To obtain the request config of the operation postStoreByStoreidCheckoutPaypalConfirmByPaykey
      *
      * @param storeid 
      * @param payKey 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidCheckoutPaypalConfirmByPaykeyRequestConfig(storeid: kotlin.String, payKey: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidCheckoutPaypalConfirmByPaykeyRequestConfig(storeid: kotlin.String, payKey: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1831,8 +1831,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidCheckoutPaypalPay(storeid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidCheckoutPaypalPayWithHttpInfo(storeid = storeid)
+    fun postStoreByStoreidCheckoutPaypalPay(storeid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidCheckoutPaypalPayWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1859,8 +1859,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidCheckoutPaypalPayWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidCheckoutPaypalPayRequestConfig(storeid = storeid)
+    fun postStoreByStoreidCheckoutPaypalPayWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidCheckoutPaypalPayRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1868,12 +1868,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidCheckoutPaypalPay
+     * To obtain the request config of the operation postStoreByStoreidCheckoutPaypalPay
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidCheckoutPaypalPayRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidCheckoutPaypalPayRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1902,8 +1902,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
+    fun postStoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1931,8 +1931,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
+    fun postStoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1940,13 +1940,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidListingByKey
+     * To obtain the request config of the operation postStoreByStoreidListingByKey
      *
      * @param storeid 
      * @param key 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1975,8 +1975,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidPaypalCancelByPaykey(storeid: kotlin.String, payKey: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidPaypalCancelByPaykeyWithHttpInfo(storeid = storeid, payKey = payKey)
+    fun postStoreByStoreidPaypalCancelByPaykey(storeid: kotlin.String, payKey: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidPaypalCancelByPaykeyWithHttpInfo(storeid = storeid, payKey = payKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2004,8 +2004,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidPaypalCancelByPaykeyWithHttpInfo(storeid: kotlin.String, payKey: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidPaypalCancelByPaykeyRequestConfig(storeid = storeid, payKey = payKey)
+    fun postStoreByStoreidPaypalCancelByPaykeyWithHttpInfo(storeid: kotlin.String, payKey: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidPaypalCancelByPaykeyRequestConfig(storeid = storeid, payKey = payKey)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2013,13 +2013,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidPaypalCancelByPaykey
+     * To obtain the request config of the operation postStoreByStoreidPaypalCancelByPaykey
      *
      * @param storeid 
      * @param payKey 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidPaypalCancelByPaykeyRequestConfig(storeid: kotlin.String, payKey: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidPaypalCancelByPaykeyRequestConfig(storeid: kotlin.String, payKey: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2048,8 +2048,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidPaypalConfirmByPaykey(storeid: kotlin.String, payKey: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidPaypalConfirmByPaykeyWithHttpInfo(storeid = storeid, payKey = payKey)
+    fun postStoreByStoreidPaypalConfirmByPaykey(storeid: kotlin.String, payKey: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidPaypalConfirmByPaykeyWithHttpInfo(storeid = storeid, payKey = payKey)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2077,8 +2077,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidPaypalConfirmByPaykeyWithHttpInfo(storeid: kotlin.String, payKey: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidPaypalConfirmByPaykeyRequestConfig(storeid = storeid, payKey = payKey)
+    fun postStoreByStoreidPaypalConfirmByPaykeyWithHttpInfo(storeid: kotlin.String, payKey: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidPaypalConfirmByPaykeyRequestConfig(storeid = storeid, payKey = payKey)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2086,13 +2086,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidPaypalConfirmByPaykey
+     * To obtain the request config of the operation postStoreByStoreidPaypalConfirmByPaykey
      *
      * @param storeid 
      * @param payKey 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidPaypalConfirmByPaykeyRequestConfig(storeid: kotlin.String, payKey: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidPaypalConfirmByPaykeyRequestConfig(storeid: kotlin.String, payKey: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2120,8 +2120,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidPaypalPay(storeid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidPaypalPayWithHttpInfo(storeid = storeid)
+    fun postStoreByStoreidPaypalPay(storeid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidPaypalPayWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2148,8 +2148,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidPaypalPayWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidPaypalPayRequestConfig(storeid = storeid)
+    fun postStoreByStoreidPaypalPayWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidPaypalPayRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2157,12 +2157,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidPaypalPay
+     * To obtain the request config of the operation postStoreByStoreidPaypalPay
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidPaypalPayRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidPaypalPayRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2190,8 +2190,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreByStoreidTrial(storeid: kotlin.String) : Unit {
-        val localVarResponse = postV1StoreByStoreidTrialWithHttpInfo(storeid = storeid)
+    fun postStoreByStoreidTrial(storeid: kotlin.String) : Unit {
+        val localVarResponse = postStoreByStoreidTrialWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2218,8 +2218,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreByStoreidTrialWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreByStoreidTrialRequestConfig(storeid = storeid)
+    fun postStoreByStoreidTrialWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreByStoreidTrialRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2227,12 +2227,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreByStoreidTrial
+     * To obtain the request config of the operation postStoreByStoreidTrial
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun postV1StoreByStoreidTrialRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun postStoreByStoreidTrialRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2259,8 +2259,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1StoreToken() : Unit {
-        val localVarResponse = postV1StoreTokenWithHttpInfo()
+    fun postStoreToken() : Unit {
+        val localVarResponse = postStoreTokenWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2286,8 +2286,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1StoreTokenWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1StoreTokenRequestConfig()
+    fun postStoreTokenWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postStoreTokenRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2295,11 +2295,11 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postV1StoreToken
+     * To obtain the request config of the operation postStoreToken
      *
      * @return RequestConfig
      */
-    fun postV1StoreTokenRequestConfig() : RequestConfig<Unit> {
+    fun postStoreTokenRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2327,8 +2327,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1StoreByStoreid(storeid: kotlin.String) : Unit {
-        val localVarResponse = putV1StoreByStoreidWithHttpInfo(storeid = storeid)
+    fun putStoreByStoreid(storeid: kotlin.String) : Unit {
+        val localVarResponse = putStoreByStoreidWithHttpInfo(storeid = storeid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2355,8 +2355,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1StoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1StoreByStoreidRequestConfig(storeid = storeid)
+    fun putStoreByStoreidWithHttpInfo(storeid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putStoreByStoreidRequestConfig(storeid = storeid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2364,12 +2364,12 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1StoreByStoreid
+     * To obtain the request config of the operation putStoreByStoreid
      *
      * @param storeid 
      * @return RequestConfig
      */
-    fun putV1StoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
+    fun putStoreByStoreidRequestConfig(storeid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2398,8 +2398,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1StoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = putV1StoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
+    fun putStoreByStoreidListingByKey(storeid: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = putStoreByStoreidListingByKeyWithHttpInfo(storeid = storeid, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2427,8 +2427,8 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1StoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1StoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
+    fun putStoreByStoreidListingByKeyWithHttpInfo(storeid: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putStoreByStoreidListingByKeyRequestConfig(storeid = storeid, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2436,13 +2436,13 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putV1StoreByStoreidListingByKey
+     * To obtain the request config of the operation putStoreByStoreidListingByKey
      *
      * @param storeid 
      * @param key 
      * @return RequestConfig
      */
-    fun putV1StoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun putStoreByStoreidListingByKeyRequestConfig(storeid: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

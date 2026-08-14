@@ -61,8 +61,8 @@ class RpcApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1RpcByChain(chain: kotlin.String, rpcIn: RpcIn) : RpcOut {
-        val localVarResponse = postV1RpcByChainWithHttpInfo(chain = chain, rpcIn = rpcIn)
+    fun postRpcByChain(chain: kotlin.String, rpcIn: RpcIn) : RpcOut {
+        val localVarResponse = postRpcByChainWithHttpInfo(chain = chain, rpcIn = rpcIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RpcOut
@@ -91,8 +91,8 @@ class RpcApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1RpcByChainWithHttpInfo(chain: kotlin.String, rpcIn: RpcIn) : ApiResponse<RpcOut?> {
-        val localVariableConfig = postV1RpcByChainRequestConfig(chain = chain, rpcIn = rpcIn)
+    fun postRpcByChainWithHttpInfo(chain: kotlin.String, rpcIn: RpcIn) : ApiResponse<RpcOut?> {
+        val localVariableConfig = postRpcByChainRequestConfig(chain = chain, rpcIn = rpcIn)
 
         return request<RpcIn, RpcOut>(
             localVariableConfig
@@ -100,13 +100,13 @@ class RpcApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation postV1RpcByChain
+     * To obtain the request config of the operation postRpcByChain
      *
      * @param chain Chain is the registry id, from the URL.
      * @param rpcIn 
      * @return RequestConfig
      */
-    fun postV1RpcByChainRequestConfig(chain: kotlin.String, rpcIn: RpcIn) : RequestConfig<RpcIn> {
+    fun postRpcByChainRequestConfig(chain: kotlin.String, rpcIn: RpcIn) : RequestConfig<RpcIn> {
         val localVariableBody = rpcIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

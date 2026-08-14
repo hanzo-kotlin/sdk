@@ -70,8 +70,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CodeAsk(q: kotlin.String? = null, repo: kotlin.String? = null) : AskAnswer {
-        val localVarResponse = getV1CodeAskWithHttpInfo(q = q, repo = repo)
+    fun getCodeAsk(q: kotlin.String? = null, repo: kotlin.String? = null) : AskAnswer {
+        val localVarResponse = getCodeAskWithHttpInfo(q = q, repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AskAnswer
@@ -100,8 +100,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CodeAskWithHttpInfo(q: kotlin.String?, repo: kotlin.String?) : ApiResponse<AskAnswer?> {
-        val localVariableConfig = getV1CodeAskRequestConfig(q = q, repo = repo)
+    fun getCodeAskWithHttpInfo(q: kotlin.String?, repo: kotlin.String?) : ApiResponse<AskAnswer?> {
+        val localVariableConfig = getCodeAskRequestConfig(q = q, repo = repo)
 
         return request<Unit, AskAnswer>(
             localVariableConfig
@@ -109,13 +109,13 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1CodeAsk
+     * To obtain the request config of the operation getCodeAsk
      *
      * @param q Q is the question to answer. Required, max 4000 bytes. (optional)
      * @param repo Repo narrows retrieval to one repository. Empty searches every repo the org has indexed. (optional)
      * @return RequestConfig
      */
-    fun getV1CodeAskRequestConfig(q: kotlin.String?, repo: kotlin.String?) : RequestConfig<Unit> {
+    fun getCodeAskRequestConfig(q: kotlin.String?, repo: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -154,8 +154,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CodeFile(path: kotlin.String? = null, repo: kotlin.String? = null) : FileContent {
-        val localVarResponse = getV1CodeFileWithHttpInfo(path = path, repo = repo)
+    fun getCodeFile(path: kotlin.String? = null, repo: kotlin.String? = null) : FileContent {
+        val localVarResponse = getCodeFileWithHttpInfo(path = path, repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FileContent
@@ -184,8 +184,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CodeFileWithHttpInfo(path: kotlin.String?, repo: kotlin.String?) : ApiResponse<FileContent?> {
-        val localVariableConfig = getV1CodeFileRequestConfig(path = path, repo = repo)
+    fun getCodeFileWithHttpInfo(path: kotlin.String?, repo: kotlin.String?) : ApiResponse<FileContent?> {
+        val localVariableConfig = getCodeFileRequestConfig(path = path, repo = repo)
 
         return request<Unit, FileContent>(
             localVariableConfig
@@ -193,13 +193,13 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1CodeFile
+     * To obtain the request config of the operation getCodeFile
      *
      * @param path Path is the file&#39;s repo-relative path. Required. (optional)
      * @param repo Repo is the repository the file belongs to. REQUIRED. (optional)
      * @return RequestConfig
      */
-    fun getV1CodeFileRequestConfig(path: kotlin.String?, repo: kotlin.String?) : RequestConfig<Unit> {
+    fun getCodeFileRequestConfig(path: kotlin.String?, repo: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -240,8 +240,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CodeSearch(q: kotlin.String? = null, type: kotlin.String? = null, repo: kotlin.String? = null, limit: kotlin.Int? = null) : SearchResults {
-        val localVarResponse = getV1CodeSearchWithHttpInfo(q = q, type = type, repo = repo, limit = limit)
+    fun getCodeSearch(q: kotlin.String? = null, type: kotlin.String? = null, repo: kotlin.String? = null, limit: kotlin.Int? = null) : SearchResults {
+        val localVarResponse = getCodeSearchWithHttpInfo(q = q, type = type, repo = repo, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SearchResults
@@ -272,8 +272,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CodeSearchWithHttpInfo(q: kotlin.String?, type: kotlin.String?, repo: kotlin.String?, limit: kotlin.Int?) : ApiResponse<SearchResults?> {
-        val localVariableConfig = getV1CodeSearchRequestConfig(q = q, type = type, repo = repo, limit = limit)
+    fun getCodeSearchWithHttpInfo(q: kotlin.String?, type: kotlin.String?, repo: kotlin.String?, limit: kotlin.Int?) : ApiResponse<SearchResults?> {
+        val localVariableConfig = getCodeSearchRequestConfig(q = q, type = type, repo = repo, limit = limit)
 
         return request<Unit, SearchResults>(
             localVariableConfig
@@ -281,7 +281,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1CodeSearch
+     * To obtain the request config of the operation getCodeSearch
      *
      * @param q Q is the search query. Required, max 4000 bytes. For type&#x3D;regex it is a regular expression; for type&#x3D;symbol it is a symbol name. (optional)
      * @param type Type selects the retrieval tier: \&quot;text\&quot; (FTS5 trigram), \&quot;regex\&quot;, \&quot;symbol\&quot; (definitions), \&quot;semantic\&quot; (embeddings) or \&quot;hybrid\&quot;. Anything else — including empty — reads as hybrid. (optional)
@@ -289,7 +289,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param limit Limit caps how many spans come back: default 20, maximum 100. A value that is not a positive integer reads as the default. (optional)
      * @return RequestConfig
      */
-    fun getV1CodeSearchRequestConfig(q: kotlin.String?, type: kotlin.String?, repo: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getCodeSearchRequestConfig(q: kotlin.String?, type: kotlin.String?, repo: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -333,8 +333,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1CodeTree(repo: kotlin.String? = null) : RepoTree {
-        val localVarResponse = getV1CodeTreeWithHttpInfo(repo = repo)
+    fun getCodeTree(repo: kotlin.String? = null) : RepoTree {
+        val localVarResponse = getCodeTreeWithHttpInfo(repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RepoTree
@@ -362,8 +362,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1CodeTreeWithHttpInfo(repo: kotlin.String?) : ApiResponse<RepoTree?> {
-        val localVariableConfig = getV1CodeTreeRequestConfig(repo = repo)
+    fun getCodeTreeWithHttpInfo(repo: kotlin.String?) : ApiResponse<RepoTree?> {
+        val localVariableConfig = getCodeTreeRequestConfig(repo = repo)
 
         return request<Unit, RepoTree>(
             localVariableConfig
@@ -371,12 +371,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1CodeTree
+     * To obtain the request config of the operation getCodeTree
      *
      * @param repo Repo is the repository to walk. REQUIRED — a tree is repo-scoped. (optional)
      * @return RequestConfig
      */
-    fun getV1CodeTreeRequestConfig(repo: kotlin.String?) : RequestConfig<Unit> {
+    fun getCodeTreeRequestConfig(repo: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -411,8 +411,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CodeAsk(askPostIn: AskPostIn) : AskAnswer {
-        val localVarResponse = postV1CodeAskWithHttpInfo(askPostIn = askPostIn)
+    fun postCodeAsk(askPostIn: AskPostIn) : AskAnswer {
+        val localVarResponse = postCodeAskWithHttpInfo(askPostIn = askPostIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AskAnswer
@@ -440,8 +440,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodeAskWithHttpInfo(askPostIn: AskPostIn) : ApiResponse<AskAnswer?> {
-        val localVariableConfig = postV1CodeAskRequestConfig(askPostIn = askPostIn)
+    fun postCodeAskWithHttpInfo(askPostIn: AskPostIn) : ApiResponse<AskAnswer?> {
+        val localVariableConfig = postCodeAskRequestConfig(askPostIn = askPostIn)
 
         return request<AskPostIn, AskAnswer>(
             localVariableConfig
@@ -449,12 +449,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1CodeAsk
+     * To obtain the request config of the operation postCodeAsk
      *
      * @param askPostIn 
      * @return RequestConfig
      */
-    fun postV1CodeAskRequestConfig(askPostIn: AskPostIn) : RequestConfig<AskPostIn> {
+    fun postCodeAskRequestConfig(askPostIn: AskPostIn) : RequestConfig<AskPostIn> {
         val localVariableBody = askPostIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -485,8 +485,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CodeContext(contextIn: ContextIn) : ContextBundle {
-        val localVarResponse = postV1CodeContextWithHttpInfo(contextIn = contextIn)
+    fun postCodeContext(contextIn: ContextIn) : ContextBundle {
+        val localVarResponse = postCodeContextWithHttpInfo(contextIn = contextIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ContextBundle
@@ -514,8 +514,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodeContextWithHttpInfo(contextIn: ContextIn) : ApiResponse<ContextBundle?> {
-        val localVariableConfig = postV1CodeContextRequestConfig(contextIn = contextIn)
+    fun postCodeContextWithHttpInfo(contextIn: ContextIn) : ApiResponse<ContextBundle?> {
+        val localVariableConfig = postCodeContextRequestConfig(contextIn = contextIn)
 
         return request<ContextIn, ContextBundle>(
             localVariableConfig
@@ -523,12 +523,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1CodeContext
+     * To obtain the request config of the operation postCodeContext
      *
      * @param contextIn 
      * @return RequestConfig
      */
-    fun postV1CodeContextRequestConfig(contextIn: ContextIn) : RequestConfig<ContextIn> {
+    fun postCodeContextRequestConfig(contextIn: ContextIn) : RequestConfig<ContextIn> {
         val localVariableBody = contextIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -559,8 +559,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CodeIndex(indexIn: IndexIn) : IndexResult {
-        val localVarResponse = postV1CodeIndexWithHttpInfo(indexIn = indexIn)
+    fun postCodeIndex(indexIn: IndexIn) : IndexResult {
+        val localVarResponse = postCodeIndexWithHttpInfo(indexIn = indexIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IndexResult
@@ -588,8 +588,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodeIndexWithHttpInfo(indexIn: IndexIn) : ApiResponse<IndexResult?> {
-        val localVariableConfig = postV1CodeIndexRequestConfig(indexIn = indexIn)
+    fun postCodeIndexWithHttpInfo(indexIn: IndexIn) : ApiResponse<IndexResult?> {
+        val localVariableConfig = postCodeIndexRequestConfig(indexIn = indexIn)
 
         return request<IndexIn, IndexResult>(
             localVariableConfig
@@ -597,12 +597,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1CodeIndex
+     * To obtain the request config of the operation postCodeIndex
      *
      * @param indexIn 
      * @return RequestConfig
      */
-    fun postV1CodeIndexRequestConfig(indexIn: IndexIn) : RequestConfig<IndexIn> {
+    fun postCodeIndexRequestConfig(indexIn: IndexIn) : RequestConfig<IndexIn> {
         val localVariableBody = indexIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -633,8 +633,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CodeLspComplete(query: Query) : Answer {
-        val localVarResponse = postV1CodeLspCompleteWithHttpInfo(query = query)
+    fun postCodeLspComplete(query: Query) : Answer {
+        val localVarResponse = postCodeLspCompleteWithHttpInfo(query = query)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
@@ -662,8 +662,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodeLspCompleteWithHttpInfo(query: Query) : ApiResponse<Answer?> {
-        val localVariableConfig = postV1CodeLspCompleteRequestConfig(query = query)
+    fun postCodeLspCompleteWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postCodeLspCompleteRequestConfig(query = query)
 
         return request<Query, Answer>(
             localVariableConfig
@@ -671,12 +671,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1CodeLspComplete
+     * To obtain the request config of the operation postCodeLspComplete
      *
      * @param query 
      * @return RequestConfig
      */
-    fun postV1CodeLspCompleteRequestConfig(query: Query) : RequestConfig<Query> {
+    fun postCodeLspCompleteRequestConfig(query: Query) : RequestConfig<Query> {
         val localVariableBody = query
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -707,8 +707,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CodeLspDiagnostics(query: Query) : Answer {
-        val localVarResponse = postV1CodeLspDiagnosticsWithHttpInfo(query = query)
+    fun postCodeLspDiagnostics(query: Query) : Answer {
+        val localVarResponse = postCodeLspDiagnosticsWithHttpInfo(query = query)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
@@ -736,8 +736,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodeLspDiagnosticsWithHttpInfo(query: Query) : ApiResponse<Answer?> {
-        val localVariableConfig = postV1CodeLspDiagnosticsRequestConfig(query = query)
+    fun postCodeLspDiagnosticsWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postCodeLspDiagnosticsRequestConfig(query = query)
 
         return request<Query, Answer>(
             localVariableConfig
@@ -745,12 +745,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1CodeLspDiagnostics
+     * To obtain the request config of the operation postCodeLspDiagnostics
      *
      * @param query 
      * @return RequestConfig
      */
-    fun postV1CodeLspDiagnosticsRequestConfig(query: Query) : RequestConfig<Query> {
+    fun postCodeLspDiagnosticsRequestConfig(query: Query) : RequestConfig<Query> {
         val localVariableBody = query
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -781,8 +781,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CodeLspHover(query: Query) : Answer {
-        val localVarResponse = postV1CodeLspHoverWithHttpInfo(query = query)
+    fun postCodeLspHover(query: Query) : Answer {
+        val localVarResponse = postCodeLspHoverWithHttpInfo(query = query)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
@@ -810,8 +810,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodeLspHoverWithHttpInfo(query: Query) : ApiResponse<Answer?> {
-        val localVariableConfig = postV1CodeLspHoverRequestConfig(query = query)
+    fun postCodeLspHoverWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postCodeLspHoverRequestConfig(query = query)
 
         return request<Query, Answer>(
             localVariableConfig
@@ -819,12 +819,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1CodeLspHover
+     * To obtain the request config of the operation postCodeLspHover
      *
      * @param query 
      * @return RequestConfig
      */
-    fun postV1CodeLspHoverRequestConfig(query: Query) : RequestConfig<Query> {
+    fun postCodeLspHoverRequestConfig(query: Query) : RequestConfig<Query> {
         val localVariableBody = query
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -855,8 +855,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CodeLspLocate(query: Query) : Answer {
-        val localVarResponse = postV1CodeLspLocateWithHttpInfo(query = query)
+    fun postCodeLspLocate(query: Query) : Answer {
+        val localVarResponse = postCodeLspLocateWithHttpInfo(query = query)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
@@ -884,8 +884,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodeLspLocateWithHttpInfo(query: Query) : ApiResponse<Answer?> {
-        val localVariableConfig = postV1CodeLspLocateRequestConfig(query = query)
+    fun postCodeLspLocateWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postCodeLspLocateRequestConfig(query = query)
 
         return request<Query, Answer>(
             localVariableConfig
@@ -893,12 +893,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1CodeLspLocate
+     * To obtain the request config of the operation postCodeLspLocate
      *
      * @param query 
      * @return RequestConfig
      */
-    fun postV1CodeLspLocateRequestConfig(query: Query) : RequestConfig<Query> {
+    fun postCodeLspLocateRequestConfig(query: Query) : RequestConfig<Query> {
         val localVariableBody = query
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -929,8 +929,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1CodeLspSymbols(query: Query) : Answer {
-        val localVarResponse = postV1CodeLspSymbolsWithHttpInfo(query = query)
+    fun postCodeLspSymbols(query: Query) : Answer {
+        val localVarResponse = postCodeLspSymbolsWithHttpInfo(query = query)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
@@ -958,8 +958,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1CodeLspSymbolsWithHttpInfo(query: Query) : ApiResponse<Answer?> {
-        val localVariableConfig = postV1CodeLspSymbolsRequestConfig(query = query)
+    fun postCodeLspSymbolsWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postCodeLspSymbolsRequestConfig(query = query)
 
         return request<Query, Answer>(
             localVariableConfig
@@ -967,12 +967,12 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1CodeLspSymbols
+     * To obtain the request config of the operation postCodeLspSymbols
      *
      * @param query 
      * @return RequestConfig
      */
-    fun postV1CodeLspSymbolsRequestConfig(query: Query) : RequestConfig<Query> {
+    fun postCodeLspSymbolsRequestConfig(query: Query) : RequestConfig<Query> {
         val localVariableBody = query
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

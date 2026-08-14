@@ -65,8 +65,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BenchmarkCatalog() : BenchmarkCatalog {
-        val localVarResponse = getV1BenchmarkCatalogWithHttpInfo()
+    fun getBenchmarkCatalog() : BenchmarkCatalog {
+        val localVarResponse = getBenchmarkCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as BenchmarkCatalog
@@ -93,8 +93,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BenchmarkCatalogWithHttpInfo() : ApiResponse<BenchmarkCatalog?> {
-        val localVariableConfig = getV1BenchmarkCatalogRequestConfig()
+    fun getBenchmarkCatalogWithHttpInfo() : ApiResponse<BenchmarkCatalog?> {
+        val localVariableConfig = getBenchmarkCatalogRequestConfig()
 
         return request<Unit, BenchmarkCatalog>(
             localVariableConfig
@@ -102,11 +102,11 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1BenchmarkCatalog
+     * To obtain the request config of the operation getBenchmarkCatalog
      *
      * @return RequestConfig
      */
-    fun getV1BenchmarkCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getBenchmarkCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -138,8 +138,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BenchmarkCompare(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String? = null) : Pairing {
-        val localVarResponse = getV1BenchmarkCompareWithHttpInfo(a = a, b = b, benchmark = benchmark)
+    fun getBenchmarkCompare(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String? = null) : Pairing {
+        val localVarResponse = getBenchmarkCompareWithHttpInfo(a = a, b = b, benchmark = benchmark)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Pairing
@@ -169,8 +169,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BenchmarkCompareWithHttpInfo(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String?) : ApiResponse<Pairing?> {
-        val localVariableConfig = getV1BenchmarkCompareRequestConfig(a = a, b = b, benchmark = benchmark)
+    fun getBenchmarkCompareWithHttpInfo(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String?) : ApiResponse<Pairing?> {
+        val localVariableConfig = getBenchmarkCompareRequestConfig(a = a, b = b, benchmark = benchmark)
 
         return request<Unit, Pairing>(
             localVariableConfig
@@ -178,14 +178,14 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1BenchmarkCompare
+     * To obtain the request config of the operation getBenchmarkCompare
      *
      * @param a A is the first model id. It is required.
      * @param b B is the second model id. It is required.
      * @param benchmark Benchmark is the catalog id to compare on, defaulting to gpqa_diamond. (optional)
      * @return RequestConfig
      */
-    fun getV1BenchmarkCompareRequestConfig(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String?) : RequestConfig<Unit> {
+    fun getBenchmarkCompareRequestConfig(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -222,8 +222,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BenchmarkLeaderboard(benchmark: kotlin.String? = null) : Leaderboard {
-        val localVarResponse = getV1BenchmarkLeaderboardWithHttpInfo(benchmark = benchmark)
+    fun getBenchmarkLeaderboard(benchmark: kotlin.String? = null) : Leaderboard {
+        val localVarResponse = getBenchmarkLeaderboardWithHttpInfo(benchmark = benchmark)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Leaderboard
@@ -251,8 +251,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BenchmarkLeaderboardWithHttpInfo(benchmark: kotlin.String?) : ApiResponse<Leaderboard?> {
-        val localVariableConfig = getV1BenchmarkLeaderboardRequestConfig(benchmark = benchmark)
+    fun getBenchmarkLeaderboardWithHttpInfo(benchmark: kotlin.String?) : ApiResponse<Leaderboard?> {
+        val localVariableConfig = getBenchmarkLeaderboardRequestConfig(benchmark = benchmark)
 
         return request<Unit, Leaderboard>(
             localVariableConfig
@@ -260,12 +260,12 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1BenchmarkLeaderboard
+     * To obtain the request config of the operation getBenchmarkLeaderboard
      *
      * @param benchmark Benchmark is the catalog id to read, defaulting to gpqa_diamond. (optional)
      * @return RequestConfig
      */
-    fun getV1BenchmarkLeaderboardRequestConfig(benchmark: kotlin.String?) : RequestConfig<Unit> {
+    fun getBenchmarkLeaderboardRequestConfig(benchmark: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -299,8 +299,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1BenchmarkPresets() : PresetList {
-        val localVarResponse = getV1BenchmarkPresetsWithHttpInfo()
+    fun getBenchmarkPresets() : PresetList {
+        val localVarResponse = getBenchmarkPresetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PresetList
@@ -327,8 +327,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1BenchmarkPresetsWithHttpInfo() : ApiResponse<PresetList?> {
-        val localVariableConfig = getV1BenchmarkPresetsRequestConfig()
+    fun getBenchmarkPresetsWithHttpInfo() : ApiResponse<PresetList?> {
+        val localVariableConfig = getBenchmarkPresetsRequestConfig()
 
         return request<Unit, PresetList>(
             localVariableConfig
@@ -336,11 +336,11 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1BenchmarkPresets
+     * To obtain the request config of the operation getBenchmarkPresets
      *
      * @return RequestConfig
      */
-    fun getV1BenchmarkPresetsRequestConfig() : RequestConfig<Unit> {
+    fun getBenchmarkPresetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -370,8 +370,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BenchmarkPresets(preset: Preset) : PresetAccepted {
-        val localVarResponse = postV1BenchmarkPresetsWithHttpInfo(preset = preset)
+    fun postBenchmarkPresets(preset: Preset) : PresetAccepted {
+        val localVarResponse = postBenchmarkPresetsWithHttpInfo(preset = preset)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PresetAccepted
@@ -399,8 +399,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BenchmarkPresetsWithHttpInfo(preset: Preset) : ApiResponse<PresetAccepted?> {
-        val localVariableConfig = postV1BenchmarkPresetsRequestConfig(preset = preset)
+    fun postBenchmarkPresetsWithHttpInfo(preset: Preset) : ApiResponse<PresetAccepted?> {
+        val localVariableConfig = postBenchmarkPresetsRequestConfig(preset = preset)
 
         return request<Preset, PresetAccepted>(
             localVariableConfig
@@ -408,12 +408,12 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1BenchmarkPresets
+     * To obtain the request config of the operation postBenchmarkPresets
      *
      * @param preset 
      * @return RequestConfig
      */
-    fun postV1BenchmarkPresetsRequestConfig(preset: Preset) : RequestConfig<Preset> {
+    fun postBenchmarkPresetsRequestConfig(preset: Preset) : RequestConfig<Preset> {
         val localVariableBody = preset
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -444,8 +444,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1BenchmarkRuns(suite: Suite) : Admission {
-        val localVarResponse = postV1BenchmarkRunsWithHttpInfo(suite = suite)
+    fun postBenchmarkRuns(suite: Suite) : Admission {
+        val localVarResponse = postBenchmarkRunsWithHttpInfo(suite = suite)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Admission
@@ -473,8 +473,8 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1BenchmarkRunsWithHttpInfo(suite: Suite) : ApiResponse<Admission?> {
-        val localVariableConfig = postV1BenchmarkRunsRequestConfig(suite = suite)
+    fun postBenchmarkRunsWithHttpInfo(suite: Suite) : ApiResponse<Admission?> {
+        val localVariableConfig = postBenchmarkRunsRequestConfig(suite = suite)
 
         return request<Suite, Admission>(
             localVariableConfig
@@ -482,12 +482,12 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1BenchmarkRuns
+     * To obtain the request config of the operation postBenchmarkRuns
      *
      * @param suite 
      * @return RequestConfig
      */
-    fun postV1BenchmarkRunsRequestConfig(suite: Suite) : RequestConfig<Suite> {
+    fun postBenchmarkRunsRequestConfig(suite: Suite) : RequestConfig<Suite> {
         val localVariableBody = suite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -70,8 +70,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1AutomationsFlowsById(id: kotlin.String) : Unit {
-        val localVarResponse = deleteV1AutomationsFlowsByIdWithHttpInfo(id = id)
+    fun deleteAutomationsFlowsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteAutomationsFlowsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -98,8 +98,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1AutomationsFlowsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1AutomationsFlowsByIdRequestConfig(id = id)
+    fun deleteAutomationsFlowsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteAutomationsFlowsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -107,12 +107,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation deleteV1AutomationsFlowsById
+     * To obtain the request config of the operation deleteAutomationsFlowsById
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteV1AutomationsFlowsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAutomationsFlowsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -140,8 +140,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AutomationsConnectors() : Catalog {
-        val localVarResponse = getV1AutomationsConnectorsWithHttpInfo()
+    fun getAutomationsConnectors() : Catalog {
+        val localVarResponse = getAutomationsConnectorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Catalog
@@ -168,8 +168,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AutomationsConnectorsWithHttpInfo() : ApiResponse<Catalog?> {
-        val localVariableConfig = getV1AutomationsConnectorsRequestConfig()
+    fun getAutomationsConnectorsWithHttpInfo() : ApiResponse<Catalog?> {
+        val localVariableConfig = getAutomationsConnectorsRequestConfig()
 
         return request<Unit, Catalog>(
             localVariableConfig
@@ -177,11 +177,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1AutomationsConnectors
+     * To obtain the request config of the operation getAutomationsConnectors
      *
      * @return RequestConfig
      */
-    fun getV1AutomationsConnectorsRequestConfig() : RequestConfig<Unit> {
+    fun getAutomationsConnectorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -211,8 +211,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AutomationsFlows(limit: kotlin.Int? = null) : FlowPage {
-        val localVarResponse = getV1AutomationsFlowsWithHttpInfo(limit = limit)
+    fun getAutomationsFlows(limit: kotlin.Int? = null) : FlowPage {
+        val localVarResponse = getAutomationsFlowsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FlowPage
@@ -240,8 +240,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AutomationsFlowsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<FlowPage?> {
-        val localVariableConfig = getV1AutomationsFlowsRequestConfig(limit = limit)
+    fun getAutomationsFlowsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<FlowPage?> {
+        val localVariableConfig = getAutomationsFlowsRequestConfig(limit = limit)
 
         return request<Unit, FlowPage>(
             localVariableConfig
@@ -249,12 +249,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1AutomationsFlows
+     * To obtain the request config of the operation getAutomationsFlows
      *
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun getV1AutomationsFlowsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAutomationsFlowsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -289,8 +289,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AutomationsFlowsById(id: kotlin.String) : PopulatedFlow {
-        val localVarResponse = getV1AutomationsFlowsByIdWithHttpInfo(id = id)
+    fun getAutomationsFlowsById(id: kotlin.String) : PopulatedFlow {
+        val localVarResponse = getAutomationsFlowsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PopulatedFlow
@@ -318,8 +318,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AutomationsFlowsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PopulatedFlow?> {
-        val localVariableConfig = getV1AutomationsFlowsByIdRequestConfig(id = id)
+    fun getAutomationsFlowsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PopulatedFlow?> {
+        val localVariableConfig = getAutomationsFlowsByIdRequestConfig(id = id)
 
         return request<Unit, PopulatedFlow>(
             localVariableConfig
@@ -327,12 +327,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1AutomationsFlowsById
+     * To obtain the request config of the operation getAutomationsFlowsById
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun getV1AutomationsFlowsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getAutomationsFlowsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -363,8 +363,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AutomationsFlowsByIdVersions(id: kotlin.String, limit: kotlin.Int? = null) : VersionPage {
-        val localVarResponse = getV1AutomationsFlowsByIdVersionsWithHttpInfo(id = id, limit = limit)
+    fun getAutomationsFlowsByIdVersions(id: kotlin.String, limit: kotlin.Int? = null) : VersionPage {
+        val localVarResponse = getAutomationsFlowsByIdVersionsWithHttpInfo(id = id, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as VersionPage
@@ -393,8 +393,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AutomationsFlowsByIdVersionsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<VersionPage?> {
-        val localVariableConfig = getV1AutomationsFlowsByIdVersionsRequestConfig(id = id, limit = limit)
+    fun getAutomationsFlowsByIdVersionsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<VersionPage?> {
+        val localVariableConfig = getAutomationsFlowsByIdVersionsRequestConfig(id = id, limit = limit)
 
         return request<Unit, VersionPage>(
             localVariableConfig
@@ -402,13 +402,13 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1AutomationsFlowsByIdVersions
+     * To obtain the request config of the operation getAutomationsFlowsByIdVersions
      *
      * @param id ID is the flow whose versions to list, from the path.
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun getV1AutomationsFlowsByIdVersionsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAutomationsFlowsByIdVersionsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -442,8 +442,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AutomationsPieces() : Catalog {
-        val localVarResponse = getV1AutomationsPiecesWithHttpInfo()
+    fun getAutomationsPieces() : Catalog {
+        val localVarResponse = getAutomationsPiecesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Catalog
@@ -470,8 +470,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AutomationsPiecesWithHttpInfo() : ApiResponse<Catalog?> {
-        val localVariableConfig = getV1AutomationsPiecesRequestConfig()
+    fun getAutomationsPiecesWithHttpInfo() : ApiResponse<Catalog?> {
+        val localVariableConfig = getAutomationsPiecesRequestConfig()
 
         return request<Unit, Catalog>(
             localVariableConfig
@@ -479,11 +479,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1AutomationsPieces
+     * To obtain the request config of the operation getAutomationsPieces
      *
      * @return RequestConfig
      */
-    fun getV1AutomationsPiecesRequestConfig() : RequestConfig<Unit> {
+    fun getAutomationsPiecesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -514,8 +514,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AutomationsRuns(flowId: kotlin.String? = null, limit: kotlin.Int? = null) : RunPage {
-        val localVarResponse = getV1AutomationsRunsWithHttpInfo(flowId = flowId, limit = limit)
+    fun getAutomationsRuns(flowId: kotlin.String? = null, limit: kotlin.Int? = null) : RunPage {
+        val localVarResponse = getAutomationsRunsWithHttpInfo(flowId = flowId, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RunPage
@@ -544,8 +544,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AutomationsRunsWithHttpInfo(flowId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<RunPage?> {
-        val localVariableConfig = getV1AutomationsRunsRequestConfig(flowId = flowId, limit = limit)
+    fun getAutomationsRunsWithHttpInfo(flowId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<RunPage?> {
+        val localVariableConfig = getAutomationsRunsRequestConfig(flowId = flowId, limit = limit)
 
         return request<Unit, RunPage>(
             localVariableConfig
@@ -553,13 +553,13 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1AutomationsRuns
+     * To obtain the request config of the operation getAutomationsRuns
      *
      * @param flowId FlowID narrows the history to one flow. Omit it for the whole org&#39;s runs. (optional)
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun getV1AutomationsRunsRequestConfig(flowId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAutomationsRunsRequestConfig(flowId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -597,8 +597,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1AutomationsRunsById(id: kotlin.String) : FlowRun {
-        val localVarResponse = getV1AutomationsRunsByIdWithHttpInfo(id = id)
+    fun getAutomationsRunsById(id: kotlin.String) : FlowRun {
+        val localVarResponse = getAutomationsRunsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FlowRun
@@ -626,8 +626,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1AutomationsRunsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<FlowRun?> {
-        val localVariableConfig = getV1AutomationsRunsByIdRequestConfig(id = id)
+    fun getAutomationsRunsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<FlowRun?> {
+        val localVariableConfig = getAutomationsRunsByIdRequestConfig(id = id)
 
         return request<Unit, FlowRun>(
             localVariableConfig
@@ -635,12 +635,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation getV1AutomationsRunsById
+     * To obtain the request config of the operation getAutomationsRunsById
      *
      * @param id ID is the run to read, from the path.
      * @return RequestConfig
      */
-    fun getV1AutomationsRunsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getAutomationsRunsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -671,8 +671,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1AutomationsFlowsById(id: kotlin.String, patchFlowIn: PatchFlowIn) : Flow {
-        val localVarResponse = patchV1AutomationsFlowsByIdWithHttpInfo(id = id, patchFlowIn = patchFlowIn)
+    fun patchAutomationsFlowsById(id: kotlin.String, patchFlowIn: PatchFlowIn) : Flow {
+        val localVarResponse = patchAutomationsFlowsByIdWithHttpInfo(id = id, patchFlowIn = patchFlowIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
@@ -701,8 +701,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1AutomationsFlowsByIdWithHttpInfo(id: kotlin.String, patchFlowIn: PatchFlowIn) : ApiResponse<Flow?> {
-        val localVariableConfig = patchV1AutomationsFlowsByIdRequestConfig(id = id, patchFlowIn = patchFlowIn)
+    fun patchAutomationsFlowsByIdWithHttpInfo(id: kotlin.String, patchFlowIn: PatchFlowIn) : ApiResponse<Flow?> {
+        val localVariableConfig = patchAutomationsFlowsByIdRequestConfig(id = id, patchFlowIn = patchFlowIn)
 
         return request<PatchFlowIn, Flow>(
             localVariableConfig
@@ -710,13 +710,13 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation patchV1AutomationsFlowsById
+     * To obtain the request config of the operation patchAutomationsFlowsById
      *
      * @param id ID is the flow to update, from the path.
      * @param patchFlowIn 
      * @return RequestConfig
      */
-    fun patchV1AutomationsFlowsByIdRequestConfig(id: kotlin.String, patchFlowIn: PatchFlowIn) : RequestConfig<PatchFlowIn> {
+    fun patchAutomationsFlowsByIdRequestConfig(id: kotlin.String, patchFlowIn: PatchFlowIn) : RequestConfig<PatchFlowIn> {
         val localVariableBody = patchFlowIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -748,8 +748,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsConnectorsByIdRun(id: kotlin.String, runIn: RunIn) : RunResp {
-        val localVarResponse = postV1AutomationsConnectorsByIdRunWithHttpInfo(id = id, runIn = runIn)
+    fun postAutomationsConnectorsByIdRun(id: kotlin.String, runIn: RunIn) : RunResp {
+        val localVarResponse = postAutomationsConnectorsByIdRunWithHttpInfo(id = id, runIn = runIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RunResp
@@ -778,8 +778,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsConnectorsByIdRunWithHttpInfo(id: kotlin.String, runIn: RunIn) : ApiResponse<RunResp?> {
-        val localVariableConfig = postV1AutomationsConnectorsByIdRunRequestConfig(id = id, runIn = runIn)
+    fun postAutomationsConnectorsByIdRunWithHttpInfo(id: kotlin.String, runIn: RunIn) : ApiResponse<RunResp?> {
+        val localVariableConfig = postAutomationsConnectorsByIdRunRequestConfig(id = id, runIn = runIn)
 
         return request<RunIn, RunResp>(
             localVariableConfig
@@ -787,13 +787,13 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsConnectorsByIdRun
+     * To obtain the request config of the operation postAutomationsConnectorsByIdRun
      *
      * @param id ID is the connector to run, from the path.
      * @param runIn 
      * @return RequestConfig
      */
-    fun postV1AutomationsConnectorsByIdRunRequestConfig(id: kotlin.String, runIn: RunIn) : RequestConfig<RunIn> {
+    fun postAutomationsConnectorsByIdRunRequestConfig(id: kotlin.String, runIn: RunIn) : RequestConfig<RunIn> {
         val localVariableBody = runIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -824,8 +824,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsFlows(createFlowReq: CreateFlowReq) : PopulatedFlow {
-        val localVarResponse = postV1AutomationsFlowsWithHttpInfo(createFlowReq = createFlowReq)
+    fun postAutomationsFlows(createFlowReq: CreateFlowReq) : PopulatedFlow {
+        val localVarResponse = postAutomationsFlowsWithHttpInfo(createFlowReq = createFlowReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PopulatedFlow
@@ -853,8 +853,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsFlowsWithHttpInfo(createFlowReq: CreateFlowReq) : ApiResponse<PopulatedFlow?> {
-        val localVariableConfig = postV1AutomationsFlowsRequestConfig(createFlowReq = createFlowReq)
+    fun postAutomationsFlowsWithHttpInfo(createFlowReq: CreateFlowReq) : ApiResponse<PopulatedFlow?> {
+        val localVariableConfig = postAutomationsFlowsRequestConfig(createFlowReq = createFlowReq)
 
         return request<CreateFlowReq, PopulatedFlow>(
             localVariableConfig
@@ -862,12 +862,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsFlows
+     * To obtain the request config of the operation postAutomationsFlows
      *
      * @param createFlowReq 
      * @return RequestConfig
      */
-    fun postV1AutomationsFlowsRequestConfig(createFlowReq: CreateFlowReq) : RequestConfig<CreateFlowReq> {
+    fun postAutomationsFlowsRequestConfig(createFlowReq: CreateFlowReq) : RequestConfig<CreateFlowReq> {
         val localVariableBody = createFlowReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -898,8 +898,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsFlowsByIdDisable(id: kotlin.String) : Flow {
-        val localVarResponse = postV1AutomationsFlowsByIdDisableWithHttpInfo(id = id)
+    fun postAutomationsFlowsByIdDisable(id: kotlin.String) : Flow {
+        val localVarResponse = postAutomationsFlowsByIdDisableWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
@@ -927,8 +927,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsFlowsByIdDisableWithHttpInfo(id: kotlin.String) : ApiResponse<Flow?> {
-        val localVariableConfig = postV1AutomationsFlowsByIdDisableRequestConfig(id = id)
+    fun postAutomationsFlowsByIdDisableWithHttpInfo(id: kotlin.String) : ApiResponse<Flow?> {
+        val localVariableConfig = postAutomationsFlowsByIdDisableRequestConfig(id = id)
 
         return request<Unit, Flow>(
             localVariableConfig
@@ -936,12 +936,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsFlowsByIdDisable
+     * To obtain the request config of the operation postAutomationsFlowsByIdDisable
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun postV1AutomationsFlowsByIdDisableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAutomationsFlowsByIdDisableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -971,8 +971,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsFlowsByIdEnable(id: kotlin.String) : Flow {
-        val localVarResponse = postV1AutomationsFlowsByIdEnableWithHttpInfo(id = id)
+    fun postAutomationsFlowsByIdEnable(id: kotlin.String) : Flow {
+        val localVarResponse = postAutomationsFlowsByIdEnableWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
@@ -1000,8 +1000,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsFlowsByIdEnableWithHttpInfo(id: kotlin.String) : ApiResponse<Flow?> {
-        val localVariableConfig = postV1AutomationsFlowsByIdEnableRequestConfig(id = id)
+    fun postAutomationsFlowsByIdEnableWithHttpInfo(id: kotlin.String) : ApiResponse<Flow?> {
+        val localVariableConfig = postAutomationsFlowsByIdEnableRequestConfig(id = id)
 
         return request<Unit, Flow>(
             localVariableConfig
@@ -1009,12 +1009,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsFlowsByIdEnable
+     * To obtain the request config of the operation postAutomationsFlowsByIdEnable
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun postV1AutomationsFlowsByIdEnableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAutomationsFlowsByIdEnableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1043,8 +1043,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsFlowsByIdOperations(id: kotlin.String) : Unit {
-        val localVarResponse = postV1AutomationsFlowsByIdOperationsWithHttpInfo(id = id)
+    fun postAutomationsFlowsByIdOperations(id: kotlin.String) : Unit {
+        val localVarResponse = postAutomationsFlowsByIdOperationsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1071,8 +1071,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsFlowsByIdOperationsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AutomationsFlowsByIdOperationsRequestConfig(id = id)
+    fun postAutomationsFlowsByIdOperationsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAutomationsFlowsByIdOperationsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1080,12 +1080,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsFlowsByIdOperations
+     * To obtain the request config of the operation postAutomationsFlowsByIdOperations
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1AutomationsFlowsByIdOperationsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAutomationsFlowsByIdOperationsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1114,8 +1114,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsFlowsByIdRun(id: kotlin.String) : FlowRun {
-        val localVarResponse = postV1AutomationsFlowsByIdRunWithHttpInfo(id = id)
+    fun postAutomationsFlowsByIdRun(id: kotlin.String) : FlowRun {
+        val localVarResponse = postAutomationsFlowsByIdRunWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FlowRun
@@ -1143,8 +1143,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsFlowsByIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<FlowRun?> {
-        val localVariableConfig = postV1AutomationsFlowsByIdRunRequestConfig(id = id)
+    fun postAutomationsFlowsByIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<FlowRun?> {
+        val localVariableConfig = postAutomationsFlowsByIdRunRequestConfig(id = id)
 
         return request<Unit, FlowRun>(
             localVariableConfig
@@ -1152,12 +1152,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsFlowsByIdRun
+     * To obtain the request config of the operation postAutomationsFlowsByIdRun
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun postV1AutomationsFlowsByIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAutomationsFlowsByIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1188,8 +1188,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsFlowsByIdVersions(id: kotlin.String, createVersionIn: CreateVersionIn) : FlowVersion {
-        val localVarResponse = postV1AutomationsFlowsByIdVersionsWithHttpInfo(id = id, createVersionIn = createVersionIn)
+    fun postAutomationsFlowsByIdVersions(id: kotlin.String, createVersionIn: CreateVersionIn) : FlowVersion {
+        val localVarResponse = postAutomationsFlowsByIdVersionsWithHttpInfo(id = id, createVersionIn = createVersionIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FlowVersion
@@ -1218,8 +1218,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsFlowsByIdVersionsWithHttpInfo(id: kotlin.String, createVersionIn: CreateVersionIn) : ApiResponse<FlowVersion?> {
-        val localVariableConfig = postV1AutomationsFlowsByIdVersionsRequestConfig(id = id, createVersionIn = createVersionIn)
+    fun postAutomationsFlowsByIdVersionsWithHttpInfo(id: kotlin.String, createVersionIn: CreateVersionIn) : ApiResponse<FlowVersion?> {
+        val localVariableConfig = postAutomationsFlowsByIdVersionsRequestConfig(id = id, createVersionIn = createVersionIn)
 
         return request<CreateVersionIn, FlowVersion>(
             localVariableConfig
@@ -1227,13 +1227,13 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsFlowsByIdVersions
+     * To obtain the request config of the operation postAutomationsFlowsByIdVersions
      *
      * @param id ID is the flow to add a version to, from the path.
      * @param createVersionIn 
      * @return RequestConfig
      */
-    fun postV1AutomationsFlowsByIdVersionsRequestConfig(id: kotlin.String, createVersionIn: CreateVersionIn) : RequestConfig<CreateVersionIn> {
+    fun postAutomationsFlowsByIdVersionsRequestConfig(id: kotlin.String, createVersionIn: CreateVersionIn) : RequestConfig<CreateVersionIn> {
         val localVariableBody = createVersionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1264,8 +1264,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsHooksBySourceByEvent(source: kotlin.String, event: kotlin.String) : Unit {
-        val localVarResponse = postV1AutomationsHooksBySourceByEventWithHttpInfo(source = source, event = event)
+    fun postAutomationsHooksBySourceByEvent(source: kotlin.String, event: kotlin.String) : Unit {
+        val localVarResponse = postAutomationsHooksBySourceByEventWithHttpInfo(source = source, event = event)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1293,8 +1293,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsHooksBySourceByEventWithHttpInfo(source: kotlin.String, event: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AutomationsHooksBySourceByEventRequestConfig(source = source, event = event)
+    fun postAutomationsHooksBySourceByEventWithHttpInfo(source: kotlin.String, event: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAutomationsHooksBySourceByEventRequestConfig(source = source, event = event)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1302,13 +1302,13 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsHooksBySourceByEvent
+     * To obtain the request config of the operation postAutomationsHooksBySourceByEvent
      *
      * @param source 
      * @param event 
      * @return RequestConfig
      */
-    fun postV1AutomationsHooksBySourceByEventRequestConfig(source: kotlin.String, event: kotlin.String) : RequestConfig<Unit> {
+    fun postAutomationsHooksBySourceByEventRequestConfig(source: kotlin.String, event: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1336,8 +1336,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1AutomationsRunsByIdResume(id: kotlin.String) : Unit {
-        val localVarResponse = postV1AutomationsRunsByIdResumeWithHttpInfo(id = id)
+    fun postAutomationsRunsByIdResume(id: kotlin.String) : Unit {
+        val localVarResponse = postAutomationsRunsByIdResumeWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1364,8 +1364,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1AutomationsRunsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1AutomationsRunsByIdResumeRequestConfig(id = id)
+    fun postAutomationsRunsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAutomationsRunsByIdResumeRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1373,12 +1373,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation postV1AutomationsRunsByIdResume
+     * To obtain the request config of the operation postAutomationsRunsByIdResume
      *
      * @param id 
      * @return RequestConfig
      */
-    fun postV1AutomationsRunsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postAutomationsRunsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

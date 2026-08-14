@@ -67,8 +67,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1FrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1FrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
+    fun deleteFrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = deleteFrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -96,8 +96,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1FrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1FrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
+    fun deleteFrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteFrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -105,13 +105,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1FrameworkByDoctypeByName
+     * To obtain the request config of the operation deleteFrameworkByDoctypeByName
      *
      * @param doctype DocType is the document&#39;s DocType, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun deleteV1FrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteFrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -139,8 +139,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1FrameworkDoctypesByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteV1FrameworkDoctypesByNameWithHttpInfo(name = name)
+    fun deleteFrameworkDoctypesByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteFrameworkDoctypesByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -167,8 +167,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1FrameworkDoctypesByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1FrameworkDoctypesByNameRequestConfig(name = name)
+    fun deleteFrameworkDoctypesByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteFrameworkDoctypesByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -176,12 +176,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1FrameworkDoctypesByName
+     * To obtain the request config of the operation deleteFrameworkDoctypesByName
      *
      * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun deleteV1FrameworkDoctypesByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteFrameworkDoctypesByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -210,8 +210,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1FrameworkRolesByUserByRole(user: kotlin.String, role: kotlin.String) : Unit {
-        val localVarResponse = deleteV1FrameworkRolesByUserByRoleWithHttpInfo(user = user, role = role)
+    fun deleteFrameworkRolesByUserByRole(user: kotlin.String, role: kotlin.String) : Unit {
+        val localVarResponse = deleteFrameworkRolesByUserByRoleWithHttpInfo(user = user, role = role)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -239,8 +239,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1FrameworkRolesByUserByRoleWithHttpInfo(user: kotlin.String, role: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteV1FrameworkRolesByUserByRoleRequestConfig(user = user, role = role)
+    fun deleteFrameworkRolesByUserByRoleWithHttpInfo(user: kotlin.String, role: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteFrameworkRolesByUserByRoleRequestConfig(user = user, role = role)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -248,13 +248,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation deleteV1FrameworkRolesByUserByRole
+     * To obtain the request config of the operation deleteFrameworkRolesByUserByRole
      *
      * @param user User is the assignee whose grant is being revoked, from the path.
      * @param role Role is the role to revoke, from the path. A role name containing a space (\&quot;System Manager\&quot;) arrives percent-encoded and is decoded before it is matched against the stored assignment.
      * @return RequestConfig
      */
-    fun deleteV1FrameworkRolesByUserByRoleRequestConfig(user: kotlin.String, role: kotlin.String) : RequestConfig<Unit> {
+    fun deleteFrameworkRolesByUserByRoleRequestConfig(user: kotlin.String, role: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -287,8 +287,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FrameworkByDoctype(doctype: kotlin.String, filters: kotlin.String? = null, fields: kotlin.String? = null, orderBy: kotlin.String? = null, limit: kotlin.String? = null) : DocumentList {
-        val localVarResponse = getV1FrameworkByDoctypeWithHttpInfo(doctype = doctype, filters = filters, fields = fields, orderBy = orderBy, limit = limit)
+    fun getFrameworkByDoctype(doctype: kotlin.String, filters: kotlin.String? = null, fields: kotlin.String? = null, orderBy: kotlin.String? = null, limit: kotlin.String? = null) : DocumentList {
+        val localVarResponse = getFrameworkByDoctypeWithHttpInfo(doctype = doctype, filters = filters, fields = fields, orderBy = orderBy, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DocumentList
@@ -320,8 +320,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FrameworkByDoctypeWithHttpInfo(doctype: kotlin.String, filters: kotlin.String?, fields: kotlin.String?, orderBy: kotlin.String?, limit: kotlin.String?) : ApiResponse<DocumentList?> {
-        val localVariableConfig = getV1FrameworkByDoctypeRequestConfig(doctype = doctype, filters = filters, fields = fields, orderBy = orderBy, limit = limit)
+    fun getFrameworkByDoctypeWithHttpInfo(doctype: kotlin.String, filters: kotlin.String?, fields: kotlin.String?, orderBy: kotlin.String?, limit: kotlin.String?) : ApiResponse<DocumentList?> {
+        val localVariableConfig = getFrameworkByDoctypeRequestConfig(doctype = doctype, filters = filters, fields = fields, orderBy = orderBy, limit = limit)
 
         return request<Unit, DocumentList>(
             localVariableConfig
@@ -329,7 +329,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FrameworkByDoctype
+     * To obtain the request config of the operation getFrameworkByDoctype
      *
      * @param doctype DocType is the DocType to list, from the path.
      * @param filters Filters is a JSON object of equality matches, e.g. {\&quot;priority\&quot;:\&quot;High\&quot;}. Every key must be a field the DocType declares (or the managed name / docstatus); an undeclared one is refused rather than silently ignored. (optional)
@@ -338,7 +338,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param limit Limit caps the rows returned. Anything that is not a positive integer leaves the engine&#39;s default in place. (optional)
      * @return RequestConfig
      */
-    fun getV1FrameworkByDoctypeRequestConfig(doctype: kotlin.String, filters: kotlin.String?, fields: kotlin.String?, orderBy: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
+    fun getFrameworkByDoctypeRequestConfig(doctype: kotlin.String, filters: kotlin.String?, fields: kotlin.String?, orderBy: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -383,8 +383,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = getV1FrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
+    fun getFrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getFrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -413,8 +413,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = getV1FrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
+    fun getFrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getFrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -422,13 +422,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FrameworkByDoctypeByName
+     * To obtain the request config of the operation getFrameworkByDoctypeByName
      *
      * @param doctype DocType is the document&#39;s DocType, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun getV1FrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getFrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -457,8 +457,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FrameworkDoctypes() : DocTypeList {
-        val localVarResponse = getV1FrameworkDoctypesWithHttpInfo()
+    fun getFrameworkDoctypes() : DocTypeList {
+        val localVarResponse = getFrameworkDoctypesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DocTypeList
@@ -485,8 +485,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FrameworkDoctypesWithHttpInfo() : ApiResponse<DocTypeList?> {
-        val localVariableConfig = getV1FrameworkDoctypesRequestConfig()
+    fun getFrameworkDoctypesWithHttpInfo() : ApiResponse<DocTypeList?> {
+        val localVariableConfig = getFrameworkDoctypesRequestConfig()
 
         return request<Unit, DocTypeList>(
             localVariableConfig
@@ -494,11 +494,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FrameworkDoctypes
+     * To obtain the request config of the operation getFrameworkDoctypes
      *
      * @return RequestConfig
      */
-    fun getV1FrameworkDoctypesRequestConfig() : RequestConfig<Unit> {
+    fun getFrameworkDoctypesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -528,8 +528,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FrameworkDoctypesByName(name: kotlin.String) : DocType {
-        val localVarResponse = getV1FrameworkDoctypesByNameWithHttpInfo(name = name)
+    fun getFrameworkDoctypesByName(name: kotlin.String) : DocType {
+        val localVarResponse = getFrameworkDoctypesByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DocType
@@ -557,8 +557,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FrameworkDoctypesByNameWithHttpInfo(name: kotlin.String) : ApiResponse<DocType?> {
-        val localVariableConfig = getV1FrameworkDoctypesByNameRequestConfig(name = name)
+    fun getFrameworkDoctypesByNameWithHttpInfo(name: kotlin.String) : ApiResponse<DocType?> {
+        val localVariableConfig = getFrameworkDoctypesByNameRequestConfig(name = name)
 
         return request<Unit, DocType>(
             localVariableConfig
@@ -566,12 +566,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FrameworkDoctypesByName
+     * To obtain the request config of the operation getFrameworkDoctypesByName
      *
      * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun getV1FrameworkDoctypesByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getFrameworkDoctypesByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -600,8 +600,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FrameworkModules() : ModuleList {
-        val localVarResponse = getV1FrameworkModulesWithHttpInfo()
+    fun getFrameworkModules() : ModuleList {
+        val localVarResponse = getFrameworkModulesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ModuleList
@@ -628,8 +628,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FrameworkModulesWithHttpInfo() : ApiResponse<ModuleList?> {
-        val localVariableConfig = getV1FrameworkModulesRequestConfig()
+    fun getFrameworkModulesWithHttpInfo() : ApiResponse<ModuleList?> {
+        val localVariableConfig = getFrameworkModulesRequestConfig()
 
         return request<Unit, ModuleList>(
             localVariableConfig
@@ -637,11 +637,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FrameworkModules
+     * To obtain the request config of the operation getFrameworkModules
      *
      * @return RequestConfig
      */
-    fun getV1FrameworkModulesRequestConfig() : RequestConfig<Unit> {
+    fun getFrameworkModulesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -671,8 +671,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FrameworkModulesByModule(module: kotlin.String) : ModuleState {
-        val localVarResponse = getV1FrameworkModulesByModuleWithHttpInfo(module = module)
+    fun getFrameworkModulesByModule(module: kotlin.String) : ModuleState {
+        val localVarResponse = getFrameworkModulesByModuleWithHttpInfo(module = module)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ModuleState
@@ -700,8 +700,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FrameworkModulesByModuleWithHttpInfo(module: kotlin.String) : ApiResponse<ModuleState?> {
-        val localVariableConfig = getV1FrameworkModulesByModuleRequestConfig(module = module)
+    fun getFrameworkModulesByModuleWithHttpInfo(module: kotlin.String) : ApiResponse<ModuleState?> {
+        val localVariableConfig = getFrameworkModulesByModuleRequestConfig(module = module)
 
         return request<Unit, ModuleState>(
             localVariableConfig
@@ -709,12 +709,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FrameworkModulesByModule
+     * To obtain the request config of the operation getFrameworkModulesByModule
      *
      * @param module Module is the lane&#39;s registered name (\&quot;cms\&quot;, \&quot;erp\&quot;), from the path.
      * @return RequestConfig
      */
-    fun getV1FrameworkModulesByModuleRequestConfig(module: kotlin.String) : RequestConfig<Unit> {
+    fun getFrameworkModulesByModuleRequestConfig(module: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -743,8 +743,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FrameworkRoles() : RoleList {
-        val localVarResponse = getV1FrameworkRolesWithHttpInfo()
+    fun getFrameworkRoles() : RoleList {
+        val localVarResponse = getFrameworkRolesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RoleList
@@ -771,8 +771,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FrameworkRolesWithHttpInfo() : ApiResponse<RoleList?> {
-        val localVariableConfig = getV1FrameworkRolesRequestConfig()
+    fun getFrameworkRolesWithHttpInfo() : ApiResponse<RoleList?> {
+        val localVariableConfig = getFrameworkRolesRequestConfig()
 
         return request<Unit, RoleList>(
             localVariableConfig
@@ -780,11 +780,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FrameworkRoles
+     * To obtain the request config of the operation getFrameworkRoles
      *
      * @return RequestConfig
      */
-    fun getV1FrameworkRolesRequestConfig() : RequestConfig<Unit> {
+    fun getFrameworkRolesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -813,8 +813,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FrameworkSummary() : SummaryView {
-        val localVarResponse = getV1FrameworkSummaryWithHttpInfo()
+    fun getFrameworkSummary() : SummaryView {
+        val localVarResponse = getFrameworkSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SummaryView
@@ -841,8 +841,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FrameworkSummaryWithHttpInfo() : ApiResponse<SummaryView?> {
-        val localVariableConfig = getV1FrameworkSummaryRequestConfig()
+    fun getFrameworkSummaryWithHttpInfo() : ApiResponse<SummaryView?> {
+        val localVariableConfig = getFrameworkSummaryRequestConfig()
 
         return request<Unit, SummaryView>(
             localVariableConfig
@@ -850,11 +850,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation getV1FrameworkSummary
+     * To obtain the request config of the operation getFrameworkSummary
      *
      * @return RequestConfig
      */
-    fun getV1FrameworkSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getFrameworkSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -883,8 +883,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FrameworkByDoctype(doctype: kotlin.String) : Unit {
-        val localVarResponse = postV1FrameworkByDoctypeWithHttpInfo(doctype = doctype)
+    fun postFrameworkByDoctype(doctype: kotlin.String) : Unit {
+        val localVarResponse = postFrameworkByDoctypeWithHttpInfo(doctype = doctype)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -911,8 +911,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FrameworkByDoctypeWithHttpInfo(doctype: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postV1FrameworkByDoctypeRequestConfig(doctype = doctype)
+    fun postFrameworkByDoctypeWithHttpInfo(doctype: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postFrameworkByDoctypeRequestConfig(doctype = doctype)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -920,12 +920,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1FrameworkByDoctype
+     * To obtain the request config of the operation postFrameworkByDoctype
      *
      * @param doctype 
      * @return RequestConfig
      */
-    fun postV1FrameworkByDoctypeRequestConfig(doctype: kotlin.String) : RequestConfig<Unit> {
+    fun postFrameworkByDoctypeRequestConfig(doctype: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -955,8 +955,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FrameworkByDoctypeByNameCancel(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = postV1FrameworkByDoctypeByNameCancelWithHttpInfo(doctype = doctype, name = name)
+    fun postFrameworkByDoctypeByNameCancel(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = postFrameworkByDoctypeByNameCancelWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -985,8 +985,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FrameworkByDoctypeByNameCancelWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = postV1FrameworkByDoctypeByNameCancelRequestConfig(doctype = doctype, name = name)
+    fun postFrameworkByDoctypeByNameCancelWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = postFrameworkByDoctypeByNameCancelRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -994,13 +994,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1FrameworkByDoctypeByNameCancel
+     * To obtain the request config of the operation postFrameworkByDoctypeByNameCancel
      *
      * @param doctype DocType is the document&#39;s DocType, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun postV1FrameworkByDoctypeByNameCancelRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun postFrameworkByDoctypeByNameCancelRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1031,8 +1031,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FrameworkByDoctypeByNameSubmit(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = postV1FrameworkByDoctypeByNameSubmitWithHttpInfo(doctype = doctype, name = name)
+    fun postFrameworkByDoctypeByNameSubmit(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = postFrameworkByDoctypeByNameSubmitWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1061,8 +1061,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FrameworkByDoctypeByNameSubmitWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = postV1FrameworkByDoctypeByNameSubmitRequestConfig(doctype = doctype, name = name)
+    fun postFrameworkByDoctypeByNameSubmitWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = postFrameworkByDoctypeByNameSubmitRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1070,13 +1070,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1FrameworkByDoctypeByNameSubmit
+     * To obtain the request config of the operation postFrameworkByDoctypeByNameSubmit
      *
      * @param doctype DocType is the document&#39;s DocType, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun postV1FrameworkByDoctypeByNameSubmitRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun postFrameworkByDoctypeByNameSubmitRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1106,8 +1106,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FrameworkDoctypes(docType: DocType) : DocType {
-        val localVarResponse = postV1FrameworkDoctypesWithHttpInfo(docType = docType)
+    fun postFrameworkDoctypes(docType: DocType) : DocType {
+        val localVarResponse = postFrameworkDoctypesWithHttpInfo(docType = docType)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DocType
@@ -1135,8 +1135,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FrameworkDoctypesWithHttpInfo(docType: DocType) : ApiResponse<DocType?> {
-        val localVariableConfig = postV1FrameworkDoctypesRequestConfig(docType = docType)
+    fun postFrameworkDoctypesWithHttpInfo(docType: DocType) : ApiResponse<DocType?> {
+        val localVariableConfig = postFrameworkDoctypesRequestConfig(docType = docType)
 
         return request<DocType, DocType>(
             localVariableConfig
@@ -1144,12 +1144,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1FrameworkDoctypes
+     * To obtain the request config of the operation postFrameworkDoctypes
      *
      * @param docType 
      * @return RequestConfig
      */
-    fun postV1FrameworkDoctypesRequestConfig(docType: DocType) : RequestConfig<DocType> {
+    fun postFrameworkDoctypesRequestConfig(docType: DocType) : RequestConfig<DocType> {
         val localVariableBody = docType
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1180,8 +1180,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FrameworkModulesByModuleInstall(module: kotlin.String) : Install {
-        val localVarResponse = postV1FrameworkModulesByModuleInstallWithHttpInfo(module = module)
+    fun postFrameworkModulesByModuleInstall(module: kotlin.String) : Install {
+        val localVarResponse = postFrameworkModulesByModuleInstallWithHttpInfo(module = module)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Install
@@ -1209,8 +1209,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FrameworkModulesByModuleInstallWithHttpInfo(module: kotlin.String) : ApiResponse<Install?> {
-        val localVariableConfig = postV1FrameworkModulesByModuleInstallRequestConfig(module = module)
+    fun postFrameworkModulesByModuleInstallWithHttpInfo(module: kotlin.String) : ApiResponse<Install?> {
+        val localVariableConfig = postFrameworkModulesByModuleInstallRequestConfig(module = module)
 
         return request<Unit, Install>(
             localVariableConfig
@@ -1218,12 +1218,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1FrameworkModulesByModuleInstall
+     * To obtain the request config of the operation postFrameworkModulesByModuleInstall
      *
      * @param module Module is the lane&#39;s registered name (\&quot;cms\&quot;, \&quot;erp\&quot;), from the path.
      * @return RequestConfig
      */
-    fun postV1FrameworkModulesByModuleInstallRequestConfig(module: kotlin.String) : RequestConfig<Unit> {
+    fun postFrameworkModulesByModuleInstallRequestConfig(module: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1253,8 +1253,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FrameworkRoles(roleAssignment: RoleAssignment) : RoleAssignment {
-        val localVarResponse = postV1FrameworkRolesWithHttpInfo(roleAssignment = roleAssignment)
+    fun postFrameworkRoles(roleAssignment: RoleAssignment) : RoleAssignment {
+        val localVarResponse = postFrameworkRolesWithHttpInfo(roleAssignment = roleAssignment)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RoleAssignment
@@ -1282,8 +1282,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FrameworkRolesWithHttpInfo(roleAssignment: RoleAssignment) : ApiResponse<RoleAssignment?> {
-        val localVariableConfig = postV1FrameworkRolesRequestConfig(roleAssignment = roleAssignment)
+    fun postFrameworkRolesWithHttpInfo(roleAssignment: RoleAssignment) : ApiResponse<RoleAssignment?> {
+        val localVariableConfig = postFrameworkRolesRequestConfig(roleAssignment = roleAssignment)
 
         return request<RoleAssignment, RoleAssignment>(
             localVariableConfig
@@ -1291,12 +1291,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation postV1FrameworkRoles
+     * To obtain the request config of the operation postFrameworkRoles
      *
      * @param roleAssignment 
      * @return RequestConfig
      */
-    fun postV1FrameworkRolesRequestConfig(roleAssignment: RoleAssignment) : RequestConfig<RoleAssignment> {
+    fun postFrameworkRolesRequestConfig(roleAssignment: RoleAssignment) : RequestConfig<RoleAssignment> {
         val localVariableBody = roleAssignment
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1327,8 +1327,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1FrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : Unit {
-        val localVarResponse = putV1FrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
+    fun putFrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = putFrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1356,8 +1356,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1FrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putV1FrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
+    fun putFrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putFrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1365,13 +1365,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation putV1FrameworkByDoctypeByName
+     * To obtain the request config of the operation putFrameworkByDoctypeByName
      *
      * @param doctype 
      * @param name 
      * @return RequestConfig
      */
-    fun putV1FrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun putFrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1401,8 +1401,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1FrameworkDoctypesByName(name: kotlin.String, docType: DocType) : DocType {
-        val localVarResponse = putV1FrameworkDoctypesByNameWithHttpInfo(name = name, docType = docType)
+    fun putFrameworkDoctypesByName(name: kotlin.String, docType: DocType) : DocType {
+        val localVarResponse = putFrameworkDoctypesByNameWithHttpInfo(name = name, docType = docType)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as DocType
@@ -1431,8 +1431,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1FrameworkDoctypesByNameWithHttpInfo(name: kotlin.String, docType: DocType) : ApiResponse<DocType?> {
-        val localVariableConfig = putV1FrameworkDoctypesByNameRequestConfig(name = name, docType = docType)
+    fun putFrameworkDoctypesByNameWithHttpInfo(name: kotlin.String, docType: DocType) : ApiResponse<DocType?> {
+        val localVariableConfig = putFrameworkDoctypesByNameRequestConfig(name = name, docType = docType)
 
         return request<DocType, DocType>(
             localVariableConfig
@@ -1440,13 +1440,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation putV1FrameworkDoctypesByName
+     * To obtain the request config of the operation putFrameworkDoctypesByName
      *
      * @param name 
      * @param docType 
      * @return RequestConfig
      */
-    fun putV1FrameworkDoctypesByNameRequestConfig(name: kotlin.String, docType: DocType) : RequestConfig<DocType> {
+    fun putFrameworkDoctypesByNameRequestConfig(name: kotlin.String, docType: DocType) : RequestConfig<DocType> {
         val localVariableBody = docType
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

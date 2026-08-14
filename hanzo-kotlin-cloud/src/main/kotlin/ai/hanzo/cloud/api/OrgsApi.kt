@@ -62,8 +62,8 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1OrgsByOrgEntitlements(org: kotlin.String) : EntitlementsView {
-        val localVarResponse = getV1OrgsByOrgEntitlementsWithHttpInfo(org = org)
+    fun getOrgsByOrgEntitlements(org: kotlin.String) : EntitlementsView {
+        val localVarResponse = getOrgsByOrgEntitlementsWithHttpInfo(org = org)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EntitlementsView
@@ -91,8 +91,8 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1OrgsByOrgEntitlementsWithHttpInfo(org: kotlin.String) : ApiResponse<EntitlementsView?> {
-        val localVariableConfig = getV1OrgsByOrgEntitlementsRequestConfig(org = org)
+    fun getOrgsByOrgEntitlementsWithHttpInfo(org: kotlin.String) : ApiResponse<EntitlementsView?> {
+        val localVariableConfig = getOrgsByOrgEntitlementsRequestConfig(org = org)
 
         return request<Unit, EntitlementsView>(
             localVariableConfig
@@ -100,12 +100,12 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1OrgsByOrgEntitlements
+     * To obtain the request config of the operation getOrgsByOrgEntitlements
      *
      * @param org 
      * @return RequestConfig
      */
-    fun getV1OrgsByOrgEntitlementsRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
+    fun getOrgsByOrgEntitlementsRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -135,8 +135,8 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Orgs(onboardReq: OnboardReq) : OnboardResp {
-        val localVarResponse = postV1OrgsWithHttpInfo(onboardReq = onboardReq)
+    fun postOrgs(onboardReq: OnboardReq) : OnboardResp {
+        val localVarResponse = postOrgsWithHttpInfo(onboardReq = onboardReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OnboardResp
@@ -164,8 +164,8 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1OrgsWithHttpInfo(onboardReq: OnboardReq) : ApiResponse<OnboardResp?> {
-        val localVariableConfig = postV1OrgsRequestConfig(onboardReq = onboardReq)
+    fun postOrgsWithHttpInfo(onboardReq: OnboardReq) : ApiResponse<OnboardResp?> {
+        val localVariableConfig = postOrgsRequestConfig(onboardReq = onboardReq)
 
         return request<OnboardReq, OnboardResp>(
             localVariableConfig
@@ -173,12 +173,12 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1Orgs
+     * To obtain the request config of the operation postOrgs
      *
      * @param onboardReq 
      * @return RequestConfig
      */
-    fun postV1OrgsRequestConfig(onboardReq: OnboardReq) : RequestConfig<OnboardReq> {
+    fun postOrgsRequestConfig(onboardReq: OnboardReq) : RequestConfig<OnboardReq> {
         val localVariableBody = onboardReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -210,8 +210,8 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1OrgsByOrgEntitlements(org: kotlin.String, mutateReq: MutateReq) : EntitlementsView {
-        val localVarResponse = postV1OrgsByOrgEntitlementsWithHttpInfo(org = org, mutateReq = mutateReq)
+    fun postOrgsByOrgEntitlements(org: kotlin.String, mutateReq: MutateReq) : EntitlementsView {
+        val localVarResponse = postOrgsByOrgEntitlementsWithHttpInfo(org = org, mutateReq = mutateReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as EntitlementsView
@@ -240,8 +240,8 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1OrgsByOrgEntitlementsWithHttpInfo(org: kotlin.String, mutateReq: MutateReq) : ApiResponse<EntitlementsView?> {
-        val localVariableConfig = postV1OrgsByOrgEntitlementsRequestConfig(org = org, mutateReq = mutateReq)
+    fun postOrgsByOrgEntitlementsWithHttpInfo(org: kotlin.String, mutateReq: MutateReq) : ApiResponse<EntitlementsView?> {
+        val localVariableConfig = postOrgsByOrgEntitlementsRequestConfig(org = org, mutateReq = mutateReq)
 
         return request<MutateReq, EntitlementsView>(
             localVariableConfig
@@ -249,13 +249,13 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1OrgsByOrgEntitlements
+     * To obtain the request config of the operation postOrgsByOrgEntitlements
      *
      * @param org 
      * @param mutateReq 
      * @return RequestConfig
      */
-    fun postV1OrgsByOrgEntitlementsRequestConfig(org: kotlin.String, mutateReq: MutateReq) : RequestConfig<MutateReq> {
+    fun postOrgsByOrgEntitlementsRequestConfig(org: kotlin.String, mutateReq: MutateReq) : RequestConfig<MutateReq> {
         val localVariableBody = mutateReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

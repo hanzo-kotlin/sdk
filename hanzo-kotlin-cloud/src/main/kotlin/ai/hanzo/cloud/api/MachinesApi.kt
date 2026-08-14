@@ -494,8 +494,8 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Machines() : Unit {
-        val localVarResponse = postV1MachinesWithHttpInfo()
+    fun postMachines() : Unit {
+        val localVarResponse = postMachinesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -521,8 +521,8 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1MachinesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1MachinesRequestConfig()
+    fun postMachinesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postMachinesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -530,11 +530,11 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1Machines
+     * To obtain the request config of the operation postMachines
      *
      * @return RequestConfig
      */
-    fun postV1MachinesRequestConfig() : RequestConfig<Unit> {
+    fun postMachinesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

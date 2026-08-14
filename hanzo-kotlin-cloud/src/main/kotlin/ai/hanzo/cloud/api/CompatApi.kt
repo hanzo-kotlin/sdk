@@ -73,8 +73,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1IamApplication(owner: kotlin.String, name: kotlin.String) : IamDeleteResult {
-        val localVarResponse = deleteV1IamApplicationWithHttpInfo(owner = owner, name = name)
+    fun deleteIamApplication(owner: kotlin.String, name: kotlin.String) : IamDeleteResult {
+        val localVarResponse = deleteIamApplicationWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteResult
@@ -103,8 +103,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1IamApplicationWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamDeleteResult?> {
-        val localVariableConfig = deleteV1IamApplicationRequestConfig(owner = owner, name = name)
+    fun deleteIamApplicationWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamDeleteResult?> {
+        val localVariableConfig = deleteIamApplicationRequestConfig(owner = owner, name = name)
 
         return request<Unit, IamDeleteResult>(
             localVariableConfig
@@ -112,13 +112,13 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1IamApplication
+     * To obtain the request config of the operation deleteIamApplication
      *
      * @param owner 
      * @param name 
      * @return RequestConfig
      */
-    fun deleteV1IamApplicationRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteIamApplicationRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -153,8 +153,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1IamApplication(owner: kotlin.String, name: kotlin.String) : IamApplication {
-        val localVarResponse = getV1IamApplicationWithHttpInfo(owner = owner, name = name)
+    fun getIamApplication(owner: kotlin.String, name: kotlin.String) : IamApplication {
+        val localVarResponse = getIamApplicationWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamApplication
@@ -183,8 +183,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1IamApplicationWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamApplication?> {
-        val localVariableConfig = getV1IamApplicationRequestConfig(owner = owner, name = name)
+    fun getIamApplicationWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamApplication?> {
+        val localVariableConfig = getIamApplicationRequestConfig(owner = owner, name = name)
 
         return request<Unit, IamApplication>(
             localVariableConfig
@@ -192,13 +192,13 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1IamApplication
+     * To obtain the request config of the operation getIamApplication
      *
      * @param owner 
      * @param name 
      * @return RequestConfig
      */
-    fun getV1IamApplicationRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getIamApplicationRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -232,8 +232,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamAddApplication(iamApplication: IamApplication) : IamResponse {
-        val localVarResponse = postV1IamAddApplicationWithHttpInfo(iamApplication = iamApplication)
+    fun postIamAddApplication(iamApplication: IamApplication) : IamResponse {
+        val localVarResponse = postIamAddApplicationWithHttpInfo(iamApplication = iamApplication)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -261,8 +261,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamAddApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamAddApplicationRequestConfig(iamApplication = iamApplication)
+    fun postIamAddApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamAddApplicationRequestConfig(iamApplication = iamApplication)
 
         return request<IamApplication, IamResponse>(
             localVariableConfig
@@ -270,12 +270,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamAddApplication
+     * To obtain the request config of the operation postIamAddApplication
      *
      * @param iamApplication 
      * @return RequestConfig
      */
-    fun postV1IamAddApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
+    fun postIamAddApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
         val localVariableBody = iamApplication
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -306,8 +306,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamAddOrganization(iamCreateOrganizationInput: IamCreateOrganizationInput) : IamResponse {
-        val localVarResponse = postV1IamAddOrganizationWithHttpInfo(iamCreateOrganizationInput = iamCreateOrganizationInput)
+    fun postIamAddOrganization(iamCreateOrganizationInput: IamCreateOrganizationInput) : IamResponse {
+        val localVarResponse = postIamAddOrganizationWithHttpInfo(iamCreateOrganizationInput = iamCreateOrganizationInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -335,8 +335,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamAddOrganizationWithHttpInfo(iamCreateOrganizationInput: IamCreateOrganizationInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamAddOrganizationRequestConfig(iamCreateOrganizationInput = iamCreateOrganizationInput)
+    fun postIamAddOrganizationWithHttpInfo(iamCreateOrganizationInput: IamCreateOrganizationInput) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamAddOrganizationRequestConfig(iamCreateOrganizationInput = iamCreateOrganizationInput)
 
         return request<IamCreateOrganizationInput, IamResponse>(
             localVariableConfig
@@ -344,12 +344,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamAddOrganization
+     * To obtain the request config of the operation postIamAddOrganization
      *
      * @param iamCreateOrganizationInput 
      * @return RequestConfig
      */
-    fun postV1IamAddOrganizationRequestConfig(iamCreateOrganizationInput: IamCreateOrganizationInput) : RequestConfig<IamCreateOrganizationInput> {
+    fun postIamAddOrganizationRequestConfig(iamCreateOrganizationInput: IamCreateOrganizationInput) : RequestConfig<IamCreateOrganizationInput> {
         val localVariableBody = iamCreateOrganizationInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -380,8 +380,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamAddProject(iamInput: IamInput) : IamResponse {
-        val localVarResponse = postV1IamAddProjectWithHttpInfo(iamInput = iamInput)
+    fun postIamAddProject(iamInput: IamInput) : IamResponse {
+        val localVarResponse = postIamAddProjectWithHttpInfo(iamInput = iamInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -409,8 +409,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamAddProjectWithHttpInfo(iamInput: IamInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamAddProjectRequestConfig(iamInput = iamInput)
+    fun postIamAddProjectWithHttpInfo(iamInput: IamInput) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamAddProjectRequestConfig(iamInput = iamInput)
 
         return request<IamInput, IamResponse>(
             localVariableConfig
@@ -418,12 +418,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamAddProject
+     * To obtain the request config of the operation postIamAddProject
      *
      * @param iamInput 
      * @return RequestConfig
      */
-    fun postV1IamAddProjectRequestConfig(iamInput: IamInput) : RequestConfig<IamInput> {
+    fun postIamAddProjectRequestConfig(iamInput: IamInput) : RequestConfig<IamInput> {
         val localVariableBody = iamInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -454,8 +454,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamAddProvider(iamProvider: IamProvider) : IamResponse {
-        val localVarResponse = postV1IamAddProviderWithHttpInfo(iamProvider = iamProvider)
+    fun postIamAddProvider(iamProvider: IamProvider) : IamResponse {
+        val localVarResponse = postIamAddProviderWithHttpInfo(iamProvider = iamProvider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -483,8 +483,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamAddProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamAddProviderRequestConfig(iamProvider = iamProvider)
+    fun postIamAddProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamAddProviderRequestConfig(iamProvider = iamProvider)
 
         return request<IamProvider, IamResponse>(
             localVariableConfig
@@ -492,12 +492,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamAddProvider
+     * To obtain the request config of the operation postIamAddProvider
      *
      * @param iamProvider 
      * @return RequestConfig
      */
-    fun postV1IamAddProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
+    fun postIamAddProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
         val localVariableBody = iamProvider
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -528,8 +528,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamAddRole(iamrolesInput: IamrolesInput) : IamResponse {
-        val localVarResponse = postV1IamAddRoleWithHttpInfo(iamrolesInput = iamrolesInput)
+    fun postIamAddRole(iamrolesInput: IamrolesInput) : IamResponse {
+        val localVarResponse = postIamAddRoleWithHttpInfo(iamrolesInput = iamrolesInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -557,8 +557,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamAddRoleWithHttpInfo(iamrolesInput: IamrolesInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamAddRoleRequestConfig(iamrolesInput = iamrolesInput)
+    fun postIamAddRoleWithHttpInfo(iamrolesInput: IamrolesInput) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamAddRoleRequestConfig(iamrolesInput = iamrolesInput)
 
         return request<IamrolesInput, IamResponse>(
             localVariableConfig
@@ -566,12 +566,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamAddRole
+     * To obtain the request config of the operation postIamAddRole
      *
      * @param iamrolesInput 
      * @return RequestConfig
      */
-    fun postV1IamAddRoleRequestConfig(iamrolesInput: IamrolesInput) : RequestConfig<IamrolesInput> {
+    fun postIamAddRoleRequestConfig(iamrolesInput: IamrolesInput) : RequestConfig<IamrolesInput> {
         val localVariableBody = iamrolesInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -602,8 +602,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamAddUser(iamuserBody: IamuserBody) : IamResponse {
-        val localVarResponse = postV1IamAddUserWithHttpInfo(iamuserBody = iamuserBody)
+    fun postIamAddUser(iamuserBody: IamuserBody) : IamResponse {
+        val localVarResponse = postIamAddUserWithHttpInfo(iamuserBody = iamuserBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -631,8 +631,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamAddUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamAddUserRequestConfig(iamuserBody = iamuserBody)
+    fun postIamAddUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamAddUserRequestConfig(iamuserBody = iamuserBody)
 
         return request<IamuserBody, IamResponse>(
             localVariableConfig
@@ -640,12 +640,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamAddUser
+     * To obtain the request config of the operation postIamAddUser
      *
      * @param iamuserBody 
      * @return RequestConfig
      */
-    fun postV1IamAddUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
+    fun postIamAddUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
         val localVariableBody = iamuserBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -676,8 +676,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamAddWorkspace(iamworkspacesInput: IamworkspacesInput) : IamResponse {
-        val localVarResponse = postV1IamAddWorkspaceWithHttpInfo(iamworkspacesInput = iamworkspacesInput)
+    fun postIamAddWorkspace(iamworkspacesInput: IamworkspacesInput) : IamResponse {
+        val localVarResponse = postIamAddWorkspaceWithHttpInfo(iamworkspacesInput = iamworkspacesInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -705,8 +705,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamAddWorkspaceWithHttpInfo(iamworkspacesInput: IamworkspacesInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamAddWorkspaceRequestConfig(iamworkspacesInput = iamworkspacesInput)
+    fun postIamAddWorkspaceWithHttpInfo(iamworkspacesInput: IamworkspacesInput) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamAddWorkspaceRequestConfig(iamworkspacesInput = iamworkspacesInput)
 
         return request<IamworkspacesInput, IamResponse>(
             localVariableConfig
@@ -714,12 +714,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamAddWorkspace
+     * To obtain the request config of the operation postIamAddWorkspace
      *
      * @param iamworkspacesInput 
      * @return RequestConfig
      */
-    fun postV1IamAddWorkspaceRequestConfig(iamworkspacesInput: IamworkspacesInput) : RequestConfig<IamworkspacesInput> {
+    fun postIamAddWorkspaceRequestConfig(iamworkspacesInput: IamworkspacesInput) : RequestConfig<IamworkspacesInput> {
         val localVariableBody = iamworkspacesInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -750,8 +750,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamApplication(iamApplication: IamApplication) : IamApplication {
-        val localVarResponse = postV1IamApplicationWithHttpInfo(iamApplication = iamApplication)
+    fun postIamApplication(iamApplication: IamApplication) : IamApplication {
+        val localVarResponse = postIamApplicationWithHttpInfo(iamApplication = iamApplication)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamApplication
@@ -779,8 +779,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamApplication?> {
-        val localVariableConfig = postV1IamApplicationRequestConfig(iamApplication = iamApplication)
+    fun postIamApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamApplication?> {
+        val localVariableConfig = postIamApplicationRequestConfig(iamApplication = iamApplication)
 
         return request<IamApplication, IamApplication>(
             localVariableConfig
@@ -788,12 +788,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamApplication
+     * To obtain the request config of the operation postIamApplication
      *
      * @param iamApplication 
      * @return RequestConfig
      */
-    fun postV1IamApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
+    fun postIamApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
         val localVariableBody = iamApplication
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -824,8 +824,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamDeleteApplication(iamApplication: IamApplication) : IamResponse {
-        val localVarResponse = postV1IamDeleteApplicationWithHttpInfo(iamApplication = iamApplication)
+    fun postIamDeleteApplication(iamApplication: IamApplication) : IamResponse {
+        val localVarResponse = postIamDeleteApplicationWithHttpInfo(iamApplication = iamApplication)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -853,8 +853,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamDeleteApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamDeleteApplicationRequestConfig(iamApplication = iamApplication)
+    fun postIamDeleteApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamDeleteApplicationRequestConfig(iamApplication = iamApplication)
 
         return request<IamApplication, IamResponse>(
             localVariableConfig
@@ -862,12 +862,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamDeleteApplication
+     * To obtain the request config of the operation postIamDeleteApplication
      *
      * @param iamApplication 
      * @return RequestConfig
      */
-    fun postV1IamDeleteApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
+    fun postIamDeleteApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
         val localVariableBody = iamApplication
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -898,8 +898,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamDeleteOrganization(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : IamResponse {
-        val localVarResponse = postV1IamDeleteOrganizationWithHttpInfo(iamDeleteOrganizationInput = iamDeleteOrganizationInput)
+    fun postIamDeleteOrganization(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : IamResponse {
+        val localVarResponse = postIamDeleteOrganizationWithHttpInfo(iamDeleteOrganizationInput = iamDeleteOrganizationInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -927,8 +927,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamDeleteOrganizationWithHttpInfo(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamDeleteOrganizationRequestConfig(iamDeleteOrganizationInput = iamDeleteOrganizationInput)
+    fun postIamDeleteOrganizationWithHttpInfo(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamDeleteOrganizationRequestConfig(iamDeleteOrganizationInput = iamDeleteOrganizationInput)
 
         return request<IamDeleteOrganizationInput, IamResponse>(
             localVariableConfig
@@ -936,12 +936,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamDeleteOrganization
+     * To obtain the request config of the operation postIamDeleteOrganization
      *
      * @param iamDeleteOrganizationInput 
      * @return RequestConfig
      */
-    fun postV1IamDeleteOrganizationRequestConfig(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : RequestConfig<IamDeleteOrganizationInput> {
+    fun postIamDeleteOrganizationRequestConfig(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : RequestConfig<IamDeleteOrganizationInput> {
         val localVariableBody = iamDeleteOrganizationInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -972,8 +972,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamDeleteProject(iamprojectsRef: IamprojectsRef) : IamResponse {
-        val localVarResponse = postV1IamDeleteProjectWithHttpInfo(iamprojectsRef = iamprojectsRef)
+    fun postIamDeleteProject(iamprojectsRef: IamprojectsRef) : IamResponse {
+        val localVarResponse = postIamDeleteProjectWithHttpInfo(iamprojectsRef = iamprojectsRef)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1001,8 +1001,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamDeleteProjectWithHttpInfo(iamprojectsRef: IamprojectsRef) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamDeleteProjectRequestConfig(iamprojectsRef = iamprojectsRef)
+    fun postIamDeleteProjectWithHttpInfo(iamprojectsRef: IamprojectsRef) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamDeleteProjectRequestConfig(iamprojectsRef = iamprojectsRef)
 
         return request<IamprojectsRef, IamResponse>(
             localVariableConfig
@@ -1010,12 +1010,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamDeleteProject
+     * To obtain the request config of the operation postIamDeleteProject
      *
      * @param iamprojectsRef 
      * @return RequestConfig
      */
-    fun postV1IamDeleteProjectRequestConfig(iamprojectsRef: IamprojectsRef) : RequestConfig<IamprojectsRef> {
+    fun postIamDeleteProjectRequestConfig(iamprojectsRef: IamprojectsRef) : RequestConfig<IamprojectsRef> {
         val localVariableBody = iamprojectsRef
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1046,8 +1046,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamDeleteProvider(iamProvider: IamProvider) : IamResponse {
-        val localVarResponse = postV1IamDeleteProviderWithHttpInfo(iamProvider = iamProvider)
+    fun postIamDeleteProvider(iamProvider: IamProvider) : IamResponse {
+        val localVarResponse = postIamDeleteProviderWithHttpInfo(iamProvider = iamProvider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1075,8 +1075,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamDeleteProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamDeleteProviderRequestConfig(iamProvider = iamProvider)
+    fun postIamDeleteProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamDeleteProviderRequestConfig(iamProvider = iamProvider)
 
         return request<IamProvider, IamResponse>(
             localVariableConfig
@@ -1084,12 +1084,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamDeleteProvider
+     * To obtain the request config of the operation postIamDeleteProvider
      *
      * @param iamProvider 
      * @return RequestConfig
      */
-    fun postV1IamDeleteProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
+    fun postIamDeleteProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
         val localVariableBody = iamProvider
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1120,8 +1120,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamDeleteRole(iamrolesRef: IamrolesRef) : IamResponse {
-        val localVarResponse = postV1IamDeleteRoleWithHttpInfo(iamrolesRef = iamrolesRef)
+    fun postIamDeleteRole(iamrolesRef: IamrolesRef) : IamResponse {
+        val localVarResponse = postIamDeleteRoleWithHttpInfo(iamrolesRef = iamrolesRef)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1149,8 +1149,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamDeleteRoleWithHttpInfo(iamrolesRef: IamrolesRef) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamDeleteRoleRequestConfig(iamrolesRef = iamrolesRef)
+    fun postIamDeleteRoleWithHttpInfo(iamrolesRef: IamrolesRef) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamDeleteRoleRequestConfig(iamrolesRef = iamrolesRef)
 
         return request<IamrolesRef, IamResponse>(
             localVariableConfig
@@ -1158,12 +1158,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamDeleteRole
+     * To obtain the request config of the operation postIamDeleteRole
      *
      * @param iamrolesRef 
      * @return RequestConfig
      */
-    fun postV1IamDeleteRoleRequestConfig(iamrolesRef: IamrolesRef) : RequestConfig<IamrolesRef> {
+    fun postIamDeleteRoleRequestConfig(iamrolesRef: IamrolesRef) : RequestConfig<IamrolesRef> {
         val localVariableBody = iamrolesRef
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1194,8 +1194,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamDeleteUser(iamuserBody: IamuserBody) : IamResponse {
-        val localVarResponse = postV1IamDeleteUserWithHttpInfo(iamuserBody = iamuserBody)
+    fun postIamDeleteUser(iamuserBody: IamuserBody) : IamResponse {
+        val localVarResponse = postIamDeleteUserWithHttpInfo(iamuserBody = iamuserBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1223,8 +1223,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamDeleteUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamDeleteUserRequestConfig(iamuserBody = iamuserBody)
+    fun postIamDeleteUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamDeleteUserRequestConfig(iamuserBody = iamuserBody)
 
         return request<IamuserBody, IamResponse>(
             localVariableConfig
@@ -1232,12 +1232,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamDeleteUser
+     * To obtain the request config of the operation postIamDeleteUser
      *
      * @param iamuserBody 
      * @return RequestConfig
      */
-    fun postV1IamDeleteUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
+    fun postIamDeleteUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
         val localVariableBody = iamuserBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1268,8 +1268,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamDeleteWorkspace(iamworkspacesRef: IamworkspacesRef) : IamResponse {
-        val localVarResponse = postV1IamDeleteWorkspaceWithHttpInfo(iamworkspacesRef = iamworkspacesRef)
+    fun postIamDeleteWorkspace(iamworkspacesRef: IamworkspacesRef) : IamResponse {
+        val localVarResponse = postIamDeleteWorkspaceWithHttpInfo(iamworkspacesRef = iamworkspacesRef)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1297,8 +1297,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamDeleteWorkspaceWithHttpInfo(iamworkspacesRef: IamworkspacesRef) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamDeleteWorkspaceRequestConfig(iamworkspacesRef = iamworkspacesRef)
+    fun postIamDeleteWorkspaceWithHttpInfo(iamworkspacesRef: IamworkspacesRef) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamDeleteWorkspaceRequestConfig(iamworkspacesRef = iamworkspacesRef)
 
         return request<IamworkspacesRef, IamResponse>(
             localVariableConfig
@@ -1306,12 +1306,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamDeleteWorkspace
+     * To obtain the request config of the operation postIamDeleteWorkspace
      *
      * @param iamworkspacesRef 
      * @return RequestConfig
      */
-    fun postV1IamDeleteWorkspaceRequestConfig(iamworkspacesRef: IamworkspacesRef) : RequestConfig<IamworkspacesRef> {
+    fun postIamDeleteWorkspaceRequestConfig(iamworkspacesRef: IamworkspacesRef) : RequestConfig<IamworkspacesRef> {
         val localVariableBody = iamworkspacesRef
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1342,8 +1342,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamUpdateApplication(iamApplication: IamApplication) : IamResponse {
-        val localVarResponse = postV1IamUpdateApplicationWithHttpInfo(iamApplication = iamApplication)
+    fun postIamUpdateApplication(iamApplication: IamApplication) : IamResponse {
+        val localVarResponse = postIamUpdateApplicationWithHttpInfo(iamApplication = iamApplication)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1371,8 +1371,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamUpdateApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamUpdateApplicationRequestConfig(iamApplication = iamApplication)
+    fun postIamUpdateApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamUpdateApplicationRequestConfig(iamApplication = iamApplication)
 
         return request<IamApplication, IamResponse>(
             localVariableConfig
@@ -1380,12 +1380,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamUpdateApplication
+     * To obtain the request config of the operation postIamUpdateApplication
      *
      * @param iamApplication 
      * @return RequestConfig
      */
-    fun postV1IamUpdateApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
+    fun postIamUpdateApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
         val localVariableBody = iamApplication
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1416,8 +1416,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamUpdateOrganization(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : IamResponse {
-        val localVarResponse = postV1IamUpdateOrganizationWithHttpInfo(iamUpdateOrganizationInput = iamUpdateOrganizationInput)
+    fun postIamUpdateOrganization(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : IamResponse {
+        val localVarResponse = postIamUpdateOrganizationWithHttpInfo(iamUpdateOrganizationInput = iamUpdateOrganizationInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1445,8 +1445,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamUpdateOrganizationWithHttpInfo(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamUpdateOrganizationRequestConfig(iamUpdateOrganizationInput = iamUpdateOrganizationInput)
+    fun postIamUpdateOrganizationWithHttpInfo(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamUpdateOrganizationRequestConfig(iamUpdateOrganizationInput = iamUpdateOrganizationInput)
 
         return request<IamUpdateOrganizationInput, IamResponse>(
             localVariableConfig
@@ -1454,12 +1454,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamUpdateOrganization
+     * To obtain the request config of the operation postIamUpdateOrganization
      *
      * @param iamUpdateOrganizationInput 
      * @return RequestConfig
      */
-    fun postV1IamUpdateOrganizationRequestConfig(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : RequestConfig<IamUpdateOrganizationInput> {
+    fun postIamUpdateOrganizationRequestConfig(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : RequestConfig<IamUpdateOrganizationInput> {
         val localVariableBody = iamUpdateOrganizationInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1490,8 +1490,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamUpdateProvider(iamProvider: IamProvider) : IamResponse {
-        val localVarResponse = postV1IamUpdateProviderWithHttpInfo(iamProvider = iamProvider)
+    fun postIamUpdateProvider(iamProvider: IamProvider) : IamResponse {
+        val localVarResponse = postIamUpdateProviderWithHttpInfo(iamProvider = iamProvider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1519,8 +1519,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamUpdateProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamUpdateProviderRequestConfig(iamProvider = iamProvider)
+    fun postIamUpdateProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamUpdateProviderRequestConfig(iamProvider = iamProvider)
 
         return request<IamProvider, IamResponse>(
             localVariableConfig
@@ -1528,12 +1528,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamUpdateProvider
+     * To obtain the request config of the operation postIamUpdateProvider
      *
      * @param iamProvider 
      * @return RequestConfig
      */
-    fun postV1IamUpdateProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
+    fun postIamUpdateProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
         val localVariableBody = iamProvider
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1564,8 +1564,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamUpdateRole(iamrolesInput: IamrolesInput) : IamResponse {
-        val localVarResponse = postV1IamUpdateRoleWithHttpInfo(iamrolesInput = iamrolesInput)
+    fun postIamUpdateRole(iamrolesInput: IamrolesInput) : IamResponse {
+        val localVarResponse = postIamUpdateRoleWithHttpInfo(iamrolesInput = iamrolesInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1593,8 +1593,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamUpdateRoleWithHttpInfo(iamrolesInput: IamrolesInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamUpdateRoleRequestConfig(iamrolesInput = iamrolesInput)
+    fun postIamUpdateRoleWithHttpInfo(iamrolesInput: IamrolesInput) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamUpdateRoleRequestConfig(iamrolesInput = iamrolesInput)
 
         return request<IamrolesInput, IamResponse>(
             localVariableConfig
@@ -1602,12 +1602,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamUpdateRole
+     * To obtain the request config of the operation postIamUpdateRole
      *
      * @param iamrolesInput 
      * @return RequestConfig
      */
-    fun postV1IamUpdateRoleRequestConfig(iamrolesInput: IamrolesInput) : RequestConfig<IamrolesInput> {
+    fun postIamUpdateRoleRequestConfig(iamrolesInput: IamrolesInput) : RequestConfig<IamrolesInput> {
         val localVariableBody = iamrolesInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1638,8 +1638,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1IamUpdateUser(iamuserBody: IamuserBody) : IamResponse {
-        val localVarResponse = postV1IamUpdateUserWithHttpInfo(iamuserBody = iamuserBody)
+    fun postIamUpdateUser(iamuserBody: IamuserBody) : IamResponse {
+        val localVarResponse = postIamUpdateUserWithHttpInfo(iamuserBody = iamuserBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
@@ -1667,8 +1667,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1IamUpdateUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postV1IamUpdateUserRequestConfig(iamuserBody = iamuserBody)
+    fun postIamUpdateUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
+        val localVariableConfig = postIamUpdateUserRequestConfig(iamuserBody = iamuserBody)
 
         return request<IamuserBody, IamResponse>(
             localVariableConfig
@@ -1676,12 +1676,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1IamUpdateUser
+     * To obtain the request config of the operation postIamUpdateUser
      *
      * @param iamuserBody 
      * @return RequestConfig
      */
-    fun postV1IamUpdateUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
+    fun postIamUpdateUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
         val localVariableBody = iamuserBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1712,8 +1712,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putV1IamApplication(iamApplication: IamApplication) : IamApplication {
-        val localVarResponse = putV1IamApplicationWithHttpInfo(iamApplication = iamApplication)
+    fun putIamApplication(iamApplication: IamApplication) : IamApplication {
+        val localVarResponse = putIamApplicationWithHttpInfo(iamApplication = iamApplication)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamApplication
@@ -1741,8 +1741,8 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putV1IamApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamApplication?> {
-        val localVariableConfig = putV1IamApplicationRequestConfig(iamApplication = iamApplication)
+    fun putIamApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamApplication?> {
+        val localVariableConfig = putIamApplicationRequestConfig(iamApplication = iamApplication)
 
         return request<IamApplication, IamApplication>(
             localVariableConfig
@@ -1750,12 +1750,12 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation putV1IamApplication
+     * To obtain the request config of the operation putIamApplication
      *
      * @param iamApplication 
      * @return RequestConfig
      */
-    fun putV1IamApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
+    fun putIamApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
         val localVariableBody = iamApplication
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

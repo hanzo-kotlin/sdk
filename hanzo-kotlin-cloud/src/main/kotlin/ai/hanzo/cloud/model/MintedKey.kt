@@ -23,6 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param accessKey AccessKey is the same value under its predecessor name, carried so callers written against the older field keep working. One value, two names.
  * @param key Key is the credential, returned ONCE — a secret key is unreadable afterwards.
+ * @param limit Limit is what the minted key may reach, echoed back so the caller can see the narrowing took. Absent means unrestricted.
  * @param type Type is the class of key that was minted.
  */
 
@@ -36,6 +37,10 @@ data class MintedKey (
     /* Key is the credential, returned ONCE — a secret key is unreadable afterwards. */
     @SerializedName("key")
     val key: kotlin.String? = null,
+
+    /* Limit is what the minted key may reach, echoed back so the caller can see the narrowing took. Absent means unrestricted. */
+    @SerializedName("limit")
+    val limit: kotlin.collections.List<kotlin.String>? = null,
 
     /* Type is the class of key that was minted. */
     @SerializedName("type")

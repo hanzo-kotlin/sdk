@@ -56,8 +56,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinetuneHfDatasets() : Unit {
-        val localVarResponse = getV1FinetuneHfDatasetsWithHttpInfo()
+    fun getFinetuneHfDatasets() : Unit {
+        val localVarResponse = getFinetuneHfDatasetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,8 +83,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinetuneHfDatasetsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1FinetuneHfDatasetsRequestConfig()
+    fun getFinetuneHfDatasetsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getFinetuneHfDatasetsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1FinetuneHfDatasets
+     * To obtain the request config of the operation getFinetuneHfDatasets
      *
      * @return RequestConfig
      */
-    fun getV1FinetuneHfDatasetsRequestConfig() : RequestConfig<Unit> {
+    fun getFinetuneHfDatasetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -123,8 +123,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinetuneHfModels() : Unit {
-        val localVarResponse = getV1FinetuneHfModelsWithHttpInfo()
+    fun getFinetuneHfModels() : Unit {
+        val localVarResponse = getFinetuneHfModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -150,8 +150,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinetuneHfModelsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1FinetuneHfModelsRequestConfig()
+    fun getFinetuneHfModelsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getFinetuneHfModelsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1FinetuneHfModels
+     * To obtain the request config of the operation getFinetuneHfModels
      *
      * @return RequestConfig
      */
-    fun getV1FinetuneHfModelsRequestConfig() : RequestConfig<Unit> {
+    fun getFinetuneHfModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,8 +190,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinetuneHfRepo() : Unit {
-        val localVarResponse = getV1FinetuneHfRepoWithHttpInfo()
+    fun getFinetuneHfRepo() : Unit {
+        val localVarResponse = getFinetuneHfRepoWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,8 +217,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinetuneHfRepoWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1FinetuneHfRepoRequestConfig()
+    fun getFinetuneHfRepoWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getFinetuneHfRepoRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1FinetuneHfRepo
+     * To obtain the request config of the operation getFinetuneHfRepo
      *
      * @return RequestConfig
      */
-    fun getV1FinetuneHfRepoRequestConfig() : RequestConfig<Unit> {
+    fun getFinetuneHfRepoRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -257,8 +257,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinetuneJob() : Unit {
-        val localVarResponse = getV1FinetuneJobWithHttpInfo()
+    fun getFinetuneJob() : Unit {
+        val localVarResponse = getFinetuneJobWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,8 +284,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinetuneJobWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1FinetuneJobRequestConfig()
+    fun getFinetuneJobWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getFinetuneJobRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +293,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1FinetuneJob
+     * To obtain the request config of the operation getFinetuneJob
      *
      * @return RequestConfig
      */
-    fun getV1FinetuneJobRequestConfig() : RequestConfig<Unit> {
+    fun getFinetuneJobRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -324,8 +324,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinetuneJobs() : Unit {
-        val localVarResponse = getV1FinetuneJobsWithHttpInfo()
+    fun getFinetuneJobs() : Unit {
+        val localVarResponse = getFinetuneJobsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -351,8 +351,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinetuneJobsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1FinetuneJobsRequestConfig()
+    fun getFinetuneJobsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getFinetuneJobsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -360,11 +360,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1FinetuneJobs
+     * To obtain the request config of the operation getFinetuneJobs
      *
      * @return RequestConfig
      */
-    fun getV1FinetuneJobsRequestConfig() : RequestConfig<Unit> {
+    fun getFinetuneJobsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -391,8 +391,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FinetunePresets() : Unit {
-        val localVarResponse = getV1FinetunePresetsWithHttpInfo()
+    fun getFinetunePresets() : Unit {
+        val localVarResponse = getFinetunePresetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -418,8 +418,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FinetunePresetsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getV1FinetunePresetsRequestConfig()
+    fun getFinetunePresetsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getFinetunePresetsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -427,11 +427,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1FinetunePresets
+     * To obtain the request config of the operation getFinetunePresets
      *
      * @return RequestConfig
      */
-    fun getV1FinetunePresetsRequestConfig() : RequestConfig<Unit> {
+    fun getFinetunePresetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -458,8 +458,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FinetuneCancel() : Unit {
-        val localVarResponse = postV1FinetuneCancelWithHttpInfo()
+    fun postFinetuneCancel() : Unit {
+        val localVarResponse = postFinetuneCancelWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -485,8 +485,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FinetuneCancelWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1FinetuneCancelRequestConfig()
+    fun postFinetuneCancelWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postFinetuneCancelRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -494,11 +494,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1FinetuneCancel
+     * To obtain the request config of the operation postFinetuneCancel
      *
      * @return RequestConfig
      */
-    fun postV1FinetuneCancelRequestConfig() : RequestConfig<Unit> {
+    fun postFinetuneCancelRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -525,8 +525,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FinetuneDeploy() : Unit {
-        val localVarResponse = postV1FinetuneDeployWithHttpInfo()
+    fun postFinetuneDeploy() : Unit {
+        val localVarResponse = postFinetuneDeployWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -552,8 +552,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FinetuneDeployWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1FinetuneDeployRequestConfig()
+    fun postFinetuneDeployWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postFinetuneDeployRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -561,11 +561,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1FinetuneDeploy
+     * To obtain the request config of the operation postFinetuneDeploy
      *
      * @return RequestConfig
      */
-    fun postV1FinetuneDeployRequestConfig() : RequestConfig<Unit> {
+    fun postFinetuneDeployRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -592,8 +592,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FinetuneJobs() : Unit {
-        val localVarResponse = postV1FinetuneJobsWithHttpInfo()
+    fun postFinetuneJobs() : Unit {
+        val localVarResponse = postFinetuneJobsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -619,8 +619,8 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FinetuneJobsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postV1FinetuneJobsRequestConfig()
+    fun postFinetuneJobsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postFinetuneJobsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -628,11 +628,11 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1FinetuneJobs
+     * To obtain the request config of the operation postFinetuneJobs
      *
      * @return RequestConfig
      */
-    fun postV1FinetuneJobsRequestConfig() : RequestConfig<Unit> {
+    fun postFinetuneJobsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

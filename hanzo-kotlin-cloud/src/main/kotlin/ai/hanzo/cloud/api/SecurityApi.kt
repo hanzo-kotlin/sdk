@@ -68,8 +68,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SecurityFindings(scanId: kotlin.String? = null, minSeverity: kotlin.String? = null, limit: kotlin.Int? = null) : FindingList {
-        val localVarResponse = getV1SecurityFindingsWithHttpInfo(scanId = scanId, minSeverity = minSeverity, limit = limit)
+    fun getSecurityFindings(scanId: kotlin.String? = null, minSeverity: kotlin.String? = null, limit: kotlin.Int? = null) : FindingList {
+        val localVarResponse = getSecurityFindingsWithHttpInfo(scanId = scanId, minSeverity = minSeverity, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FindingList
@@ -99,8 +99,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SecurityFindingsWithHttpInfo(scanId: kotlin.String?, minSeverity: kotlin.String?, limit: kotlin.Int?) : ApiResponse<FindingList?> {
-        val localVariableConfig = getV1SecurityFindingsRequestConfig(scanId = scanId, minSeverity = minSeverity, limit = limit)
+    fun getSecurityFindingsWithHttpInfo(scanId: kotlin.String?, minSeverity: kotlin.String?, limit: kotlin.Int?) : ApiResponse<FindingList?> {
+        val localVariableConfig = getSecurityFindingsRequestConfig(scanId = scanId, minSeverity = minSeverity, limit = limit)
 
         return request<Unit, FindingList>(
             localVariableConfig
@@ -108,14 +108,14 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1SecurityFindings
+     * To obtain the request config of the operation getSecurityFindings
      *
      * @param scanId ScanID narrows to a single scan. (optional)
      * @param minSeverity MinSeverity drops everything below that rank: critical, high, medium or low. A value outside that set is refused rather than quietly ignored, so a filter typo cannot read as \&quot;no findings\&quot;. (optional)
      * @param limit Limit caps the page. (optional)
      * @return RequestConfig
      */
-    fun getV1SecurityFindingsRequestConfig(scanId: kotlin.String?, minSeverity: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getSecurityFindingsRequestConfig(scanId: kotlin.String?, minSeverity: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -156,8 +156,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SecurityFindingsById(id: kotlin.String) : FindingView {
-        val localVarResponse = getV1SecurityFindingsByIdWithHttpInfo(id = id)
+    fun getSecurityFindingsById(id: kotlin.String) : FindingView {
+        val localVarResponse = getSecurityFindingsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FindingView
@@ -185,8 +185,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SecurityFindingsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<FindingView?> {
-        val localVariableConfig = getV1SecurityFindingsByIdRequestConfig(id = id)
+    fun getSecurityFindingsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<FindingView?> {
+        val localVariableConfig = getSecurityFindingsByIdRequestConfig(id = id)
 
         return request<Unit, FindingView>(
             localVariableConfig
@@ -194,12 +194,12 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1SecurityFindingsById
+     * To obtain the request config of the operation getSecurityFindingsById
      *
      * @param id ID is the finding the URL names.
      * @return RequestConfig
      */
-    fun getV1SecurityFindingsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSecurityFindingsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -228,8 +228,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SecurityHealth() : Ruleset {
-        val localVarResponse = getV1SecurityHealthWithHttpInfo()
+    fun getSecurityHealth() : Ruleset {
+        val localVarResponse = getSecurityHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Ruleset
@@ -256,8 +256,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SecurityHealthWithHttpInfo() : ApiResponse<Ruleset?> {
-        val localVariableConfig = getV1SecurityHealthRequestConfig()
+    fun getSecurityHealthWithHttpInfo() : ApiResponse<Ruleset?> {
+        val localVariableConfig = getSecurityHealthRequestConfig()
 
         return request<Unit, Ruleset>(
             localVariableConfig
@@ -265,11 +265,11 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1SecurityHealth
+     * To obtain the request config of the operation getSecurityHealth
      *
      * @return RequestConfig
      */
-    fun getV1SecurityHealthRequestConfig() : RequestConfig<Unit> {
+    fun getSecurityHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -298,8 +298,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SecurityRules() : RuleList {
-        val localVarResponse = getV1SecurityRulesWithHttpInfo()
+    fun getSecurityRules() : RuleList {
+        val localVarResponse = getSecurityRulesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as RuleList
@@ -326,8 +326,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SecurityRulesWithHttpInfo() : ApiResponse<RuleList?> {
-        val localVariableConfig = getV1SecurityRulesRequestConfig()
+    fun getSecurityRulesWithHttpInfo() : ApiResponse<RuleList?> {
+        val localVariableConfig = getSecurityRulesRequestConfig()
 
         return request<Unit, RuleList>(
             localVariableConfig
@@ -335,11 +335,11 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1SecurityRules
+     * To obtain the request config of the operation getSecurityRules
      *
      * @return RequestConfig
      */
-    fun getV1SecurityRulesRequestConfig() : RequestConfig<Unit> {
+    fun getSecurityRulesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -369,8 +369,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SecurityScans(limit: kotlin.Int? = null) : ScanList {
-        val localVarResponse = getV1SecurityScansWithHttpInfo(limit = limit)
+    fun getSecurityScans(limit: kotlin.Int? = null) : ScanList {
+        val localVarResponse = getSecurityScansWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ScanList
@@ -398,8 +398,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SecurityScansWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ScanList?> {
-        val localVariableConfig = getV1SecurityScansRequestConfig(limit = limit)
+    fun getSecurityScansWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ScanList?> {
+        val localVariableConfig = getSecurityScansRequestConfig(limit = limit)
 
         return request<Unit, ScanList>(
             localVariableConfig
@@ -407,12 +407,12 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1SecurityScans
+     * To obtain the request config of the operation getSecurityScans
      *
      * @param limit Limit caps the page. (optional)
      * @return RequestConfig
      */
-    fun getV1SecurityScansRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getSecurityScansRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -447,8 +447,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SecurityScansById(id: kotlin.String) : ScanDetail {
-        val localVarResponse = getV1SecurityScansByIdWithHttpInfo(id = id)
+    fun getSecurityScansById(id: kotlin.String) : ScanDetail {
+        val localVarResponse = getSecurityScansByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ScanDetail
@@ -476,8 +476,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SecurityScansByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ScanDetail?> {
-        val localVariableConfig = getV1SecurityScansByIdRequestConfig(id = id)
+    fun getSecurityScansByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ScanDetail?> {
+        val localVariableConfig = getSecurityScansByIdRequestConfig(id = id)
 
         return request<Unit, ScanDetail>(
             localVariableConfig
@@ -485,12 +485,12 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation getV1SecurityScansById
+     * To obtain the request config of the operation getSecurityScansById
      *
      * @param id ID is the scan the URL names.
      * @return RequestConfig
      */
-    fun getV1SecurityScansByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getSecurityScansByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -520,8 +520,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1SecurityScans(submitReq: SubmitReq) : ScanView {
-        val localVarResponse = postV1SecurityScansWithHttpInfo(submitReq = submitReq)
+    fun postSecurityScans(submitReq: SubmitReq) : ScanView {
+        val localVarResponse = postSecurityScansWithHttpInfo(submitReq = submitReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ScanView
@@ -549,8 +549,8 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SecurityScansWithHttpInfo(submitReq: SubmitReq) : ApiResponse<ScanView?> {
-        val localVariableConfig = postV1SecurityScansRequestConfig(submitReq = submitReq)
+    fun postSecurityScansWithHttpInfo(submitReq: SubmitReq) : ApiResponse<ScanView?> {
+        val localVariableConfig = postSecurityScansRequestConfig(submitReq = submitReq)
 
         return request<SubmitReq, ScanView>(
             localVariableConfig
@@ -558,12 +558,12 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation postV1SecurityScans
+     * To obtain the request config of the operation postSecurityScans
      *
      * @param submitReq 
      * @return RequestConfig
      */
-    fun postV1SecurityScansRequestConfig(submitReq: SubmitReq) : RequestConfig<SubmitReq> {
+    fun postSecurityScansRequestConfig(submitReq: SubmitReq) : RequestConfig<SubmitReq> {
         val localVariableBody = submitReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -62,8 +62,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1FlowWorkflowsByWorkflow(workflow: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteV1FlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow)
+    fun deleteFlowWorkflowsByWorkflow(workflow: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteFlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -91,8 +91,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1FlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteV1FlowWorkflowsByWorkflowRequestConfig(workflow = workflow)
+    fun deleteFlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteFlowWorkflowsByWorkflowRequestConfig(workflow = workflow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -100,12 +100,12 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1FlowWorkflowsByWorkflow
+     * To obtain the request config of the operation deleteFlowWorkflowsByWorkflow
      *
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
      * @return RequestConfig
      */
-    fun deleteV1FlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String) : RequestConfig<Unit> {
+    fun deleteFlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -135,8 +135,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlowRuns(workflow: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = getV1FlowRunsWithHttpInfo(workflow = workflow)
+    fun getFlowRuns(workflow: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getFlowRunsWithHttpInfo(workflow = workflow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -164,8 +164,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlowRunsWithHttpInfo(workflow: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1FlowRunsRequestConfig(workflow = workflow)
+    fun getFlowRunsWithHttpInfo(workflow: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getFlowRunsRequestConfig(workflow = workflow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -173,12 +173,12 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1FlowRuns
+     * To obtain the request config of the operation getFlowRuns
      *
      * @param workflow Workflow is the UUID of the workflow whose run records to read. It rides the query string. (optional)
      * @return RequestConfig
      */
-    fun getV1FlowRunsRequestConfig(workflow: kotlin.String?) : RequestConfig<Unit> {
+    fun getFlowRunsRequestConfig(workflow: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -212,8 +212,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlowStatus() : FlowStatus {
-        val localVarResponse = getV1FlowStatusWithHttpInfo()
+    fun getFlowStatus() : FlowStatus {
+        val localVarResponse = getFlowStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as FlowStatus
@@ -240,8 +240,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlowStatusWithHttpInfo() : ApiResponse<FlowStatus?> {
-        val localVariableConfig = getV1FlowStatusRequestConfig()
+    fun getFlowStatusWithHttpInfo() : ApiResponse<FlowStatus?> {
+        val localVariableConfig = getFlowStatusRequestConfig()
 
         return request<Unit, FlowStatus>(
             localVariableConfig
@@ -249,11 +249,11 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1FlowStatus
+     * To obtain the request config of the operation getFlowStatus
      *
      * @return RequestConfig
      */
-    fun getV1FlowStatusRequestConfig() : RequestConfig<Unit> {
+    fun getFlowStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -284,8 +284,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlowWorkflows(page: kotlin.String? = null, size: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = getV1FlowWorkflowsWithHttpInfo(page = page, size = size)
+    fun getFlowWorkflows(page: kotlin.String? = null, size: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getFlowWorkflowsWithHttpInfo(page = page, size = size)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -314,8 +314,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlowWorkflowsWithHttpInfo(page: kotlin.String?, size: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1FlowWorkflowsRequestConfig(page = page, size = size)
+    fun getFlowWorkflowsWithHttpInfo(page: kotlin.String?, size: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getFlowWorkflowsRequestConfig(page = page, size = size)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -323,13 +323,13 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1FlowWorkflows
+     * To obtain the request config of the operation getFlowWorkflows
      *
      * @param page Page is the 1-based page of workflows to return. (optional)
      * @param size Size is how many workflows one page holds (the product caps it at 100). (optional)
      * @return RequestConfig
      */
-    fun getV1FlowWorkflowsRequestConfig(page: kotlin.String?, size: kotlin.String?) : RequestConfig<Unit> {
+    fun getFlowWorkflowsRequestConfig(page: kotlin.String?, size: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -367,8 +367,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1FlowWorkflowsByWorkflow(workflow: kotlin.String) : kotlin.Any {
-        val localVarResponse = getV1FlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow)
+    fun getFlowWorkflowsByWorkflow(workflow: kotlin.String) : kotlin.Any {
+        val localVarResponse = getFlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -396,8 +396,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1FlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getV1FlowWorkflowsByWorkflowRequestConfig(workflow = workflow)
+    fun getFlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getFlowWorkflowsByWorkflowRequestConfig(workflow = workflow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -405,12 +405,12 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation getV1FlowWorkflowsByWorkflow
+     * To obtain the request config of the operation getFlowWorkflowsByWorkflow
      *
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
      * @return RequestConfig
      */
-    fun getV1FlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String) : RequestConfig<Unit> {
+    fun getFlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -441,8 +441,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchV1FlowWorkflowsByWorkflow(workflow: kotlin.String, flowUpdate: FlowUpdate) : kotlin.Any {
-        val localVarResponse = patchV1FlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow, flowUpdate = flowUpdate)
+    fun patchFlowWorkflowsByWorkflow(workflow: kotlin.String, flowUpdate: FlowUpdate) : kotlin.Any {
+        val localVarResponse = patchFlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow, flowUpdate = flowUpdate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -471,8 +471,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchV1FlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String, flowUpdate: FlowUpdate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = patchV1FlowWorkflowsByWorkflowRequestConfig(workflow = workflow, flowUpdate = flowUpdate)
+    fun patchFlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String, flowUpdate: FlowUpdate) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = patchFlowWorkflowsByWorkflowRequestConfig(workflow = workflow, flowUpdate = flowUpdate)
 
         return request<FlowUpdate, kotlin.Any>(
             localVariableConfig
@@ -480,13 +480,13 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation patchV1FlowWorkflowsByWorkflow
+     * To obtain the request config of the operation patchFlowWorkflowsByWorkflow
      *
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
      * @param flowUpdate 
      * @return RequestConfig
      */
-    fun patchV1FlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String, flowUpdate: FlowUpdate) : RequestConfig<FlowUpdate> {
+    fun patchFlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String, flowUpdate: FlowUpdate) : RequestConfig<FlowUpdate> {
         val localVariableBody = flowUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -517,8 +517,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FlowRuns(flowRun: FlowRun) : kotlin.Any {
-        val localVarResponse = postV1FlowRunsWithHttpInfo(flowRun = flowRun)
+    fun postFlowRuns(flowRun: FlowRun) : kotlin.Any {
+        val localVarResponse = postFlowRunsWithHttpInfo(flowRun = flowRun)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -546,8 +546,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FlowRunsWithHttpInfo(flowRun: FlowRun) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1FlowRunsRequestConfig(flowRun = flowRun)
+    fun postFlowRunsWithHttpInfo(flowRun: FlowRun) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postFlowRunsRequestConfig(flowRun = flowRun)
 
         return request<FlowRun, kotlin.Any>(
             localVariableConfig
@@ -555,12 +555,12 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1FlowRuns
+     * To obtain the request config of the operation postFlowRuns
      *
      * @param flowRun 
      * @return RequestConfig
      */
-    fun postV1FlowRunsRequestConfig(flowRun: FlowRun) : RequestConfig<FlowRun> {
+    fun postFlowRunsRequestConfig(flowRun: FlowRun) : RequestConfig<FlowRun> {
         val localVariableBody = flowRun
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -591,8 +591,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1FlowWorkflows(flowCreate: FlowCreate) : kotlin.Any {
-        val localVarResponse = postV1FlowWorkflowsWithHttpInfo(flowCreate = flowCreate)
+    fun postFlowWorkflows(flowCreate: FlowCreate) : kotlin.Any {
+        val localVarResponse = postFlowWorkflowsWithHttpInfo(flowCreate = flowCreate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -620,8 +620,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1FlowWorkflowsWithHttpInfo(flowCreate: FlowCreate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postV1FlowWorkflowsRequestConfig(flowCreate = flowCreate)
+    fun postFlowWorkflowsWithHttpInfo(flowCreate: FlowCreate) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postFlowWorkflowsRequestConfig(flowCreate = flowCreate)
 
         return request<FlowCreate, kotlin.Any>(
             localVariableConfig
@@ -629,12 +629,12 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation postV1FlowWorkflows
+     * To obtain the request config of the operation postFlowWorkflows
      *
      * @param flowCreate 
      * @return RequestConfig
      */
-    fun postV1FlowWorkflowsRequestConfig(flowCreate: FlowCreate) : RequestConfig<FlowCreate> {
+    fun postFlowWorkflowsRequestConfig(flowCreate: FlowCreate) : RequestConfig<FlowCreate> {
         val localVariableBody = flowCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

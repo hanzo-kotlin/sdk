@@ -60,8 +60,8 @@ class TokensApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1TokensByChainByAddress(chain: kotlin.String, address: kotlin.String) : Balances {
-        val localVarResponse = getV1TokensByChainByAddressWithHttpInfo(chain = chain, address = address)
+    fun getTokensByChainByAddress(chain: kotlin.String, address: kotlin.String) : Balances {
+        val localVarResponse = getTokensByChainByAddressWithHttpInfo(chain = chain, address = address)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Balances
@@ -90,8 +90,8 @@ class TokensApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1TokensByChainByAddressWithHttpInfo(chain: kotlin.String, address: kotlin.String) : ApiResponse<Balances?> {
-        val localVariableConfig = getV1TokensByChainByAddressRequestConfig(chain = chain, address = address)
+    fun getTokensByChainByAddressWithHttpInfo(chain: kotlin.String, address: kotlin.String) : ApiResponse<Balances?> {
+        val localVariableConfig = getTokensByChainByAddressRequestConfig(chain = chain, address = address)
 
         return request<Unit, Balances>(
             localVariableConfig
@@ -99,13 +99,13 @@ class TokensApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1TokensByChainByAddress
+     * To obtain the request config of the operation getTokensByChainByAddress
      *
      * @param chain Chain is the registry id.
      * @param address Address is the account, 0x-prefixed.
      * @return RequestConfig
      */
-    fun getV1TokensByChainByAddressRequestConfig(chain: kotlin.String, address: kotlin.String) : RequestConfig<Unit> {
+    fun getTokensByChainByAddressRequestConfig(chain: kotlin.String, address: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

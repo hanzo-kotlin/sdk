@@ -63,8 +63,8 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteV1SkillsById(id: kotlin.String) : SkillDeleted {
-        val localVarResponse = deleteV1SkillsByIdWithHttpInfo(id = id)
+    fun deleteSkillsById(id: kotlin.String) : SkillDeleted {
+        val localVarResponse = deleteSkillsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SkillDeleted
@@ -92,8 +92,8 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteV1SkillsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SkillDeleted?> {
-        val localVariableConfig = deleteV1SkillsByIdRequestConfig(id = id)
+    fun deleteSkillsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SkillDeleted?> {
+        val localVariableConfig = deleteSkillsByIdRequestConfig(id = id)
 
         return request<Unit, SkillDeleted>(
             localVariableConfig
@@ -101,12 +101,12 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation deleteV1SkillsById
+     * To obtain the request config of the operation deleteSkillsById
      *
      * @param id ID is the skill to remove, from the path. It is the skill&#39;s name.
      * @return RequestConfig
      */
-    fun deleteV1SkillsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteSkillsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -136,8 +136,8 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1Skills(activated: kotlin.String? = null) : SourceToolList {
-        val localVarResponse = getV1SkillsWithHttpInfo(activated = activated)
+    fun getSkills(activated: kotlin.String? = null) : SourceToolList {
+        val localVarResponse = getSkillsWithHttpInfo(activated = activated)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SourceToolList
@@ -165,8 +165,8 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SkillsWithHttpInfo(activated: kotlin.String?) : ApiResponse<SourceToolList?> {
-        val localVariableConfig = getV1SkillsRequestConfig(activated = activated)
+    fun getSkillsWithHttpInfo(activated: kotlin.String?) : ApiResponse<SourceToolList?> {
+        val localVariableConfig = getSkillsRequestConfig(activated = activated)
 
         return request<Unit, SourceToolList>(
             localVariableConfig
@@ -174,12 +174,12 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1Skills
+     * To obtain the request config of the operation getSkills
      *
      * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @return RequestConfig
      */
-    fun getV1SkillsRequestConfig(activated: kotlin.String?) : RequestConfig<Unit> {
+    fun getSkillsRequestConfig(activated: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -213,8 +213,8 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getV1SkillsAuthored() : AuthoredSkillList {
-        val localVarResponse = getV1SkillsAuthoredWithHttpInfo()
+    fun getSkillsAuthored() : AuthoredSkillList {
+        val localVarResponse = getSkillsAuthoredWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as AuthoredSkillList
@@ -241,8 +241,8 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getV1SkillsAuthoredWithHttpInfo() : ApiResponse<AuthoredSkillList?> {
-        val localVariableConfig = getV1SkillsAuthoredRequestConfig()
+    fun getSkillsAuthoredWithHttpInfo() : ApiResponse<AuthoredSkillList?> {
+        val localVariableConfig = getSkillsAuthoredRequestConfig()
 
         return request<Unit, AuthoredSkillList>(
             localVariableConfig
@@ -250,11 +250,11 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation getV1SkillsAuthored
+     * To obtain the request config of the operation getSkillsAuthored
      *
      * @return RequestConfig
      */
-    fun getV1SkillsAuthoredRequestConfig() : RequestConfig<Unit> {
+    fun getSkillsAuthoredRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -284,8 +284,8 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postV1Skills(skillIn: SkillIn) : SkillWritten {
-        val localVarResponse = postV1SkillsWithHttpInfo(skillIn = skillIn)
+    fun postSkills(skillIn: SkillIn) : SkillWritten {
+        val localVarResponse = postSkillsWithHttpInfo(skillIn = skillIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SkillWritten
@@ -313,8 +313,8 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postV1SkillsWithHttpInfo(skillIn: SkillIn) : ApiResponse<SkillWritten?> {
-        val localVariableConfig = postV1SkillsRequestConfig(skillIn = skillIn)
+    fun postSkillsWithHttpInfo(skillIn: SkillIn) : ApiResponse<SkillWritten?> {
+        val localVariableConfig = postSkillsRequestConfig(skillIn = skillIn)
 
         return request<SkillIn, SkillWritten>(
             localVariableConfig
@@ -322,12 +322,12 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation postV1Skills
+     * To obtain the request config of the operation postSkills
      *
      * @param skillIn 
      * @return RequestConfig
      */
-    fun postV1SkillsRequestConfig(skillIn: SkillIn) : RequestConfig<SkillIn> {
+    fun postSkillsRequestConfig(skillIn: SkillIn) : RequestConfig<SkillIn> {
         val localVariableBody = skillIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
