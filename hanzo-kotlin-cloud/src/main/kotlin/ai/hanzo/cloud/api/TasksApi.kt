@@ -56,7 +56,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteTasksApp() : Unit {
+    fun deleteTasks() : Unit {
         val localVarResponse = deleteTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
@@ -92,7 +92,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteTasksApp
+     * To obtain the request config of the operation deleteTasks
      *
      * @return RequestConfig
      */
@@ -124,7 +124,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteTasksAppAssets(wildcard1: kotlin.String) : Unit {
+    fun deleteTasksByWildcard1(wildcard1: kotlin.String) : Unit {
         val localVarResponse = deleteTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
@@ -161,7 +161,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation deleteTasksAppAssets
+     * To obtain the request config of the operation deleteTasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
@@ -193,7 +193,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getTasksApp() : Unit {
+    fun getTasks() : Unit {
         val localVarResponse = getTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
@@ -229,7 +229,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getTasksApp
+     * To obtain the request config of the operation getTasks
      *
      * @return RequestConfig
      */
@@ -261,7 +261,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getTasksAppAssets(wildcard1: kotlin.String) : Unit {
+    fun getTasksByWildcard1(wildcard1: kotlin.String) : Unit {
         val localVarResponse = getTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
@@ -298,7 +298,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation getTasksAppAssets
+     * To obtain the request config of the operation getTasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
@@ -330,7 +330,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchTasksApp() : Unit {
+    fun patchTasks() : Unit {
         val localVarResponse = patchTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
@@ -366,7 +366,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchTasksApp
+     * To obtain the request config of the operation patchTasks
      *
      * @return RequestConfig
      */
@@ -398,7 +398,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchTasksAppAssets(wildcard1: kotlin.String) : Unit {
+    fun patchTasksByWildcard1(wildcard1: kotlin.String) : Unit {
         val localVarResponse = patchTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
@@ -435,7 +435,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation patchTasksAppAssets
+     * To obtain the request config of the operation patchTasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
@@ -467,7 +467,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postTasksApp() : Unit {
+    fun postTasks() : Unit {
         val localVarResponse = postTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
@@ -503,7 +503,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postTasksApp
+     * To obtain the request config of the operation postTasks
      *
      * @return RequestConfig
      */
@@ -535,7 +535,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postTasksAppAssets(wildcard1: kotlin.String) : Unit {
+    fun postTasksByWildcard1(wildcard1: kotlin.String) : Unit {
         val localVarResponse = postTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
@@ -572,7 +572,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation postTasksAppAssets
+     * To obtain the request config of the operation postTasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
@@ -604,7 +604,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putTasksApp() : Unit {
+    fun putTasks() : Unit {
         val localVarResponse = putTasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
@@ -640,7 +640,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putTasksApp
+     * To obtain the request config of the operation putTasks
      *
      * @return RequestConfig
      */
@@ -672,7 +672,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putTasksAppAssets(wildcard1: kotlin.String) : Unit {
+    fun putTasksByWildcard1(wildcard1: kotlin.String) : Unit {
         val localVarResponse = putTasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
@@ -709,7 +709,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation putTasksAppAssets
+     * To obtain the request config of the operation putTasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
