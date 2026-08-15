@@ -27,11 +27,32 @@ The shape, measured — the document at `.spec-lock`, and the tree it produced:
 | infrastructure | 13 |
 | methods across the API classes | 2,502 — 23 operations carry two tags, so they land in two classes |
 
-Nothing is on Maven Central: `ai.hanzo` is not a group there, and the four
-`v0.1.0-alpha.*` tags predate this client. Until a release lands, a consumer
-builds it — `./gradlew -PpublishLocal :hanzo-kotlin-cloud:publishToMavenLocal`,
-then `mavenLocal()`. The `-PpublishLocal` property is what turns off signing;
-without it the publish stops at `signMavenPublication` with no signatory.
+Nothing is on Maven Central: `ai.hanzo` is not a group there
+(`repo1.maven.org/maven2/ai/hanzo/` answers 404), and the four `v0.1.0-alpha.*`
+tags predate this client. Until a release lands, a consumer builds it —
+`./gradlew -PpublishLocal :hanzo-kotlin-cloud:publishToMavenLocal`, then
+`mavenLocal()`. The `-PpublishLocal` property is what turns off signing; without
+it the publish stops at `signMavenPublication` with no signatory.
+
+Two things have to exist before a tag can put it there, and neither is code:
+
+1. **The namespace.** Central accepts `ai.hanzo` only once the namespace is
+   verified against hanzo.ai, which is a DNS TXT record and a Portal account.
+   hanzo.ai carries no such record today, so the namespace has never been
+   claimed.
+2. **The credential**, sealed in KMS at org `hanzo`, env `prod`, path `maven`:
+   `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD` (the two halves of a
+   Central Portal user token) and `GPG_SIGNING_KEY`, `GPG_SIGNING_KEY_ID`,
+   `GPG_SIGNING_PASSWORD` (an armoured private key, its long id, its
+   passphrase). `GET /v1/kms/secrets/maven/MAVEN_CENTRAL_USERNAME?env=prod`
+   answers `404 secret not found`; `NPM_TOKEN` and `PYPI_TOKEN` are sealed for
+   the sibling SDKs, this pair is not. The path is `maven`, not `kotlin-sdk`,
+   because one namespace and one signing key serve every JVM client — sealing
+   it twice is a second thing to rotate.
+
+With both in place the release is a tag: `.hanzo/workflows/publish-maven.yml`
+reads those five keys and runs `publishAndReleaseToMavenCentral`. It refuses
+rather than skipping, so a tag can never report success over an empty registry.
 
 There was a second, hand-shaped client here — `hanzo-kotlin-core` plus its
 okhttp transport, umbrella, example and proguard modules. It is gone. Two
@@ -118,8 +139,10 @@ the only way to know one is to read it.
 ## Gates
 
 `hanzo.yml` is read by hanzoai/ci: regenerate, then build the client and the six
-examples, lint, run the flow tests, and produce the jar. `.hanzo/workflows` is
-the call into `hanzoai/ci`.
+examples, lint, run the flow tests, and produce the jar, which a tag attaches to
+the release. `.hanzo/workflows/cicd.yml` is the call into `hanzoai/ci`;
+`.hanzo/workflows/publish-maven.yml` beside it is the registry lane, and the two
+have no overlap — one attaches a jar to a release, the other uploads to Central.
 
 ## Sibling repos
 

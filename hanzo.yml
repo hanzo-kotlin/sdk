@@ -26,20 +26,16 @@ test:
 
 binaries:
   - name: hanzo-kotlin-cloud
-    # Built on every push, published only on a tag.
+    # The jar: built on every push, attached to the release on a tag.
     #
-    # Maven Central publication rides here because it is the release lane this
-    # repo has: `hanzo.publish` (buildSrc) signs with GPG_SIGNING_KEY /
-    # GPG_SIGNING_KEY_ID / GPG_SIGNING_PASSWORD and uploads with
-    # ORG_GRADLE_PROJECT_mavenCentralUsername / …Password, all KMS-sourced and
-    # injected by the reusable. Without them the jar is still produced and
-    # nothing is published — so a push builds and only a tag releases.
-    run: |
-      set -e
-      ./gradlew :hanzo-kotlin-cloud:assemble
-      if [ "${GITHUB_REF_TYPE:-}" = tag ] && [ -n "${GPG_SIGNING_KEY:-}" ]; then
-        ./gradlew :hanzo-kotlin-cloud:publishAndReleaseToMavenCentral
-      fi
+    # Maven Central is NOT published from here. It is
+    # `.hanzo/workflows/publish-maven.yml` — one lane, which reads its
+    # credential from KMS and fails when the credential is absent. This block
+    # used to carry a second upload behind `if [ -n "$GPG_SIGNING_KEY" ]`, and
+    # hanzoai/ci sets no such variable (it fetches deploy credentials, not
+    # publishing ones), so the condition was false on every run ever made: a tag
+    # assembled the jar, published nothing, and went green.
+    run: ./gradlew :hanzo-kotlin-cloud:assemble
     out: hanzo-kotlin-cloud/build/libs/*.jar
 
 # THE CLIENT LANE — this repo is a PROJECTION of one API document at one version.

@@ -1,0 +1,93 @@
+name: Publish Maven
+# The ONE lane that puts this client on Maven Central. A `v*` tag runs it on the
+# Hanzo git-runner fleet; the Central credential and the PGP key are read from
+# KMS at publish time and live nowhere else — not in a forge secret, not in a
+# GitHub secret, not in this file.
+#
+# IT FAILS WHEN THE CREDENTIAL IS ABSENT. That is the whole reason this file
+# exists. Publishing used to ride inside `hanzo.yml`'s `binaries:` block behind
+# `if [ -n "$GPG_SIGNING_KEY" ]`, and nothing in the fleet has ever set that
+# variable, so every tag assembled a jar, uploaded nothing, and reported
+# success. A release that skips its upload and goes green is indistinguishable
+# from one that worked, which is how four alpha tags exist with an empty
+# registry behind them.
+#
+# The credential is registry-scoped, not repo-scoped: one `ai.hanzo` namespace,
+# one Central token, one signing key, shared with hanzoai/java-sdk. So it is
+# sealed ONCE, at org `hanzo`, env `prod`, path `maven`, and both JVM clients
+# read the same five keys:
+#
+#     MAVEN_CENTRAL_USERNAME   Central Portal user token, name half
+#     MAVEN_CENTRAL_PASSWORD   Central Portal user token, secret half
+#     GPG_SIGNING_KEY          ASCII-armoured private key
+#     GPG_SIGNING_KEY_ID       its long key id
+#     GPG_SIGNING_PASSWORD     its passphrase
+#
+# Central also requires the `ai.hanzo` namespace to be verified against
+# hanzo.ai before it accepts anything under it.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-maven-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: [hanzo-build-linux-amd64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Read the publish credential from KMS
+        env:
+          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
+          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
+        run: |
+          set -euo pipefail
+          KMS=https://api.hanzo.ai; ENVN=prod; P=maven
+          if [ -z "${KMS_CLIENT_ID:-}" ] || [ -z "${KMS_CLIENT_SECRET:-}" ]; then
+            echo "::error::no KMS machine identity — seal KMS_CLIENT_ID/KMS_CLIENT_SECRET as forge Actions secrets"; exit 1
+          fi
+          TOKEN=$(curl -sf "$KMS/v1/kms/auth/login" -H 'Content-Type: application/json' \
+            -d "{\"clientId\":\"$KMS_CLIENT_ID\",\"clientSecret\":\"$KMS_CLIENT_SECRET\"}" | jq -r '.accessToken // empty')
+          [ -n "$TOKEN" ] || { echo "::error::KMS login refused $KMS_CLIENT_ID"; exit 1; }
+          # `curl -sf` exits 22 on a 404 and, under `set -e`, kills the step
+          # before any message of ours prints — which reads like a broken
+          # network and is a secret that was never sealed. Capture the status
+          # and let the guard below say which key at which path.
+          missing=
+          for k in MAVEN_CENTRAL_USERNAME MAVEN_CENTRAL_PASSWORD GPG_SIGNING_KEY GPG_SIGNING_KEY_ID GPG_SIGNING_PASSWORD; do
+            body=$(curl -s -w '\n%{http_code}' "$KMS/v1/kms/secrets/$P/$k?env=$ENVN" -H "Authorization: Bearer $TOKEN") || true
+            code=$(printf '%s' "$body" | tail -1)
+            v=$(printf '%s' "$body" | sed '$d' | jq -r '.value // empty' 2>/dev/null || true)
+            if [ -z "$v" ]; then missing="$missing $k(HTTP $code)"; continue; fi
+            echo "::add-mask::$v"
+            # vanniktech reads the upload credential as a gradle property and
+            # the signing key off these three names, so the KMS key name is the
+            # env name and nothing translates between them.
+            case "$k" in
+              MAVEN_CENTRAL_USERNAME) n=ORG_GRADLE_PROJECT_mavenCentralUsername ;;
+              MAVEN_CENTRAL_PASSWORD) n=ORG_GRADLE_PROJECT_mavenCentralPassword ;;
+              *) n=$k ;;
+            esac
+            { echo "$n<<__KMS__"; echo "$v"; echo "__KMS__"; } >> "$GITHUB_ENV"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::KMS holds no Maven Central credential at org hanzo, env $ENVN, path $P —$missing. Seal it there; it belongs in KMS, not in a forge or GitHub secret."; exit 1
+          fi
+
+      - name: Publish
+        run: ./gradlew --no-daemon :hanzo-kotlin-cloud:publishAndReleaseToMavenCentral
+
+      - name: Coordinate
+        run: |
+          V=$(sed -n 's/.*version = "\(.*\)" \/\/ x-release-please-version.*/\1/p' build.gradle.kts)
+          echo "\`ai.hanzo:hanzo-kotlin-cloud:$V\`" >> "$GITHUB_STEP_SUMMARY"
