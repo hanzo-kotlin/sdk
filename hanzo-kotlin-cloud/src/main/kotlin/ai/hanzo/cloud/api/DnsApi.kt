@@ -109,7 +109,7 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -179,7 +179,7 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -249,7 +249,7 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -319,7 +319,7 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -389,7 +389,7 @@ class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -121,7 +121,7 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -191,7 +191,7 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -265,7 +265,7 @@ class KeysApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

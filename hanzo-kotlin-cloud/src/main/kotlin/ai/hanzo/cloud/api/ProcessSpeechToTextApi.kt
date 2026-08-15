@@ -106,7 +106,7 @@ class ProcessSpeechToTextApi(basePath: kotlin.String = defaultBasePath, client: 
             path = "/v1/process-speech-to-text",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -123,7 +123,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -193,7 +193,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -266,7 +266,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -347,7 +347,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/{name}/invocations".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -420,7 +420,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/{name}/logs".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -490,7 +490,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/deployments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -568,7 +568,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -638,7 +638,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/secrets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -708,7 +708,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/triggers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -782,7 +782,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -859,7 +859,7 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/functions/{name}/invoke".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

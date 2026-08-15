@@ -111,7 +111,7 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/notify/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -185,7 +185,7 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/notify/send",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -259,7 +259,7 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/notify/send/email",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -333,7 +333,7 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/notify/send/sms",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

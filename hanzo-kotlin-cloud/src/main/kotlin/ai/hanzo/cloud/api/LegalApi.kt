@@ -129,7 +129,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -202,7 +202,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -280,7 +280,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/filings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -350,7 +350,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -420,7 +420,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/templates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -493,7 +493,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/templates/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -567,7 +567,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -644,7 +644,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents/{id}/sign".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -714,7 +714,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents/{id}/sign/complete".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -788,7 +788,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/filings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -865,7 +865,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/templates/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

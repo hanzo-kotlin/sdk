@@ -118,7 +118,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -188,7 +188,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -258,7 +258,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -328,7 +328,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -401,7 +401,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -471,7 +471,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -544,7 +544,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -614,7 +614,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -687,7 +687,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -757,7 +757,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -827,7 +827,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/tls",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -901,7 +901,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -975,7 +975,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1049,7 +1049,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1126,7 +1126,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1203,7 +1203,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1280,7 +1280,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1354,7 +1354,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/tls",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

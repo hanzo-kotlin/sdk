@@ -197,7 +197,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -271,7 +271,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/tokens",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -345,7 +345,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/webauthn-credentials",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -419,7 +419,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/organizations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -493,7 +493,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/sessions/create",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -573,7 +573,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -646,7 +646,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/Users/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -716,7 +716,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/service-accounts/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -790,7 +790,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/organizations/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -864,7 +864,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/providers/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -938,7 +938,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/sessions/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1012,7 +1012,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/tokens/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1086,7 +1086,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/webauthn-credentials/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1153,7 +1153,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/account",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1233,7 +1233,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1309,7 +1309,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1389,7 +1389,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/applications/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1467,7 +1467,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/audit-logs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1551,7 +1551,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/auth/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1629,7 +1629,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/auth/methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1707,7 +1707,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/certs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1774,7 +1774,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/consent",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1841,7 +1841,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-account",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1925,7 +1925,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-app-login",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1992,7 +1992,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2059,7 +2059,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2126,7 +2126,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-cert",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2193,7 +2193,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-certs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2260,7 +2260,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-global-users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2327,7 +2327,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-invitations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2411,7 +2411,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-memberships",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2478,7 +2478,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-organization",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2545,7 +2545,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-organization-projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2612,7 +2612,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-organization-workspaces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2679,7 +2679,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-organizations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2746,7 +2746,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-permission",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2813,7 +2813,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-permissions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2880,7 +2880,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-provider",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2947,7 +2947,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3014,7 +3014,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-records",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3081,7 +3081,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-role",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3148,7 +3148,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3215,7 +3215,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3282,7 +3282,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/get-users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3360,7 +3360,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/invitations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3438,7 +3438,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3522,7 +3522,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/keys/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3589,7 +3589,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/linked-accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3673,7 +3673,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/memberships",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3740,7 +3740,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/authorize",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3807,7 +3807,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3874,7 +3874,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/logout",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3941,7 +3941,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/userinfo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4019,7 +4019,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/permissions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4103,7 +4103,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/permissions/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4181,7 +4181,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4248,7 +4248,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/registry/jwks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4315,7 +4315,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/registry/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4382,7 +4382,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/resolve-key",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4460,7 +4460,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4530,7 +4530,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/ResourceTypes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4603,7 +4603,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/ResourceTypes/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4673,7 +4673,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/Schemas",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4746,7 +4746,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/Schemas/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4816,7 +4816,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/ServiceProviderConfig",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4883,7 +4883,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/Users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4956,7 +4956,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/Users/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5046,7 +5046,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/service-accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5134,7 +5134,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5222,7 +5222,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/users/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5289,7 +5289,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/web3/nonce",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5356,7 +5356,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/.well-known/jwks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5423,7 +5423,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/.well-known/oauth-authorization-server",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5490,7 +5490,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/.well-known/openid-configuration",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5557,7 +5557,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/whoami",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5635,7 +5635,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/workspaces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5719,7 +5719,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/organizations/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5793,7 +5793,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/providers/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5867,7 +5867,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/sessions/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5941,7 +5941,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/tokens/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6015,7 +6015,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/webauthn-credentials/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6105,7 +6105,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/organizations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6183,7 +6183,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6257,7 +6257,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/sessions/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6341,7 +6341,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/tokens",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6419,7 +6419,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/webauthn-credentials",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6492,7 +6492,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/Users/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6566,7 +6566,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/add-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6633,7 +6633,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/add-membership",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6707,7 +6707,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/add-organization",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6781,7 +6781,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/add-project",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6855,7 +6855,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/add-provider",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6929,7 +6929,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/add-role",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7003,7 +7003,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/add-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7077,7 +7077,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/add-workspace",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7144,7 +7144,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/admin/provision",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7218,7 +7218,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7292,7 +7292,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7366,7 +7366,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/applications/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7440,7 +7440,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/applications/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7514,7 +7514,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/audit-logs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7588,7 +7588,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/audit-logs/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7662,7 +7662,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/audit-logs/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7736,7 +7736,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/audit-logs/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7810,7 +7810,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/certs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7884,7 +7884,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/certs/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7958,7 +7958,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/certs/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8032,7 +8032,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/certs/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8106,7 +8106,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8173,7 +8173,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-membership",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8240,7 +8240,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-mfa",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8314,7 +8314,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-organization",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8388,7 +8388,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-project",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8462,7 +8462,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-provider",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8536,7 +8536,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-role",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8610,7 +8610,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8684,7 +8684,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/delete-workspace",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8758,7 +8758,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/invitations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8832,7 +8832,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/invitations/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8906,7 +8906,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/invitations/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8980,7 +8980,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/invitations/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9047,7 +9047,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/issue-user-token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9121,7 +9121,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9195,7 +9195,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/keys/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9262,7 +9262,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/keys/mint",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9329,7 +9329,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/keys/revoke",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9403,7 +9403,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/keys/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9470,7 +9470,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/link",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9537,7 +9537,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/login",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9604,7 +9604,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/memberships",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9671,7 +9671,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/mfa/disable",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9738,7 +9738,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/mfa/preferred",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9805,7 +9805,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/mfa/setup/enable",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9872,7 +9872,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/mfa/setup/initiate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9939,7 +9939,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/mint-user-keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10006,7 +10006,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/authorize",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10073,7 +10073,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/device",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10140,7 +10140,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/device/info",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10207,7 +10207,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/federation/mfa",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10274,7 +10274,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/introspect",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10341,7 +10341,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/logout",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10408,7 +10408,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/revoke",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10475,7 +10475,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10542,7 +10542,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/oauth/userinfo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10609,7 +10609,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/onboard",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10683,7 +10683,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/permissions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10757,7 +10757,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/permissions/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10831,7 +10831,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/permissions/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10898,7 +10898,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/preferences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10972,7 +10972,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11046,7 +11046,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/projects/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11120,7 +11120,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/projects/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11194,7 +11194,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/projects/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11261,7 +11261,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/registry/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11328,7 +11328,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/revoke-user-keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11402,7 +11402,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11476,7 +11476,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/roles/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11550,7 +11550,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/roles/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11624,7 +11624,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/roles/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11691,7 +11691,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/Users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11758,7 +11758,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/send-verification-code",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11825,7 +11825,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/service-accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11895,7 +11895,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/service-accounts/{name}/keys".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11962,7 +11962,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/set-preferred-mfa",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12029,7 +12029,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/signin",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12096,7 +12096,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/signup",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12163,7 +12163,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/tokens/issue",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12230,7 +12230,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/unlink",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12304,7 +12304,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/update-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12378,7 +12378,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/update-organization",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12445,7 +12445,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/update-preferences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12519,7 +12519,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/update-provider",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12593,7 +12593,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/update-role",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12667,7 +12667,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/update-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12741,7 +12741,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12815,7 +12815,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/users/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12889,7 +12889,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/users/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12956,7 +12956,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/verification-codes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13023,7 +13023,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/web3/verify",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13097,7 +13097,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/workspaces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13171,7 +13171,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/workspaces/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13245,7 +13245,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/workspaces/get",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13319,7 +13319,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/workspaces/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13393,7 +13393,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13460,7 +13460,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/consent",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13542,7 +13542,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/password",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13615,7 +13615,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/scim/v2/Users/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13689,7 +13689,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/organizations/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13763,7 +13763,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/providers/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13837,7 +13837,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/sessions/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13911,7 +13911,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/tokens/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13985,7 +13985,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/webauthn-credentials/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14063,7 +14063,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/admin/applications/upsert",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14141,7 +14141,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/iam/admin/users/upsert",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

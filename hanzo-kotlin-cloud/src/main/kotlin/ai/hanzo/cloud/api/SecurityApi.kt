@@ -137,7 +137,7 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/security/findings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -210,7 +210,7 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/security/findings/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -280,7 +280,7 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/security/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -350,7 +350,7 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/security/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -428,7 +428,7 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/security/scans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -501,7 +501,7 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/security/scans/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -575,7 +575,7 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/security/scans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

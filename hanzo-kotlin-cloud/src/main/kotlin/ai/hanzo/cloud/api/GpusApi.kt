@@ -111,7 +111,7 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/gpus/alerts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -181,7 +181,7 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/gpus",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

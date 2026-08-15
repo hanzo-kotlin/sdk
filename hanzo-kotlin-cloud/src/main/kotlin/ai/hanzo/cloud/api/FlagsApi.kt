@@ -119,7 +119,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/defs/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -197,7 +197,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/activity",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -267,7 +267,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/defs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -340,7 +340,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/defs/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -410,7 +410,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -488,7 +488,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/waitlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -562,7 +562,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -636,7 +636,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/decide",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -713,7 +713,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/defs/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -121,7 +121,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}/messages/{seq}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"seq"+"}", encodeURIComponent(seq.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -267,7 +267,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -337,7 +337,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -407,7 +407,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/info",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -491,7 +491,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -564,7 +564,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -663,7 +663,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}/messages".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -750,7 +750,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -826,7 +826,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -900,7 +900,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -977,7 +977,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}/purge".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1054,7 +1054,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1134,7 +1134,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers/{name}/next".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1211,7 +1211,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

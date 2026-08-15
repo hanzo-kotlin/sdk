@@ -134,7 +134,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/ask",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -218,7 +218,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/file",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -314,7 +314,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -392,7 +392,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/tree",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -466,7 +466,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/ask",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -540,7 +540,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/context",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -614,7 +614,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/index",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -688,7 +688,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/lsp/complete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -762,7 +762,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/lsp/diagnostics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -836,7 +836,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/lsp/hover",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -910,7 +910,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/lsp/locate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -984,7 +984,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/lsp/symbols",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

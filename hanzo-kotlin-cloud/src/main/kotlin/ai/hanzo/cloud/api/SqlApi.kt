@@ -113,7 +113,7 @@ class SqlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/sql/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -183,7 +183,7 @@ class SqlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/sql",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class SqlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/sql/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -330,7 +330,7 @@ class SqlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/sql",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

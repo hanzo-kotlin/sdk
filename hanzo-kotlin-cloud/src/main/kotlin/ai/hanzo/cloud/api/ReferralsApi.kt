@@ -112,7 +112,7 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/referrals",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -186,7 +186,7 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/referrals/claim",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

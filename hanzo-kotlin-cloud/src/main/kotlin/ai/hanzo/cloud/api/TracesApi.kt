@@ -106,7 +106,7 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/traces/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/traces/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/traces/trace",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -307,7 +307,7 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/traces/write",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

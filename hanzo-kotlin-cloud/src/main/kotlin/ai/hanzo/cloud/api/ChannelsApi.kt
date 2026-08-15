@@ -116,7 +116,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/allowlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -278,7 +278,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/inbox",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -348,7 +348,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/pairing",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -418,7 +418,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/{channel}/send".replace("{"+"channel"+"}", encodeURIComponent(channel.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -492,7 +492,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/pairing/approve",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -566,7 +566,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/allowlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

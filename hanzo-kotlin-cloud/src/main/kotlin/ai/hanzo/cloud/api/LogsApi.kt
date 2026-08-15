@@ -106,7 +106,7 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/logs/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/logs/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/logs/write",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

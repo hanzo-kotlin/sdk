@@ -116,7 +116,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows/{workflow}".replace("{"+"workflow"+"}", encodeURIComponent(workflow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -264,7 +264,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -348,7 +348,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -421,7 +421,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows/{workflow}".replace("{"+"workflow"+"}", encodeURIComponent(workflow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -498,7 +498,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows/{workflow}".replace("{"+"workflow"+"}", encodeURIComponent(workflow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -572,7 +572,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -646,7 +646,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

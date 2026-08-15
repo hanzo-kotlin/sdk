@@ -115,7 +115,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/cookie",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -196,7 +196,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/files/{workspace}/{filename}".replace("{"+"workspace"+"}", encodeURIComponent(workspace.toString())).replace("{"+"filename"+"}", encodeURIComponent(filename.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -266,7 +266,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/auth/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -336,7 +336,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/auth/{provider}/callback".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -406,7 +406,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -476,7 +476,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/billing/plan",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -543,7 +543,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/billing/ui",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -613,7 +613,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/billing/ui/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -683,7 +683,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/bots",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -756,7 +756,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/files/{workspace}/{filename}".replace("{"+"workspace"+"}", encodeURIComponent(workspace.toString())).replace("{"+"filename"+"}", encodeURIComponent(filename.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -834,7 +834,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/transactor/api/v1/statistics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -904,7 +904,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/transactor/{token}".replace("{"+"token"+"}", encodeURIComponent(token.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -982,7 +982,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/transactor/statistics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1049,7 +1049,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1119,7 +1119,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/bots/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1189,7 +1189,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/files/{workspace}".replace("{"+"workspace"+"}", encodeURIComponent(workspace.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1256,7 +1256,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/cookie",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

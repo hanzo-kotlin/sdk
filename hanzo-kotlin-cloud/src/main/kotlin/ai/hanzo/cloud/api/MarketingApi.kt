@@ -136,7 +136,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -206,7 +206,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -276,7 +276,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -369,7 +369,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/suppressions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -447,7 +447,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -520,7 +520,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -593,7 +593,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences/{id}/preview".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -677,7 +677,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -750,7 +750,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -834,7 +834,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -907,7 +907,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -977,7 +977,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/promos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1064,7 +1064,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/promos/{code}/eligibility".replace("{"+"code"+"}", encodeURIComponent(code.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1137,7 +1137,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/promos/{code}/redemption".replace("{"+"code"+"}", encodeURIComponent(code.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1215,7 +1215,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1288,7 +1288,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1369,7 +1369,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/enrollments".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1442,7 +1442,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/steps".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1512,7 +1512,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1590,7 +1590,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/suppressions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1686,7 +1686,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/unsubscribe",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1760,7 +1760,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1834,7 +1834,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1907,7 +1907,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar/{id}/publish".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1981,7 +1981,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2058,7 +2058,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns/{id}/schedule".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2135,7 +2135,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/promos/{code}/redeem".replace("{"+"code"+"}", encodeURIComponent(code.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2209,7 +2209,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2286,7 +2286,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/enroll".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2359,7 +2359,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/enrollments/{eid}/cancel".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"eid"+"}", encodeURIComponent(eid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2436,7 +2436,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/status".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2513,7 +2513,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/steps".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2587,7 +2587,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/suppressions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2664,7 +2664,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2741,7 +2741,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -131,7 +131,7 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -201,7 +201,7 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/balance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -271,7 +271,7 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/credits",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -341,7 +341,7 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/invoices",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -419,7 +419,7 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/ledger",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -489,7 +489,7 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/payment-methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -559,7 +559,7 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/treasury",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -637,7 +637,7 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

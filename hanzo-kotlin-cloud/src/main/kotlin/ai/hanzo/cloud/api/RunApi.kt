@@ -115,7 +115,7 @@ class RunApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/run",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

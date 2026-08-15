@@ -128,7 +128,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -201,7 +201,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -271,7 +271,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -344,7 +344,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -414,7 +414,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -487,7 +487,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -560,7 +560,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -636,7 +636,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -712,7 +712,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -788,7 +788,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}/{key}/history".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -862,7 +862,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -939,7 +939,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1019,7 +1019,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers/{name}/next".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1096,7 +1096,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1170,7 +1170,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/publish",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1244,7 +1244,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/request",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1321,7 +1321,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1401,7 +1401,7 @@ class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

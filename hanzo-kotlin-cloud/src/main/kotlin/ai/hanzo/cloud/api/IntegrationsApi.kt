@@ -137,7 +137,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -207,7 +207,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -280,7 +280,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -350,7 +350,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}/callback".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -417,7 +417,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/discord/link",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -484,7 +484,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/discord/link/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -551,7 +551,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/discord/link/discord",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -621,7 +621,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/installations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -691,7 +691,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -764,7 +764,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -831,7 +831,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/install",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -898,7 +898,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/link",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -965,7 +965,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/link/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1032,7 +1032,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/link/slack",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1099,7 +1099,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/teams/link",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1166,7 +1166,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/teams/link/aad",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1233,7 +1233,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/teams/link/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1300,7 +1300,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/link",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1367,7 +1367,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/link/auth",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1434,7 +1434,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/link/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1511,7 +1511,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}/connect".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1584,7 +1584,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}/disconnect".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1657,7 +1657,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}/verify".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1724,7 +1724,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/discord/interactions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1798,7 +1798,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/claim",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1872,7 +1872,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/fork",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1946,7 +1946,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/issues/backfill",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2023,7 +2023,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2096,7 +2096,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos/{repo}/pages/builds".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2170,7 +2170,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos/import",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2244,7 +2244,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2311,7 +2311,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2385,7 +2385,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/openrouter/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2452,7 +2452,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/commands",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2519,7 +2519,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/events",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2586,7 +2586,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/teams/events",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2656,7 +2656,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/connect",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2723,7 +2723,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2800,7 +2800,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

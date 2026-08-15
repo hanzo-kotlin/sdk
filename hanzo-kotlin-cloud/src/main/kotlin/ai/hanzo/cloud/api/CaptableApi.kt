@@ -129,7 +129,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/convertibles/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -202,7 +202,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/options/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -275,7 +275,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/safes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -348,7 +348,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/shares/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -421,7 +421,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/stakeholders/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -491,7 +491,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/classes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -561,7 +561,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/company",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -631,7 +631,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/convertibles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -701,7 +701,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/investments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -771,7 +771,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/options",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -841,7 +841,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/plans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -911,7 +911,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -984,7 +984,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1054,7 +1054,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/safes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1124,7 +1124,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/shares",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1194,7 +1194,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/stakeholders",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1264,7 +1264,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1334,7 +1334,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/classes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1411,7 +1411,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/stakeholders/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1478,7 +1478,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/classes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1545,7 +1545,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/convertibles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1612,7 +1612,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/options",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1679,7 +1679,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/plans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1746,7 +1746,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1823,7 +1823,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds/{id}/close".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1893,7 +1893,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds/{id}/investments".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1960,7 +1960,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/safes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2027,7 +2027,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/shares",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2094,7 +2094,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/shares/transfer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2161,7 +2161,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/stakeholders",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2235,7 +2235,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/company",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

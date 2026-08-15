@@ -112,7 +112,7 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/enablement",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -186,7 +186,7 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/enablement/optin",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -260,7 +260,7 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/enablement/optout",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -109,7 +109,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -179,7 +179,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -246,7 +246,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -316,7 +316,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -383,7 +383,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -459,7 +459,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{project}/{repo}/info/refs".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -532,7 +532,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{repo}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -608,7 +608,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{repo}/blob/{wildcard1}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())).replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -681,7 +681,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{repo}/commits".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -754,7 +754,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{repo}/info/refs".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -830,7 +830,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{repo}/tree/{wildcard1}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())).replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -897,7 +897,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/collaborator",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -964,7 +964,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/_/commerce/deposits",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1034,7 +1034,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/_/commerce/healthz",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1103,7 +1103,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/event.js",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1170,7 +1170,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/explore",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1237,7 +1237,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/git",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1310,7 +1310,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/git/{org}/{repo}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1386,7 +1386,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/git/{org}/{repo}/blob/{wildcard1}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())).replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1459,7 +1459,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/git/{org}/{repo}/commits".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1535,7 +1535,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/git/{org}/{repo}/tree/{wildcard1}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())).replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1602,7 +1602,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/git/explore",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1669,7 +1669,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1739,7 +1739,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1873,7 +1873,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1943,7 +1943,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2013,7 +2013,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/.well-known/agent-skills/{skill}/SKILL.md".replace("{"+"skill"+"}", encodeURIComponent(skill.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2080,7 +2080,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/.well-known/agent-skills/index.json",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2147,7 +2147,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/.well-known/jwks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2214,7 +2214,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/.well-known/oauth-authorization-server",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2281,7 +2281,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/.well-known/openid-configuration",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2348,7 +2348,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/ws/query_progress",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2415,7 +2415,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2485,7 +2485,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2552,7 +2552,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2622,7 +2622,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2702,7 +2702,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{project}/{repo}/git-receive-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2782,7 +2782,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{project}/{repo}/git-upload-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2859,7 +2859,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{repo}/git-receive-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2936,7 +2936,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/{org}/{repo}/git-upload-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3013,7 +3013,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/collaborator/rpc/{documentId}".replace("{"+"documentId"+"}", encodeURIComponent(documentId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3080,7 +3080,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3150,7 +3150,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3217,7 +3217,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3287,7 +3287,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3354,7 +3354,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3424,7 +3424,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/meet/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3491,7 +3491,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3561,7 +3561,7 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

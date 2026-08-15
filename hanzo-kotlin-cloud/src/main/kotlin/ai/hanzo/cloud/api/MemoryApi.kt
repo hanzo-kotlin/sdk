@@ -106,7 +106,7 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/memory/facts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/memory/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/memory/recall",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -307,7 +307,7 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/memory/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -374,7 +374,7 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/memory/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -441,7 +441,7 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/memory/remember",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -508,7 +508,7 @@ class MemoryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/memory/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

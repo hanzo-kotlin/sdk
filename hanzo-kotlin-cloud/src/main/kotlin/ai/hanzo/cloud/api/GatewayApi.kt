@@ -111,7 +111,7 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/gateway/traffic",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -181,7 +181,7 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/gateway/config",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -255,7 +255,7 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/gateway/config",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

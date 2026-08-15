@@ -176,7 +176,7 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/models/{model}/access".replace("{"+"model"+"}", encodeURIComponent(model.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -313,7 +313,7 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/models/{model}/access".replace("{"+"model"+"}", encodeURIComponent(model.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

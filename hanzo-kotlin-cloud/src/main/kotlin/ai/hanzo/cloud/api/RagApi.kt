@@ -106,7 +106,7 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/rag/context",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/rag/delete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/rag/embed",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -307,7 +307,7 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/rag/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -374,7 +374,7 @@ class RagApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/rag/query-multiple",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

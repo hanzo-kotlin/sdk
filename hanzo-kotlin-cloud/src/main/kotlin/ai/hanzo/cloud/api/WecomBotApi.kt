@@ -106,7 +106,7 @@ class WecomBotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/wecom-bot/callback/{botId}",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class WecomBotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/wecom-bot/callback/{botId}",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

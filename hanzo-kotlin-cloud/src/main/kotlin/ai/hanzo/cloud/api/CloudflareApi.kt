@@ -123,7 +123,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/d1/databases/{database}".replace("{"+"database"+"}", encodeURIComponent(database.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -196,7 +196,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/kv/namespaces/{namespace}".replace("{"+"namespace"+"}", encodeURIComponent(namespace.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -272,7 +272,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/kv/namespaces/{namespace}/values/{key}".replace("{"+"namespace"+"}", encodeURIComponent(namespace.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -345,7 +345,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/pages/projects/{project}".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -421,7 +421,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/pages/projects/{project}/domains/{domain}".replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"domain"+"}", encodeURIComponent(domain.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -494,7 +494,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/r2/buckets/{bucket}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -567,7 +567,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/workers/scripts/{script}".replace("{"+"script"+"}", encodeURIComponent(script.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -643,7 +643,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/workers/zones/{zone}/routes/{route}".replace("{"+"zone"+"}", encodeURIComponent(zone.toString())).replace("{"+"route"+"}", encodeURIComponent(route.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -733,7 +733,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/d1/databases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -829,7 +829,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/kv/namespaces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -902,7 +902,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/kv/namespaces/{namespace}/values/{key}".replace("{"+"namespace"+"}", encodeURIComponent(namespace.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -972,7 +972,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/pages/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1045,7 +1045,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/pages/projects/{project}".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1147,7 +1147,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/r2/buckets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1217,7 +1217,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/workers/scripts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1287,7 +1287,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/workers/subdomain",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1360,7 +1360,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/workers/zones/{zone}/routes".replace("{"+"zone"+"}", encodeURIComponent(zone.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1468,7 +1468,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/zones",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1541,7 +1541,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/zones/{zone}".replace("{"+"zone"+"}", encodeURIComponent(zone.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1634,7 +1634,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/zones/{zone}/analytics".replace("{"+"zone"+"}", encodeURIComponent(zone.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1704,7 +1704,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/ai/run/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1778,7 +1778,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/d1/databases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1855,7 +1855,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/d1/databases/{database}/query".replace("{"+"database"+"}", encodeURIComponent(database.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1929,7 +1929,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/kv/namespaces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2003,7 +2003,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/pages/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2080,7 +2080,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/pages/projects/{project}/deployments".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2157,7 +2157,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/pages/projects/{project}/domains".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2231,7 +2231,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/r2/buckets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2308,7 +2308,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/workers/scripts/{script}/subdomain".replace("{"+"script"+"}", encodeURIComponent(script.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2385,7 +2385,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/workers/zones/{zone}/routes".replace("{"+"zone"+"}", encodeURIComponent(zone.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2462,7 +2462,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/zones/{zone}/purge".replace("{"+"zone"+"}", encodeURIComponent(zone.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2535,7 +2535,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/kv/namespaces/{namespace}/values/{key}".replace("{"+"namespace"+"}", encodeURIComponent(namespace.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2612,7 +2612,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/cloudflare/workers/scripts/{script}".replace("{"+"script"+"}", encodeURIComponent(script.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

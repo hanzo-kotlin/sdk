@@ -106,7 +106,7 @@ class CompletionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/completions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

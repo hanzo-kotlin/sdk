@@ -120,7 +120,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -191,7 +191,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/end",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -258,7 +258,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -328,7 +328,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -398,7 +398,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/fs".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -468,7 +468,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/screen".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -538,7 +538,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/screen/ws".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -608,7 +608,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/terminal".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -678,7 +678,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/terminal/ws".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -752,7 +752,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/lease",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -819,7 +819,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -889,7 +889,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/exec".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -959,7 +959,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/fs".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1029,7 +1029,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/screen/ticket".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1099,7 +1099,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/{id}/terminal/ticket".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1173,7 +1173,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/read",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1247,7 +1247,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/run",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1321,7 +1321,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/stop",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1395,7 +1395,7 @@ class SandboxesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/sandboxes/write",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

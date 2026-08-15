@@ -131,7 +131,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -227,7 +227,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/register",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -297,7 +297,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/register/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -375,7 +375,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/review",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -449,7 +449,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -523,7 +523,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/advance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -593,7 +593,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -663,7 +663,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/esign",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -737,7 +737,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/esign/complete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -811,7 +811,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/founders",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -885,7 +885,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/fundraise/deck",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -959,7 +959,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/fundraise/round",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1033,7 +1033,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/fundraise/safe",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1103,7 +1103,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/genesis",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1177,7 +1177,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/import/captable",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1251,7 +1251,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/import/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1321,7 +1321,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/kyc",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1395,7 +1395,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/kyc/decision",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1465,7 +1465,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/kyc/refresh",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1535,7 +1535,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/payment",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1605,7 +1605,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/skip",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1679,7 +1679,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/structure",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

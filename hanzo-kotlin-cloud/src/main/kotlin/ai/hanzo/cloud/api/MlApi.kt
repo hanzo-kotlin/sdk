@@ -111,7 +111,7 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -178,7 +178,7 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -248,7 +248,7 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -321,7 +321,7 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -391,7 +391,7 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -458,7 +458,7 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -528,7 +528,7 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models/{name}/predict".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

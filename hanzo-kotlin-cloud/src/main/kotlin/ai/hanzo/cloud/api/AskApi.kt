@@ -113,7 +113,7 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ask",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -187,7 +187,7 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ask/web",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

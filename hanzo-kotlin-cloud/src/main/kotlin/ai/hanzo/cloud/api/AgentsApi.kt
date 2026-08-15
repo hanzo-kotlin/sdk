@@ -135,7 +135,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -208,7 +208,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -278,7 +278,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -348,7 +348,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/activity",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -426,7 +426,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/builds",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -502,7 +502,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/builds/{org}/{project}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -575,7 +575,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -656,7 +656,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}/runs".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -734,7 +734,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -818,7 +818,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -920,7 +920,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -993,7 +993,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1074,7 +1074,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/control".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1147,7 +1147,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/tree".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1214,7 +1214,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/stream",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1284,7 +1284,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1357,7 +1357,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1434,7 +1434,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1511,7 +1511,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1588,7 +1588,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1662,7 +1662,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1732,7 +1732,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}/run".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1806,7 +1806,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1876,7 +1876,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/events".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1946,7 +1946,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/message".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2016,7 +2016,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/pause".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2086,7 +2086,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/resume".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2156,7 +2156,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/stop".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2230,7 +2230,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2303,7 +2303,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}/claim".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2376,7 +2376,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}/key".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2456,7 +2456,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}/runs/{runId}/report".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"runId"+"}", encodeURIComponent(runId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

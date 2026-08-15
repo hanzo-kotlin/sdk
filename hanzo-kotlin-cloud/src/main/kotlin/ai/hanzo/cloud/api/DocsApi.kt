@@ -106,7 +106,7 @@ class DocsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/docs/ingest",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -113,7 +113,7 @@ class X402Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/x402/settlements/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

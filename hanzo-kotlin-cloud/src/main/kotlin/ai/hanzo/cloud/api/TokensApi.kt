@@ -116,7 +116,7 @@ class TokensApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/tokens/{chain}/{address}".replace("{"+"chain"+"}", encodeURIComponent(chain.toString())).replace("{"+"address"+"}", encodeURIComponent(address.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

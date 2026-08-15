@@ -118,7 +118,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -191,7 +191,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -264,7 +264,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}/deployments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -340,7 +340,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}/deployments/{id}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -413,7 +413,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}/releases".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -487,7 +487,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -564,7 +564,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}/deployments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -644,7 +644,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}/deployments/{id}/complete".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -721,7 +721,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}/publish".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -798,7 +798,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}/releases".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -874,7 +874,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/{slug}/releases/{release}/activate".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"release"+"}", encodeURIComponent(release.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -948,7 +948,7 @@ class SitesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/sites/deploy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

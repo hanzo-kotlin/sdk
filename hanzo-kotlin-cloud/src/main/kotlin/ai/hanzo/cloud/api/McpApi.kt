@@ -112,7 +112,7 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/mcp/servers/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -182,7 +182,7 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/mcp/servers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/mcp/servers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

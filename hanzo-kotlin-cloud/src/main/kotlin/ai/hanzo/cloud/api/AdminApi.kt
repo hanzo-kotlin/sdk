@@ -203,7 +203,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/aimetrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -281,7 +281,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/analytics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -371,7 +371,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -503,7 +503,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/audit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -573,7 +573,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/audit/verify",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -643,7 +643,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/bases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -727,7 +727,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/caps",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -817,7 +817,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/compute",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -894,7 +894,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/nodes/{id}/cordon".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -968,7 +968,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/caps",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1041,7 +1041,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers/{org}".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1111,7 +1111,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1192,7 +1192,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/caps/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1279,7 +1279,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/droplets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1352,7 +1352,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/loadbalancers/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1445,7 +1445,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/volumes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1522,7 +1522,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/plugins/{name}/disable".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1599,7 +1599,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/plugins/{name}/enable".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1669,7 +1669,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/finance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1743,7 +1743,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/finance/backfill",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1813,7 +1813,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/flags",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1890,7 +1890,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers/{org}/credit".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1980,7 +1980,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/grants",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2058,7 +2058,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2148,7 +2148,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/invoices",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2222,7 +2222,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/grants",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2292,7 +2292,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2376,7 +2376,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2446,7 +2446,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/money",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2524,7 +2524,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/o11y",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2594,7 +2594,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/orgs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2664,7 +2664,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2742,7 +2742,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/plugins",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2832,7 +2832,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/products",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2902,7 +2902,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/promos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2972,7 +2972,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/providers/credit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3045,7 +3045,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers/{org}/reactivate".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3122,7 +3122,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/plugins/{name}/reload".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3199,7 +3199,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/droplets/{id}/resize".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3276,7 +3276,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/volumes/{id}/resize".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3346,7 +3346,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/revenue",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3436,7 +3436,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3516,7 +3516,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/clusters/{id}/nodepools/{pool}/scale".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"pool"+"}", encodeURIComponent(pool.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3586,7 +3586,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3663,7 +3663,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/flags/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3737,7 +3737,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/promos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3814,7 +3814,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/services/{service}/mode".replace("{"+"service"+"}", encodeURIComponent(service.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3891,7 +3891,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/volumes/{id}/snapshot".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3981,7 +3981,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/subscriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4059,7 +4059,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/subsystems",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4132,7 +4132,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers/{org}/suspend".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4202,7 +4202,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4279,7 +4279,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/caps/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4353,7 +4353,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4431,7 +4431,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4515,7 +4515,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/usage/funding",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4611,7 +4611,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4681,7 +4681,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/volumes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4771,7 +4771,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/waitlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4845,7 +4845,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/waitlist/boost",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4923,7 +4923,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/affiliates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5001,7 +5001,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5082,7 +5082,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/{id}/basis".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5152,7 +5152,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5222,7 +5222,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/enablement",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5292,7 +5292,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/referrals",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5370,7 +5370,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/referrals/bonuses",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5448,7 +5448,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5518,7 +5518,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/catalog/models/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5595,7 +5595,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/catalog/providers/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5672,7 +5672,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/affiliates/{id}/approve".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5749,7 +5749,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/affiliates/{id}/payout".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5826,7 +5826,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/affiliates/{id}/rate".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5899,7 +5899,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/affiliates/{id}/suspend".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5969,7 +5969,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/affiliates/sweep",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6046,7 +6046,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/{id}/approve".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6123,7 +6123,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/{id}/payout".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6196,7 +6196,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/{id}/suspend".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6266,7 +6266,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/sweep",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6336,7 +6336,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/referrals/sweep",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6406,7 +6406,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/anchor",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6480,7 +6480,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6554,7 +6554,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/seed",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6628,7 +6628,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/sweep",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6702,7 +6702,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/enablement",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6772,7 +6772,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/anchor/signer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

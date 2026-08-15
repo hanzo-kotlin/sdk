@@ -117,7 +117,7 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/experiments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -190,7 +190,7 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/experiments/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -275,7 +275,7 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/experiments/{id}/assign".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -345,7 +345,7 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/experiments/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -419,7 +419,7 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/experiments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -496,7 +496,7 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/experiments/{id}/analyze".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -573,7 +573,7 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/experiments/{id}/decide".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

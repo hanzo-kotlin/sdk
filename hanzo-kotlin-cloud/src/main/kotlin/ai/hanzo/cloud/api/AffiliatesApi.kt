@@ -124,7 +124,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/leaderboard",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -264,7 +264,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -334,7 +334,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/me/earnings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -404,7 +404,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/me/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -478,7 +478,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/apply",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -552,7 +552,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/attribute",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -626,7 +626,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/click",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -700,7 +700,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/me/handle",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -774,7 +774,7 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/affiliates/me/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

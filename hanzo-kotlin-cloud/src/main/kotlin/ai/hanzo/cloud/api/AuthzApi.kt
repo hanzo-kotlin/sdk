@@ -106,7 +106,7 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/authz/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/authz/readyz",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/authz/check",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

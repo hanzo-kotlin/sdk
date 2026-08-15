@@ -120,7 +120,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -197,7 +197,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters/{clusterId}/pools".replace("{"+"clusterId"+"}", encodeURIComponent(clusterId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -278,7 +278,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters/{clusterId}/pools/{poolId}".replace("{"+"clusterId"+"}", encodeURIComponent(clusterId.toString())).replace("{"+"poolId"+"}", encodeURIComponent(poolId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -351,7 +351,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -421,7 +421,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -501,7 +501,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters/{clusterId}/pools/{poolId}/scale".replace("{"+"clusterId"+"}", encodeURIComponent(clusterId.toString())).replace("{"+"poolId"+"}", encodeURIComponent(poolId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

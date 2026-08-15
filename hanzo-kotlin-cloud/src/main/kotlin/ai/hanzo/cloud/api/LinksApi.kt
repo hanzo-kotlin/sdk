@@ -123,7 +123,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -193,7 +193,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -266,7 +266,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -339,7 +339,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/devices/{machine}".replace("{"+"machine"+"}", encodeURIComponent(machine.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -409,7 +409,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/route",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -505,7 +505,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -575,7 +575,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/usage/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -653,7 +653,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/usage/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -727,7 +727,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -800,7 +800,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/devices/{machine}/revoke".replace("{"+"machine"+"}", encodeURIComponent(machine.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -874,7 +874,7 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/links/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

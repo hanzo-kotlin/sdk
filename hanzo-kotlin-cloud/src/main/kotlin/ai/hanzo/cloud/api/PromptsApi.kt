@@ -114,7 +114,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -184,7 +184,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -257,7 +257,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -327,7 +327,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -397,7 +397,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -471,7 +471,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -166,7 +166,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/mcp/tools",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -242,7 +242,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/articles/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -318,7 +318,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/assets/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -394,7 +394,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/chats/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -461,7 +461,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/connections/{provider}",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -537,7 +537,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/deployments/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -613,7 +613,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -689,7 +689,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/forms/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -765,7 +765,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/graphs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -841,7 +841,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -911,7 +911,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages/welcome",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -987,7 +987,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/nodes/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1063,7 +1063,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/providers/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1139,7 +1139,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1215,7 +1215,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/remote-connections/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1291,7 +1291,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/routes/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1367,7 +1367,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scales/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1443,7 +1443,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scans/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1519,7 +1519,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signin-sessions/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1595,7 +1595,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1671,7 +1671,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1747,7 +1747,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/templates/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1823,7 +1823,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tree-files/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1893,7 +1893,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/vectors/all",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1969,7 +1969,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/vectors/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2045,7 +2045,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/videos/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2121,7 +2121,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/workflows/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2191,7 +2191,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/account",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2261,7 +2261,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/activities",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2331,7 +2331,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/answer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2401,7 +2401,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/articles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2477,7 +2477,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/articles/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2547,7 +2547,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/articles/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2617,7 +2617,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/assets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2693,7 +2693,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/assets/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2763,7 +2763,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/chats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2839,7 +2839,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/chats/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2909,7 +2909,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/chats/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2976,7 +2976,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/connections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3043,7 +3043,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/connections/{provider}/authorize",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3110,7 +3110,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/connections/{provider}/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3177,7 +3177,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/connections/{provider}/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3247,7 +3247,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/dashboards/agents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3317,7 +3317,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/dashboards/vm",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3387,7 +3387,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/deployments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3463,7 +3463,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/deployments/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3533,7 +3533,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3603,7 +3603,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/active",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3679,7 +3679,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3749,7 +3749,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3819,7 +3819,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/forms",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3895,7 +3895,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/forms/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3965,7 +3965,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/forms/data",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4035,7 +4035,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/forms/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4105,7 +4105,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/graphs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4181,7 +4181,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/graphs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4251,7 +4251,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/graphs/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4321,7 +4321,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/k8s-status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4391,7 +4391,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4467,7 +4467,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4543,7 +4543,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages/{owner}/{name}/answer".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4613,7 +4613,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4683,7 +4683,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/nodes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4759,7 +4759,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/nodes/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4835,7 +4835,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/nodes/{owner}/{name}/tunnel".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4905,7 +4905,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/prometheus",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4975,7 +4975,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5051,7 +5051,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/providers/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5121,7 +5121,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/providers/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5191,7 +5191,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5267,7 +5267,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5337,7 +5337,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5407,7 +5407,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/query-second",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5477,7 +5477,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/remote-connections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5553,7 +5553,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/remote-connections/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5623,7 +5623,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/routes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5699,7 +5699,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/routes/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5769,7 +5769,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scales",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5845,7 +5845,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scales/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5915,7 +5915,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scales/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5985,7 +5985,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scales/public",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6055,7 +6055,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6131,7 +6131,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scans/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6201,7 +6201,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signin-sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6277,7 +6277,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signin-sessions/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6347,7 +6347,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signin-sessions/duplicated",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6417,7 +6417,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6493,7 +6493,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6563,7 +6563,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6633,7 +6633,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores/names",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6703,7 +6703,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6773,7 +6773,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/system",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6843,7 +6843,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6919,7 +6919,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6989,7 +6989,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7059,7 +7059,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/templates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7135,7 +7135,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/templates/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7205,7 +7205,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/training-contribution",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7275,7 +7275,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/usages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7345,7 +7345,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/usages/by-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7415,7 +7415,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/usages/cloud",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7485,7 +7485,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/usages/range",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7555,7 +7555,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/usages/user-names",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7625,7 +7625,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/vectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7701,7 +7701,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/vectors/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7771,7 +7771,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/vectors/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7841,7 +7841,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/version",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7911,7 +7911,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/videos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7987,7 +7987,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/videos/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8057,7 +8057,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/videos/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8127,7 +8127,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/workflows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8203,7 +8203,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/workflows/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8273,7 +8273,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/workflows/global",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8353,7 +8353,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/articles/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8433,7 +8433,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/assets/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8513,7 +8513,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/chats/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8593,7 +8593,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/deployments/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8673,7 +8673,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8753,7 +8753,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/forms/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8833,7 +8833,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/graphs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8913,7 +8913,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8993,7 +8993,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/nodes/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9067,7 +9067,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/preferences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9147,7 +9147,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/providers/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9227,7 +9227,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9307,7 +9307,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/remote-connections/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9387,7 +9387,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/routes/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9467,7 +9467,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scales/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9547,7 +9547,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scans/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9627,7 +9627,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signin-sessions/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9707,7 +9707,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9787,7 +9787,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9867,7 +9867,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/templates/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9941,7 +9941,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/training-contribution",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10021,7 +10021,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tree-files/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10101,7 +10101,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/vectors/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10181,7 +10181,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/videos/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10261,7 +10261,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/workflows/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10335,7 +10335,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/articles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10409,7 +10409,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/assets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10489,7 +10489,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/assets/{owner}/{name}/scan".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10563,7 +10563,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/assets/scan",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10637,7 +10637,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/chats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10704,7 +10704,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/connections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10771,7 +10771,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/connections/{provider}",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10845,7 +10845,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/deployments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10925,7 +10925,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/deployments/{owner}/{name}/deploy".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11005,7 +11005,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/deployments/{owner}/{name}/undeploy".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11079,7 +11079,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11153,7 +11153,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/activate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11233,7 +11233,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/{owner}/{name}/vectors".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11307,7 +11307,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/upload",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11381,7 +11381,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/forms",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11455,7 +11455,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/graphs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11529,7 +11529,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11603,7 +11603,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/nodes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11683,7 +11683,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/nodes/{owner}/{name}/tunnel".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11757,7 +11757,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11831,7 +11831,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/providers/mcp-tools",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11905,7 +11905,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11979,7 +11979,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/batch",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12053,7 +12053,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/commit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12127,7 +12127,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/commit-second",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12201,7 +12201,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/remote-connections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12281,7 +12281,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/remote-connections/{owner}/{name}/start".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12361,7 +12361,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/remote-connections/{owner}/{name}/stop".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12435,7 +12435,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/routes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12509,7 +12509,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scales",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12583,7 +12583,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12657,7 +12657,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signin",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12731,7 +12731,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signin-sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12805,7 +12805,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signout",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12879,7 +12879,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12959,7 +12959,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores/{owner}/{name}/vectors".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13033,7 +13033,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13113,7 +13113,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks/{owner}/{name}/analyze".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13193,7 +13193,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks/{owner}/{name}/document".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13267,7 +13267,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/templates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13341,7 +13341,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tree-files",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13415,7 +13415,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/vectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13489,7 +13489,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/videos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13563,7 +13563,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/videos/upload",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13637,7 +13637,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/workflows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13717,7 +13717,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/articles/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13797,7 +13797,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/assets/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13877,7 +13877,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/chats/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13957,7 +13957,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/deployments/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14037,7 +14037,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/files/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14117,7 +14117,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/forms/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14197,7 +14197,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/graphs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14277,7 +14277,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/messages/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14357,7 +14357,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/nodes/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14431,7 +14431,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/preferences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14511,7 +14511,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/providers/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14591,7 +14591,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/records/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14671,7 +14671,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/remote-connections/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14751,7 +14751,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/routes/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14831,7 +14831,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scales/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14911,7 +14911,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/scans/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14991,7 +14991,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/signin-sessions/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15071,7 +15071,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/stores/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15151,7 +15151,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tasks/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15231,7 +15231,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/templates/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15305,7 +15305,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/training-contribution",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15385,7 +15385,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/tree-files/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15465,7 +15465,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/vectors/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15545,7 +15545,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/videos/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15625,7 +15625,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ai/workflows/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

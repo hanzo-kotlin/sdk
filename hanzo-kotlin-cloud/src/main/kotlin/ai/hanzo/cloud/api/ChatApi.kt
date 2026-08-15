@@ -106,7 +106,7 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/chat",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/chat/completions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

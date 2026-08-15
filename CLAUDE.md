@@ -65,6 +65,29 @@ because inside it would be deleted.
 ktfmt is switched off for this module: its sources must stay byte-identical to
 the generator's output, and that identity is what `--check` diffs.
 
+## The credential
+
+The document declares one `securityScheme` — `bearer`, HTTP — and a top-level
+`security: [bearer]`, so the generator emits credential code it did not emit
+before: `ApiClient.updateAuthParams` fills `Authorization: Bearer <token>` from
+`ApiClient.accessToken`, and every generated request config carries
+`requiresAuthentication`. That flag is TRUE on 2,498 of the 2,502 methods and
+false on the four operations the document exempts with `security: []` —
+`get_models`, `get_models_providers`, `get_commands`, `get_openapi.json`.
+
+`Hanzo.kt` still carries the token itself, and the reason is worth keeping:
+`ApiClient.accessToken` is on the generated COMPANION, one per process, while
+`ApiClient` takes only `(baseUrl, client)` and offers no per-instance slot. A
+client that read the companion would hand one tenant's token to another's call
+— `FlowsTest` demonstrated exactly that, two tests in one JVM, before the seam
+went back to the transport. So the interceptor sets `Authorization` when there
+is a key and REMOVES it when there is not, which also stops a token parked on
+the process-wide field from riding out on a call meant to be anonymous.
+
+A bearer is a Cloud API key (`sk-`/`pk-`) or an IAM access token from
+`POST https://hanzo.id/v1/iam/oauth/token` with `grant_type=client_credentials`.
+Both are the same header; the API distinguishes them.
+
 ## Examples
 
 `examples/<flow>/` — the six canonical flows every Hanzo SDK ships, defined as
@@ -74,6 +97,12 @@ they cannot rot. Configured in one place, the `examples` block in
 `build.gradle.kts`. `hello` is also where the error path is shown: a 4xx is
 `ClientException`, a 5xx is `ServerException`, both from
 `ai.hanzo.cloud.infrastructure` and both carrying `statusCode`.
+
+`hello` opens on `get_models`, which the document declares open, so
+`./gradlew :examples:hello:run` reaches api.hanzo.ai and prints a 200 with no
+credential at all — an unreachable gateway and a rejected credential otherwise
+end in the same "no". flows.yaml carries that as the flow's first operation, so
+every language's `hello` gets the same opening.
 
 ```sh
 HANZO_API_KEY=sk-… ./gradlew :examples:hello:run

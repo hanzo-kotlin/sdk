@@ -113,7 +113,7 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/runner/releases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -186,7 +186,7 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/runner/releases/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -260,7 +260,7 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/runner",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

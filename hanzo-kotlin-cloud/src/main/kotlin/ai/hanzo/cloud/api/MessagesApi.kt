@@ -106,7 +106,7 @@ class MessagesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/messages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class MessagesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/messages/count_tokens",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

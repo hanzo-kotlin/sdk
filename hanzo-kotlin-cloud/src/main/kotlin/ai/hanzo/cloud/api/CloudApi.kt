@@ -120,7 +120,7 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/cloud/{provider}/accounts/{label}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())).replace("{"+"label"+"}", encodeURIComponent(label.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -190,7 +190,7 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/cloud",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -260,7 +260,7 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/cloud/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -337,7 +337,7 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/cloud/{provider}/accounts".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -413,7 +413,7 @@ class CloudApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/cloud/{provider}/accounts/{label}/sync".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())).replace("{"+"label"+"}", encodeURIComponent(label.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

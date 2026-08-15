@@ -132,7 +132,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -202,7 +202,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/activation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -304,7 +304,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -377,7 +377,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/catalog/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -454,7 +454,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/catalog/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -528,7 +528,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/call",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -598,7 +598,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/catalog/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -672,7 +672,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/activation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

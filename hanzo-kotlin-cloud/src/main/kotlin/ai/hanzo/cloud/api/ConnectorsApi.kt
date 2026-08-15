@@ -122,7 +122,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -192,7 +192,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -265,7 +265,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{id}/token".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -335,7 +335,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -408,7 +408,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{id}/refresh".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -485,7 +485,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{provider}/credential".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -562,7 +562,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{provider}/device".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -638,7 +638,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{provider}/device/{flow}/poll".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())).replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

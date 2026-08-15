@@ -113,7 +113,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/analytics/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -203,7 +203,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/analytics/overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -293,7 +293,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/analytics/timeseries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -389,7 +389,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/analytics/top",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

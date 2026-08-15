@@ -109,7 +109,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -179,7 +179,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -249,7 +249,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -319,7 +319,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -389,7 +389,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -459,7 +459,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -529,7 +529,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -599,7 +599,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -669,7 +669,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -739,7 +739,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -809,7 +809,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -879,7 +879,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -949,7 +949,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1019,7 +1019,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1089,7 +1089,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1159,7 +1159,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1229,7 +1229,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1296,7 +1296,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/admin/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1363,7 +1363,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1430,7 +1430,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/collection/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1500,7 +1500,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1567,7 +1567,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/currencies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1634,7 +1634,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/disclosure/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1704,7 +1704,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1771,7 +1771,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/discount/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1841,7 +1841,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1908,7 +1908,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/movie/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1978,7 +1978,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2045,7 +2045,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/note/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2115,7 +2115,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2182,7 +2182,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/org",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2249,7 +2249,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/product/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2319,7 +2319,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2386,7 +2386,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/return/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2456,7 +2456,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2523,7 +2523,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/saleschannel/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2593,7 +2593,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2660,7 +2660,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/stocklocation/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2730,7 +2730,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2797,7 +2797,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/submission/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2867,7 +2867,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2934,7 +2934,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/subscriber/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3004,7 +3004,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3071,7 +3071,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/tokentransaction/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3141,7 +3141,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3208,7 +3208,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/transfer/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3278,7 +3278,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3345,7 +3345,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/variant/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3415,7 +3415,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3482,7 +3482,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/wallet/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3552,7 +3552,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3619,7 +3619,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/watchlist/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3689,7 +3689,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3756,7 +3756,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/webhook/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3826,7 +3826,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3896,7 +3896,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3966,7 +3966,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4036,7 +4036,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4106,7 +4106,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4176,7 +4176,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4246,7 +4246,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4316,7 +4316,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4386,7 +4386,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4456,7 +4456,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4526,7 +4526,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4596,7 +4596,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4666,7 +4666,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4736,7 +4736,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4806,7 +4806,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4876,7 +4876,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4946,7 +4946,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5016,7 +5016,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5083,7 +5083,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/collection/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5153,7 +5153,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5220,7 +5220,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/disclosure/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5290,7 +5290,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5357,7 +5357,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/discount/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5427,7 +5427,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5494,7 +5494,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/movie/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5564,7 +5564,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5631,7 +5631,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/note/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5701,7 +5701,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5768,7 +5768,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/product/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5838,7 +5838,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5905,7 +5905,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/return/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5975,7 +5975,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6042,7 +6042,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/saleschannel/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6112,7 +6112,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6179,7 +6179,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/stocklocation/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6249,7 +6249,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6316,7 +6316,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/submission/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6386,7 +6386,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6453,7 +6453,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/subscriber/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6523,7 +6523,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6590,7 +6590,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/tokentransaction/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6660,7 +6660,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6727,7 +6727,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/transfer/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6797,7 +6797,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6864,7 +6864,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/variant/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6934,7 +6934,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7001,7 +7001,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/wallet/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7071,7 +7071,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7138,7 +7138,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/watchlist/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7208,7 +7208,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7275,7 +7275,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/webhook/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7345,7 +7345,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7415,7 +7415,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7485,7 +7485,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7555,7 +7555,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7625,7 +7625,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7695,7 +7695,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7765,7 +7765,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7835,7 +7835,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7905,7 +7905,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7975,7 +7975,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8045,7 +8045,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8115,7 +8115,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8185,7 +8185,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8255,7 +8255,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8325,7 +8325,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8395,7 +8395,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8465,7 +8465,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8535,7 +8535,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

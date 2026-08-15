@@ -115,7 +115,7 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/cart/{id}/discard".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -188,7 +188,7 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/cart/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -262,7 +262,7 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/cart",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -339,7 +339,7 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/cart/{id}/item".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

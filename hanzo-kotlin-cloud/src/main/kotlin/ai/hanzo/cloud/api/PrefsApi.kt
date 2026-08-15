@@ -110,7 +110,7 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/prefs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -177,7 +177,7 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/prefs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

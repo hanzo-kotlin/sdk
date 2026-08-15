@@ -107,7 +107,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/artifact-meta",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -177,7 +177,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/data",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -244,7 +244,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/defaults",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -311,7 +311,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/ledger",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -378,7 +378,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -445,7 +445,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/rewards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -512,7 +512,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/artifact-meta",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -582,7 +582,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/data",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -649,7 +649,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/defaults",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -716,7 +716,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/history",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -783,7 +783,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/judge-panel",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -850,7 +850,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/ledger",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -917,7 +917,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -984,7 +984,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/rewards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1051,7 +1051,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1118,7 +1118,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/artifact-meta",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1185,7 +1185,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/defaults",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1252,7 +1252,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/ledger",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1319,7 +1319,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1386,7 +1386,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/rewards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1453,7 +1453,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/artifact-meta",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1520,7 +1520,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/defaults",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1587,7 +1587,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/ledger",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1654,7 +1654,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1721,7 +1721,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/rewards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1788,7 +1788,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/artifact-meta",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1855,7 +1855,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/defaults",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1922,7 +1922,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/ledger",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1989,7 +1989,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2056,7 +2056,7 @@ class RouterApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/router/rewards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

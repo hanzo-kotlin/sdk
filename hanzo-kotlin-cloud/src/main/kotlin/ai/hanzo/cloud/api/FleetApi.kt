@@ -124,7 +124,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/jobs/{id}/cancel".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -278,7 +278,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/jobs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -368,7 +368,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/samples",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -438,7 +438,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/workers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -512,7 +512,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/samples",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -106,7 +106,7 @@ class EmbeddingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/embeddings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

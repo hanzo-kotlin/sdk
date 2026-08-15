@@ -132,7 +132,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/accreditation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -205,7 +205,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/accreditation/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -283,7 +283,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/audit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -353,7 +353,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -431,7 +431,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/records",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -501,7 +501,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -579,7 +579,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/subjects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -652,7 +652,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/subjects/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -730,7 +730,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -803,7 +803,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -877,7 +877,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/accreditation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -954,7 +954,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/accreditation/{id}/decision".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1028,7 +1028,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/subjects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1102,7 +1102,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1179,7 +1179,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications/{id}/decision".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1252,7 +1252,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications/{id}/refresh".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1319,7 +1319,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

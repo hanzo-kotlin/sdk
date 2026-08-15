@@ -146,7 +146,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -220,7 +220,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/state/model",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -301,7 +301,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/reference/{set}".replace("{"+"set"+"}", encodeURIComponent(set.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -375,7 +375,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/datasets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -448,7 +448,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/datasets/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -529,7 +529,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/datasets/{name}/lineage".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -599,7 +599,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/datasets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -672,7 +672,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/datasets/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -746,7 +746,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/labels/dispose",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -845,7 +845,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/datasets/{name}/export".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -923,7 +923,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/features",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -997,7 +997,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/labels/hold",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1071,7 +1071,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/labels",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1161,7 +1161,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/labels/coverage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1231,7 +1231,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/labels/vocabulary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1339,7 +1339,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/labels",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1413,7 +1413,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/learn",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1486,7 +1486,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/datasets/{name}/materialize".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1556,7 +1556,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1626,7 +1626,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/state/model",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1713,7 +1713,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/reference/{set}".replace("{"+"set"+"}", encodeURIComponent(set.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1783,7 +1783,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/reference",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1857,7 +1857,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/reference/refresh",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1931,7 +1931,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/labels/resolve",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2005,7 +2005,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/reference/resolve",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2079,7 +2079,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/score",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2153,7 +2153,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2226,7 +2226,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/search/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2300,7 +2300,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2377,7 +2377,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/reference/{set}".replace("{"+"set"+"}", encodeURIComponent(set.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2447,7 +2447,7 @@ class RiskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/risk/state",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -106,7 +106,7 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/metrics/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/metrics/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/metrics/batch",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -307,7 +307,7 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/metrics/write",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

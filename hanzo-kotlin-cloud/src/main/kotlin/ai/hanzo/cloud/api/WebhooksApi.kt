@@ -115,7 +115,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -185,7 +185,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -258,7 +258,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -345,7 +345,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}/deliveries".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -419,7 +419,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -492,7 +492,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}/secret".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -565,7 +565,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}/test".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -642,7 +642,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

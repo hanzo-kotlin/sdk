@@ -115,7 +115,7 @@ class ReplayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/replay",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

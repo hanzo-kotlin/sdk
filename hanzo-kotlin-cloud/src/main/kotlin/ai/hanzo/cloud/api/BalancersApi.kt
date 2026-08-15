@@ -112,7 +112,7 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/balancers/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -182,7 +182,7 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/balancers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -255,7 +255,7 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/balancers/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -329,7 +329,7 @@ class BalancersApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/balancers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

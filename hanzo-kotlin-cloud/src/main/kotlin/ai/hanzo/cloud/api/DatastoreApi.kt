@@ -113,7 +113,7 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/datastore/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -183,7 +183,7 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/datastore",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/datastore/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -330,7 +330,7 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/datastore",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -106,7 +106,7 @@ class TrafficApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/traffic/globe",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

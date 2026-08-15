@@ -106,7 +106,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -307,7 +307,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -374,7 +374,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -441,7 +441,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -508,7 +508,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -575,7 +575,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -642,7 +642,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -709,7 +709,7 @@ class OrgApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/org/settings/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

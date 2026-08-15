@@ -115,7 +115,7 @@ class AvatarApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/avatar/{org}/{user}/{digest}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"user"+"}", encodeURIComponent(user.toString())).replace("{"+"digest"+"}", encodeURIComponent(digest.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -182,7 +182,7 @@ class AvatarApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/avatar",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

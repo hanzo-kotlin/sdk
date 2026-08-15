@@ -116,7 +116,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -186,7 +186,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -259,7 +259,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -329,7 +329,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/pieces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -407,7 +407,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -480,7 +480,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/runs/{run}".replace("{"+"run"+"}", encodeURIComponent(run.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -550,7 +550,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -627,7 +627,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -701,7 +701,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -774,7 +774,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows/{flow}/publish".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -848,7 +848,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

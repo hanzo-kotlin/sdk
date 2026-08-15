@@ -109,7 +109,7 @@ class DownloadApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/download/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

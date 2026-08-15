@@ -132,7 +132,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/datasets/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -210,7 +210,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/datasets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -283,7 +283,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/datasets/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -364,7 +364,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/datasets/{name}/items".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -442,7 +442,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/evaluators",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -526,7 +526,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -604,7 +604,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/rubrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -688,7 +688,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -784,7 +784,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/scores",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -880,7 +880,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/traces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -954,7 +954,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/datasets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1031,7 +1031,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/datasets/{name}/items".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1105,7 +1105,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/evaluators",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1179,7 +1179,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/rubrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1257,7 +1257,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1331,7 +1331,7 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/evals/scores",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

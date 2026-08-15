@@ -116,7 +116,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/images",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/packages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -264,7 +264,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -334,7 +334,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -412,7 +412,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/tags",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -486,7 +486,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -121,7 +121,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}/agent".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -191,7 +191,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -264,7 +264,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -337,7 +337,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}/agent".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -407,7 +407,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/agents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -477,7 +477,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -544,7 +544,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -614,7 +614,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}/agent".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

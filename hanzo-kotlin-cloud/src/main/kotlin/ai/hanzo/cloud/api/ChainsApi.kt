@@ -111,7 +111,7 @@ class ChainsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/chains",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -184,7 +184,7 @@ class ChainsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/chains/{chain}".replace("{"+"chain"+"}", encodeURIComponent(chain.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

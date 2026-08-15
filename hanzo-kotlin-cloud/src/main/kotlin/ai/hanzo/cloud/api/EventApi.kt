@@ -115,7 +115,7 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/event",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -189,7 +189,7 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/event/{project}/envelope".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -263,7 +263,7 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/event/{project}/store".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

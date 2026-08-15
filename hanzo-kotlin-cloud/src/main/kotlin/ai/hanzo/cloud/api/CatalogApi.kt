@@ -110,7 +110,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/entries/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -242,7 +242,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -309,7 +309,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/entries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -376,7 +376,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/entries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -443,7 +443,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -510,7 +510,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/models/refresh",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -577,7 +577,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/seed",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -647,7 +647,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/entries/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
