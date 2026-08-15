@@ -29,7 +29,9 @@ fun main() {
     // returns Unit and the status is the whole of what it reports. Reading it
     // off `...WithHttpInfo` is the typed way; parsing the body here would be
     // this client inventing a shape the document does not state.
-    println("gateway  ${hanzo.baseUrl}  HTTP ${hanzo.api(::ModelsApi).getModelsWithHttpInfo().statusCode}")
+    println(
+        "gateway  ${hanzo.baseUrl}  HTTP ${hanzo.api(::ModelsApi).getModelsWithHttpInfo().statusCode}"
+    )
 
     // `propertyKeys`, not `keys`: the wire name is `keys`, which is on the
     // Kotlin generator's reserved list (`size`, `keys`, `values`, `entries`,
@@ -42,7 +44,9 @@ fun main() {
             // than thrown at the terminal as a stack trace. Every generated call
             // raises ClientException on a 4xx and ServerException on a 5xx, both
             // carrying `statusCode` and the raw `response`.
-            println("keys     HTTP ${refused.statusCode}  set HANZO_API_KEY to a key this gateway knows")
+            println(
+                "keys     HTTP ${refused.statusCode}  set HANZO_API_KEY to a key this gateway knows"
+            )
             return
         }
     if (keys.isEmpty()) {
