@@ -106,7 +106,7 @@ class GenerateTextToSpeechAudioApi(basePath: kotlin.String = defaultBasePath, cl
             path = "/v1/generate-text-to-speech-audio",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

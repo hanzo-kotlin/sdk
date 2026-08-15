@@ -24,13 +24,13 @@ cd hanzo-kotlin-sdk
 
 <!-- x-release-please-start-version -->
 
-That installs `ai.hanzo:hanzo-kotlin-cloud:0.1.0-alpha.4` into `~/.m2`. Then, in
+That installs `ai.hanzo:hanzo-kotlin-cloud:0.1.0-alpha.5` into `~/.m2`. Then, in
 the project that wants it:
 
 ```kotlin
 repositories { mavenLocal() }
 
-dependencies { implementation("ai.hanzo:hanzo-kotlin-cloud:0.1.0-alpha.4") }
+dependencies { implementation("ai.hanzo:hanzo-kotlin-cloud:0.1.0-alpha.5") }
 ```
 
 <!-- x-release-please-end -->
@@ -60,7 +60,8 @@ export HANZO_API_KEY=sk-...
 
 With a key that prints the caller's own keys. With none, the API answers 403:
 this route refuses rather than pretending, which is what makes it a credential
-check. [`examples/hello`](examples/hello) catches that — see [Errors](#errors).
+check. [`examples/hello`](examples/hello) catches that — see [Errors](#errors) —
+and opens with a call that needs no key at all, so it runs either way.
 
 `Hanzo()` resolves the endpoint and credentials; `hanzo.api(::SomeApi)` builds any
 of the 192 generated API classes against them. The classes follow the document's
@@ -72,25 +73,43 @@ names off the client; do not guess them.
 
 ## Authenticate
 
-`HANZO_API_KEY` goes out as `Authorization: Bearer …` on every request. A Cloud
-API key is one of two classes: `sk-` (secret, belongs on a server) or `pk-`
-(publishable, org-identifying, safe in a browser bundle). `POST /v1/keys` mints
-one; the `GET` above lists what the caller already holds. A few OIDC-gated routes
-want an IAM-issued JWT instead and answer 401 to an API key.
+`HANZO_API_KEY` goes out as `Authorization: Bearer …` on every request. The
+document declares one scheme, `bearer`, and applies it to every operation but
+four, so what the client sends is what the API says it wants.
+
+Two kinds of token fit that header. A **Cloud API key** is `sk-` (secret, belongs
+on a server) or `pk-` (publishable, org-identifying, safe in a browser bundle);
+`POST /v1/keys` mints one and the `GET` above lists what the caller already
+holds. An **IAM access token** is what a service presents, minted from its own
+client credentials:
+
+```sh
+export HANZO_API_KEY=$(curl -s https://hanzo.id/v1/iam/oauth/token \
+  -d grant_type=client_credentials -d client_id=… -d client_secret=… \
+  | python3 -c 'import json,sys; print(json.load(sys.stdin)["access_token"])')
+```
+
+Four operations need neither, because the document exempts them with
+`security: []` — `get_models`, `get_models_providers`, `get_commands` and
+`get_openapi.json`. Every generated request config reports which side it is on
+as `requiresAuthentication`, so the client can be asked rather than guessed at.
 
 | variable | meaning |
 | --- | --- |
-| `HANZO_API_KEY` | bearer credential |
+| `HANZO_API_KEY` | bearer credential: a Cloud API key or an IAM access token |
 | `HANZO_BASE_URL` | gateway to talk to; default `https://api.hanzo.ai` |
 | `HANZO_ORG_ID` | org scope, sent as `X-Org-Id`; the KV and agents routes refuse without it |
 
 Pass them explicitly when one program serves more than one tenant —
-`Hanzo(apiKey = "sk-…", orgId = "acme")` — rather than mutating a global.
+`Hanzo(apiKey = "sk-…", orgId = "acme")`. Each client keeps the credential it was
+handed; a second tenant cannot re-point the first one's calls.
 
 [`Hanzo`](hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/Hanzo.kt) is the one
-hand-written file under `src/main`, and it is what makes the client authenticated
-at all: the document declares no `securitySchemes`, so the generator registers no
-credential and a call built any other way goes out bare.
+hand-written file under `src/main`, and it is where the credential lives. The
+generated `ApiClient` does carry the declaration's own credential field, but it
+is one field per process — fine for a single tenant, wrong for two — so the token
+rides the transport, per instance, alongside the `X-Org-Id` no generated
+signature accepts.
 
 ## Errors
 
@@ -115,17 +134,30 @@ Gradle subprojects compiled by the build, so they cannot rot.
 
 | flow | operations | what it does |
 | --- | --- | --- |
-| [`hello`](examples/hello) | `get_keys` | the call that says no, so a 200 proves the key works — and the refusal it catches |
+| [`hello`](examples/hello) | `get_models`, `get_keys` | the open call that proves the gateway is reachable, then the call that says no, so a 200 proves the key works |
 | [`chat`](examples/chat) | `post_chat_completions` | one completion — the route carries no schema in the document, so the flow prints the status it got rather than inventing a request |
 | [`money`](examples/money) | `get_billing_balance`, `get_billing_usage` | the balance and the usage that moved it, same shape and same reason |
 | [`store`](examples/store) | `post_kv`, `get_kv_by_name`, `delete_kv_by_name` | provision a KV store, read it back, drop it |
 | [`agent`](examples/agent) | `post_agents`, `post_agents_by_ref_run`, `get_agents_by_ref_runs` | create an agent, run it, poll until the run is terminal |
 | [`tools`](examples/tools) | `get_tools` | the tools this key can reach, and which are activated |
 
+One command, no credential — `hello` opens on a route the document declares
+open, so this runs end to end against the live gateway as it stands:
+
+```sh
+./gradlew :examples:hello:run
+gateway  https://api.hanzo.ai  HTTP 200
+keys     HTTP 403  set HANZO_API_KEY to a key this gateway knows
+```
+
+With a credential the second line answers too, and the other five flows run:
+
 ```sh
 export HANZO_API_KEY=sk-...
 export HANZO_ORG_ID=my-org      # store and agent only
 ./gradlew :examples:hello:run
+gateway  https://api.hanzo.ai  HTTP 200
+keys     the key is good, and it owns no keys of its own
 ```
 
 `agent` runs on `zen5` and reads `HANZO_MODEL` to pick another;
@@ -144,8 +176,10 @@ Route reference: [docs.hanzo.ai](https://docs.hanzo.ai).
 The examples are the gate. The build compiles the client and all six flows
 against it, so a document change that renames or drops an operation goes red here
 instead of in someone's app. `FlowsTest` pins each flow to the route
-hanzoai/openapi `flows.yaml` names and asserts the client actually sends the
-bearer token and the org header — the whole contract of a generated client.
+hanzoai/openapi `flows.yaml` names, asserts the client actually sends the bearer
+token and the org header, that two clients in one process keep their own
+credentials, and that each route reports the `requiresAuthentication` the
+document declares for it.
 
 ## Regenerate
 

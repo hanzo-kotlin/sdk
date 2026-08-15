@@ -111,7 +111,7 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/bots",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -184,7 +184,7 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/bots/{runId}/stop".replace("{"+"runId"+"}", encodeURIComponent(runId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -251,7 +251,7 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/bots/run",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

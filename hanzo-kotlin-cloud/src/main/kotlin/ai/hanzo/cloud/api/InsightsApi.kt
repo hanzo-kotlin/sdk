@@ -119,7 +119,7 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/insights/events",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -189,7 +189,7 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/insights/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

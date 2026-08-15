@@ -444,7 +444,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts/check_in".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -521,7 +521,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud-integrations/{cloud_provider}/agent-check-in".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -595,7 +595,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/authz/check",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -668,7 +668,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}/clone".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -745,7 +745,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -819,7 +819,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/domains",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -893,7 +893,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/invite/bulk",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -967,7 +967,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/channels",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1041,7 +1041,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1115,7 +1115,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboard_views",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1189,7 +1189,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/downtime_schedules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1263,7 +1263,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/gateway/ingestion_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1340,7 +1340,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/gateway/ingestion_keys/{keyId}/limits".replace("{"+"keyId"+"}", encodeURIComponent(keyId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1414,7 +1414,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/invite",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1488,7 +1488,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/annotation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1562,7 +1562,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/scores",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1636,7 +1636,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric_reduction_rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1707,7 +1707,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm_pricing_rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1784,7 +1784,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}/public".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1857,7 +1857,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/{id}/reset_password_tokens".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1931,7 +1931,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2005,7 +2005,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/route_policies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2079,7 +2079,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2153,7 +2153,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2230,7 +2230,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}/keys".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2304,7 +2304,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}/roles".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2378,7 +2378,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/sessions/email_password",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2455,7 +2455,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_mapper_groups/{groupId}/span_mappers".replace("{"+"groupId"+"}", encodeURIComponent(groupId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2529,7 +2529,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_mapper_groups",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2603,7 +2603,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/new",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2677,7 +2677,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2747,7 +2747,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/domains/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2817,7 +2817,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/channels/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2887,7 +2887,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2957,7 +2957,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboard_views/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3027,7 +3027,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/downtime_schedules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3097,7 +3097,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/gateway/ingestion_keys/{keyId}".replace("{"+"keyId"+"}", encodeURIComponent(keyId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3167,7 +3167,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/gateway/ingestion_keys/limits/{limitId}".replace("{"+"limitId"+"}", encodeURIComponent(limitId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3237,7 +3237,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm_pricing_rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3307,7 +3307,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/score/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3377,7 +3377,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric_reduction_rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3450,7 +3450,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/explorer/views/{viewId}".replace("{"+"viewId"+"}", encodeURIComponent(viewId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3523,7 +3523,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reviews/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3593,7 +3593,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}/public".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3663,7 +3663,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/roles/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3733,7 +3733,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/route_policies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3803,7 +3803,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3873,7 +3873,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3946,7 +3946,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}/roles/{rid}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"rid"+"}", encodeURIComponent(rid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4013,7 +4013,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4086,7 +4086,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_mapper_groups/{groupId}/span_mappers/{mapperId}".replace("{"+"groupId"+"}", encodeURIComponent(groupId.toString())).replace("{"+"mapperId"+"}", encodeURIComponent(mapperId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4156,7 +4156,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_mapper_groups/{groupId}".replace("{"+"groupId"+"}", encodeURIComponent(groupId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4229,7 +4229,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4299,7 +4299,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4369,7 +4369,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/user/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4442,7 +4442,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts/{id}".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4513,7 +4513,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/factor_password/forgot",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4589,7 +4589,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts/{id}".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4668,7 +4668,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts/{id}/services/{service_id}".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"service_id"+"}", encodeURIComponent(serviceId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4738,7 +4738,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/alerts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4808,7 +4808,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/route_policies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4881,7 +4881,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/domains/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -4954,7 +4954,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/channels/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5027,7 +5027,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/credentials".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5100,7 +5100,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5173,7 +5173,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/downtime_schedules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5247,7 +5247,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/analytics/error-traces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5321,7 +5321,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/analytics/overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5395,7 +5395,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/analytics/slow-traces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5469,7 +5469,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/analytics/steps",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5543,7 +5543,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/analytics/steps/overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5620,7 +5620,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/traces/{traceId}/flamegraph".replace("{"+"traceId"+"}", encodeURIComponent(traceId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5690,7 +5690,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/zeus/hosts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5774,7 +5774,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/gateway/ingestion_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5847,7 +5847,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/integrations/{integrationId}".replace("{"+"integrationId"+"}", encodeURIComponent(integrationId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -5928,7 +5928,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/integrations/{integrationId}/connection_status".replace("{"+"integrationId"+"}", encodeURIComponent(integrationId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6001,7 +6001,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm_pricing_rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6074,7 +6074,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/score/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6150,7 +6150,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/alerts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6238,7 +6238,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/attributes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6314,7 +6314,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/dashboards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6390,7 +6390,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/highlights",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6466,7 +6466,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/metadata",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6539,7 +6539,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric_reduction_rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6609,7 +6609,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric_reduction_rules/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6679,7 +6679,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric_reduction_rules/timeseries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6749,7 +6749,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/onboarding",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6823,7 +6823,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6897,7 +6897,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/treemap",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -6967,7 +6967,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/orgs/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7037,7 +7037,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7107,7 +7107,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7177,7 +7177,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/user/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7244,7 +7244,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/alerts/last",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7340,7 +7340,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/autocomplete/aggregate_attributes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7448,7 +7448,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/autocomplete/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7568,7 +7568,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/autocomplete/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7652,7 +7652,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/availability",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7760,7 +7760,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/clusters/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7880,7 +7880,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/clusters/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -7947,7 +7947,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/complete/google",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8014,7 +8014,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/complete/oidc",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8122,7 +8122,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/daemonsets/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8242,7 +8242,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/daemonsets/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8350,7 +8350,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/deployments/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8470,7 +8470,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/deployments/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8540,7 +8540,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/disks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8626,7 +8626,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/errorFromErrorID",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8712,7 +8712,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/errorFromGroupID",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8832,7 +8832,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/errortracking/issues",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8905,7 +8905,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/errortracking/issues/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -8995,7 +8995,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/explorer/views",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9068,7 +9068,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/explorer/views/{viewId}".replace("{"+"viewId"+"}", encodeURIComponent(viewId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9138,7 +9138,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/features",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9270,7 +9270,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/fields/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9414,7 +9414,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/fields/values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9514,7 +9514,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/filter_suggestions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9584,7 +9584,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/global/config",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9662,7 +9662,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9729,7 +9729,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/healthz",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9837,7 +9837,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/hosts/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -9957,7 +9957,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/hosts/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10033,7 +10033,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/checks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10103,7 +10103,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_onboarding/k8s/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10211,7 +10211,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/jobs/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10331,7 +10331,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/jobs/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10401,7 +10401,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/licenses",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10471,7 +10471,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/licenses/active",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10538,7 +10538,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/livez",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10605,7 +10605,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/login",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10695,7 +10695,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10765,7 +10765,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/aggregate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10835,7 +10835,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/fields",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10902,7 +10902,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/livetail",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -10975,7 +10975,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/pipelines/{version}".replace("{"+"version"+"}", encodeURIComponent(version.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11045,7 +11045,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/promote_paths",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11129,7 +11129,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric/metric_metadata",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11237,7 +11237,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/namespaces/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11357,7 +11357,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/namespaces/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11443,7 +11443,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/nextPrevErrorIDs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11551,7 +11551,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/nodes/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11671,7 +11671,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/nodes/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11779,7 +11779,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/pods/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -11899,7 +11899,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/pods/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12007,7 +12007,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/processes/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12127,7 +12127,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/processes/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12217,7 +12217,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/product/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12325,7 +12325,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/pvcs/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12445,7 +12445,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/pvcs/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12539,7 +12539,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12606,7 +12606,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/query_progress",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12706,7 +12706,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/query_range",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12773,7 +12773,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/readyz",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12857,7 +12857,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reviews",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -12930,7 +12930,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reviews/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13023,7 +13023,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reviews/{id}/items".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13093,7 +13093,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/services/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13160,7 +13160,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13238,7 +13238,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/settings/apdex",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13308,7 +13308,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/settings/ttl",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13416,7 +13416,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/statefulsets/attribute_keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13536,7 +13536,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/statefulsets/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13606,7 +13606,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13684,7 +13684,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13774,7 +13774,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/traces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13866,7 +13866,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -13936,7 +13936,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/version",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14009,7 +14009,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/org/preferences/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14086,7 +14086,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/overall_status".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14159,7 +14159,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}/public".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14232,7 +14232,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/public/dashboards/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14322,7 +14322,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/public/dashboards/{id}/widgets/{idx}/query_range".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"idx"+"}", encodeURIComponent(idx.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14392,7 +14392,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/orgs/me/filters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14465,7 +14465,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/{id}/reset_password_tokens".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14538,7 +14538,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/getResetPasswordToken/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14611,7 +14611,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/roles/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14684,7 +14684,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/{id}/roles".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14757,7 +14757,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/route_policies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14830,7 +14830,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -14929,7 +14929,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/filter_keys".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15038,7 +15038,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/filter_values".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15125,7 +15125,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/overall_status".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15212,7 +15212,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/stats".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15329,7 +15329,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/timeline".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15416,7 +15416,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/top_contributors".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15493,7 +15493,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/timeline".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15570,7 +15570,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/top_contributors".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15647,7 +15647,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}/history/stats".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15731,7 +15731,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/services/{service_id}".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())).replace("{"+"service_id"+"}", encodeURIComponent(serviceId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15804,7 +15804,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15877,7 +15877,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}/roles".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -15961,7 +15961,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/sessions/context",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16034,7 +16034,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/orgs/me/filters/{signal}".replace("{"+"signal"+"}", encodeURIComponent(signal.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16111,7 +16111,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/traces/{traceId}/aggregations".replace("{"+"traceId"+"}", encodeURIComponent(traceId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16181,7 +16181,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/traces/fields",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16254,7 +16254,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16331,7 +16331,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}/analytics/error-traces".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16408,7 +16408,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}/analytics/overview".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16485,7 +16485,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}/analytics/slow-traces".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16562,7 +16562,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}/analytics/steps".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16639,7 +16639,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}/analytics/steps/overview".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16712,7 +16712,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16785,7 +16785,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/user/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16858,7 +16858,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/user/preferences/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -16931,7 +16931,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/roles/{id}/users".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17008,7 +17008,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/traces/{traceId}/waterfall".replace("{"+"traceId"+"}", encodeURIComponent(traceId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17082,7 +17082,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/inspect",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17156,7 +17156,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/integrations/install",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17232,7 +17232,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts/{id}/services".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17305,7 +17305,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17375,7 +17375,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/domains",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17445,7 +17445,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/channels",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17515,7 +17515,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboard_views",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17617,7 +17617,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/me/dashboards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17719,7 +17719,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17803,7 +17803,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/downtime_schedules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17881,7 +17881,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/integrations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -17983,7 +17983,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/annotation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18109,7 +18109,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/observations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18205,7 +18205,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm_pricing_rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18313,7 +18313,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/scores",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18439,7 +18439,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18565,7 +18565,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/traces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18691,7 +18691,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/llm/users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18799,7 +18799,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric_reduction_rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18901,7 +18901,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -18971,7 +18971,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/org/preferences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19041,7 +19041,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19111,7 +19111,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19184,7 +19184,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}/keys".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19254,7 +19254,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19335,7 +19335,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/services".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19413,7 +19413,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_mapper_groups",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19486,7 +19486,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_mapper_groups/{groupId}/span_mappers".replace("{"+"groupId"+"}", encodeURIComponent(groupId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19556,7 +19556,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19626,7 +19626,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/user/preferences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19696,7 +19696,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19766,7 +19766,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19836,7 +19836,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}/lock".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19913,7 +19913,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -19990,7 +19990,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reviews/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20070,7 +20070,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reviews/{id}/items/{itemId}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"itemId"+"}", encodeURIComponent(itemId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20147,7 +20147,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20217,7 +20217,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/me/dashboards/{id}/pins".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20287,7 +20287,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/alerts/{receiver}".replace("{"+"receiver"+"}", encodeURIComponent(`receiver`.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20357,7 +20357,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/api/{project_id}/envelope/".replace("{"+"project_id"+"}", encodeURIComponent(projectId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20427,7 +20427,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/api/{project_id}/store/".replace("{"+"project_id"+"}", encodeURIComponent(projectId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20501,7 +20501,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/auto_complete/attribute_values",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20575,7 +20575,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/clusters/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20642,7 +20642,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/complete/saml",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20716,7 +20716,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/countErrors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20790,7 +20790,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/daemonsets/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20864,7 +20864,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dependency_graph",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -20938,7 +20938,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/deployments/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21015,7 +21015,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/errortracking/issues/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21089,7 +21089,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/event",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21163,7 +21163,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/explorer/views",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21230,7 +21230,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/export_raw_data",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21304,7 +21304,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/hosts/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21378,7 +21378,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21452,7 +21452,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/daemonsets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21526,7 +21526,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/deployments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21600,7 +21600,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/hosts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21674,7 +21674,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/jobs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21748,7 +21748,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/namespaces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21822,7 +21822,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/nodes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21896,7 +21896,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/pods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -21970,7 +21970,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/pvcs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22044,7 +22044,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/infra_monitoring/statefulsets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22118,7 +22118,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/jobs/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22192,7 +22192,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/listErrors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22266,7 +22266,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/fields",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22340,7 +22340,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/pipelines",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22414,7 +22414,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/pipelines/preview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22488,7 +22488,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/logs/promote_paths",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22562,7 +22562,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/consumer-lag/consumer-details",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22636,7 +22636,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/consumer-lag/network-latency",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22710,7 +22710,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/consumer-lag/producer-details",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22784,7 +22784,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/onboarding/consumers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22858,7 +22858,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/onboarding/kafka",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -22932,7 +22932,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/onboarding/producers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23006,7 +23006,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/partition-latency/consumer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23080,7 +23080,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/partition-latency/overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23154,7 +23154,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/span/evaluation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23228,7 +23228,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/topic-throughput/consumer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23302,7 +23302,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/topic-throughput/consumer-details",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23376,7 +23376,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/topic-throughput/producer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23450,7 +23450,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/kafka/topic-throughput/producer-details",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23524,7 +23524,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/messaging-queues/queue-overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23598,7 +23598,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/namespaces/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23672,7 +23672,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/nodes/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23746,7 +23746,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/pods/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23820,7 +23820,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/processes/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23894,7 +23894,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/pvcs/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -23968,7 +23968,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/query_filter/analyze",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24042,7 +24042,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/query_range",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24116,7 +24116,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/query_range/format",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24190,7 +24190,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/query_range/preview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24264,7 +24264,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/register",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24338,7 +24338,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reviews",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24415,7 +24415,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reviews/{id}/items".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24489,7 +24489,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service/entry_point_operations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24563,7 +24563,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service/top_level_operations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24637,7 +24637,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service/top_operations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24711,7 +24711,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24785,7 +24785,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/settings/apdex",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24859,7 +24859,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/settings/ttl",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -24933,7 +24933,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_percentile",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25007,7 +25007,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/statefulsets/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25081,7 +25081,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/substitute_vars",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25155,7 +25155,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/third-party-apis/overview/domain",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25229,7 +25229,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/third-party-apis/overview/list",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25303,7 +25303,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/variables/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25377,7 +25377,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric_reduction_rules/preview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25448,7 +25448,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/zeus/hosts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25525,7 +25525,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/explorer/views/{viewId}".replace("{"+"viewId"+"}", encodeURIComponent(viewId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25596,7 +25596,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/zeus/profiles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25669,7 +25669,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/{id}/roles/{roleId}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"roleId"+"}", encodeURIComponent(roleId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25740,7 +25740,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/resetPassword",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25813,7 +25813,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}/keys/{fid}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"fid"+"}", encodeURIComponent(fid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25887,7 +25887,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/sessions/rotate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -25977,7 +25977,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/gateway/ingestion_keys/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26076,7 +26076,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/traces/{traceId}".replace("{"+"traceId"+"}", encodeURIComponent(traceId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26153,7 +26153,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/{id}/roles".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26224,7 +26224,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/channels/test",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26295,7 +26295,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/testChannel",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26369,7 +26369,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/test",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26443,7 +26443,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/testRule",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26517,7 +26517,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/integrations/uninstall",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26587,7 +26587,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}/lock".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26657,7 +26657,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/me/dashboards/{id}/pins".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26734,7 +26734,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts/{id}".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26808,7 +26808,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/domains/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26882,7 +26882,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/channels/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -26959,7 +26959,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27036,7 +27036,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboard_views/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27110,7 +27110,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/downtime_schedules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27184,7 +27184,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/gateway/ingestion_keys/{keyId}".replace("{"+"keyId"+"}", encodeURIComponent(keyId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27258,7 +27258,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/gateway/ingestion_keys/limits/{limitId}".replace("{"+"limitId"+"}", encodeURIComponent(limitId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27332,7 +27332,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metrics/metadata",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27409,7 +27409,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/metric_reduction_rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27480,7 +27480,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/orgs/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27551,7 +27551,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/me/factor_password",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27622,7 +27622,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27693,7 +27693,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27767,7 +27767,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/org/preferences/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27841,7 +27841,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/dashboards/{id}/public".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27912,7 +27912,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/orgs/me/filters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -27986,7 +27986,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/roles/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28063,7 +28063,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/route_policies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28137,7 +28137,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/rules/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28217,7 +28217,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/cloud_integrations/{cloud_provider}/accounts/{id}/services/{service_id}".replace("{"+"cloud_provider"+"}", encodeURIComponent(cloudProvider.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"service_id"+"}", encodeURIComponent(serviceId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28291,7 +28291,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28368,7 +28368,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/service_accounts/{id}/keys/{fid}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"fid"+"}", encodeURIComponent(fid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28445,7 +28445,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_mapper_groups/{groupId}/span_mappers/{mapperId}".replace("{"+"groupId"+"}", encodeURIComponent(groupId.toString())).replace("{"+"mapperId"+"}", encodeURIComponent(mapperId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28519,7 +28519,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/span_mapper_groups/{groupId}".replace("{"+"groupId"+"}", encodeURIComponent(groupId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28593,7 +28593,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/traces/fields",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28670,7 +28670,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28744,7 +28744,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/steps/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28818,7 +28818,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/users/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28895,7 +28895,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/user/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -28969,7 +28969,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/user/preferences/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -29043,7 +29043,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/analytics/validate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -29120,7 +29120,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/trace-funnels/{funnel_id}/analytics/validate".replace("{"+"funnel_id"+"}", encodeURIComponent(funnelId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -29191,7 +29191,7 @@ class O11yApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/o11y/reset_password_tokens/verify",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

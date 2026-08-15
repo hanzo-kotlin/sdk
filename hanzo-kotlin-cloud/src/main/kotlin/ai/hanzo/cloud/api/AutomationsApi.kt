@@ -122,7 +122,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -192,7 +192,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/connectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -270,7 +270,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -343,7 +343,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -424,7 +424,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/versions".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -494,7 +494,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/pieces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -578,7 +578,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -651,7 +651,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/runs/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -728,7 +728,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -805,7 +805,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/connectors/{id}/run".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -879,7 +879,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -952,7 +952,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/disable".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1025,7 +1025,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/enable".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1095,7 +1095,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/operations".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1168,7 +1168,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/run".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1245,7 +1245,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/versions".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1318,7 +1318,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/hooks/{source}/{event}".replace("{"+"source"+"}", encodeURIComponent(source.toString())).replace("{"+"event"+"}", encodeURIComponent(event.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1388,7 +1388,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/runs/{id}/resume".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

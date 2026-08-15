@@ -120,7 +120,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/account/can-i/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -190,7 +190,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -263,7 +263,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -336,7 +336,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/resource-tree".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -412,7 +412,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/revisions/{revision}/metadata".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"revision"+"}", encodeURIComponent(revision.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -485,7 +485,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/syncwindows".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -552,7 +552,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -622,7 +622,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -692,7 +692,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/gitops",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -759,7 +759,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -826,7 +826,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/login",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -896,7 +896,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -966,7 +966,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/session/userinfo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1036,7 +1036,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1103,7 +1103,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/stream/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1173,7 +1173,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/stream/applications/{name}/resource-tree".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1243,7 +1243,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/version",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1313,7 +1313,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/rollback".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1383,7 +1383,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/sync".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1450,7 +1450,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/logout",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1517,7 +1517,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/reconcile",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

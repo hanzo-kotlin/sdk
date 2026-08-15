@@ -116,7 +116,7 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/orgs/{org}/entitlements".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -190,7 +190,7 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/orgs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -267,7 +267,7 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/orgs/{org}/entitlements".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

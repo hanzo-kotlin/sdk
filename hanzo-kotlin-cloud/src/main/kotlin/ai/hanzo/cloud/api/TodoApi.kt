@@ -115,7 +115,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -229,7 +229,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/board",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -349,7 +349,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/issues",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -419,7 +419,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -492,7 +492,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -603,7 +603,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects/{key}/issues".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -679,7 +679,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects/{key}/issues/{num}".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -749,7 +749,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -829,7 +829,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects/{key}/issues/{num}".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -896,7 +896,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -973,7 +973,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects/{key}/issues".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1049,7 +1049,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/todo/projects/{key}/issues/{num}/claim".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

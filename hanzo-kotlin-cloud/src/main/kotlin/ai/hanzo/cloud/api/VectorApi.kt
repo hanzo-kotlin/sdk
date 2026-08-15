@@ -115,7 +115,7 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -185,7 +185,7 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -258,7 +258,7 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -332,7 +332,7 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector/collections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -406,7 +406,7 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -480,7 +480,7 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

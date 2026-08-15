@@ -137,7 +137,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/download/{release}".replace("{"+"release"+"}", encodeURIComponent(release.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -207,7 +207,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/healthz",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -277,7 +277,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/jwks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -347,7 +347,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/pubkey",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -417,7 +417,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/releases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -490,7 +490,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/releases/{release}".replace("{"+"release"+"}", encodeURIComponent(release.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -564,7 +564,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/fingerprint",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -638,7 +638,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/issue",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -712,7 +712,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/releases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -786,7 +786,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/revoke",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -860,7 +860,7 @@ class LicensingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/licensing/verify",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

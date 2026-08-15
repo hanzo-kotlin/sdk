@@ -106,7 +106,7 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/documents/{file_id}/context",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

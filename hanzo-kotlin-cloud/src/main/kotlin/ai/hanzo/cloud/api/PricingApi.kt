@@ -118,7 +118,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -188,7 +188,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/base",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -258,7 +258,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/blockchain",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -328,7 +328,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/cloud",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -398,7 +398,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/cloud/plans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -468,7 +468,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/cloud/regions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -538,7 +538,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/cloud/storage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -608,7 +608,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/compute",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -678,7 +678,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/compute/presets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -748,7 +748,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/datastore",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -818,7 +818,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/featured",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -888,7 +888,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/free",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -958,7 +958,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/gpu",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1028,7 +1028,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1098,7 +1098,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/iam",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1171,7 +1171,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/model/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1241,7 +1241,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1311,7 +1311,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/paas",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1381,7 +1381,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1451,7 +1451,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1521,7 +1521,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1591,7 +1591,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/subscriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1661,7 +1661,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1731,7 +1731,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/tools",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1801,7 +1801,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

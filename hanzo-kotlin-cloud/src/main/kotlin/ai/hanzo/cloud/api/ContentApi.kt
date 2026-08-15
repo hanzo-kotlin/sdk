@@ -144,7 +144,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/board",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -214,7 +214,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/channels",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -284,7 +284,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/lifecycle",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -364,7 +364,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/{doctype}/{name}/transition".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -438,7 +438,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/generate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -512,7 +512,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/publish",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

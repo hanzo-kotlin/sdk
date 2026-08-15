@@ -116,7 +116,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -192,7 +192,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}/channels/{kind}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"kind"+"}", encodeURIComponent(kind.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -276,7 +276,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -349,7 +349,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -442,7 +442,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}/metrics".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -512,7 +512,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -586,7 +586,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -663,7 +663,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}/channels".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -733,7 +733,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}/launch".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -803,7 +803,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}/pause".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -880,7 +880,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

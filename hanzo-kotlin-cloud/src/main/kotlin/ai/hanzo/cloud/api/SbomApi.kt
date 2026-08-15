@@ -112,7 +112,7 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sbom/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -182,7 +182,7 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sbom/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sbom",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

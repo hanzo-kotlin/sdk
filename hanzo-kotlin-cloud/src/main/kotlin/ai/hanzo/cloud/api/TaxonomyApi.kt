@@ -118,7 +118,7 @@ class TaxonomyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/taxonomy/categories/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -191,7 +191,7 @@ class TaxonomyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/taxonomy/taxa/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -269,7 +269,7 @@ class TaxonomyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/taxonomy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -346,7 +346,7 @@ class TaxonomyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/taxonomy/categories/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -423,7 +423,7 @@ class TaxonomyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/taxonomy/taxa/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

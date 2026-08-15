@@ -106,7 +106,7 @@ class QueryMultipleApi(basePath: kotlin.String = defaultBasePath, client: Call.F
             path = "/v1/query_multiple",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

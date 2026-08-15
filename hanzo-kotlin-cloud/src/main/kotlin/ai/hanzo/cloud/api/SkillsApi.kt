@@ -117,7 +117,7 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/skills/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -195,7 +195,7 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/skills",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -265,7 +265,7 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/skills/authored",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -339,7 +339,7 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/skills",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

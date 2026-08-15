@@ -150,7 +150,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/activity",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -246,7 +246,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/analytics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -324,7 +324,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/analytics/access",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -420,7 +420,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/leaderboard",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -490,7 +490,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/leaderboard/optin",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -586,7 +586,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/samples",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -676,7 +676,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -750,7 +750,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -824,7 +824,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/rollup/backfill",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -898,7 +898,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/leaderboard/optin",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -972,7 +972,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/leaderboard/optin/org",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

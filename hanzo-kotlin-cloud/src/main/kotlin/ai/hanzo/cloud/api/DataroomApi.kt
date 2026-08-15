@@ -125,7 +125,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/analytics/dataroom/{dataroomId}".replace("{"+"dataroomId"+"}", encodeURIComponent(dataroomId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -198,7 +198,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/analytics/link/{linkId}".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -268,7 +268,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/datarooms",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -341,7 +341,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/datarooms/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -411,7 +411,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -484,7 +484,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/documents/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -554,7 +554,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/documents/{id}/file".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -621,7 +621,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -691,7 +691,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -761,7 +761,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/view/{linkId}".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -834,7 +834,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/view/{linkId}/document/{documentId}/file".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())).replace("{"+"documentId"+"}", encodeURIComponent(documentId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -908,7 +908,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/datarooms",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -985,7 +985,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/datarooms/{id}/documents".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1052,7 +1052,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1126,7 +1126,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1196,7 +1196,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/view/{linkId}/authenticate".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1266,7 +1266,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/view/{linkId}/pageview".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

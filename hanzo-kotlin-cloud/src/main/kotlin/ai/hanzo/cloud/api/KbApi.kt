@@ -120,7 +120,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -190,7 +190,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -283,7 +283,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/{provider}/callback".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -356,7 +356,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/{provider}/connect".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -426,7 +426,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -504,7 +504,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/graph",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -577,7 +577,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/{provider}/sync".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -644,7 +644,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/import",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -718,7 +718,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

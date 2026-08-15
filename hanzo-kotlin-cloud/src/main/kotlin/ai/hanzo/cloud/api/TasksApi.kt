@@ -106,7 +106,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -176,7 +176,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -243,7 +243,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -313,7 +313,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -380,7 +380,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -450,7 +450,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -517,7 +517,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -587,7 +587,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -654,7 +654,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -724,7 +724,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

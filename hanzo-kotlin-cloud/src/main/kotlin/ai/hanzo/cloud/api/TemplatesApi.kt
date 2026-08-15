@@ -113,7 +113,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -183,7 +183,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -330,7 +330,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -407,7 +407,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

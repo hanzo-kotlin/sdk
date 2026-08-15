@@ -109,7 +109,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -182,7 +182,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents/{id}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -249,7 +249,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -316,7 +316,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -386,7 +386,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -456,7 +456,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -529,7 +529,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents/{id}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -599,7 +599,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/settings".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -666,7 +666,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -736,7 +736,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/tasks/{uid}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -803,7 +803,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/version",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -873,7 +873,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/settings".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -940,7 +940,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1010,7 +1010,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1080,7 +1080,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents/delete-batch".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1150,7 +1150,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/search".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1220,7 +1220,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

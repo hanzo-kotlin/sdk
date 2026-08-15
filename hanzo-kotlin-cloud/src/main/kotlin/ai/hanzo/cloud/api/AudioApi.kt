@@ -106,7 +106,7 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/audio/foley",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/audio/music",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/audio/speech",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -307,7 +307,7 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/audio/transcriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -374,7 +374,7 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/audio/voice",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

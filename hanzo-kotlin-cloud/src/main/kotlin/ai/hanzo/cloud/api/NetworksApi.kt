@@ -112,7 +112,7 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/networks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -185,7 +185,7 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/networks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -255,7 +255,7 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/networks/routers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

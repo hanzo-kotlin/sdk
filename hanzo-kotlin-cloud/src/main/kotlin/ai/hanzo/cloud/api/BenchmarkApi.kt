@@ -117,7 +117,7 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/benchmark/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -203,7 +203,7 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/benchmark/compare",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -281,7 +281,7 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/benchmark/leaderboard",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -351,7 +351,7 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/benchmark/presets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -425,7 +425,7 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/benchmark/presets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -499,7 +499,7 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/benchmark/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

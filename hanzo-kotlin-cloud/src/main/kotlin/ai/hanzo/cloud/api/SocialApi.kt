@@ -109,7 +109,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -179,7 +179,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -246,7 +246,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -316,7 +316,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -383,7 +383,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -453,7 +453,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -520,7 +520,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -587,7 +587,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -654,7 +654,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -721,7 +721,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -791,7 +791,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts/{id}/publish".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -861,7 +861,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -931,7 +931,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

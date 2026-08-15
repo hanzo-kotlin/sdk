@@ -115,7 +115,7 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -193,7 +193,7 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors/basis",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -267,7 +267,7 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors/connect",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -341,7 +341,7 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors/deploys/record",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -415,7 +415,7 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors/repos/verify",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -122,7 +122,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -192,7 +192,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -262,7 +262,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -346,7 +346,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -419,7 +419,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/applications/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -497,7 +497,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -570,7 +570,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -654,7 +654,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -727,7 +727,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -811,7 +811,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -884,7 +884,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -954,7 +954,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1031,7 +1031,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/applications/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1098,7 +1098,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1172,7 +1172,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1246,7 +1246,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1320,7 +1320,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1397,7 +1397,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1474,7 +1474,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1551,7 +1551,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

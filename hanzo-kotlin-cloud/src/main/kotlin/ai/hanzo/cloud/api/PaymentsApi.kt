@@ -115,7 +115,7 @@ class PaymentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/payments/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -189,7 +189,7 @@ class PaymentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/payments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

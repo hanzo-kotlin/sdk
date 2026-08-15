@@ -106,7 +106,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/hf/datasets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/hf/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/hf/repo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -307,7 +307,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/job",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -374,7 +374,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/jobs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -441,7 +441,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/presets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -508,7 +508,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/cancel",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -575,7 +575,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/deploy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -642,7 +642,7 @@ class FinetuneApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/finetune/jobs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

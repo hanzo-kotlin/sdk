@@ -114,7 +114,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -184,7 +184,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -257,7 +257,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -334,7 +334,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -408,7 +408,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -481,7 +481,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync/{id}/run".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

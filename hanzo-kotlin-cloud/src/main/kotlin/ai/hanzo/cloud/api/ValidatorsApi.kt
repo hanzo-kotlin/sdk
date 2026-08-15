@@ -121,7 +121,7 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/validators",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/validators/{tokenId}".replace("{"+"tokenId"+"}", encodeURIComponent(tokenId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -272,7 +272,7 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/validators/challenge",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -346,7 +346,7 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/validators",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

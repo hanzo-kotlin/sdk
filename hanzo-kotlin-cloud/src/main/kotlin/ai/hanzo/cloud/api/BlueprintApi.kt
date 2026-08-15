@@ -111,7 +111,7 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/blueprint",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -181,7 +181,7 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/blueprint/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -248,7 +248,7 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/blueprint/sbom",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

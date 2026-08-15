@@ -128,7 +128,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/help/articles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -201,7 +201,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/help/articles/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -271,7 +271,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/help/categories",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -345,7 +345,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/help/tickets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

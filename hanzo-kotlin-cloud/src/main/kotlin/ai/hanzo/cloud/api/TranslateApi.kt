@@ -132,7 +132,7 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/translate/memory",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -199,7 +199,7 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/translate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -273,7 +273,7 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/translate/memory",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

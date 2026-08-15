@@ -124,7 +124,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/projects/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -264,7 +264,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -343,7 +343,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/events/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -475,7 +475,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/issues",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -548,7 +548,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/issues/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -633,7 +633,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/issues/{id}/events".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -727,7 +727,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/logs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -797,7 +797,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -870,7 +870,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/projects/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -958,7 +958,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1046,7 +1046,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/traces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1125,7 +1125,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/traces/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1195,7 +1195,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1265,7 +1265,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{project}/envelope/".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1335,7 +1335,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{project}/store/".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1405,7 +1405,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1479,7 +1479,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/discover",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1553,7 +1553,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1626,7 +1626,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/projects/{id}/keys/rotate".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1696,7 +1696,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1773,7 +1773,7 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/issues/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

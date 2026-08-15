@@ -116,7 +116,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations/{platform}".replace("{"+"platform"+"}", encodeURIComponent(platform.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -186,7 +186,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -259,7 +259,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations/{platform}".replace("{"+"platform"+"}", encodeURIComponent(platform.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -336,7 +336,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations/{platform}".replace("{"+"platform"+"}", encodeURIComponent(platform.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -409,7 +409,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations/{platform}/test".replace("{"+"platform"+"}", encodeURIComponent(platform.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

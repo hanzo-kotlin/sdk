@@ -114,7 +114,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -192,7 +192,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/limits",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -262,7 +262,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/news",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -332,7 +332,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/pipeline",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -399,7 +399,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/stream",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -473,7 +473,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/pipeline",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

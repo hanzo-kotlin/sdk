@@ -116,7 +116,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices/{id}/collect".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -186,7 +186,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/alerts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/methods/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -326,7 +326,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/portal/methods/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -393,7 +393,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -463,7 +463,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/accounts/{id}/members".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -530,7 +530,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/alerts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -597,7 +597,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/alerts/authorize",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -664,7 +664,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/balance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -731,7 +731,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/credit-balance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -798,7 +798,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/credits",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -868,7 +868,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/crypto/deposit/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -935,7 +935,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/crypto/options",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1002,7 +1002,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1072,7 +1072,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices/{id}/pdf".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1139,7 +1139,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1206,7 +1206,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/payouts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1273,7 +1273,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/plans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1340,7 +1340,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/portal/methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1407,7 +1407,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1474,7 +1474,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/subscriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1541,7 +1541,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/tier",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1608,7 +1608,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/transactions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1675,7 +1675,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1745,7 +1745,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/usage/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1812,7 +1812,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/wire",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1885,7 +1885,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1958,7 +1958,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices/{id}/issue".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2028,7 +2028,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/alerts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2095,7 +2095,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/alerts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2162,7 +2162,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/crypto/deposit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2229,7 +2229,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2296,7 +2296,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/mode",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2363,7 +2363,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/portal/methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2430,7 +2430,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/recharge/run-all",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2497,7 +2497,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/subscribe/card",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2567,7 +2567,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/subscriptions/{id}/cancel".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2637,7 +2637,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/subscriptions/{id}/reactivate".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2704,7 +2704,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/topup",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2771,7 +2771,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/topup/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2841,7 +2841,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/webhooks/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2915,7 +2915,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2988,7 +2988,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices/{id}/void".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

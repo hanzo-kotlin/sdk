@@ -110,7 +110,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -180,7 +180,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -247,7 +247,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/connect",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -317,7 +317,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/nodes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -387,7 +387,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -457,7 +457,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -527,7 +527,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/nodes/{id}/invoke".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -594,7 +594,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/peer/invoke",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -664,7 +664,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

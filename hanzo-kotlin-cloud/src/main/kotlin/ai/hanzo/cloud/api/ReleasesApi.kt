@@ -110,7 +110,7 @@ class ReleasesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/releases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

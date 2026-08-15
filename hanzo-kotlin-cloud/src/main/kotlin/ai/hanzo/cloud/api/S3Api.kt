@@ -113,7 +113,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/buckets/{bucket}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -186,7 +186,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/buckets/{bucket}/objects/{wildcard1}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -326,7 +326,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -393,7 +393,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/buckets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -463,7 +463,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/buckets/{bucket}/objects".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -536,7 +536,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/buckets/{bucket}/objects/{wildcard1}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -609,7 +609,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -676,7 +676,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -750,7 +750,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -817,7 +817,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/buckets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -887,7 +887,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/s3/buckets/{bucket}/objects".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

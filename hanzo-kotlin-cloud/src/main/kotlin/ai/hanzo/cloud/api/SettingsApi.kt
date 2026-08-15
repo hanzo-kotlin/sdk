@@ -114,7 +114,7 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/settings/{product}".replace("{"+"product"+"}", encodeURIComponent(product.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -191,7 +191,7 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/settings/{product}".replace("{"+"product"+"}", encodeURIComponent(product.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

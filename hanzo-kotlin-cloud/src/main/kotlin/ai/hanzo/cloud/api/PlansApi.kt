@@ -118,7 +118,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entries/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -188,7 +188,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -258,7 +258,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/blockchain",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -328,7 +328,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/cloud",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -398,7 +398,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/dns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -471,7 +471,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entitlements/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -538,7 +538,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -608,7 +608,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/gpu",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -678,7 +678,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -748,7 +748,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -818,7 +818,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/regions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -891,7 +891,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/resolve/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -961,7 +961,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/schema",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1031,7 +1031,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/storage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1101,7 +1101,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/subscriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1171,7 +1171,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/tools",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1241,7 +1241,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/vocab",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1308,7 +1308,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1375,7 +1375,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/seed",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1445,7 +1445,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entries/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

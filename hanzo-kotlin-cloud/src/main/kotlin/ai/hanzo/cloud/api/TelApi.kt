@@ -122,7 +122,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/calls/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -195,7 +195,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/numbers/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -265,7 +265,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/calls",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -335,7 +335,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/messages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -405,7 +405,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/numbers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -501,7 +501,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/numbers/available",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -571,7 +571,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -645,7 +645,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/calls",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -719,7 +719,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/messages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -793,7 +793,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/tel/numbers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

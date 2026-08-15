@@ -118,7 +118,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -188,7 +188,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -261,7 +261,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -331,7 +331,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -401,7 +401,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/nodes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

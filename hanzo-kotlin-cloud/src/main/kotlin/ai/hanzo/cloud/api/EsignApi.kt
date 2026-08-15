@@ -106,7 +106,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -176,7 +176,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/documents/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -246,7 +246,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/documents/{id}/audit".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -316,7 +316,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/documents/{id}/download".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -383,7 +383,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -456,7 +456,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/o/{org}/sign/{token}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"token"+"}", encodeURIComponent(token.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -523,7 +523,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -593,7 +593,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/documents/{id}/fields".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -663,7 +663,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/documents/{id}/recipients".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -733,7 +733,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/documents/{id}/send".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -806,7 +806,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/o/{org}/sign/{token}/complete".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"token"+"}", encodeURIComponent(token.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -882,7 +882,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/o/{org}/sign/{token}/fields/{fieldId}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"token"+"}", encodeURIComponent(token.toString())).replace("{"+"fieldId"+"}", encodeURIComponent(fieldId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -955,7 +955,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/esign/o/{org}/sign/{token}/reject".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"token"+"}", encodeURIComponent(token.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

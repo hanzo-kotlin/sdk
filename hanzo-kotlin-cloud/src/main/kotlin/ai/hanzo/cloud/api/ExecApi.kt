@@ -115,7 +115,7 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/exec",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -182,7 +182,7 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/exec/programmatic",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

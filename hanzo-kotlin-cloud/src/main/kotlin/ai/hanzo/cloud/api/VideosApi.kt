@@ -106,7 +106,7 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/videos/{id}",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -173,7 +173,7 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/videos/{id}/content",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -240,7 +240,7 @@ class VideosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/videos/generations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

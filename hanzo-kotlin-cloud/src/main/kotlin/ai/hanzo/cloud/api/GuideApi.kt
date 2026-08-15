@@ -120,7 +120,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/curriculum",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -190,7 +190,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -260,7 +260,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/actions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -330,7 +330,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/analytics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -400,7 +400,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/blueprint",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -470,7 +470,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/blueprint/versions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -540,7 +540,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/curriculum",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -610,7 +610,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/profile",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -700,7 +700,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/strategies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -770,7 +770,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/suggest",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -843,7 +843,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/blueprint/{collection}/{id}".replace("{"+"collection"+"}", encodeURIComponent(collection.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -917,7 +917,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/chat",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -987,7 +987,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/do".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1057,7 +1057,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/done".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1130,7 +1130,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/reset".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1203,7 +1203,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/skip".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1273,7 +1273,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/start".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1340,7 +1340,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/blueprint",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1407,7 +1407,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/curriculum",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

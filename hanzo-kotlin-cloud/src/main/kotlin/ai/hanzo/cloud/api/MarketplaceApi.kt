@@ -115,7 +115,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/listings/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -185,7 +185,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -255,7 +255,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/listings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -329,7 +329,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/install",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -403,7 +403,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/listings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -477,7 +477,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/uninstall",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

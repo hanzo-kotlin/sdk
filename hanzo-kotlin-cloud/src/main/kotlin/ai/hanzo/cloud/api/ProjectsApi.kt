@@ -120,7 +120,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -193,7 +193,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/domains/{host}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"host"+"}", encodeURIComponent(host.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -263,7 +263,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -336,7 +336,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -409,7 +409,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/deployments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -485,7 +485,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/deployments/{id}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -558,7 +558,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/domains".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -635,7 +635,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -709,7 +709,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -786,7 +786,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/deploy".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -863,7 +863,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/deployments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -943,7 +943,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/deployments/{id}/complete".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1020,7 +1020,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/domains".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1096,7 +1096,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/domains/{host}/verify".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"host"+"}", encodeURIComponent(host.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1169,7 +1169,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/{slug}/purge".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1243,7 +1243,7 @@ class ProjectsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/projects/fork",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

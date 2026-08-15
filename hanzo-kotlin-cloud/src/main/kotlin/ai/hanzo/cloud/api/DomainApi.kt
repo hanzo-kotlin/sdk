@@ -123,7 +123,7 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/domain/availability",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -193,7 +193,7 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/domain/domains",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -263,7 +263,7 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/domain/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -345,7 +345,7 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/domain/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -419,7 +419,7 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/domain/register",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -493,7 +493,7 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/domain/renew",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -567,7 +567,7 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/domain/transfer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

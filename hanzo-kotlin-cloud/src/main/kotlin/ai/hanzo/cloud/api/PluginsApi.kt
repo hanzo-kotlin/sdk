@@ -117,7 +117,7 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/plugins/authored/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -195,7 +195,7 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/plugins",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -265,7 +265,7 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/plugins/authored",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -339,7 +339,7 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/plugins/build",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

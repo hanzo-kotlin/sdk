@@ -109,7 +109,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -182,7 +182,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/listing/{key}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -249,7 +249,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -316,7 +316,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/access",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -386,7 +386,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -459,7 +459,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/bundle/{key}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -529,7 +529,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/listing".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -602,7 +602,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/listing/{key}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -675,7 +675,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/product/{key}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -748,7 +748,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/variant/{key}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -815,7 +815,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/current",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -885,7 +885,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -958,7 +958,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/listing/{key}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1025,7 +1025,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1095,7 +1095,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1165,7 +1165,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/authorize".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1238,7 +1238,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/authorize/{orderid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"orderid"+"}", encodeURIComponent(orderid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1311,7 +1311,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/capture/{orderid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"orderid"+"}", encodeURIComponent(orderid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1381,7 +1381,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/charge".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1451,7 +1451,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/checkout/authorize".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1524,7 +1524,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/checkout/authorize/{orderid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"orderid"+"}", encodeURIComponent(orderid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1597,7 +1597,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/checkout/capture/{orderid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"orderid"+"}", encodeURIComponent(orderid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1667,7 +1667,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/checkout/charge".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1740,7 +1740,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/checkout/paypal/cancel/{payKey}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"payKey"+"}", encodeURIComponent(payKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1813,7 +1813,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/checkout/paypal/confirm/{payKey}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"payKey"+"}", encodeURIComponent(payKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1883,7 +1883,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/checkout/paypal/pay".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1956,7 +1956,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/listing/{key}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2029,7 +2029,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/paypal/cancel/{payKey}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"payKey"+"}", encodeURIComponent(payKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2102,7 +2102,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/paypal/confirm/{payKey}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"payKey"+"}", encodeURIComponent(payKey.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2172,7 +2172,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/paypal/pay".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2242,7 +2242,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/trial".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2309,7 +2309,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2379,7 +2379,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2452,7 +2452,7 @@ class StoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/store/{storeid}/listing/{key}".replace("{"+"storeid"+"}", encodeURIComponent(storeid.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

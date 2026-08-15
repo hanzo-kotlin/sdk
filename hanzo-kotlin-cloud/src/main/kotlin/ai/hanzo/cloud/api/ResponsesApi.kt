@@ -106,7 +106,7 @@ class ResponsesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/responses",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

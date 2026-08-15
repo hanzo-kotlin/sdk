@@ -110,7 +110,7 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/meet/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -177,7 +177,7 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/meet/session",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -244,7 +244,7 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/meet/getToken",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

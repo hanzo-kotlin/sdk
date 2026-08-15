@@ -109,7 +109,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/kms/secrets/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -176,7 +176,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/kms/config",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -243,7 +243,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/kms/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -310,7 +310,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/kms/secrets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -380,7 +380,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/kms/secrets/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -447,7 +447,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/kms/auth/login",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -514,7 +514,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/kms/secrets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

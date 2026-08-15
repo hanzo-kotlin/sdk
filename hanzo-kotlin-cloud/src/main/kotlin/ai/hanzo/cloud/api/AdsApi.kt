@@ -114,7 +114,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -198,7 +198,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -271,7 +271,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -341,7 +341,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -415,7 +415,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -485,7 +485,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns/{id}/launch".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -562,7 +562,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

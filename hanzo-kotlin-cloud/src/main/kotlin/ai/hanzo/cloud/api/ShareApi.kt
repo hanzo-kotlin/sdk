@@ -111,7 +111,7 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/share",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -181,7 +181,7 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/share/enable",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

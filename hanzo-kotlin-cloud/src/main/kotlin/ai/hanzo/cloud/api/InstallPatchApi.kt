@@ -106,7 +106,7 @@ class InstallPatchApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/install-patch",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

@@ -139,7 +139,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/artifacts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -209,7 +209,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/artifacts/{sha256}".replace("{"+"sha256"+"}", encodeURIComponent(sha256.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -293,7 +293,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/experiments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -363,7 +363,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -441,7 +441,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/totals",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -515,7 +515,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/artifacts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -589,7 +589,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/experiments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -663,7 +663,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/grants",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

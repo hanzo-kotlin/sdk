@@ -108,7 +108,7 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -175,7 +175,7 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -242,7 +242,7 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -309,7 +309,7 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -376,7 +376,7 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -450,7 +450,7 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

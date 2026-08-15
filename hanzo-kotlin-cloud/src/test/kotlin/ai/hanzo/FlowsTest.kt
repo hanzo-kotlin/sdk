@@ -5,14 +5,18 @@ import ai.hanzo.cloud.api.BillingApi
 import ai.hanzo.cloud.api.ChatApi
 import ai.hanzo.cloud.api.KeysApi
 import ai.hanzo.cloud.api.KvApi
+import ai.hanzo.cloud.api.ModelsApi
 import ai.hanzo.cloud.api.ToolsApi
+import ai.hanzo.cloud.infrastructure.ApiClient
 import ai.hanzo.cloud.model.CreateAgentIn
 import ai.hanzo.cloud.model.ProvisionRequest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 /**
@@ -39,10 +43,8 @@ class FlowsTest {
         val request = probe(hanzo)
         assertEquals(method, request.method)
         assertEquals(path, request.path)
-        // The document hanzoai/cloud emits declares no security scheme, so the
-        // generated calls carry no credential of their own; `Hanzo`'s
-        // interceptor is what puts the bearer and the org on every request, and
-        // this is the assertion that says it still does.
+        // `Hanzo`'s interceptor is what puts the bearer and the org on every
+        // request, and this is the assertion that says it still does.
         assertEquals("Bearer test-key", request.getHeader("Authorization"))
         assertEquals("test-org", request.getHeader("X-Org-Id"))
     }
@@ -71,11 +73,41 @@ class FlowsTest {
     /**
      * With no key the client sends no `Authorization` header, so the API is the
      * one that says no. `examples/hello` exists to show that answer.
+     *
+     * It holds even while another instance in this same process is holding a
+     * key, which is not free: the generated `ApiClient.accessToken` is one
+     * field per process, so a client that read it would inherit that key here.
+     * Setting the field first is how this test is made to mean that.
      */
     @Test
     fun anUnauthenticatedClientSendsNoCredential() {
+        ApiClient.accessToken = "someone-elses-key"
         val request = probe({ api(::KeysApi).getKeys() }, apiKey = null)
         assertNull(request.getHeader("Authorization"))
+    }
+
+    /**
+     * Two tenants, one process: each client sends the credential it was handed.
+     * The credential is a value on the instance, not a slot somewhere both can
+     * reach, so serving a second tenant cannot re-point the first one's calls.
+     */
+    @Test
+    fun eachClientKeepsItsOwnCredential() {
+        assertEquals("Bearer acme", probe({ api(::KeysApi).getKeys() }, apiKey = "acme").getHeader("Authorization"))
+        assertEquals("Bearer globex", probe({ api(::KeysApi).getKeys() }, apiKey = "globex").getHeader("Authorization"))
+    }
+
+    /**
+     * The document says which routes need the credential, and the client says
+     * it back. Four operations carry `security: []` — `get_models` is the one
+     * `hello` opens with — and every other one inherits the top-level `bearer`.
+     * Reading it off the generated request config is reading the declaration,
+     * not a probe result someone wrote down.
+     */
+    @Test
+    fun theDocumentSaysWhichRoutesNeedTheCredential() {
+        assertFalse(ModelsApi().getModelsRequestConfig().requiresAuthentication)
+        assertTrue(KeysApi().getKeysRequestConfig().requiresAuthentication)
     }
 
     @Test

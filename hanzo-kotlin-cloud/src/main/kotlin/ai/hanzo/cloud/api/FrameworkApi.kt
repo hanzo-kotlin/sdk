@@ -121,7 +121,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -191,7 +191,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -264,7 +264,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/roles/{user}/{role}".replace("{"+"user"+"}", encodeURIComponent(user.toString())).replace("{"+"role"+"}", encodeURIComponent(role.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -363,7 +363,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -439,7 +439,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -509,7 +509,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -582,7 +582,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -652,7 +652,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/modules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -725,7 +725,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/modules/{module}".replace("{"+"module"+"}", encodeURIComponent(module.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -795,7 +795,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -865,7 +865,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -935,7 +935,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1011,7 +1011,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}/cancel".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1087,7 +1087,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}/submit".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1161,7 +1161,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1234,7 +1234,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/modules/{module}/install".replace("{"+"module"+"}", encodeURIComponent(module.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1308,7 +1308,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1381,7 +1381,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1458,7 +1458,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

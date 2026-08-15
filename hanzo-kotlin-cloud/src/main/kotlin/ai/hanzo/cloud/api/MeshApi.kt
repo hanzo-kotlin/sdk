@@ -110,7 +110,7 @@ class MeshApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/mesh/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

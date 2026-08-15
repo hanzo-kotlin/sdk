@@ -141,7 +141,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -225,7 +225,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/transactions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -303,7 +303,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/unreconciled",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -405,7 +405,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/export",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -489,7 +489,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/gl",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -567,7 +567,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/inbox",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -657,7 +657,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -747,7 +747,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/pnl",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -831,7 +831,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/position",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -909,7 +909,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/questions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -987,7 +987,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1095,7 +1095,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/transactions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1185,7 +1185,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/trial",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1263,7 +1263,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/vendors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1337,7 +1337,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/ask",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1404,7 +1404,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/exchange",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1478,7 +1478,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/import",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1548,7 +1548,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1615,7 +1615,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1689,7 +1689,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/inbox",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1763,7 +1763,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1837,7 +1837,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/scan",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1911,7 +1911,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/scan/book",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1981,7 +1981,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2055,7 +2055,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/vendors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

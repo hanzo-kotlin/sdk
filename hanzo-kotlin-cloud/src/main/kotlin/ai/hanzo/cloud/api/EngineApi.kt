@@ -118,7 +118,7 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/engine/model",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -188,7 +188,7 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/engine/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -258,7 +258,7 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/engine/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -328,7 +328,7 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/engine/system",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

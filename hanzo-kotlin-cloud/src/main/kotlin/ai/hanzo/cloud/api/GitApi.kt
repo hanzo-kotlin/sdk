@@ -137,7 +137,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/keys/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -207,7 +207,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -280,7 +280,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/mirrors/{id}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -353,7 +353,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/subscriptions/{id}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -429,7 +429,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{project}/{repo}/info/refs".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -502,7 +502,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{repo}/info/refs".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -572,7 +572,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -642,7 +642,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -715,7 +715,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -802,7 +802,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/blob".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -895,7 +895,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/commits".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -982,7 +982,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/files".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1055,7 +1055,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/mirrors".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1136,7 +1136,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/pulls".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1212,7 +1212,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/pulls/{number}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"number"+"}", encodeURIComponent(number.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1293,7 +1293,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/readme".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1366,7 +1366,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/refs".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1439,7 +1439,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/subscriptions".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1526,7 +1526,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/tree".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1596,7 +1596,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1673,7 +1673,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1753,7 +1753,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{project}/{repo}/git-receive-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1833,7 +1833,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{project}/{repo}/git-upload-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1910,7 +1910,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{repo}/git-receive-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1987,7 +1987,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{repo}/git-upload-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2061,7 +2061,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2135,7 +2135,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2208,7 +2208,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/gc".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2285,7 +2285,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/mirror".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2362,7 +2362,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/mirrors".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2439,7 +2439,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/pulls".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2515,7 +2515,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/pulls/{number}/merge".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"number"+"}", encodeURIComponent(number.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2592,7 +2592,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/push".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2669,7 +2669,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/subscriptions".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2736,7 +2736,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2807,7 +2807,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/createRepo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2878,7 +2878,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/deleteRepo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -2949,7 +2949,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/getRepo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3016,7 +3016,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/listRepos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -3083,7 +3083,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

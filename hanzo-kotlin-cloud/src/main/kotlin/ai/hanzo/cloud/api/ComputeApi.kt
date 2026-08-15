@@ -111,7 +111,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -184,7 +184,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -251,7 +251,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/regions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -318,7 +318,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/sizes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -388,7 +388,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -461,7 +461,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots/{id}/{action}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"action"+"}", encodeURIComponent(action.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -528,7 +528,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots/launch",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

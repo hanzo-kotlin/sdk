@@ -133,7 +133,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -213,7 +213,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -287,7 +287,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/add-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -361,7 +361,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/add-organization",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -435,7 +435,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/add-project",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -509,7 +509,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/add-provider",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -583,7 +583,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/add-role",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -657,7 +657,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/add-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -731,7 +731,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/add-workspace",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -805,7 +805,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -879,7 +879,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/delete-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -953,7 +953,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/delete-organization",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1027,7 +1027,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/delete-project",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1101,7 +1101,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/delete-provider",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1175,7 +1175,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/delete-role",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1249,7 +1249,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/delete-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1323,7 +1323,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/delete-workspace",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1397,7 +1397,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/update-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1471,7 +1471,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/update-organization",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1545,7 +1545,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/update-provider",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1619,7 +1619,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/update-role",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1693,7 +1693,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/update-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -1767,7 +1767,7 @@ class CompatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }

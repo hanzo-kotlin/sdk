@@ -110,7 +110,7 @@ class AppearanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/appearance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
@@ -184,7 +184,7 @@ class AppearanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/appearance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = false,
+            requiresAuthentication = true,
             body = localVariableBody
         )
     }
