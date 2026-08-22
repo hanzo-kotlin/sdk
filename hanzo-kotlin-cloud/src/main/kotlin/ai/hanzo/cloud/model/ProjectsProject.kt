@@ -22,53 +22,58 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param analytics Analytics is the wired-by-default web-analytics flag (default true). It is the value the app's static-builder reads as deployment.analytics to inject the beacon. Space is the project's Base data space (\"<org>/<slug>\") a deployed site posts form/forum/data submissions to under /v1/base.
- * @param bucket 
- * @param cacheControl Cache is the site's edge-cache state: the HTML/document Cache-Control policy in effect (TTL) and the last edge-purge time, so a console can show freshness.
- * @param createdAt 
- * @param currentDeploymentId 
- * @param description 
+ * @param analytics Analytics is whether the web-analytics beacon is injected into this site's pages. It is ON by default — a project has to opt out — and it is what the static builder reads to decide whether to inject at all.
+ * @param bucket Bucket is the object-store bucket the site's files are served out of.
+ * @param cacheControl CacheControl is the Cache-Control policy the edge serves this site's HTML under — how long a reader may hold a stale page before asking again. Assets are content-addressed and are not governed by it.
+ * @param createdAt CreatedAt is when the project was created, as Unix seconds.
+ * @param currentDeploymentId CurrentDeploymentID names the deployment currently serving, so a caller can ask what is live without scanning the history.
+ * @param description Description is the one-line summary, which is copied onto forks of this project and shown on a gallery card.
  * @param forkedFrom ForkedFrom is the parent this project was forked from (\"<org>/<slug>\" of a published project, or a catalog template slug) — the attribution edge a gallery credits.
- * @param framework 
- * @param hidden 
- * @param hiddenReason 
- * @param id 
+ * @param framework Framework is a BUILD HINT from a closed set, defaulting to static. It tells CI how to build a linked repo and never gates a deploy, so a wrong value costs a build rather than access.
+ * @param hidden Hidden is PLATFORM MODERATION, and it is a different axis from visibility: it pulls a public project out of the catalogue without editing the publisher's own choice, so un-hiding restores exactly what they asked for. A project is listed only when it is public AND not hidden. Always present, never omitted, for the same reason as visibility.
+ * @param hiddenReason HiddenReason is why moderation hid it. Absent when it is not hidden.
+ * @param id ID is the project's internal identifier. It is stable across a rename, but it is not what the API addresses this project by — `slug` is.
  * @param key Key is the project's publishable ingest key, minted at create. It is the value the injected beacon carries and the ONE thing that attributes this site's events; the static-builder reads it beside analytics.  Publishable means it belongs in a page's source: it names a write scope and mints no principal, so it is returned in full rather than masked. Masking it would only mean every caller needed a second endpoint to get the thing the page already ships.
- * @param lastPurgeAt 
- * @param license 
- * @param liveUrl 
- * @param name 
- * @param org 
- * @param repo 
- * @param slug 
- * @param space 
- * @param status 
+ * @param lastPurgeAt LastPurgeAt is when the edge cache was last cleared, as Unix seconds, so a console can say how fresh what readers see actually is. Absent means never.
+ * @param license License is the terms that upstream work carries. Absent has the same reading: undeclared, not unencumbered.
+ * @param liveUrl LiveURL is where the site answers today. Absent until something has been deployed.
+ * @param name Name is the project's display name, free text a person chose.
+ * @param org Org is the organisation that owns the project, and therefore who pays for it and who may change it. It is also the AUTHORSHIP line a gallery credits; there is no separate author field.
+ * @param repo Repo is the git source this project builds from, empty when it is deployed by uploading an artifact instead.
+ * @param slug Slug is the identifier that MATTERS: the handle every later call addresses, the S3 key segment the site's objects live under, and the label of the public host `<slug>.hanzo.app`. Because it is a hostname it is constrained and reserved labels such as `api` are refused.
+ * @param space Space is the project's Base data space, which is where a deployed site's form, forum and data submissions land. Absent means the site stores nothing.
+ * @param starred Starred is THIS CALLER's star, not a property of the project — two people in the same org see different values for the same row, which is the whole point of it. Always present so a client can tell \"not starred\" from \"this API is too old to say\", the same reason visibility and hidden are.
+ * @param status Status is where the project stands — whether a build has ever succeeded and whether anything is serving right now.
  * @param tags Tags is the site's browser tag config: platform slug → non-secret pixel id (GA measurement, Meta pixel, …) — what track.js injects and the server CAPI reads, per site. Omitted when none are set. The API SECRET is never here (KMS).
- * @param updatedAt 
- * @param upstream Upstream/License credit the third-party work this project was published from, and the terms it carries. Omitted when nothing is declared: an absent credit means \"nobody has said\", not \"there is nothing to say\".
+ * @param updatedAt UpdatedAt is when the project's own record last changed, as Unix seconds. A deploy is not an edit of the project, so this does not move on every publish.
+ * @param upstream Upstream credits the third-party work this project was published from — a free-text line, because the honest answer is a name and a title that no enum could hold. Absent means NOBODY HAS SAID, not that there is nothing to say.
  * @param visibility Visibility is \"public\" or \"private\", and Hidden reports platform moderation. Both are always present (never omitempty) so a consumer can tell a real answer from \"this API is too old to say\" — and so a console never renders a project as public because a field was missing.  Authorship is deliberately absent: it is Org, above.
  */
 
 
 data class ProjectsProject (
 
-    /* Analytics is the wired-by-default web-analytics flag (default true). It is the value the app's static-builder reads as deployment.analytics to inject the beacon. Space is the project's Base data space (\"<org>/<slug>\") a deployed site posts form/forum/data submissions to under /v1/base. */
+    /* Analytics is whether the web-analytics beacon is injected into this site's pages. It is ON by default — a project has to opt out — and it is what the static builder reads to decide whether to inject at all. */
     @SerializedName("analytics")
     val analytics: kotlin.Boolean? = null,
 
+    /* Bucket is the object-store bucket the site's files are served out of. */
     @SerializedName("bucket")
     val bucket: kotlin.String? = null,
 
-    /* Cache is the site's edge-cache state: the HTML/document Cache-Control policy in effect (TTL) and the last edge-purge time, so a console can show freshness. */
+    /* CacheControl is the Cache-Control policy the edge serves this site's HTML under — how long a reader may hold a stale page before asking again. Assets are content-addressed and are not governed by it. */
     @SerializedName("cacheControl")
     val cacheControl: kotlin.String? = null,
 
+    /* CreatedAt is when the project was created, as Unix seconds. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* CurrentDeploymentID names the deployment currently serving, so a caller can ask what is live without scanning the history. */
     @SerializedName("currentDeploymentId")
     val currentDeploymentId: kotlin.String? = null,
 
+    /* Description is the one-line summary, which is copied onto forks of this project and shown on a gallery card. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
@@ -76,15 +81,19 @@ data class ProjectsProject (
     @SerializedName("forkedFrom")
     val forkedFrom: kotlin.String? = null,
 
+    /* Framework is a BUILD HINT from a closed set, defaulting to static. It tells CI how to build a linked repo and never gates a deploy, so a wrong value costs a build rather than access. */
     @SerializedName("framework")
     val framework: kotlin.String? = null,
 
+    /* Hidden is PLATFORM MODERATION, and it is a different axis from visibility: it pulls a public project out of the catalogue without editing the publisher's own choice, so un-hiding restores exactly what they asked for. A project is listed only when it is public AND not hidden. Always present, never omitted, for the same reason as visibility. */
     @SerializedName("hidden")
     val hidden: kotlin.Boolean? = null,
 
+    /* HiddenReason is why moderation hid it. Absent when it is not hidden. */
     @SerializedName("hiddenReason")
     val hiddenReason: kotlin.String? = null,
 
+    /* ID is the project's internal identifier. It is stable across a rename, but it is not what the API addresses this project by — `slug` is. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
@@ -92,30 +101,43 @@ data class ProjectsProject (
     @SerializedName("key")
     val key: kotlin.String? = null,
 
+    /* LastPurgeAt is when the edge cache was last cleared, as Unix seconds, so a console can say how fresh what readers see actually is. Absent means never. */
     @SerializedName("lastPurgeAt")
     val lastPurgeAt: kotlin.Int? = null,
 
+    /* License is the terms that upstream work carries. Absent has the same reading: undeclared, not unencumbered. */
     @SerializedName("license")
     val license: kotlin.String? = null,
 
+    /* LiveURL is where the site answers today. Absent until something has been deployed. */
     @SerializedName("liveUrl")
     val liveUrl: kotlin.String? = null,
 
+    /* Name is the project's display name, free text a person chose. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Org is the organisation that owns the project, and therefore who pays for it and who may change it. It is also the AUTHORSHIP line a gallery credits; there is no separate author field. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Repo is the git source this project builds from, empty when it is deployed by uploading an artifact instead. */
     @SerializedName("repo")
     val repo: ProjectsRepo? = null,
 
+    /* Slug is the identifier that MATTERS: the handle every later call addresses, the S3 key segment the site's objects live under, and the label of the public host `<slug>.hanzo.app`. Because it is a hostname it is constrained and reserved labels such as `api` are refused. */
     @SerializedName("slug")
     val slug: kotlin.String? = null,
 
+    /* Space is the project's Base data space, which is where a deployed site's form, forum and data submissions land. Absent means the site stores nothing. */
     @SerializedName("space")
     val space: kotlin.String? = null,
 
+    /* Starred is THIS CALLER's star, not a property of the project — two people in the same org see different values for the same row, which is the whole point of it. Always present so a client can tell \"not starred\" from \"this API is too old to say\", the same reason visibility and hidden are. */
+    @SerializedName("starred")
+    val starred: kotlin.Boolean? = null,
+
+    /* Status is where the project stands — whether a build has ever succeeded and whether anything is serving right now. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
@@ -123,10 +145,11 @@ data class ProjectsProject (
     @SerializedName("tags")
     val tags: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
 
+    /* UpdatedAt is when the project's own record last changed, as Unix seconds. A deploy is not an edit of the project, so this does not move on every publish. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null,
 
-    /* Upstream/License credit the third-party work this project was published from, and the terms it carries. Omitted when nothing is declared: an absent credit means \"nobody has said\", not \"there is nothing to say\". */
+    /* Upstream credits the third-party work this project was published from — a free-text line, because the honest answer is a name and a title that no enum could hold. Absent means NOBODY HAS SAID, not that there is nothing to say. */
     @SerializedName("upstream")
     val upstream: kotlin.String? = null,
 

@@ -21,33 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param endLine 
- * @param file 
- * @param kind 
- * @param line 
- * @param repo 
+ * @param endLine EndLine is the last line of the span, inclusive. It equals Line for a one-line span rather than being zero or absent.
+ * @param file File is the path inside the repo, relative to its root and never absolute.
+ * @param kind Kind is what the indexer decided this chunk IS — \"func\", \"method\", \"type\", \"struct\", \"interface\", \"var\", \"const\", or \"block\" for a run of code that declares nothing. Absent when the chunker could not classify it.
+ * @param line Line is where the span starts, 1-based, as an editor counts.
+ * @param repo Repo is the indexed repository the span was found in, as it was indexed (\"owner/name\"). A search may be scoped to one repo or run across all of them, so this is how a caller tells the results apart.
  * @param role context: match | definition | caller
- * @param score 
- * @param snippet 
- * @param symbol 
- * @param tier 
+ * @param score Score ranks this span against the OTHERS IN THE SAME RESPONSE and means nothing across responses or between tiers: the hybrid tier's number is a reciprocal-rank fusion sum (Σ 1/(60+rank), so tenths at best), the symbol tier's is a descending position count, and the text and semantic tiers pass through bm25 and cosine. Compare within a list; never threshold on it.
+ * @param snippet Snippet is the code itself: a bounded excerpt on /search, the whole chunk on /context — which is why the same type serves both and why a /context span is the one an agent pastes into its window.
+ * @param symbol Symbol is the declared name, when the span declares one. Absent on a block.
+ * @param tier Tier is which retrieval produced the span: \"hybrid\" (the default — all three fused), \"text\" (trigram/FTS), \"regex\", \"semantic\" (vector), or \"symbol\". It is what explains a Score, so the two travel together.
  */
 
 
 data class Span (
 
+    /* EndLine is the last line of the span, inclusive. It equals Line for a one-line span rather than being zero or absent. */
     @SerializedName("endLine")
     val endLine: kotlin.Int? = null,
 
+    /* File is the path inside the repo, relative to its root and never absolute. */
     @SerializedName("file")
     val file: kotlin.String? = null,
 
+    /* Kind is what the indexer decided this chunk IS — \"func\", \"method\", \"type\", \"struct\", \"interface\", \"var\", \"const\", or \"block\" for a run of code that declares nothing. Absent when the chunker could not classify it. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Line is where the span starts, 1-based, as an editor counts. */
     @SerializedName("line")
     val line: kotlin.Int? = null,
 
+    /* Repo is the indexed repository the span was found in, as it was indexed (\"owner/name\"). A search may be scoped to one repo or run across all of them, so this is how a caller tells the results apart. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
@@ -55,15 +60,19 @@ data class Span (
     @SerializedName("role")
     val role: kotlin.String? = null,
 
+    /* Score ranks this span against the OTHERS IN THE SAME RESPONSE and means nothing across responses or between tiers: the hybrid tier's number is a reciprocal-rank fusion sum (Σ 1/(60+rank), so tenths at best), the symbol tier's is a descending position count, and the text and semantic tiers pass through bm25 and cosine. Compare within a list; never threshold on it. */
     @SerializedName("score")
     val score: java.math.BigDecimal? = null,
 
+    /* Snippet is the code itself: a bounded excerpt on /search, the whole chunk on /context — which is why the same type serves both and why a /context span is the one an agent pastes into its window. */
     @SerializedName("snippet")
     val snippet: kotlin.String? = null,
 
+    /* Symbol is the declared name, when the span declares one. Absent on a block. */
     @SerializedName("symbol")
     val symbol: kotlin.String? = null,
 
+    /* Tier is which retrieval produced the span: \"hybrid\" (the default — all three fused), \"text\" (trigram/FTS), \"regex\", \"semantic\" (vector), or \"symbol\". It is what explains a Score, so the two travel together. */
     @SerializedName("tier")
     val tier: kotlin.String? = null
 

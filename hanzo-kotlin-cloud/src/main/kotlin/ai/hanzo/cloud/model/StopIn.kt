@@ -21,12 +21,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param id 
+ * @param id ID is the sandbox to interrupt, from an earlier lease. Every command running in it stops; the lease itself survives, so the checkout and the half-written files are still there to read. Use EndIn to give the computer back.
  */
 
 
 data class StopIn (
 
+    /* ID is the sandbox to interrupt, from an earlier lease. Every command running in it stops; the lease itself survives, so the checkout and the half-written files are still there to read. Use EndIn to give the computer back. */
     @SerializedName("id")
     val id: kotlin.String? = null
 

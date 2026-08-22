@@ -21,36 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param account 
- * @param amount formatted figure ($…)
- * @param id the source transaction id it concerns
- * @param kind outlier|reversal|roundoff|uncosted|overdrawn
- * @param postedAt 
- * @param text the specific question to ask the founder
+ * @param account Account is the chart number the questioned entry posted to, where one applies.
+ * @param amount Amount is the figure that makes the question concrete, already FORMATTED for display with its currency symbol — a string, not cents, and not for arithmetic.
+ * @param id ID is the source transaction the question is about, so answering it leads straight back to the entry that raised it.
+ * @param kind Kind is what looked wrong: outlier (a charge far above the usual), reversal (a posting undone), roundoff (a balancing plug big enough to be worth explaining), uncosted (revenue booked with no cost matched to it), or overdrawn (a wallet spent past its balance).
+ * @param postedAt PostedAt anchors the question in time — when the entry it concerns posted.
+ * @param text Text is the question itself, written for a founder to answer directly.
  */
 
 
 data class Question (
 
+    /* Account is the chart number the questioned entry posted to, where one applies. */
     @SerializedName("account")
     val account: kotlin.String? = null,
 
-    /* formatted figure ($…) */
+    /* Amount is the figure that makes the question concrete, already FORMATTED for display with its currency symbol — a string, not cents, and not for arithmetic. */
     @SerializedName("amount")
     val amount: kotlin.String? = null,
 
-    /* the source transaction id it concerns */
+    /* ID is the source transaction the question is about, so answering it leads straight back to the entry that raised it. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* outlier|reversal|roundoff|uncosted|overdrawn */
+    /* Kind is what looked wrong: outlier (a charge far above the usual), reversal (a posting undone), roundoff (a balancing plug big enough to be worth explaining), uncosted (revenue booked with no cost matched to it), or overdrawn (a wallet spent past its balance). */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* PostedAt anchors the question in time — when the entry it concerns posted. */
     @SerializedName("postedAt")
     val postedAt: kotlin.String? = null,
 
-    /* the specific question to ask the founder */
+    /* Text is the question itself, written for a founder to answer directly. */
     @SerializedName("text")
     val text: kotlin.String? = null
 

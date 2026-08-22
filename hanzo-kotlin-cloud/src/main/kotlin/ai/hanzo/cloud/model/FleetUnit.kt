@@ -23,53 +23,63 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param host 
- * @param kind 
- * @param label 
- * @param metrics 
- * @param queued 
- * @param running Running is what the unit is actively executing: agent sessions for a run-target, in-flight renders for a BYO GPU. Queued is the gpu-jobs backlog on this GPU's lane (BYO units only; an agent unit does not queue). Both come from the org's gpu-jobs queue for BYO units, overlaid in listFleet.
- * @param sessions 
- * @param source 
- * @param spec 
- * @param status 
- * @param unit 
+ * @param host Host is the unit's hostname. Empty for a unit that is not one host: a cluster row has no hostname to report.
+ * @param kind Kind is what the unit IS: laptop, cloud, gpu, cluster, machine or worker.
+ * @param label Label is the name to show a human — a target's label, a worker's hostname, a machine's display name. Empty when the source has none to give.
+ * @param metrics Metrics is the unit's latest utilization: its own live snapshot when it keeps one (a run-target's heartbeat wins), else the newest sample from the series for the SAME source. Absent means nothing is known about this unit's load — which is deliberately not the same as a reading of zero.
+ * @param queued Queued is how many renders are waiting on THIS GPU's own lane in the org's gpu-jobs queue. BYO units only — an agent run-target dispatches, it does not queue — and omitted when nothing is waiting.
+ * @param running Running is what the unit is executing right now: agent sessions in flight for a run-target, claimed renders for a BYO GPU.
+ * @param sessions Sessions is how many agent sessions are open on this unit. Always present, and 0 for a source that cannot host agent sessions at all — a fact about that plane, not a gap in the reading.
+ * @param source Source is the plane this row came from: \"agent\" (a linked run-target), \"byo\" (a worker or cluster the org dialed in) or \"visor\" (a machine Hanzo provisioned). It is half the row's identity, and it says which face owns the unit — /v1/agents/targets, /v1/visor/fleet/workers, /v1/visor/machines.
+ * @param spec Spec is the unit's static capability. Absent when the source reported none — unknown capability, never a zeroed one.
+ * @param status Status is liveness in the SOURCE's own vocabulary, because each plane decides it differently: a run-target's is derived from its heartbeat, a BYO worker's is online/offline on the 90s window, a BYO cluster's is \"attached\", and a Visor machine's is the provider's word for its lifecycle state.
+ * @param unit Unit is the SOURCE's own id for this unit — a run-target id, a BYO worker id, a Visor machine name — so a row links straight back to the face that owns it. It is unique within a source, not across them: two planes may mint the same id, which is why (source, unit) together is the identity.
  */
 
 
 data class FleetUnit (
 
+    /* Host is the unit's hostname. Empty for a unit that is not one host: a cluster row has no hostname to report. */
     @SerializedName("host")
     val host: kotlin.String? = null,
 
+    /* Kind is what the unit IS: laptop, cloud, gpu, cluster, machine or worker. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Label is the name to show a human — a target's label, a worker's hostname, a machine's display name. Empty when the source has none to give. */
     @SerializedName("label")
     val label: kotlin.String? = null,
 
+    /* Metrics is the unit's latest utilization: its own live snapshot when it keeps one (a run-target's heartbeat wins), else the newest sample from the series for the SAME source. Absent means nothing is known about this unit's load — which is deliberately not the same as a reading of zero. */
     @SerializedName("metrics")
     val metrics: FleetMetrics? = null,
 
+    /* Queued is how many renders are waiting on THIS GPU's own lane in the org's gpu-jobs queue. BYO units only — an agent run-target dispatches, it does not queue — and omitted when nothing is waiting. */
     @SerializedName("queued")
     val queued: kotlin.Int? = null,
 
-    /* Running is what the unit is actively executing: agent sessions for a run-target, in-flight renders for a BYO GPU. Queued is the gpu-jobs backlog on this GPU's lane (BYO units only; an agent unit does not queue). Both come from the org's gpu-jobs queue for BYO units, overlaid in listFleet. */
+    /* Running is what the unit is executing right now: agent sessions in flight for a run-target, claimed renders for a BYO GPU. */
     @SerializedName("running")
     val running: kotlin.Int? = null,
 
+    /* Sessions is how many agent sessions are open on this unit. Always present, and 0 for a source that cannot host agent sessions at all — a fact about that plane, not a gap in the reading. */
     @SerializedName("sessions")
     val sessions: kotlin.Int? = null,
 
+    /* Source is the plane this row came from: \"agent\" (a linked run-target), \"byo\" (a worker or cluster the org dialed in) or \"visor\" (a machine Hanzo provisioned). It is half the row's identity, and it says which face owns the unit — /v1/agents/targets, /v1/visor/fleet/workers, /v1/visor/machines. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Spec is the unit's static capability. Absent when the source reported none — unknown capability, never a zeroed one. */
     @SerializedName("spec")
     val spec: FleetSpec? = null,
 
+    /* Status is liveness in the SOURCE's own vocabulary, because each plane decides it differently: a run-target's is derived from its heartbeat, a BYO worker's is online/offline on the 90s window, a BYO cluster's is \"attached\", and a Visor machine's is the provider's word for its lifecycle state. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Unit is the SOURCE's own id for this unit — a run-target id, a BYO worker id, a Visor machine name — so a row links straight back to the face that owns it. It is unique within a source, not across them: two planes may mint the same id, which is why (source, unit) together is the identity. */
     @SerializedName("unit")
     val unit: kotlin.String? = null
 

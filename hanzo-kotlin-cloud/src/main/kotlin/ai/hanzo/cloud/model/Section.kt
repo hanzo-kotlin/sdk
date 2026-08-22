@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param detail 
- * @param enabled 
- * @param id 
- * @param order 
- * @param title 
+ * @param detail Detail is what this phase of the journey is for, in prose.
+ * @param enabled Enabled is the admin lever. Absent reads as ON, so only an explicit false turns a phase off — and it takes every step filed under it out of the journey, not just the heading.
+ * @param id ID is the slug a step's `section` names to file itself under this phase.
+ * @param order Order places the phase in the journey, ascending. Ties fall back to authoring order, and an omitted order sorts as 0 — ahead of everything.
+ * @param title Title is the phase heading a person reads above its steps.
  */
 
 
 data class Section (
 
+    /* Detail is what this phase of the journey is for, in prose. */
     @SerializedName("detail")
     val detail: kotlin.String? = null,
 
+    /* Enabled is the admin lever. Absent reads as ON, so only an explicit false turns a phase off — and it takes every step filed under it out of the journey, not just the heading. */
     @SerializedName("enabled")
     val enabled: kotlin.Boolean? = null,
 
+    /* ID is the slug a step's `section` names to file itself under this phase. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Order places the phase in the journey, ascending. Ties fall back to authoring order, and an omitted order sorts as 0 — ahead of everything. */
     @SerializedName("order")
     val order: kotlin.Int? = null,
 
+    /* Title is the phase heading a person reads above its steps. */
     @SerializedName("title")
     val title: kotlin.String? = null
 

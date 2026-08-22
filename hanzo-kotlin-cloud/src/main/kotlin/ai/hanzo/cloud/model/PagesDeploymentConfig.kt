@@ -25,32 +25,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param compatibilityDate 
- * @param compatibilityFlags 
- * @param d1Databases 
- * @param envVars 
- * @param kvNamespaces 
- * @param r2Buckets 
+ * @param compatibilityDate CompatibilityDate pins which Workers runtime behaviour the functions run under, as a date (\"2024-01-01\"). It is a pin, not a version: the runtime keeps that date's semantics for code deployed against it.
+ * @param compatibilityFlags CompatibilityFlags turn individual runtime behaviours on or off ahead of, or behind, the date above (\"nodejs_compat\").
+ * @param d1Databases D1Databases binds D1 databases in, keyed by binding name.
+ * @param envVars EnvVars are the environment variables the functions see, KEYED BY VARIABLE NAME. The key is the name; the value carries the value and whether it is a secret.
+ * @param kvNamespaces KVNamespaces binds KV namespaces into the functions, KEYED BY THE BINDING NAME the code reads (`env.SESSIONS`). Same shape for the two below.
+ * @param r2Buckets R2Buckets binds R2 buckets in, keyed by binding name.
  */
 
 
 data class PagesDeploymentConfig (
 
+    /* CompatibilityDate pins which Workers runtime behaviour the functions run under, as a date (\"2024-01-01\"). It is a pin, not a version: the runtime keeps that date's semantics for code deployed against it. */
     @SerializedName("compatibility_date")
     val compatibilityDate: kotlin.String? = null,
 
+    /* CompatibilityFlags turn individual runtime behaviours on or off ahead of, or behind, the date above (\"nodejs_compat\"). */
     @SerializedName("compatibility_flags")
     val compatibilityFlags: kotlin.collections.List<kotlin.String>? = null,
 
+    /* D1Databases binds D1 databases in, keyed by binding name. */
     @SerializedName("d1_databases")
     val d1Databases: kotlin.collections.Map<kotlin.String, PagesD1Binding>? = null,
 
+    /* EnvVars are the environment variables the functions see, KEYED BY VARIABLE NAME. The key is the name; the value carries the value and whether it is a secret. */
     @SerializedName("env_vars")
     val envVars: kotlin.collections.Map<kotlin.String, PagesEnvVar>? = null,
 
+    /* KVNamespaces binds KV namespaces into the functions, KEYED BY THE BINDING NAME the code reads (`env.SESSIONS`). Same shape for the two below. */
     @SerializedName("kv_namespaces")
     val kvNamespaces: kotlin.collections.Map<kotlin.String, PagesKVBinding>? = null,
 
+    /* R2Buckets binds R2 buckets in, keyed by binding name. */
     @SerializedName("r2_buckets")
     val r2Buckets: kotlin.collections.Map<kotlin.String, PagesR2Binding>? = null
 

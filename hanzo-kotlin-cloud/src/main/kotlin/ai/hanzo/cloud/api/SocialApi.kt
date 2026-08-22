@@ -19,6 +19,16 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.SocialAccount
+import ai.hanzo.cloud.model.SocialAccountBody
+import ai.hanzo.cloud.model.SocialAccountWrite
+import ai.hanzo.cloud.model.SocialAccounts
+import ai.hanzo.cloud.model.SocialPost
+import ai.hanzo.cloud.model.SocialPostBody
+import ai.hanzo.cloud.model.SocialPostWrite
+import ai.hanzo.cloud.model.SocialPosts
+import ai.hanzo.cloud.model.SocialProviders
+import ai.hanzo.cloud.model.SocialSummary
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,9 +56,9 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/social/accounts/{id}
-     * Disconnect one account
-     * Removes one connected account from the org and answers 204 with no body; an id that is not there is 404.  It removes the account record only. Posts that already published through it keep their published state and their recorded external ids — this does not retract anything from the network.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
+     * Removes one connected account from the org and answers 204 with no body; an id that is not there is 404.
+     * Removes one connected account from the org and answers 204 with no body; an id that is not there is 404.  It removes the account record only. Posts that already published through it keep their published state and their recorded external ids — this does not retract anything from the network.
+     * @param id ID is the account or post to act on, taken from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -77,9 +87,9 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/social/accounts/{id}
-     * Disconnect one account
-     * Removes one connected account from the org and answers 204 with no body; an id that is not there is 404.  It removes the account record only. Posts that already published through it keep their published state and their recorded external ids — this does not retract anything from the network.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
+     * Removes one connected account from the org and answers 204 with no body; an id that is not there is 404.
+     * Removes one connected account from the org and answers 204 with no body; an id that is not there is 404.  It removes the account record only. Posts that already published through it keep their published state and their recorded external ids — this does not retract anything from the network.
+     * @param id ID is the account or post to act on, taken from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -96,7 +106,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation deleteSocialAccountsById
      *
-     * @param id 
+     * @param id ID is the account or post to act on, taken from the path.
      * @return RequestConfig
      */
     fun deleteSocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
@@ -116,9 +126,9 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/social/posts/{id}
-     * Delete one post
-     * Removes one post from the org and answers 204 with no body; an id that is not there is 404.  It deletes the record here only. A post that has already published is not retracted from the network by deleting it.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
+     * Removes one post from the org and answers 204 with no body; an id that is not there is 404.
+     * Removes one post from the org and answers 204 with no body; an id that is not there is 404.  It deletes the record here only. A post that has already published is not retracted from the network by deleting it.
+     * @param id ID is the account or post to act on, taken from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -147,9 +157,9 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/social/posts/{id}
-     * Delete one post
-     * Removes one post from the org and answers 204 with no body; an id that is not there is 404.  It deletes the record here only. A post that has already published is not retracted from the network by deleting it.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
+     * Removes one post from the org and answers 204 with no body; an id that is not there is 404.
+     * Removes one post from the org and answers 204 with no body; an id that is not there is 404.  It deletes the record here only. A post that has already published is not retracted from the network by deleting it.
+     * @param id ID is the account or post to act on, taken from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -166,7 +176,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation deleteSocialPostsById
      *
-     * @param id 
+     * @param id ID is the account or post to act on, taken from the path.
      * @return RequestConfig
      */
     fun deleteSocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
@@ -186,21 +196,24 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/accounts
-     * List the social accounts connected to your org
-     * Returns the org&#39;s connected accounts — each one&#39;s id, network, handle, status and timestamps. &#x60;provider&#x60; filters to one network; &#x60;limit&#x60; bounds the page, defaulting to 200 and capped at 1000.  An account&#39;s provider access token is NEVER included in any response on this surface. Only the publisher reads it.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return void
+     * Returns the org&#39;s connected accounts — each one&#39;s id, network, handle, status and timestamps, most-recently-updated first.
+     * Returns the org&#39;s connected accounts — each one&#39;s id, network, handle, status and timestamps, most-recently-updated first.  An account&#39;s provider access token is NEVER included in any response on this surface. Only the publisher reads it.
+     * @param provider Provider keeps only accounts on one network — x, facebook, instagram, linkedin, tiktok, youtube or threads. Omit it for every network. It is lower-cased and trimmed before it is matched, and a value that names no network simply matches nothing rather than being refused. (optional)
+     * @param limit Limit bounds the page, defaulting to 200 and capped at 1000. It is a string rather than an integer on purpose: the route parses it with a leading trim and falls back to the default on anything it cannot read, so &#x60;?limit&#x3D;%2050&#x60; is a page of fifty today. An integer field would refuse the space and read an unparseable value as zero, which is a different page. (optional)
+     * @return SocialAccounts
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getSocialAccounts() : Unit {
-        val localVarResponse = getSocialAccountsWithHttpInfo()
+    fun getSocialAccounts(provider: kotlin.String? = null, limit: kotlin.String? = null) : SocialAccounts {
+        val localVarResponse = getSocialAccountsWithHttpInfo(provider = provider, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialAccounts
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -216,17 +229,20 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/accounts
-     * List the social accounts connected to your org
-     * Returns the org&#39;s connected accounts — each one&#39;s id, network, handle, status and timestamps. &#x60;provider&#x60; filters to one network; &#x60;limit&#x60; bounds the page, defaulting to 200 and capped at 1000.  An account&#39;s provider access token is NEVER included in any response on this surface. Only the publisher reads it.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return ApiResponse<Unit?>
+     * Returns the org&#39;s connected accounts — each one&#39;s id, network, handle, status and timestamps, most-recently-updated first.
+     * Returns the org&#39;s connected accounts — each one&#39;s id, network, handle, status and timestamps, most-recently-updated first.  An account&#39;s provider access token is NEVER included in any response on this surface. Only the publisher reads it.
+     * @param provider Provider keeps only accounts on one network — x, facebook, instagram, linkedin, tiktok, youtube or threads. Omit it for every network. It is lower-cased and trimmed before it is matched, and a value that names no network simply matches nothing rather than being refused. (optional)
+     * @param limit Limit bounds the page, defaulting to 200 and capped at 1000. It is a string rather than an integer on purpose: the route parses it with a leading trim and falls back to the default on anything it cannot read, so &#x60;?limit&#x3D;%2050&#x60; is a page of fifty today. An integer field would refuse the space and read an unparseable value as zero, which is a different page. (optional)
+     * @return ApiResponse<SocialAccounts?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getSocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getSocialAccountsRequestConfig()
+    fun getSocialAccountsWithHttpInfo(provider: kotlin.String?, limit: kotlin.String?) : ApiResponse<SocialAccounts?> {
+        val localVariableConfig = getSocialAccountsRequestConfig(provider = provider, limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, SocialAccounts>(
             localVariableConfig
         )
     }
@@ -234,13 +250,24 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation getSocialAccounts
      *
+     * @param provider Provider keeps only accounts on one network — x, facebook, instagram, linkedin, tiktok, youtube or threads. Omit it for every network. It is lower-cased and trimmed before it is matched, and a value that names no network simply matches nothing rather than being refused. (optional)
+     * @param limit Limit bounds the page, defaulting to 200 and capped at 1000. It is a string rather than an integer on purpose: the route parses it with a leading trim and falls back to the default on anything it cannot read, so &#x60;?limit&#x3D;%2050&#x60; is a page of fifty today. An integer field would refuse the space and read an unparseable value as zero, which is a different page. (optional)
      * @return RequestConfig
      */
-    fun getSocialAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getSocialAccountsRequestConfig(provider: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (provider != null) {
+                    put("provider", listOf(provider.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/social/accounts",
@@ -253,22 +280,23 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/accounts/{id}
-     * Read one connected account
-     * Returns one of the org&#39;s connected accounts by id — its network, handle, status and timestamps — or 404. The provider access token is not part of the response.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
-     * @return void
+     * Returns one of the org&#39;s connected accounts by id — its network, handle, status and timestamps — or 404.
+     * Returns one of the org&#39;s connected accounts by id — its network, handle, status and timestamps — or 404. The provider access token is not part of the response.
+     * @param id ID is the account or post to act on, taken from the path.
+     * @return SocialAccount
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getSocialAccountsById(id: kotlin.String) : Unit {
+    fun getSocialAccountsById(id: kotlin.String) : SocialAccount {
         val localVarResponse = getSocialAccountsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialAccount
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -284,18 +312,19 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/accounts/{id}
-     * Read one connected account
-     * Returns one of the org&#39;s connected accounts by id — its network, handle, status and timestamps — or 404. The provider access token is not part of the response.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Returns one of the org&#39;s connected accounts by id — its network, handle, status and timestamps — or 404.
+     * Returns one of the org&#39;s connected accounts by id — its network, handle, status and timestamps — or 404. The provider access token is not part of the response.
+     * @param id ID is the account or post to act on, taken from the path.
+     * @return ApiResponse<SocialAccount?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getSocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun getSocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SocialAccount?> {
         val localVariableConfig = getSocialAccountsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, SocialAccount>(
             localVariableConfig
         )
     }
@@ -303,14 +332,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation getSocialAccountsById
      *
-     * @param id 
+     * @param id ID is the account or post to act on, taken from the path.
      * @return RequestConfig
      */
     fun getSocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/social/accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -323,21 +353,24 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/posts
-     * List your org&#39;s posts
-     * Returns the org&#39;s posts — content, channel, status, scheduled time, media and timestamps. &#x60;status&#x60; filters to one of draft, scheduled, published or failed; &#x60;limit&#x60; bounds the page, defaulting to 200 and capped at 1000.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return void
+     * Returns the org&#39;s posts — content, channel, status, scheduled time, media and timestamps — most-recently-updated first.
+     * Returns the org&#39;s posts — content, channel, status, scheduled time, media and timestamps — most-recently-updated first.
+     * @param status Status keeps only posts in one state — draft, scheduled, published or failed. Omit it for every state. The transient publishing claim is not a user-visible state and matching it is not useful. (optional)
+     * @param limit Limit bounds the page, defaulting to 200 and capped at 1000. A string for the same reason accountFilter.Limit is. (optional)
+     * @return SocialPosts
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getSocialPosts() : Unit {
-        val localVarResponse = getSocialPostsWithHttpInfo()
+    fun getSocialPosts(status: kotlin.String? = null, limit: kotlin.String? = null) : SocialPosts {
+        val localVarResponse = getSocialPostsWithHttpInfo(status = status, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialPosts
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -353,17 +386,20 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/posts
-     * List your org&#39;s posts
-     * Returns the org&#39;s posts — content, channel, status, scheduled time, media and timestamps. &#x60;status&#x60; filters to one of draft, scheduled, published or failed; &#x60;limit&#x60; bounds the page, defaulting to 200 and capped at 1000.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return ApiResponse<Unit?>
+     * Returns the org&#39;s posts — content, channel, status, scheduled time, media and timestamps — most-recently-updated first.
+     * Returns the org&#39;s posts — content, channel, status, scheduled time, media and timestamps — most-recently-updated first.
+     * @param status Status keeps only posts in one state — draft, scheduled, published or failed. Omit it for every state. The transient publishing claim is not a user-visible state and matching it is not useful. (optional)
+     * @param limit Limit bounds the page, defaulting to 200 and capped at 1000. A string for the same reason accountFilter.Limit is. (optional)
+     * @return ApiResponse<SocialPosts?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getSocialPostsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getSocialPostsRequestConfig()
+    fun getSocialPostsWithHttpInfo(status: kotlin.String?, limit: kotlin.String?) : ApiResponse<SocialPosts?> {
+        val localVariableConfig = getSocialPostsRequestConfig(status = status, limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, SocialPosts>(
             localVariableConfig
         )
     }
@@ -371,13 +407,24 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation getSocialPosts
      *
+     * @param status Status keeps only posts in one state — draft, scheduled, published or failed. Omit it for every state. The transient publishing claim is not a user-visible state and matching it is not useful. (optional)
+     * @param limit Limit bounds the page, defaulting to 200 and capped at 1000. A string for the same reason accountFilter.Limit is. (optional)
      * @return RequestConfig
      */
-    fun getSocialPostsRequestConfig() : RequestConfig<Unit> {
+    fun getSocialPostsRequestConfig(status: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (status != null) {
+                    put("status", listOf(status.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/social/posts",
@@ -390,22 +437,23 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/posts/{id}
-     * Read one post
-     * Returns one of the org&#39;s posts by id, with its current status, scheduled time, media and — once it has published — the account and external id it published under. 404 when there is no such post for this org.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
-     * @return void
+     * Returns one of the org&#39;s posts by id, with its current status, scheduled time, media and — once it has published — the account and external id it published under.
+     * Returns one of the org&#39;s posts by id, with its current status, scheduled time, media and — once it has published — the account and external id it published under. 404 when there is no such post for this org.
+     * @param id ID is the account or post to act on, taken from the path.
+     * @return SocialPost
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getSocialPostsById(id: kotlin.String) : Unit {
+    fun getSocialPostsById(id: kotlin.String) : SocialPost {
         val localVarResponse = getSocialPostsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialPost
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -421,18 +469,19 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/posts/{id}
-     * Read one post
-     * Returns one of the org&#39;s posts by id, with its current status, scheduled time, media and — once it has published — the account and external id it published under. 404 when there is no such post for this org.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Returns one of the org&#39;s posts by id, with its current status, scheduled time, media and — once it has published — the account and external id it published under.
+     * Returns one of the org&#39;s posts by id, with its current status, scheduled time, media and — once it has published — the account and external id it published under. 404 when there is no such post for this org.
+     * @param id ID is the account or post to act on, taken from the path.
+     * @return ApiResponse<SocialPost?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getSocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun getSocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SocialPost?> {
         val localVariableConfig = getSocialPostsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, SocialPost>(
             localVariableConfig
         )
     }
@@ -440,14 +489,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation getSocialPostsById
      *
-     * @param id 
+     * @param id ID is the account or post to act on, taken from the path.
      * @return RequestConfig
      */
     fun getSocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/social/posts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -460,21 +510,22 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/providers
-     * Which networks this deployment can actually publish to
-     * Reports each supported network&#39;s publish-readiness: whether this deployment holds the OAuth application credentials for it and, when it does not, exactly which environment variables are missing.  This is a live read of the deployment&#39;s own configuration, not a static list of networks — it answers \&quot;can I connect this today\&quot;, which is what a connect affordance and a pre-cutover checklist both need. It says nothing about whether the caller has connected an account; that is the accounts listing.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return void
+     * Reports each supported network&#39;s publish-readiness: whether this deployment holds the OAuth application credentials for it and, when it does not, exactly which environment variables are missing.
+     * Reports each supported network&#39;s publish-readiness: whether this deployment holds the OAuth application credentials for it and, when it does not, exactly which environment variables are missing.  This is a live read of the deployment&#39;s own configuration, not a static list of networks — it answers \&quot;can I connect this today\&quot;, which is what a connect affordance and a pre-cutover checklist both need. It says nothing about whether the caller has connected an account; that is the accounts listing.
+     * @return SocialProviders
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getSocialProviders() : Unit {
+    fun getSocialProviders() : SocialProviders {
         val localVarResponse = getSocialProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialProviders
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -490,17 +541,18 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/providers
-     * Which networks this deployment can actually publish to
-     * Reports each supported network&#39;s publish-readiness: whether this deployment holds the OAuth application credentials for it and, when it does not, exactly which environment variables are missing.  This is a live read of the deployment&#39;s own configuration, not a static list of networks — it answers \&quot;can I connect this today\&quot;, which is what a connect affordance and a pre-cutover checklist both need. It says nothing about whether the caller has connected an account; that is the accounts listing.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return ApiResponse<Unit?>
+     * Reports each supported network&#39;s publish-readiness: whether this deployment holds the OAuth application credentials for it and, when it does not, exactly which environment variables are missing.
+     * Reports each supported network&#39;s publish-readiness: whether this deployment holds the OAuth application credentials for it and, when it does not, exactly which environment variables are missing.  This is a live read of the deployment&#39;s own configuration, not a static list of networks — it answers \&quot;can I connect this today\&quot;, which is what a connect affordance and a pre-cutover checklist both need. It says nothing about whether the caller has connected an account; that is the accounts listing.
+     * @return ApiResponse<SocialProviders?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getSocialProvidersWithHttpInfo() : ApiResponse<Unit?> {
+    fun getSocialProvidersWithHttpInfo() : ApiResponse<SocialProviders?> {
         val localVariableConfig = getSocialProvidersRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, SocialProviders>(
             localVariableConfig
         )
     }
@@ -514,7 +566,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/social/providers",
@@ -527,21 +580,22 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/summary
-     * Counts across your org&#39;s social presence
-     * Returns four counts for the caller&#39;s org: total posts, how many are scheduled, how many have published, and how many accounts are connected. It is the dashboard roll-up, computed over the org&#39;s own rows in one read.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return void
+     * Returns four counts for the caller&#39;s org: total posts, how many are scheduled, how many have published, and how many accounts are connected.
+     * Returns four counts for the caller&#39;s org: total posts, how many are scheduled, how many have published, and how many accounts are connected. It is the dashboard roll-up, computed over the org&#39;s own rows in one read.
+     * @return SocialSummary
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getSocialSummary() : Unit {
+    fun getSocialSummary() : SocialSummary {
         val localVarResponse = getSocialSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialSummary
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -557,17 +611,18 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/summary
-     * Counts across your org&#39;s social presence
-     * Returns four counts for the caller&#39;s org: total posts, how many are scheduled, how many have published, and how many accounts are connected. It is the dashboard roll-up, computed over the org&#39;s own rows in one read.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return ApiResponse<Unit?>
+     * Returns four counts for the caller&#39;s org: total posts, how many are scheduled, how many have published, and how many accounts are connected.
+     * Returns four counts for the caller&#39;s org: total posts, how many are scheduled, how many have published, and how many accounts are connected. It is the dashboard roll-up, computed over the org&#39;s own rows in one read.
+     * @return ApiResponse<SocialSummary?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getSocialSummaryWithHttpInfo() : ApiResponse<Unit?> {
+    fun getSocialSummaryWithHttpInfo() : ApiResponse<SocialSummary?> {
         val localVariableConfig = getSocialSummaryRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, SocialSummary>(
             localVariableConfig
         )
     }
@@ -581,7 +636,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/social/summary",
@@ -594,21 +650,23 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/accounts
-     * Connect a social account to your org
-     * Records a social account for the org and answers 201 with the stored row, including the generated id later calls address it by.  &#x60;provider&#x60; must be one of x, facebook, instagram, linkedin, tiktok, youtube or threads, defaulting to x when omitted. &#x60;status&#x60; is one of connected, disconnected or error, defaulting to connected. The handle is trimmed and bounded at 1024 characters.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return void
+     * Records a social account for the org and answers 201 with the stored row, including the generated id later calls address it by.
+     * Records a social account for the org and answers 201 with the stored row, including the generated id later calls address it by.
+     * @param socialAccountBody 
+     * @return SocialAccount
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postSocialAccounts() : Unit {
-        val localVarResponse = postSocialAccountsWithHttpInfo()
+    fun postSocialAccounts(socialAccountBody: SocialAccountBody) : SocialAccount {
+        val localVarResponse = postSocialAccountsWithHttpInfo(socialAccountBody = socialAccountBody)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialAccount
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -624,17 +682,19 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/accounts
-     * Connect a social account to your org
-     * Records a social account for the org and answers 201 with the stored row, including the generated id later calls address it by.  &#x60;provider&#x60; must be one of x, facebook, instagram, linkedin, tiktok, youtube or threads, defaulting to x when omitted. &#x60;status&#x60; is one of connected, disconnected or error, defaulting to connected. The handle is trimmed and bounded at 1024 characters.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return ApiResponse<Unit?>
+     * Records a social account for the org and answers 201 with the stored row, including the generated id later calls address it by.
+     * Records a social account for the org and answers 201 with the stored row, including the generated id later calls address it by.
+     * @param socialAccountBody 
+     * @return ApiResponse<SocialAccount?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postSocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postSocialAccountsRequestConfig()
+    fun postSocialAccountsWithHttpInfo(socialAccountBody: SocialAccountBody) : ApiResponse<SocialAccount?> {
+        val localVariableConfig = postSocialAccountsRequestConfig(socialAccountBody = socialAccountBody)
 
-        return request<Unit, Unit>(
+        return request<SocialAccountBody, SocialAccount>(
             localVariableConfig
         )
     }
@@ -642,13 +702,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postSocialAccounts
      *
+     * @param socialAccountBody 
      * @return RequestConfig
      */
-    fun postSocialAccountsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postSocialAccountsRequestConfig(socialAccountBody: SocialAccountBody) : RequestConfig<SocialAccountBody> {
+        val localVariableBody = socialAccountBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/social/accounts",
@@ -661,21 +724,23 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/posts
-     * Create a post, and publish it if it is already due
-     * Stores a post for the org and answers 201 with the stored row.  A post created as scheduled for a time that has already passed is published IMMEDIATELY, and the row returned carries that outcome — this is the one behaviour a reader would otherwise miss. A future-scheduled post is left for the scheduler, and a draft is left alone. Publishing never fails the creation: the post is stored either way, and a publish that could not run leaves the row for the scheduler to retry.  &#x60;content&#x60; is required and bounded at 8192 characters; &#x60;channel&#x60; is one of the seven supported networks, defaulting to x; &#x60;status&#x60; is one of draft, scheduled, published or failed, defaulting to draft; up to 10 media URLs are kept, each bounded at 1024 characters.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return void
+     * Stores a post for the org and answers 201 with the stored row.
+     * Stores a post for the org and answers 201 with the stored row.  A post created as scheduled for a time that has already passed is published IMMEDIATELY, and the row returned carries that outcome — this is the one behaviour a reader would otherwise miss. A future-scheduled post is left for the scheduler, and a draft is left alone. Publishing never fails the creation: the post is stored either way, and a publish that could not run leaves the row for the scheduler to retry.
+     * @param socialPostBody 
+     * @return SocialPost
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postSocialPosts() : Unit {
-        val localVarResponse = postSocialPostsWithHttpInfo()
+    fun postSocialPosts(socialPostBody: SocialPostBody) : SocialPost {
+        val localVarResponse = postSocialPostsWithHttpInfo(socialPostBody = socialPostBody)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialPost
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -691,17 +756,19 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/posts
-     * Create a post, and publish it if it is already due
-     * Stores a post for the org and answers 201 with the stored row.  A post created as scheduled for a time that has already passed is published IMMEDIATELY, and the row returned carries that outcome — this is the one behaviour a reader would otherwise miss. A future-scheduled post is left for the scheduler, and a draft is left alone. Publishing never fails the creation: the post is stored either way, and a publish that could not run leaves the row for the scheduler to retry.  &#x60;content&#x60; is required and bounded at 8192 characters; &#x60;channel&#x60; is one of the seven supported networks, defaulting to x; &#x60;status&#x60; is one of draft, scheduled, published or failed, defaulting to draft; up to 10 media URLs are kept, each bounded at 1024 characters.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @return ApiResponse<Unit?>
+     * Stores a post for the org and answers 201 with the stored row.
+     * Stores a post for the org and answers 201 with the stored row.  A post created as scheduled for a time that has already passed is published IMMEDIATELY, and the row returned carries that outcome — this is the one behaviour a reader would otherwise miss. A future-scheduled post is left for the scheduler, and a draft is left alone. Publishing never fails the creation: the post is stored either way, and a publish that could not run leaves the row for the scheduler to retry.
+     * @param socialPostBody 
+     * @return ApiResponse<SocialPost?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postSocialPostsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postSocialPostsRequestConfig()
+    fun postSocialPostsWithHttpInfo(socialPostBody: SocialPostBody) : ApiResponse<SocialPost?> {
+        val localVariableConfig = postSocialPostsRequestConfig(socialPostBody = socialPostBody)
 
-        return request<Unit, Unit>(
+        return request<SocialPostBody, SocialPost>(
             localVariableConfig
         )
     }
@@ -709,13 +776,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postSocialPosts
      *
+     * @param socialPostBody 
      * @return RequestConfig
      */
-    fun postSocialPostsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postSocialPostsRequestConfig(socialPostBody: SocialPostBody) : RequestConfig<SocialPostBody> {
+        val localVariableBody = socialPostBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/social/posts",
@@ -728,22 +798,23 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/posts/{id}/publish
-     * Publish one post now
-     * Publishes the post immediately to the connected accounts on its channel and answers with the updated row, carrying the account and external id it published under.  It is IDEMPOTENT: a post that has already published, or that another caller is publishing right now, comes back unchanged rather than being posted twice. That claim is taken before any network call, which is what makes a double submit safe.  The two failure shapes differ on purpose. Having no connected account for the channel is the caller&#39;s to fix, so it is recorded ON the post as failed with the reason and answers normally. A deployment that lacks the network&#39;s own credentials cannot publish for anyone, so that is a 503 naming exactly what is missing.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
-     * @return void
+     * Publishes the post immediately to the connected accounts on its channel and answers with the updated row, carrying the account and external id it published under.
+     * Publishes the post immediately to the connected accounts on its channel and answers with the updated row, carrying the account and external id it published under.  It is IDEMPOTENT: a post that has already published, or that another caller is publishing right now, comes back unchanged rather than being posted twice. That claim is taken before any network call, which is what makes a double submit safe.  The two failure shapes differ on purpose. Having no connected account for the channel is the caller&#39;s to fix, so it is recorded ON the post as failed with the reason and answers normally. A deployment that lacks the network&#39;s own credentials cannot publish for anyone, so that is a 503 naming exactly what is missing.
+     * @param id ID is the account or post to act on, taken from the path.
+     * @return SocialPost
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postSocialPostsByIdPublish(id: kotlin.String) : Unit {
+    fun postSocialPostsByIdPublish(id: kotlin.String) : SocialPost {
         val localVarResponse = postSocialPostsByIdPublishWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialPost
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -759,18 +830,19 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/posts/{id}/publish
-     * Publish one post now
-     * Publishes the post immediately to the connected accounts on its channel and answers with the updated row, carrying the account and external id it published under.  It is IDEMPOTENT: a post that has already published, or that another caller is publishing right now, comes back unchanged rather than being posted twice. That claim is taken before any network call, which is what makes a double submit safe.  The two failure shapes differ on purpose. Having no connected account for the channel is the caller&#39;s to fix, so it is recorded ON the post as failed with the reason and answers normally. A deployment that lacks the network&#39;s own credentials cannot publish for anyone, so that is a 503 naming exactly what is missing.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Publishes the post immediately to the connected accounts on its channel and answers with the updated row, carrying the account and external id it published under.
+     * Publishes the post immediately to the connected accounts on its channel and answers with the updated row, carrying the account and external id it published under.  It is IDEMPOTENT: a post that has already published, or that another caller is publishing right now, comes back unchanged rather than being posted twice. That claim is taken before any network call, which is what makes a double submit safe.  The two failure shapes differ on purpose. Having no connected account for the channel is the caller&#39;s to fix, so it is recorded ON the post as failed with the reason and answers normally. A deployment that lacks the network&#39;s own credentials cannot publish for anyone, so that is a 503 naming exactly what is missing.
+     * @param id ID is the account or post to act on, taken from the path.
+     * @return ApiResponse<SocialPost?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postSocialPostsByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun postSocialPostsByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<SocialPost?> {
         val localVariableConfig = postSocialPostsByIdPublishRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, SocialPost>(
             localVariableConfig
         )
     }
@@ -778,14 +850,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postSocialPostsByIdPublish
      *
-     * @param id 
+     * @param id ID is the account or post to act on, taken from the path.
      * @return RequestConfig
      */
     fun postSocialPostsByIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/social/posts/{id}/publish".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -798,22 +871,24 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PUT /v1/social/accounts/{id}
-     * Replace one connected account
-     * Replaces the account&#39;s network, handle and status with what the body carries, and answers with the stored row.  This is a REPLACEMENT, not a merge, which is the rule most easily got wrong: a field the body omits is written as its default, so leaving out the handle blanks it and leaving out the status resets it to connected. Send the whole record. The same vocabularies as create apply, and an unknown network or status is refused rather than coerced.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
+     * Replaces the account&#39;s network, handle and status with what the body carries, and answers with the stored row.
+     * Replaces the account&#39;s network, handle and status with what the body carries, and answers with the stored row.  This is a REPLACEMENT, not a merge, which is the rule most easily got wrong: a field the body omits is written as its default, so leaving out the handle blanks it and leaving out the status resets it to connected. Send the whole record. The same vocabularies as create apply, and an unknown network or status is refused rather than coerced.
      * @param id 
-     * @return void
+     * @param socialAccountWrite 
+     * @return SocialAccount
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putSocialAccountsById(id: kotlin.String) : Unit {
-        val localVarResponse = putSocialAccountsByIdWithHttpInfo(id = id)
+    fun putSocialAccountsById(id: kotlin.String, socialAccountWrite: SocialAccountWrite) : SocialAccount {
+        val localVarResponse = putSocialAccountsByIdWithHttpInfo(id = id, socialAccountWrite = socialAccountWrite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialAccount
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -829,18 +904,20 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PUT /v1/social/accounts/{id}
-     * Replace one connected account
-     * Replaces the account&#39;s network, handle and status with what the body carries, and answers with the stored row.  This is a REPLACEMENT, not a merge, which is the rule most easily got wrong: a field the body omits is written as its default, so leaving out the handle blanks it and leaving out the status resets it to connected. Send the whole record. The same vocabularies as create apply, and an unknown network or status is refused rather than coerced.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
+     * Replaces the account&#39;s network, handle and status with what the body carries, and answers with the stored row.
+     * Replaces the account&#39;s network, handle and status with what the body carries, and answers with the stored row.  This is a REPLACEMENT, not a merge, which is the rule most easily got wrong: a field the body omits is written as its default, so leaving out the handle blanks it and leaving out the status resets it to connected. Send the whole record. The same vocabularies as create apply, and an unknown network or status is refused rather than coerced.
      * @param id 
-     * @return ApiResponse<Unit?>
+     * @param socialAccountWrite 
+     * @return ApiResponse<SocialAccount?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putSocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putSocialAccountsByIdRequestConfig(id = id)
+    fun putSocialAccountsByIdWithHttpInfo(id: kotlin.String, socialAccountWrite: SocialAccountWrite) : ApiResponse<SocialAccount?> {
+        val localVariableConfig = putSocialAccountsByIdRequestConfig(id = id, socialAccountWrite = socialAccountWrite)
 
-        return request<Unit, Unit>(
+        return request<SocialAccountWrite, SocialAccount>(
             localVariableConfig
         )
     }
@@ -849,13 +926,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * To obtain the request config of the operation putSocialAccountsById
      *
      * @param id 
+     * @param socialAccountWrite 
      * @return RequestConfig
      */
-    fun putSocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun putSocialAccountsByIdRequestConfig(id: kotlin.String, socialAccountWrite: SocialAccountWrite) : RequestConfig<SocialAccountWrite> {
+        val localVariableBody = socialAccountWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.PUT,
             path = "/v1/social/accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -868,22 +948,24 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PUT /v1/social/posts/{id}
-     * Replace one post
-     * Replaces the post&#39;s content, channel, status, scheduled time and media with what the body carries, and answers with the stored row.  A REPLACEMENT, not a merge: an omitted field is written as its default, so omitting media clears it and omitting the status resets the post to draft. &#x60;content&#x60; is required on every update. Unlike create, this never triggers a publish — moving a post&#39;s scheduled time into the past here leaves it for the scheduler; publish now is its own operation.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
+     * Replaces the post&#39;s content, channel, status, scheduled time and media with what the body carries, and answers with the stored row.
+     * Replaces the post&#39;s content, channel, status, scheduled time and media with what the body carries, and answers with the stored row.  A REPLACEMENT, not a merge: an omitted field is written as its default, so omitting media clears it and omitting the status resets the post to draft. &#x60;content&#x60; is required on every update. Unlike create, this never triggers a publish — moving a post&#39;s scheduled time into the past here leaves it for the scheduler; publish now is its own operation.
      * @param id 
-     * @return void
+     * @param socialPostWrite 
+     * @return SocialPost
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putSocialPostsById(id: kotlin.String) : Unit {
-        val localVarResponse = putSocialPostsByIdWithHttpInfo(id = id)
+    fun putSocialPostsById(id: kotlin.String, socialPostWrite: SocialPostWrite) : SocialPost {
+        val localVarResponse = putSocialPostsByIdWithHttpInfo(id = id, socialPostWrite = socialPostWrite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SocialPost
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -899,18 +981,20 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PUT /v1/social/posts/{id}
-     * Replace one post
-     * Replaces the post&#39;s content, channel, status, scheduled time and media with what the body carries, and answers with the stored row.  A REPLACEMENT, not a merge: an omitted field is written as its default, so omitting media clears it and omitting the status resets the post to draft. &#x60;content&#x60; is required on every update. Unlike create, this never triggers a publish — moving a post&#39;s scheduled time into the past here leaves it for the scheduler; publish now is its own operation.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
+     * Replaces the post&#39;s content, channel, status, scheduled time and media with what the body carries, and answers with the stored row.
+     * Replaces the post&#39;s content, channel, status, scheduled time and media with what the body carries, and answers with the stored row.  A REPLACEMENT, not a merge: an omitted field is written as its default, so omitting media clears it and omitting the status resets the post to draft. &#x60;content&#x60; is required on every update. Unlike create, this never triggers a publish — moving a post&#39;s scheduled time into the past here leaves it for the scheduler; publish now is its own operation.
      * @param id 
-     * @return ApiResponse<Unit?>
+     * @param socialPostWrite 
+     * @return ApiResponse<SocialPost?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putSocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putSocialPostsByIdRequestConfig(id = id)
+    fun putSocialPostsByIdWithHttpInfo(id: kotlin.String, socialPostWrite: SocialPostWrite) : ApiResponse<SocialPost?> {
+        val localVariableConfig = putSocialPostsByIdRequestConfig(id = id, socialPostWrite = socialPostWrite)
 
-        return request<Unit, Unit>(
+        return request<SocialPostWrite, SocialPost>(
             localVariableConfig
         )
     }
@@ -919,13 +1003,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * To obtain the request config of the operation putSocialPostsById
      *
      * @param id 
+     * @param socialPostWrite 
      * @return RequestConfig
      */
-    fun putSocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun putSocialPostsByIdRequestConfig(id: kotlin.String, socialPostWrite: SocialPostWrite) : RequestConfig<SocialPostWrite> {
+        val localVariableBody = socialPostWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.PUT,
             path = "/v1/social/posts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),

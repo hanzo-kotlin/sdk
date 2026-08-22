@@ -19,6 +19,23 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.EsignCompletion
+import ai.hanzo.cloud.model.EsignDocument
+import ai.hanzo.cloud.model.EsignDocuments
+import ai.hanzo.cloud.model.EsignFieldIn
+import ai.hanzo.cloud.model.EsignHealth
+import ai.hanzo.cloud.model.EsignInsertion
+import ai.hanzo.cloud.model.EsignInvite
+import ai.hanzo.cloud.model.EsignLinks
+import ai.hanzo.cloud.model.EsignPDF
+import ai.hanzo.cloud.model.EsignPlacement
+import ai.hanzo.cloud.model.EsignRecipientIn
+import ai.hanzo.cloud.model.EsignRejectIn
+import ai.hanzo.cloud.model.EsignRejection
+import ai.hanzo.cloud.model.EsignSession
+import ai.hanzo.cloud.model.EsignTrail
+import ai.hanzo.cloud.model.EsignUploadIn
+import ai.hanzo.cloud.model.EsignValueIn
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +63,22 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/documents
-     * Your org&#39;s documents, newest first
-     * Lists the caller org&#39;s documents with their status, recipients and timestamps, newest first, capped at 200 — there is no paging, so treat it as the recent window rather than a complete export. Requires a validated principal (403 without one) and reads the caller&#39;s own tenant store, so no other org&#39;s documents can appear in it.
-     * @return void
+     * Returns your org&#39;s documents, newest first.
+     * Returns your org&#39;s documents, newest first.  Each carries its status, recipients and field layout. The listing is capped at 200 and there is no paging, so treat it as the recent window rather than a complete export. It reads the caller&#39;s own tenant store, so no other org&#39;s documents can appear in it.
+     * @return EsignDocuments
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getEsignDocuments() : Unit {
+    fun getEsignDocuments() : EsignDocuments {
         val localVarResponse = getEsignDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignDocuments
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,17 +94,18 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/documents
-     * Your org&#39;s documents, newest first
-     * Lists the caller org&#39;s documents with their status, recipients and timestamps, newest first, capped at 200 — there is no paging, so treat it as the recent window rather than a complete export. Requires a validated principal (403 without one) and reads the caller&#39;s own tenant store, so no other org&#39;s documents can appear in it.
-     * @return ApiResponse<Unit?>
+     * Returns your org&#39;s documents, newest first.
+     * Returns your org&#39;s documents, newest first.  Each carries its status, recipients and field layout. The listing is capped at 200 and there is no paging, so treat it as the recent window rather than a complete export. It reads the caller&#39;s own tenant store, so no other org&#39;s documents can appear in it.
+     * @return ApiResponse<EsignDocuments?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getEsignDocumentsWithHttpInfo() : ApiResponse<Unit?> {
+    fun getEsignDocumentsWithHttpInfo() : ApiResponse<EsignDocuments?> {
         val localVariableConfig = getEsignDocumentsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, EsignDocuments>(
             localVariableConfig
         )
     }
@@ -100,7 +119,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/esign/documents",
@@ -113,22 +133,23 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/documents/{id}
-     * One document with its recipients and field layout
-     * Answers the document, its recipients with each one&#39;s read and signing status, and every field with its type, page and position — the view a sender&#39;s UI renders, and where the field ids come from. Requires a validated principal (403 without one) and resolves the id in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404 rather than a refusal that would confirm it exists.
-     * @param id 
-     * @return void
+     * Returns one document with its recipients and field layout.
+     * Returns one document with its recipients and field layout.  It answers the document, its recipients with each one&#39;s read and signing status, and every field with its type, page and position — the view a sender&#39;s UI renders, and where the field ids come from. The id is resolved in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404 rather than a refusal that would confirm it exists.
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
+     * @return EsignDocument
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getEsignDocumentsById(id: kotlin.String) : Unit {
+    fun getEsignDocumentsById(id: kotlin.String) : EsignDocument {
         val localVarResponse = getEsignDocumentsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignDocument
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -144,18 +165,19 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/documents/{id}
-     * One document with its recipients and field layout
-     * Answers the document, its recipients with each one&#39;s read and signing status, and every field with its type, page and position — the view a sender&#39;s UI renders, and where the field ids come from. Requires a validated principal (403 without one) and resolves the id in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404 rather than a refusal that would confirm it exists.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Returns one document with its recipients and field layout.
+     * Returns one document with its recipients and field layout.  It answers the document, its recipients with each one&#39;s read and signing status, and every field with its type, page and position — the view a sender&#39;s UI renders, and where the field ids come from. The id is resolved in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404 rather than a refusal that would confirm it exists.
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
+     * @return ApiResponse<EsignDocument?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getEsignDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun getEsignDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<EsignDocument?> {
         val localVariableConfig = getEsignDocumentsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, EsignDocument>(
             localVariableConfig
         )
     }
@@ -163,14 +185,15 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * To obtain the request config of the operation getEsignDocumentsById
      *
-     * @param id 
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
      * @return RequestConfig
      */
     fun getEsignDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/esign/documents/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -183,22 +206,23 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/documents/{id}/audit
-     * The document&#39;s full audit trail, oldest first
-     * Answers every recorded event for the document in order — created, recipient added, field created, sent, opened, each field inserted, each recipient completed or rejected, and completion — with the actor and timestamp on each. This is the evidence record behind a signature, so it is append-only and nothing in the surface edits it.  Requires a validated principal (403 without one) and resolves the id in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404.
-     * @param id 
-     * @return void
+     * Returns the document&#39;s full audit trail, oldest first.
+     * Returns the document&#39;s full audit trail, oldest first.  It answers every recorded event for the document in order — created, recipient added, field created, sent, opened, each field inserted, each recipient completed or rejected, and completion — with the actor and timestamp on each. This is the evidence record behind a signature, so it is append-only and nothing in the surface edits it.  The id is resolved in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404.
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
+     * @return EsignTrail
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getEsignDocumentsByIdAudit(id: kotlin.String) : Unit {
+    fun getEsignDocumentsByIdAudit(id: kotlin.String) : EsignTrail {
         val localVarResponse = getEsignDocumentsByIdAuditWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignTrail
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -214,18 +238,19 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/documents/{id}/audit
-     * The document&#39;s full audit trail, oldest first
-     * Answers every recorded event for the document in order — created, recipient added, field created, sent, opened, each field inserted, each recipient completed or rejected, and completion — with the actor and timestamp on each. This is the evidence record behind a signature, so it is append-only and nothing in the surface edits it.  Requires a validated principal (403 without one) and resolves the id in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Returns the document&#39;s full audit trail, oldest first.
+     * Returns the document&#39;s full audit trail, oldest first.  It answers every recorded event for the document in order — created, recipient added, field created, sent, opened, each field inserted, each recipient completed or rejected, and completion — with the actor and timestamp on each. This is the evidence record behind a signature, so it is append-only and nothing in the surface edits it.  The id is resolved in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404.
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
+     * @return ApiResponse<EsignTrail?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getEsignDocumentsByIdAuditWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun getEsignDocumentsByIdAuditWithHttpInfo(id: kotlin.String) : ApiResponse<EsignTrail?> {
         val localVariableConfig = getEsignDocumentsByIdAuditRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, EsignTrail>(
             localVariableConfig
         )
     }
@@ -233,14 +258,15 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * To obtain the request config of the operation getEsignDocumentsByIdAudit
      *
-     * @param id 
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
      * @return RequestConfig
      */
     fun getEsignDocumentsByIdAuditRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/esign/documents/{id}/audit".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -253,22 +279,23 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/documents/{id}/download
-     * Download the document — the sealed PDF once it is complete
-     * Answers the document&#39;s current PDF as base64 with a &#x60;sealed&#x60; flag and a filename. Before completion that is the original upload; once every signer has finished it is the SEALED artifact — the field values rendered onto the page and a real x509 PKCS#7 digital signature applied — and &#x60;sealed&#x60; is true. There is one &#x60;pdfBase64&#x60; field either way, so &#x60;sealed&#x60; is what tells you which you are holding.  Requires a validated principal (403 without one) and resolves the id in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404.
-     * @param id 
-     * @return void
+     * Returns the document — the sealed PDF once it is complete.
+     * Returns the document — the sealed PDF once it is complete.  It answers the document&#39;s current PDF as base64 with a sealed flag and a filename. Before completion that is the original upload; once every signer has finished it is the SEALED artifact, with the field values rendered onto the page and a real x509 PKCS#7 digital signature applied. There is one pdfBase64 field either way, so sealed is what tells you which you are holding.  The id is resolved in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404.
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
+     * @return EsignPDF
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getEsignDocumentsByIdDownload(id: kotlin.String) : Unit {
+    fun getEsignDocumentsByIdDownload(id: kotlin.String) : EsignPDF {
         val localVarResponse = getEsignDocumentsByIdDownloadWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignPDF
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -284,18 +311,19 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/documents/{id}/download
-     * Download the document — the sealed PDF once it is complete
-     * Answers the document&#39;s current PDF as base64 with a &#x60;sealed&#x60; flag and a filename. Before completion that is the original upload; once every signer has finished it is the SEALED artifact — the field values rendered onto the page and a real x509 PKCS#7 digital signature applied — and &#x60;sealed&#x60; is true. There is one &#x60;pdfBase64&#x60; field either way, so &#x60;sealed&#x60; is what tells you which you are holding.  Requires a validated principal (403 without one) and resolves the id in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Returns the document — the sealed PDF once it is complete.
+     * Returns the document — the sealed PDF once it is complete.  It answers the document&#39;s current PDF as base64 with a sealed flag and a filename. Before completion that is the original upload; once every signer has finished it is the SEALED artifact, with the field values rendered onto the page and a real x509 PKCS#7 digital signature applied. There is one pdfBase64 field either way, so sealed is what tells you which you are holding.  The id is resolved in the caller&#39;s OWN tenant store, so another org&#39;s document id is a 404.
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
+     * @return ApiResponse<EsignPDF?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getEsignDocumentsByIdDownloadWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun getEsignDocumentsByIdDownloadWithHttpInfo(id: kotlin.String) : ApiResponse<EsignPDF?> {
         val localVariableConfig = getEsignDocumentsByIdDownloadRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, EsignPDF>(
             localVariableConfig
         )
     }
@@ -303,14 +331,15 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * To obtain the request config of the operation getEsignDocumentsByIdDownload
      *
-     * @param id 
+     * @param id ID is the document to act on. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id belonging to another tenant is simply not found.
      * @return RequestConfig
      */
     fun getEsignDocumentsByIdDownloadRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/esign/documents/{id}/download".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -323,21 +352,22 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/health
-     * Whether the e-signature surface is mounted
-     * Answers ok whenever the subsystem is mounted. It is unauthenticated and takes no tenant, and it is deliberately shallow: it is registered before the document host is built, so it still answers on a deployment that came up WITHOUT object storage and therefore serves nothing else. Read it as reachability, never as a promise that documents can be stored.
-     * @return void
+     * Reports whether the e-signature surface is mounted.
+     * Reports whether the e-signature surface is mounted.  It answers ok whenever the subsystem is mounted, takes no tenant and needs no principal. It is deliberately shallow: it is registered before the document host is built, so it still answers on a deployment that came up WITHOUT object storage and therefore serves nothing else. Read it as reachability, never as a promise that documents can be stored.
+     * @return EsignHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getEsignHealth() : Unit {
+    fun getEsignHealth() : EsignHealth {
         val localVarResponse = getEsignHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -353,17 +383,18 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/health
-     * Whether the e-signature surface is mounted
-     * Answers ok whenever the subsystem is mounted. It is unauthenticated and takes no tenant, and it is deliberately shallow: it is registered before the document host is built, so it still answers on a deployment that came up WITHOUT object storage and therefore serves nothing else. Read it as reachability, never as a promise that documents can be stored.
-     * @return ApiResponse<Unit?>
+     * Reports whether the e-signature surface is mounted.
+     * Reports whether the e-signature surface is mounted.  It answers ok whenever the subsystem is mounted, takes no tenant and needs no principal. It is deliberately shallow: it is registered before the document host is built, so it still answers on a deployment that came up WITHOUT object storage and therefore serves nothing else. Read it as reachability, never as a promise that documents can be stored.
+     * @return ApiResponse<EsignHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getEsignHealthWithHttpInfo() : ApiResponse<Unit?> {
+    fun getEsignHealthWithHttpInfo() : ApiResponse<EsignHealth?> {
         val localVariableConfig = getEsignHealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, EsignHealth>(
             localVariableConfig
         )
     }
@@ -377,7 +408,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/esign/health",
@@ -390,23 +422,24 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/o/{org}/sign/{token}
-     * Open a document you were asked to sign, using your signing link
-     * Answers the document, the recipient it identifies, the fields THAT recipient must fill, and the PDF to display. The first open also marks the recipient as having opened it and records that on the audit trail, so this read has a side effect by design.  This is the signer&#39;s door and it takes NO account: the signing token is the entire credential, and it names the recipient, so a signer sees only their own fields and never the other recipients&#39; tokens. The &#x60;:org&#x60; segment selects which tenant&#39;s store is opened, and the token is then looked up inside it — so a token presented under the wrong org simply does not resolve. An unknown or wrong-org token is a 401, never a hint that some other document exists.
+     * Opens a document you were asked to sign, using your signing link.
+     * Opens a document you were asked to sign, using your signing link.  It answers the document, the recipient the link identifies, the fields THAT recipient must fill, and the PDF to display. The first open also marks the recipient as having opened it and records that on the audit trail, so this read has a side effect by design.  This door takes NO account: the signing token is the entire credential, and it names the recipient, so a signer sees only their own fields and never the other recipients&#39; tokens. The token resolves to its owning tenant FIRST, before any per-tenant store is opened, and the org segment is only checked against that answer. An unknown or wrong-org token is one and the same 404, never a hint that some other document exists.
      * @param org 
      * @param token 
-     * @return void
+     * @return EsignSession
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getEsignOByOrgSignByToken(org: kotlin.String, token: kotlin.String) : Unit {
+    fun getEsignOByOrgSignByToken(org: kotlin.String, token: kotlin.String) : EsignSession {
         val localVarResponse = getEsignOByOrgSignByTokenWithHttpInfo(org = org, token = token)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignSession
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -422,19 +455,20 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/esign/o/{org}/sign/{token}
-     * Open a document you were asked to sign, using your signing link
-     * Answers the document, the recipient it identifies, the fields THAT recipient must fill, and the PDF to display. The first open also marks the recipient as having opened it and records that on the audit trail, so this read has a side effect by design.  This is the signer&#39;s door and it takes NO account: the signing token is the entire credential, and it names the recipient, so a signer sees only their own fields and never the other recipients&#39; tokens. The &#x60;:org&#x60; segment selects which tenant&#39;s store is opened, and the token is then looked up inside it — so a token presented under the wrong org simply does not resolve. An unknown or wrong-org token is a 401, never a hint that some other document exists.
+     * Opens a document you were asked to sign, using your signing link.
+     * Opens a document you were asked to sign, using your signing link.  It answers the document, the recipient the link identifies, the fields THAT recipient must fill, and the PDF to display. The first open also marks the recipient as having opened it and records that on the audit trail, so this read has a side effect by design.  This door takes NO account: the signing token is the entire credential, and it names the recipient, so a signer sees only their own fields and never the other recipients&#39; tokens. The token resolves to its owning tenant FIRST, before any per-tenant store is opened, and the org segment is only checked against that answer. An unknown or wrong-org token is one and the same 404, never a hint that some other document exists.
      * @param org 
      * @param token 
-     * @return ApiResponse<Unit?>
+     * @return ApiResponse<EsignSession?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getEsignOByOrgSignByTokenWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
+    fun getEsignOByOrgSignByTokenWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<EsignSession?> {
         val localVariableConfig = getEsignOByOrgSignByTokenRequestConfig(org = org, token = token)
 
-        return request<Unit, Unit>(
+        return request<Unit, EsignSession>(
             localVariableConfig
         )
     }
@@ -450,7 +484,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/esign/o/{org}/sign/{token}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"token"+"}", encodeURIComponent(token.toString())),
@@ -463,21 +498,23 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/documents
-     * Upload a PDF and open a draft ready for recipients and fields
-     * Creates a document from a base64 PDF and answers 201 with it in &#x60;DRAFT&#x60; — the state where recipients and fields may still be added, and the only state they may. &#x60;title&#x60; and &#x60;pdfBase64&#x60; are required; &#x60;signingOrder&#x60; chooses &#x60;PARALLEL&#x60; (the default, everyone may sign at once) or &#x60;SEQUENTIAL&#x60;, and that choice is fixed for the document&#39;s life.  The bytes go to object storage, not into the tenant database, and the ORIGINAL is kept under its own key so it survives sealing untouched — a completed document can always be compared against what was uploaded. Creation is recorded on the audit trail.  This is the sender&#39;s door: a validated principal is required (403 without one) and the document lands in that principal&#39;s OWN org. Isolation is physical rather than a filter — each tenant has its own store — so another org&#39;s document id is simply not there. Bodies over 32 MiB are refused with 413.
-     * @return void
+     * Uploads a PDF and opens a draft ready for recipients and fields.
+     * Uploads a PDF and opens a draft ready for recipients and fields.  It answers 201 with the document in DRAFT — the state where recipients and fields may still be added, and the only state they may. The bytes go to object storage rather than into the tenant database, and the original is kept under its own key so it survives sealing untouched: a completed document can always be compared against what was uploaded. Creation is recorded on the audit trail.  This is the sender&#39;s door: a validated principal is required, and the document lands in that principal&#39;s OWN org. Isolation is physical rather than a filter — each tenant has its own store — so another org&#39;s document id is simply not there. A body over 32 MiB is refused with 413.
+     * @param esignUploadIn 
+     * @return EsignDocument
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postEsignDocuments() : Unit {
-        val localVarResponse = postEsignDocumentsWithHttpInfo()
+    fun postEsignDocuments(esignUploadIn: EsignUploadIn) : EsignDocument {
+        val localVarResponse = postEsignDocumentsWithHttpInfo(esignUploadIn = esignUploadIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignDocument
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -493,17 +530,19 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/documents
-     * Upload a PDF and open a draft ready for recipients and fields
-     * Creates a document from a base64 PDF and answers 201 with it in &#x60;DRAFT&#x60; — the state where recipients and fields may still be added, and the only state they may. &#x60;title&#x60; and &#x60;pdfBase64&#x60; are required; &#x60;signingOrder&#x60; chooses &#x60;PARALLEL&#x60; (the default, everyone may sign at once) or &#x60;SEQUENTIAL&#x60;, and that choice is fixed for the document&#39;s life.  The bytes go to object storage, not into the tenant database, and the ORIGINAL is kept under its own key so it survives sealing untouched — a completed document can always be compared against what was uploaded. Creation is recorded on the audit trail.  This is the sender&#39;s door: a validated principal is required (403 without one) and the document lands in that principal&#39;s OWN org. Isolation is physical rather than a filter — each tenant has its own store — so another org&#39;s document id is simply not there. Bodies over 32 MiB are refused with 413.
-     * @return ApiResponse<Unit?>
+     * Uploads a PDF and opens a draft ready for recipients and fields.
+     * Uploads a PDF and opens a draft ready for recipients and fields.  It answers 201 with the document in DRAFT — the state where recipients and fields may still be added, and the only state they may. The bytes go to object storage rather than into the tenant database, and the original is kept under its own key so it survives sealing untouched: a completed document can always be compared against what was uploaded. Creation is recorded on the audit trail.  This is the sender&#39;s door: a validated principal is required, and the document lands in that principal&#39;s OWN org. Isolation is physical rather than a filter — each tenant has its own store — so another org&#39;s document id is simply not there. A body over 32 MiB is refused with 413.
+     * @param esignUploadIn 
+     * @return ApiResponse<EsignDocument?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postEsignDocumentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postEsignDocumentsRequestConfig()
+    fun postEsignDocumentsWithHttpInfo(esignUploadIn: EsignUploadIn) : ApiResponse<EsignDocument?> {
+        val localVariableConfig = postEsignDocumentsRequestConfig(esignUploadIn = esignUploadIn)
 
-        return request<Unit, Unit>(
+        return request<EsignUploadIn, EsignDocument>(
             localVariableConfig
         )
     }
@@ -511,13 +550,16 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * To obtain the request config of the operation postEsignDocuments
      *
+     * @param esignUploadIn 
      * @return RequestConfig
      */
-    fun postEsignDocumentsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postEsignDocumentsRequestConfig(esignUploadIn: EsignUploadIn) : RequestConfig<EsignUploadIn> {
+        val localVariableBody = esignUploadIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/esign/documents",
@@ -530,22 +572,24 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/documents/{id}/fields
-     * Place a field on the page for one recipient to fill
-     * Adds a field — a signature, date, name, email or text box — at a page and position for ONE named recipient, and answers 201 with its id. &#x60;recipientId&#x60; and a valid &#x60;type&#x60; are required, and the recipient must belong to this document (400 otherwise); page defaults to 1 and position defaults to the origin.  Fields are what make a recipient signable: a document cannot be sent while any signing recipient has none. Only while DRAFT — adding a field to a sent document is a 409. Requires a validated principal (403 without one), acts only on the caller&#39;s own tenant, and an unknown document is a 404. The addition is recorded on the audit trail.
+     * Places a field on the page for one recipient to fill.
+     * Places a field on the page for one recipient to fill.  It adds a signature, date, name, email or text box at a page and position for ONE named recipient, and answers 201 with its id. The recipient must belong to this document; one from elsewhere is refused.  Fields are what make a recipient signable: a document cannot be sent while any signing recipient has none. Only while DRAFT — adding a field to a sent document is a 409 — and an unknown document is a 404. The addition is recorded on the audit trail.
      * @param id 
-     * @return void
+     * @param esignFieldIn 
+     * @return EsignPlacement
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postEsignDocumentsByIdFields(id: kotlin.String) : Unit {
-        val localVarResponse = postEsignDocumentsByIdFieldsWithHttpInfo(id = id)
+    fun postEsignDocumentsByIdFields(id: kotlin.String, esignFieldIn: EsignFieldIn) : EsignPlacement {
+        val localVarResponse = postEsignDocumentsByIdFieldsWithHttpInfo(id = id, esignFieldIn = esignFieldIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignPlacement
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -561,18 +605,20 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/documents/{id}/fields
-     * Place a field on the page for one recipient to fill
-     * Adds a field — a signature, date, name, email or text box — at a page and position for ONE named recipient, and answers 201 with its id. &#x60;recipientId&#x60; and a valid &#x60;type&#x60; are required, and the recipient must belong to this document (400 otherwise); page defaults to 1 and position defaults to the origin.  Fields are what make a recipient signable: a document cannot be sent while any signing recipient has none. Only while DRAFT — adding a field to a sent document is a 409. Requires a validated principal (403 without one), acts only on the caller&#39;s own tenant, and an unknown document is a 404. The addition is recorded on the audit trail.
+     * Places a field on the page for one recipient to fill.
+     * Places a field on the page for one recipient to fill.  It adds a signature, date, name, email or text box at a page and position for ONE named recipient, and answers 201 with its id. The recipient must belong to this document; one from elsewhere is refused.  Fields are what make a recipient signable: a document cannot be sent while any signing recipient has none. Only while DRAFT — adding a field to a sent document is a 409 — and an unknown document is a 404. The addition is recorded on the audit trail.
      * @param id 
-     * @return ApiResponse<Unit?>
+     * @param esignFieldIn 
+     * @return ApiResponse<EsignPlacement?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postEsignDocumentsByIdFieldsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postEsignDocumentsByIdFieldsRequestConfig(id = id)
+    fun postEsignDocumentsByIdFieldsWithHttpInfo(id: kotlin.String, esignFieldIn: EsignFieldIn) : ApiResponse<EsignPlacement?> {
+        val localVariableConfig = postEsignDocumentsByIdFieldsRequestConfig(id = id, esignFieldIn = esignFieldIn)
 
-        return request<Unit, Unit>(
+        return request<EsignFieldIn, EsignPlacement>(
             localVariableConfig
         )
     }
@@ -581,13 +627,16 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * To obtain the request config of the operation postEsignDocumentsByIdFields
      *
      * @param id 
+     * @param esignFieldIn 
      * @return RequestConfig
      */
-    fun postEsignDocumentsByIdFieldsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postEsignDocumentsByIdFieldsRequestConfig(id: kotlin.String, esignFieldIn: EsignFieldIn) : RequestConfig<EsignFieldIn> {
+        val localVariableBody = esignFieldIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/esign/documents/{id}/fields".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -600,22 +649,24 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/documents/{id}/recipients
-     * Add someone to a draft and mint their signing token
-     * Adds a recipient and answers 201 with their id and their signing TOKEN — the crypto-random capability that is the only credential the signer&#39;s door accepts, so this response is where the signing link is built from. &#x60;email&#x60; is required; &#x60;role&#x60; defaults to &#x60;SIGNER&#x60;, and a &#x60;CC&#x60; recipient is recorded as already complete because they are never asked to sign. &#x60;signingOrder&#x60; sets this recipient&#39;s position for a sequential document.  Only while DRAFT: adding a recipient to a document already sent is a 409, because the field layout and the turn order were fixed when it went out. Requires a validated principal (403 without one), acts only on the caller&#39;s own tenant, and an unknown document is a 404. The addition is recorded on the audit trail.
+     * Adds someone to a draft and mints their signing token.
+     * Adds someone to a draft and mints their signing token.  It answers 201 with the recipient&#39;s id and their signing TOKEN — the crypto-random capability that is the only credential the signer&#39;s door accepts — so this response is where the signing link is built from. A CC recipient is recorded as already complete, because they are never asked to sign.  Only while DRAFT: adding a recipient to a document already sent is a 409, because the field layout and the turn order were fixed when it went out. An unknown document is a 404. The addition is recorded on the audit trail.
      * @param id 
-     * @return void
+     * @param esignRecipientIn 
+     * @return EsignInvite
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postEsignDocumentsByIdRecipients(id: kotlin.String) : Unit {
-        val localVarResponse = postEsignDocumentsByIdRecipientsWithHttpInfo(id = id)
+    fun postEsignDocumentsByIdRecipients(id: kotlin.String, esignRecipientIn: EsignRecipientIn) : EsignInvite {
+        val localVarResponse = postEsignDocumentsByIdRecipientsWithHttpInfo(id = id, esignRecipientIn = esignRecipientIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignInvite
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -631,18 +682,20 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/documents/{id}/recipients
-     * Add someone to a draft and mint their signing token
-     * Adds a recipient and answers 201 with their id and their signing TOKEN — the crypto-random capability that is the only credential the signer&#39;s door accepts, so this response is where the signing link is built from. &#x60;email&#x60; is required; &#x60;role&#x60; defaults to &#x60;SIGNER&#x60;, and a &#x60;CC&#x60; recipient is recorded as already complete because they are never asked to sign. &#x60;signingOrder&#x60; sets this recipient&#39;s position for a sequential document.  Only while DRAFT: adding a recipient to a document already sent is a 409, because the field layout and the turn order were fixed when it went out. Requires a validated principal (403 without one), acts only on the caller&#39;s own tenant, and an unknown document is a 404. The addition is recorded on the audit trail.
+     * Adds someone to a draft and mints their signing token.
+     * Adds someone to a draft and mints their signing token.  It answers 201 with the recipient&#39;s id and their signing TOKEN — the crypto-random capability that is the only credential the signer&#39;s door accepts — so this response is where the signing link is built from. A CC recipient is recorded as already complete, because they are never asked to sign.  Only while DRAFT: adding a recipient to a document already sent is a 409, because the field layout and the turn order were fixed when it went out. An unknown document is a 404. The addition is recorded on the audit trail.
      * @param id 
-     * @return ApiResponse<Unit?>
+     * @param esignRecipientIn 
+     * @return ApiResponse<EsignInvite?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postEsignDocumentsByIdRecipientsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postEsignDocumentsByIdRecipientsRequestConfig(id = id)
+    fun postEsignDocumentsByIdRecipientsWithHttpInfo(id: kotlin.String, esignRecipientIn: EsignRecipientIn) : ApiResponse<EsignInvite?> {
+        val localVariableConfig = postEsignDocumentsByIdRecipientsRequestConfig(id = id, esignRecipientIn = esignRecipientIn)
 
-        return request<Unit, Unit>(
+        return request<EsignRecipientIn, EsignInvite>(
             localVariableConfig
         )
     }
@@ -651,13 +704,16 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * To obtain the request config of the operation postEsignDocumentsByIdRecipients
      *
      * @param id 
+     * @param esignRecipientIn 
      * @return RequestConfig
      */
-    fun postEsignDocumentsByIdRecipientsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postEsignDocumentsByIdRecipientsRequestConfig(id: kotlin.String, esignRecipientIn: EsignRecipientIn) : RequestConfig<EsignRecipientIn> {
+        val localVariableBody = esignRecipientIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/esign/documents/{id}/recipients".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -670,22 +726,23 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/documents/{id}/send
-     * Send the document out and get each signer&#39;s link
-     * Moves the document from &#x60;DRAFT&#x60; to &#x60;PENDING&#x60; and answers the signing tokens — one per signing recipient, with the path to hand them — which is how the links reach the people who must sign. Nothing is emailed by this call; delivering the links is the caller&#39;s.  It refuses to send an unsignable document: no recipients at all is a 400, and so is any signing recipient with no fields to fill, named in the error. Re-sending an already-pending document is allowed and re-issues the same links rather than restarting anything; a completed document is a 409. Requires a validated principal (403 without one) and acts only on the caller&#39;s own tenant; an unknown document is a 404. The send is recorded on the audit trail.
-     * @param id 
-     * @return void
+     * Sends the document out and answers each signer&#39;s link.
+     * Sends the document out and answers each signer&#39;s link.  It moves the document from DRAFT to PENDING and answers the signing tokens — one per signing recipient, with the path to hand them — which is how the links reach the people who must sign. Nothing is emailed by this call; delivering the links is the caller&#39;s.  It refuses to send an unsignable document: no recipients at all is a 400, and so is any signing recipient with no fields to fill, named in the error. Re-sending an already-pending document is allowed and re-issues the same links rather than restarting anything; a completed document is a 409, and an unknown one a 404. The send is recorded on the audit trail.
+     * @param id ID is the document to send. The URL is the addressing authority.
+     * @return EsignLinks
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postEsignDocumentsByIdSend(id: kotlin.String) : Unit {
+    fun postEsignDocumentsByIdSend(id: kotlin.String) : EsignLinks {
         val localVarResponse = postEsignDocumentsByIdSendWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignLinks
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -701,18 +758,19 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/documents/{id}/send
-     * Send the document out and get each signer&#39;s link
-     * Moves the document from &#x60;DRAFT&#x60; to &#x60;PENDING&#x60; and answers the signing tokens — one per signing recipient, with the path to hand them — which is how the links reach the people who must sign. Nothing is emailed by this call; delivering the links is the caller&#39;s.  It refuses to send an unsignable document: no recipients at all is a 400, and so is any signing recipient with no fields to fill, named in the error. Re-sending an already-pending document is allowed and re-issues the same links rather than restarting anything; a completed document is a 409. Requires a validated principal (403 without one) and acts only on the caller&#39;s own tenant; an unknown document is a 404. The send is recorded on the audit trail.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Sends the document out and answers each signer&#39;s link.
+     * Sends the document out and answers each signer&#39;s link.  It moves the document from DRAFT to PENDING and answers the signing tokens — one per signing recipient, with the path to hand them — which is how the links reach the people who must sign. Nothing is emailed by this call; delivering the links is the caller&#39;s.  It refuses to send an unsignable document: no recipients at all is a 400, and so is any signing recipient with no fields to fill, named in the error. Re-sending an already-pending document is allowed and re-issues the same links rather than restarting anything; a completed document is a 409, and an unknown one a 404. The send is recorded on the audit trail.
+     * @param id ID is the document to send. The URL is the addressing authority.
+     * @return ApiResponse<EsignLinks?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postEsignDocumentsByIdSendWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun postEsignDocumentsByIdSendWithHttpInfo(id: kotlin.String) : ApiResponse<EsignLinks?> {
         val localVariableConfig = postEsignDocumentsByIdSendRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, EsignLinks>(
             localVariableConfig
         )
     }
@@ -720,14 +778,15 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * To obtain the request config of the operation postEsignDocumentsByIdSend
      *
-     * @param id 
+     * @param id ID is the document to send. The URL is the addressing authority.
      * @return RequestConfig
      */
     fun postEsignDocumentsByIdSendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/esign/documents/{id}/send".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -740,23 +799,24 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/o/{org}/sign/{token}/complete
-     * Finish signing — and seal the document if you were the last
-     * Marks this recipient as done and answers whether the DOCUMENT sealed with it. When every signing recipient has completed, sealing happens right here in the same call: the collected values are rendered onto the PDF, a real x509 PKCS#7 signature is applied, the sealed bytes are stored beside the untouched original, and the document moves to &#x60;COMPLETED&#x60;. Until then the answer is the recipient&#39;s own completion with the document still pending.  It refuses to complete a half-filled signature: a recipient with any unfilled field is a 400 naming how many remain. A document not out for signature is a 409, as is a recipient who has already completed, and under SEQUENTIAL order a signer out of turn is a 403. The token is the whole credential — no account, and a token that does not resolve under &#x60;:org&#x60; is a 401. Sealing and completion are one transaction, so a failure anywhere leaves the document exactly as it was.
+     * Finishes your signing — and seals the document if you were the last.
+     * Finishes your signing — and seals the document if you were the last.  It marks this recipient as done and answers whether the DOCUMENT sealed with it. When every signing recipient has completed, sealing happens right here in the same call: the collected values are rendered onto the PDF, a real x509 PKCS#7 signature is applied, the sealed bytes are stored beside the untouched original, and the document moves to COMPLETED. Until then the answer is the recipient&#39;s own completion with the document still pending.  It refuses to complete a half-filled signature: a recipient with any unfilled field is a 400 naming how many remain. A document not out for signature is a 409, as is a recipient who has already completed, and under SEQUENTIAL order a signer out of turn is a 403. The token is the whole credential — no account, and a token that does not resolve under the org segment is a 404. Sealing and completion are one transaction, so a failure anywhere leaves the document exactly as it was.
      * @param org 
      * @param token 
-     * @return void
+     * @return EsignCompletion
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postEsignOByOrgSignByTokenComplete(org: kotlin.String, token: kotlin.String) : Unit {
+    fun postEsignOByOrgSignByTokenComplete(org: kotlin.String, token: kotlin.String) : EsignCompletion {
         val localVarResponse = postEsignOByOrgSignByTokenCompleteWithHttpInfo(org = org, token = token)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignCompletion
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -772,19 +832,20 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/o/{org}/sign/{token}/complete
-     * Finish signing — and seal the document if you were the last
-     * Marks this recipient as done and answers whether the DOCUMENT sealed with it. When every signing recipient has completed, sealing happens right here in the same call: the collected values are rendered onto the PDF, a real x509 PKCS#7 signature is applied, the sealed bytes are stored beside the untouched original, and the document moves to &#x60;COMPLETED&#x60;. Until then the answer is the recipient&#39;s own completion with the document still pending.  It refuses to complete a half-filled signature: a recipient with any unfilled field is a 400 naming how many remain. A document not out for signature is a 409, as is a recipient who has already completed, and under SEQUENTIAL order a signer out of turn is a 403. The token is the whole credential — no account, and a token that does not resolve under &#x60;:org&#x60; is a 401. Sealing and completion are one transaction, so a failure anywhere leaves the document exactly as it was.
+     * Finishes your signing — and seals the document if you were the last.
+     * Finishes your signing — and seals the document if you were the last.  It marks this recipient as done and answers whether the DOCUMENT sealed with it. When every signing recipient has completed, sealing happens right here in the same call: the collected values are rendered onto the PDF, a real x509 PKCS#7 signature is applied, the sealed bytes are stored beside the untouched original, and the document moves to COMPLETED. Until then the answer is the recipient&#39;s own completion with the document still pending.  It refuses to complete a half-filled signature: a recipient with any unfilled field is a 400 naming how many remain. A document not out for signature is a 409, as is a recipient who has already completed, and under SEQUENTIAL order a signer out of turn is a 403. The token is the whole credential — no account, and a token that does not resolve under the org segment is a 404. Sealing and completion are one transaction, so a failure anywhere leaves the document exactly as it was.
      * @param org 
      * @param token 
-     * @return ApiResponse<Unit?>
+     * @return ApiResponse<EsignCompletion?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postEsignOByOrgSignByTokenCompleteWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
+    fun postEsignOByOrgSignByTokenCompleteWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<EsignCompletion?> {
         val localVariableConfig = postEsignOByOrgSignByTokenCompleteRequestConfig(org = org, token = token)
 
-        return request<Unit, Unit>(
+        return request<Unit, EsignCompletion>(
             localVariableConfig
         )
     }
@@ -800,7 +861,8 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/esign/o/{org}/sign/{token}/complete".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"token"+"}", encodeURIComponent(token.toString())),
@@ -813,24 +875,26 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/o/{org}/sign/{token}/fields/{fieldId}
-     * Fill in one of your fields
-     * Records a value for one field and marks it inserted. A signature field takes &#x60;value&#x60; with &#x60;isBase64&#x60; true for drawn image bytes, or false for a typed signature; a date, name or email field falls back to today, the recipient&#39;s name or their email when &#x60;value&#x60; is omitted; any other type requires one.  Nothing is sealed here — filling every field still leaves the document pending until the completion call. The token is the whole credential and it bounds what can be written: a field belonging to another recipient is refused with 401 even under a valid token, an unknown field is a 404, and a field already filled is a 409. A document not out for signature is a 409, as is a recipient who has already completed or rejected. Under SEQUENTIAL order a signer whose turn has not come is refused 403 until every earlier signer has signed. Each insertion is recorded on the audit trail.
+     * Fills in one of your fields.
+     * Fills in one of your fields.  It records a value for one field and marks it inserted. A signature field takes a value with isBase64 true for drawn image bytes, or false for a typed signature; a date, name or email field falls back to today, the recipient&#39;s name or their email when the value is omitted; any other type requires one.  Nothing is sealed here — filling every field still leaves the document pending until the completion call. The token is the whole credential and it bounds what can be written: a field belonging to another recipient is refused with 401 even under a valid token, an unknown field is a 404, and a field already filled is a 409. A document not out for signature is a 409, as is a recipient who has already completed or rejected. Under SEQUENTIAL order a signer whose turn has not come is refused 403 until every earlier signer has signed. Each insertion is recorded on the audit trail.
      * @param org 
      * @param token 
      * @param fieldId 
-     * @return void
+     * @param esignValueIn 
+     * @return EsignInsertion
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postEsignOByOrgSignByTokenFieldsByFieldid(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : Unit {
-        val localVarResponse = postEsignOByOrgSignByTokenFieldsByFieldidWithHttpInfo(org = org, token = token, fieldId = fieldId)
+    fun postEsignOByOrgSignByTokenFieldsByFieldid(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String, esignValueIn: EsignValueIn) : EsignInsertion {
+        val localVarResponse = postEsignOByOrgSignByTokenFieldsByFieldidWithHttpInfo(org = org, token = token, fieldId = fieldId, esignValueIn = esignValueIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignInsertion
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -846,20 +910,22 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/o/{org}/sign/{token}/fields/{fieldId}
-     * Fill in one of your fields
-     * Records a value for one field and marks it inserted. A signature field takes &#x60;value&#x60; with &#x60;isBase64&#x60; true for drawn image bytes, or false for a typed signature; a date, name or email field falls back to today, the recipient&#39;s name or their email when &#x60;value&#x60; is omitted; any other type requires one.  Nothing is sealed here — filling every field still leaves the document pending until the completion call. The token is the whole credential and it bounds what can be written: a field belonging to another recipient is refused with 401 even under a valid token, an unknown field is a 404, and a field already filled is a 409. A document not out for signature is a 409, as is a recipient who has already completed or rejected. Under SEQUENTIAL order a signer whose turn has not come is refused 403 until every earlier signer has signed. Each insertion is recorded on the audit trail.
+     * Fills in one of your fields.
+     * Fills in one of your fields.  It records a value for one field and marks it inserted. A signature field takes a value with isBase64 true for drawn image bytes, or false for a typed signature; a date, name or email field falls back to today, the recipient&#39;s name or their email when the value is omitted; any other type requires one.  Nothing is sealed here — filling every field still leaves the document pending until the completion call. The token is the whole credential and it bounds what can be written: a field belonging to another recipient is refused with 401 even under a valid token, an unknown field is a 404, and a field already filled is a 409. A document not out for signature is a 409, as is a recipient who has already completed or rejected. Under SEQUENTIAL order a signer whose turn has not come is refused 403 until every earlier signer has signed. Each insertion is recorded on the audit trail.
      * @param org 
      * @param token 
      * @param fieldId 
-     * @return ApiResponse<Unit?>
+     * @param esignValueIn 
+     * @return ApiResponse<EsignInsertion?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postEsignOByOrgSignByTokenFieldsByFieldidWithHttpInfo(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postEsignOByOrgSignByTokenFieldsByFieldidRequestConfig(org = org, token = token, fieldId = fieldId)
+    fun postEsignOByOrgSignByTokenFieldsByFieldidWithHttpInfo(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String, esignValueIn: EsignValueIn) : ApiResponse<EsignInsertion?> {
+        val localVariableConfig = postEsignOByOrgSignByTokenFieldsByFieldidRequestConfig(org = org, token = token, fieldId = fieldId, esignValueIn = esignValueIn)
 
-        return request<Unit, Unit>(
+        return request<EsignValueIn, EsignInsertion>(
             localVariableConfig
         )
     }
@@ -870,13 +936,16 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param org 
      * @param token 
      * @param fieldId 
+     * @param esignValueIn 
      * @return RequestConfig
      */
-    fun postEsignOByOrgSignByTokenFieldsByFieldidRequestConfig(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postEsignOByOrgSignByTokenFieldsByFieldidRequestConfig(org: kotlin.String, token: kotlin.String, fieldId: kotlin.String, esignValueIn: EsignValueIn) : RequestConfig<EsignValueIn> {
+        val localVariableBody = esignValueIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/esign/o/{org}/sign/{token}/fields/{fieldId}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"token"+"}", encodeURIComponent(token.toString())).replace("{"+"fieldId"+"}", encodeURIComponent(fieldId.toString())),
@@ -889,23 +958,25 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/o/{org}/sign/{token}/reject
-     * Decline to sign, with an optional reason
-     * Records this recipient&#39;s refusal and moves the WHOLE DOCUMENT to &#x60;REJECTED&#x60; — one declining signer ends it for everyone, and there is no route back: the document cannot then be signed or completed. An optional &#x60;reason&#x60; is stored and written onto the audit trail with the rejection, which is what the sender sees.  A document not out for signature is a 409, and so is a recipient who has already signed or already rejected — a refusal cannot be taken back or repeated. The token is the whole credential; one that does not resolve under &#x60;:org&#x60; is a 401.
+     * Declines to sign, with an optional reason.
+     * Declines to sign, with an optional reason.  It records this recipient&#39;s refusal and moves the WHOLE DOCUMENT to REJECTED — one declining signer ends it for everyone, and there is no route back: the document cannot then be signed or completed. An optional reason is stored and written onto the audit trail with the rejection, which is what the sender sees.  A document not out for signature is a 409, and so is a recipient who has already signed or already rejected — a refusal cannot be taken back or repeated. The token is the whole credential; one that does not resolve under the org segment is a 404.
      * @param org 
      * @param token 
-     * @return void
+     * @param esignRejectIn 
+     * @return EsignRejection
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postEsignOByOrgSignByTokenReject(org: kotlin.String, token: kotlin.String) : Unit {
-        val localVarResponse = postEsignOByOrgSignByTokenRejectWithHttpInfo(org = org, token = token)
+    fun postEsignOByOrgSignByTokenReject(org: kotlin.String, token: kotlin.String, esignRejectIn: EsignRejectIn) : EsignRejection {
+        val localVarResponse = postEsignOByOrgSignByTokenRejectWithHttpInfo(org = org, token = token, esignRejectIn = esignRejectIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignRejection
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -921,19 +992,21 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/esign/o/{org}/sign/{token}/reject
-     * Decline to sign, with an optional reason
-     * Records this recipient&#39;s refusal and moves the WHOLE DOCUMENT to &#x60;REJECTED&#x60; — one declining signer ends it for everyone, and there is no route back: the document cannot then be signed or completed. An optional &#x60;reason&#x60; is stored and written onto the audit trail with the rejection, which is what the sender sees.  A document not out for signature is a 409, and so is a recipient who has already signed or already rejected — a refusal cannot be taken back or repeated. The token is the whole credential; one that does not resolve under &#x60;:org&#x60; is a 401.
+     * Declines to sign, with an optional reason.
+     * Declines to sign, with an optional reason.  It records this recipient&#39;s refusal and moves the WHOLE DOCUMENT to REJECTED — one declining signer ends it for everyone, and there is no route back: the document cannot then be signed or completed. An optional reason is stored and written onto the audit trail with the rejection, which is what the sender sees.  A document not out for signature is a 409, and so is a recipient who has already signed or already rejected — a refusal cannot be taken back or repeated. The token is the whole credential; one that does not resolve under the org segment is a 404.
      * @param org 
      * @param token 
-     * @return ApiResponse<Unit?>
+     * @param esignRejectIn 
+     * @return ApiResponse<EsignRejection?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postEsignOByOrgSignByTokenRejectWithHttpInfo(org: kotlin.String, token: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postEsignOByOrgSignByTokenRejectRequestConfig(org = org, token = token)
+    fun postEsignOByOrgSignByTokenRejectWithHttpInfo(org: kotlin.String, token: kotlin.String, esignRejectIn: EsignRejectIn) : ApiResponse<EsignRejection?> {
+        val localVariableConfig = postEsignOByOrgSignByTokenRejectRequestConfig(org = org, token = token, esignRejectIn = esignRejectIn)
 
-        return request<Unit, Unit>(
+        return request<EsignRejectIn, EsignRejection>(
             localVariableConfig
         )
     }
@@ -943,13 +1016,16 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      *
      * @param org 
      * @param token 
+     * @param esignRejectIn 
      * @return RequestConfig
      */
-    fun postEsignOByOrgSignByTokenRejectRequestConfig(org: kotlin.String, token: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postEsignOByOrgSignByTokenRejectRequestConfig(org: kotlin.String, token: kotlin.String, esignRejectIn: EsignRejectIn) : RequestConfig<EsignRejectIn> {
+        val localVariableBody = esignRejectIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/esign/o/{org}/sign/{token}/reject".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"token"+"}", encodeURIComponent(token.toString())),

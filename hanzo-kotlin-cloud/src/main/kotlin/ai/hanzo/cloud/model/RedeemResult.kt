@@ -24,8 +24,8 @@ import com.google.gson.annotations.SerializedName
  *
  * @param alreadyRedeemed AlreadyRedeemed is true when this org had already taken the promo and the call was an idempotent replay.
  * @param chargeCents ChargeCents is what month one costs after the discount, DiscountCents the discount that produced it. Both are quoted figures against the org's derived plan — NOTHING WAS CREDITED and no wallet moved.
- * @param discountCents 
- * @param redemption 
+ * @param discountCents DiscountCents is the discount claimed for month one, in USD cents, at the single-seat floor. It is the same figure recorded on the Redemption, and it is evidence an admin may later grant against — not a balance.
+ * @param redemption Redemption is the row that was recorded — the org's claim on this promo, with the server-derived plan and seat count. On a replay it is the ORIGINAL row, so its redeemedAt is when the org first took the promo, not now.
  */
 
 
@@ -39,9 +39,11 @@ data class RedeemResult (
     @SerializedName("chargeCents")
     val chargeCents: kotlin.Int? = null,
 
+    /* DiscountCents is the discount claimed for month one, in USD cents, at the single-seat floor. It is the same figure recorded on the Redemption, and it is evidence an admin may later grant against — not a balance. */
     @SerializedName("discountCents")
     val discountCents: kotlin.Int? = null,
 
+    /* Redemption is the row that was recorded — the org's claim on this promo, with the server-derived plan and seat count. On a replay it is the ORIGINAL row, so its redeemedAt is when the org first took the promo, not now. */
     @SerializedName("redemption")
     val redemption: Redemption? = null
 

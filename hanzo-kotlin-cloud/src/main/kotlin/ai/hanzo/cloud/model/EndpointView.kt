@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param connector 
- * @param locator 
- * @param provider 
+ * @param connector Connector names a connected account from the org's connector registry, when the endpoint reaches its provider through one. Absent means the locator stands on its own; the pair below is always sufficient either way.
+ * @param locator Locator addresses the thing INSIDE that provider, in the provider's own terms — an https clone URL for a hosted forge, a bare repository name for hanzo-git. It never carries a credential.
+ * @param provider Provider is the concrete integration: \"github\", \"gitlab\" or \"hanzo-git\".
  */
 
 
 data class EndpointView (
 
+    /* Connector names a connected account from the org's connector registry, when the endpoint reaches its provider through one. Absent means the locator stands on its own; the pair below is always sufficient either way. */
     @SerializedName("connector")
     val connector: kotlin.String? = null,
 
+    /* Locator addresses the thing INSIDE that provider, in the provider's own terms — an https clone URL for a hosted forge, a bare repository name for hanzo-git. It never carries a credential. */
     @SerializedName("locator")
     val locator: kotlin.String? = null,
 
+    /* Provider is the concrete integration: \"github\", \"gitlab\" or \"hanzo-git\". */
     @SerializedName("provider")
     val provider: kotlin.String? = null
 

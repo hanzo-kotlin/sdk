@@ -23,11 +23,11 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param at At is when this version last changed state, and By who.
- * @param by 
+ * @param at At is when this version last changed state, RFC 3339 UTC.
+ * @param by By is who moved it there: the validated user, or the org itself when the caller is a machine with no user behind it.
  * @param counts Counts is how the rows fall across the splits.
  * @param digest Digest fingerprints the SPEC and the ROWS together. Two materialisations of one spec agree on it or the plane says they do not.
- * @param name Name and Version identify the version.
+ * @param name Name identifies the dataset across all of its versions.
  * @param oversize Oversize is how many of the window's subjects this version could NOT carry because their subject identity exceeds the plane's per-subject byte bound.  It is on the wire, not only in a log, because it is the one degradation a caller cannot otherwise detect: the rows that are here look complete, and a dataset silently missing a population is a model silently blind to it. Non-zero does not make a version invalid — it makes it a version whose coverage is STATED. Zero is the normal case and omits.
  * @param refusal Refusal names why there are no bytes, when there are none.
  * @param running Running is true while THIS process is materialising the version. A version that is `materializing` and not running was started by a process that is gone — two states the register cannot tell apart, because a register cannot know which processes are alive.
@@ -35,16 +35,17 @@ import com.google.gson.annotations.SerializedName
  * @param spec Spec is the bound query this version was built from, exactly as recorded.
  * @param status Status is declared, materializing, ready or refused. Only `ready` has bytes, and `ready` is terminal: a published version is never rewritten.
  * @param truncated Truncated is true when the row cap bound before the window ran out. The trailing subject is dropped whole when that happens, because half a subject on one side of a split is exactly the leak the grouping prevents.
- * @param version 
+ * @param version Version is which version this is, from 1 and monotone within the dataset. A number is never reused — not even after a disposal, where the next declare continues the count — so \"signups v3\" means one thing forever, which is what makes a model's citation of it checkable.
  */
 
 
 data class RiskDataset (
 
-    /* At is when this version last changed state, and By who. */
+    /* At is when this version last changed state, RFC 3339 UTC. */
     @SerializedName("at")
     val at: kotlin.String? = null,
 
+    /* By is who moved it there: the validated user, or the org itself when the caller is a machine with no user behind it. */
     @SerializedName("by")
     val by: kotlin.String? = null,
 
@@ -56,7 +57,7 @@ data class RiskDataset (
     @SerializedName("digest")
     val digest: kotlin.String? = null,
 
-    /* Name and Version identify the version. */
+    /* Name identifies the dataset across all of its versions. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
@@ -88,6 +89,7 @@ data class RiskDataset (
     @SerializedName("truncated")
     val truncated: kotlin.Boolean? = null,
 
+    /* Version is which version this is, from 1 and monotone within the dataset. A number is never reused — not even after a disposal, where the next declare continues the count — so \"signups v3\" means one thing forever, which is what makes a model's citation of it checkable. */
     @SerializedName("version")
     val version: kotlin.Int? = null
 

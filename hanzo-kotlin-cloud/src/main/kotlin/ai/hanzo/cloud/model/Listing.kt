@@ -21,43 +21,50 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param category 
- * @param createdAt 
- * @param currency 
- * @param description 
- * @param id 
+ * @param category Category groups the listing in the shop window. Free text — no vocabulary, nothing validates it — and unlike Description it is silently cut to 4096 bytes rather than refused. Empty means ungrouped.
+ * @param createdAt CreatedAt is when the listing was published, in Unix SECONDS, minted at insert. Every listing read orders by it descending, so it is the shop's ordering key as well as its age.
+ * @param currency Currency is the ISO 4217 code Price is quoted in; Create defaults it to \"USD\" when the publisher names none. It is a LABEL that travels to the shop window: publish parses Price with money.ParseUSD and the x402 terms carry no currency, so another code here changes what is displayed, not what is charged.
+ * @param description Description is the long copy. Publish REFUSES one past 4096 bytes rather than truncating it, so what is stored is what was sent; empty is allowed.
+ * @param id ID is the listing's id, minted here as \"lst_\" + 16 hex characters. A publisher cannot choose it: Create overwrites whatever arrives. It is unique within PublisherOrg (the primary key is the pair), and it is the path segment DELETE /v1/marketplace/listings/:id takes.
  * @param price 
- * @param `public` 
- * @param publisherOrg 
+ * @param `public` Public is whether other orgs can discover the listing. It also decides ENFORCEMENT: only public rows reach the price table, so a private listing with a price charges nobody. False leaves the row visible to its publisher alone.
+ * @param publisherOrg PublisherOrg is the org that published the listing, taken from the validated principal and never off the wire. It is also the PAYEE org — Recipient is resolved inside it — and the isolation key: a publisher reads and deletes only rows carrying its own org.
  * @param recipient seller payout WALLET ID, in PublisherOrg.
- * @param title 
- * @param tool 
+ * @param title Title is the shop-window name, required and refused past 200 bytes. It is what discovery paints over the tool's registry name.
+ * @param tool Tool is the registry name of the offered capability, in the flat fleet-wide tool namespace. It resolved in the publisher's own scope at publish time, so no listing advertises a capability that did not exist; it is also the key the price table looks a dispatch up by.
  */
 
 
 data class Listing (
 
+    /* Category groups the listing in the shop window. Free text — no vocabulary, nothing validates it — and unlike Description it is silently cut to 4096 bytes rather than refused. Empty means ungrouped. */
     @SerializedName("category")
     val category: kotlin.String? = null,
 
+    /* CreatedAt is when the listing was published, in Unix SECONDS, minted at insert. Every listing read orders by it descending, so it is the shop's ordering key as well as its age. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* Currency is the ISO 4217 code Price is quoted in; Create defaults it to \"USD\" when the publisher names none. It is a LABEL that travels to the shop window: publish parses Price with money.ParseUSD and the x402 terms carry no currency, so another code here changes what is displayed, not what is charged. */
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
+    /* Description is the long copy. Publish REFUSES one past 4096 bytes rather than truncating it, so what is stored is what was sent; empty is allowed. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* ID is the listing's id, minted here as \"lst_\" + 16 hex characters. A publisher cannot choose it: Create overwrites whatever arrives. It is unique within PublisherOrg (the primary key is the pair), and it is the path segment DELETE /v1/marketplace/listings/:id takes. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
     @SerializedName("price")
     val price: kotlin.Any? = null,
 
+    /* Public is whether other orgs can discover the listing. It also decides ENFORCEMENT: only public rows reach the price table, so a private listing with a price charges nobody. False leaves the row visible to its publisher alone. */
     @SerializedName("public")
     val `public`: kotlin.Boolean? = null,
 
+    /* PublisherOrg is the org that published the listing, taken from the validated principal and never off the wire. It is also the PAYEE org — Recipient is resolved inside it — and the isolation key: a publisher reads and deletes only rows carrying its own org. */
     @SerializedName("publisherOrg")
     val publisherOrg: kotlin.String? = null,
 
@@ -65,9 +72,11 @@ data class Listing (
     @SerializedName("recipient")
     val recipient: kotlin.String? = null,
 
+    /* Title is the shop-window name, required and refused past 200 bytes. It is what discovery paints over the tool's registry name. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* Tool is the registry name of the offered capability, in the flat fleet-wide tool namespace. It resolved in the publisher's own scope at publish time, so no listing advertises a capability that did not exist; it is also the key the price table looks a dispatch up by. */
     @SerializedName("tool")
     val tool: kotlin.String? = null
 

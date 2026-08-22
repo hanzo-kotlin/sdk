@@ -23,25 +23,29 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param apiVersion 
- * @param kind 
- * @param metadata 
- * @param spec 
+ * @param apiVersion APIVersion is the constant \"argoproj.io/v1alpha1\". A project here is an IAM resource wearing that shape; no argoproj.io object is stored behind it.
+ * @param kind Kind is the constant \"AppProject\".
+ * @param metadata Metadata is the project's identity: its name is the key an application's spec.project matches, and is the same string an App CR carries in its app.kubernetes.io/part-of label.
+ * @param spec Spec is the fence the SPA displays — repos, destinations, admitted kinds.
  * @param status 
  */
 
 
 data class ArgoProject (
 
+    /* APIVersion is the constant \"argoproj.io/v1alpha1\". A project here is an IAM resource wearing that shape; no argoproj.io object is stored behind it. */
     @SerializedName("apiVersion")
     val apiVersion: kotlin.String? = null,
 
+    /* Kind is the constant \"AppProject\". */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Metadata is the project's identity: its name is the key an application's spec.project matches, and is the same string an App CR carries in its app.kubernetes.io/part-of label. */
     @SerializedName("metadata")
     val metadata: ArgoMeta? = null,
 
+    /* Spec is the fence the SPA displays — repos, destinations, admitted kinds. */
     @SerializedName("spec")
     val spec: ArgoProjectSpec? = null,
 

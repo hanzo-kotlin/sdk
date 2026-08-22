@@ -20,7 +20,7 @@ import ai.hanzo.cloud.model.O11yusageBucket
 import com.google.gson.annotations.SerializedName
 
 /**
- * 
+ * Usage is the LLM side of the same window: how many calls, how many tokens and what they cost. It counts model traffic, not HTTP requests, so it does not reconcile with series.requests.
  *
  * @param calls 
  * @param costCents 

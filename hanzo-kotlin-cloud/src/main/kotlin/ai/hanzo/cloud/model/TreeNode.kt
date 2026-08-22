@@ -22,16 +22,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param children 
- * @param session 
+ * @param children Children is this node's direct children, each a whole node, so the array nests to the depth of the flow. A leaf carries null rather than an empty array. The subtree is materialised in full, up to 10000 nodes, out of one indexed read of the root; nothing is walked node by node.
+ * @param session Session is this node's own session, carrying its event count and its direct fan-out. It is the same shape the list and detail reads answer with, minus the last-event preview, which the tree does not fetch.
  */
 
 
 data class TreeNode (
 
+    /* Children is this node's direct children, each a whole node, so the array nests to the depth of the flow. A leaf carries null rather than an empty array. The subtree is materialised in full, up to 10000 nodes, out of one indexed read of the root; nothing is walked node by node. */
     @SerializedName("children")
     val children: kotlin.collections.List<TreeNode>? = null,
 
+    /* Session is this node's own session, carrying its event count and its direct fan-out. It is the same shape the list and detail reads answer with, minus the last-event preview, which the tree does not fetch. */
     @SerializedName("session")
     val session: SessionView? = null
 

@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param key 
- * @param secret 
- * @param `value` 
+ * @param key Key is the variable's name in the container, which must match `^[A-Za-z_][A-Za-z0-9_]*$`. For a sealed value it is also the last segment of the KMS ref, so it is what identifies the value across a round trip.
+ * @param secret Secret says the value lives in KMS and never in the database. A caller may only ADD secrecy: the server seals a value whose key or shape looks like a credential anyway (secretshape.go), so an entry can come back secret that was not sent that way.
+ * @param `value` Value is the plaintext, and it is WRITE-ONLY once the entry is secret: a sealed value reads back as \"\", and sending \"\" again KEEPS what is sealed rather than wiping it. Only a non-empty value seals a new one.
  */
 
 
 data class EnvVarJSON (
 
+    /* Key is the variable's name in the container, which must match `^[A-Za-z_][A-Za-z0-9_]*$`. For a sealed value it is also the last segment of the KMS ref, so it is what identifies the value across a round trip. */
     @SerializedName("key")
     val key: kotlin.String? = null,
 
+    /* Secret says the value lives in KMS and never in the database. A caller may only ADD secrecy: the server seals a value whose key or shape looks like a credential anyway (secretshape.go), so an entry can come back secret that was not sent that way. */
     @SerializedName("secret")
     val secret: kotlin.Boolean? = null,
 
+    /* Value is the plaintext, and it is WRITE-ONLY once the entry is secret: a sealed value reads back as \"\", and sending \"\" again KEEPS what is sealed rather than wiping it. Only a non-empty value seals a new one. */
     @SerializedName("value")
     val `value`: kotlin.String? = null
 

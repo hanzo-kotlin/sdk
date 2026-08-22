@@ -21,56 +21,68 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param agentName 
- * @param botVersion 
- * @param createdTime 
- * @param machineId 
- * @param message 
- * @param name 
- * @param org 
- * @param owner 
- * @param provider 
- * @param publicIp 
- * @param status 
- * @param updatedTime 
+ * @param agentName AgentName is the cloud Agent (/v1/agents) this machine runs — the agent a message to the bot is actually run against. It is the one field that decides what the bot DOES.
+ * @param botVersion BotVersion pins the @hanzo/bot runtime version the machine runs. Empty means the machine took the default in force when it was bound.
+ * @param createdTime CreatedTime is when the binding was first made.
+ * @param machineId MachineId is the bound machine as vm addresses it, owner-qualified (\"<org>/<machine>\"). The unqualified half is what this surface's :id routes take.
+ * @param message Message is vm's human-readable detail on Status (\"machine provisioning; @hanzo/bot runtime not yet confirmed\") — the reason behind the state, not a second state.
+ * @param name Name is the binding's own key, which is the machine's id: a machine hosts at most one agent, so the binding is named for it. This is the key a bots list joins bindings onto machines by.
+ * @param org Org is the Hanzo tenant the binding belongs to.
+ * @param owner Owner is the tenant vm filed the binding under, resolved from the ?owner it was called with — which is the caller's validated org and never a body field.
+ * @param provider Provider is the cloud the bound machine runs on, carried here so a bindings list says where each bot lives without a second read per machine.
+ * @param publicIp PublicIp is the bound machine's public address as vm recorded it on the binding. Empty while the machine has none yet.
+ * @param status Status is the binding's lifecycle in VM's OWN words — \"Pending\" while the machine provisions and the runtime is unconfirmed, \"running\" once vm has confirmed it. The vocabulary is vm's and passes through unmapped, which is why its capitalization does not match the machine states beside it, and it is vm's reconciled reading rather than anything asserted here.
+ * @param updatedTime UpdatedTime is when vm last reconciled it — the age of Status.
  */
 
 
 data class AgentBinding (
 
+    /* AgentName is the cloud Agent (/v1/agents) this machine runs — the agent a message to the bot is actually run against. It is the one field that decides what the bot DOES. */
     @SerializedName("agentName")
     val agentName: kotlin.String? = null,
 
+    /* BotVersion pins the @hanzo/bot runtime version the machine runs. Empty means the machine took the default in force when it was bound. */
     @SerializedName("botVersion")
     val botVersion: kotlin.String? = null,
 
+    /* CreatedTime is when the binding was first made. */
     @SerializedName("createdTime")
     val createdTime: kotlin.String? = null,
 
+    /* MachineId is the bound machine as vm addresses it, owner-qualified (\"<org>/<machine>\"). The unqualified half is what this surface's :id routes take. */
     @SerializedName("machineId")
     val machineId: kotlin.String? = null,
 
+    /* Message is vm's human-readable detail on Status (\"machine provisioning; @hanzo/bot runtime not yet confirmed\") — the reason behind the state, not a second state. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
+    /* Name is the binding's own key, which is the machine's id: a machine hosts at most one agent, so the binding is named for it. This is the key a bots list joins bindings onto machines by. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Org is the Hanzo tenant the binding belongs to. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Owner is the tenant vm filed the binding under, resolved from the ?owner it was called with — which is the caller's validated org and never a body field. */
     @SerializedName("owner")
     val owner: kotlin.String? = null,
 
+    /* Provider is the cloud the bound machine runs on, carried here so a bindings list says where each bot lives without a second read per machine. */
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* PublicIp is the bound machine's public address as vm recorded it on the binding. Empty while the machine has none yet. */
     @SerializedName("publicIp")
     val publicIp: kotlin.String? = null,
 
+    /* Status is the binding's lifecycle in VM's OWN words — \"Pending\" while the machine provisions and the runtime is unconfirmed, \"running\" once vm has confirmed it. The vocabulary is vm's and passes through unmapped, which is why its capitalization does not match the machine states beside it, and it is vm's reconciled reading rather than anything asserted here. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* UpdatedTime is when vm last reconciled it — the age of Status. */
     @SerializedName("updatedTime")
     val updatedTime: kotlin.String? = null
 

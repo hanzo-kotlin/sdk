@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param repository 
- * @param tag 
+ * @param repository Repository is the image path without a tag (ghcr.io/acme/api). Required for source `image`, which runs it as-is. A git app's built image is NOT this: the build pushes to a path derived from the org and slug, and the deployment records that full ref.
+ * @param tag Tag is the tag to run: what the create declared, then RE-STAMPED on every transition to live with the tag that actually went live. So after a deploy it names what is running, not what was asked for.
  */
 
 
 data class ImageView (
 
+    /* Repository is the image path without a tag (ghcr.io/acme/api). Required for source `image`, which runs it as-is. A git app's built image is NOT this: the build pushes to a path derived from the org and slug, and the deployment records that full ref. */
     @SerializedName("repository")
     val repository: kotlin.String? = null,
 
+    /* Tag is the tag to run: what the create declared, then RE-STAMPED on every transition to live with the tag that actually went live. So after a deploy it names what is running, not what was asked for. */
     @SerializedName("tag")
     val tag: kotlin.String? = null
 

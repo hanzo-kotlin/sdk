@@ -24,16 +24,16 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param createdAt 
+ * @param createdAt CreatedAt is the object's creationTimestamp, RFC 3339 UTC to the second. Absent when the object carries none.
  * @param group 
- * @param health 
- * @param images 
- * @param info 
+ * @param health Health is the node's own derived health. Always present on a node of this tree; a kind with no health signal of its own reports Healthy, since a ConfigMap existing IS its healthy state.
+ * @param images Images are the container images running on this node. Always absent — the tag travels as the \"Image Tag\" chip in Info instead, which is where the SPA reads it on a node.
+ * @param info Info are the chips shown on the node. At most one: the image tag — the RUNNING tag on a Deployment, ReplicaSet or Pod, and the DECLARED tag on the App CR at the root. Absent on a node that carries no image at all.
  * @param kind 
  * @param name 
  * @param namespace 
- * @param parentRefs 
- * @param resourceVersion 
+ * @param parentRefs ParentRefs are the node's edges UPWARD, which is how the SPA draws the DAG from this flat list. Exactly one entry where present: a depth-1 object points at the App CR, a ReplicaSet at its Deployment, a Pod at its ReplicaSet (or at the Deployment whose selector matches it, when the ReplicaSet is gone). Absent on the root.
+ * @param resourceVersion ResourceVersion is the k8s version a watch would resume from. Always empty: the tree is rebuilt from live reads on every request, including on every frame of the SSE stream, so there is no revision to resume from.
  * @param uid 
  * @param version 
  */
@@ -41,18 +41,22 @@ import com.google.gson.annotations.SerializedName
 
 data class ArgoNode (
 
+    /* CreatedAt is the object's creationTimestamp, RFC 3339 UTC to the second. Absent when the object carries none. */
     @SerializedName("createdAt")
     val createdAt: kotlin.String? = null,
 
     @SerializedName("group")
     val group: kotlin.String? = null,
 
+    /* Health is the node's own derived health. Always present on a node of this tree; a kind with no health signal of its own reports Healthy, since a ConfigMap existing IS its healthy state. */
     @SerializedName("health")
     val health: ArgoHealth? = null,
 
+    /* Images are the container images running on this node. Always absent — the tag travels as the \"Image Tag\" chip in Info instead, which is where the SPA reads it on a node. */
     @SerializedName("images")
     val images: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Info are the chips shown on the node. At most one: the image tag — the RUNNING tag on a Deployment, ReplicaSet or Pod, and the DECLARED tag on the App CR at the root. Absent on a node that carries no image at all. */
     @SerializedName("info")
     val info: kotlin.collections.List<ArgoInfoItem>? = null,
 
@@ -65,9 +69,11 @@ data class ArgoNode (
     @SerializedName("namespace")
     val namespace: kotlin.String? = null,
 
+    /* ParentRefs are the node's edges UPWARD, which is how the SPA draws the DAG from this flat list. Exactly one entry where present: a depth-1 object points at the App CR, a ReplicaSet at its Deployment, a Pod at its ReplicaSet (or at the Deployment whose selector matches it, when the ReplicaSet is gone). Absent on the root. */
     @SerializedName("parentRefs")
     val parentRefs: kotlin.collections.List<ArgoResourceRef>? = null,
 
+    /* ResourceVersion is the k8s version a watch would resume from. Always empty: the tree is rebuilt from live reads on every request, including on every frame of the SSE stream, so there is no revision to resume from. */
     @SerializedName("resourceVersion")
     val resourceVersion: kotlin.String? = null,
 

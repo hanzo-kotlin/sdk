@@ -23,24 +23,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param connectionState 
- * @param info 
- * @param name 
- * @param server 
+ * @param connectionState ConnectionState is whether the destination is reachable.
+ * @param info Info is the connection state again plus the count of applications targeting this destination.
+ * @param name Name is what the Destination column shows: \"in-cluster\" for this cluster, otherwise whatever spec.destination.name declares, falling back to the server URL when it declares none.
+ * @param server Server is the destination's API URL, and the key the list is deduplicated by. https://kubernetes.default.svc is this cluster.
  */
 
 
 data class ArgoCluster (
 
+    /* ConnectionState is whether the destination is reachable. */
     @SerializedName("connectionState")
     val connectionState: ArgoConnectionState? = null,
 
+    /* Info is the connection state again plus the count of applications targeting this destination. */
     @SerializedName("info")
     val info: ArgoClusterInfo? = null,
 
+    /* Name is what the Destination column shows: \"in-cluster\" for this cluster, otherwise whatever spec.destination.name declares, falling back to the server URL when it declares none. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Server is the destination's API URL, and the key the list is deduplicated by. https://kubernetes.default.svc is this cluster. */
     @SerializedName("server")
     val server: kotlin.String? = null
 

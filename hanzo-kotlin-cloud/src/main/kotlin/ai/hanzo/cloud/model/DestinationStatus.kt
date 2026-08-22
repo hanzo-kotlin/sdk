@@ -28,8 +28,9 @@ import com.google.gson.annotations.SerializedName
  * @param connected Connected is true when this org has a stored row for the platform — it has been configured here at least once. It says nothing about whether a credential still resolves; that is Live.
  * @param enabled Enabled is whether the fan-out forwards to this destination. False on a destination that is connected but paused, and on one never connected.
  * @param fields Fields are the non-secret inputs this platform needs, which the console card renders and the connect body fills.
- * @param live Live is whether a credential resolves RIGHT NOW: a KMS-sealed secret for this org, else the integrations connection named by the platform's Fallback, else no credential needed at all (a public-ingest sink like Umami). False on a connected destination whose secret has gone missing — Connected && !Live is exactly the \"reconnect me\" state.
+ * @param live Live is whether a credential resolves RIGHT NOW: a KMS-sealed secret for this org, else the integrations connection named by the platform's Fallback, else no credential needed at all (a public-ingest sink like Analytics). False on a connected destination whose secret has gone missing — Connected && !Live is exactly the \"reconnect me\" state.
  * @param name the platform's display name (\"Google Analytics 4\")
+ * @param pixel Pixel is whether the hosted tag can inject a browser pixel for this platform, so a console offers a per-SITE pixel input for exactly these. False means the platform receives conversions server-side only, and an input would promise an injection that never happens. Derived from the tag's own map (event.BrowserTags), never restated — a second list is how a console offers a pixel nothing fires.
  * @param platform the platform slug, and the path segment every route addresses it by
  * @param secrets Secrets are the KMS secret NAMES this platform custodies for the org — names only, never values. The connect body accepts each under its camelCase form.
  */
@@ -61,13 +62,17 @@ data class DestinationStatus (
     @SerializedName("fields")
     val fields: kotlin.collections.List<DestinationField>? = null,
 
-    /* Live is whether a credential resolves RIGHT NOW: a KMS-sealed secret for this org, else the integrations connection named by the platform's Fallback, else no credential needed at all (a public-ingest sink like Umami). False on a connected destination whose secret has gone missing — Connected && !Live is exactly the \"reconnect me\" state. */
+    /* Live is whether a credential resolves RIGHT NOW: a KMS-sealed secret for this org, else the integrations connection named by the platform's Fallback, else no credential needed at all (a public-ingest sink like Analytics). False on a connected destination whose secret has gone missing — Connected && !Live is exactly the \"reconnect me\" state. */
     @SerializedName("live")
     val live: kotlin.Boolean? = null,
 
     /* the platform's display name (\"Google Analytics 4\") */
     @SerializedName("name")
     val name: kotlin.String? = null,
+
+    /* Pixel is whether the hosted tag can inject a browser pixel for this platform, so a console offers a per-SITE pixel input for exactly these. False means the platform receives conversions server-side only, and an input would promise an injection that never happens. Derived from the tag's own map (event.BrowserTags), never restated — a second list is how a console offers a pixel nothing fires. */
+    @SerializedName("pixel")
+    val pixel: kotlin.Boolean? = null,
 
     /* the platform slug, and the path segment every route addresses it by */
     @SerializedName("platform")

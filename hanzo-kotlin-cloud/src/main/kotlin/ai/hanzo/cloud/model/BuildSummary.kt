@@ -21,48 +21,58 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param agent 
- * @param endedAt 
- * @param org 
- * @param project 
- * @param repo 
- * @param session 
- * @param startedAt 
- * @param status 
- * @param title 
- * @param turns 
+ * @param agent Agent is the label the surface that did the work calls itself by.
+ * @param endedAt EndedAt is when it finished, same format. Empty means it is still going.
+ * @param org Org and Project are the build's public ADDRESS — the pair the full story is read at, and the pair a visitor sees in the URL bar. Not a tenant key: this index is anonymous and lists only what authors published.
+ * @param project Project is the product's slug, the second half of that address.
+ * @param repo Repo is the repository the work was done in, as the session reported it.
+ * @param session Session is the agent session behind the build, and the value its commits name in their `Hanzo-Session:` trailer.
+ * @param startedAt StartedAt is when the session opened, RFC 3339 in UTC.
+ * @param status Status is the session's own: running, paused, done or error — so a card can show a build still being written.
+ * @param title Title is the human line for the card. Sent even when empty, like every field here, because that is what this route has always sent.
+ * @param turns Turns is HOW MANY turns the transcript holds — a COUNT, unlike the `turn` on each turn of the full story, which is that turn's position. The full read returns at most 1000 of them; this number is not capped.
  */
 
 
 data class BuildSummary (
 
+    /* Agent is the label the surface that did the work calls itself by. */
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* EndedAt is when it finished, same format. Empty means it is still going. */
     @SerializedName("endedAt")
     val endedAt: kotlin.String? = null,
 
+    /* Org and Project are the build's public ADDRESS — the pair the full story is read at, and the pair a visitor sees in the URL bar. Not a tenant key: this index is anonymous and lists only what authors published. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Project is the product's slug, the second half of that address. */
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Repo is the repository the work was done in, as the session reported it. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* Session is the agent session behind the build, and the value its commits name in their `Hanzo-Session:` trailer. */
     @SerializedName("session")
     val session: kotlin.String? = null,
 
+    /* StartedAt is when the session opened, RFC 3339 in UTC. */
     @SerializedName("startedAt")
     val startedAt: kotlin.String? = null,
 
+    /* Status is the session's own: running, paused, done or error — so a card can show a build still being written. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Title is the human line for the card. Sent even when empty, like every field here, because that is what this route has always sent. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* Turns is HOW MANY turns the transcript holds — a COUNT, unlike the `turn` on each turn of the full story, which is that turn's position. The full read returns at most 1000 of them; this number is not capped. */
     @SerializedName("turns")
     val turns: kotlin.Int? = null
 

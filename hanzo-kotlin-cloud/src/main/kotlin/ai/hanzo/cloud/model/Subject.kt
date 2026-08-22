@@ -21,41 +21,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param createdAt 
- * @param email 
- * @param id 
- * @param kind 
- * @param name 
- * @param org 
- * @param ref the org's own opaque external id for this subject
- * @param updatedAt 
+ * @param createdAt CreatedAt is when the subject was first recorded, Unix SECONDS.
+ * @param email Email is the party's address, when the org supplied one. It is PII: sealed at rest, returned only to the owning org, and never copied into a check record.
+ * @param id ID is the opaque handle every other record uses to point at this party. It is the only reference that leaves this type, which is what keeps the PII in one place: a check, an accreditation and an audit row all carry the id and none of them carry the name.
+ * @param kind Kind is what is being verified: \"individual\" (a natural person, so KYC) or \"business\" (a legal entity, so KYB). It decides which provider flow runs.
+ * @param name Name is the party's name, under the same PII rule as Email. For a business it is the legal entity name rather than a trading name, since that is what a provider verifies against.
+ * @param org Org is the tenant that is doing the verifying — the party who must answer for this record, not the party being verified. A subject is returned only to it.
+ * @param ref Ref is the org's OWN identifier for this party, carried so a caller can match a subject back to their system without keeping a second mapping. Opaque here: nothing in this plane parses or enforces it.
+ * @param updatedAt UpdatedAt is when the subject's own fields last changed, Unix seconds. A check moving to a new status does not touch it — that history lives on the check.
  */
 
 
 data class Subject (
 
+    /* CreatedAt is when the subject was first recorded, Unix SECONDS. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* Email is the party's address, when the org supplied one. It is PII: sealed at rest, returned only to the owning org, and never copied into a check record. */
     @SerializedName("email")
     val email: kotlin.String? = null,
 
+    /* ID is the opaque handle every other record uses to point at this party. It is the only reference that leaves this type, which is what keeps the PII in one place: a check, an accreditation and an audit row all carry the id and none of them carry the name. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Kind is what is being verified: \"individual\" (a natural person, so KYC) or \"business\" (a legal entity, so KYB). It decides which provider flow runs. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Name is the party's name, under the same PII rule as Email. For a business it is the legal entity name rather than a trading name, since that is what a provider verifies against. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Org is the tenant that is doing the verifying — the party who must answer for this record, not the party being verified. A subject is returned only to it. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
-    /* the org's own opaque external id for this subject */
+    /* Ref is the org's OWN identifier for this party, carried so a caller can match a subject back to their system without keeping a second mapping. Opaque here: nothing in this plane parses or enforces it. */
     @SerializedName("ref")
     val ref: kotlin.String? = null,
 
+    /* UpdatedAt is when the subject's own fields last changed, Unix seconds. A check moving to a new status does not touch it — that history lives on the check. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null
 

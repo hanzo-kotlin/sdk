@@ -21,25 +21,26 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param dataset 
+ * @param dataset Dataset is the dataset traced.
  * @param digest Digest is the version's fingerprint, repeated here so a lineage answer is self-contained.
- * @param from From and To are the window actually read — To is the window's end pulled back by the maturity horizon, which is usually earlier than the spec's.
+ * @param from From is where the window actually read opens, RFC 3339. Same as the spec's.
  * @param holds Holds is what the source holds for the same window NOW. The difference between it and Rows is the whole of the reproducibility claim.
  * @param oversize Oversize is how many subjects the window held that were too large to represent when this version was built. It is part of the fingerprint, so it is part of what \"reproducible\" is measured over.
- * @param refusal 
- * @param reproducible Reproducible is true when the source still holds what this version was built from. Refusal says why not, when it is false.
+ * @param refusal Refusal says which way it failed — the window expired, or the source now holds a different count. Absent when Reproducible is true.
+ * @param reproducible Reproducible is true when the source still holds what this version was built from — measured by asking it again, not recalled. False is ordinary: the source is fed by a rollup that runs behind the events, so \"it holds more now\" is the common case and it means re-running the spec would not produce this version.
  * @param retention Retention is the source's own expiry rule as the store reports it, read at materialisation time rather than assumed. A source whose retention is shorter than this window cannot re-derive it.
- * @param rows Rows and Subjects are what the source held for that window at materialisation time.
+ * @param rows Rows is how many rows the source held for that window at materialisation time. Holds is the same question asked now, and the difference between them is the whole of the reproducibility claim.
  * @param share Share is the fraction of subjects admitted, in thousandths.
  * @param source Source is the plane the rows were derived from.
- * @param subjects 
- * @param to 
- * @param version 
+ * @param subjects Subjects is how many distinct subjects those rows belonged to. It is the real sample size — the row count flatters it whenever a subject is active.
+ * @param to To is where it ends: the spec's own end pulled BACK by the maturity horizon, so it is usually earlier than the spec says. This is the window a reproduction has to ask for — asking the spec's would not return these rows.
+ * @param version Version is the version traced — the one asked for, or the newest published one when the request named none.
  */
 
 
 data class RiskLineage (
 
+    /* Dataset is the dataset traced. */
     @SerializedName("dataset")
     val dataset: kotlin.String? = null,
 
@@ -47,7 +48,7 @@ data class RiskLineage (
     @SerializedName("digest")
     val digest: kotlin.String? = null,
 
-    /* From and To are the window actually read — To is the window's end pulled back by the maturity horizon, which is usually earlier than the spec's. */
+    /* From is where the window actually read opens, RFC 3339. Same as the spec's. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
@@ -59,10 +60,11 @@ data class RiskLineage (
     @SerializedName("oversize")
     val oversize: kotlin.Int? = null,
 
+    /* Refusal says which way it failed — the window expired, or the source now holds a different count. Absent when Reproducible is true. */
     @SerializedName("refusal")
     val refusal: kotlin.String? = null,
 
-    /* Reproducible is true when the source still holds what this version was built from. Refusal says why not, when it is false. */
+    /* Reproducible is true when the source still holds what this version was built from — measured by asking it again, not recalled. False is ordinary: the source is fed by a rollup that runs behind the events, so \"it holds more now\" is the common case and it means re-running the spec would not produce this version. */
     @SerializedName("reproducible")
     val reproducible: kotlin.Boolean? = null,
 
@@ -70,7 +72,7 @@ data class RiskLineage (
     @SerializedName("retention")
     val retention: kotlin.String? = null,
 
-    /* Rows and Subjects are what the source held for that window at materialisation time. */
+    /* Rows is how many rows the source held for that window at materialisation time. Holds is the same question asked now, and the difference between them is the whole of the reproducibility claim. */
     @SerializedName("rows")
     val rows: kotlin.Int? = null,
 
@@ -82,12 +84,15 @@ data class RiskLineage (
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Subjects is how many distinct subjects those rows belonged to. It is the real sample size — the row count flatters it whenever a subject is active. */
     @SerializedName("subjects")
     val subjects: kotlin.Int? = null,
 
+    /* To is where it ends: the spec's own end pulled BACK by the maturity horizon, so it is usually earlier than the spec says. This is the window a reproduction has to ask for — asking the spec's would not return these rows. */
     @SerializedName("to")
     val to: kotlin.String? = null,
 
+    /* Version is the version traced — the one asked for, or the newest published one when the request named none. */
     @SerializedName("version")
     val version: kotlin.Int? = null
 

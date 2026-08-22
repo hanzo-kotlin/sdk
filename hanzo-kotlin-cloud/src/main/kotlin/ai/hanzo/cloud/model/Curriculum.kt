@@ -22,20 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param steps 
- * @param title 
- * @param version 
+ * @param steps Steps are the enabled steps in authoring order. Order is the tiebreak the next-step logic walks, so it is part of the contract rather than cosmetic.
+ * @param title Title is the playbook's name as it heads the checklist.
+ * @param version Version identifies the authored playbook this journey was projected from, so two orgs on different playbooks can be told apart. It is the blueprint's own `version` string, not the store's numeric revision.
  */
 
 
 data class Curriculum (
 
+    /* Steps are the enabled steps in authoring order. Order is the tiebreak the next-step logic walks, so it is part of the contract rather than cosmetic. */
     @SerializedName("steps")
     val steps: kotlin.collections.List<JourneyStep>? = null,
 
+    /* Title is the playbook's name as it heads the checklist. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* Version identifies the authored playbook this journey was projected from, so two orgs on different playbooks can be told apart. It is the blueprint's own `version` string, not the store's numeric revision. */
     @SerializedName("version")
     val version: kotlin.String? = null
 

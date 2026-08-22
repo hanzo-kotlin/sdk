@@ -21,21 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param doctype 
- * @param name 
- * @param scheduleAt \"\" = now
+ * @param doctype DocType is the content type holding the item: Campaign, SocialPost or Asset. Any other name is refused as an unknown content type.
+ * @param name Name is the document within that type — the item to distribute. Its caption, media and channel list come off the stored document, so this names WHICH item and says nothing about what goes out.
+ * @param scheduleAt ScheduleAt hands a future go-live to the channel's own scheduler, as an ISO-8601 time. Empty posts now.
  */
 
 
 data class PublishInput (
 
+    /* DocType is the content type holding the item: Campaign, SocialPost or Asset. Any other name is refused as an unknown content type. */
     @SerializedName("doctype")
     val doctype: kotlin.String? = null,
 
+    /* Name is the document within that type — the item to distribute. Its caption, media and channel list come off the stored document, so this names WHICH item and says nothing about what goes out. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
-    /* \"\" = now */
+    /* ScheduleAt hands a future go-live to the channel's own scheduler, as an ISO-8601 time. Empty posts now. */
     @SerializedName("scheduleAt")
     val scheduleAt: kotlin.String? = null
 

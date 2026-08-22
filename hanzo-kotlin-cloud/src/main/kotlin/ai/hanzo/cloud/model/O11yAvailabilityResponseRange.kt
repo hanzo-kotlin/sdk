@@ -19,7 +19,7 @@ package ai.hanzo.cloud.model
 import com.google.gson.annotations.SerializedName
 
 /**
- * 
+ * Range is the window and bucket width actually used, after clamping — not what was asked for, which is why a caller reads it back rather than assuming.
  *
  * @param sinceSec 
  * @param stepSec 

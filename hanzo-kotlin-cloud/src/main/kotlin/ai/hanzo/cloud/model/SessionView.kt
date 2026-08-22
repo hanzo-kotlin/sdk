@@ -22,58 +22,66 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param account 
- * @param actor 
- * @param agent 
- * @param children 
- * @param createdAt 
- * @param cwd 
- * @param endedAt 
- * @param events 
+ * @param account Account is which subscription or API account under that provider served it. Together with Provider it is what a login revoke matches on to stop the sessions a withdrawn account was paying for.
+ * @param actor Actor is WHO this session belongs to, as \"org/sub\" — the same identity a run is billed under. A register that names none takes the calling principal. It is what scopes a login revoke, so a session with the wrong actor is a session the right person cannot stop.
+ * @param agent Agent is the label the surface running this session calls itself by (\"hanzo-dev\"), up to 128 characters. Required at register. It is free text, not a reference: it need not name a defined agent, and nothing resolves it.
+ * @param children Children is the DIRECT fan-out — how many sessions name this one as parent — and not the size of the subtree. Read the tree for that.
+ * @param createdAt CreatedAt is when the row was written, same format. Every path that opens a session stamps it and StartedAt from one clock reading, so the two are equal on every session this surface has ever produced.
+ * @param cwd Cwd is the directory the session is working in NOW, not the one it started in: a linked shell moves around, and a card showing where `hanzo link` was run answers \"which work is this\" with something that was true once.
+ * @param endedAt EndedAt is when it reached done or error, same format. Empty while it is still running or paused, which is how absence reads here: not over yet.
+ * @param events Events is how many turns the session's log holds, counted at read time. It is the whole log, however few of them RecentEvents carries.
  * @param host Execution context (mission-control): the machine/repo/cwd a card shows and the run-target a session is dispatched to. Omitted when a surface didn't report it.
- * @param id 
+ * @param id ID is the session's handle, minted here as \"sess_\" + 32 hex characters. Every later read, patch, event append and control command is addressed with it, and a caller cannot choose it.
  * @param lastEvent LastEvent is the compact latest-activity line for the list projection (nil in register/patch/tree responses; set by list + detail). It lets a swipe card show a live one-line preview without fetching full detail.
  * @param org Org is the caller's OWN tenant, echoed so a client can build the public build URL (/builds/:org/:project) without a second call or a guess. It is never another tenant's — every read is org-scoped before it gets here.
- * @param parentSessionId 
+ * @param parentSessionId ParentSessionID is the session that spawned this one, making this a subagent of it. Empty means this session is a root — a flow of its own. A parent always belongs to the same org, so a tree never crosses a tenant.
  * @param project The readable build: the product this session built and whether its story is public (provenance.go).
- * @param provider 
- * @param published 
- * @param repo 
- * @param rootSessionId 
- * @param startedAt 
- * @param status 
- * @param target 
- * @param taskRunId 
- * @param taskWorkflowId 
+ * @param provider Provider is the linked AI account's provider (claude | codex | hanzo | …) that served this run. Empty when the surface did not say.
+ * @param published Published is the author's decision to let anyone read this session's story at the public build route. It only ever widens READ access to a session that already exists and grants nothing else; false, an unpublished session is invisible there no matter who asks. It cannot be true without a Project, because that route is keyed on (org, project).
+ * @param repo Repo is the code the session is working on, as the surface reported it. It is truth the SURFACE states, so it is a label rather than something resolved here.
+ * @param rootSessionId RootSessionID is the top of this session's tree, inherited from the parent and shared by every node in one flow. A root session's own id, when it has no parent. It is the key one indexed read pulls a whole flow by, and what ?root= narrows a list or a stream to.
+ * @param startedAt StartedAt is when the session opened, RFC 3339 in UTC to the second.
+ * @param status Status is one of exactly four: running, paused, done, error. running and paused are LIVE; done and error are TERMINAL and monotonic — once a session reaches one it can never go back, because reopening a finished run would fabricate liveness. A control command never moves it: the surface running the agent reports the new status, and until it does the command is only recorded.
+ * @param target Target is the registered run-target this session is dispatched to — a machine the org claimed, resolved same-org when it was set, so it can never point at another tenant's computer. Empty means the session names no machine.
+ * @param taskRunId TaskRunID is that workflow's particular run. A workflow is the definition and a run is one execution of it, which is why both are carried.
+ * @param taskWorkflowId TaskWorkflowID is the hanzoai/tasks durable workflow that actually EXECUTES this session — this registry is the view, control and stream layer over it. Set, a control command is FORWARDED to that engine; empty, the running surface polls for commands instead, which is every session today.
  * @param terminal Terminal is where this session can be WATCHED — the URL the machine published for its live terminal. Omitted when it publishes none.
- * @param title 
- * @param updatedAt 
+ * @param title Title is the human line a card shows (\"ship the landing page\"), up to 512 characters. Free text, and the one field a surface may rewrite as the work turns out to be something else.
+ * @param updatedAt UpdatedAt is the session's last-activity clock, same format. It moves on a write to the row — a status, a title, a re-dispatch — AND on every appended turn, because the append bumps it in the same transaction. The list is ordered on CreatedAt, so this is the field that says whether a session is still saying anything.
  */
 
 
 data class SessionView (
 
+    /* Account is which subscription or API account under that provider served it. Together with Provider it is what a login revoke matches on to stop the sessions a withdrawn account was paying for. */
     @SerializedName("account")
     val account: kotlin.String? = null,
 
+    /* Actor is WHO this session belongs to, as \"org/sub\" — the same identity a run is billed under. A register that names none takes the calling principal. It is what scopes a login revoke, so a session with the wrong actor is a session the right person cannot stop. */
     @SerializedName("actor")
     val actor: kotlin.String? = null,
 
+    /* Agent is the label the surface running this session calls itself by (\"hanzo-dev\"), up to 128 characters. Required at register. It is free text, not a reference: it need not name a defined agent, and nothing resolves it. */
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* Children is the DIRECT fan-out — how many sessions name this one as parent — and not the size of the subtree. Read the tree for that. */
     @SerializedName("children")
     val children: kotlin.Int? = null,
 
+    /* CreatedAt is when the row was written, same format. Every path that opens a session stamps it and StartedAt from one clock reading, so the two are equal on every session this surface has ever produced. */
     @SerializedName("createdAt")
     val createdAt: kotlin.String? = null,
 
+    /* Cwd is the directory the session is working in NOW, not the one it started in: a linked shell moves around, and a card showing where `hanzo link` was run answers \"which work is this\" with something that was true once. */
     @SerializedName("cwd")
     val cwd: kotlin.String? = null,
 
+    /* EndedAt is when it reached done or error, same format. Empty while it is still running or paused, which is how absence reads here: not over yet. */
     @SerializedName("endedAt")
     val endedAt: kotlin.String? = null,
 
+    /* Events is how many turns the session's log holds, counted at read time. It is the whole log, however few of them RecentEvents carries. */
     @SerializedName("events")
     val events: kotlin.Int? = null,
 
@@ -81,6 +89,7 @@ data class SessionView (
     @SerializedName("host")
     val host: kotlin.String? = null,
 
+    /* ID is the session's handle, minted here as \"sess_\" + 32 hex characters. Every later read, patch, event append and control command is addressed with it, and a caller cannot choose it. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
@@ -92,6 +101,7 @@ data class SessionView (
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* ParentSessionID is the session that spawned this one, making this a subagent of it. Empty means this session is a root — a flow of its own. A parent always belongs to the same org, so a tree never crosses a tenant. */
     @SerializedName("parentSessionId")
     val parentSessionId: kotlin.String? = null,
 
@@ -99,30 +109,39 @@ data class SessionView (
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Provider is the linked AI account's provider (claude | codex | hanzo | …) that served this run. Empty when the surface did not say. */
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* Published is the author's decision to let anyone read this session's story at the public build route. It only ever widens READ access to a session that already exists and grants nothing else; false, an unpublished session is invisible there no matter who asks. It cannot be true without a Project, because that route is keyed on (org, project). */
     @SerializedName("published")
     val published: kotlin.Boolean? = null,
 
+    /* Repo is the code the session is working on, as the surface reported it. It is truth the SURFACE states, so it is a label rather than something resolved here. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* RootSessionID is the top of this session's tree, inherited from the parent and shared by every node in one flow. A root session's own id, when it has no parent. It is the key one indexed read pulls a whole flow by, and what ?root= narrows a list or a stream to. */
     @SerializedName("rootSessionId")
     val rootSessionId: kotlin.String? = null,
 
+    /* StartedAt is when the session opened, RFC 3339 in UTC to the second. */
     @SerializedName("startedAt")
     val startedAt: kotlin.String? = null,
 
+    /* Status is one of exactly four: running, paused, done, error. running and paused are LIVE; done and error are TERMINAL and monotonic — once a session reaches one it can never go back, because reopening a finished run would fabricate liveness. A control command never moves it: the surface running the agent reports the new status, and until it does the command is only recorded. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Target is the registered run-target this session is dispatched to — a machine the org claimed, resolved same-org when it was set, so it can never point at another tenant's computer. Empty means the session names no machine. */
     @SerializedName("target")
     val target: kotlin.String? = null,
 
+    /* TaskRunID is that workflow's particular run. A workflow is the definition and a run is one execution of it, which is why both are carried. */
     @SerializedName("taskRunId")
     val taskRunId: kotlin.String? = null,
 
+    /* TaskWorkflowID is the hanzoai/tasks durable workflow that actually EXECUTES this session — this registry is the view, control and stream layer over it. Set, a control command is FORWARDED to that engine; empty, the running surface polls for commands instead, which is every session today. */
     @SerializedName("taskWorkflowId")
     val taskWorkflowId: kotlin.String? = null,
 
@@ -130,9 +149,11 @@ data class SessionView (
     @SerializedName("terminal")
     val terminal: kotlin.String? = null,
 
+    /* Title is the human line a card shows (\"ship the landing page\"), up to 512 characters. Free text, and the one field a surface may rewrite as the work turns out to be something else. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* UpdatedAt is the session's last-activity clock, same format. It moves on a write to the row — a status, a title, a re-dispatch — AND on every appended turn, because the append bumps it in the same transaction. The list is ordered on CreatedAt, so this is the field that says whether a session is still saying anything. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.String? = null
 

@@ -21,27 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param apis [\"openai\",\"anthropic\"]
- * @param models ids from the node's GET /v1/models
- * @param status \"ready\" | \"unreachable\"
- * @param url 
+ * @param apis APIs are the wire formats the engine serves on that one port: \"openai\", \"anthropic\", or both.
+ * @param models Models are the model ids the node's own GET /v1/models answered with — what this GPU can actually be asked for.
+ * @param status Status is \"ready\" when the node's engine answered, \"unreachable\" when it did not. Advertised is not the same as serving, and this is the difference.
+ * @param url URL is the base address the node advertised its engine on — where a model call to this GPU is sent. The node chose it, so reaching it is a question about the node's network, not about this surface.
  */
 
 
 data class EngineAdvertisement (
 
-    /* [\"openai\",\"anthropic\"] */
+    /* APIs are the wire formats the engine serves on that one port: \"openai\", \"anthropic\", or both. */
     @SerializedName("apis")
     val apis: kotlin.collections.List<kotlin.String>? = null,
 
-    /* ids from the node's GET /v1/models */
+    /* Models are the model ids the node's own GET /v1/models answered with — what this GPU can actually be asked for. */
     @SerializedName("models")
     val models: kotlin.collections.List<kotlin.String>? = null,
 
-    /* \"ready\" | \"unreachable\" */
+    /* Status is \"ready\" when the node's engine answered, \"unreachable\" when it did not. Advertised is not the same as serving, and this is the difference. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* URL is the base address the node advertised its engine on — where a model call to this GPU is sent. The node chose it, so reaching it is a question about the node's network, not about this surface. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

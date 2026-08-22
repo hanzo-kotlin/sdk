@@ -21,32 +21,37 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param computeRef 
- * @param description 
- * @param executionMode 
- * @param instructions 
- * @param model 
+ * @param computeRef ComputeRef re-binds (or, with \"\", unbinds) the visor machine. Opaque here.
+ * @param description Description replaces the line other agents read in the tool catalogue.
+ * @param executionMode ExecutionMode switches between one-shot and long-running. The RESULTING mode+schedule are validated together, so switching to long-running without a stored or supplied cron is refused rather than accepted into an agent the scheduler would skip forever. A switch INTO long-running counts against the per-org cap and can be a 409.
+ * @param instructions Instructions replaces the system prompt whole, up to 32 KiB. There is no append: a prompt is one text, and sending \"\" clears it.
+ * @param model Model re-points the agent at another model, checked against the gateway's served catalogue exactly as create checks it. Empty STRING is refused — say nothing to keep the current one. Past runs keep the model that served them.
  * @param ref Ref is the agent to update — its public id or org-unique name, from the path.
- * @param schedule 
- * @param serviceAccountId 
- * @param tools 
+ * @param schedule Schedule replaces the cron. It is validated against the mode this update leaves behind, and dropped if that mode is one-shot.
+ * @param serviceAccountId ServiceAccountID re-points (or, with \"\", clears) the IAM service account a scheduled run is billed as. Clearing it puts that spend back on the org.
+ * @param tools Tools replaces the whole allow-list, it does not add to it. Sending [] takes every tool away, which is the only way to say that.
  */
 
 
 data class UpdateAgentIn (
 
+    /* ComputeRef re-binds (or, with \"\", unbinds) the visor machine. Opaque here. */
     @SerializedName("computeRef")
     val computeRef: kotlin.String? = null,
 
+    /* Description replaces the line other agents read in the tool catalogue. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* ExecutionMode switches between one-shot and long-running. The RESULTING mode+schedule are validated together, so switching to long-running without a stored or supplied cron is refused rather than accepted into an agent the scheduler would skip forever. A switch INTO long-running counts against the per-org cap and can be a 409. */
     @SerializedName("executionMode")
     val executionMode: kotlin.String? = null,
 
+    /* Instructions replaces the system prompt whole, up to 32 KiB. There is no append: a prompt is one text, and sending \"\" clears it. */
     @SerializedName("instructions")
     val instructions: kotlin.String? = null,
 
+    /* Model re-points the agent at another model, checked against the gateway's served catalogue exactly as create checks it. Empty STRING is refused — say nothing to keep the current one. Past runs keep the model that served them. */
     @SerializedName("model")
     val model: kotlin.String? = null,
 
@@ -54,12 +59,15 @@ data class UpdateAgentIn (
     @SerializedName("ref")
     val ref: kotlin.String? = null,
 
+    /* Schedule replaces the cron. It is validated against the mode this update leaves behind, and dropped if that mode is one-shot. */
     @SerializedName("schedule")
     val schedule: kotlin.String? = null,
 
+    /* ServiceAccountID re-points (or, with \"\", clears) the IAM service account a scheduled run is billed as. Clearing it puts that spend back on the org. */
     @SerializedName("serviceAccountId")
     val serviceAccountId: kotlin.String? = null,
 
+    /* Tools replaces the whole allow-list, it does not add to it. Sending [] takes every tool away, which is the only way to say that. */
     @SerializedName("tools")
     val tools: kotlin.collections.List<kotlin.String>? = null
 

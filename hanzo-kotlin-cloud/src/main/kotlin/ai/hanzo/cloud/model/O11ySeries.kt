@@ -21,30 +21,22 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param costCents 
- * @param errors 
- * @param requests 
- * @param tokens 
- * @param ts 
+ * @param labels 
+ * @param labelsArray 
+ * @param propertyValues 
  */
 
 
 data class O11ySeries (
 
-    @SerializedName("costCents")
-    val costCents: kotlin.Int? = null,
+    @SerializedName("labels")
+    val labels: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
 
-    @SerializedName("errors")
-    val errors: kotlin.Int? = null,
+    @SerializedName("labelsArray")
+    val labelsArray: kotlin.collections.List<kotlin.collections.Map<kotlin.String, kotlin.String>>? = null,
 
-    @SerializedName("requests")
-    val requests: kotlin.Int? = null,
-
-    @SerializedName("tokens")
-    val tokens: kotlin.Int? = null,
-
-    @SerializedName("ts")
-    val ts: kotlin.String? = null
+    @SerializedName("values")
+    val propertyValues: kotlin.collections.List<kotlin.Any>? = null
 
 ) {
 

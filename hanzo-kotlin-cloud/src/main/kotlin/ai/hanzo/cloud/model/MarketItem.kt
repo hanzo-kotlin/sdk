@@ -23,15 +23,15 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param activated 
- * @param category 
+ * @param category Category is that same listing's grouping. Free text chosen by the publisher, absent when there is no public listing or the publisher left it blank.
  * @param description 
  * @param dispatchable 
  * @param inputSchema 
- * @param installed 
+ * @param installed Installed is whether the tool is activated for THIS caller's (org, project): the same bit as Activated, under the shop's name for it, which install and uninstall are the writes for. It is per caller, so one listing reads installed for one org and not for another.
  * @param name 
  * @param price 
  * @param source 
- * @param title 
+ * @param title Title is the shop-window name, painted over the registry Name from the CHEAPEST public listing for this tool — several orgs may list the same one, and the row shown is the one a buyer would pay. Absent when no org has listed the tool publicly: that row is a plain capability, not an offer.
  */
 
 
@@ -40,6 +40,7 @@ data class MarketItem (
     @SerializedName("activated")
     val activated: kotlin.Boolean? = null,
 
+    /* Category is that same listing's grouping. Free text chosen by the publisher, absent when there is no public listing or the publisher left it blank. */
     @SerializedName("category")
     val category: kotlin.String? = null,
 
@@ -52,6 +53,7 @@ data class MarketItem (
     @SerializedName("inputSchema")
     val inputSchema: kotlin.Any? = null,
 
+    /* Installed is whether the tool is activated for THIS caller's (org, project): the same bit as Activated, under the shop's name for it, which install and uninstall are the writes for. It is per caller, so one listing reads installed for one org and not for another. */
     @SerializedName("installed")
     val installed: kotlin.Boolean? = null,
 
@@ -64,6 +66,7 @@ data class MarketItem (
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Title is the shop-window name, painted over the registry Name from the CHEAPEST public listing for this tool — several orgs may list the same one, and the row shown is the one a buyer would pay. Absent when no org has listed the tool publicly: that row is a plain capability, not an offer. */
     @SerializedName("title")
     val title: kotlin.String? = null
 

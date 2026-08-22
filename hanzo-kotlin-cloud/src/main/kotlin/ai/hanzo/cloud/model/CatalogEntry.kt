@@ -21,22 +21,25 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param configured 
- * @param description 
- * @param displayName 
+ * @param configured Configured is whether THIS DEPLOYMENT holds the OAuth client credentials for the provider. False means Connect would dead-end, so the console can offer it disabled instead of broken. It is deployment-wide and says nothing about whether the caller's org has connected the source — that is the connector list's `status`.
+ * @param description Description is one line of shop copy: what connecting this source pulls in. Native connectors carry written prose; a piece-backed one reads \"activepieces connector (<piece>)\".
+ * @param displayName DisplayName is the label to show a person. First-party connectors carry a written name (\"GitHub\", \"Google Drive\"); a piece-backed one falls back to the provider capitalized, because the rich activepieces metadata lives behind a cross-service call this read will not make.
  * @param kind \"native\" | \"piece\"
- * @param provider 
+ * @param provider Provider is the source's id and the address every connector op takes it by (/v1/knowledge/connectors/:provider). One of github, slack, google, notion.
  */
 
 
 data class CatalogEntry (
 
+    /* Configured is whether THIS DEPLOYMENT holds the OAuth client credentials for the provider. False means Connect would dead-end, so the console can offer it disabled instead of broken. It is deployment-wide and says nothing about whether the caller's org has connected the source — that is the connector list's `status`. */
     @SerializedName("configured")
     val configured: kotlin.Boolean? = null,
 
+    /* Description is one line of shop copy: what connecting this source pulls in. Native connectors carry written prose; a piece-backed one reads \"activepieces connector (<piece>)\". */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* DisplayName is the label to show a person. First-party connectors carry a written name (\"GitHub\", \"Google Drive\"); a piece-backed one falls back to the provider capitalized, because the rich activepieces metadata lives behind a cross-service call this read will not make. */
     @SerializedName("displayName")
     val displayName: kotlin.String? = null,
 
@@ -44,6 +47,7 @@ data class CatalogEntry (
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Provider is the source's id and the address every connector op takes it by (/v1/knowledge/connectors/:provider). One of github, slack, google, notion. */
     @SerializedName("provider")
     val provider: kotlin.String? = null
 

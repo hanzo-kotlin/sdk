@@ -21,33 +21,31 @@ import okhttp3.HttpUrl
 
 import ai.hanzo.cloud.model.AddDomainReq
 import ai.hanzo.cloud.model.AppView
+import ai.hanzo.cloud.model.BuildBoard
 import ai.hanzo.cloud.model.CreateAppReq
 import ai.hanzo.cloud.model.DeployLogs
 import ai.hanzo.cloud.model.DeployReq
 import ai.hanzo.cloud.model.DeploymentView
 import ai.hanzo.cloud.model.DomainView
 import ai.hanzo.cloud.model.DriftBoard
+import ai.hanzo.cloud.model.EnvironmentBoard
+import ai.hanzo.cloud.model.PipelineBoard
 import ai.hanzo.cloud.model.PreviewReq
 import ai.hanzo.cloud.model.PreviewView
 import ai.hanzo.cloud.model.ProjectView
-import ai.hanzo.cloud.model.ProjectsBoundDomains
-import ai.hanzo.cloud.model.ProjectsComplete
-import ai.hanzo.cloud.model.ProjectsCreate
-import ai.hanzo.cloud.model.ProjectsDeployStart
-import ai.hanzo.cloud.model.ProjectsDeployment
-import ai.hanzo.cloud.model.ProjectsDomain
-import ai.hanzo.cloud.model.ProjectsDomains
-import ai.hanzo.cloud.model.ProjectsDomainsBind
-import ai.hanzo.cloud.model.ProjectsProject
-import ai.hanzo.cloud.model.ProjectsPublish
-import ai.hanzo.cloud.model.ProjectsRelease
-import ai.hanzo.cloud.model.ProjectsUpdate
 import ai.hanzo.cloud.model.PromoteReq
+import ai.hanzo.cloud.model.Push
 import ai.hanzo.cloud.model.Readiness
+import ai.hanzo.cloud.model.ReleaseBoard
 import ai.hanzo.cloud.model.RestartRef
 import ai.hanzo.cloud.model.Restarted
 import ai.hanzo.cloud.model.RollbackReq
+import ai.hanzo.cloud.model.RunReq
+import ai.hanzo.cloud.model.RunView
+import ai.hanzo.cloud.model.RunnerBuildReq
+import ai.hanzo.cloud.model.RunnerBuildResp
 import ai.hanzo.cloud.model.SetEnvReq
+import ai.hanzo.cloud.model.Verdict
 
 import com.google.gson.annotations.SerializedName
 
@@ -215,149 +213,6 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/platform/projects/{project}/apps/{app}/domains/{host}".replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"app"+"}", encodeURIComponent(app.toString())).replace("{"+"host"+"}", encodeURIComponent(host.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/platform/sites/{slug}
-     * Deletes a project and takes its site off the internet.
-     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the git source is retired on every copy it has so a reclaimed slug never adopts a repository left behind (visibility.go), the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deletePlatformSitesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = deletePlatformSitesBySlugWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/platform/sites/{slug}
-     * Deletes a project and takes its site off the internet.
-     * Deletes a project and takes its site off the internet.  The metadata delete is authoritative and everything after it is best-effort, in this order: the public &#x60;&lt;slug&gt;&#x60; subdomain binding is released so the slug is free to reclaim, the release rows are dropped so a reclaimed slug never inherits the previous owner&#39;s rollback menu, the git source is retired on every copy it has so a reclaimed slug never adopts a repository left behind (visibility.go), the S3 origin is purged under BOTH &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60; and the site&#39;s sibling release space, and the edge cache-tag is flushed. A failure in any of those is logged and the delete still answers 204 — resurrecting a project because a purge missed would be worse than a leaked prefix.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404 and nothing of theirs is touched.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun deletePlatformSitesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deletePlatformSitesBySlugRequestConfig(slug = slug)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation deletePlatformSitesBySlug
-     *
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return RequestConfig
-     */
-    fun deletePlatformSitesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/platform/sites/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/platform/sites/{slug}/domains/{host}
-     * Gives a custom hostname back, so the name is free to reuse.
-     * Gives a custom hostname back, so the name is free to reuse.  A claim is FIRST-COME and global, so an add-only surface was not ownership but a leak: a customer who mistyped a domain, or claimed one they later moved elsewhere, could neither reuse it nor let anyone else. This is the third writer that closes it. The release is scoped to (host, org, slug), so it can only ever drop THIS tenant&#39;s own claim, and it is IDEMPOTENT: releasing a host we do not hold is a clean 204, never a 404 that would let a caller probe which hosts other tenants hold. The edge cache-tag is flushed, since the host stops routing here.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project the host is attached to, from the path.
-     * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deletePlatformSitesBySlugDomainsByHost(slug: kotlin.String, host: kotlin.String) : Unit {
-        val localVarResponse = deletePlatformSitesBySlugDomainsByHostWithHttpInfo(slug = slug, host = host)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/platform/sites/{slug}/domains/{host}
-     * Gives a custom hostname back, so the name is free to reuse.
-     * Gives a custom hostname back, so the name is free to reuse.  A claim is FIRST-COME and global, so an add-only surface was not ownership but a leak: a customer who mistyped a domain, or claimed one they later moved elsewhere, could neither reuse it nor let anyone else. This is the third writer that closes it. The release is scoped to (host, org, slug), so it can only ever drop THIS tenant&#39;s own claim, and it is IDEMPOTENT: releasing a host we do not hold is a clean 204, never a 404 that would let a caller probe which hosts other tenants hold. The edge cache-tag is flushed, since the host stops routing here.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project the host is attached to, from the path.
-     * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun deletePlatformSitesBySlugDomainsByHostWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deletePlatformSitesBySlugDomainsByHostRequestConfig(slug = slug, host = host)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation deletePlatformSitesBySlugDomainsByHost
-     *
-     * @param slug Slug is the project the host is attached to, from the path.
-     * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
-     * @return RequestConfig
-     */
-    fun deletePlatformSitesBySlugDomainsByHostRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/platform/sites/{slug}/domains/{host}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"host"+"}", encodeURIComponent(host.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -573,6 +428,76 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
+     * GET /v1/platform/builds
+     * Returns real build records for your org.
+     * Returns real build records for your org.  It lists the org&#39;s BuildKit build records — the git build step behind a deploy — each with the repo it built, the short commit, its status, when it started and how long it took. These are real records or an honest empty list; a build appears here because one ran, never because a page needed a row. Builds are created only by /deploy and the push-to-deploy hook. Requires a validated principal; 403 without one.
+     * @return BuildBoard
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getPlatformBuilds() : BuildBoard {
+        val localVarResponse = getPlatformBuildsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BuildBoard
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/platform/builds
+     * Returns real build records for your org.
+     * Returns real build records for your org.  It lists the org&#39;s BuildKit build records — the git build step behind a deploy — each with the repo it built, the short commit, its status, when it started and how long it took. These are real records or an honest empty list; a build appears here because one ran, never because a page needed a row. Builds are created only by /deploy and the push-to-deploy hook. Requires a validated principal; 403 without one.
+     * @return ApiResponse<BuildBoard?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getPlatformBuildsWithHttpInfo() : ApiResponse<BuildBoard?> {
+        val localVariableConfig = getPlatformBuildsRequestConfig()
+
+        return request<Unit, BuildBoard>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getPlatformBuilds
+     *
+     * @return RequestConfig
+     */
+    fun getPlatformBuildsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/platform/builds",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/platform/cd
      * The delivery plane
      * Every Hanzo CD Application this caller may observe, with its sync verdict, health, the universe revision last applied, and whether automation and self-heal are on. A SuperAdmin sees the fleet; an org admin sees only Applications whose destination namespace IS its own organization, and never a reserved one.  A cluster with no CD installed answers an empty plane. A plane that cannot be READ answers 503 and says why — the two are opposite facts and never share a shape.
@@ -699,6 +624,76 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/platform/ci",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/platform/environments
+     * Returns your deploy targets, and what is running on each.
+     * Returns your deploy targets, and what is running on each.  It returns the org&#39;s environments — the distinct deploy targets its applications name, &#x60;production&#x60; for anything that names none — each aggregating the apps that target it, a rolled-up status and when it last changed.  An environment is DERIVED, not stored: there is nothing to create or delete here, and an environment exists exactly as long as an app points at it. Requires a validated principal; 403 without one.
+     * @return EnvironmentBoard
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getPlatformEnvironments() : EnvironmentBoard {
+        val localVarResponse = getPlatformEnvironmentsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EnvironmentBoard
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/platform/environments
+     * Returns your deploy targets, and what is running on each.
+     * Returns your deploy targets, and what is running on each.  It returns the org&#39;s environments — the distinct deploy targets its applications name, &#x60;production&#x60; for anything that names none — each aggregating the apps that target it, a rolled-up status and when it last changed.  An environment is DERIVED, not stored: there is nothing to create or delete here, and an environment exists exactly as long as an app points at it. Requires a validated principal; 403 without one.
+     * @return ApiResponse<EnvironmentBoard?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getPlatformEnvironmentsWithHttpInfo() : ApiResponse<EnvironmentBoard?> {
+        val localVariableConfig = getPlatformEnvironmentsRequestConfig()
+
+        return request<Unit, EnvironmentBoard>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getPlatformEnvironments
+     *
+     * @return RequestConfig
+     */
+    fun getPlatformEnvironmentsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/platform/environments",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -946,6 +941,76 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/platform/health",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/platform/pipelines
+     * Returns one build-and-deploy pipeline per app, with its latest run.
+     * Returns one build-and-deploy pipeline per app, with its latest run.  It returns one pipeline per application in the caller&#39;s org — its repo or image source, its current status, and when its most recent deployment ran and how long it took. A pipeline is a PROJECTION of an app plus its newest deployment, not a separate record: it comes into existence with the app and is triggered only through /deploy, never here. Requires a validated principal; 403 without one.
+     * @return PipelineBoard
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getPlatformPipelines() : PipelineBoard {
+        val localVarResponse = getPlatformPipelinesWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PipelineBoard
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/platform/pipelines
+     * Returns one build-and-deploy pipeline per app, with its latest run.
+     * Returns one build-and-deploy pipeline per app, with its latest run.  It returns one pipeline per application in the caller&#39;s org — its repo or image source, its current status, and when its most recent deployment ran and how long it took. A pipeline is a PROJECTION of an app plus its newest deployment, not a separate record: it comes into existence with the app and is triggered only through /deploy, never here. Requires a validated principal; 403 without one.
+     * @return ApiResponse<PipelineBoard?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getPlatformPipelinesWithHttpInfo() : ApiResponse<PipelineBoard?> {
+        val localVariableConfig = getPlatformPipelinesRequestConfig()
+
+        return request<Unit, PipelineBoard>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getPlatformPipelines
+     *
+     * @return RequestConfig
+     */
+    fun getPlatformPipelinesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/platform/pipelines",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1556,10 +1621,10 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * GET /v1/platform/sites
-     * Returns every project your org owns.
-     * Returns every project your org owns.  Each row carries the slug, name, framework, visibility, status and live URL — the same rows console and the builder render, because there is only one store behind both. It requires a validated principal (403 without one) and is keyed by that principal&#39;s org, so it never contains another tenant&#39;s project.
-     * @return kotlin.collections.List<ProjectsProject>
+     * GET /v1/platform/releases
+     * Returns the versions that actually reached the cluster.
+     * Returns the versions that actually reached the cluster.  It lists the org&#39;s releases: the deployments that were genuinely applied to the cluster, with the app they belong to, their version, environment, status and when they were released. A deployment that failed or is still building is NOT a release and is excluded — reaching the cluster is what makes one. Requires a validated principal; 403 without one.
+     * @return ReleaseBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1568,11 +1633,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformSites() : kotlin.collections.List<ProjectsProject> {
-        val localVarResponse = getPlatformSitesWithHttpInfo()
+    fun getPlatformReleases() : ReleaseBoard {
+        val localVarResponse = getPlatformReleasesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectsProject>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReleaseBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1587,29 +1652,29 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * GET /v1/platform/sites
-     * Returns every project your org owns.
-     * Returns every project your org owns.  Each row carries the slug, name, framework, visibility, status and live URL — the same rows console and the builder render, because there is only one store behind both. It requires a validated principal (403 without one) and is keyed by that principal&#39;s org, so it never contains another tenant&#39;s project.
-     * @return ApiResponse<kotlin.collections.List<ProjectsProject>?>
+     * GET /v1/platform/releases
+     * Returns the versions that actually reached the cluster.
+     * Returns the versions that actually reached the cluster.  It lists the org&#39;s releases: the deployments that were genuinely applied to the cluster, with the app they belong to, their version, environment, status and when they were released. A deployment that failed or is still building is NOT a release and is excluded — reaching the cluster is what makes one. Requires a validated principal; 403 without one.
+     * @return ApiResponse<ReleaseBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformSitesWithHttpInfo() : ApiResponse<kotlin.collections.List<ProjectsProject>?> {
-        val localVariableConfig = getPlatformSitesRequestConfig()
+    fun getPlatformReleasesWithHttpInfo() : ApiResponse<ReleaseBoard?> {
+        val localVariableConfig = getPlatformReleasesRequestConfig()
 
-        return request<Unit, kotlin.collections.List<ProjectsProject>>(
+        return request<Unit, ReleaseBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getPlatformSites
+     * To obtain the request config of the operation getPlatformReleases
      *
      * @return RequestConfig
      */
-    fun getPlatformSitesRequestConfig() : RequestConfig<Unit> {
+    fun getPlatformReleasesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1617,452 +1682,7 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/platform/sites",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}
-     * Returns one project of yours by slug — its settings, its live URL and the deployment currently serving it.
-     * Returns one project of yours by slug — its settings, its live URL and the deployment currently serving it.  Scope: a validated principal is required (403 without one) and the lookup is keyed by (org, slug), so another tenant&#39;s slug is a 404 exactly like a nonexistent one.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ProjectsProject
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformSitesBySlug(slug: kotlin.String) : ProjectsProject {
-        val localVarResponse = getPlatformSitesBySlugWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}
-     * Returns one project of yours by slug — its settings, its live URL and the deployment currently serving it.
-     * Returns one project of yours by slug — its settings, its live URL and the deployment currently serving it.  Scope: a validated principal is required (403 without one) and the lookup is keyed by (org, slug), so another tenant&#39;s slug is a 404 exactly like a nonexistent one.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ApiResponse<ProjectsProject?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformSitesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = getPlatformSitesBySlugRequestConfig(slug = slug)
-
-        return request<Unit, ProjectsProject>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getPlatformSitesBySlug
-     *
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return RequestConfig
-     */
-    fun getPlatformSitesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/platform/sites/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}/deployments
-     * Returns a project&#39;s deploy history, newest version first.
-     * Returns a project&#39;s deploy history, newest version first.  Every deploy of the project is a row — uploads, generated sites, and git/CI builds alike — carrying its version, status, source, commit, live URL, file count and byte count. The short-lived upload grant a queued git deployment was handed is NOT replayed here: it exists only on the 202 that minted it, so a grant cannot outlive its build by being fetched again.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return kotlin.collections.List<ProjectsDeployment>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformSitesBySlugDeployments(slug: kotlin.String) : kotlin.collections.List<ProjectsDeployment> {
-        val localVarResponse = getPlatformSitesBySlugDeploymentsWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectsDeployment>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}/deployments
-     * Returns a project&#39;s deploy history, newest version first.
-     * Returns a project&#39;s deploy history, newest version first.  Every deploy of the project is a row — uploads, generated sites, and git/CI builds alike — carrying its version, status, source, commit, live URL, file count and byte count. The short-lived upload grant a queued git deployment was handed is NOT replayed here: it exists only on the 202 that minted it, so a grant cannot outlive its build by being fetched again.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ApiResponse<kotlin.collections.List<ProjectsDeployment>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformSitesBySlugDeploymentsWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.collections.List<ProjectsDeployment>?> {
-        val localVariableConfig = getPlatformSitesBySlugDeploymentsRequestConfig(slug = slug)
-
-        return request<Unit, kotlin.collections.List<ProjectsDeployment>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getPlatformSitesBySlugDeployments
-     *
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return RequestConfig
-     */
-    fun getPlatformSitesBySlugDeploymentsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/platform/sites/{slug}/deployments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}/deployments/{id}
-     * Returns one deployment of a project by id.
-     * Returns one deployment of a project by id.  It is how a console follows a build: the status (&#x60;queued&#x60;, &#x60;uploading&#x60;, &#x60;live&#x60;, &#x60;error&#x60;), the message a failure left, and the URL and prefix it went live at. Like the history, it never replays the upload grant.  Scope: a validated principal is required (403 without one). Both the project and the deployment are resolved within that principal&#39;s org, so a deployment of another project — or of another tenant — is a 404.
-     * @param slug Slug is the project the deployment belongs to, from the path.
-     * @param id ID is the deployment id, from the path. A deployment of another project — or of another tenant&#39;s project — is not found.
-     * @return ProjectsDeployment
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformSitesBySlugDeploymentsById(slug: kotlin.String, id: kotlin.String) : ProjectsDeployment {
-        val localVarResponse = getPlatformSitesBySlugDeploymentsByIdWithHttpInfo(slug = slug, id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}/deployments/{id}
-     * Returns one deployment of a project by id.
-     * Returns one deployment of a project by id.  It is how a console follows a build: the status (&#x60;queued&#x60;, &#x60;uploading&#x60;, &#x60;live&#x60;, &#x60;error&#x60;), the message a failure left, and the URL and prefix it went live at. Like the history, it never replays the upload grant.  Scope: a validated principal is required (403 without one). Both the project and the deployment are resolved within that principal&#39;s org, so a deployment of another project — or of another tenant — is a 404.
-     * @param slug Slug is the project the deployment belongs to, from the path.
-     * @param id ID is the deployment id, from the path. A deployment of another project — or of another tenant&#39;s project — is not found.
-     * @return ApiResponse<ProjectsDeployment?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformSitesBySlugDeploymentsByIdWithHttpInfo(slug: kotlin.String, id: kotlin.String) : ApiResponse<ProjectsDeployment?> {
-        val localVariableConfig = getPlatformSitesBySlugDeploymentsByIdRequestConfig(slug = slug, id = id)
-
-        return request<Unit, ProjectsDeployment>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getPlatformSitesBySlugDeploymentsById
-     *
-     * @param slug Slug is the project the deployment belongs to, from the path.
-     * @param id ID is the deployment id, from the path. A deployment of another project — or of another tenant&#39;s project — is not found.
-     * @return RequestConfig
-     */
-    fun getPlatformSitesBySlugDeploymentsByIdRequestConfig(slug: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/platform/sites/{slug}/deployments/{id}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}/domains
-     * Returns every custom hostname this site holds: the live ones, plus any pending claim with the DNS records it still owes.
-     * Returns every custom hostname this site holds: the live ones, plus any pending claim with the DNS records it still owes.  &#x60;domains&#x60; is the routing answer — the hosts that are verified right now — while &#x60;claims&#x60; is the full panel, one row per host, each saying whether it is live or pending and, if pending, exactly what to publish.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ProjectsDomains
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformSitesBySlugDomains(slug: kotlin.String) : ProjectsDomains {
-        val localVarResponse = getPlatformSitesBySlugDomainsWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDomains
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}/domains
-     * Returns every custom hostname this site holds: the live ones, plus any pending claim with the DNS records it still owes.
-     * Returns every custom hostname this site holds: the live ones, plus any pending claim with the DNS records it still owes.  &#x60;domains&#x60; is the routing answer — the hosts that are verified right now — while &#x60;claims&#x60; is the full panel, one row per host, each saying whether it is live or pending and, if pending, exactly what to publish.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ApiResponse<ProjectsDomains?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformSitesBySlugDomainsWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsDomains?> {
-        val localVariableConfig = getPlatformSitesBySlugDomainsRequestConfig(slug = slug)
-
-        return request<Unit, ProjectsDomains>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getPlatformSitesBySlugDomains
-     *
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return RequestConfig
-     */
-    fun getPlatformSitesBySlugDomainsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/platform/sites/{slug}/domains".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}/releases
-     * Returns a site&#39;s releases newest-first, marking the active one — the rollback menu.
-     * Returns a site&#39;s releases newest-first, marking the active one — the rollback menu.  Each row carries the release id to activate, the source it was promoted from, its object and byte counts, and the URL if it is the one serving. Retention bounds the list, so it is the set that can actually still be rolled back to, not a full history.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return kotlin.collections.List<ProjectsRelease>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformSitesBySlugReleases(slug: kotlin.String) : kotlin.collections.List<ProjectsRelease> {
-        val localVarResponse = getPlatformSitesBySlugReleasesWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProjectsRelease>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/platform/sites/{slug}/releases
-     * Returns a site&#39;s releases newest-first, marking the active one — the rollback menu.
-     * Returns a site&#39;s releases newest-first, marking the active one — the rollback menu.  Each row carries the release id to activate, the source it was promoted from, its object and byte counts, and the URL if it is the one serving. Retention bounds the list, so it is the set that can actually still be rolled back to, not a full history.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ApiResponse<kotlin.collections.List<ProjectsRelease>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformSitesBySlugReleasesWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.collections.List<ProjectsRelease>?> {
-        val localVariableConfig = getPlatformSitesBySlugReleasesRequestConfig(slug = slug)
-
-        return request<Unit, kotlin.collections.List<ProjectsRelease>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getPlatformSitesBySlugReleases
-     *
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return RequestConfig
-     */
-    fun getPlatformSitesBySlugReleasesRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/platform/sites/{slug}/releases".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/platform/sites/{slug}
-     * Changes a project&#39;s settings, and only the settings you send.
-     * Changes a project&#39;s settings, and only the settings you send.  Every field is optional and absent means \&quot;leave it\&quot;: &#x60;name&#x60; may not be blanked, &#x60;framework&#x60; must stay a known build hint, and &#x60;cacheControl&#x60; is capped at 256 characters with no newlines (it becomes a response header). &#x60;visibility&#x60; flips public/private under the same rule as create — public is free, private needs a funded org. &#x60;upstream&#x60; and &#x60;license&#x60; are free-text credit for third-party work, and sending \&quot;\&quot; clears one. Changing anything reconciles the project&#39;s canonical git repo, so a visibility change reaches the source and not just the listing.  &#x60;hidden&#x60;/&#x60;hiddenReason&#x60; are platform MODERATION and are ignored unless the caller is a platform admin; they remove a project from the public catalogue without touching the publisher&#39;s own visibility choice, so un-hiding restores exactly what they asked for.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to update, from the path. The URL is the addressing authority — a &#x60;slug&#x60; in the body cannot move the write to another project.
-     * @param projectsUpdate 
-     * @return ProjectsProject
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchPlatformSitesBySlug(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ProjectsProject {
-        val localVarResponse = patchPlatformSitesBySlugWithHttpInfo(slug = slug, projectsUpdate = projectsUpdate)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/platform/sites/{slug}
-     * Changes a project&#39;s settings, and only the settings you send.
-     * Changes a project&#39;s settings, and only the settings you send.  Every field is optional and absent means \&quot;leave it\&quot;: &#x60;name&#x60; may not be blanked, &#x60;framework&#x60; must stay a known build hint, and &#x60;cacheControl&#x60; is capped at 256 characters with no newlines (it becomes a response header). &#x60;visibility&#x60; flips public/private under the same rule as create — public is free, private needs a funded org. &#x60;upstream&#x60; and &#x60;license&#x60; are free-text credit for third-party work, and sending \&quot;\&quot; clears one. Changing anything reconciles the project&#39;s canonical git repo, so a visibility change reaches the source and not just the listing.  &#x60;hidden&#x60;/&#x60;hiddenReason&#x60; are platform MODERATION and are ignored unless the caller is a platform admin; they remove a project from the public catalogue without touching the publisher&#39;s own visibility choice, so un-hiding restores exactly what they asked for.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to update, from the path. The URL is the addressing authority — a &#x60;slug&#x60; in the body cannot move the write to another project.
-     * @param projectsUpdate 
-     * @return ApiResponse<ProjectsProject?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun patchPlatformSitesBySlugWithHttpInfo(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = patchPlatformSitesBySlugRequestConfig(slug = slug, projectsUpdate = projectsUpdate)
-
-        return request<ProjectsUpdate, ProjectsProject>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation patchPlatformSitesBySlug
-     *
-     * @param slug Slug is the project to update, from the path. The URL is the addressing authority — a &#x60;slug&#x60; in the body cannot move the write to another project.
-     * @param projectsUpdate 
-     * @return RequestConfig
-     */
-    fun patchPlatformSitesBySlugRequestConfig(slug: kotlin.String, projectsUpdate: ProjectsUpdate) : RequestConfig<ProjectsUpdate> {
-        val localVariableBody = projectsUpdate
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/platform/sites/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            path = "/v1/platform/releases",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -2207,6 +1827,80 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/platform/fleet/{app}/deploy".replace("{"+"app"+"}", encodeURIComponent(app.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/platform/hook
+     * Receive a push from the forge and trigger its build
+     * The forge&#39;s push-to-deploy door. git.hanzo.ai runs as a separate server, so its pushes never reach this fleet&#39;s own receive-pack; without this a push to the host we call canonical builds nothing. A verified push is handed to the SAME two seams a native push travels — the single-registrant deploy trigger, and the many-subscriber lifecycle stream that notifies and indexes — and the build decision itself stays downstream in the one place that knows what a push means.  PUBLIC at the JWT layer, because the forge carries no Hanzo session: AUTHENTICATION IS THE SIGNATURE. The HMAC covers the raw bytes and is verified BEFORE the payload is parsed, so an unauthenticated body is never decoded. The secret is read from KMS; a deployment that cannot read it answers 503 and processes nothing, rather than trusting a delivery it could not check. The body is read UNCOMPRESSED — a request declaring a Content-Encoding is refused 415 before it is touched, because decoding one is unbounded work bought with a few bytes and no credential. A bad signature is 401, a payload over 8 MiB is 413, and a malformed one 400.  A verified push that reaches both seams answers 200 with fired true and the NUMBER OF BUILDS it launched — zero is ordinary, since most pushes track no application, and it is the answer &#39;fired&#39; cannot give. A push that could not be dispatched answers 500: the delivery page shows it red, and the Replay that prompts reaches a fresh attempt rather than being declined as already landed.  The deliveries deliberately ignored answer 200 with a reason and nothing else: a payload that is not a push, a ref DELETE (a zero &#x60;after&#x60; has no commit to build), a BOT-authored push (release automation pushes as the forge&#39;s own Actions user, and a release must never rebuild itself), a push from a forge namespace that maps to no org, and a redelivery of a push already fired. Branches and tags both reach the build trigger, because releases are cut by tag and filtering here would silently stop publishing.
+     * @param push  (optional)
+     * @return Verdict
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postPlatformHook(push: Push? = null) : Verdict {
+        val localVarResponse = postPlatformHookWithHttpInfo(push = push)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Verdict
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/platform/hook
+     * Receive a push from the forge and trigger its build
+     * The forge&#39;s push-to-deploy door. git.hanzo.ai runs as a separate server, so its pushes never reach this fleet&#39;s own receive-pack; without this a push to the host we call canonical builds nothing. A verified push is handed to the SAME two seams a native push travels — the single-registrant deploy trigger, and the many-subscriber lifecycle stream that notifies and indexes — and the build decision itself stays downstream in the one place that knows what a push means.  PUBLIC at the JWT layer, because the forge carries no Hanzo session: AUTHENTICATION IS THE SIGNATURE. The HMAC covers the raw bytes and is verified BEFORE the payload is parsed, so an unauthenticated body is never decoded. The secret is read from KMS; a deployment that cannot read it answers 503 and processes nothing, rather than trusting a delivery it could not check. The body is read UNCOMPRESSED — a request declaring a Content-Encoding is refused 415 before it is touched, because decoding one is unbounded work bought with a few bytes and no credential. A bad signature is 401, a payload over 8 MiB is 413, and a malformed one 400.  A verified push that reaches both seams answers 200 with fired true and the NUMBER OF BUILDS it launched — zero is ordinary, since most pushes track no application, and it is the answer &#39;fired&#39; cannot give. A push that could not be dispatched answers 500: the delivery page shows it red, and the Replay that prompts reaches a fresh attempt rather than being declined as already landed.  The deliveries deliberately ignored answer 200 with a reason and nothing else: a payload that is not a push, a ref DELETE (a zero &#x60;after&#x60; has no commit to build), a BOT-authored push (release automation pushes as the forge&#39;s own Actions user, and a release must never rebuild itself), a push from a forge namespace that maps to no org, and a redelivery of a push already fired. Branches and tags both reach the build trigger, because releases are cut by tag and filtering here would silently stop publishing.
+     * @param push  (optional)
+     * @return ApiResponse<Verdict?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postPlatformHookWithHttpInfo(push: Push?) : ApiResponse<Verdict?> {
+        val localVariableConfig = postPlatformHookRequestConfig(push = push)
+
+        return request<Push, Verdict>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postPlatformHook
+     *
+     * @param push  (optional)
+     * @return RequestConfig
+     */
+    fun postPlatformHookRequestConfig(push: Push?) : RequestConfig<Push> {
+        val localVariableBody = push
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/platform/hook",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -2923,11 +2617,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/platform/sites
-     * Creates a project — the handle a site is deployed and served under — and answers 201 with it in &#x60;draft&#x60;.
-     * Creates a project — the handle a site is deployed and served under — and answers 201 with it in &#x60;draft&#x60;.  &#x60;name&#x60; is required; &#x60;slug&#x60; is derived from the name when omitted and is the identifier that matters — it becomes the S3 key segment, the public host &#x60;&lt;slug&gt;.hanzo.app&#x60;, and the handle every later call addresses, so it must match &#x60;^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$&#x60; and may not be a reserved label such as &#x60;api&#x60; or &#x60;admin&#x60;. &#x60;framework&#x60; is a build hint from a closed set, defaulting to &#x60;static&#x60;; it never gates a deploy, it only tells CI how to build a linked repo.  Two defaults are worth knowing: the analytics beacon is ON unless &#x60;analytics&#x60; is explicitly false, and &#x60;visibility&#x60; is &#x60;public&#x60; unless asked otherwise. Publishing publicly is free; PRIVATE is the paid feature, and an unfunded org asking for it is refused rather than quietly published as public. Creation also provisions the project&#39;s data space and a canonical git repo, both best-effort — neither can fail the create.  Scope: a validated principal is required (403 without one) and the project is created in THAT principal&#39;s org. The slug is unique per org, so a slug already used in the caller&#39;s own org is a 409 while the same slug in another org is irrelevant.
-     * @param projectsCreate 
-     * @return ProjectsProject
+     * POST /v1/platform/run
+     * Runs a container image and gives back a URL.
+     * Runs a container image and gives back a URL.  The one-call shortcut over project → app → deploy: give it a &#x60;name&#x60; and an &#x60;image&#x60; and it creates or updates an image-source application in your org&#39;s DEFAULT project, deploys it through the same operator Service-CR writer everything else uses, and answers its id, name, live URL, status and shape. Re-running the same name UPDATES it in place, so the call is idempotent by name.  What it produces is a first-class application, not a special object: it is listable, stoppable and redeployable through the /v1/platform routes like any other app.  &#x60;minScale&#x60; is the replica floor. &#x60;maxScale&#x60; above it declares an autoscaling ceiling; &#x60;maxScale: 0&#x60; means no autoscaler at all — a fixed run at the floor. Both are clamped to the deployment&#39;s limits. &#x60;runtime&#x60; and &#x60;shape&#x60; are accepted for the client contract and echoed back: the image is the runtime unit and sizing is the operator&#39;s default.  It is BILLING-GATED before it touches the cluster: a flat per-run fee is authorized against the org&#39;s own prepaid balance first, so an org that cannot pay is refused without anything being created. An unreachable cluster is 503 — a run never reports a URL it did not create. Secret env is sealed into KMS and fails closed without it.  Requires a validated principal; 403 without one. The org is resolved from that validated identity and is what both pays and owns the namespace — it is never read from the body.
+     * @param runReq 
+     * @return RunView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2936,11 +2630,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSites(projectsCreate: ProjectsCreate) : ProjectsProject {
-        val localVarResponse = postPlatformSitesWithHttpInfo(projectsCreate = projectsCreate)
+    fun postPlatformRun(runReq: RunReq) : RunView {
+        val localVarResponse = postPlatformRunWithHttpInfo(runReq = runReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2955,32 +2649,32 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/platform/sites
-     * Creates a project — the handle a site is deployed and served under — and answers 201 with it in &#x60;draft&#x60;.
-     * Creates a project — the handle a site is deployed and served under — and answers 201 with it in &#x60;draft&#x60;.  &#x60;name&#x60; is required; &#x60;slug&#x60; is derived from the name when omitted and is the identifier that matters — it becomes the S3 key segment, the public host &#x60;&lt;slug&gt;.hanzo.app&#x60;, and the handle every later call addresses, so it must match &#x60;^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$&#x60; and may not be a reserved label such as &#x60;api&#x60; or &#x60;admin&#x60;. &#x60;framework&#x60; is a build hint from a closed set, defaulting to &#x60;static&#x60;; it never gates a deploy, it only tells CI how to build a linked repo.  Two defaults are worth knowing: the analytics beacon is ON unless &#x60;analytics&#x60; is explicitly false, and &#x60;visibility&#x60; is &#x60;public&#x60; unless asked otherwise. Publishing publicly is free; PRIVATE is the paid feature, and an unfunded org asking for it is refused rather than quietly published as public. Creation also provisions the project&#39;s data space and a canonical git repo, both best-effort — neither can fail the create.  Scope: a validated principal is required (403 without one) and the project is created in THAT principal&#39;s org. The slug is unique per org, so a slug already used in the caller&#39;s own org is a 409 while the same slug in another org is irrelevant.
-     * @param projectsCreate 
-     * @return ApiResponse<ProjectsProject?>
+     * POST /v1/platform/run
+     * Runs a container image and gives back a URL.
+     * Runs a container image and gives back a URL.  The one-call shortcut over project → app → deploy: give it a &#x60;name&#x60; and an &#x60;image&#x60; and it creates or updates an image-source application in your org&#39;s DEFAULT project, deploys it through the same operator Service-CR writer everything else uses, and answers its id, name, live URL, status and shape. Re-running the same name UPDATES it in place, so the call is idempotent by name.  What it produces is a first-class application, not a special object: it is listable, stoppable and redeployable through the /v1/platform routes like any other app.  &#x60;minScale&#x60; is the replica floor. &#x60;maxScale&#x60; above it declares an autoscaling ceiling; &#x60;maxScale: 0&#x60; means no autoscaler at all — a fixed run at the floor. Both are clamped to the deployment&#39;s limits. &#x60;runtime&#x60; and &#x60;shape&#x60; are accepted for the client contract and echoed back: the image is the runtime unit and sizing is the operator&#39;s default.  It is BILLING-GATED before it touches the cluster: a flat per-run fee is authorized against the org&#39;s own prepaid balance first, so an org that cannot pay is refused without anything being created. An unreachable cluster is 503 — a run never reports a URL it did not create. Secret env is sealed into KMS and fails closed without it.  Requires a validated principal; 403 without one. The org is resolved from that validated identity and is what both pays and owns the namespace — it is never read from the body.
+     * @param runReq 
+     * @return ApiResponse<RunView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesWithHttpInfo(projectsCreate: ProjectsCreate) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = postPlatformSitesRequestConfig(projectsCreate = projectsCreate)
+    fun postPlatformRunWithHttpInfo(runReq: RunReq) : ApiResponse<RunView?> {
+        val localVariableConfig = postPlatformRunRequestConfig(runReq = runReq)
 
-        return request<ProjectsCreate, ProjectsProject>(
+        return request<RunReq, RunView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postPlatformSites
+     * To obtain the request config of the operation postPlatformRun
      *
-     * @param projectsCreate 
+     * @param runReq 
      * @return RequestConfig
      */
-    fun postPlatformSitesRequestConfig(projectsCreate: ProjectsCreate) : RequestConfig<ProjectsCreate> {
-        val localVariableBody = projectsCreate
+    fun postPlatformRunRequestConfig(runReq: RunReq) : RequestConfig<RunReq> {
+        val localVariableBody = runReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2988,7 +2682,7 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/platform/sites",
+            path = "/v1/platform/run",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -2997,12 +2691,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/platform/sites/{slug}/deploy
-     * Upload a built site as one archive and serve it
-     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60; in one call. The body is the site itself — a &#x60;zip&#x60; or &#x60;tar.gz&#x60; holding &#x60;index.html&#x60; at its root (or a single wrapper directory that does), sent raw or as a multipart file part. It is unpacked to the site&#39;s own storage prefix and served immediately, answering the finished deployment.  It is bounded by the edge body limit (16 MiB by default), and that bound is the whole reason the other path exists: an oversized POST is refused by the server BEFORE any handler runs and surfaces as an opaque &#x60;400 Error when parsing request&#x60; that reads like a malformed payload rather than a size cap. A site too large for one archive opens a deployment with &#x60;POST /v1/sites/{slug}/deployments&#x60; instead and writes its files straight to storage against the scoped grant that answers with — no body limit, and no bytes through this API at all.  Billing is fail-closed and fails FIRST: the hosting gate runs before anything is parsed or uploaded, so an unfunded org is 402 and an unreachable commerce is 503 with nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site — and a redeploy answers the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured (503); an archive that does not walk is a 400 and one over the size cap is a 413.
-     * @param slug 
-     * @param body  (optional)
-     * @return ProjectsDeployment
+     * POST /v1/platform/runner
+     * Triggers a native build — an image, or the binaries a repo declares.
+     * Triggers a native build — an image, or the binaries a repo declares.  The fabric&#39;s own build trigger, and what &#x60;hanzo build&#x60; and git-push-to-deploy call. It answers 202 with the build job id: a queued build, not a pushed artifact.  Two lanes, and a build is exactly one of them. The IMAGE lane takes &#x60;repo&#x60; and the output &#x60;image&#x60; and launches a BuildKit Job that pushes it. The ARTIFACT lane takes &#x60;binaries&#x60; — the same recipe the repo&#39;s hanzo.yml declares — and publishes to object storage instead; it must carry no &#x60;image&#x60;, because a build produces binaries or an image, never both.  PRIVILEGED, and A BUILD BELONGS TO THE ORGANIZATION ITS CREDENTIAL NAMES. Two credentials, never a third:    - one that NAMES an organization — a person who administers it (the &#x60;hanzo     build&#x60; path, so one IAM login authorizes a build with no separate build     token), or that organization&#39;s own machine identity (the pipeline path). The     build is attributed to that org and confined to what it owns.   - the shared build-callback token, compared in constant time. It names NO     organization, which is both why the fabric&#39;s own release can publish across     brands with it and why anything that CAN name one is read first.  Both are bounded by the owned-registry allowlist. The org path is bounded again, by the org: the image&#39;s registry namespace must be one that organization owns, so it publishes into its own brand and can never overwrite another&#39;s through the shared push credential. The same confinement applies to the artifact lane&#39;s repo owner. There is no request field naming an organization — the attribution is read off the credential, so there is nothing for a caller to write it with.  The output image is parsed and validated as a single well-formed OCI ref before any authorization decision reads it, so a crafted ref cannot smuggle a build-exporter attribute past the check.
+     * @param runnerBuildReq 
+     * @return RunnerBuildResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3011,11 +2704,11 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugDeploy(slug: kotlin.String, body: java.io.File? = null) : ProjectsDeployment {
-        val localVarResponse = postPlatformSitesBySlugDeployWithHttpInfo(slug = slug, body = body)
+    fun postPlatformRunner(runnerBuildReq: RunnerBuildReq) : RunnerBuildResp {
+        val localVarResponse = postPlatformRunnerWithHttpInfo(runnerBuildReq = runnerBuildReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunnerBuildResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3030,111 +2723,32 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/platform/sites/{slug}/deploy
-     * Upload a built site as one archive and serve it
-     * Takes a built site live at &#x60;https://&lt;slug&gt;.hanzo.app&#x60; in one call. The body is the site itself — a &#x60;zip&#x60; or &#x60;tar.gz&#x60; holding &#x60;index.html&#x60; at its root (or a single wrapper directory that does), sent raw or as a multipart file part. It is unpacked to the site&#39;s own storage prefix and served immediately, answering the finished deployment.  It is bounded by the edge body limit (16 MiB by default), and that bound is the whole reason the other path exists: an oversized POST is refused by the server BEFORE any handler runs and surfaces as an opaque &#x60;400 Error when parsing request&#x60; that reads like a malformed payload rather than a size cap. A site too large for one archive opens a deployment with &#x60;POST /v1/sites/{slug}/deployments&#x60; instead and writes its files straight to storage against the scoped grant that answers with — no body limit, and no bytes through this API at all.  Billing is fail-closed and fails FIRST: the hosting gate runs before anything is parsed or uploaded, so an unfunded org is 402 and an unreachable commerce is 503 with nothing written. The debit lands only on success — a failed upload is never billed and never flips the live site — and a redeploy answers the SAME URL, because slug and apex are stable.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404. Object storage must be configured (503); an archive that does not walk is a 400 and one over the size cap is a 413.
-     * @param slug 
-     * @param body  (optional)
-     * @return ApiResponse<ProjectsDeployment?>
+     * POST /v1/platform/runner
+     * Triggers a native build — an image, or the binaries a repo declares.
+     * Triggers a native build — an image, or the binaries a repo declares.  The fabric&#39;s own build trigger, and what &#x60;hanzo build&#x60; and git-push-to-deploy call. It answers 202 with the build job id: a queued build, not a pushed artifact.  Two lanes, and a build is exactly one of them. The IMAGE lane takes &#x60;repo&#x60; and the output &#x60;image&#x60; and launches a BuildKit Job that pushes it. The ARTIFACT lane takes &#x60;binaries&#x60; — the same recipe the repo&#39;s hanzo.yml declares — and publishes to object storage instead; it must carry no &#x60;image&#x60;, because a build produces binaries or an image, never both.  PRIVILEGED, and A BUILD BELONGS TO THE ORGANIZATION ITS CREDENTIAL NAMES. Two credentials, never a third:    - one that NAMES an organization — a person who administers it (the &#x60;hanzo     build&#x60; path, so one IAM login authorizes a build with no separate build     token), or that organization&#39;s own machine identity (the pipeline path). The     build is attributed to that org and confined to what it owns.   - the shared build-callback token, compared in constant time. It names NO     organization, which is both why the fabric&#39;s own release can publish across     brands with it and why anything that CAN name one is read first.  Both are bounded by the owned-registry allowlist. The org path is bounded again, by the org: the image&#39;s registry namespace must be one that organization owns, so it publishes into its own brand and can never overwrite another&#39;s through the shared push credential. The same confinement applies to the artifact lane&#39;s repo owner. There is no request field naming an organization — the attribution is read off the credential, so there is nothing for a caller to write it with.  The output image is parsed and validated as a single well-formed OCI ref before any authorization decision reads it, so a crafted ref cannot smuggle a build-exporter attribute past the check.
+     * @param runnerBuildReq 
+     * @return ApiResponse<RunnerBuildResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugDeployWithHttpInfo(slug: kotlin.String, body: java.io.File?) : ApiResponse<ProjectsDeployment?> {
-        val localVariableConfig = postPlatformSitesBySlugDeployRequestConfig(slug = slug, body = body)
+    fun postPlatformRunnerWithHttpInfo(runnerBuildReq: RunnerBuildReq) : ApiResponse<RunnerBuildResp?> {
+        val localVariableConfig = postPlatformRunnerRequestConfig(runnerBuildReq = runnerBuildReq)
 
-        return request<java.io.File, ProjectsDeployment>(
+        return request<RunnerBuildReq, RunnerBuildResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postPlatformSitesBySlugDeploy
+     * To obtain the request config of the operation postPlatformRunner
      *
-     * @param slug 
-     * @param body  (optional)
+     * @param runnerBuildReq 
      * @return RequestConfig
      */
-    fun postPlatformSitesBySlugDeployRequestConfig(slug: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/octet-stream"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/deploy".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/deployments
-     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage.
-     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage. Answers 202.  This is the path for a site too large to send as one archive: a real export is hundreds of megabytes against a 16 MiB body limit, so the bytes deliberately do NOT pass through the API. The answer carries &#x60;bucket&#x60;, &#x60;prefix&#x60; and &#x60;upload&#x60; — a presigned POST policy that S3 itself confines to this site&#39;s prefix (starts-with &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60;), expires in 30 minutes and bounds each object. So a build writes its own files and holds no standing bucket credential; there is nothing to rotate and nothing that leaks between tenants. Never guess the prefix — it is server-derived, and a guessed one lands where nothing is served.  The deployment is &#x60;queued&#x60; until POST .../deployments/{id}/complete flips it live (or error). That completion is also where DELETION happens: the grant authorizes writes only, so a build cannot remove a file, and cloud reconciles the prefix against the &#x60;keys&#x60; manifest the completion carries. A build that dies before completing leaves the deployment queued rather than a half-live site.  The grant is on the 202 and NOWHERE else — it is never stored and never replayed on a later read, so it cannot outlive the build it was minted for. A deployment whose grant could not be minted is still created and still completable; it simply carries no &#x60;upload&#x60;, and a caller with no other way to write should treat that as the failure it is.  Billing: the hosting gate runs BEFORE anything is created (402 unfunded, 503 commerce unreachable), and the debit lands on the completion that goes live — never on a queued or failed build.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site to deploy, from the path.
-     * @param projectsDeployStart 
-     * @return ProjectsDeployment
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugDeployments(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : ProjectsDeployment {
-        val localVarResponse = postPlatformSitesBySlugDeploymentsWithHttpInfo(slug = slug, projectsDeployStart = projectsDeployStart)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/deployments
-     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage.
-     * Opens a deployment and hands back a short-lived, prefix-scoped grant to write its bytes straight to object storage. Answers 202.  This is the path for a site too large to send as one archive: a real export is hundreds of megabytes against a 16 MiB body limit, so the bytes deliberately do NOT pass through the API. The answer carries &#x60;bucket&#x60;, &#x60;prefix&#x60; and &#x60;upload&#x60; — a presigned POST policy that S3 itself confines to this site&#39;s prefix (starts-with &#x60;&lt;org&gt;/&lt;slug&gt;/&#x60;), expires in 30 minutes and bounds each object. So a build writes its own files and holds no standing bucket credential; there is nothing to rotate and nothing that leaks between tenants. Never guess the prefix — it is server-derived, and a guessed one lands where nothing is served.  The deployment is &#x60;queued&#x60; until POST .../deployments/{id}/complete flips it live (or error). That completion is also where DELETION happens: the grant authorizes writes only, so a build cannot remove a file, and cloud reconciles the prefix against the &#x60;keys&#x60; manifest the completion carries. A build that dies before completing leaves the deployment queued rather than a half-live site.  The grant is on the 202 and NOWHERE else — it is never stored and never replayed on a later read, so it cannot outlive the build it was minted for. A deployment whose grant could not be minted is still created and still completable; it simply carries no &#x60;upload&#x60;, and a caller with no other way to write should treat that as the failure it is.  Billing: the hosting gate runs BEFORE anything is created (402 unfunded, 503 commerce unreachable), and the debit lands on the completion that goes live — never on a queued or failed build.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site to deploy, from the path.
-     * @param projectsDeployStart 
-     * @return ApiResponse<ProjectsDeployment?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugDeploymentsWithHttpInfo(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : ApiResponse<ProjectsDeployment?> {
-        val localVariableConfig = postPlatformSitesBySlugDeploymentsRequestConfig(slug = slug, projectsDeployStart = projectsDeployStart)
-
-        return request<ProjectsDeployStart, ProjectsDeployment>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postPlatformSitesBySlugDeployments
-     *
-     * @param slug Slug is the site to deploy, from the path.
-     * @param projectsDeployStart 
-     * @return RequestConfig
-     */
-    fun postPlatformSitesBySlugDeploymentsRequestConfig(slug: kotlin.String, projectsDeployStart: ProjectsDeployStart) : RequestConfig<ProjectsDeployStart> {
-        val localVariableBody = projectsDeployStart
+    fun postPlatformRunnerRequestConfig(runnerBuildReq: RunnerBuildReq) : RequestConfig<RunnerBuildReq> {
+        val localVariableBody = runnerBuildReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -3142,543 +2756,7 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/deployments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/deployments/{id}/complete
-     * CompleteDeployment is the CI completion hook that flips a queued git deployment to live (or error) once CI has synced the built site to S3.
-     * CompleteDeployment is the CI completion hook that flips a queued git deployment to live (or error) once CI has synced the built site to S3.  &#x60;status&#x60; must be &#x60;live&#x60; or &#x60;error&#x60;. On a LIVE completion the public host is claimed FIRST, so the deployment reports the URL it actually OWNS — a CI-supplied &#x60;liveUrl&#x60; is a hint that can refine that URL but can never assert a subdomain another tenant holds. &#x60;keys&#x60; is the manifest CI just uploaded, relative to the deployment prefix: cloud reconciles the prefix against it so a page deleted from the build actually stops serving. Omit &#x60;keys&#x60; and nothing is deleted — the prefix only grows. Reconciliation runs only on a live completion (pruning against a failed build&#39;s manifest would delete the site the last good build is still serving) and is best-effort, so a stale leftover never turns a successful deploy into a 500. A live completion is also the one billable moment on the git path; an error completion bills nothing.  Scope: a validated principal is required (403 without one). CI authenticates with an org-scoped token through the gateway, so the deployment is resolved within that principal&#39;s org and another tenant&#39;s slug or deployment id is a 404.
-     * @param slug Slug is the project the deployment belongs to, from the path.
-     * @param id ID is the queued deployment to complete, from the path.
-     * @param projectsComplete 
-     * @return ProjectsDeployment
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugDeploymentsByIdComplete(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : ProjectsDeployment {
-        val localVarResponse = postPlatformSitesBySlugDeploymentsByIdCompleteWithHttpInfo(slug = slug, id = id, projectsComplete = projectsComplete)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDeployment
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/deployments/{id}/complete
-     * CompleteDeployment is the CI completion hook that flips a queued git deployment to live (or error) once CI has synced the built site to S3.
-     * CompleteDeployment is the CI completion hook that flips a queued git deployment to live (or error) once CI has synced the built site to S3.  &#x60;status&#x60; must be &#x60;live&#x60; or &#x60;error&#x60;. On a LIVE completion the public host is claimed FIRST, so the deployment reports the URL it actually OWNS — a CI-supplied &#x60;liveUrl&#x60; is a hint that can refine that URL but can never assert a subdomain another tenant holds. &#x60;keys&#x60; is the manifest CI just uploaded, relative to the deployment prefix: cloud reconciles the prefix against it so a page deleted from the build actually stops serving. Omit &#x60;keys&#x60; and nothing is deleted — the prefix only grows. Reconciliation runs only on a live completion (pruning against a failed build&#39;s manifest would delete the site the last good build is still serving) and is best-effort, so a stale leftover never turns a successful deploy into a 500. A live completion is also the one billable moment on the git path; an error completion bills nothing.  Scope: a validated principal is required (403 without one). CI authenticates with an org-scoped token through the gateway, so the deployment is resolved within that principal&#39;s org and another tenant&#39;s slug or deployment id is a 404.
-     * @param slug Slug is the project the deployment belongs to, from the path.
-     * @param id ID is the queued deployment to complete, from the path.
-     * @param projectsComplete 
-     * @return ApiResponse<ProjectsDeployment?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugDeploymentsByIdCompleteWithHttpInfo(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : ApiResponse<ProjectsDeployment?> {
-        val localVariableConfig = postPlatformSitesBySlugDeploymentsByIdCompleteRequestConfig(slug = slug, id = id, projectsComplete = projectsComplete)
-
-        return request<ProjectsComplete, ProjectsDeployment>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postPlatformSitesBySlugDeploymentsByIdComplete
-     *
-     * @param slug Slug is the project the deployment belongs to, from the path.
-     * @param id ID is the queued deployment to complete, from the path.
-     * @param projectsComplete 
-     * @return RequestConfig
-     */
-    fun postPlatformSitesBySlugDeploymentsByIdCompleteRequestConfig(slug: kotlin.String, id: kotlin.String, projectsComplete: ProjectsComplete) : RequestConfig<ProjectsComplete> {
-        val localVariableBody = projectsComplete
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/deployments/{id}/complete".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/domains
-     * Attaches one or more CUSTOM public hostnames to this org&#39;s site.
-     * Attaches one or more CUSTOM public hostnames to this org&#39;s site.  Binding a host you do not own would let you shadow it at the edge, so which outcome you get depends on whether ownership is already established: a SuperAdmin vouches (the operator manages the customer&#39;s DNS, so its bind IS the proof) and binds VERIFIED immediately; every other caller, INCLUDING an admin of the deployment&#39;s own brand org, has the host CLAIMED as pending and gets the DNS challenge back in &#x60;bound[].records&#x60;. A pending claim HOLDS the name so nobody else can take it, but it does not route until POST .../domains/{host}/verify proves control.  A hostname we operate is refused to a non-vouched caller (those are assigned by the platform, never claimed), a host another site already holds is a 409, and a name the platform holds is a 400 for EVERY caller — a vouch skips the ownership proof, never the host table&#39;s own invariant. Claims and binds are idempotent for the same (org, slug), and re-claiming returns the SAME token rather than invalidating a record the customer has already published. The edge cache-tag is flushed afterwards so a newly-verified host serves the current build immediately.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site the hosts attach to, from the path.
-     * @param projectsDomainsBind 
-     * @return ProjectsBoundDomains
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugDomains(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ProjectsBoundDomains {
-        val localVarResponse = postPlatformSitesBySlugDomainsWithHttpInfo(slug = slug, projectsDomainsBind = projectsDomainsBind)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsBoundDomains
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/domains
-     * Attaches one or more CUSTOM public hostnames to this org&#39;s site.
-     * Attaches one or more CUSTOM public hostnames to this org&#39;s site.  Binding a host you do not own would let you shadow it at the edge, so which outcome you get depends on whether ownership is already established: a SuperAdmin vouches (the operator manages the customer&#39;s DNS, so its bind IS the proof) and binds VERIFIED immediately; every other caller, INCLUDING an admin of the deployment&#39;s own brand org, has the host CLAIMED as pending and gets the DNS challenge back in &#x60;bound[].records&#x60;. A pending claim HOLDS the name so nobody else can take it, but it does not route until POST .../domains/{host}/verify proves control.  A hostname we operate is refused to a non-vouched caller (those are assigned by the platform, never claimed), a host another site already holds is a 409, and a name the platform holds is a 400 for EVERY caller — a vouch skips the ownership proof, never the host table&#39;s own invariant. Claims and binds are idempotent for the same (org, slug), and re-claiming returns the SAME token rather than invalidating a record the customer has already published. The edge cache-tag is flushed afterwards so a newly-verified host serves the current build immediately.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site the hosts attach to, from the path.
-     * @param projectsDomainsBind 
-     * @return ApiResponse<ProjectsBoundDomains?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugDomainsWithHttpInfo(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : ApiResponse<ProjectsBoundDomains?> {
-        val localVariableConfig = postPlatformSitesBySlugDomainsRequestConfig(slug = slug, projectsDomainsBind = projectsDomainsBind)
-
-        return request<ProjectsDomainsBind, ProjectsBoundDomains>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postPlatformSitesBySlugDomains
-     *
-     * @param slug Slug is the site the hosts attach to, from the path.
-     * @param projectsDomainsBind 
-     * @return RequestConfig
-     */
-    fun postPlatformSitesBySlugDomainsRequestConfig(slug: kotlin.String, projectsDomainsBind: ProjectsDomainsBind) : RequestConfig<ProjectsDomainsBind> {
-        val localVariableBody = projectsDomainsBind
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/domains".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/domains/{host}/verify
-     * Checks the DNS challenge for a pending custom hostname and, when it passes, promotes the host so it begins routing at the edge.
-     * Checks the DNS challenge for a pending custom hostname and, when it passes, promotes the host so it begins routing at the edge.  It answers 200 either way, with the host&#39;s honest current state: verified once the TXT record is found, still pending — with the records to publish and the resolver&#39;s own explanation in &#x60;detail&#x60; — when it is not. A not-yet is not an error: the check ran, DNS simply has not propagated, and the customer retries. An already-verified host is returned unchanged without re-resolving. On a successful promotion the edge cache-tag is flushed, since the host routes as of that moment.  Scope: a validated principal is required (403 without one). Both the site and the claim are resolved within that principal&#39;s org, so a host claimed by another tenant is \&quot;not claimed by this site\&quot;.
-     * @param slug Slug is the project the host is attached to, from the path.
-     * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
-     * @return ProjectsDomain
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugDomainsByHostVerify(slug: kotlin.String, host: kotlin.String) : ProjectsDomain {
-        val localVarResponse = postPlatformSitesBySlugDomainsByHostVerifyWithHttpInfo(slug = slug, host = host)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsDomain
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/domains/{host}/verify
-     * Checks the DNS challenge for a pending custom hostname and, when it passes, promotes the host so it begins routing at the edge.
-     * Checks the DNS challenge for a pending custom hostname and, when it passes, promotes the host so it begins routing at the edge.  It answers 200 either way, with the host&#39;s honest current state: verified once the TXT record is found, still pending — with the records to publish and the resolver&#39;s own explanation in &#x60;detail&#x60; — when it is not. A not-yet is not an error: the check ran, DNS simply has not propagated, and the customer retries. An already-verified host is returned unchanged without re-resolving. On a successful promotion the edge cache-tag is flushed, since the host routes as of that moment.  Scope: a validated principal is required (403 without one). Both the site and the claim are resolved within that principal&#39;s org, so a host claimed by another tenant is \&quot;not claimed by this site\&quot;.
-     * @param slug Slug is the project the host is attached to, from the path.
-     * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
-     * @return ApiResponse<ProjectsDomain?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugDomainsByHostVerifyWithHttpInfo(slug: kotlin.String, host: kotlin.String) : ApiResponse<ProjectsDomain?> {
-        val localVariableConfig = postPlatformSitesBySlugDomainsByHostVerifyRequestConfig(slug = slug, host = host)
-
-        return request<Unit, ProjectsDomain>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postPlatformSitesBySlugDomainsByHostVerify
-     *
-     * @param slug Slug is the project the host is attached to, from the path.
-     * @param host Host is the custom hostname, from the path. It is cleaned to its canonical form (lowercased, trailing dot dropped) before anything is looked up.
-     * @return RequestConfig
-     */
-    fun postPlatformSitesBySlugDomainsByHostVerifyRequestConfig(slug: kotlin.String, host: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/domains/{host}/verify".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"host"+"}", encodeURIComponent(host.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/publish
-     * Promotes a build output into a new release AND goes live with it — create+activate in one call, which is the 99% path.
-     * Promotes a build output into a new release AND goes live with it — create+activate in one call, which is the 99% path.  It is exactly the two halves in sequence with no extra semantics, so the staged flow and the one-shot flow can never drift apart: &#x60;source&#x60; is promoted under the same org-relative rule and the same guards CreateRelease applies, then the site&#39;s pointer is flipped to it, the public host is claimed and the edge is purged. Idempotent on unchanged bytes — same manifest, same release id, no copy — and billed once, after the release exists.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site to publish, from the path.
-     * @param projectsPublish 
-     * @return ProjectsRelease
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugPublish(slug: kotlin.String, projectsPublish: ProjectsPublish) : ProjectsRelease {
-        val localVarResponse = postPlatformSitesBySlugPublishWithHttpInfo(slug = slug, projectsPublish = projectsPublish)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsRelease
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/publish
-     * Promotes a build output into a new release AND goes live with it — create+activate in one call, which is the 99% path.
-     * Promotes a build output into a new release AND goes live with it — create+activate in one call, which is the 99% path.  It is exactly the two halves in sequence with no extra semantics, so the staged flow and the one-shot flow can never drift apart: &#x60;source&#x60; is promoted under the same org-relative rule and the same guards CreateRelease applies, then the site&#39;s pointer is flipped to it, the public host is claimed and the edge is purged. Idempotent on unchanged bytes — same manifest, same release id, no copy — and billed once, after the release exists.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site to publish, from the path.
-     * @param projectsPublish 
-     * @return ApiResponse<ProjectsRelease?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugPublishWithHttpInfo(slug: kotlin.String, projectsPublish: ProjectsPublish) : ApiResponse<ProjectsRelease?> {
-        val localVariableConfig = postPlatformSitesBySlugPublishRequestConfig(slug = slug, projectsPublish = projectsPublish)
-
-        return request<ProjectsPublish, ProjectsRelease>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postPlatformSitesBySlugPublish
-     *
-     * @param slug Slug is the site to publish, from the path.
-     * @param projectsPublish 
-     * @return RequestConfig
-     */
-    fun postPlatformSitesBySlugPublishRequestConfig(slug: kotlin.String, projectsPublish: ProjectsPublish) : RequestConfig<ProjectsPublish> {
-        val localVariableBody = projectsPublish
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/publish".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/purge
-     * Flushes the site&#39;s edge cache without redeploying anything.
-     * Flushes the site&#39;s edge cache without redeploying anything.  It invalidates the edge cache-tag &#x60;site-&lt;org&gt;-&lt;slug&gt;&#x60; and stamps &#x60;lastPurgeAt&#x60; (unix seconds), and it NEVER writes or deletes the S3 origin — the live build keeps serving; only stale copies held at the edge drop, so the next request re-fetches the current artifact from origin. Idempotent, and an edge that is unconfigured or failing is not fatal: &#x60;lastPurgeAt&#x60; is still stamped and the answer is still the updated project.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ProjectsProject
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugPurge(slug: kotlin.String) : ProjectsProject {
-        val localVarResponse = postPlatformSitesBySlugPurgeWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsProject
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/purge
-     * Flushes the site&#39;s edge cache without redeploying anything.
-     * Flushes the site&#39;s edge cache without redeploying anything.  It invalidates the edge cache-tag &#x60;site-&lt;org&gt;-&lt;slug&gt;&#x60; and stamps &#x60;lastPurgeAt&#x60; (unix seconds), and it NEVER writes or deletes the S3 origin — the live build keeps serving; only stale copies held at the edge drop, so the next request re-fetches the current artifact from origin. Idempotent, and an edge that is unconfigured or failing is not fatal: &#x60;lastPurgeAt&#x60; is still stamped and the answer is still the updated project.  Scope: a validated principal is required (403 without one) and the project is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return ApiResponse<ProjectsProject?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugPurgeWithHttpInfo(slug: kotlin.String) : ApiResponse<ProjectsProject?> {
-        val localVariableConfig = postPlatformSitesBySlugPurgeRequestConfig(slug = slug)
-
-        return request<Unit, ProjectsProject>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postPlatformSitesBySlugPurge
-     *
-     * @param slug Slug is the project to act on, from the path. It is unique within the caller&#39;s org and nowhere else, so another tenant&#39;s slug is a 404.
-     * @return RequestConfig
-     */
-    fun postPlatformSitesBySlugPurgeRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/purge".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/releases
-     * Promotes a build output into a new immutable release WITHOUT serving it — the staged half of publishing, for when you want to check a release before it goes live.
-     * Promotes a build output into a new immutable release WITHOUT serving it — the staged half of publishing, for when you want to check a release before it goes live. Answers 201.  &#x60;source&#x60; is a path RELATIVE to your org&#39;s own storage space: the org segment is prepended server-side from the validated principal and the bucket is never in the request at all, so a server-side copy can only ever reach bytes your org already owns. The prefix is listed, content-addressed (SHA-256 over the sorted manifest of key/size/etag), and copied into an immutable &#x60;&lt;org&gt;/.releases/&lt;slug&gt;/&lt;id&gt;/&#x60; prefix; the row is written LAST, so a partial copy is unreachable rather than merely unlikely. Re-publishing an unchanged source is idempotent BY CONSTRUCTION — same bytes, same id, no copy at all.  The source must contain index.html at its root and stay under the same file and byte caps an artifact deploy does (413 past them); a source that changes mid-copy is a 409 and the release is abandoned. Each publish also reclaims releases past the retention depth, so a site&#39;s release space stays bounded. This is the billable half — the hosting gate runs before any copy, and the debit lands once the release exists.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site to publish, from the path.
-     * @param projectsPublish 
-     * @return ProjectsRelease
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugReleases(slug: kotlin.String, projectsPublish: ProjectsPublish) : ProjectsRelease {
-        val localVarResponse = postPlatformSitesBySlugReleasesWithHttpInfo(slug = slug, projectsPublish = projectsPublish)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsRelease
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/releases
-     * Promotes a build output into a new immutable release WITHOUT serving it — the staged half of publishing, for when you want to check a release before it goes live.
-     * Promotes a build output into a new immutable release WITHOUT serving it — the staged half of publishing, for when you want to check a release before it goes live. Answers 201.  &#x60;source&#x60; is a path RELATIVE to your org&#39;s own storage space: the org segment is prepended server-side from the validated principal and the bucket is never in the request at all, so a server-side copy can only ever reach bytes your org already owns. The prefix is listed, content-addressed (SHA-256 over the sorted manifest of key/size/etag), and copied into an immutable &#x60;&lt;org&gt;/.releases/&lt;slug&gt;/&lt;id&gt;/&#x60; prefix; the row is written LAST, so a partial copy is unreachable rather than merely unlikely. Re-publishing an unchanged source is idempotent BY CONSTRUCTION — same bytes, same id, no copy at all.  The source must contain index.html at its root and stay under the same file and byte caps an artifact deploy does (413 past them); a source that changes mid-copy is a 409 and the release is abandoned. Each publish also reclaims releases past the retention depth, so a site&#39;s release space stays bounded. This is the billable half — the hosting gate runs before any copy, and the debit lands once the release exists.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site to publish, from the path.
-     * @param projectsPublish 
-     * @return ApiResponse<ProjectsRelease?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugReleasesWithHttpInfo(slug: kotlin.String, projectsPublish: ProjectsPublish) : ApiResponse<ProjectsRelease?> {
-        val localVariableConfig = postPlatformSitesBySlugReleasesRequestConfig(slug = slug, projectsPublish = projectsPublish)
-
-        return request<ProjectsPublish, ProjectsRelease>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postPlatformSitesBySlugReleases
-     *
-     * @param slug Slug is the site to publish, from the path.
-     * @param projectsPublish 
-     * @return RequestConfig
-     */
-    fun postPlatformSitesBySlugReleasesRequestConfig(slug: kotlin.String, projectsPublish: ProjectsPublish) : RequestConfig<ProjectsPublish> {
-        val localVariableBody = projectsPublish
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/releases".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/releases/{release}/activate
-     * Points the site at an existing release — the go-live, and equally the ROLLBACK.
-     * Points the site at an existing release — the go-live, and equally the ROLLBACK.  Aim it at an older release and the site serves that one again: releases are immutable and retained to the retention depth, so nothing is rebuilt or re-copied and the flip is one atomic statement. Before the flip, two conditions run in the order that gives each its own honest answer — the ROW says whether this release exists for this tenant at all (404, with no signal about a foreign id), and only then do the BYTES say whether it can still serve (410 GONE when retention has reclaimed them; that rollback target is not coming back, so publish again). Going live also claims the public host and purges the edge, so the release is reachable and no cached predecessor is served. NOT billed: no new content is produced, only a pointer moved.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site the release belongs to, from the path.
-     * @param release Release is the content-addressed release id (\&quot;rel_\&quot; + 32 hex chars), from the path. Anything that is not that shape is not found, rather than being interpolated into a storage prefix.
-     * @return ProjectsRelease
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postPlatformSitesBySlugReleasesByReleaseActivate(slug: kotlin.String, release: kotlin.String) : ProjectsRelease {
-        val localVarResponse = postPlatformSitesBySlugReleasesByReleaseActivateWithHttpInfo(slug = slug, release = release)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsRelease
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/platform/sites/{slug}/releases/{release}/activate
-     * Points the site at an existing release — the go-live, and equally the ROLLBACK.
-     * Points the site at an existing release — the go-live, and equally the ROLLBACK.  Aim it at an older release and the site serves that one again: releases are immutable and retained to the retention depth, so nothing is rebuilt or re-copied and the flip is one atomic statement. Before the flip, two conditions run in the order that gives each its own honest answer — the ROW says whether this release exists for this tenant at all (404, with no signal about a foreign id), and only then do the BYTES say whether it can still serve (410 GONE when retention has reclaimed them; that rollback target is not coming back, so publish again). Going live also claims the public host and purges the edge, so the release is reachable and no cached predecessor is served. NOT billed: no new content is produced, only a pointer moved.  Scope: a validated principal is required (403 without one) and the site is resolved within that principal&#39;s org, so another tenant&#39;s slug is a 404.
-     * @param slug Slug is the site the release belongs to, from the path.
-     * @param release Release is the content-addressed release id (\&quot;rel_\&quot; + 32 hex chars), from the path. Anything that is not that shape is not found, rather than being interpolated into a storage prefix.
-     * @return ApiResponse<ProjectsRelease?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postPlatformSitesBySlugReleasesByReleaseActivateWithHttpInfo(slug: kotlin.String, release: kotlin.String) : ApiResponse<ProjectsRelease?> {
-        val localVariableConfig = postPlatformSitesBySlugReleasesByReleaseActivateRequestConfig(slug = slug, release = release)
-
-        return request<Unit, ProjectsRelease>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postPlatformSitesBySlugReleasesByReleaseActivate
-     *
-     * @param slug Slug is the site the release belongs to, from the path.
-     * @param release Release is the content-addressed release id (\&quot;rel_\&quot; + 32 hex chars), from the path. Anything that is not that shape is not found, rather than being interpolated into a storage prefix.
-     * @return RequestConfig
-     */
-    fun postPlatformSitesBySlugReleasesByReleaseActivateRequestConfig(slug: kotlin.String, release: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/platform/sites/{slug}/releases/{release}/activate".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"release"+"}", encodeURIComponent(release.toString())),
+            path = "/v1/platform/runner",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

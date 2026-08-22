@@ -23,9 +23,9 @@ import com.google.gson.annotations.SerializedName
  *
  * @param at unix seconds, server-stamped
  * @param gpuUtil 0..1 aggregate utilization
- * @param load1 
- * @param load5 
- * @param load15 
+ * @param load1 Load1 is the machine's own one-minute load average — a count of runnable and uninterruptible tasks, NOT a percentage and NOT already divided by core count, so it is read against Spec.CPUs: 8.0 is idle on 16 cores and swamped on 4. Coerced finite and non-negative on write, so 0 means either genuinely idle or nothing reported.
+ * @param load5 Load5 is the same figure averaged over five minutes.
+ * @param load15 Load15 is the same figure over fifteen. The three together are what separate a machine that is busy right now from one that has been busy all along — which is the question a dispatcher is really asking.
  * @param memFree bytes
  * @param memUsed bytes
  */
@@ -41,12 +41,15 @@ data class Metrics (
     @SerializedName("gpuUtil")
     val gpuUtil: java.math.BigDecimal? = null,
 
+    /* Load1 is the machine's own one-minute load average — a count of runnable and uninterruptible tasks, NOT a percentage and NOT already divided by core count, so it is read against Spec.CPUs: 8.0 is idle on 16 cores and swamped on 4. Coerced finite and non-negative on write, so 0 means either genuinely idle or nothing reported. */
     @SerializedName("load1")
     val load1: java.math.BigDecimal? = null,
 
+    /* Load5 is the same figure averaged over five minutes. */
     @SerializedName("load5")
     val load5: java.math.BigDecimal? = null,
 
+    /* Load15 is the same figure over fifteen. The three together are what separate a machine that is busy right now from one that has been busy all along — which is the question a dispatcher is really asking. */
     @SerializedName("load15")
     val load15: java.math.BigDecimal? = null,
 

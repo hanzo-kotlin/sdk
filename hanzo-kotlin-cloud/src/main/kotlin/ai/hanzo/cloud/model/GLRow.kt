@@ -21,44 +21,53 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param account 
- * @param against 
- * @param credit 
- * @param debit 
- * @param id 
- * @param postingAt 
- * @param remarks 
- * @param sourceId 
- * @param sourceKind 
+ * @param account Account is the chart-of-accounts number this leg posts to.
+ * @param against Against names the OTHER accounts in the same voucher — the contra side of this leg — so a single row reads as an entry rather than as half of one.
+ * @param credit Credit is the amount credited to that account, in whole cents.
+ * @param debit Debit is the amount debited to that account, in whole cents. Exactly one of debit and credit is non-zero on a leg; a negative amount is never used to mean the other side.
+ * @param id ID is the entry's position in the ledger. The ledger is append-only, so ids ascend with posting order and a higher id is a later entry.
+ * @param postingAt PostingAt is the accounting date this entry belongs to — what the reports window on, which need not be when the row was written.
+ * @param remarks Remarks is the memo carried onto the entry, for a human reading the ledger.
+ * @param sourceId SourceID identifies that originating record within its kind.
+ * @param sourceKind SourceKind is what caused the posting: a bank line, a scanned document, a commerce sale. With sourceId it traces the entry back to the thing that produced it.
  */
 
 
 data class GLRow (
 
+    /* Account is the chart-of-accounts number this leg posts to. */
     @SerializedName("account")
     val account: kotlin.String? = null,
 
+    /* Against names the OTHER accounts in the same voucher — the contra side of this leg — so a single row reads as an entry rather than as half of one. */
     @SerializedName("against")
     val against: kotlin.String? = null,
 
+    /* Credit is the amount credited to that account, in whole cents. */
     @SerializedName("credit")
     val credit: kotlin.Int? = null,
 
+    /* Debit is the amount debited to that account, in whole cents. Exactly one of debit and credit is non-zero on a leg; a negative amount is never used to mean the other side. */
     @SerializedName("debit")
     val debit: kotlin.Int? = null,
 
+    /* ID is the entry's position in the ledger. The ledger is append-only, so ids ascend with posting order and a higher id is a later entry. */
     @SerializedName("id")
     val id: kotlin.Int? = null,
 
+    /* PostingAt is the accounting date this entry belongs to — what the reports window on, which need not be when the row was written. */
     @SerializedName("postingAt")
     val postingAt: kotlin.String? = null,
 
+    /* Remarks is the memo carried onto the entry, for a human reading the ledger. */
     @SerializedName("remarks")
     val remarks: kotlin.String? = null,
 
+    /* SourceID identifies that originating record within its kind. */
     @SerializedName("sourceId")
     val sourceId: kotlin.String? = null,
 
+    /* SourceKind is what caused the posting: a bank line, a scanned document, a commerce sale. With sourceId it traces the entry back to the thing that produced it. */
     @SerializedName("sourceKind")
     val sourceKind: kotlin.String? = null
 

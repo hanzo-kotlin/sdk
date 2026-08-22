@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param id ID is the file's path RELATIVE to its session's artifact directory, which is also how it is fetched: GET /v1/download/{session}/{id}.
+ * @param id ID is the file's path RELATIVE to its session's artifact directory, which is also how it is fetched: GET /v1/exec/download/{session}/{id}.
  * @param name Name is the display name. On an ANSWER it carries the `{session}/{id}` identifier whole, because the client matches on that prefix.
  * @param sessionId SessionID is the other accepted spelling of the same fact on the way IN. Both are read; whichever is set wins.
  * @param storageSessionId StorageSessionID names the session holding the bytes, and is the spelling the answer always uses.
@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CodeFile (
 
-    /* ID is the file's path RELATIVE to its session's artifact directory, which is also how it is fetched: GET /v1/download/{session}/{id}. */
+    /* ID is the file's path RELATIVE to its session's artifact directory, which is also how it is fetched: GET /v1/exec/download/{session}/{id}. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 

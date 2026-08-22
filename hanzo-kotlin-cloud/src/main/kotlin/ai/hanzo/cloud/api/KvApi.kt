@@ -19,10 +19,12 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.ProvisionRequest
-import ai.hanzo.cloud.model.ProvisionResult
-import ai.hanzo.cloud.model.ProvisionedResource
-import ai.hanzo.cloud.model.ProvisionedSummary
+import ai.hanzo.cloud.model.BucketRecord
+import ai.hanzo.cloud.model.BucketWrite
+import ai.hanzo.cloud.model.KvAck
+import ai.hanzo.cloud.model.KvEntry
+import ai.hanzo.cloud.model.KvPage
+import ai.hanzo.cloud.model.KvWrite
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,10 +51,10 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/kv/{name}
-     * DropKV deprovisions one Hanzo KV store.
-     * DropKV deprovisions one Hanzo KV store. It reverts any app instance bound to it back to Base BEFORE tearing down the org&#39;s dedicated Valkey instance, then deletes the sealed credential and removes the metadata row. Answers 204 with no body; a second call is a 404.
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
+     * DELETE /v1/kv/{bucket}
+     * Removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body.
+     * Removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body. 404 when the org has no bucket of that name.
+     * @param bucket Bucket is the bucket&#39;s name, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -61,8 +63,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteKvByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteKvByNameWithHttpInfo(name = name)
+    fun deleteKvByBucket(bucket: kotlin.String) : Unit {
+        val localVarResponse = deleteKvByBucketWithHttpInfo(bucket = bucket)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -80,17 +82,17 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/kv/{name}
-     * DropKV deprovisions one Hanzo KV store.
-     * DropKV deprovisions one Hanzo KV store. It reverts any app instance bound to it back to Base BEFORE tearing down the org&#39;s dedicated Valkey instance, then deletes the sealed credential and removes the metadata row. Answers 204 with no body; a second call is a 404.
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
+     * DELETE /v1/kv/{bucket}
+     * Removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body.
+     * Removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body. 404 when the org has no bucket of that name.
+     * @param bucket Bucket is the bucket&#39;s name, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteKvByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteKvByNameRequestConfig(name = name)
+    fun deleteKvByBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteKvByBucketRequestConfig(bucket = bucket)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,19 +100,19 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteKvByName
+     * To obtain the request config of the operation deleteKvByBucket
      *
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
+     * @param bucket Bucket is the bucket&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun deleteKvByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteKvByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/kv/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/kv/{bucket}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -119,23 +121,24 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/kv
-     * ListKV lists the caller org&#39;s Hanzo KV stores.
-     * ListKV lists the caller org&#39;s Hanzo KV stores. Each one is a DEDICATED Valkey instance the org alone runs, so the host is that instance&#39;s own in-cluster Service and the port is 6379.
-     * @return kotlin.collections.List<ProvisionedSummary>
+     * DELETE /v1/kv/{bucket}/{key}
+     * Delete removes one key — a delete marker in the key&#39;s history, so watchers see it and Get answers 404 — and answers 204 with no body.
+     * Delete removes one key — a delete marker in the key&#39;s history, so watchers see it and Get answers 404 — and answers 204 with no body. 404 when the bucket does not exist.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getKv() : kotlin.collections.List<ProvisionedSummary> {
-        val localVarResponse = getKvWithHttpInfo()
+    fun deleteKvByBucketByKey(bucket: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = deleteKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -150,29 +153,107 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/kv
-     * ListKV lists the caller org&#39;s Hanzo KV stores.
-     * ListKV lists the caller org&#39;s Hanzo KV stores. Each one is a DEDICATED Valkey instance the org alone runs, so the host is that instance&#39;s own in-cluster Service and the port is 6379.
-     * @return ApiResponse<kotlin.collections.List<ProvisionedSummary>?>
+     * DELETE /v1/kv/{bucket}/{key}
+     * Delete removes one key — a delete marker in the key&#39;s history, so watchers see it and Get answers 404 — and answers 204 with no body.
+     * Delete removes one key — a delete marker in the key&#39;s history, so watchers see it and Get answers 404 — and answers 204 with no body. 404 when the bucket does not exist.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getKvWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
-        val localVariableConfig = getKvRequestConfig()
+    fun deleteKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteKvByBucketByKeyRequestConfig(bucket = bucket, key = key)
 
-        return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getKv
+     * To obtain the request config of the operation deleteKvByBucketByKey
      *
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
      * @return RequestConfig
      */
-    fun getKvRequestConfig() : RequestConfig<Unit> {
+    fun deleteKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/kv/{bucket}/{key}
+     * Get returns one key&#39;s current value and revision.
+     * Get returns one key&#39;s current value and revision. 404 when the bucket does not exist, the key was never written, or its latest revision is a delete.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @return KvEntry
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getKvByBucketByKey(bucket: kotlin.String, key: kotlin.String) : KvEntry {
+        val localVarResponse = getKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KvEntry
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/kv/{bucket}/{key}
+     * Get returns one key&#39;s current value and revision.
+     * Get returns one key&#39;s current value and revision. 404 when the bucket does not exist, the key was never written, or its latest revision is a delete.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @return ApiResponse<KvEntry?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<KvEntry?> {
+        val localVariableConfig = getKvByBucketByKeyRequestConfig(bucket = bucket, key = key)
+
+        return request<Unit, KvEntry>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getKvByBucketByKey
+     *
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @return RequestConfig
+     */
+    fun getKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -180,7 +261,7 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/kv",
+            path = "/v1/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -189,11 +270,12 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/kv/{name}
-     * GetKV returns one Hanzo KV store&#39;s metadata.
-     * GetKV returns one Hanzo KV store&#39;s metadata. It carries the store&#39;s status, its instance address and the Valkey user it authenticates as (\&quot;default\&quot;, the only user a requirepass instance has) — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view.
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ProvisionedResource
+     * GET /v1/kv/{bucket}/{key}/history
+     * History returns one key&#39;s retained revisions, oldest first — every put and every delete marker up to the bucket&#39;s History depth.
+     * History returns one key&#39;s retained revisions, oldest first — every put and every delete marker up to the bucket&#39;s History depth. 404 when the bucket does not exist or the key was never written.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @return KvPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -202,11 +284,11 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getKvByName(name: kotlin.String) : ProvisionedResource {
-        val localVarResponse = getKvByNameWithHttpInfo(name = name)
+    fun getKvByBucketByKeyHistory(bucket: kotlin.String, key: kotlin.String) : KvPage {
+        val localVarResponse = getKvByBucketByKeyHistoryWithHttpInfo(bucket = bucket, key = key)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KvPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -221,31 +303,33 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/kv/{name}
-     * GetKV returns one Hanzo KV store&#39;s metadata.
-     * GetKV returns one Hanzo KV store&#39;s metadata. It carries the store&#39;s status, its instance address and the Valkey user it authenticates as (\&quot;default\&quot;, the only user a requirepass instance has) — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view.
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ApiResponse<ProvisionedResource?>
+     * GET /v1/kv/{bucket}/{key}/history
+     * History returns one key&#39;s retained revisions, oldest first — every put and every delete marker up to the bucket&#39;s History depth.
+     * History returns one key&#39;s retained revisions, oldest first — every put and every delete marker up to the bucket&#39;s History depth. 404 when the bucket does not exist or the key was never written.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @return ApiResponse<KvPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getKvByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
-        val localVariableConfig = getKvByNameRequestConfig(name = name)
+    fun getKvByBucketByKeyHistoryWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<KvPage?> {
+        val localVariableConfig = getKvByBucketByKeyHistoryRequestConfig(bucket = bucket, key = key)
 
-        return request<Unit, ProvisionedResource>(
+        return request<Unit, KvPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getKvByName
+     * To obtain the request config of the operation getKvByBucketByKeyHistory
      *
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
      * @return RequestConfig
      */
-    fun getKvByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getKvByBucketByKeyHistoryRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -253,7 +337,7 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/kv/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/kv/{bucket}/{key}/history".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -262,11 +346,12 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/kv
-     * Provision a key-value store for your org
-     * Launches your org&#39;s OWN key-value instance and answers with its &#x60;kv://&#x60; connection string. The instance is yours alone: a deployment in your own tenant namespace, so its admin credential is naturally scoped to you and no other tenant shares the process. Off-cluster, where there is no orchestrator to launch one, this fails closed with 503 rather than handing back a shared one.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
-     * @param provisionRequest  (optional)
-     * @return ProvisionResult
+     * POST /v1/kv/{bucket}
+     * Creates a KV bucket and returns it.
+     * Creates a KV bucket and returns it. A bucket is keyed state on the same durable plane as the streams: each key holds up to History revisions, entries can expire by TTL, and watchers on the NATS port see every write. 409 when the org already has a bucket of that name.
+     * @param bucket Bucket is the bucket&#39;s name within the org, from the path: 1–64 of [A-Za-z0-9_], no dash.
+     * @param bucketWrite 
+     * @return BucketRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -275,11 +360,11 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postKv(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
-        val localVarResponse = postKvWithHttpInfo(provisionRequest = provisionRequest)
+    fun postKvByBucket(bucket: kotlin.String, bucketWrite: BucketWrite) : BucketRecord {
+        val localVarResponse = postKvByBucketWithHttpInfo(bucket = bucket, bucketWrite = bucketWrite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BucketRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -294,32 +379,34 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/kv
-     * Provision a key-value store for your org
-     * Launches your org&#39;s OWN key-value instance and answers with its &#x60;kv://&#x60; connection string. The instance is yours alone: a deployment in your own tenant namespace, so its admin credential is naturally scoped to you and no other tenant shares the process. Off-cluster, where there is no orchestrator to launch one, this fails closed with 503 rather than handing back a shared one.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
-     * @param provisionRequest  (optional)
-     * @return ApiResponse<ProvisionResult?>
+     * POST /v1/kv/{bucket}
+     * Creates a KV bucket and returns it.
+     * Creates a KV bucket and returns it. A bucket is keyed state on the same durable plane as the streams: each key holds up to History revisions, entries can expire by TTL, and watchers on the NATS port see every write. 409 when the org already has a bucket of that name.
+     * @param bucket Bucket is the bucket&#39;s name within the org, from the path: 1–64 of [A-Za-z0-9_], no dash.
+     * @param bucketWrite 
+     * @return ApiResponse<BucketRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postKvWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
-        val localVariableConfig = postKvRequestConfig(provisionRequest = provisionRequest)
+    fun postKvByBucketWithHttpInfo(bucket: kotlin.String, bucketWrite: BucketWrite) : ApiResponse<BucketRecord?> {
+        val localVariableConfig = postKvByBucketRequestConfig(bucket = bucket, bucketWrite = bucketWrite)
 
-        return request<ProvisionRequest, ProvisionResult>(
+        return request<BucketWrite, BucketRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postKv
+     * To obtain the request config of the operation postKvByBucket
      *
-     * @param provisionRequest  (optional)
+     * @param bucket Bucket is the bucket&#39;s name within the org, from the path: 1–64 of [A-Za-z0-9_], no dash.
+     * @param bucketWrite 
      * @return RequestConfig
      */
-    fun postKvRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
-        val localVariableBody = provisionRequest
+    fun postKvByBucketRequestConfig(bucket: kotlin.String, bucketWrite: BucketWrite) : RequestConfig<BucketWrite> {
+        val localVariableBody = bucketWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -327,7 +414,87 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/kv",
+            path = "/v1/kv/{bucket}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/kv/{bucket}/{key}
+     * Put sets one key to one value and returns the revision the write created.
+     * Put sets one key to one value and returns the revision the write created. Writes are versioned: each put is a new revision and the bucket retains up to its History of them per key.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @param kvWrite 
+     * @return KvAck
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putKvByBucketByKey(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : KvAck {
+        val localVarResponse = putKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key, kvWrite = kvWrite)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KvAck
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/kv/{bucket}/{key}
+     * Put sets one key to one value and returns the revision the write created.
+     * Put sets one key to one value and returns the revision the write created. Writes are versioned: each put is a new revision and the bucket retains up to its History of them per key.
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @param kvWrite 
+     * @return ApiResponse<KvAck?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : ApiResponse<KvAck?> {
+        val localVariableConfig = putKvByBucketByKeyRequestConfig(bucket = bucket, key = key, kvWrite = kvWrite)
+
+        return request<KvWrite, KvAck>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putKvByBucketByKey
+     *
+     * @param bucket Bucket is the bucket, from the path.
+     * @param key Key is the key, from the path.
+     * @param kvWrite 
+     * @return RequestConfig
+     */
+    fun putKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : RequestConfig<KvWrite> {
+        val localVariableBody = kvWrite
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

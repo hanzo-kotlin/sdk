@@ -22,12 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `data` 
+ * @param `data` Data is this org's own calls, newest first — what this platform placed or received on its behalf, which is our record rather than the carrier's.
  */
 
 
 data class CallList (
 
+    /* Data is this org's own calls, newest first — what this platform placed or received on its behalf, which is our record rather than the carrier's. */
     @SerializedName("data")
     val `data`: kotlin.collections.List<ModelCall>? = null
 

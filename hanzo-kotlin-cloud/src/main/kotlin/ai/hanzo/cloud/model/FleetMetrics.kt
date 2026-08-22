@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param at 
- * @param gpuUtil 
- * @param load1 
- * @param memFree 
- * @param memUsed 
+ * @param at At is when this reading was MEASURED, RFC 3339 in UTC — not when the board was built. A console decides staleness by comparing it to now; the board deliberately does not decide that for it.
+ * @param gpuUtil GPUUtil is aggregate accelerator utilization as a FRACTION of 1 — 0.42 is 42% busy, never 42. Across all of the unit's cards, not one of them.
+ * @param load1 Load1 is the host's 1-minute load average — runnable processes, not a percentage, so it is read against the unit's core count and can exceed 1.
+ * @param memFree MemFree is host memory still available, in BYTES. It is what the source reported, not fleetSpec.Memory minus MemUsed.
+ * @param memUsed MemUsed is host memory in use, in BYTES.
  */
 
 
 data class FleetMetrics (
 
+    /* At is when this reading was MEASURED, RFC 3339 in UTC — not when the board was built. A console decides staleness by comparing it to now; the board deliberately does not decide that for it. */
     @SerializedName("at")
     val at: kotlin.String? = null,
 
+    /* GPUUtil is aggregate accelerator utilization as a FRACTION of 1 — 0.42 is 42% busy, never 42. Across all of the unit's cards, not one of them. */
     @SerializedName("gpuUtil")
     val gpuUtil: java.math.BigDecimal? = null,
 
+    /* Load1 is the host's 1-minute load average — runnable processes, not a percentage, so it is read against the unit's core count and can exceed 1. */
     @SerializedName("load1")
     val load1: java.math.BigDecimal? = null,
 
+    /* MemFree is host memory still available, in BYTES. It is what the source reported, not fleetSpec.Memory minus MemUsed. */
     @SerializedName("memFree")
     val memFree: kotlin.Int? = null,
 
+    /* MemUsed is host memory in use, in BYTES. */
     @SerializedName("memUsed")
     val memUsed: kotlin.Int? = null
 

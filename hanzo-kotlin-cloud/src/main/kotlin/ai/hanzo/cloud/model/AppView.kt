@@ -24,115 +24,138 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param buildType 
- * @param createdAt 
- * @param currentDeploymentId 
- * @param description 
- * @param dockerfile 
- * @param domains 
- * @param env 
- * @param environment 
- * @param health 
- * @param id 
- * @param image 
- * @param name 
- * @param namespace 
- * @param org 
- * @param phase 
- * @param port 
- * @param projectId 
- * @param replicas 
- * @param repo 
- * @param secretSync \"\"|pending|syncing|ready|failed (secrets.go)
- * @param secretSyncDetail honest reason when not ready
- * @param slug 
- * @param source 
- * @param status 
- * @param storageGb GiB; absent means stateless
- * @param updatedAt 
+ * @param buildType BuildType is how a git app builds: `pack`, the zero-config default that detects the project, or `dockerfile`. An image app carries `image`, which means it never builds.
+ * @param createdAt CreatedAt is when the app was created, unix seconds.
+ * @param currentDeploymentId CurrentDeploymentID is the deployment that is live — the pointer a deploy advances monotonically by version, so it never regresses to an older one. Empty until the first deploy reaches the cluster.
+ * @param description Description is free text about what the app is. Nothing derives from it.
+ * @param dockerfile Dockerfile is the path inside the repo to build from, for buildType `dockerfile`. The build path keys off its presence, and it is validated at create against the same allowlist the privileged build enforces.
+ * @param domains Domains are the ingress hosts rendered into the app's CR, its own `<slug>.<org>.<sites host>` first. That one is seeded at create and cannot be removed; a custom host joins only after add-domain and DNS verification.
+ * @param env Env is the app's environment variables, with every SECRET value masked to \"\" — the plaintext is in KMS and this surface never echoes it. That masking is why an empty secret value means \"keep what is sealed\" when posted back.
+ * @param environment Environment is the deploy target this app names, `production` when none was given. It is a LABEL: /v1/platform/environments derives the environment list from the apps that name one, so an environment exists as long as an app points at it and no route creates or deletes one.
+ * @param health Health rolls ready-vs-desired replicas up to a colour: green (all ready), yellow (some ready, or deliberately scaled to zero), red (none), or \"\" when the cluster reports no replica counts at all — unknown, never a guessed green.
+ * @param id ID is the server-minted application id (`app_…`). Routes address an app by project and slug; this is the key its deployments and builds carry.
+ * @param image Image is the image a source `image` app runs. For a git app only the tag is filled, stamped by the deploy that went live; the built ref is on the deployment.
+ * @param name Name is the display name. It is not an address — the slug is.
+ * @param namespace Namespace is where the app's cluster objects live, `tenant-<org>`. It is derived from the validated org and is never accepted from a request.
+ * @param org Org is the tenant that owns the app. It comes from the validated identity, never from the request, and it is the boundary every route is scoped to.
+ * @param phase Phase is the operator's own `status.phase` for the app's Service CR, read from the cluster on this request. Empty when there is no CR yet or the cluster could not be read.
+ * @param port Port is the container port traffic is sent to. 8080 when the create asked for none, or for one outside 1–65535.
+ * @param projectId ProjectID is the IAM project the app lives under, and it is that project's NAME — the (org,name) key IAM identifies it by, which is also what the `:project` path segment carries. There is no platform-minted project id.
+ * @param replicas Replicas is how many copies the CR declares. It is CLAMPED to the deployment's ceiling rather than refused, so it can be below what was asked.
+ * @param repo Repo is the git origin a source `git` app builds from, and the repo+branch a landed push has to match to build it.
+ * @param secretSync SecretSync is how far the app's secret env has got into the cluster: \"\"|pending|syncing|ready|failed (secrets.go). It is best-effort and never fails a deploy, so `pending` is ordinary right after one.
+ * @param secretSyncDetail SecretSyncDetail is the honest reason when the sync is not ready — a missing CRD, an RBAC grant, a per-tenant credential. Empty when it is.
+ * @param slug Slug is the app's identity in the cluster: the operator CR's name, the first label of its default host, and the `:app` path segment. Unique per project.
+ * @param source Source is what the app deploys FROM: `git`, which builds Repo, or `image`, which runs Image as it is. It decides whether a deploy builds at all.
+ * @param status Status is the lifecycle THIS store records: draft (created, nothing in the cluster yet), building, deploying, live, stopped or error. What the cluster itself says is Phase and Health.
+ * @param storageGb StorageGB is the persistent volume size in GiB. Absent means stateless — no volume at all — and it is clamped like Replicas.
+ * @param updatedAt UpdatedAt is when it last changed, unix seconds. Every lifecycle transition moves it, so it tracks deploys as well as edits.
  */
 
 
 data class AppView (
 
+    /* BuildType is how a git app builds: `pack`, the zero-config default that detects the project, or `dockerfile`. An image app carries `image`, which means it never builds. */
     @SerializedName("buildType")
     val buildType: kotlin.String? = null,
 
+    /* CreatedAt is when the app was created, unix seconds. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* CurrentDeploymentID is the deployment that is live — the pointer a deploy advances monotonically by version, so it never regresses to an older one. Empty until the first deploy reaches the cluster. */
     @SerializedName("currentDeploymentId")
     val currentDeploymentId: kotlin.String? = null,
 
+    /* Description is free text about what the app is. Nothing derives from it. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* Dockerfile is the path inside the repo to build from, for buildType `dockerfile`. The build path keys off its presence, and it is validated at create against the same allowlist the privileged build enforces. */
     @SerializedName("dockerfile")
     val dockerfile: kotlin.String? = null,
 
+    /* Domains are the ingress hosts rendered into the app's CR, its own `<slug>.<org>.<sites host>` first. That one is seeded at create and cannot be removed; a custom host joins only after add-domain and DNS verification. */
     @SerializedName("domains")
     val domains: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Env is the app's environment variables, with every SECRET value masked to \"\" — the plaintext is in KMS and this surface never echoes it. That masking is why an empty secret value means \"keep what is sealed\" when posted back. */
     @SerializedName("env")
     val env: kotlin.collections.List<EnvVarJSON>? = null,
 
+    /* Environment is the deploy target this app names, `production` when none was given. It is a LABEL: /v1/platform/environments derives the environment list from the apps that name one, so an environment exists as long as an app points at it and no route creates or deletes one. */
     @SerializedName("environment")
     val environment: kotlin.String? = null,
 
+    /* Health rolls ready-vs-desired replicas up to a colour: green (all ready), yellow (some ready, or deliberately scaled to zero), red (none), or \"\" when the cluster reports no replica counts at all — unknown, never a guessed green. */
     @SerializedName("health")
     val health: kotlin.String? = null,
 
+    /* ID is the server-minted application id (`app_…`). Routes address an app by project and slug; this is the key its deployments and builds carry. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Image is the image a source `image` app runs. For a git app only the tag is filled, stamped by the deploy that went live; the built ref is on the deployment. */
     @SerializedName("image")
     val image: ImageView? = null,
 
+    /* Name is the display name. It is not an address — the slug is. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Namespace is where the app's cluster objects live, `tenant-<org>`. It is derived from the validated org and is never accepted from a request. */
     @SerializedName("namespace")
     val namespace: kotlin.String? = null,
 
+    /* Org is the tenant that owns the app. It comes from the validated identity, never from the request, and it is the boundary every route is scoped to. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Phase is the operator's own `status.phase` for the app's Service CR, read from the cluster on this request. Empty when there is no CR yet or the cluster could not be read. */
     @SerializedName("phase")
     val phase: kotlin.String? = null,
 
+    /* Port is the container port traffic is sent to. 8080 when the create asked for none, or for one outside 1–65535. */
     @SerializedName("port")
     val port: kotlin.Int? = null,
 
+    /* ProjectID is the IAM project the app lives under, and it is that project's NAME — the (org,name) key IAM identifies it by, which is also what the `:project` path segment carries. There is no platform-minted project id. */
     @SerializedName("projectId")
     val projectId: kotlin.String? = null,
 
+    /* Replicas is how many copies the CR declares. It is CLAMPED to the deployment's ceiling rather than refused, so it can be below what was asked. */
     @SerializedName("replicas")
     val replicas: kotlin.Int? = null,
 
+    /* Repo is the git origin a source `git` app builds from, and the repo+branch a landed push has to match to build it. */
     @SerializedName("repo")
     val repo: GitSource? = null,
 
-    /* \"\"|pending|syncing|ready|failed (secrets.go) */
+    /* SecretSync is how far the app's secret env has got into the cluster: \"\"|pending|syncing|ready|failed (secrets.go). It is best-effort and never fails a deploy, so `pending` is ordinary right after one. */
     @SerializedName("secretSync")
     val secretSync: kotlin.String? = null,
 
-    /* honest reason when not ready */
+    /* SecretSyncDetail is the honest reason when the sync is not ready — a missing CRD, an RBAC grant, a per-tenant credential. Empty when it is. */
     @SerializedName("secretSyncDetail")
     val secretSyncDetail: kotlin.String? = null,
 
+    /* Slug is the app's identity in the cluster: the operator CR's name, the first label of its default host, and the `:app` path segment. Unique per project. */
     @SerializedName("slug")
     val slug: kotlin.String? = null,
 
+    /* Source is what the app deploys FROM: `git`, which builds Repo, or `image`, which runs Image as it is. It decides whether a deploy builds at all. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Status is the lifecycle THIS store records: draft (created, nothing in the cluster yet), building, deploying, live, stopped or error. What the cluster itself says is Phase and Health. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
-    /* GiB; absent means stateless */
+    /* StorageGB is the persistent volume size in GiB. Absent means stateless — no volume at all — and it is clamped like Replicas. */
     @SerializedName("storageGb")
     val storageGb: kotlin.Int? = null,
 
+    /* UpdatedAt is when it last changed, unix seconds. Every lifecycle transition moves it, so it tracks deploys as well as edits. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null
 

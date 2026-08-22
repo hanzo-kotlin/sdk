@@ -21,18 +21,19 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param gpuModel 
+ * @param gpuModel GPUModel names the representative accelerator (\"GB10\"); GPUs carries how many. A heterogeneous host names its first card rather than inventing a summary.
  * @param gpuUtil GPUUtil is accelerator utilization as a fraction 0..1; the warehouse clamps anything outside that.
- * @param gpus GPUs is how many accelerators the reading covers, GPUModel the representative model name.
+ * @param gpus GPUs is how many accelerators this reading covers.
  * @param host Host is the node's hostname, for display.
- * @param memFree 
- * @param memUsed MemUsed and MemFree are host memory in bytes.
+ * @param memFree MemFree is host memory still available, in BYTES.
+ * @param memUsed MemUsed is host memory in use, in BYTES.
  * @param unit Unit is the reporting node's own id — the same id it registered under, and the key the board joins this series onto. Required.
  */
 
 
 data class SampleIngest (
 
+    /* GPUModel names the representative accelerator (\"GB10\"); GPUs carries how many. A heterogeneous host names its first card rather than inventing a summary. */
     @SerializedName("gpuModel")
     val gpuModel: kotlin.String? = null,
 
@@ -40,7 +41,7 @@ data class SampleIngest (
     @SerializedName("gpuUtil")
     val gpuUtil: java.math.BigDecimal? = null,
 
-    /* GPUs is how many accelerators the reading covers, GPUModel the representative model name. */
+    /* GPUs is how many accelerators this reading covers. */
     @SerializedName("gpus")
     val gpus: kotlin.Int? = null,
 
@@ -48,10 +49,11 @@ data class SampleIngest (
     @SerializedName("host")
     val host: kotlin.String? = null,
 
+    /* MemFree is host memory still available, in BYTES. */
     @SerializedName("memFree")
     val memFree: kotlin.Int? = null,
 
-    /* MemUsed and MemFree are host memory in bytes. */
+    /* MemUsed is host memory in use, in BYTES. */
     @SerializedName("memUsed")
     val memUsed: kotlin.Int? = null,
 

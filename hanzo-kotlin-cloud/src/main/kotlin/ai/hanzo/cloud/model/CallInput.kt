@@ -21,19 +21,21 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param agent 
- * @param from 
+ * @param agent Agent hands the answered call to a Hanzo assistant by name instead of connecting it to a person. Empty places an ordinary call.
+ * @param from From is the number to call FROM, in E.164. It must be one this org holds.
  * @param record Record is a per-call flag rather than a product. Where a recording lands and how long it is kept is the org's retention policy, not this call's.
- * @param to 
- * @param webhook 
+ * @param to To is the number to call, in E.164.
+ * @param webhook Webhook is a URL the carrier posts this call's events to as it progresses. Empty means the call's outcome is only visible by reading it back.
  */
 
 
 data class CallInput (
 
+    /* Agent hands the answered call to a Hanzo assistant by name instead of connecting it to a person. Empty places an ordinary call. */
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* From is the number to call FROM, in E.164. It must be one this org holds. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
@@ -41,9 +43,11 @@ data class CallInput (
     @SerializedName("record")
     val record: kotlin.Boolean? = null,
 
+    /* To is the number to call, in E.164. */
     @SerializedName("to")
     val to: kotlin.String? = null,
 
+    /* Webhook is a URL the carrier posts this call's events to as it progresses. Empty means the call's outcome is only visible by reading it back. */
     @SerializedName("webhook")
     val webhook: kotlin.String? = null
 

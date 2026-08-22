@@ -22,12 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `data` 
+ * @param `data` Data is every step of the sequence, idx ascending — the order they send in. It is not paged: a sequence's steps are a handful, and a partial list would misstate the drip. An empty array for a sequence with no messages yet, which enrolls fine and completes immediately.
  */
 
 
 data class StepList (
 
+    /* Data is every step of the sequence, idx ascending — the order they send in. It is not paged: a sequence's steps are a handful, and a partial list would misstate the drip. An empty array for a sequence with no messages yet, which enrolls fine and completes immediately. */
     @SerializedName("data")
     val `data`: kotlin.collections.List<Step>? = null
 

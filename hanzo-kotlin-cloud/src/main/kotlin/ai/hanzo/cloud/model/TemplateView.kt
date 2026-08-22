@@ -22,36 +22,43 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param category 
- * @param counselReview 
- * @param fields 
- * @param id 
- * @param origin 
- * @param title 
- * @param version 
+ * @param category Category is the corporate need the template serves: formation, equity, ops or sales. Formation and equity are the securities-class categories, which is what forces counselReview.
+ * @param counselReview CounselReview marks a template whose rendered documents open with the counsel notice. True for every formation and equity template whatever an override sends: the engine prepends the notice and no caller can suppress it.
+ * @param fields Fields declares the merge fields the body consumes — every key a generation must supply, each with its human label. All are REQUIRED: a missing one is refused rather than rendered as a blank into a contract.
+ * @param id ID is the template's stable id and the path segment that fetches its body — \"nda\", \"msa\", \"safe\". An override keeps the built-in's id.
+ * @param origin Origin is \"builtin\" for a template the platform ships or \"org\" for one this org saved. It separates the catalog every tenant sees from this tenant's own.
+ * @param title Title is the display name, e.g. \"Mutual Non-Disclosure Agreement\". A generated document inherits it.
+ * @param version Version is which version of this template the caller's org resolves to. A built-in is version 1; the org's first override is 2 and each save increments, so an override version never collides with the built-in's.
  */
 
 
 data class TemplateView (
 
+    /* Category is the corporate need the template serves: formation, equity, ops or sales. Formation and equity are the securities-class categories, which is what forces counselReview. */
     @SerializedName("category")
     val category: kotlin.String? = null,
 
+    /* CounselReview marks a template whose rendered documents open with the counsel notice. True for every formation and equity template whatever an override sends: the engine prepends the notice and no caller can suppress it. */
     @SerializedName("counselReview")
     val counselReview: kotlin.Boolean? = null,
 
+    /* Fields declares the merge fields the body consumes — every key a generation must supply, each with its human label. All are REQUIRED: a missing one is refused rather than rendered as a blank into a contract. */
     @SerializedName("fields")
     val fields: kotlin.collections.List<Field>? = null,
 
+    /* ID is the template's stable id and the path segment that fetches its body — \"nda\", \"msa\", \"safe\". An override keeps the built-in's id. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Origin is \"builtin\" for a template the platform ships or \"org\" for one this org saved. It separates the catalog every tenant sees from this tenant's own. */
     @SerializedName("origin")
     val origin: kotlin.String? = null,
 
+    /* Title is the display name, e.g. \"Mutual Non-Disclosure Agreement\". A generated document inherits it. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* Version is which version of this template the caller's org resolves to. A built-in is version 1; the org's first override is 2 and each save increments, so an override version never collides with the built-in's. */
     @SerializedName("version")
     val version: kotlin.Int? = null
 

@@ -22,14 +22,15 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param promo 
+ * @param promo Promo is the offer itself. It is fleet-wide, identical for every org — only the two counters beside it move.
  * @param redeemed Redeemed is how many orgs have taken it, Remaining how many are left under the fleet-wide cap.
- * @param remaining 
+ * @param remaining Remaining is MaxRedemptions minus Redeemed, floored at 0. At 0 the next redeem is declined, and a quote reports ineligible rather than pricing an offer that cannot be taken.
  */
 
 
 data class PromoStatus (
 
+    /* Promo is the offer itself. It is fleet-wide, identical for every org — only the two counters beside it move. */
     @SerializedName("promo")
     val promo: Promo? = null,
 
@@ -37,6 +38,7 @@ data class PromoStatus (
     @SerializedName("redeemed")
     val redeemed: kotlin.Int? = null,
 
+    /* Remaining is MaxRedemptions minus Redeemed, floored at 0. At 0 the next redeem is declined, and a quote reports ineligible rather than pricing an offer that cannot be taken. */
     @SerializedName("remaining")
     val remaining: kotlin.Int? = null
 

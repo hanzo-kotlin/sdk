@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param nonce Nonce is the value GET /v1/validators/challenge issued for this slot.
+ * @param nonce Nonce is the value GET /v1/validator/challenge issued for this slot.
  * @param signature Signature is the wallet's personal_sign over the challenge message, hex with a 0x prefix.
  * @param tokenId TokenID is the Validator-tier GenesisNFT token id being claimed. It IS the validator slot.
  */
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ValidatorClaim (
 
-    /* Nonce is the value GET /v1/validators/challenge issued for this slot. */
+    /* Nonce is the value GET /v1/validator/challenge issued for this slot. */
     @SerializedName("nonce")
     val nonce: kotlin.String? = null,
 

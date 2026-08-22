@@ -22,36 +22,43 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param group 
- * @param health 
- * @param kind 
- * @param name 
- * @param namespace 
- * @param status 
- * @param version 
+ * @param group Group is the object's API group: empty for the core group (Pod, Service, ConfigMap), otherwise apps, networking.k8s.io, autoscaling or policy — and hanzo.ai for the App CR itself.
+ * @param health Health is this object's own health, derived from its live state by the same rule the resource tree uses.
+ * @param kind Kind is the object kind — App, Deployment, ReplicaSet, Pod, Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget, ConfigMap. Never Secret: the walk that produces these does not visit them.
+ * @param name Name is the object's metadata.name.
+ * @param namespace Namespace is the namespace the object was found in — the same one for every entry of an application, since the walk is confined to it.
+ * @param status Status is the APPLICATION's sync verdict repeated on every row, not a per-object one. The operator owns these children, so no child has a desired state of its own to compare against.
+ * @param version Version is the object's API version as the live object reports it: v1 for every kind here except the HorizontalPodAutoscaler, which is autoscaling/v2.
  */
 
 
 data class ArgoResourceStatus (
 
+    /* Group is the object's API group: empty for the core group (Pod, Service, ConfigMap), otherwise apps, networking.k8s.io, autoscaling or policy — and hanzo.ai for the App CR itself. */
     @SerializedName("group")
     val group: kotlin.String? = null,
 
+    /* Health is this object's own health, derived from its live state by the same rule the resource tree uses. */
     @SerializedName("health")
     val health: ArgoHealth? = null,
 
+    /* Kind is the object kind — App, Deployment, ReplicaSet, Pod, Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget, ConfigMap. Never Secret: the walk that produces these does not visit them. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Name is the object's metadata.name. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Namespace is the namespace the object was found in — the same one for every entry of an application, since the walk is confined to it. */
     @SerializedName("namespace")
     val namespace: kotlin.String? = null,
 
+    /* Status is the APPLICATION's sync verdict repeated on every row, not a per-object one. The operator owns these children, so no child has a desired state of its own to compare against. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Version is the object's API version as the live object reports it: v1 for every kind here except the HorizontalPodAutoscaler, which is autoscaling/v2. */
     @SerializedName("version")
     val version: kotlin.String? = null
 

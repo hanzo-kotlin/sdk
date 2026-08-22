@@ -22,20 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param bytes 
- * @param generated 
- * @param plugin 
+ * @param bytes Bytes is the size of the bundled CommonJS the runtime will execute.
+ * @param generated Generated is whether a model wrote the source from a spec, rather than the caller posting the source itself.
+ * @param plugin Plugin is the plugin as stored, with its derived id and build time.
  */
 
 
 data class BuildOut (
 
+    /* Bytes is the size of the bundled CommonJS the runtime will execute. */
     @SerializedName("bytes")
     val bytes: kotlin.Int? = null,
 
+    /* Generated is whether a model wrote the source from a spec, rather than the caller posting the source itself. */
     @SerializedName("generated")
     val generated: kotlin.Boolean? = null,
 
+    /* Plugin is the plugin as stored, with its derived id and build time. */
     @SerializedName("plugin")
     val plugin: AuthoredPlugin? = null
 

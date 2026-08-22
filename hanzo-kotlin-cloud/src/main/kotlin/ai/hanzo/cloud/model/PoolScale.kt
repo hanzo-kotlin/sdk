@@ -21,16 +21,16 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param clusterId ClusterID and PoolID address the pool, from the URL path.
+ * @param clusterId ClusterID is the cluster holding the pool, from the URL path.
  * @param count Count is the node count to scale TO — an absolute target, not a delta, and never negative.
- * @param poolId 
+ * @param poolId PoolID is the pool to resize, from the URL path — the `poolId` a cluster read reports for it. Required.
  * @param provider Provider is the cloud the cluster lives on. Required; body or ?provider=.
  */
 
 
 data class PoolScale (
 
-    /* ClusterID and PoolID address the pool, from the URL path. */
+    /* ClusterID is the cluster holding the pool, from the URL path. */
     @SerializedName("clusterId")
     val clusterId: kotlin.String? = null,
 
@@ -38,6 +38,7 @@ data class PoolScale (
     @SerializedName("count")
     val count: kotlin.Int? = null,
 
+    /* PoolID is the pool to resize, from the URL path — the `poolId` a cluster read reports for it. Required. */
     @SerializedName("poolId")
     val poolId: kotlin.String? = null,
 

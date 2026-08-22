@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param group 
- * @param kind 
+ * @param group Group is the API group a project admits, \"*\" for any. Empty names the core group.
+ * @param kind Kind is the kind it admits, \"*\" for any.
  */
 
 
 data class ArgoGroupKind (
 
+    /* Group is the API group a project admits, \"*\" for any. Empty names the core group. */
     @SerializedName("group")
     val group: kotlin.String? = null,
 
+    /* Kind is the kind it admits, \"*\" for any. */
     @SerializedName("kind")
     val kind: kotlin.String? = null
 

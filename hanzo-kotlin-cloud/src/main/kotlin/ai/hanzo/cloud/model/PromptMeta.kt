@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param labels Labels is the creator's free-form taxonomy, stored as given after trimming and de-duplication. Always present, `[]` when none — never null.
  * @param lastUpdatedAt LastUpdatedAt is when the newest version was appended, RFC 3339 UTC. Empty only if the record carries no timestamp at all.
- * @param name Name is the prompt's org-unique handle and the URL segment it is fetched by: GET /v1/prompts/<name>.
+ * @param name Name is the prompt's org-unique handle and the URL segment it is fetched by: GET /v1/prompt/<name>.
  * @param tags Tags is the second free-form taxonomy under the same rules as Labels. Nothing in this service interprets either; they are yours to organize by.
  * @param type Type labels the template's kind, \"text\" unless the creator said otherwise. It is the CURRENT version's type; earlier versions may carry a different one.
  * @param versions Versions lists every version NUMBER this prompt has, newest first, capped at the last 100. The highest is the current one. (On a metrics row the same key is a count, not a list.)
@@ -40,7 +40,7 @@ data class PromptMeta (
     @SerializedName("lastUpdatedAt")
     val lastUpdatedAt: kotlin.String? = null,
 
-    /* Name is the prompt's org-unique handle and the URL segment it is fetched by: GET /v1/prompts/<name>. */
+    /* Name is the prompt's org-unique handle and the URL segment it is fetched by: GET /v1/prompt/<name>. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 

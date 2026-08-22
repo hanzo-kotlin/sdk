@@ -22,20 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param keyMetrics 
- * @param signals 
- * @param stage 
+ * @param keyMetrics KeyMetrics are the org's OWN numbers behind those signals — never another org's, and never a platform aggregate.
+ * @param signals Signals is what was observed of the org right now, one boolean per probe. A probe that could not be run reports FALSE, not absent — the shape is stable so a caller never has to tell a missing key from a negative answer, and the cost is that \"not observed\" and \"not there\" look alike here. Keys are the probe names, including the `module:<name>` and `connected:<provider>` families.
+ * @param stage Stage is how far the business itself has got — formed, launched, activated or scaling — decided purely from the signals below, and by what the org has ACHIEVED rather than what it has configured. It reads the STRONGEST evidence present, so money of record makes an org scaling even if an earlier rung's signal was never observed. It is unrelated to checklist progress.
  */
 
 
 data class ProfileResponse (
 
+    /* KeyMetrics are the org's OWN numbers behind those signals — never another org's, and never a platform aggregate. */
     @SerializedName("keyMetrics")
     val keyMetrics: ProfileMetrics? = null,
 
+    /* Signals is what was observed of the org right now, one boolean per probe. A probe that could not be run reports FALSE, not absent — the shape is stable so a caller never has to tell a missing key from a negative answer, and the cost is that \"not observed\" and \"not there\" look alike here. Keys are the probe names, including the `module:<name>` and `connected:<provider>` families. */
     @SerializedName("signals")
     val signals: kotlin.collections.Map<kotlin.String, kotlin.Boolean>? = null,
 
+    /* Stage is how far the business itself has got — formed, launched, activated or scaling — decided purely from the signals below, and by what the org has ACHIEVED rather than what it has configured. It reads the STRONGEST evidence present, so money of record makes an org scaling even if an earlier rung's signal was never observed. It is unrelated to checklist progress. */
     @SerializedName("stage")
     val stage: kotlin.String? = null
 

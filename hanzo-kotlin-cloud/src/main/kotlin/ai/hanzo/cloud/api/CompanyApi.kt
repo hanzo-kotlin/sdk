@@ -23,6 +23,8 @@ import ai.hanzo.cloud.model.AdvanceIn
 import ai.hanzo.cloud.model.BeginIn
 import ai.hanzo.cloud.model.DecisionIn
 import ai.hanzo.cloud.model.DeckOut
+import ai.hanzo.cloud.model.EIN
+import ai.hanzo.cloud.model.EinIn
 import ai.hanzo.cloud.model.EsignCompleteIn
 import ai.hanzo.cloud.model.EsignOut
 import ai.hanzo.cloud.model.FormationView
@@ -41,6 +43,8 @@ import ai.hanzo.cloud.model.RoundOut
 import ai.hanzo.cloud.model.SafeIn
 import ai.hanzo.cloud.model.SafeOut
 import ai.hanzo.cloud.model.StructureIn
+import ai.hanzo.cloud.model.Tariff
+import ai.hanzo.cloud.model.TariffIn
 
 import com.google.gson.annotations.SerializedName
 
@@ -591,6 +595,80 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/company/documents",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/company/ein
+     * Opens the EIN application and answers what it owes.
+     * Opens the EIN application and answers what it owes.  The answer states whether it can be filed ONLINE, because that is the fact deciding whether the customer waits a sitting or several weeks — and it names each form with what that form is for, so nobody has to already know what an SS-4 is to understand why they are signing one.
+     * @param einIn 
+     * @return EIN
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postCompanyEin(einIn: EinIn) : EIN {
+        val localVarResponse = postCompanyEinWithHttpInfo(einIn = einIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EIN
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/company/ein
+     * Opens the EIN application and answers what it owes.
+     * Opens the EIN application and answers what it owes.  The answer states whether it can be filed ONLINE, because that is the fact deciding whether the customer waits a sitting or several weeks — and it names each form with what that form is for, so nobody has to already know what an SS-4 is to understand why they are signing one.
+     * @param einIn 
+     * @return ApiResponse<EIN?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postCompanyEinWithHttpInfo(einIn: EinIn) : ApiResponse<EIN?> {
+        val localVariableConfig = postCompanyEinRequestConfig(einIn = einIn)
+
+        return request<EinIn, EIN>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postCompanyEin
+     *
+     * @param einIn 
+     * @return RequestConfig
+     */
+    fun postCompanyEinRequestConfig(einIn: EinIn) : RequestConfig<EinIn> {
+        val localVariableBody = einIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/company/ein",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1472,8 +1550,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/payment
-     * Charge the one-time formation fee and mark the formation paid
-     * Bills the caller&#39;s own org the one-time Hanzo Company formation fee — $999 unless the deployment sets another — and answers with the formation record carrying its paid flag and the charge reference. Takes no body: the org is the validated tenant and the amount is the platform&#39;s, never the caller&#39;s to assert.  IDEMPOTENT on the formation rather than on the request: an already-paid formation answers 200 with the same record and is not charged again, so a retry or a double-clicked button costs nothing. Available only at the &#x60;payment&#x60; stage (409 anywhere else) and only for an org that has begun a formation (404 otherwise).  A refused charge answers the fleet-wide billing contract, not a formation error — 402 when the org cannot pay, 503 when metering is unavailable — which is exactly why this route is not a typed op.
+     * Charges the caller&#39;s own org the one-time Hanzo Company formation fee.
+     * Charges the caller&#39;s own org the one-time Hanzo Company formation fee.  It is $999 unless the deployment sets another, and the answer is the formation record carrying its paid flag and the charge reference. It takes no body: the org is the validated tenant and the amount is the platform&#39;s, never the caller&#39;s to assert.  IDEMPOTENT on the formation rather than on the request: an already-paid formation answers 200 with the same record and is not charged again, so a retry or a double-clicked button costs nothing. Available only at the &#x60;payment&#x60; stage (409 anywhere else) and only for an org that has begun a formation (404 otherwise).  A denial answers the fleet-wide billing contract — 402 insufficient_balance, 402 spend_cap_exceeded, 503 balance_unavailable — carried by cloud.Denied, which is the money wire&#39;s own {\&quot;error\&quot;:{\&quot;code\&quot;,\&quot;message\&quot;}} body rather than a second vocabulary invented for this surface.  The gate is the LAST thing it does, after the stage check and the paid short-circuit, so a caller the machine is about to refuse is never charged. That ordering is why the gate cannot lift into middleware, where it would run first. Both facts are pinned: TestPaymentDenialWire, TestPaymentChargesLast.
      * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1503,8 +1581,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/payment
-     * Charge the one-time formation fee and mark the formation paid
-     * Bills the caller&#39;s own org the one-time Hanzo Company formation fee — $999 unless the deployment sets another — and answers with the formation record carrying its paid flag and the charge reference. Takes no body: the org is the validated tenant and the amount is the platform&#39;s, never the caller&#39;s to assert.  IDEMPOTENT on the formation rather than on the request: an already-paid formation answers 200 with the same record and is not charged again, so a retry or a double-clicked button costs nothing. Available only at the &#x60;payment&#x60; stage (409 anywhere else) and only for an org that has begun a formation (404 otherwise).  A refused charge answers the fleet-wide billing contract, not a formation error — 402 when the org cannot pay, 503 when metering is unavailable — which is exactly why this route is not a typed op.
+     * Charges the caller&#39;s own org the one-time Hanzo Company formation fee.
+     * Charges the caller&#39;s own org the one-time Hanzo Company formation fee.  It is $999 unless the deployment sets another, and the answer is the formation record carrying its paid flag and the charge reference. It takes no body: the org is the validated tenant and the amount is the platform&#39;s, never the caller&#39;s to assert.  IDEMPOTENT on the formation rather than on the request: an already-paid formation answers 200 with the same record and is not charged again, so a retry or a double-clicked button costs nothing. Available only at the &#x60;payment&#x60; stage (409 anywhere else) and only for an org that has begun a formation (404 otherwise).  A denial answers the fleet-wide billing contract — 402 insufficient_balance, 402 spend_cap_exceeded, 503 balance_unavailable — carried by cloud.Denied, which is the money wire&#39;s own {\&quot;error\&quot;:{\&quot;code\&quot;,\&quot;message\&quot;}} body rather than a second vocabulary invented for this surface.  The gate is the LAST thing it does, after the stage check and the paid short-circuit, so a caller the machine is about to refuse is never charged. That ordering is why the gate cannot lift into middleware, where it would run first. Both facts are pinned: TestPaymentDenialWire, TestPaymentChargesLast.
      * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1603,6 +1681,80 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/company/skip",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/company/tariff
+     * Itemises what a formation costs before anyone commits to it.
+     * Itemises what a formation costs before anyone commits to it.  It answers what is due now and what recurs, as separate figures, and marks the state&#39;s filing fee as money we collect and remit rather than keep. A caller can therefore show a payer the whole bill — which is the point of quoting at all, and was impossible while the fee was one number in an error string.  A jurisdiction whose filing fee this deployment has not been told REFUSES, naming the setting that fixes it. Quoting our half as though it were the total is the one answer that would be worse than no answer.
+     * @param tariffIn 
+     * @return Tariff
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postCompanyTariff(tariffIn: TariffIn) : Tariff {
+        val localVarResponse = postCompanyTariffWithHttpInfo(tariffIn = tariffIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Tariff
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/company/tariff
+     * Itemises what a formation costs before anyone commits to it.
+     * Itemises what a formation costs before anyone commits to it.  It answers what is due now and what recurs, as separate figures, and marks the state&#39;s filing fee as money we collect and remit rather than keep. A caller can therefore show a payer the whole bill — which is the point of quoting at all, and was impossible while the fee was one number in an error string.  A jurisdiction whose filing fee this deployment has not been told REFUSES, naming the setting that fixes it. Quoting our half as though it were the total is the one answer that would be worse than no answer.
+     * @param tariffIn 
+     * @return ApiResponse<Tariff?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postCompanyTariffWithHttpInfo(tariffIn: TariffIn) : ApiResponse<Tariff?> {
+        val localVariableConfig = postCompanyTariffRequestConfig(tariffIn = tariffIn)
+
+        return request<TariffIn, Tariff>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postCompanyTariff
+     *
+     * @param tariffIn 
+     * @return RequestConfig
+     */
+    fun postCompanyTariffRequestConfig(tariffIn: TariffIn) : RequestConfig<TariffIn> {
+        val localVariableBody = tariffIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/company/tariff",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

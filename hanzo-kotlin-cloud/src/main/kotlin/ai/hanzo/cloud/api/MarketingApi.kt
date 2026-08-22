@@ -600,8 +600,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/marketing/calendar
-     * Returns the org&#39;s calendar, soonest scheduled first, optionally narrowed to one status.
-     * Returns the org&#39;s calendar, soonest scheduled first, optionally narrowed to one status.
+     * Returns the org&#39;s calendar, latest scheduled first, optionally narrowed to one status.
+     * Returns the org&#39;s calendar, latest scheduled first, optionally narrowed to one status.
      * @param status Status keeps only posts in that state (draft, scheduled, published, failed, canceled). Empty means every post. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return PostList
@@ -633,8 +633,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/marketing/calendar
-     * Returns the org&#39;s calendar, soonest scheduled first, optionally narrowed to one status.
-     * Returns the org&#39;s calendar, soonest scheduled first, optionally narrowed to one status.
+     * Returns the org&#39;s calendar, latest scheduled first, optionally narrowed to one status.
+     * Returns the org&#39;s calendar, latest scheduled first, optionally narrowed to one status.
      * @param status Status keeps only posts in that state (draft, scheduled, published, failed, canceled). Empty means every post. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return ApiResponse<PostList?>

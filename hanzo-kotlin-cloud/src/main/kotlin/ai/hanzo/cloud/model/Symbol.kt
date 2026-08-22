@@ -22,24 +22,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param detail 
- * @param kind 
- * @param name 
- * @param range 
+ * @param detail Detail is the server's short elaboration, typically the signature. Absent when it offered none.
+ * @param kind Kind is the LSP SymbolKind number (5 class, 6 method, 12 function, 23 struct, …), passed through rather than translated to a word — these callers already speak LSP, and inventing a second vocabulary is how the two drift.
+ * @param name Name is the declared identifier.
+ * @param range Range is the declaration's span in the file.
  */
 
 
 data class Symbol (
 
+    /* Detail is the server's short elaboration, typically the signature. Absent when it offered none. */
     @SerializedName("detail")
     val detail: kotlin.String? = null,
 
+    /* Kind is the LSP SymbolKind number (5 class, 6 method, 12 function, 23 struct, …), passed through rather than translated to a word — these callers already speak LSP, and inventing a second vocabulary is how the two drift. */
     @SerializedName("kind")
     val kind: kotlin.Int? = null,
 
+    /* Name is the declared identifier. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Range is the declaration's span in the file. */
     @SerializedName("range")
     val range: Range? = null
 

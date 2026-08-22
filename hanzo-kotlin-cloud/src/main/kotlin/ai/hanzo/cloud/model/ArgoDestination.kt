@@ -22,8 +22,8 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param name ArgoCD allows a destination by cluster name; omitted for the in-cluster projection.
- * @param namespace 
- * @param server 
+ * @param namespace Namespace is where in that cluster the workload lands. \"*\" on a project's destination fence means any namespace.
+ * @param server Server is the cluster API URL the application reconciles into. Everything this plane projects lands in the cluster it runs in, so it is https://kubernetes.default.svc — except on a project's destination fence, where \"*\" means any cluster.
  */
 
 
@@ -33,9 +33,11 @@ data class ArgoDestination (
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Namespace is where in that cluster the workload lands. \"*\" on a project's destination fence means any namespace. */
     @SerializedName("namespace")
     val namespace: kotlin.String? = null,
 
+    /* Server is the cluster API URL the application reconciles into. Everything this plane projects lands in the cluster it runs in, so it is https://kubernetes.default.svc — except on a project's destination fence, where \"*\" means any cluster. */
     @SerializedName("server")
     val server: kotlin.String? = null
 

@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param principles 
- * @param sections 
- * @param steps 
- * @param strategies 
- * @param templates 
+ * @param principles Principles is how many spine archetypes the playbook carries (64 in the shipped corpus).
+ * @param sections Sections is how many phases the journey has.
+ * @param steps Steps is how many checklist items the playbook holds, DISABLED ONES INCLUDED — this counts the authored document, not the journey an org runs, so it is normally larger than the `total` on a progress view.
+ * @param strategies Strategies is how many tactics the corpus holds, again counting disabled ones.
+ * @param templates Templates is how many reusable prompts the playbook carries.
  */
 
 
 data class BlueprintCounts (
 
+    /* Principles is how many spine archetypes the playbook carries (64 in the shipped corpus). */
     @SerializedName("principles")
     val principles: kotlin.Int? = null,
 
+    /* Sections is how many phases the journey has. */
     @SerializedName("sections")
     val sections: kotlin.Int? = null,
 
+    /* Steps is how many checklist items the playbook holds, DISABLED ONES INCLUDED — this counts the authored document, not the journey an org runs, so it is normally larger than the `total` on a progress view. */
     @SerializedName("steps")
     val steps: kotlin.Int? = null,
 
+    /* Strategies is how many tactics the corpus holds, again counting disabled ones. */
     @SerializedName("strategies")
     val strategies: kotlin.Int? = null,
 
+    /* Templates is how many reusable prompts the playbook carries. */
     @SerializedName("templates")
     val templates: kotlin.Int? = null
 

@@ -21,40 +21,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param active 
- * @param bytes 
- * @param createdAt 
- * @param objects 
- * @param releaseId 
- * @param slug 
- * @param source 
- * @param url 
+ * @param active Active is whether this is the release the site is SERVING right now. Exactly one release of a site is active; the others are kept so they can be activated again, until retention reclaims them.
+ * @param bytes Bytes is their total size in bytes.
+ * @param createdAt CreatedAt is when the release was cut, as Unix seconds — not when it was last activated.
+ * @param objects Objects is how many files the release holds.
+ * @param releaseId ReleaseID is derived from a DIGEST of the release's own manifest, so identical content is the same release and a release can never be confused with another one. Activating an older id IS the rollback.
+ * @param slug Slug is the site this release belongs to.
+ * @param source Source is what the release was cut from — the build output or upload it was promoted out of.
+ * @param url URL is where the site serves. Present only on the ACTIVE release, since an inactive one is not answering anywhere.
  */
 
 
 data class ProjectsRelease (
 
+    /* Active is whether this is the release the site is SERVING right now. Exactly one release of a site is active; the others are kept so they can be activated again, until retention reclaims them. */
     @SerializedName("active")
     val active: kotlin.Boolean? = null,
 
+    /* Bytes is their total size in bytes. */
     @SerializedName("bytes")
     val bytes: kotlin.Int? = null,
 
+    /* CreatedAt is when the release was cut, as Unix seconds — not when it was last activated. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* Objects is how many files the release holds. */
     @SerializedName("objects")
     val objects: kotlin.Int? = null,
 
+    /* ReleaseID is derived from a DIGEST of the release's own manifest, so identical content is the same release and a release can never be confused with another one. Activating an older id IS the rollback. */
     @SerializedName("releaseId")
     val releaseId: kotlin.String? = null,
 
+    /* Slug is the site this release belongs to. */
     @SerializedName("slug")
     val slug: kotlin.String? = null,
 
+    /* Source is what the release was cut from — the build output or upload it was promoted out of. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* URL is where the site serves. Present only on the ACTIVE release, since an inactive one is not answering anywhere. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

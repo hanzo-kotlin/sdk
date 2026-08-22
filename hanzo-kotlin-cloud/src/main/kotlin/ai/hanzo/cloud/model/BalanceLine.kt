@@ -21,25 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param account 
- * @param amount cents, display sign
- * @param name 
- * @param type 
+ * @param account Account is the chart-of-accounts number this line reports on. ABSENT marks a DERIVED line that no account holds — retained earnings is the one such line, computed from cumulative income minus expense.
+ * @param amount Amount is the balance as of the statement date, in whole cents, in its NATURAL sign: positive when the account behaved normally, on all three sides. Assets are debit-normal and shown as stored; liabilities and equity are credit-normal and flipped once here for display. A negative asset is a real overdraft, not a sign convention.
+ * @param name Name is the account's human name, or the derived line's own name.
+ * @param type Type is the account's fundamental class. Absent on a derived line, which belongs to no account and therefore has none.
  */
 
 
 data class BalanceLine (
 
+    /* Account is the chart-of-accounts number this line reports on. ABSENT marks a DERIVED line that no account holds — retained earnings is the one such line, computed from cumulative income minus expense. */
     @SerializedName("account")
     val account: kotlin.String? = null,
 
-    /* cents, display sign */
+    /* Amount is the balance as of the statement date, in whole cents, in its NATURAL sign: positive when the account behaved normally, on all three sides. Assets are debit-normal and shown as stored; liabilities and equity are credit-normal and flipped once here for display. A negative asset is a real overdraft, not a sign convention. */
     @SerializedName("amount")
     val amount: kotlin.Int? = null,
 
+    /* Name is the account's human name, or the derived line's own name. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Type is the account's fundamental class. Absent on a derived line, which belongs to no account and therefore has none. */
     @SerializedName("type")
     val type: kotlin.String? = null
 

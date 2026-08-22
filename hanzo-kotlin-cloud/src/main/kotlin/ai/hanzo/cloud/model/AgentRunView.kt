@@ -21,25 +21,26 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param actor 
+ * @param actor Actor is the \"org/sub\" identity the run was executed and billed AS. Empty means there was no PERSON — a schedule or a service token — which is a different fact from \"we do not know\", and the difference is what an audit asks about.
  * @param agent What an operator needs to answer \"what ran, for whom, and what did it do\" — and, through traceId, to leave this record for the waterfall of the very same run rather than a search that hopefully lands near it.  Agent is on the row because the org-wide feed lists runs across agents, and a run that cannot name its agent is an orphan in exactly the view built to make sense of many of them. Every field is omitempty: a run recorded before these columns existed reports absence rather than a zero it never measured.
- * @param completionTokens 
- * @param createdAt 
- * @param durationMs 
- * @param error 
- * @param id 
- * @param input 
- * @param model 
- * @param output 
- * @param promptTokens 
- * @param status 
- * @param toolCalls 
- * @param traceId 
+ * @param completionTokens CompletionTokens is the same measurement for what the model produced, on the same final completion. It is a count of TOKENS, not of turns and not of money.
+ * @param createdAt CreatedAt is when the run finished, RFC 3339 in UTC to the second — the duration above already says how long it had been going.
+ * @param durationMs DurationMs is wall-clock milliseconds around the completion, including a failover's retries. It is time SPENT, not time billed.
+ * @param error Error is why an \"ok\"-less run failed, as the failing call reported it. Empty on every successful run.
+ * @param id ID is the run's handle, minted as \"run_\" + 32 hex characters. It is the key the metering ledger records this run's per-round token spend under, so it is how a bill and a run are joined.
+ * @param input Input is the text the run was given, verbatim.
+ * @param model Model is the model that actually SERVED this run, which is not always the one the agent is defined on — a failover records what answered. Normalized to our name on the way out; the stored row is left exactly as it happened, because a run is a record and rewriting it would be worse than the name it carries.
+ * @param output Output is what the model produced. Empty on an error run, and empty is also a legitimate answer from a run that succeeded with nothing to say — Status is what separates those.
+ * @param promptTokens PromptTokens is what the gateway reported for the run's FINAL completion, and only that one — a tool loop's earlier rounds are the metering ledger's account, joined by this run's id. Reading it as the run's total spend undercounts a loop.
+ * @param status Status is the run's outcome, and there are exactly two: \"ok\" when the model answered, \"error\" when it did not. It is written when the run ends, so no row here is in flight.
+ * @param toolCalls ToolCalls is how many tool dispatches the run made — a count of ACTIONS, which is a different measurement from the token counts above and from the turns a build reports. Zero is a run that answered straight from the model.
+ * @param traceId TraceID is the trace this run IS, so the record and its spans are one thing to move between: it opens the waterfall for THIS run rather than a search that lands near it. Empty when the process had no tracer, never a fabricated id.
  */
 
 
 data class AgentRunView (
 
+    /* Actor is the \"org/sub\" identity the run was executed and billed AS. Empty means there was no PERSON — a schedule or a service token — which is a different fact from \"we do not know\", and the difference is what an audit asks about. */
     @SerializedName("actor")
     val actor: kotlin.String? = null,
 
@@ -47,39 +48,51 @@ data class AgentRunView (
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* CompletionTokens is the same measurement for what the model produced, on the same final completion. It is a count of TOKENS, not of turns and not of money. */
     @SerializedName("completionTokens")
     val completionTokens: kotlin.Int? = null,
 
+    /* CreatedAt is when the run finished, RFC 3339 in UTC to the second — the duration above already says how long it had been going. */
     @SerializedName("createdAt")
     val createdAt: kotlin.String? = null,
 
+    /* DurationMs is wall-clock milliseconds around the completion, including a failover's retries. It is time SPENT, not time billed. */
     @SerializedName("durationMs")
     val durationMs: kotlin.Int? = null,
 
+    /* Error is why an \"ok\"-less run failed, as the failing call reported it. Empty on every successful run. */
     @SerializedName("error")
     val error: kotlin.String? = null,
 
+    /* ID is the run's handle, minted as \"run_\" + 32 hex characters. It is the key the metering ledger records this run's per-round token spend under, so it is how a bill and a run are joined. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Input is the text the run was given, verbatim. */
     @SerializedName("input")
     val input: kotlin.String? = null,
 
+    /* Model is the model that actually SERVED this run, which is not always the one the agent is defined on — a failover records what answered. Normalized to our name on the way out; the stored row is left exactly as it happened, because a run is a record and rewriting it would be worse than the name it carries. */
     @SerializedName("model")
     val model: kotlin.String? = null,
 
+    /* Output is what the model produced. Empty on an error run, and empty is also a legitimate answer from a run that succeeded with nothing to say — Status is what separates those. */
     @SerializedName("output")
     val output: kotlin.String? = null,
 
+    /* PromptTokens is what the gateway reported for the run's FINAL completion, and only that one — a tool loop's earlier rounds are the metering ledger's account, joined by this run's id. Reading it as the run's total spend undercounts a loop. */
     @SerializedName("promptTokens")
     val promptTokens: kotlin.Int? = null,
 
+    /* Status is the run's outcome, and there are exactly two: \"ok\" when the model answered, \"error\" when it did not. It is written when the run ends, so no row here is in flight. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* ToolCalls is how many tool dispatches the run made — a count of ACTIONS, which is a different measurement from the token counts above and from the turns a build reports. Zero is a run that answered straight from the model. */
     @SerializedName("toolCalls")
     val toolCalls: kotlin.Int? = null,
 
+    /* TraceID is the trace this run IS, so the record and its spans are one thing to move between: it opens the waterfall for THIS run rather than a search that lands near it. Empty when the process had no tracer, never a fabricated id. */
     @SerializedName("traceId")
     val traceId: kotlin.String? = null
 

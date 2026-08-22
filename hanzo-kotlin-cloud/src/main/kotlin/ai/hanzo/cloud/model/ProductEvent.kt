@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
  * @param properties 
  * @param sessionId SessionID groups the events of one visit. Omitted when the client sent none.
  * @param timestamp Timestamp is when the event happened, RFC3339 UTC.
- * @param type Type is the row's kind — the plane's discriminator: page, track, identify or group. (Errors are not here at all: they land on event.error and are read at /v1/errors.)
+ * @param type Type is the row's kind — the plane's discriminator: page, track, identify or group. (Errors are not here at all: they land on event.error and are read at /v1/event/errors.)
  * @param url URL is the full page address the event fired on. Omitted when absent.
  */
 
@@ -67,7 +67,7 @@ data class ProductEvent (
     @SerializedName("timestamp")
     val timestamp: kotlin.String? = null,
 
-    /* Type is the row's kind — the plane's discriminator: page, track, identify or group. (Errors are not here at all: they land on event.error and are read at /v1/errors.) */
+    /* Type is the row's kind — the plane's discriminator: page, track, identify or group. (Errors are not here at all: they land on event.error and are read at /v1/event/errors.) */
     @SerializedName("type")
     val type: kotlin.String? = null,
 

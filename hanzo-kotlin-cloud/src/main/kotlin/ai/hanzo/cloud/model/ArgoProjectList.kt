@@ -23,16 +23,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param items 
- * @param metadata 
+ * @param items Items is the projects visible to the caller — its own organization's, or every organization's for a SuperAdmin. A project named \"default\" is always present and is prepended when IAM does not carry one, because that is what an application with no project label groups under.
+ * @param metadata Metadata is the list envelope the SPA expects; it carries no resume point.
  */
 
 
 data class ArgoProjectList (
 
+    /* Items is the projects visible to the caller — its own organization's, or every organization's for a SuperAdmin. A project named \"default\" is always present and is prepended when IAM does not carry one, because that is what an application with no project label groups under. */
     @SerializedName("items")
     val items: kotlin.collections.List<ArgoProject>? = null,
 
+    /* Metadata is the list envelope the SPA expects; it carries no resume point. */
     @SerializedName("metadata")
     val metadata: ArgoListMeta? = null
 

@@ -22,18 +22,19 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param dataset 
+ * @param dataset Dataset is the dataset the page was read from.
  * @param digest Digest is the version's fingerprint. An exported page that did not carry it would be bytes with no way to say which dataset they are.
  * @param dims Dims names what each coordinate of Point means, in Point's own order.
- * @param limit 
- * @param offset Offset and Limit are the page actually served, which may be smaller than the one asked for.
+ * @param limit Limit is the page size actually served: the one asked for, clamped to the plane's own bound of 5000. Fewer rows than Limit means the version ended.
+ * @param offset Offset is where this page starts in the version's own row order, which is by row id and therefore stable forever.
  * @param rows Rows is the page. Never null.
- * @param version 
+ * @param version Version is which published version it was read from — the one asked for, or the newest published one when the request named none.
  */
 
 
 data class RiskDatasetRows (
 
+    /* Dataset is the dataset the page was read from. */
     @SerializedName("dataset")
     val dataset: kotlin.String? = null,
 
@@ -45,10 +46,11 @@ data class RiskDatasetRows (
     @SerializedName("dims")
     val dims: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Limit is the page size actually served: the one asked for, clamped to the plane's own bound of 5000. Fewer rows than Limit means the version ended. */
     @SerializedName("limit")
     val limit: kotlin.Int? = null,
 
-    /* Offset and Limit are the page actually served, which may be smaller than the one asked for. */
+    /* Offset is where this page starts in the version's own row order, which is by row id and therefore stable forever. */
     @SerializedName("offset")
     val offset: kotlin.Int? = null,
 
@@ -56,6 +58,7 @@ data class RiskDatasetRows (
     @SerializedName("rows")
     val rows: kotlin.collections.List<RiskDatasetRow>? = null,
 
+    /* Version is which published version it was read from — the one asked for, or the newest published one when the request named none. */
     @SerializedName("version")
     val version: kotlin.Int? = null
 

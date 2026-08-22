@@ -22,16 +22,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param count 
- * @param repos 
+ * @param count Count is how many hits Repos carries. It is that array's length, NOT GitHub's total_count, so it never exceeds limit and says nothing about how many more repositories matched.
+ * @param repos Repos are the matching repositories in GitHub's own relevance order, capped at limit. Always an array, never null.
  */
 
 
 data class GithubSearchOut (
 
+    /* Count is how many hits Repos carries. It is that array's length, NOT GitHub's total_count, so it never exceeds limit and says nothing about how many more repositories matched. */
     @SerializedName("count")
     val count: kotlin.Int? = null,
 
+    /* Repos are the matching repositories in GitHub's own relevance order, capped at limit. Always an array, never null. */
     @SerializedName("repos")
     val repos: kotlin.collections.List<GithubSearchHit>? = null
 

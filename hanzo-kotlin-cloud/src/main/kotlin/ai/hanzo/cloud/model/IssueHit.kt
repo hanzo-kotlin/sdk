@@ -21,48 +21,58 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param assignee 
- * @param kind 
- * @param number 
- * @param priority 
- * @param project 
- * @param repo 
- * @param source 
- * @param status 
- * @param title 
- * @param url 
+ * @param assignee Assignee is who holds the work. EMPTY MEANS UNHELD, which is what makes the issue claimable: claiming one already held by someone else is refused with 409 rather than quietly taken.
+ * @param kind Kind is what the row IS: issue, pr or epic.
+ * @param number Number is the issue's number on that board, from 1 and monotonic there. Unique per board, never across the org — so it addresses an issue only together with Project.
+ * @param priority Priority is urgent, high, medium, low or none. Never empty — an unset priority is the value \"none\".
+ * @param project Project is the board key the issue is on. It and Number are the issue's address in every other route on this surface, which is why a hit carries it.
+ * @param repo Repo is the git repository the issue is bound to, empty when it is not repo-bound.
+ * @param source Source is which surface opened it: team, git, crm, helpdesk, cms or agent. \"git\" is how the mirrored forge and GitHub rows are spelled.
+ * @param status Status is the board column: backlog, todo, in_progress, done or canceled. Claiming moves backlog and todo to in_progress and leaves the other three where they are.
+ * @param title Title is the issue's one-line summary — what the q filter matched, along with the description.
+ * @param url URL is the row's external anchor — its extRef — which is a link only when the feeder sent one. A mirrored GitHub issue carries \"github:owner/repo#123\" and an agent's PR row carries the pushed branch. Empty for a row opened here.
  */
 
 
 data class IssueHit (
 
+    /* Assignee is who holds the work. EMPTY MEANS UNHELD, which is what makes the issue claimable: claiming one already held by someone else is refused with 409 rather than quietly taken. */
     @SerializedName("assignee")
     val assignee: kotlin.String? = null,
 
+    /* Kind is what the row IS: issue, pr or epic. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Number is the issue's number on that board, from 1 and monotonic there. Unique per board, never across the org — so it addresses an issue only together with Project. */
     @SerializedName("number")
     val number: kotlin.Int? = null,
 
+    /* Priority is urgent, high, medium, low or none. Never empty — an unset priority is the value \"none\". */
     @SerializedName("priority")
     val priority: kotlin.String? = null,
 
+    /* Project is the board key the issue is on. It and Number are the issue's address in every other route on this surface, which is why a hit carries it. */
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Repo is the git repository the issue is bound to, empty when it is not repo-bound. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* Source is which surface opened it: team, git, crm, helpdesk, cms or agent. \"git\" is how the mirrored forge and GitHub rows are spelled. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Status is the board column: backlog, todo, in_progress, done or canceled. Claiming moves backlog and todo to in_progress and leaves the other three where they are. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Title is the issue's one-line summary — what the q filter matched, along with the description. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* URL is the row's external anchor — its extRef — which is a link only when the feeder sent one. A mirrored GitHub issue carries \"github:owner/repo#123\" and an agent's PR row carries the pushed branch. Empty for a row opened here. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

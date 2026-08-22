@@ -22,24 +22,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param channels 
- * @param externalIds 
- * @param results 
- * @param status 
+ * @param channels Channels is the channel list read off the content document — integration ids or provider names, as the item declares them. Empty when the item names none, which targets every connected, enabled channel. It is what was ASKED for; Results is what happened.
+ * @param externalIds ExternalIDs maps channel id → the post id that channel returned, merged with everything earlier publishes recorded. Successes only, and it is the idempotency ledger: a channel named here is skipped by every later publish of this item, so the map only ever grows.
+ * @param results Results is the outcome per channel — which went out, which did not and why — covering the whole fan-out including failures, so partial success is never flattened into one verdict. A channel the org has not connected appears here as failed with \"channel not connected\".
+ * @param status Status is the ONE headline, drawn from: \"distributed\" (something is on record and went out now), \"scheduled\" (same, handed to the channel's own scheduler for later), \"failed\" (nothing is on record — this fan-out missed entirely and no earlier one landed), \"in_progress\" (another publisher holds the item, so this call posted NOTHING and the caller retries), and \"not_configured\" (no distribution edge is wired; a transition records it instead of failing). A partial fan-out is \"distributed\"/\"scheduled\", never \"failed\" — the per-channel truth is in Results.
  */
 
 
 data class PublishResult (
 
+    /* Channels is the channel list read off the content document — integration ids or provider names, as the item declares them. Empty when the item names none, which targets every connected, enabled channel. It is what was ASKED for; Results is what happened. */
     @SerializedName("channels")
     val channels: kotlin.collections.List<kotlin.String>? = null,
 
+    /* ExternalIDs maps channel id → the post id that channel returned, merged with everything earlier publishes recorded. Successes only, and it is the idempotency ledger: a channel named here is skipped by every later publish of this item, so the map only ever grows. */
     @SerializedName("externalIds")
     val externalIds: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
 
+    /* Results is the outcome per channel — which went out, which did not and why — covering the whole fan-out including failures, so partial success is never flattened into one verdict. A channel the org has not connected appears here as failed with \"channel not connected\". */
     @SerializedName("results")
     val results: kotlin.collections.List<ChannelResult>? = null,
 
+    /* Status is the ONE headline, drawn from: \"distributed\" (something is on record and went out now), \"scheduled\" (same, handed to the channel's own scheduler for later), \"failed\" (nothing is on record — this fan-out missed entirely and no earlier one landed), \"in_progress\" (another publisher holds the item, so this call posted NOTHING and the caller retries), and \"not_configured\" (no distribution edge is wired; a transition records it instead of failing). A partial fan-out is \"distributed\"/\"scheduled\", never \"failed\" — the per-channel truth is in Results. */
     @SerializedName("status")
     val status: kotlin.String? = null
 

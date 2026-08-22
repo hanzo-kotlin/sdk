@@ -22,16 +22,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param preview 
- * @param production 
+ * @param preview Preview is the config every branch build other than the production branch runs under. It is a SEPARATE set of bindings and variables, which is what lets a preview point at test data.
+ * @param production Production is the config the production branch builds under.
  */
 
 
 data class PagesDeploymentConfigs (
 
+    /* Preview is the config every branch build other than the production branch runs under. It is a SEPARATE set of bindings and variables, which is what lets a preview point at test data. */
     @SerializedName("preview")
     val preview: PagesDeploymentConfig? = null,
 
+    /* Production is the config the production branch builds under. */
     @SerializedName("production")
     val production: PagesDeploymentConfig? = null
 

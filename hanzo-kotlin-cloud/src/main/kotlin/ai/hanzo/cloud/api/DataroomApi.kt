@@ -32,6 +32,17 @@ import ai.hanzo.cloud.model.DataroomRoomDetailOne
 import ai.hanzo.cloud.model.DataroomRoomOne
 import ai.hanzo.cloud.model.DataroomRooms
 import ai.hanzo.cloud.model.DataroomStats
+import ai.hanzo.cloud.model.TrustAsk
+import ai.hanzo.cloud.model.TrustAsked
+import ai.hanzo.cloud.model.TrustDecision
+import ai.hanzo.cloud.model.TrustDesk
+import ai.hanzo.cloud.model.TrustEdit
+import ai.hanzo.cloud.model.TrustGranted
+import ai.hanzo.cloud.model.TrustItemView
+import ai.hanzo.cloud.model.TrustPage
+import ai.hanzo.cloud.model.TrustPublish
+import ai.hanzo.cloud.model.TrustRefused
+import ai.hanzo.cloud.model.TrustSettings
 
 import com.google.gson.annotations.SerializedName
 
@@ -697,6 +708,222 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
+     * GET /v1/dataroom/trust
+     * Answers the caller org&#39;s OWN trust centre: its settings, every item it holds in both tiers, the requests waiting on it, and the grants it has made.
+     * Answers the caller org&#39;s OWN trust centre: its settings, every item it holds in both tiers, the requests waiting on it, and the grants it has made.  The org is the caller&#39;s, taken from the validated bearer and from nothing else, so this op cannot be pointed at another tenant — there is no field for one. An org that has never opened a centre reads back an empty one rather than an error, because having no trust centre is an ordinary state and this is the read that tells you so.
+     * @return TrustDesk
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getDataroomTrust() : TrustDesk {
+        val localVarResponse = getDataroomTrustWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrustDesk
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/dataroom/trust
+     * Answers the caller org&#39;s OWN trust centre: its settings, every item it holds in both tiers, the requests waiting on it, and the grants it has made.
+     * Answers the caller org&#39;s OWN trust centre: its settings, every item it holds in both tiers, the requests waiting on it, and the grants it has made.  The org is the caller&#39;s, taken from the validated bearer and from nothing else, so this op cannot be pointed at another tenant — there is no field for one. An org that has never opened a centre reads back an empty one rather than an error, because having no trust centre is an ordinary state and this is the read that tells you so.
+     * @return ApiResponse<TrustDesk?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getDataroomTrustWithHttpInfo() : ApiResponse<TrustDesk?> {
+        val localVariableConfig = getDataroomTrustRequestConfig()
+
+        return request<Unit, TrustDesk>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getDataroomTrust
+     *
+     * @return RequestConfig
+     */
+    fun getDataroomTrustRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/dataroom/trust",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/dataroom/trust/center/{slug}
+     * Answers an org&#39;s public trust centre: its name, the text a party must accept to ask for a document, and every item it publishes.
+     * Answers an org&#39;s public trust centre: its name, the text a party must accept to ask for a document, and every item it publishes.  An item is either available NOW — the things the org states itself, its policies, its filled questionnaires, its subprocessor list, its knowledge base — or available ON REQUEST, which is everything an independent auditor put their name to. Both are listed by name and kind, so a reader can see WHAT exists before asking for it; only the second withholds the content.  No principal is involved and none is accepted: the org is resolved from the address, which answers only for a centre its owner has published. An address nobody publishes at is not found, the same answer an unpublished one gets.
+     * @param slug Slug is the centre&#39;s public address. It resolves only for an org that has published; anything else is not found, so this cannot be used to learn which orgs exist.
+     * @return TrustPage
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getDataroomTrustCenterBySlug(slug: kotlin.String) : TrustPage {
+        val localVarResponse = getDataroomTrustCenterBySlugWithHttpInfo(slug = slug)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrustPage
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/dataroom/trust/center/{slug}
+     * Answers an org&#39;s public trust centre: its name, the text a party must accept to ask for a document, and every item it publishes.
+     * Answers an org&#39;s public trust centre: its name, the text a party must accept to ask for a document, and every item it publishes.  An item is either available NOW — the things the org states itself, its policies, its filled questionnaires, its subprocessor list, its knowledge base — or available ON REQUEST, which is everything an independent auditor put their name to. Both are listed by name and kind, so a reader can see WHAT exists before asking for it; only the second withholds the content.  No principal is involved and none is accepted: the org is resolved from the address, which answers only for a centre its owner has published. An address nobody publishes at is not found, the same answer an unpublished one gets.
+     * @param slug Slug is the centre&#39;s public address. It resolves only for an org that has published; anything else is not found, so this cannot be used to learn which orgs exist.
+     * @return ApiResponse<TrustPage?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getDataroomTrustCenterBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<TrustPage?> {
+        val localVariableConfig = getDataroomTrustCenterBySlugRequestConfig(slug = slug)
+
+        return request<Unit, TrustPage>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getDataroomTrustCenterBySlug
+     *
+     * @param slug Slug is the centre&#39;s public address. It resolves only for an org that has published; anything else is not found, so this cannot be used to learn which orgs exist.
+     * @return RequestConfig
+     */
+    fun getDataroomTrustCenterBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/dataroom/trust/center/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/dataroom/trust/center/{slug}/file/{item}
+     * Read a public trust-centre item&#39;s bytes
+     * Streams the file behind an item a trust centre publishes openly — a policy, a filled questionnaire, a knowledge-base attachment — under its recorded content type.  No principal and no link: these are the things an org states about itself, so they are served to anyone who asks. The narrowing is in the lookup rather than in a check: the item must be public, must not be retired, and must belong to a centre its owner has published, so an item released only on request is NOT FOUND here rather than refused — the same answer an id that never existed gets, which is what stops this reporting what the released-on-request tier holds.  Bytes that cannot be fetched from object storage are 502, never a truncated file.
+     * @param slug 
+     * @param item 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getDataroomTrustCenterBySlugFileByItem(slug: kotlin.String, item: kotlin.String) : Unit {
+        val localVarResponse = getDataroomTrustCenterBySlugFileByItemWithHttpInfo(slug = slug, item = item)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/dataroom/trust/center/{slug}/file/{item}
+     * Read a public trust-centre item&#39;s bytes
+     * Streams the file behind an item a trust centre publishes openly — a policy, a filled questionnaire, a knowledge-base attachment — under its recorded content type.  No principal and no link: these are the things an org states about itself, so they are served to anyone who asks. The narrowing is in the lookup rather than in a check: the item must be public, must not be retired, and must belong to a centre its owner has published, so an item released only on request is NOT FOUND here rather than refused — the same answer an id that never existed gets, which is what stops this reporting what the released-on-request tier holds.  Bytes that cannot be fetched from object storage are 502, never a truncated file.
+     * @param slug 
+     * @param item 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getDataroomTrustCenterBySlugFileByItemWithHttpInfo(slug: kotlin.String, item: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getDataroomTrustCenterBySlugFileByItemRequestConfig(slug = slug, item = item)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getDataroomTrustCenterBySlugFileByItem
+     *
+     * @param slug 
+     * @param item 
+     * @return RequestConfig
+     */
+    fun getDataroomTrustCenterBySlugFileByItemRequestConfig(slug: kotlin.String, item: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/dataroom/trust/center/{slug}/file/{item}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"item"+"}", encodeURIComponent(item.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/dataroom/view/{linkId}
      * What a share link&#39;s visitor sees before authenticating
      * Answers the pre-auth face of a link to anyone holding its id: name and type, which gates apply (whether an address is required, whether a password is set), whether download is permitted, whether it has expired, and the name and description of the room behind it — or, for a single-document link, that document&#39;s name and page count.  No principal is involved: the owning org is resolved from the link id through dataroom&#39;s one cross-tenant routing table, and an unknown or archived link is a 404.  It is metadata only — a room&#39;s document list and every file stay behind the authenticate step. An expired link is REPORTED as expired here rather than refused, so a visitor learns why the next step will fail; nothing about the password beyond its existence is disclosed.
@@ -832,6 +1059,83 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/view/{linkId}/document/{documentId}/file".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())).replace("{"+"documentId"+"}", encodeURIComponent(documentId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/dataroom/trust/artifacts/{id}
+     * Amend changes an item on the caller org&#39;s trust centre — replace its file with a newer edition, move it between public and gated, rewrite what it says, or retire it — and answers with the item as it now stands.
+     * Amend changes an item on the caller org&#39;s trust centre — replace its file with a newer edition, move it between public and gated, rewrite what it says, or retire it — and answers with the item as it now stands.  Retiring is the withdrawal: the item leaves the public centre immediately and can no longer be granted, while grants already made over it stand, because a release that happened is part of the record and un-happening it in the record would be a lie. Restoring is the same call with retired false.  Moving an item an independent auditor signed to the public tier is refused, and refused by the database rather than only here. Only an admin of the org may call it, and the item is resolved in that org&#39;s own store, so another org&#39;s id is not found.
+     * @param id ID is the item to change, taken from the path.
+     * @param trustEdit 
+     * @return TrustItemView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchDataroomTrustArtifactsById(id: kotlin.String, trustEdit: TrustEdit) : TrustItemView {
+        val localVarResponse = patchDataroomTrustArtifactsByIdWithHttpInfo(id = id, trustEdit = trustEdit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrustItemView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/dataroom/trust/artifacts/{id}
+     * Amend changes an item on the caller org&#39;s trust centre — replace its file with a newer edition, move it between public and gated, rewrite what it says, or retire it — and answers with the item as it now stands.
+     * Amend changes an item on the caller org&#39;s trust centre — replace its file with a newer edition, move it between public and gated, rewrite what it says, or retire it — and answers with the item as it now stands.  Retiring is the withdrawal: the item leaves the public centre immediately and can no longer be granted, while grants already made over it stand, because a release that happened is part of the record and un-happening it in the record would be a lie. Restoring is the same call with retired false.  Moving an item an independent auditor signed to the public tier is refused, and refused by the database rather than only here. Only an admin of the org may call it, and the item is resolved in that org&#39;s own store, so another org&#39;s id is not found.
+     * @param id ID is the item to change, taken from the path.
+     * @param trustEdit 
+     * @return ApiResponse<TrustItemView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchDataroomTrustArtifactsByIdWithHttpInfo(id: kotlin.String, trustEdit: TrustEdit) : ApiResponse<TrustItemView?> {
+        val localVariableConfig = patchDataroomTrustArtifactsByIdRequestConfig(id = id, trustEdit = trustEdit)
+
+        return request<TrustEdit, TrustItemView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchDataroomTrustArtifactsById
+     *
+     * @param id ID is the item to change, taken from the path.
+     * @param trustEdit 
+     * @return RequestConfig
+     */
+    fun patchDataroomTrustArtifactsByIdRequestConfig(id: kotlin.String, trustEdit: TrustEdit) : RequestConfig<TrustEdit> {
+        val localVariableBody = trustEdit
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/dataroom/trust/artifacts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1132,6 +1436,311 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
+     * POST /v1/dataroom/trust/artifacts
+     * Publish puts an item on the caller org&#39;s trust centre and answers with it.
+     * Publish puts an item on the caller org&#39;s trust centre and answers with it.  The item is GATED unless it says otherwise, so a kind nobody has thought of yet arrives private and someone has to release it deliberately — that default is what keeps an auditor&#39;s report from becoming readable because a field went unset. An item whose attester is \&quot;auditor\&quot; cannot be public at all: the database refuses the pair, so no path through this API can publish one.  A file is optional and is uploaded FIRST, through POST /v1/dataroom/documents, then named here — the data room is the one place bytes enter, so a trust centre document is an ordinary data-room document and inherits its storage, its grants and its page-by-page access record. A gated item that has a file is added to the org&#39;s release room, which is what lets a party be granted the whole gated tier in one link.  Only an admin of the org may call it.
+     * @param trustPublish 
+     * @return TrustItemView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postDataroomTrustArtifacts(trustPublish: TrustPublish) : TrustItemView {
+        val localVarResponse = postDataroomTrustArtifactsWithHttpInfo(trustPublish = trustPublish)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrustItemView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/dataroom/trust/artifacts
+     * Publish puts an item on the caller org&#39;s trust centre and answers with it.
+     * Publish puts an item on the caller org&#39;s trust centre and answers with it.  The item is GATED unless it says otherwise, so a kind nobody has thought of yet arrives private and someone has to release it deliberately — that default is what keeps an auditor&#39;s report from becoming readable because a field went unset. An item whose attester is \&quot;auditor\&quot; cannot be public at all: the database refuses the pair, so no path through this API can publish one.  A file is optional and is uploaded FIRST, through POST /v1/dataroom/documents, then named here — the data room is the one place bytes enter, so a trust centre document is an ordinary data-room document and inherits its storage, its grants and its page-by-page access record. A gated item that has a file is added to the org&#39;s release room, which is what lets a party be granted the whole gated tier in one link.  Only an admin of the org may call it.
+     * @param trustPublish 
+     * @return ApiResponse<TrustItemView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postDataroomTrustArtifactsWithHttpInfo(trustPublish: TrustPublish) : ApiResponse<TrustItemView?> {
+        val localVariableConfig = postDataroomTrustArtifactsRequestConfig(trustPublish = trustPublish)
+
+        return request<TrustPublish, TrustItemView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postDataroomTrustArtifacts
+     *
+     * @param trustPublish 
+     * @return RequestConfig
+     */
+    fun postDataroomTrustArtifactsRequestConfig(trustPublish: TrustPublish) : RequestConfig<TrustPublish> {
+        val localVariableBody = trustPublish
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/dataroom/trust/artifacts",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/dataroom/trust/center/{slug}/requests
+     * Records a request to read what an independent auditor signed, and answers with its id.
+     * Records a request to read what an independent auditor signed, and answers with its id.  The org that owns the centre decides. Nothing is released here and no link is minted: this writes the ask down, which is the whole promise the form makes. The write is the answer — a request that could not be stored is an error, never a receipt, so a form can never appear to have been sent and be gone.  &#x60;email&#x60; is required and is the ONLY address the eventual grant will admit, so an address the asker cannot read is an ask that cannot be answered. Where the centre states an NDA, &#x60;accept&#x60; must be true and the text in force is recorded verbatim against the request.  Asking twice for the same thing from the same address is the SAME ask: the second answers with the first&#39;s id rather than opening a second row, which is also what keeps an anonymous door from filling a tenant&#39;s store.
+     * @param slug Slug is the centre&#39;s public address, taken from the path.
+     * @param trustAsk 
+     * @return TrustAsked
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postDataroomTrustCenterBySlugRequests(slug: kotlin.String, trustAsk: TrustAsk) : TrustAsked {
+        val localVarResponse = postDataroomTrustCenterBySlugRequestsWithHttpInfo(slug = slug, trustAsk = trustAsk)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrustAsked
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/dataroom/trust/center/{slug}/requests
+     * Records a request to read what an independent auditor signed, and answers with its id.
+     * Records a request to read what an independent auditor signed, and answers with its id.  The org that owns the centre decides. Nothing is released here and no link is minted: this writes the ask down, which is the whole promise the form makes. The write is the answer — a request that could not be stored is an error, never a receipt, so a form can never appear to have been sent and be gone.  &#x60;email&#x60; is required and is the ONLY address the eventual grant will admit, so an address the asker cannot read is an ask that cannot be answered. Where the centre states an NDA, &#x60;accept&#x60; must be true and the text in force is recorded verbatim against the request.  Asking twice for the same thing from the same address is the SAME ask: the second answers with the first&#39;s id rather than opening a second row, which is also what keeps an anonymous door from filling a tenant&#39;s store.
+     * @param slug Slug is the centre&#39;s public address, taken from the path.
+     * @param trustAsk 
+     * @return ApiResponse<TrustAsked?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postDataroomTrustCenterBySlugRequestsWithHttpInfo(slug: kotlin.String, trustAsk: TrustAsk) : ApiResponse<TrustAsked?> {
+        val localVariableConfig = postDataroomTrustCenterBySlugRequestsRequestConfig(slug = slug, trustAsk = trustAsk)
+
+        return request<TrustAsk, TrustAsked>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postDataroomTrustCenterBySlugRequests
+     *
+     * @param slug Slug is the centre&#39;s public address, taken from the path.
+     * @param trustAsk 
+     * @return RequestConfig
+     */
+    fun postDataroomTrustCenterBySlugRequestsRequestConfig(slug: kotlin.String, trustAsk: TrustAsk) : RequestConfig<TrustAsk> {
+        val localVariableBody = trustAsk
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/dataroom/trust/center/{slug}/requests".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/dataroom/trust/requests/{id}/grant
+     * Grant answers a request by opening access: it mints a share link over what was asked for, addressed to the address that asked and closing at expiry, records the decision, and mails the asker.
+     * Grant answers a request by opening access: it mints a share link over what was asked for, addressed to the address that asked and closing at expiry, records the decision, and mails the asker.  The link is NEVER a public URL. It carries the asker&#39;s address on its allow list, so forwarding it to somebody else does not open it, and it expires. What the party then does with it — which document, which page, for how long — is recorded by the data room&#39;s own view tracking, which is where the access record for this release lives; there is no second log.  A request that was already answered is refused rather than answered twice, so a second click cannot mint a second link. Only an admin of the org may call it, and the request is resolved in that org&#39;s own store, so another org&#39;s request id is not found — which is also what stops one org deciding another&#39;s queue.  Mail is best effort and the grant does not depend on it: a deployment that sends no mail still records the grant and says so in &#x60;delivery&#x60;, so the approver knows to pass the address on themselves.
+     * @param id ID is the request to answer, taken from the path.
+     * @param trustDecision 
+     * @return TrustGranted
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postDataroomTrustRequestsByIdGrant(id: kotlin.String, trustDecision: TrustDecision) : TrustGranted {
+        val localVarResponse = postDataroomTrustRequestsByIdGrantWithHttpInfo(id = id, trustDecision = trustDecision)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrustGranted
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/dataroom/trust/requests/{id}/grant
+     * Grant answers a request by opening access: it mints a share link over what was asked for, addressed to the address that asked and closing at expiry, records the decision, and mails the asker.
+     * Grant answers a request by opening access: it mints a share link over what was asked for, addressed to the address that asked and closing at expiry, records the decision, and mails the asker.  The link is NEVER a public URL. It carries the asker&#39;s address on its allow list, so forwarding it to somebody else does not open it, and it expires. What the party then does with it — which document, which page, for how long — is recorded by the data room&#39;s own view tracking, which is where the access record for this release lives; there is no second log.  A request that was already answered is refused rather than answered twice, so a second click cannot mint a second link. Only an admin of the org may call it, and the request is resolved in that org&#39;s own store, so another org&#39;s request id is not found — which is also what stops one org deciding another&#39;s queue.  Mail is best effort and the grant does not depend on it: a deployment that sends no mail still records the grant and says so in &#x60;delivery&#x60;, so the approver knows to pass the address on themselves.
+     * @param id ID is the request to answer, taken from the path.
+     * @param trustDecision 
+     * @return ApiResponse<TrustGranted?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postDataroomTrustRequestsByIdGrantWithHttpInfo(id: kotlin.String, trustDecision: TrustDecision) : ApiResponse<TrustGranted?> {
+        val localVariableConfig = postDataroomTrustRequestsByIdGrantRequestConfig(id = id, trustDecision = trustDecision)
+
+        return request<TrustDecision, TrustGranted>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postDataroomTrustRequestsByIdGrant
+     *
+     * @param id ID is the request to answer, taken from the path.
+     * @param trustDecision 
+     * @return RequestConfig
+     */
+    fun postDataroomTrustRequestsByIdGrantRequestConfig(id: kotlin.String, trustDecision: TrustDecision) : RequestConfig<TrustDecision> {
+        val localVariableBody = trustDecision
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/dataroom/trust/requests/{id}/grant".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/dataroom/trust/requests/{id}/refuse
+     * Refuse answers a request by declining it, recording who declined and why.
+     * Refuse answers a request by declining it, recording who declined and why.  Nothing is released and no link is minted. The refusal STAYS on the record beside the ask — a request that was turned down is part of the access record exactly as one that was granted is, and deleting it would leave a queue that only ever shows the decisions somebody liked.  A request that was already answered is refused rather than answered twice. Only an admin of the org may call it, and the request is resolved in that org&#39;s own store, so another org&#39;s request id is not found.
+     * @param id ID is the request to answer, taken from the path.
+     * @param trustDecision 
+     * @return TrustRefused
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postDataroomTrustRequestsByIdRefuse(id: kotlin.String, trustDecision: TrustDecision) : TrustRefused {
+        val localVarResponse = postDataroomTrustRequestsByIdRefuseWithHttpInfo(id = id, trustDecision = trustDecision)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrustRefused
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/dataroom/trust/requests/{id}/refuse
+     * Refuse answers a request by declining it, recording who declined and why.
+     * Refuse answers a request by declining it, recording who declined and why.  Nothing is released and no link is minted. The refusal STAYS on the record beside the ask — a request that was turned down is part of the access record exactly as one that was granted is, and deleting it would leave a queue that only ever shows the decisions somebody liked.  A request that was already answered is refused rather than answered twice. Only an admin of the org may call it, and the request is resolved in that org&#39;s own store, so another org&#39;s request id is not found.
+     * @param id ID is the request to answer, taken from the path.
+     * @param trustDecision 
+     * @return ApiResponse<TrustRefused?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postDataroomTrustRequestsByIdRefuseWithHttpInfo(id: kotlin.String, trustDecision: TrustDecision) : ApiResponse<TrustRefused?> {
+        val localVariableConfig = postDataroomTrustRequestsByIdRefuseRequestConfig(id = id, trustDecision = trustDecision)
+
+        return request<TrustDecision, TrustRefused>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postDataroomTrustRequestsByIdRefuse
+     *
+     * @param id ID is the request to answer, taken from the path.
+     * @param trustDecision 
+     * @return RequestConfig
+     */
+    fun postDataroomTrustRequestsByIdRefuseRequestConfig(id: kotlin.String, trustDecision: TrustDecision) : RequestConfig<TrustDecision> {
+        val localVariableBody = trustDecision
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/dataroom/trust/requests/{id}/refuse".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * POST /v1/dataroom/view/{linkId}/authenticate
      * Pass a share link&#39;s gates and open a viewing session
      * Clears the link&#39;s access controls and answers with the viewing session — a &#x60;viewId&#x60;, whether download is permitted, and the documents behind the link — which every later viewer call is authorised by.  No principal: the visitor is whoever holds the link id, and the org is resolved from it. The gates run in a fixed order and each is a flat refusal, never a hint. An archived or unknown link is 404 and an expired one 403. A missing address on an email-protected link is 401. An address on the deny list is 403, checked BEFORE the allow list so deny always wins. An address the allow list does not admit is 403 — an EMPTY allow list admits everyone, so a link with no list enforces the email gate alone. A wrong or absent password is 401, decided against the stored bcrypt hash.  The address is taken as stated and recorded UNVERIFIED: it names a viewer for analytics and repeat visits from it reuse one viewer record, but it proves nothing about who is on the other end. A link gated only by email is openable by anyone the link reaches.
@@ -1264,6 +1873,80 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/dataroom/view/{linkId}/pageview".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/dataroom/trust
+     * SetCenter opens, publishes or withdraws the caller org&#39;s trust centre and answers with the centre as it now stands.
+     * SetCenter opens, publishes or withdraws the caller org&#39;s trust centre and answers with the centre as it now stands.  Publishing requires a name and an address, and the address must be free: another org already answering there is a conflict, never a takeover. Withdrawing closes the public door only — items, grants and the access record are untouched, so an org can go quiet and come back without losing anything.  Only an admin of the org may call it. The org is the caller&#39;s own, so there is no field naming one and no way to point this at another tenant.
+     * @param trustSettings 
+     * @return TrustDesk
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putDataroomTrust(trustSettings: TrustSettings) : TrustDesk {
+        val localVarResponse = putDataroomTrustWithHttpInfo(trustSettings = trustSettings)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrustDesk
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/dataroom/trust
+     * SetCenter opens, publishes or withdraws the caller org&#39;s trust centre and answers with the centre as it now stands.
+     * SetCenter opens, publishes or withdraws the caller org&#39;s trust centre and answers with the centre as it now stands.  Publishing requires a name and an address, and the address must be free: another org already answering there is a conflict, never a takeover. Withdrawing closes the public door only — items, grants and the access record are untouched, so an org can go quiet and come back without losing anything.  Only an admin of the org may call it. The org is the caller&#39;s own, so there is no field naming one and no way to point this at another tenant.
+     * @param trustSettings 
+     * @return ApiResponse<TrustDesk?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putDataroomTrustWithHttpInfo(trustSettings: TrustSettings) : ApiResponse<TrustDesk?> {
+        val localVariableConfig = putDataroomTrustRequestConfig(trustSettings = trustSettings)
+
+        return request<TrustSettings, TrustDesk>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putDataroomTrust
+     *
+     * @param trustSettings 
+     * @return RequestConfig
+     */
+    fun putDataroomTrustRequestConfig(trustSettings: TrustSettings) : RequestConfig<TrustSettings> {
+        val localVariableBody = trustSettings
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/dataroom/trust",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

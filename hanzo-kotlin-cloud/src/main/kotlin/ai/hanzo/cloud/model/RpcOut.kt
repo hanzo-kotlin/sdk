@@ -22,21 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param error 
+ * @param error Error is the JSON-RPC error object, present instead of Result. Its presence is the ONLY way a failure shows up here: the HTTP status stays 200, because that is what a standard JSON-RPC client parses.
  * @param id 
- * @param jsonrpc 
+ * @param jsonrpc JSONRPC is always \"2.0\". An upstream that omits it has it filled in, so a client never has to cope with a response that is missing the one field telling it which protocol it is reading.
  * @param result 
  */
 
 
 data class RpcOut (
 
+    /* Error is the JSON-RPC error object, present instead of Result. Its presence is the ONLY way a failure shows up here: the HTTP status stays 200, because that is what a standard JSON-RPC client parses. */
     @SerializedName("error")
     val error: RpcError? = null,
 
     @SerializedName("id")
     val id: kotlin.Any? = null,
 
+    /* JSONRPC is always \"2.0\". An upstream that omits it has it filled in, so a client never has to cope with a response that is missing the one field telling it which protocol it is reading. */
     @SerializedName("jsonrpc")
     val jsonrpc: kotlin.String? = null,
 

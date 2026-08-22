@@ -26,6 +26,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param accountItems 
  * @param accountMenu 
+ * @param avatar 
  * @param balanceCredit 
  * @param balanceCurrency 
  * @param countryCodes 
@@ -38,6 +39,7 @@ import com.google.gson.annotations.SerializedName
  * @param deleted 
  * @param disableSignin 
  * @param displayName 
+ * @param emoji 
  * @param enableSoftDeletion 
  * @param enableTour 
  * @param failedSigninFrozenTime 
@@ -94,6 +96,9 @@ data class IamCreateOrganizationInput (
     @SerializedName("accountMenu")
     val accountMenu: kotlin.String? = null,
 
+    @SerializedName("avatar")
+    val avatar: kotlin.String? = null,
+
     @SerializedName("balanceCredit")
     val balanceCredit: java.math.BigDecimal? = null,
 
@@ -129,6 +134,9 @@ data class IamCreateOrganizationInput (
 
     @SerializedName("displayName")
     val displayName: kotlin.String? = null,
+
+    @SerializedName("emoji")
+    val emoji: kotlin.String? = null,
 
     @SerializedName("enableSoftDeletion")
     val enableSoftDeletion: kotlin.Boolean? = null,

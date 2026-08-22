@@ -21,42 +21,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param capable voice | sms | mms | fax
- * @param country 
- * @param currency 
- * @param e164 
- * @param id 
- * @param monthly minor units, as the carrier quoted it
- * @param org 
- * @param type 
+ * @param capable Capable is what the number can carry: any of \"voice\", \"sms\", \"mms\", \"fax\". A number missing \"sms\" cannot send one no matter what this platform does.
+ * @param country Country is the ISO 3166-1 alpha-2 code the number is issued under. Numbering is national, so this is what makes a search answerable at all.
+ * @param currency Currency is the ISO 4217 code Monthly is denominated in. Without it the number beside it means nothing, so the two are always read together.
+ * @param e164 E164 is the number in E.164: a leading + and digits only, no spaces or dashes. That is what a carrier accepts and what a search result must be bought by.
+ * @param id ID is the carrier's handle for the number, and the id every route here addresses it by. It is not the number itself — see E164.
+ * @param monthly Monthly is the recurring rental in the MINOR unit of Currency (cents for USD), exactly as the carrier quoted it. It is a price, not a charge: nothing is billed by this field.
+ * @param org Org is the tenant holding the number. A search result carries none — nobody holds it yet — which is how an available number is told from a held one.
+ * @param type Type is what kind of number it is: \"local\", \"national\", \"tollfree\" or \"mobile\". It decides both price and what a carrier will let it originate.
  */
 
 
 data class Number (
 
-    /* voice | sms | mms | fax */
+    /* Capable is what the number can carry: any of \"voice\", \"sms\", \"mms\", \"fax\". A number missing \"sms\" cannot send one no matter what this platform does. */
     @SerializedName("capable")
     val capable: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Country is the ISO 3166-1 alpha-2 code the number is issued under. Numbering is national, so this is what makes a search answerable at all. */
     @SerializedName("country")
     val country: kotlin.String? = null,
 
+    /* Currency is the ISO 4217 code Monthly is denominated in. Without it the number beside it means nothing, so the two are always read together. */
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
+    /* E164 is the number in E.164: a leading + and digits only, no spaces or dashes. That is what a carrier accepts and what a search result must be bought by. */
     @SerializedName("e164")
     val e164: kotlin.String? = null,
 
+    /* ID is the carrier's handle for the number, and the id every route here addresses it by. It is not the number itself — see E164. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* minor units, as the carrier quoted it */
+    /* Monthly is the recurring rental in the MINOR unit of Currency (cents for USD), exactly as the carrier quoted it. It is a price, not a charge: nothing is billed by this field. */
     @SerializedName("monthly")
     val monthly: kotlin.Int? = null,
 
+    /* Org is the tenant holding the number. A search result carries none — nobody holds it yet — which is how an available number is told from a held one. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Type is what kind of number it is: \"local\", \"national\", \"tollfree\" or \"mobile\". It decides both price and what a carrier will let it originate. */
     @SerializedName("type")
     val type: kotlin.String? = null
 

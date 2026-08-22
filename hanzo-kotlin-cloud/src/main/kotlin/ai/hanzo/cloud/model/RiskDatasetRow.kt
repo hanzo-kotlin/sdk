@@ -23,10 +23,10 @@ import com.google.gson.annotations.SerializedName
  *
  * @param at At is the row's instant.
  * @param id ID names the row forever. It is DERIVED from the row's own subject and instant, not allocated, so two materialisations of the same fact agree on it without coordinating.
- * @param kind Kind and Subject name whose row this is.
+ * @param kind Kind is the subject kind: person, session or account.
  * @param point Point is the coordinates, in the order the version's spec names its dims.
  * @param split Split is train, val or test.
- * @param subject 
+ * @param subject Subject is the identity within that kind — whose row this is. Every row of one subject is in ONE split, decided by that subject's earliest instant, so a subject is never on both sides of a cut.
  */
 
 
@@ -40,7 +40,7 @@ data class RiskDatasetRow (
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* Kind and Subject name whose row this is. */
+    /* Kind is the subject kind: person, session or account. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
@@ -52,6 +52,7 @@ data class RiskDatasetRow (
     @SerializedName("split")
     val split: kotlin.String? = null,
 
+    /* Subject is the identity within that kind — whose row this is. Every row of one subject is in ONE split, decided by that subject's earliest instant, so a subject is never on both sides of a cut. */
     @SerializedName("subject")
     val subject: kotlin.String? = null
 

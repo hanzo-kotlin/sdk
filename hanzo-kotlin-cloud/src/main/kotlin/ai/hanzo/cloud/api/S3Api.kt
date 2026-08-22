@@ -19,10 +19,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.ProvisionRequest
-import ai.hanzo.cloud.model.ProvisionResult
-import ai.hanzo.cloud.model.ProvisionedResource
-import ai.hanzo.cloud.model.ProvisionedSummary
+import ai.hanzo.cloud.model.BucketIn
+import ai.hanzo.cloud.model.BucketItem
+import ai.hanzo.cloud.model.BucketList
+import ai.hanzo.cloud.model.ObjectList
+import ai.hanzo.cloud.model.PresignResponse
+import ai.hanzo.cloud.model.S3Health
+import ai.hanzo.cloud.model.UploadIn
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,9 +53,9 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * DELETE /v1/s3/buckets/{bucket}
-     * Delete an empty bucket
-     * Removes one of the caller&#39;s buckets, and only when it is already EMPTY — a bucket with objects in it answers 409 instead.  That refusal is deliberate rather than a limitation: this API does not cascade a delete of a tenant&#39;s objects behind a single bucket call, so emptying the bucket stays an explicit act. A bucket that does not exist is 404, and a successful delete answers 204 with no body.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
+     * Removes an EMPTY bucket and answers 204.
+     * Removes an EMPTY bucket and answers 204.  A non-empty bucket is 409 rather than a cascade: deleting a tenant&#39;s objects behind a single bucket call is not a thing this surface will do silently. A bucket the caller&#39;s org does not own is the same 404 an unknown name gives.
+     * @param bucket Bucket is the bucket&#39;s friendly name, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -81,9 +84,9 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * DELETE /v1/s3/buckets/{bucket}
-     * Delete an empty bucket
-     * Removes one of the caller&#39;s buckets, and only when it is already EMPTY — a bucket with objects in it answers 409 instead.  That refusal is deliberate rather than a limitation: this API does not cascade a delete of a tenant&#39;s objects behind a single bucket call, so emptying the bucket stays an explicit act. A bucket that does not exist is 404, and a successful delete answers 204 with no body.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
+     * Removes an EMPTY bucket and answers 204.
+     * Removes an EMPTY bucket and answers 204.  A non-empty bucket is 409 rather than a cascade: deleting a tenant&#39;s objects behind a single bucket call is not a thing this surface will do silently. A bucket the caller&#39;s org does not own is the same 404 an unknown name gives.
+     * @param bucket Bucket is the bucket&#39;s friendly name, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -100,7 +103,7 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     /**
      * To obtain the request config of the operation deleteS3BucketsByBucket
      *
-     * @param bucket 
+     * @param bucket Bucket is the bucket&#39;s friendly name, from the path.
      * @return RequestConfig
      */
     fun deleteS3BucketsByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
@@ -119,235 +122,23 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/s3/buckets/{bucket}/objects/{wildcard1}
-     * Delete one object
-     * Removes the single object at the trailing path from one of the caller&#39;s buckets and answers 204 with no body. The key is path-cleaned first, so the delete cannot reach outside the bucket it names.  It removes one object and never a prefix: a trailing path that looks like a folder deletes the placeholder at that key, not the objects beneath it.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteS3BucketsByBucketObjectsByWildcard1(bucket: kotlin.String, wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteS3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket = bucket, wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/s3/buckets/{bucket}/objects/{wildcard1}
-     * Delete one object
-     * Removes the single object at the trailing path from one of the caller&#39;s buckets and answers 204 with no body. The key is path-cleaned first, so the delete cannot reach outside the bucket it names.  It removes one object and never a prefix: a trailing path that looks like a folder deletes the placeholder at that key, not the objects beneath it.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun deleteS3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket: kotlin.String, wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteS3BucketsByBucketObjectsByWildcard1RequestConfig(bucket = bucket, wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation deleteS3BucketsByBucketObjectsByWildcard1
-     *
-     * @param bucket 
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun deleteS3BucketsByBucketObjectsByWildcard1RequestConfig(bucket: kotlin.String, wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/s3/buckets/{bucket}/objects/{wildcard1}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/s3/{name}
-     * Deletes one bucket from the shared object store and removes its metadata row.
-     * Deletes one bucket from the shared object store and removes its metadata row. Answers 204 with no body; a second call is a 404.
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteS3ByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteS3ByNameWithHttpInfo(name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/s3/{name}
-     * Deletes one bucket from the shared object store and removes its metadata row.
-     * Deletes one bucket from the shared object store and removes its metadata row. Answers 204 with no body; a second call is a 404.
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun deleteS3ByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteS3ByNameRequestConfig(name = name)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation deleteS3ByName
-     *
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return RequestConfig
-     */
-    fun deleteS3ByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/s3/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/s3
-     * Lists the caller org&#39;s object-storage buckets.
-     * Lists the caller org&#39;s object-storage buckets. A bucket lives in an already-live shared object store and is reached through the public gateway. The names here are the friendly ones the org provisioned; the physical bucket is org-namespaced underneath, which is what keeps two tenants&#39; buckets distinct.
-     * @return kotlin.collections.List<ProvisionedSummary>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getS3() : kotlin.collections.List<ProvisionedSummary> {
-        val localVarResponse = getS3WithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/s3
-     * Lists the caller org&#39;s object-storage buckets.
-     * Lists the caller org&#39;s object-storage buckets. A bucket lives in an already-live shared object store and is reached through the public gateway. The names here are the friendly ones the org provisioned; the physical bucket is org-namespaced underneath, which is what keeps two tenants&#39; buckets distinct.
-     * @return ApiResponse<kotlin.collections.List<ProvisionedSummary>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getS3WithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
-        val localVariableConfig = getS3RequestConfig()
-
-        return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getS3
-     *
-     * @return RequestConfig
-     */
-    fun getS3RequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/s3",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/s3/buckets
-     * List your org&#39;s buckets
-     * Returns the caller&#39;s own buckets under the friendly names they were created with, each with its creation time.  Another tenant&#39;s bucket is not refused, it is INVISIBLE — a bucket outside the caller&#39;s namespace is skipped during the listing rather than reported, so the operation cannot be used to discover that a name is taken elsewhere.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @return void
+     * Lists the caller org&#39;s own buckets.
+     * Lists the caller org&#39;s own buckets.  Only the caller&#39;s: every bucket is physically named under a per-org prefix and the listing strips that prefix, so a tenant sees friendly names and another tenant&#39;s buckets are not in the answer at all.
+     * @return BucketList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getS3Buckets() : Unit {
+    fun getS3Buckets() : BucketList {
         val localVarResponse = getS3BucketsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BucketList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -363,17 +154,18 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/s3/buckets
-     * List your org&#39;s buckets
-     * Returns the caller&#39;s own buckets under the friendly names they were created with, each with its creation time.  Another tenant&#39;s bucket is not refused, it is INVISIBLE — a bucket outside the caller&#39;s namespace is skipped during the listing rather than reported, so the operation cannot be used to discover that a name is taken elsewhere.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @return ApiResponse<Unit?>
+     * Lists the caller org&#39;s own buckets.
+     * Lists the caller org&#39;s own buckets.  Only the caller&#39;s: every bucket is physically named under a per-org prefix and the listing strips that prefix, so a tenant sees friendly names and another tenant&#39;s buckets are not in the answer at all.
+     * @return ApiResponse<BucketList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getS3BucketsWithHttpInfo() : ApiResponse<Unit?> {
+    fun getS3BucketsWithHttpInfo() : ApiResponse<BucketList?> {
         val localVariableConfig = getS3BucketsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, BucketList>(
             localVariableConfig
         )
     }
@@ -387,7 +179,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/s3/buckets",
@@ -400,22 +193,25 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/s3/buckets/{bucket}/objects
-     * Browse one level of a bucket
-     * Lists one folder level of a bucket: each entry&#39;s key, whether it is a folder, its size, last-modified time and ETag. &#x60;prefix&#x60; scopes the read to a sub-folder.  Keys come back RELATIVE to the requested prefix, not absolute, which is what lets a client render a breadcrumb without re-deriving it. The default is the folder view — sub-prefixes are returned as directory entries — and &#x60;recursive&#x3D;true&#x60; flattens it to every key beneath the prefix instead.  The listing is bounded at 1000 entries so a large bucket cannot exhaust memory; treat a full page as \&quot;there may be more\&quot; rather than as the whole bucket.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
-     * @return void
+     * Lists one folder level of a bucket.
+     * Lists one folder level of a bucket.  Folder-style by default: sub-prefixes come back as directory entries, which is the file-manager view. &#x60;?recursive&#x3D;true&#x60; lists every key flat under the prefix instead. Keys are RELATIVE to &#x60;?prefix&#x3D;&#x60;, and the listing is bounded so a huge bucket cannot exhaust memory — Total is what came back, not what the bucket holds.
+     * @param bucket Bucket is the bucket to list, from the path.
+     * @param prefix  (optional)
+     * @param recursive  (optional)
+     * @return ObjectList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getS3BucketsByBucketObjects(bucket: kotlin.String) : Unit {
-        val localVarResponse = getS3BucketsByBucketObjectsWithHttpInfo(bucket = bucket)
+    fun getS3BucketsByBucketObjects(bucket: kotlin.String, prefix: kotlin.String? = null, recursive: kotlin.String? = null) : ObjectList {
+        val localVarResponse = getS3BucketsByBucketObjectsWithHttpInfo(bucket = bucket, prefix = prefix, recursive = recursive)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ObjectList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -431,18 +227,21 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/s3/buckets/{bucket}/objects
-     * Browse one level of a bucket
-     * Lists one folder level of a bucket: each entry&#39;s key, whether it is a folder, its size, last-modified time and ETag. &#x60;prefix&#x60; scopes the read to a sub-folder.  Keys come back RELATIVE to the requested prefix, not absolute, which is what lets a client render a breadcrumb without re-deriving it. The default is the folder view — sub-prefixes are returned as directory entries — and &#x60;recursive&#x3D;true&#x60; flattens it to every key beneath the prefix instead.  The listing is bounded at 1000 entries so a large bucket cannot exhaust memory; treat a full page as \&quot;there may be more\&quot; rather than as the whole bucket.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
-     * @return ApiResponse<Unit?>
+     * Lists one folder level of a bucket.
+     * Lists one folder level of a bucket.  Folder-style by default: sub-prefixes come back as directory entries, which is the file-manager view. &#x60;?recursive&#x3D;true&#x60; lists every key flat under the prefix instead. Keys are RELATIVE to &#x60;?prefix&#x3D;&#x60;, and the listing is bounded so a huge bucket cannot exhaust memory — Total is what came back, not what the bucket holds.
+     * @param bucket Bucket is the bucket to list, from the path.
+     * @param prefix  (optional)
+     * @param recursive  (optional)
+     * @return ApiResponse<ObjectList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getS3BucketsByBucketObjectsWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getS3BucketsByBucketObjectsRequestConfig(bucket = bucket)
+    fun getS3BucketsByBucketObjectsWithHttpInfo(bucket: kotlin.String, prefix: kotlin.String?, recursive: kotlin.String?) : ApiResponse<ObjectList?> {
+        val localVariableConfig = getS3BucketsByBucketObjectsRequestConfig(bucket = bucket, prefix = prefix, recursive = recursive)
 
-        return request<Unit, Unit>(
+        return request<Unit, ObjectList>(
             localVariableConfig
         )
     }
@@ -450,14 +249,25 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     /**
      * To obtain the request config of the operation getS3BucketsByBucketObjects
      *
-     * @param bucket 
+     * @param bucket Bucket is the bucket to list, from the path.
+     * @param prefix  (optional)
+     * @param recursive  (optional)
      * @return RequestConfig
      */
-    fun getS3BucketsByBucketObjectsRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
+    fun getS3BucketsByBucketObjectsRequestConfig(bucket: kotlin.String, prefix: kotlin.String?, recursive: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (prefix != null) {
+                    put("prefix", listOf(prefix.toString()))
+                }
+                if (recursive != null) {
+                    put("recursive", listOf(recursive.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/s3/buckets/{bucket}/objects".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
@@ -469,168 +279,23 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/s3/buckets/{bucket}/objects/{wildcard1}
-     * Get a URL to download one object directly
-     * Returns a short-lived presigned GET URL for the object at the trailing path, with the method, the key and its remaining lifetime. As with upload, the client fetches from that URL directly and the storage credential stays on the server.  The URL carries a content disposition of attachment with the object&#39;s file name, so a browser following it downloads the object rather than rendering it in place. Signed against the public host, scoped to the one bucket and key, and good for five minutes; a deployment with no public storage endpoint answers 503.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getS3BucketsByBucketObjectsByWildcard1(bucket: kotlin.String, wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getS3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket = bucket, wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/s3/buckets/{bucket}/objects/{wildcard1}
-     * Get a URL to download one object directly
-     * Returns a short-lived presigned GET URL for the object at the trailing path, with the method, the key and its remaining lifetime. As with upload, the client fetches from that URL directly and the storage credential stays on the server.  The URL carries a content disposition of attachment with the object&#39;s file name, so a browser following it downloads the object rather than rendering it in place. Signed against the public host, scoped to the one bucket and key, and good for five minutes; a deployment with no public storage endpoint answers 503.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getS3BucketsByBucketObjectsByWildcard1WithHttpInfo(bucket: kotlin.String, wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getS3BucketsByBucketObjectsByWildcard1RequestConfig(bucket = bucket, wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getS3BucketsByBucketObjectsByWildcard1
-     *
-     * @param bucket 
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun getS3BucketsByBucketObjectsByWildcard1RequestConfig(bucket: kotlin.String, wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/s3/buckets/{bucket}/objects/{wildcard1}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/s3/{name}
-     * Returns one bucket&#39;s metadata.
-     * Returns one bucket&#39;s metadata. It carries the bucket&#39;s status and the gateway address it is reached at, and no username: the object store authenticates with a shared, out-of-band key rather than a per-bucket credential.
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ProvisionedResource
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getS3ByName(name: kotlin.String) : ProvisionedResource {
-        val localVarResponse = getS3ByNameWithHttpInfo(name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/s3/{name}
-     * Returns one bucket&#39;s metadata.
-     * Returns one bucket&#39;s metadata. It carries the bucket&#39;s status and the gateway address it is reached at, and no username: the object store authenticates with a shared, out-of-band key rather than a per-bucket credential.
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ApiResponse<ProvisionedResource?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getS3ByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
-        val localVariableConfig = getS3ByNameRequestConfig(name = name)
-
-        return request<Unit, ProvisionedResource>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getS3ByName
-     *
-     * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return RequestConfig
-     */
-    fun getS3ByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/s3/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/s3/health
-     * Whether object storage is usable here
-     * A real readiness probe rather than a liveness stub: 200 only when the storage credentials are present, and it additionally reports whether presigning is available — the capability the two URL-issuing operations need and refuse without.  An unconfigured deployment answers 503 with &#x60;ready:false&#x60; and the reason, which is the same state in which every data-plane operation here refuses. Not token-gated, so the platform can probe it without a credential, and it carries no credential, bucket or tenant detail.
-     * @return void
+     * Health reports whether this deployment can serve object storage.
+     * Health reports whether this deployment can serve object storage.  It is a REAL probe rather than a constant: 200 when admin credentials are present, so the store is reachable in principle, and 503 with the reason when they are not. It is deliberately NOT gated — liveness has to be probe-able without a token — so it is the one operation here that names no bucket and bills nothing.
+     * @return S3Health
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getS3Health() : Unit {
+    fun getS3Health() : S3Health {
         val localVarResponse = getS3HealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as S3Health
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -646,17 +311,18 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/s3/health
-     * Whether object storage is usable here
-     * A real readiness probe rather than a liveness stub: 200 only when the storage credentials are present, and it additionally reports whether presigning is available — the capability the two URL-issuing operations need and refuse without.  An unconfigured deployment answers 503 with &#x60;ready:false&#x60; and the reason, which is the same state in which every data-plane operation here refuses. Not token-gated, so the platform can probe it without a credential, and it carries no credential, bucket or tenant detail.
-     * @return ApiResponse<Unit?>
+     * Health reports whether this deployment can serve object storage.
+     * Health reports whether this deployment can serve object storage.  It is a REAL probe rather than a constant: 200 when admin credentials are present, so the store is reachable in principle, and 503 with the reason when they are not. It is deliberately NOT gated — liveness has to be probe-able without a token — so it is the one operation here that names no bucket and bills nothing.
+     * @return ApiResponse<S3Health?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getS3HealthWithHttpInfo() : ApiResponse<Unit?> {
+    fun getS3HealthWithHttpInfo() : ApiResponse<S3Health?> {
         val localVariableConfig = getS3HealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, S3Health>(
             localVariableConfig
         )
     }
@@ -670,7 +336,8 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/s3/health",
@@ -682,96 +349,24 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/s3
-     * Provision an object storage bucket for your org
-     * Creates an S3-compatible bucket inside the already-running shared object store and answers with the endpoint that reaches it.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
-     * @param provisionRequest  (optional)
-     * @return ProvisionResult
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postS3(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
-        val localVarResponse = postS3WithHttpInfo(provisionRequest = provisionRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/s3
-     * Provision an object storage bucket for your org
-     * Creates an S3-compatible bucket inside the already-running shared object store and answers with the endpoint that reaches it.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
-     * @param provisionRequest  (optional)
-     * @return ApiResponse<ProvisionResult?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postS3WithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
-        val localVariableConfig = postS3RequestConfig(provisionRequest = provisionRequest)
-
-        return request<ProvisionRequest, ProvisionResult>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postS3
-     *
-     * @param provisionRequest  (optional)
-     * @return RequestConfig
-     */
-    fun postS3RequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
-        val localVariableBody = provisionRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/s3",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /v1/s3/buckets
-     * Create a bucket in your org
-     * Creates a new bucket in the caller&#39;s own namespace and answers 201 with its friendly name and creation time.  The name is validated exactly as sent and never quietly normalised: it must match &#x60;^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$&#x60;, so a mixed-case name is a clean 400 rather than a bucket created as &#x60;photos&#x60; that the caller keeps asking for as &#x60;Photos&#x60;. A name already in use in the caller&#39;s own namespace is 409.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @return void
+     * Makes a new bucket for the caller&#39;s org and answers 201 with it.
+     * Makes a new bucket for the caller&#39;s org and answers 201 with it.  The physical name is derived from the caller&#39;s validated org, so a tenant can only ever create inside its own namespace and no request field can redirect that. A name already taken in the org is 409.
+     * @param bucketIn 
+     * @return BucketItem
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postS3Buckets() : Unit {
-        val localVarResponse = postS3BucketsWithHttpInfo()
+    fun postS3Buckets(bucketIn: BucketIn) : BucketItem {
+        val localVarResponse = postS3BucketsWithHttpInfo(bucketIn = bucketIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BucketItem
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -787,17 +382,19 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/s3/buckets
-     * Create a bucket in your org
-     * Creates a new bucket in the caller&#39;s own namespace and answers 201 with its friendly name and creation time.  The name is validated exactly as sent and never quietly normalised: it must match &#x60;^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$&#x60;, so a mixed-case name is a clean 400 rather than a bucket created as &#x60;photos&#x60; that the caller keeps asking for as &#x60;Photos&#x60;. A name already in use in the caller&#39;s own namespace is 409.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @return ApiResponse<Unit?>
+     * Makes a new bucket for the caller&#39;s org and answers 201 with it.
+     * Makes a new bucket for the caller&#39;s org and answers 201 with it.  The physical name is derived from the caller&#39;s validated org, so a tenant can only ever create inside its own namespace and no request field can redirect that. A name already taken in the org is 409.
+     * @param bucketIn 
+     * @return ApiResponse<BucketItem?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postS3BucketsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postS3BucketsRequestConfig()
+    fun postS3BucketsWithHttpInfo(bucketIn: BucketIn) : ApiResponse<BucketItem?> {
+        val localVariableConfig = postS3BucketsRequestConfig(bucketIn = bucketIn)
 
-        return request<Unit, Unit>(
+        return request<BucketIn, BucketItem>(
             localVariableConfig
         )
     }
@@ -805,13 +402,16 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     /**
      * To obtain the request config of the operation postS3Buckets
      *
+     * @param bucketIn 
      * @return RequestConfig
      */
-    fun postS3BucketsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postS3BucketsRequestConfig(bucketIn: BucketIn) : RequestConfig<BucketIn> {
+        val localVariableBody = bucketIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/s3/buckets",
@@ -824,22 +424,24 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/s3/buckets/{bucket}/objects
-     * Get a URL to upload one object directly
-     * Returns a short-lived presigned PUT URL, with the method, the cleaned key and the seconds until it expires. The client uploads to that URL DIRECTLY — the bytes never pass through this API, and the storage credential never leaves the server.  The URL is signed against the public storage host and scoped to exactly one bucket and key, and it expires five minutes after it is issued. The key is path-cleaned before signing, so a traversal cannot escape the bucket. A deployment with no public storage endpoint answers 503, because there is no host to sign a browser-followable URL against.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
-     * @return void
+     * Mints a presigned PUT URL the caller uploads to DIRECTLY.
+     * Mints a presigned PUT URL the caller uploads to DIRECTLY.  The bytes never pass through this binary and the admin credential never leaves the server: the URL is signed against the PUBLIC host, scoped to exactly this bucket and key, and expires. A deployment with no public endpoint configured cannot mint one and answers 503 rather than a URL that will not work.
+     * @param bucket Bucket is the bucket to upload into, from the path.
+     * @param uploadIn 
+     * @return PresignResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postS3BucketsByBucketObjects(bucket: kotlin.String) : Unit {
-        val localVarResponse = postS3BucketsByBucketObjectsWithHttpInfo(bucket = bucket)
+    fun postS3BucketsByBucketObjects(bucket: kotlin.String, uploadIn: UploadIn) : PresignResponse {
+        val localVarResponse = postS3BucketsByBucketObjectsWithHttpInfo(bucket = bucket, uploadIn = uploadIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PresignResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -855,18 +457,20 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/s3/buckets/{bucket}/objects
-     * Get a URL to upload one object directly
-     * Returns a short-lived presigned PUT URL, with the method, the cleaned key and the seconds until it expires. The client uploads to that URL DIRECTLY — the bytes never pass through this API, and the storage credential never leaves the server.  The URL is signed against the public storage host and scoped to exactly one bucket and key, and it expires five minutes after it is issued. The key is path-cleaned before signing, so a traversal cannot escape the bucket. A deployment with no public storage endpoint answers 503, because there is no host to sign a browser-followable URL against.  A validated principal is required, and every bucket and key is resolved inside the caller&#39;s own org: physical bucket names are derived from the org, so a tenant cannot name another&#39;s storage. The operation is billed per call — the balance is checked BEFORE anything is touched, so an unfunded org is refused with nothing done, and the debit happens only after the work succeeds. Object storage that is not configured answers 503 under this subsystem&#39;s own name rather than falling through to another.
-     * @param bucket 
-     * @return ApiResponse<Unit?>
+     * Mints a presigned PUT URL the caller uploads to DIRECTLY.
+     * Mints a presigned PUT URL the caller uploads to DIRECTLY.  The bytes never pass through this binary and the admin credential never leaves the server: the URL is signed against the PUBLIC host, scoped to exactly this bucket and key, and expires. A deployment with no public endpoint configured cannot mint one and answers 503 rather than a URL that will not work.
+     * @param bucket Bucket is the bucket to upload into, from the path.
+     * @param uploadIn 
+     * @return ApiResponse<PresignResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postS3BucketsByBucketObjectsWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postS3BucketsByBucketObjectsRequestConfig(bucket = bucket)
+    fun postS3BucketsByBucketObjectsWithHttpInfo(bucket: kotlin.String, uploadIn: UploadIn) : ApiResponse<PresignResponse?> {
+        val localVariableConfig = postS3BucketsByBucketObjectsRequestConfig(bucket = bucket, uploadIn = uploadIn)
 
-        return request<Unit, Unit>(
+        return request<UploadIn, PresignResponse>(
             localVariableConfig
         )
     }
@@ -874,14 +478,17 @@ class S3Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     /**
      * To obtain the request config of the operation postS3BucketsByBucketObjects
      *
-     * @param bucket 
+     * @param bucket Bucket is the bucket to upload into, from the path.
+     * @param uploadIn 
      * @return RequestConfig
      */
-    fun postS3BucketsByBucketObjectsRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postS3BucketsByBucketObjectsRequestConfig(bucket: kotlin.String, uploadIn: UploadIn) : RequestConfig<UploadIn> {
+        val localVariableBody = uploadIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/s3/buckets/{bucket}/objects".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),

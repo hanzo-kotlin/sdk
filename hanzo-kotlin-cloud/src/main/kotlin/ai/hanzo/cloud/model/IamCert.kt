@@ -37,7 +37,6 @@ import com.google.gson.annotations.SerializedName
  * @param id 
  * @param name 
  * @param owner 
- * @param privateKey 
  * @param provider 
  * @param scope 
  * @param type 
@@ -94,9 +93,6 @@ data class IamCert (
 
     @SerializedName("owner")
     val owner: kotlin.String? = null,
-
-    @SerializedName("privateKey")
-    val privateKey: kotlin.String? = null,
 
     @SerializedName("provider")
     val provider: kotlin.String? = null,

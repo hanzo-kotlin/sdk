@@ -19,7 +19,7 @@ package ai.hanzo.cloud.model
 import com.google.gson.annotations.SerializedName
 
 /**
- * 
+ * Repo links a git source, so pushes to it rebuild this project. Omit it for a project deployed by uploading an artifact.
  *
  * @param branch 
  * @param url 

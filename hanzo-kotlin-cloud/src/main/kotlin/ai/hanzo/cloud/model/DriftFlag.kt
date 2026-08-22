@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param kind 
- * @param message 
- * @param severity 
+ * @param kind Kind is which finding this is, one of stale, un-rolled, floating-declared, floating-running, no-release or zero-assets. It is what code matches on, and the kinds are independent — one row can carry several at once.
+ * @param message Message is the finding in words, naming the tags that produced it (\"running v1.2.3 has not rolled to declared v1.2.4\"). For display: match on Kind.
+ * @param severity Severity is this ONE finding's weight — yellow for stale and un-rolled, red for the other four. It is a constant of the kind (severityOf), never a judgement about the row, so the same kind always weighs the same.
  */
 
 
 data class DriftFlag (
 
+    /* Kind is which finding this is, one of stale, un-rolled, floating-declared, floating-running, no-release or zero-assets. It is what code matches on, and the kinds are independent — one row can carry several at once. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Message is the finding in words, naming the tags that produced it (\"running v1.2.3 has not rolled to declared v1.2.4\"). For display: match on Kind. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
+    /* Severity is this ONE finding's weight — yellow for stale and un-rolled, red for the other four. It is a constant of the kind (severityOf), never a judgement about the row, so the same kind always weighs the same. */
     @SerializedName("severity")
     val severity: kotlin.String? = null
 

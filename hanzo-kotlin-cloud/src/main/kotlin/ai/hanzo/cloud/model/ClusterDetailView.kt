@@ -32,7 +32,7 @@ import com.google.gson.annotations.SerializedName
  * @param nodeCount 
  * @param nodePools 
  * @param nodeSize 
- * @param nodes 
+ * @param nodes Nodes is every worker node in the cluster, each in the same shape the machines surface uses — a node IS a machine, addressable by its own id. This is the individual hardware behind the pool counts above.
  * @param nvidiaGpu 
  * @param region 
  * @param status 
@@ -68,6 +68,7 @@ data class ClusterDetailView (
     @SerializedName("nodeSize")
     val nodeSize: kotlin.String? = null,
 
+    /* Nodes is every worker node in the cluster, each in the same shape the machines surface uses — a node IS a machine, addressable by its own id. This is the individual hardware behind the pool counts above. */
     @SerializedName("nodes")
     val nodes: kotlin.collections.List<MachineView>? = null,
 

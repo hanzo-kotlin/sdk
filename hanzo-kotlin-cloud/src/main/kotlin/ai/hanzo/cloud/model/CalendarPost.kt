@@ -23,14 +23,14 @@ import com.google.gson.annotations.SerializedName
  *
  * @param body Body is the post text. Required.
  * @param channel Channel is the target network: x, facebook, instagram, linkedin, tiktok, youtube or threads. Required — a post must name where it goes.
- * @param createdAt CreatedAt and UpdatedAt are unix seconds, both server-assigned.
+ * @param createdAt CreatedAt is unix seconds when the post was added, server-assigned and never rewritten.
  * @param error Error is the exact reason the last publish attempt failed — the honest record behind a \"failed\" status, never a faked success.
  * @param id ID is the server-assigned post id (\"cal_\" + 128 random bits).
  * @param publishedAt PublishedAt is when the publish succeeded; 0 until it does.
  * @param scheduledAt ScheduledAt is the unix publish time; 0 leaves the post a draft, and any value makes it \"scheduled\" for the durable sweep to pick up.
  * @param status Status is draft, scheduled, published, failed or canceled. Server-owned.
  * @param title Title is the post's internal label, capped at 1024 bytes.
- * @param updatedAt 
+ * @param updatedAt UpdatedAt is unix seconds of the last write, server-assigned. The durable sweep writes too — claiming a due post, publishing it and recording a failure each bump it — so this moves without anyone editing the post.
  */
 
 
@@ -44,7 +44,7 @@ data class CalendarPost (
     @SerializedName("channel")
     val channel: kotlin.String? = null,
 
-    /* CreatedAt and UpdatedAt are unix seconds, both server-assigned. */
+    /* CreatedAt is unix seconds when the post was added, server-assigned and never rewritten. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
@@ -72,6 +72,7 @@ data class CalendarPost (
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* UpdatedAt is unix seconds of the last write, server-assigned. The durable sweep writes too — claiming a due post, publishing it and recording a failure each bump it — so this moves without anyone editing the post. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null
 

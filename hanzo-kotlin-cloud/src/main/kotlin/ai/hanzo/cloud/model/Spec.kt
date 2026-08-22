@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param arch amd64 | arm64 | ...
  * @param cpus logical cores
- * @param gpus 
+ * @param gpus GPUs is every accelerator the machine advertises, one entry each, capped at 32 on write. Empty means the probe found none — and that is the answer a Need is checked against, so a machine with no entry here clears no accelerator floor. The list is not vendor-filtered: what satisfies a job is counts and VRAM, never a brand (see Need).
  * @param memory total RAM, bytes
  * @param os linux | darwin | windows
  */
@@ -40,6 +40,7 @@ data class Spec (
     @SerializedName("cpus")
     val cpus: kotlin.Int? = null,
 
+    /* GPUs is every accelerator the machine advertises, one entry each, capped at 32 on write. Empty means the probe found none — and that is the answer a Need is checked against, so a machine with no entry here clears no accelerator floor. The list is not vendor-filtered: what satisfies a job is counts and VRAM, never a brand (see Need). */
     @SerializedName("gpus")
     val gpus: kotlin.collections.List<GPU>? = null,
 

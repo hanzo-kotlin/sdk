@@ -22,10 +22,10 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param definition 
- * @param key 
- * @param updatedAt 
- * @param updatedBy 
- * @param version 
+ * @param key Key is the flag's primary key in the caller's (org, project) store, and the name evaluation looks it up by. On a write it is taken from the URL, never from the body: the stored document's own \"key\" is forced to match.
+ * @param updatedAt UpdatedAt is when the definition was last written, RFC 3339 UTC.
+ * @param updatedBy UpdatedBy is the email of the principal who last wrote it. Empty when the write came from an in-process composer (an experiment registering its own assignment flag) rather than from a signed-in person.
+ * @param version Version is 1 when the key was created and rises by one on every overwrite. It counts writes, not content changes: re-storing an identical document bumps it.
  */
 
 
@@ -34,15 +34,19 @@ data class DefRow (
     @SerializedName("definition")
     val definition: kotlin.Any? = null,
 
+    /* Key is the flag's primary key in the caller's (org, project) store, and the name evaluation looks it up by. On a write it is taken from the URL, never from the body: the stored document's own \"key\" is forced to match. */
     @SerializedName("key")
     val key: kotlin.String? = null,
 
+    /* UpdatedAt is when the definition was last written, RFC 3339 UTC. */
     @SerializedName("updated_at")
     val updatedAt: kotlin.String? = null,
 
+    /* UpdatedBy is the email of the principal who last wrote it. Empty when the write came from an in-process composer (an experiment registering its own assignment flag) rather than from a signed-in person. */
     @SerializedName("updated_by")
     val updatedBy: kotlin.String? = null,
 
+    /* Version is 1 when the key was created and rises by one on every overwrite. It counts writes, not content changes: re-storing an identical document bumps it. */
     @SerializedName("version")
     val version: kotlin.Int? = null
 

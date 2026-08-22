@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param calls 
- * @param messages 
- * @param numbers 
+ * @param calls Calls is how many calls this org has placed or received, over its whole history — a running total, not a window.
+ * @param messages Messages is the same running total for messages.
+ * @param numbers Numbers is how many numbers this org holds right now.
  */
 
 
 data class Summary (
 
+    /* Calls is how many calls this org has placed or received, over its whole history — a running total, not a window. */
     @SerializedName("calls")
     val calls: kotlin.Int? = null,
 
+    /* Messages is the same running total for messages. */
     @SerializedName("messages")
     val messages: kotlin.Int? = null,
 
+    /* Numbers is how many numbers this org holds right now. */
     @SerializedName("numbers")
     val numbers: kotlin.Int? = null
 

@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param author 
- * @param date 
- * @param message 
- * @param signatureInfo 
- * @param tags 
+ * @param author Author is the commit author. Always absent: an App CR pins an IMAGE, so this process has no commit to read one from and will not invent one.
+ * @param date Date is when the App CR was created, RFC 3339 UTC — the only real timestamp there is here. It is NOT the date of the revision asked for.
+ * @param message Message is the revision asked for, echoed back — not a commit message. The empty revision and \"HEAD\" resolve to the image tag the CR declares (spec.image.tag), and anything longer than 256 characters is truncated to it.
+ * @param signatureInfo SignatureInfo is the GPG verification result for the revision. Always absent: nothing here verifies a signature, and an empty field says so rather than implying an unsigned commit.
+ * @param tags Tags are the git tags pointing at the revision. Always absent, for the same reason as Author.
  */
 
 
 data class ArgoRevisionMetadata (
 
+    /* Author is the commit author. Always absent: an App CR pins an IMAGE, so this process has no commit to read one from and will not invent one. */
     @SerializedName("author")
     val author: kotlin.String? = null,
 
+    /* Date is when the App CR was created, RFC 3339 UTC — the only real timestamp there is here. It is NOT the date of the revision asked for. */
     @SerializedName("date")
     val date: kotlin.String? = null,
 
+    /* Message is the revision asked for, echoed back — not a commit message. The empty revision and \"HEAD\" resolve to the image tag the CR declares (spec.image.tag), and anything longer than 256 characters is truncated to it. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
+    /* SignatureInfo is the GPG verification result for the revision. Always absent: nothing here verifies a signature, and an empty field says so rather than implying an unsigned commit. */
     @SerializedName("signatureInfo")
     val signatureInfo: kotlin.String? = null,
 
+    /* Tags are the git tags pointing at the revision. Always absent, for the same reason as Author. */
     @SerializedName("tags")
     val tags: kotlin.collections.List<kotlin.String>? = null
 

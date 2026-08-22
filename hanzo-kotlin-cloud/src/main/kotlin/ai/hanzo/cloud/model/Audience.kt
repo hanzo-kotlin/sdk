@@ -21,18 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param createdAt CreatedAt and UpdatedAt are unix seconds, both server-assigned.
+ * @param createdAt CreatedAt is unix seconds when the filter was saved, server-assigned.
  * @param event Event is the analytics event a member must have fired. EMPTY MEANS NO FILTER: the audience is then every mailable customer in the org, and no warehouse is consulted.
  * @param id ID is the server-assigned audience id (\"aud_\" + 128 random bits).
  * @param name Name is the audience's label. Required, trimmed, capped at 1024 bytes.
- * @param updatedAt 
+ * @param updatedAt UpdatedAt is unix seconds of the last write, server-assigned, and the key the audience list is ordered by (newest first). A saved audience has no update route, so in practice it stays equal to CreatedAt: to change a filter you save another one.
  * @param windowDays WindowDays is how far back the event counts, ending now. 0 means 30 and nothing above 3650 is honoured. Ignored when Event is empty.
  */
 
 
 data class Audience (
 
-    /* CreatedAt and UpdatedAt are unix seconds, both server-assigned. */
+    /* CreatedAt is unix seconds when the filter was saved, server-assigned. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
@@ -48,6 +48,7 @@ data class Audience (
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* UpdatedAt is unix seconds of the last write, server-assigned, and the key the audience list is ordered by (newest first). A saved audience has no update route, so in practice it stays equal to CreatedAt: to change a filter you save another one. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null,
 

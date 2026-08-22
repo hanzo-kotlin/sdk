@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param revision 
- * @param status 
+ * @param revision Revision is what Status was reached against. For an App CR that is the declared IMAGE TAG, not a commit — the CR is image-pinned. For a CD row it is the commit CD last applied.
+ * @param status Status is the ArgoCD sync vocabulary, Capitalized: Synced, OutOfSync or Unknown. For an App CR it compares the tag the CR DECLARES against the tag the cluster's Deployment is RUNNING — equal is Synced, both known and different is OutOfSync, either unknown is Unknown. For a CD row it is CD's own git-versus-cluster verdict.
  */
 
 
 data class ArgoSyncStatus (
 
+    /* Revision is what Status was reached against. For an App CR that is the declared IMAGE TAG, not a commit — the CR is image-pinned. For a CD row it is the commit CD last applied. */
     @SerializedName("revision")
     val revision: kotlin.String? = null,
 
+    /* Status is the ArgoCD sync vocabulary, Capitalized: Synced, OutOfSync or Unknown. For an App CR it compares the tag the CR DECLARES against the tag the cluster's Deployment is RUNNING — equal is Synced, both known and different is OutOfSync, either unknown is Unknown. For a CD row it is CD's own git-versus-cluster verdict. */
     @SerializedName("status")
     val status: kotlin.String? = null
 

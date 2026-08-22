@@ -22,6 +22,14 @@ import okhttp3.HttpUrl
 import ai.hanzo.cloud.model.AuthorizeOut
 import ai.hanzo.cloud.model.ConnectIn
 import ai.hanzo.cloud.model.ConnectOut
+import ai.hanzo.cloud.model.ConnectorProvidersOut
+import ai.hanzo.cloud.model.ConnectorTokenOut
+import ai.hanzo.cloud.model.ConnectorsOut
+import ai.hanzo.cloud.model.CredentialIn
+import ai.hanzo.cloud.model.CredentialOut
+import ai.hanzo.cloud.model.DevicePollOut
+import ai.hanzo.cloud.model.DeviceStartIn
+import ai.hanzo.cloud.model.DeviceStartOut
 import ai.hanzo.cloud.model.DisconnectOut
 import ai.hanzo.cloud.model.GithubBackfillIn
 import ai.hanzo.cloud.model.GithubBackfillResult
@@ -41,8 +49,10 @@ import ai.hanzo.cloud.model.GithubPagesView
 import ai.hanzo.cloud.model.GithubReposOut
 import ai.hanzo.cloud.model.GithubSearchOut
 import ai.hanzo.cloud.model.GithubSearchReq
+import ai.hanzo.cloud.model.GitlabProjectsOut
 import ai.hanzo.cloud.model.ListOut
 import ai.hanzo.cloud.model.ProviderView
+import ai.hanzo.cloud.model.RefreshOut
 import ai.hanzo.cloud.model.VerifyOut
 
 import com.google.gson.annotations.SerializedName
@@ -67,6 +77,79 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
         val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.baseUrlKey, "https://api.hanzo.ai")
         }
+    }
+
+    /**
+     * DELETE /v1/integrations/connectors/{id}
+     * Forgets a connector: every custodied secret, then the row.
+     * Forgets a connector: every custodied secret, then the row. Idempotent — dropping a never-connected id still answers {disconnected:true} (disconnect() parity). No provider Revoke: none of the user-plane providers exposes a revoke endpoint.
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return DisconnectOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIntegrationsConnectorsById(id: kotlin.String) : DisconnectOut {
+        val localVarResponse = deleteIntegrationsConnectorsByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DisconnectOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/integrations/connectors/{id}
+     * Forgets a connector: every custodied secret, then the row.
+     * Forgets a connector: every custodied secret, then the row. Idempotent — dropping a never-connected id still answers {disconnected:true} (disconnect() parity). No provider Revoke: none of the user-plane providers exposes a revoke endpoint.
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return ApiResponse<DisconnectOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIntegrationsConnectorsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DisconnectOut?> {
+        val localVariableConfig = deleteIntegrationsConnectorsByIdRequestConfig(id = id)
+
+        return request<Unit, DisconnectOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIntegrationsConnectorsById
+     *
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return RequestConfig
+     */
+    fun deleteIntegrationsConnectorsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/integrations/connectors/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -145,7 +228,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     /**
      * GET /v1/integrations
      * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders.
-     * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders. Org-authed: a caller with no validated principal is 403, because the status is per-org and there is no org-less answer. User-plane providers (the /v1/connectors surface) are omitted; the two planes are disjoint.
+     * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders. Org-authed: a caller with no validated principal is 403, because the status is per-org and there is no org-less answer. User-plane providers (the /v1/integrations/connectors surface) are omitted; the two planes are disjoint.
      * @return ListOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -176,7 +259,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     /**
      * GET /v1/integrations
      * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders.
-     * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders. Org-authed: a caller with no validated principal is 403, because the status is per-org and there is no org-less answer. User-plane providers (the /v1/connectors surface) are omitted; the two planes are disjoint.
+     * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders. Org-authed: a caller with no validated principal is 403, because the status is per-org and there is no org-less answer. User-plane providers (the /v1/integrations/connectors surface) are omitted; the two planes are disjoint.
      * @return ApiResponse<ListOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -216,7 +299,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * GET /v1/integrations/{provider}
      * Returns ONE provider with this org&#39;s connection status — the same view list carries, for a single id.
      * Returns ONE provider with this org&#39;s connection status — the same view list carries, for a single id. An unknown id is 404, and so is a user-plane provider: the org surface never resolves one.
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return ProviderView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -248,7 +331,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * GET /v1/integrations/{provider}
      * Returns ONE provider with this org&#39;s connection status — the same view list carries, for a single id.
      * Returns ONE provider with this org&#39;s connection status — the same view list carries, for a single id. An unknown id is 404, and so is a user-plane provider: the org surface never resolves one.
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return ApiResponse<ProviderView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -266,7 +349,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     /**
      * To obtain the request config of the operation getIntegrationsByProvider
      *
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
     fun getIntegrationsByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
@@ -348,6 +431,219 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/integrations/{provider}/callback".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/connectors
+     * Lists the caller&#39;s OWN connectors across every provider — the set &#x60;hanzo connector ls&#x60; prints.
+     * Lists the caller&#39;s OWN connectors across every provider — the set &#x60;hanzo connector ls&#x60; prints. Rows are keyed (org,user), so this can never surface another user&#39;s connector, and no secret is in the view.
+     * @return ConnectorsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIntegrationsConnectors() : ConnectorsOut {
+        val localVarResponse = getIntegrationsConnectorsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/connectors
+     * Lists the caller&#39;s OWN connectors across every provider — the set &#x60;hanzo connector ls&#x60; prints.
+     * Lists the caller&#39;s OWN connectors across every provider — the set &#x60;hanzo connector ls&#x60; prints. Rows are keyed (org,user), so this can never surface another user&#39;s connector, and no secret is in the view.
+     * @return ApiResponse<ConnectorsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIntegrationsConnectorsWithHttpInfo() : ApiResponse<ConnectorsOut?> {
+        val localVariableConfig = getIntegrationsConnectorsRequestConfig()
+
+        return request<Unit, ConnectorsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIntegrationsConnectors
+     *
+     * @return RequestConfig
+     */
+    fun getIntegrationsConnectorsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/connectors",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/connectors/{id}/token
+     * Hands the custodied access token to its owner — the ONE place custody exits.
+     * Hands the custodied access token to its owner — the ONE place custody exits. The (org,user)-keyed row IS the same-user gate: another user&#39;s id is simply \&quot;no row\&quot; → 404. fresh() auto-rotates within the refreshSkew window; static providers degenerate to a plain kmsGet of Secrets[0]. Refresh tokens are NEVER returned — custody keeps the sink. The token is never logged.
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return ConnectorTokenOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIntegrationsConnectorsByIdToken(id: kotlin.String) : ConnectorTokenOut {
+        val localVarResponse = getIntegrationsConnectorsByIdTokenWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorTokenOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/connectors/{id}/token
+     * Hands the custodied access token to its owner — the ONE place custody exits.
+     * Hands the custodied access token to its owner — the ONE place custody exits. The (org,user)-keyed row IS the same-user gate: another user&#39;s id is simply \&quot;no row\&quot; → 404. fresh() auto-rotates within the refreshSkew window; static providers degenerate to a plain kmsGet of Secrets[0]. Refresh tokens are NEVER returned — custody keeps the sink. The token is never logged.
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return ApiResponse<ConnectorTokenOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIntegrationsConnectorsByIdTokenWithHttpInfo(id: kotlin.String) : ApiResponse<ConnectorTokenOut?> {
+        val localVariableConfig = getIntegrationsConnectorsByIdTokenRequestConfig(id = id)
+
+        return request<Unit, ConnectorTokenOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIntegrationsConnectorsByIdToken
+     *
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return RequestConfig
+     */
+    fun getIntegrationsConnectorsByIdTokenRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/connectors/{id}/token".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/connectors/providers
+     * Lists the user-scoped provider cards — the catalog of what a user can connect, and how.
+     * Lists the user-scoped provider cards — the catalog of what a user can connect, and how. Methods derive from capabilities (Device/Adopt/Verify — Mount asserts at least one), never from a parallel kind enum.
+     * @return ConnectorProvidersOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIntegrationsConnectorsProviders() : ConnectorProvidersOut {
+        val localVarResponse = getIntegrationsConnectorsProvidersWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorProvidersOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/connectors/providers
+     * Lists the user-scoped provider cards — the catalog of what a user can connect, and how.
+     * Lists the user-scoped provider cards — the catalog of what a user can connect, and how. Methods derive from capabilities (Device/Adopt/Verify — Mount asserts at least one), never from a parallel kind enum.
+     * @return ApiResponse<ConnectorProvidersOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIntegrationsConnectorsProvidersWithHttpInfo() : ApiResponse<ConnectorProvidersOut?> {
+        val localVariableConfig = getIntegrationsConnectorsProvidersRequestConfig()
+
+        return request<Unit, ConnectorProvidersOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIntegrationsConnectorsProviders
+     *
+     * @return RequestConfig
+     */
+    fun getIntegrationsConnectorsProvidersRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/connectors/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -762,6 +1058,76 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/gitlab/projects
+     * Lists the projects the org&#39;s GitLab connection can reach — membership projects, most recently active first.
+     * Lists the projects the org&#39;s GitLab connection can reach — membership projects, most recently active first.
+     * @return GitlabProjectsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIntegrationsGitlabProjects() : GitlabProjectsOut {
+        val localVarResponse = getIntegrationsGitlabProjectsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GitlabProjectsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/gitlab/projects
+     * Lists the projects the org&#39;s GitLab connection can reach — membership projects, most recently active first.
+     * Lists the projects the org&#39;s GitLab connection can reach — membership projects, most recently active first.
+     * @return ApiResponse<GitlabProjectsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIntegrationsGitlabProjectsWithHttpInfo() : ApiResponse<GitlabProjectsOut?> {
+        val localVariableConfig = getIntegrationsGitlabProjectsRequestConfig()
+
+        return request<Unit, GitlabProjectsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIntegrationsGitlabProjects
+     *
+     * @return RequestConfig
+     */
+    fun getIntegrationsGitlabProjectsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/gitlab/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1520,7 +1886,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * POST /v1/integrations/{provider}/disconnect
      * Revokes (best-effort) and forgets an org&#39;s connection: it deletes every custodied KMS secret and the connection row.
      * Revokes (best-effort) and forgets an org&#39;s connection: it deletes every custodied KMS secret and the connection row. Idempotent — disconnecting a provider that was never connected still returns {disconnected:true}. Symmetric with connect: an AdminOnly connector needs the caller&#39;s own-org admin bit.
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return DisconnectOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1552,7 +1918,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * POST /v1/integrations/{provider}/disconnect
      * Revokes (best-effort) and forgets an org&#39;s connection: it deletes every custodied KMS secret and the connection row.
      * Revokes (best-effort) and forgets an org&#39;s connection: it deletes every custodied KMS secret and the connection row. Idempotent — disconnecting a provider that was never connected still returns {disconnected:true}. Symmetric with connect: an AdminOnly connector needs the caller&#39;s own-org admin bit.
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return ApiResponse<DisconnectOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1570,7 +1936,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     /**
      * To obtain the request config of the operation postIntegrationsByProviderDisconnect
      *
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
     fun postIntegrationsByProviderDisconnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
@@ -1593,7 +1959,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * POST /v1/integrations/{provider}/verify
      * Re-checks a CONNECTED apikey connector&#39;s stored credential against the provider, live (&#x60;hanzo connector verify&#x60;).
      * Re-checks a CONNECTED apikey connector&#39;s stored credential against the provider, live (&#x60;hanzo connector verify&#x60;). Org-scoped (any member may check status); the credential is read from KMS, verified, and NEVER returned or logged. A verification failure is reported as {active:false}, not an error — the console/ CLI renders it. Only apikey providers support verify (OAuth tokens are checked at use, not re-verified here).
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return VerifyOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1625,7 +1991,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * POST /v1/integrations/{provider}/verify
      * Re-checks a CONNECTED apikey connector&#39;s stored credential against the provider, live (&#x60;hanzo connector verify&#x60;).
      * Re-checks a CONNECTED apikey connector&#39;s stored credential against the provider, live (&#x60;hanzo connector verify&#x60;). Org-scoped (any member may check status); the credential is read from KMS, verified, and NEVER returned or logged. A verification failure is reported as {active:false}, not an error — the console/ CLI renders it. Only apikey providers support verify (OAuth tokens are checked at use, not re-verified here).
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return ApiResponse<VerifyOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1643,7 +2009,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     /**
      * To obtain the request config of the operation postIntegrationsByProviderVerify
      *
-     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
+     * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/integrations/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
     fun postIntegrationsByProviderVerifyRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
@@ -1655,6 +2021,309 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/integrations/{provider}/verify".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/connectors/{id}/refresh
+     * Forces a token rotation for a connected connector, ahead of the automatic rotation a token read would do inside the expiry window.
+     * Forces a token rotation for a connected connector, ahead of the automatic rotation a token read would do inside the expiry window. Only providers that declare a Refresh support it.
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return RefreshOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsConnectorsByIdRefresh(id: kotlin.String) : RefreshOut {
+        val localVarResponse = postIntegrationsConnectorsByIdRefreshWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RefreshOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/connectors/{id}/refresh
+     * Forces a token rotation for a connected connector, ahead of the automatic rotation a token read would do inside the expiry window.
+     * Forces a token rotation for a connected connector, ahead of the automatic rotation a token read would do inside the expiry window. Only providers that declare a Refresh support it.
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return ApiResponse<RefreshOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsConnectorsByIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<RefreshOut?> {
+        val localVariableConfig = postIntegrationsConnectorsByIdRefreshRequestConfig(id = id)
+
+        return request<Unit, RefreshOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsConnectorsByIdRefresh
+     *
+     * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
+     * @return RequestConfig
+     */
+    fun postIntegrationsConnectorsByIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/connectors/{id}/refresh".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/connectors/{provider}/credential
+     * Is the direct intake path: a customer-held token/setup-token (Verify) or an externally obtained OAuth bundle from the CLI&#39;s local PKCE (Adopt).
+     * Is the direct intake path: a customer-held token/setup-token (Verify) or an externally obtained OAuth bundle from the CLI&#39;s local PKCE (Adopt). ALWAYS verify-before-store: a bad credential is refused and NOTHING is persisted (connectByCredential&#39;s fail-closed order).
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param credentialIn 
+     * @return CredentialOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsConnectorsByProviderCredential(provider: kotlin.String, credentialIn: CredentialIn) : CredentialOut {
+        val localVarResponse = postIntegrationsConnectorsByProviderCredentialWithHttpInfo(provider = provider, credentialIn = credentialIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CredentialOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/connectors/{provider}/credential
+     * Is the direct intake path: a customer-held token/setup-token (Verify) or an externally obtained OAuth bundle from the CLI&#39;s local PKCE (Adopt).
+     * Is the direct intake path: a customer-held token/setup-token (Verify) or an externally obtained OAuth bundle from the CLI&#39;s local PKCE (Adopt). ALWAYS verify-before-store: a bad credential is refused and NOTHING is persisted (connectByCredential&#39;s fail-closed order).
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param credentialIn 
+     * @return ApiResponse<CredentialOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsConnectorsByProviderCredentialWithHttpInfo(provider: kotlin.String, credentialIn: CredentialIn) : ApiResponse<CredentialOut?> {
+        val localVariableConfig = postIntegrationsConnectorsByProviderCredentialRequestConfig(provider = provider, credentialIn = credentialIn)
+
+        return request<CredentialIn, CredentialOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsConnectorsByProviderCredential
+     *
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param credentialIn 
+     * @return RequestConfig
+     */
+    fun postIntegrationsConnectorsByProviderCredentialRequestConfig(provider: kotlin.String, credentialIn: CredentialIn) : RequestConfig<CredentialIn> {
+        val localVariableBody = credentialIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/connectors/{provider}/credential".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/connectors/{provider}/device
+     * Begins a device sign-in and returns the code to show the user plus how to poll for completion.
+     * Begins a device sign-in and returns the code to show the user plus how to poll for completion. KMS readiness is checked NOW rather than dead-ending the user at poll-done (connect() parity), and the per-provider connector cap is checked before the provider is called. The provider&#39;s device code is persisted only in the encrypted grants table and is NEVER returned.
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param deviceStartIn 
+     * @return DeviceStartOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsConnectorsByProviderDevice(provider: kotlin.String, deviceStartIn: DeviceStartIn) : DeviceStartOut {
+        val localVarResponse = postIntegrationsConnectorsByProviderDeviceWithHttpInfo(provider = provider, deviceStartIn = deviceStartIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeviceStartOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/connectors/{provider}/device
+     * Begins a device sign-in and returns the code to show the user plus how to poll for completion.
+     * Begins a device sign-in and returns the code to show the user plus how to poll for completion. KMS readiness is checked NOW rather than dead-ending the user at poll-done (connect() parity), and the per-provider connector cap is checked before the provider is called. The provider&#39;s device code is persisted only in the encrypted grants table and is NEVER returned.
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param deviceStartIn 
+     * @return ApiResponse<DeviceStartOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsConnectorsByProviderDeviceWithHttpInfo(provider: kotlin.String, deviceStartIn: DeviceStartIn) : ApiResponse<DeviceStartOut?> {
+        val localVariableConfig = postIntegrationsConnectorsByProviderDeviceRequestConfig(provider = provider, deviceStartIn = deviceStartIn)
+
+        return request<DeviceStartIn, DeviceStartOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsConnectorsByProviderDevice
+     *
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param deviceStartIn 
+     * @return RequestConfig
+     */
+    fun postIntegrationsConnectorsByProviderDeviceRequestConfig(provider: kotlin.String, deviceStartIn: DeviceStartIn) : RequestConfig<DeviceStartIn> {
+        val localVariableBody = deviceStartIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/connectors/{provider}/device".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/connectors/{provider}/device/{flow}/poll
+     * Advances a device sign-in.
+     * Advances a device sign-in. Terminal outcomes are DATA, not errors (verifyConn {active:false} discipline) — the status set is closed: pending|connected|denied|expired. pollSlow collapses to \&quot;pending\&quot; on the wire; the raised cadence rides interval.
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param flow Flow is the id deviceStartOut returned. Expired or another user&#39;s flow is indistinguishable from an unknown one: 404.
+     * @return DevicePollOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsConnectorsByProviderDeviceByFlowPoll(provider: kotlin.String, flow: kotlin.String) : DevicePollOut {
+        val localVarResponse = postIntegrationsConnectorsByProviderDeviceByFlowPollWithHttpInfo(provider = provider, flow = flow)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DevicePollOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/connectors/{provider}/device/{flow}/poll
+     * Advances a device sign-in.
+     * Advances a device sign-in. Terminal outcomes are DATA, not errors (verifyConn {active:false} discipline) — the status set is closed: pending|connected|denied|expired. pollSlow collapses to \&quot;pending\&quot; on the wire; the raised cadence rides interval.
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param flow Flow is the id deviceStartOut returned. Expired or another user&#39;s flow is indistinguishable from an unknown one: 404.
+     * @return ApiResponse<DevicePollOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsConnectorsByProviderDeviceByFlowPollWithHttpInfo(provider: kotlin.String, flow: kotlin.String) : ApiResponse<DevicePollOut?> {
+        val localVariableConfig = postIntegrationsConnectorsByProviderDeviceByFlowPollRequestConfig(provider = provider, flow = flow)
+
+        return request<Unit, DevicePollOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsConnectorsByProviderDeviceByFlowPoll
+     *
+     * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
+     * @param flow Flow is the id deviceStartOut returned. Expired or another user&#39;s flow is indistinguishable from an unknown one: 404.
+     * @return RequestConfig
+     */
+    fun postIntegrationsConnectorsByProviderDeviceByFlowPollRequestConfig(provider: kotlin.String, flow: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/connectors/{provider}/device/{flow}/poll".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())).replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

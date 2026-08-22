@@ -26,6 +26,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param accountItems 
  * @param accountMenu 
+ * @param avatar How the organization appears across Hanzo — the square mark beside its name — as an image or as one emoji, never both. It is the pair a person carries (User.Avatar) under the same names, resolved the same way, so a screen draws a subject without asking which kind of subject it has. Both halves live on the row: a mark that appears everywhere cannot be kept on one device. Written through schema.MarkOf; Logo and LogoDark above are a different thing, the wordmark a login screen draws.
  * @param balanceCredit 
  * @param balanceCurrency 
  * @param countryCodes 
@@ -38,6 +39,7 @@ import com.google.gson.annotations.SerializedName
  * @param deleted 
  * @param disableSignin 
  * @param displayName 
+ * @param emoji 
  * @param enableSoftDeletion 
  * @param enableTour 
  * @param failedSigninFrozenTime 
@@ -94,6 +96,10 @@ data class IamOrganization (
     @SerializedName("accountMenu")
     val accountMenu: kotlin.String? = null,
 
+    /* How the organization appears across Hanzo — the square mark beside its name — as an image or as one emoji, never both. It is the pair a person carries (User.Avatar) under the same names, resolved the same way, so a screen draws a subject without asking which kind of subject it has. Both halves live on the row: a mark that appears everywhere cannot be kept on one device. Written through schema.MarkOf; Logo and LogoDark above are a different thing, the wordmark a login screen draws. */
+    @SerializedName("avatar")
+    val avatar: kotlin.String? = null,
+
     @SerializedName("balanceCredit")
     val balanceCredit: java.math.BigDecimal? = null,
 
@@ -129,6 +135,9 @@ data class IamOrganization (
 
     @SerializedName("displayName")
     val displayName: kotlin.String? = null,
+
+    @SerializedName("emoji")
+    val emoji: kotlin.String? = null,
 
     @SerializedName("enableSoftDeletion")
     val enableSoftDeletion: kotlin.Boolean? = null,

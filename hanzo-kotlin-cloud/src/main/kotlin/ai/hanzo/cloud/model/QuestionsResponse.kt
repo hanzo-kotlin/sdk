@@ -22,12 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param questions 
+ * @param questions Questions are what the books want explained, SHARPEST FIRST — largest amounts ahead of smaller ones, and capped, so this is the top of the list rather than everything. Empty means the ledger looks clean; the detector is deterministic over what was posted and invents nothing.
  */
 
 
 data class QuestionsResponse (
 
+    /* Questions are what the books want explained, SHARPEST FIRST — largest amounts ahead of smaller ones, and capped, so this is the top of the list rather than everything. Empty means the ledger looks clean; the detector is deterministic over what was posted and invents nothing. */
     @SerializedName("questions")
     val questions: kotlin.collections.List<Question>? = null
 

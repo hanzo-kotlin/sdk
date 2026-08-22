@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param path 
- * @param repoURL 
- * @param targetRevision 
+ * @param path Path is the directory within RepoURL. Display-only alongside a display-only RepoURL; CD's own value for a CD row.
+ * @param repoURL RepoURL is the git repository the desired state comes from. For an application projected from an App CR it is the fleet manifest repo and is DISPLAY ONLY — an App CR pins an image, and nothing is rendered from this repo to produce it. For a CD row it is the repo CD actually polls.
+ * @param targetRevision TargetRevision is the git ref tracked there — a branch such as \"main\". Display-only for a projected App CR; the ref CD tracks for a CD row.
  */
 
 
 data class ArgoSource (
 
+    /* Path is the directory within RepoURL. Display-only alongside a display-only RepoURL; CD's own value for a CD row. */
     @SerializedName("path")
     val path: kotlin.String? = null,
 
+    /* RepoURL is the git repository the desired state comes from. For an application projected from an App CR it is the fleet manifest repo and is DISPLAY ONLY — an App CR pins an image, and nothing is rendered from this repo to produce it. For a CD row it is the repo CD actually polls. */
     @SerializedName("repoURL")
     val repoURL: kotlin.String? = null,
 
+    /* TargetRevision is the git ref tracked there — a branch such as \"main\". Display-only for a projected App CR; the ref CD tracks for a CD row. */
     @SerializedName("targetRevision")
     val targetRevision: kotlin.String? = null
 

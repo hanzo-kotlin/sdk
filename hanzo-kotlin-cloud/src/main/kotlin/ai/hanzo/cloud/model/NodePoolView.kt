@@ -21,36 +21,43 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param autoScale 
- * @param count 
- * @param maxNodes 
- * @param minNodes 
- * @param name 
- * @param poolId 
- * @param propertySize 
+ * @param autoScale AutoScale reports whether the provider's cluster autoscaler owns this pool's size, moving Count between MinNodes and MaxNodes as workloads demand. False means Count changes only when someone scales the pool.
+ * @param count Count is how many nodes the pool has right now. Always present, so 0 means a pool that is genuinely empty rather than a figure the provider withheld.
+ * @param maxNodes MaxNodes is the ceiling the autoscaler will not grow the pool past, and so the bound on what this pool can cost. Read it only with AutoScale set.
+ * @param minNodes MinNodes is the floor the autoscaler will not shrink the pool below. Read it only with AutoScale set — the provider ignores it otherwise.
+ * @param name Name is the pool's name as the provider knows it.
+ * @param poolId PoolID is the provider's id for the pool — the value the scale and delete routes address it by. It falls back to the pool's name when the provider answered without one, so it is always something the routes accept.
+ * @param propertySize Size is the provider size slug every node in the pool runs at (\"s-4vcpu-8gb\", \"gpu-h100x8-640gb\"). One pool is one size — a mixed cluster is several pools.
  */
 
 
 data class NodePoolView (
 
+    /* AutoScale reports whether the provider's cluster autoscaler owns this pool's size, moving Count between MinNodes and MaxNodes as workloads demand. False means Count changes only when someone scales the pool. */
     @SerializedName("autoScale")
     val autoScale: kotlin.Boolean? = null,
 
+    /* Count is how many nodes the pool has right now. Always present, so 0 means a pool that is genuinely empty rather than a figure the provider withheld. */
     @SerializedName("count")
     val count: kotlin.Int? = null,
 
+    /* MaxNodes is the ceiling the autoscaler will not grow the pool past, and so the bound on what this pool can cost. Read it only with AutoScale set. */
     @SerializedName("maxNodes")
     val maxNodes: kotlin.Int? = null,
 
+    /* MinNodes is the floor the autoscaler will not shrink the pool below. Read it only with AutoScale set — the provider ignores it otherwise. */
     @SerializedName("minNodes")
     val minNodes: kotlin.Int? = null,
 
+    /* Name is the pool's name as the provider knows it. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* PoolID is the provider's id for the pool — the value the scale and delete routes address it by. It falls back to the pool's name when the provider answered without one, so it is always something the routes accept. */
     @SerializedName("poolId")
     val poolId: kotlin.String? = null,
 
+    /* Size is the provider size slug every node in the pool runs at (\"s-4vcpu-8gb\", \"gpu-h100x8-640gb\"). One pool is one size — a mixed cluster is several pools. */
     @SerializedName("size")
     val propertySize: kotlin.String? = null
 

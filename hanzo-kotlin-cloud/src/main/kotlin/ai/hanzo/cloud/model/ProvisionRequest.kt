@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param instance 
- * @param name 
+ * @param instance Instance binds a DEDICATED add-on to the app instance whose <instance>-addons Secret receives the <KIND>_URL (e.g. \"commerce\"). Optional: empty means \"not instance-bound\" — the DSN is returned once and wired by the caller.
+ * @param name Name is the org-unique slug for the new resource, matching ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. Every physical name derives from it.
  */
 
 
 data class ProvisionRequest (
 
+    /* Instance binds a DEDICATED add-on to the app instance whose <instance>-addons Secret receives the <KIND>_URL (e.g. \"commerce\"). Optional: empty means \"not instance-bound\" — the DSN is returned once and wired by the caller. */
     @SerializedName("instance")
     val instance: kotlin.String? = null,
 
+    /* Name is the org-unique slug for the new resource, matching ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. Every physical name derives from it. */
     @SerializedName("name")
     val name: kotlin.String? = null
 

@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param engine Engine names the engine serving the surface: hanzo-analytics.
  * @param ok OK is always true — reaching this route is the liveness fact it reports.
- * @param surface Surface is the path prefix this status covers: /v1/insights.
+ * @param surface Surface is the path prefix this status covers: /v1/event/insights.
  */
 
 
@@ -37,7 +37,7 @@ data class InsightsStatus (
     @SerializedName("ok")
     val ok: kotlin.Boolean? = null,
 
-    /* Surface is the path prefix this status covers: /v1/insights. */
+    /* Surface is the path prefix this status covers: /v1/event/insights. */
     @SerializedName("surface")
     val surface: kotlin.String? = null
 

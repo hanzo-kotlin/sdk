@@ -21,29 +21,34 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param automatable 
- * @param detail 
- * @param rationale 
- * @param stepId 
- * @param title 
+ * @param automatable Automatable is true when the step names a tool, so the Business AI can do it rather than only describe it.
+ * @param detail Detail is the step's own prose — what it asks for.
+ * @param rationale Rationale is why this step is being suggested NOW, written for the person reading it. It explains the ranking, not the step.
+ * @param stepId StepID is the checklist step being recommended — the id every step route takes, so a caller can act on the suggestion directly.
+ * @param title Title is the step's own one-line quest.
  * @param unlocks Unlocks is how many downstream steps completing this one immediately makes available (its leverage) — the primary ranking key.
  */
 
 
 data class Suggestion (
 
+    /* Automatable is true when the step names a tool, so the Business AI can do it rather than only describe it. */
     @SerializedName("automatable")
     val automatable: kotlin.Boolean? = null,
 
+    /* Detail is the step's own prose — what it asks for. */
     @SerializedName("detail")
     val detail: kotlin.String? = null,
 
+    /* Rationale is why this step is being suggested NOW, written for the person reading it. It explains the ranking, not the step. */
     @SerializedName("rationale")
     val rationale: kotlin.String? = null,
 
+    /* StepID is the checklist step being recommended — the id every step route takes, so a caller can act on the suggestion directly. */
     @SerializedName("stepId")
     val stepId: kotlin.String? = null,
 
+    /* Title is the step's own one-line quest. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 

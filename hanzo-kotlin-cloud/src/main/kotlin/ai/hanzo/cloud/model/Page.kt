@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param body 
- * @param enabled 
- * @param id 
- * @param title 
+ * @param body Body is the reusable prompt or snippet itself. It may carry {placeholder} tokens for the client-specific bits — {client_name}, {domain}, {product} — which are substituted where the template is used, not here.
+ * @param enabled Enabled is the admin lever. Absent reads as ON; an explicit false withdraws the template from org-facing reads.
+ * @param id ID is the slug a step references to pull this template in.
+ * @param title Title names the template in the authoring plane and in a picker.
  */
 
 
 data class Page (
 
+    /* Body is the reusable prompt or snippet itself. It may carry {placeholder} tokens for the client-specific bits — {client_name}, {domain}, {product} — which are substituted where the template is used, not here. */
     @SerializedName("body")
     val body: kotlin.String? = null,
 
+    /* Enabled is the admin lever. Absent reads as ON; an explicit false withdraws the template from org-facing reads. */
     @SerializedName("enabled")
     val enabled: kotlin.Boolean? = null,
 
+    /* ID is the slug a step references to pull this template in. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Title names the template in the authoring plane and in a picker. */
     @SerializedName("title")
     val title: kotlin.String? = null
 

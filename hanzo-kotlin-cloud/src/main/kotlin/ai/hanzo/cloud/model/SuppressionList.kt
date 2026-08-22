@@ -22,12 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `data` 
+ * @param `data` Data is the page: every (channel, address) this org's send gate refuses, newest opt-out first. Absence from it is not permission to mail someone — it only means no opt-out was recorded on that channel.
  */
 
 
 data class SuppressionList (
 
+    /* Data is the page: every (channel, address) this org's send gate refuses, newest opt-out first. Absence from it is not permission to mail someone — it only means no opt-out was recorded on that channel. */
     @SerializedName("data")
     val `data`: kotlin.collections.List<Suppression>? = null
 

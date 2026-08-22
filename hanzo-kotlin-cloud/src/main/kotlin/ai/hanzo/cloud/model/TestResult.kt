@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param delivered 
- * @param durationMs 
- * @param error 
- * @param httpStatus 
+ * @param delivered Delivered is whether the subscriber accepted the test POST. It is the whole answer: the send is synchronous and is not retried.
+ * @param durationMs DurationMs is how long the single attempt took, in MILLISECONDS.
+ * @param error Error says what stopped it. Empty when delivered.
+ * @param httpStatus HTTPStatus is what the subscriber answered, or 0 if it never answered.
  */
 
 
 data class TestResult (
 
+    /* Delivered is whether the subscriber accepted the test POST. It is the whole answer: the send is synchronous and is not retried. */
     @SerializedName("delivered")
     val delivered: kotlin.Boolean? = null,
 
+    /* DurationMs is how long the single attempt took, in MILLISECONDS. */
     @SerializedName("durationMs")
     val durationMs: kotlin.Int? = null,
 
+    /* Error says what stopped it. Empty when delivered. */
     @SerializedName("error")
     val error: kotlin.String? = null,
 
+    /* HTTPStatus is what the subscriber answered, or 0 if it never answered. */
     @SerializedName("httpStatus")
     val httpStatus: kotlin.Int? = null
 

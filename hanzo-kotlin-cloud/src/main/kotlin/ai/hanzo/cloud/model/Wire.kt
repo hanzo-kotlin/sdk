@@ -21,41 +21,45 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param action 
- * @param authMethod 
- * @param email 
- * @param hash 
+ * @param action Action is the verb that was performed. It is the event's name, not the HTTP method — a request-sourced record carries both, and the pair is what makes a row readable (\"grant.create\" at POST /v1/admin/grants).
+ * @param authMethod Auth is the credential the actor presented: \"jwt\", \"api-key\", or \"none\".
+ * @param email Email is the actor's validated address, absent when the credential carried none. It comes from the verified token, never from a client header.
+ * @param hash Hash is this record's SHA-256 over its own canonical JSON with both hash fields cleared, folded with prevHash. Recomputing it from the row's other fields is what proves the row has not been edited.
  * @param home Home is present ONLY on a cross-org action: the org the actor came FROM, while Org is the org they acted IN. A console row carrying `home` is a platform-admin impersonation and should be rendered as one.
- * @param isAdmin 
- * @param method 
- * @param org 
- * @param path 
- * @param prevHash 
- * @param reason 
- * @param requestId 
- * @param resource 
- * @param resourceId 
- * @param result 
- * @param seq 
- * @param sourceIp 
- * @param status 
- * @param sub 
- * @param time 
- * @param userAgent 
+ * @param isAdmin IsAdmin is the VALIDATED platform-SuperAdmin bit at decision time (membership of the reserved admin org), never the client's own claim to be one.
+ * @param method Method is the HTTP verb, on a record a request produced. Absent on an event emitted from inside the binary with no request behind it.
+ * @param org Org is the tenant the action was taken IN — the effective org, which for everyone but an impersonating SuperAdmin is also the actor's own. Empty on an unauthenticated request.
+ * @param path Path is the request's route. Any segment shaped like a credential is replaced before the record is written, so a key that rides in a path is not preserved here by the very control meant to watch it.
+ * @param prevHash PrevHash is the hash of record seq-1, which is what links the rows into a chain: a deleted or reordered record breaks the recomputation at that point. The first record of a chain carries 64 zeros rather than an empty string, so \"start of chain\" and \"field missing\" cannot look alike.
+ * @param reason Reason is a short explanation for a deny or an error (\"SuperAdmin required\", \"insufficient_balance\"). It is never a secret and never a raw upstream error body; absent on a success.
+ * @param requestId RequestID ties this row to the request-line log and any downstream trace — the X-Request-Id the pipeline minted for that request.
+ * @param resource Resource is the KIND of thing acted upon (\"org\", \"role\", \"secret\", \"provider-config\", \"credit\"). Where a mutation has no finer semantics than its route, this is the route family and resourceId is empty — the action and the path already pin the object.
+ * @param resourceId ResourceID is the specific instance, absent when the kind alone identifies it.
+ * @param result Result is how the action ended: \"success\", \"deny\" or \"error\". A deny is a decision this binary made and is as much evidence as a success.
+ * @param seq Seq is the record's position in the chain, 0-based and gapless. The Recorder assigns it under its own lock, so it is a true total order: seq n+1 was written after seq n, and a missing number is a missing record.
+ * @param sourceIp SourceIP is the client address the edge resolved for the request, after the proxy chain — the address a responder would act on, not the socket peer.
+ * @param status Status is the HTTP status the caller received. It is the outcome as the client saw it, so a 200 carrying a domain refusal still reads 200 here.
+ * @param sub Sub is the acting user (the IAM subject). Empty for a machine principal or an anonymous request, which is how a service action is told from a person's.
+ * @param time Time is when the action happened, RFC3339Nano in UTC. The stored column has the same precision and sorts the same way, so a client can range and order on this string verbatim.
+ * @param userAgent UserAgent is the client the request announced itself as. Client-supplied, so it is evidence about what claimed to act, not proof of it.
  */
 
 
 data class Wire (
 
+    /* Action is the verb that was performed. It is the event's name, not the HTTP method — a request-sourced record carries both, and the pair is what makes a row readable (\"grant.create\" at POST /v1/admin/grants). */
     @SerializedName("action")
     val action: kotlin.String? = null,
 
+    /* Auth is the credential the actor presented: \"jwt\", \"api-key\", or \"none\". */
     @SerializedName("authMethod")
     val authMethod: kotlin.String? = null,
 
+    /* Email is the actor's validated address, absent when the credential carried none. It comes from the verified token, never from a client header. */
     @SerializedName("email")
     val email: kotlin.String? = null,
 
+    /* Hash is this record's SHA-256 over its own canonical JSON with both hash fields cleared, folded with prevHash. Recomputing it from the row's other fields is what proves the row has not been edited. */
     @SerializedName("hash")
     val hash: kotlin.String? = null,
 
@@ -63,51 +67,67 @@ data class Wire (
     @SerializedName("home")
     val home: kotlin.String? = null,
 
+    /* IsAdmin is the VALIDATED platform-SuperAdmin bit at decision time (membership of the reserved admin org), never the client's own claim to be one. */
     @SerializedName("isAdmin")
     val isAdmin: kotlin.Boolean? = null,
 
+    /* Method is the HTTP verb, on a record a request produced. Absent on an event emitted from inside the binary with no request behind it. */
     @SerializedName("method")
     val method: kotlin.String? = null,
 
+    /* Org is the tenant the action was taken IN — the effective org, which for everyone but an impersonating SuperAdmin is also the actor's own. Empty on an unauthenticated request. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Path is the request's route. Any segment shaped like a credential is replaced before the record is written, so a key that rides in a path is not preserved here by the very control meant to watch it. */
     @SerializedName("path")
     val path: kotlin.String? = null,
 
+    /* PrevHash is the hash of record seq-1, which is what links the rows into a chain: a deleted or reordered record breaks the recomputation at that point. The first record of a chain carries 64 zeros rather than an empty string, so \"start of chain\" and \"field missing\" cannot look alike. */
     @SerializedName("prevHash")
     val prevHash: kotlin.String? = null,
 
+    /* Reason is a short explanation for a deny or an error (\"SuperAdmin required\", \"insufficient_balance\"). It is never a secret and never a raw upstream error body; absent on a success. */
     @SerializedName("reason")
     val reason: kotlin.String? = null,
 
+    /* RequestID ties this row to the request-line log and any downstream trace — the X-Request-Id the pipeline minted for that request. */
     @SerializedName("requestId")
     val requestId: kotlin.String? = null,
 
+    /* Resource is the KIND of thing acted upon (\"org\", \"role\", \"secret\", \"provider-config\", \"credit\"). Where a mutation has no finer semantics than its route, this is the route family and resourceId is empty — the action and the path already pin the object. */
     @SerializedName("resource")
     val resource: kotlin.String? = null,
 
+    /* ResourceID is the specific instance, absent when the kind alone identifies it. */
     @SerializedName("resourceId")
     val resourceId: kotlin.String? = null,
 
+    /* Result is how the action ended: \"success\", \"deny\" or \"error\". A deny is a decision this binary made and is as much evidence as a success. */
     @SerializedName("result")
     val result: kotlin.String? = null,
 
+    /* Seq is the record's position in the chain, 0-based and gapless. The Recorder assigns it under its own lock, so it is a true total order: seq n+1 was written after seq n, and a missing number is a missing record. */
     @SerializedName("seq")
     val seq: kotlin.Int? = null,
 
+    /* SourceIP is the client address the edge resolved for the request, after the proxy chain — the address a responder would act on, not the socket peer. */
     @SerializedName("sourceIp")
     val sourceIp: kotlin.String? = null,
 
+    /* Status is the HTTP status the caller received. It is the outcome as the client saw it, so a 200 carrying a domain refusal still reads 200 here. */
     @SerializedName("status")
     val status: kotlin.Int? = null,
 
+    /* Sub is the acting user (the IAM subject). Empty for a machine principal or an anonymous request, which is how a service action is told from a person's. */
     @SerializedName("sub")
     val sub: kotlin.String? = null,
 
+    /* Time is when the action happened, RFC3339Nano in UTC. The stored column has the same precision and sorts the same way, so a client can range and order on this string verbatim. */
     @SerializedName("time")
     val time: kotlin.String? = null,
 
+    /* UserAgent is the client the request announced itself as. Client-supplied, so it is evidence about what claimed to act, not proof of it. */
     @SerializedName("userAgent")
     val userAgent: kotlin.String? = null
 

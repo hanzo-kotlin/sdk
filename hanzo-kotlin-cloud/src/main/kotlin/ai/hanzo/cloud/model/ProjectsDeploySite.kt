@@ -22,20 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param files 
- * @param name 
- * @param slug 
+ * @param files Files is the whole site, inline — every file it consists of. It REPLACES what is there rather than merging, so an omitted file is a deleted one.
+ * @param name Name is the site's display name.
+ * @param slug Slug is the handle and public host label to publish under.
  */
 
 
 data class ProjectsDeploySite (
 
+    /* Files is the whole site, inline — every file it consists of. It REPLACES what is there rather than merging, so an omitted file is a deleted one. */
     @SerializedName("files")
     val files: kotlin.collections.List<ProjectsFile>? = null,
 
+    /* Name is the site's display name. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Slug is the handle and public host label to publish under. */
     @SerializedName("slug")
     val slug: kotlin.String? = null
 

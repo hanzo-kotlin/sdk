@@ -21,46 +21,53 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param account 
- * @param closingCredit 
- * @param closingDebit 
- * @param credit period movement
- * @param debit period movement
- * @param name 
- * @param openingCredit 
- * @param openingDebit 
- * @param type 
+ * @param account Account is the chart-of-accounts NUMBER this line reports on (\"1000\", \"4000\") — the stable posting key, not a display label.
+ * @param closingCredit ClosingCredit is that closing balance in cents when it is a credit balance.
+ * @param closingDebit ClosingDebit is the balance at the end of the window, in cents, when it is a debit balance. This is the column the report's totals are summed from.
+ * @param credit Credit is the same window movement in cents when it was net credit.
+ * @param debit Debit is the account's MOVEMENT within the window — closing minus opening, not the closing balance — in cents, when that movement was net debit. Zero when the account moved net credit.
+ * @param name Name is that account's human name from the fixed chart.
+ * @param openingCredit OpeningCredit is the same opening balance in cents when it fell on the credit side. Zero when the balance was a debit one.
+ * @param openingDebit OpeningDebit is the account's balance before the window began, in whole cents, when that balance was on the debit side. Zero when the balance was a credit one — the pair is exclusive, never two halves of one number.
+ * @param type Type is the account's fundamental class — asset, liability, income, expense or equity — which is also its normal balance side. It is carried for presentation and does NOT decide which column an amount lands in: placement follows the sign of the real net, so a contra balance shows up as one.
  */
 
 
 data class TrialBalanceRow (
 
+    /* Account is the chart-of-accounts NUMBER this line reports on (\"1000\", \"4000\") — the stable posting key, not a display label. */
     @SerializedName("account")
     val account: kotlin.String? = null,
 
+    /* ClosingCredit is that closing balance in cents when it is a credit balance. */
     @SerializedName("closingCredit")
     val closingCredit: kotlin.Int? = null,
 
+    /* ClosingDebit is the balance at the end of the window, in cents, when it is a debit balance. This is the column the report's totals are summed from. */
     @SerializedName("closingDebit")
     val closingDebit: kotlin.Int? = null,
 
-    /* period movement */
+    /* Credit is the same window movement in cents when it was net credit. */
     @SerializedName("credit")
     val credit: kotlin.Int? = null,
 
-    /* period movement */
+    /* Debit is the account's MOVEMENT within the window — closing minus opening, not the closing balance — in cents, when that movement was net debit. Zero when the account moved net credit. */
     @SerializedName("debit")
     val debit: kotlin.Int? = null,
 
+    /* Name is that account's human name from the fixed chart. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* OpeningCredit is the same opening balance in cents when it fell on the credit side. Zero when the balance was a debit one. */
     @SerializedName("openingCredit")
     val openingCredit: kotlin.Int? = null,
 
+    /* OpeningDebit is the account's balance before the window began, in whole cents, when that balance was on the debit side. Zero when the balance was a credit one — the pair is exclusive, never two halves of one number. */
     @SerializedName("openingDebit")
     val openingDebit: kotlin.Int? = null,
 
+    /* Type is the account's fundamental class — asset, liability, income, expense or equity — which is also its normal balance side. It is carried for presentation and does NOT decide which column an amount lands in: placement follows the sign of the real net, so a contra balance shows up as one. */
     @SerializedName("type")
     val type: kotlin.String? = null
 

@@ -21,10 +21,23 @@ import okhttp3.HttpUrl
 
 import ai.hanzo.cloud.model.ActivationReq
 import ai.hanzo.cloud.model.ActivationSet
+import ai.hanzo.cloud.model.AuthoredPluginList
+import ai.hanzo.cloud.model.AuthoredSkillList
+import ai.hanzo.cloud.model.BuildOut
+import ai.hanzo.cloud.model.BuildRequest
+import ai.hanzo.cloud.model.CreateServerReq
 import ai.hanzo.cloud.model.CurateReq
 import ai.hanzo.cloud.model.MCPListing
+import ai.hanzo.cloud.model.MCPServer
 import ai.hanzo.cloud.model.McpCatalog
 import ai.hanzo.cloud.model.McpCatalogSync
+import ai.hanzo.cloud.model.McpServerList
+import ai.hanzo.cloud.model.PluginDeleted
+import ai.hanzo.cloud.model.PluginMountList
+import ai.hanzo.cloud.model.SkillDeleted
+import ai.hanzo.cloud.model.SkillIn
+import ai.hanzo.cloud.model.SkillWritten
+import ai.hanzo.cloud.model.SourceToolList
 import ai.hanzo.cloud.model.ToolCall
 import ai.hanzo.cloud.model.ToolList
 import ai.hanzo.cloud.model.ToolResult
@@ -51,6 +64,222 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.baseUrlKey, "https://api.hanzo.ai")
         }
+    }
+
+    /**
+     * DELETE /v1/tools/mcp/servers/{id}
+     * Deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry.
+     * Deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry. Scoped to the caller&#39;s org, so an id belonging to another tenant is a 404 and not a delete. Answers 204 with no body; a server this org does not have is 404.
+     * @param id ID is the server to deregister, from the path.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteToolsMcpServersById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteToolsMcpServersByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/tools/mcp/servers/{id}
+     * Deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry.
+     * Deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry. Scoped to the caller&#39;s org, so an id belonging to another tenant is a 404 and not a delete. Answers 204 with no body; a server this org does not have is 404.
+     * @param id ID is the server to deregister, from the path.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteToolsMcpServersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteToolsMcpServersByIdRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteToolsMcpServersById
+     *
+     * @param id ID is the server to deregister, from the path.
+     * @return RequestConfig
+     */
+    fun deleteToolsMcpServersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/tools/mcp/servers/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/tools/plugins/authored/{id}
+     * Removes one of the caller org&#39;s built plugins, so the runtime can no longer load it.
+     * Removes one of the caller org&#39;s built plugins, so the runtime can no longer load it. Scoped to the caller&#39;s org, so an id belonging to another tenant answers 404 and is not deleted.
+     * @param id ID is the plugin to remove, from the path.
+     * @return PluginDeleted
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteToolsPluginsAuthoredById(id: kotlin.String) : PluginDeleted {
+        val localVarResponse = deleteToolsPluginsAuthoredByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PluginDeleted
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/tools/plugins/authored/{id}
+     * Removes one of the caller org&#39;s built plugins, so the runtime can no longer load it.
+     * Removes one of the caller org&#39;s built plugins, so the runtime can no longer load it. Scoped to the caller&#39;s org, so an id belonging to another tenant answers 404 and is not deleted.
+     * @param id ID is the plugin to remove, from the path.
+     * @return ApiResponse<PluginDeleted?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteToolsPluginsAuthoredByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PluginDeleted?> {
+        val localVariableConfig = deleteToolsPluginsAuthoredByIdRequestConfig(id = id)
+
+        return request<Unit, PluginDeleted>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteToolsPluginsAuthoredById
+     *
+     * @param id ID is the plugin to remove, from the path.
+     * @return RequestConfig
+     */
+    fun deleteToolsPluginsAuthoredByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/tools/plugins/authored/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/tools/skills/{id}
+     * Removes one of the caller org&#39;s authored skills.
+     * Removes one of the caller org&#39;s authored skills. Scoped to the caller&#39;s org, so an id belonging to another tenant is never reached. Removing what is not there is not an error — the caller&#39;s intent is \&quot;gone\&quot;, and it is.
+     * @param id ID is the skill to remove, from the path. It is the skill&#39;s name.
+     * @return SkillDeleted
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteToolsSkillsById(id: kotlin.String) : SkillDeleted {
+        val localVarResponse = deleteToolsSkillsByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SkillDeleted
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/tools/skills/{id}
+     * Removes one of the caller org&#39;s authored skills.
+     * Removes one of the caller org&#39;s authored skills. Scoped to the caller&#39;s org, so an id belonging to another tenant is never reached. Removing what is not there is not an error — the caller&#39;s intent is \&quot;gone\&quot;, and it is.
+     * @param id ID is the skill to remove, from the path. It is the skill&#39;s name.
+     * @return ApiResponse<SkillDeleted?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteToolsSkillsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SkillDeleted?> {
+        val localVariableConfig = deleteToolsSkillsByIdRequestConfig(id = id)
+
+        return request<Unit, SkillDeleted>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteToolsSkillsById
+     *
+     * @param id ID is the skill to remove, from the path. It is the skill&#39;s name.
+     * @return RequestConfig
+     */
+    fun deleteToolsSkillsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/tools/skills/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -210,7 +439,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * GET /v1/tools/catalog
      * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.
-     * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.  This is the SHELF an org picks from. A listing with a streamable-http endpoint can be enabled as-is — POST /v1/mcp/servers with its id — and its tools then join the org&#39;s tool plane and the fleet&#39;s MCP door. A listing that only ships a stdio package needs a process to run it, which is why the transports are on every entry rather than implied.  Hidden entries are absent: they are the ones we took off the shelf. A platform SuperAdmin sees them, because the same query answers \&quot;what is on the shelf\&quot; and \&quot;what is in the catalog\&quot; and two queries would drift apart.  It is PAGED — 50 by default, 200 at most. The public registry publishes tens of thousands of servers, so an unbounded answer is a twenty-megabyte response and a storefront that renders in a minute. total is the whole match, not the page.
+     * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.  This is the SHELF an org picks from. A listing with a streamable-http endpoint can be enabled as-is — POST /v1/tools/mcp/servers with its id — and its tools then join the org&#39;s tool plane and the fleet&#39;s MCP door. A listing that only ships a stdio package needs a process to run it, which is why the transports are on every entry rather than implied.  Hidden entries are absent: they are the ones we took off the shelf. A platform SuperAdmin sees them, because the same query answers \&quot;what is on the shelf\&quot; and \&quot;what is in the catalog\&quot; and two queries would drift apart.  It is PAGED — 50 by default, 200 at most. The public registry publishes tens of thousands of servers, so an unbounded answer is a twenty-megabyte response and a storefront that renders in a minute. total is the whole match, not the page.
      * @param q Q matches the name, title or description, case-insensitively. (optional)
      * @param featured Featured keeps only the listings we put on the front of the shelf, and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @param official Official keeps only the vendors&#39; OWN servers — not third-party copies of them — and only when it is exactly the string \&quot;true\&quot;. (optional)
@@ -246,7 +475,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * GET /v1/tools/catalog
      * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.
-     * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.  This is the SHELF an org picks from. A listing with a streamable-http endpoint can be enabled as-is — POST /v1/mcp/servers with its id — and its tools then join the org&#39;s tool plane and the fleet&#39;s MCP door. A listing that only ships a stdio package needs a process to run it, which is why the transports are on every entry rather than implied.  Hidden entries are absent: they are the ones we took off the shelf. A platform SuperAdmin sees them, because the same query answers \&quot;what is on the shelf\&quot; and \&quot;what is in the catalog\&quot; and two queries would drift apart.  It is PAGED — 50 by default, 200 at most. The public registry publishes tens of thousands of servers, so an unbounded answer is a twenty-megabyte response and a storefront that renders in a minute. total is the whole match, not the page.
+     * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.  This is the SHELF an org picks from. A listing with a streamable-http endpoint can be enabled as-is — POST /v1/tools/mcp/servers with its id — and its tools then join the org&#39;s tool plane and the fleet&#39;s MCP door. A listing that only ships a stdio package needs a process to run it, which is why the transports are on every entry rather than implied.  Hidden entries are absent: they are the ones we took off the shelf. A platform SuperAdmin sees them, because the same query answers \&quot;what is on the shelf\&quot; and \&quot;what is in the catalog\&quot; and two queries would drift apart.  It is PAGED — 50 by default, 200 at most. The public registry publishes tens of thousands of servers, so an unbounded answer is a twenty-megabyte response and a storefront that renders in a minute. total is the whole match, not the page.
      * @param q Q matches the name, title or description, case-insensitively. (optional)
      * @param featured Featured keeps only the listings we put on the front of the shelf, and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @param official Official keeps only the vendors&#39; OWN servers — not third-party copies of them — and only when it is exactly the string \&quot;true\&quot;. (optional)
@@ -375,6 +604,372 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/tools/catalog/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/tools/mcp/servers
+     * Lists the external MCP servers the caller&#39;s org has registered.
+     * Lists the external MCP servers the caller&#39;s org has registered. Each record carries the URL and the name of the header its credential is injected into; the credential VALUE lives only in KMS and is never returned, so hasSecret is the whole of what this surface says about it.
+     * @return McpServerList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getToolsMcpServers() : McpServerList {
+        val localVarResponse = getToolsMcpServersWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as McpServerList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/tools/mcp/servers
+     * Lists the external MCP servers the caller&#39;s org has registered.
+     * Lists the external MCP servers the caller&#39;s org has registered. Each record carries the URL and the name of the header its credential is injected into; the credential VALUE lives only in KMS and is never returned, so hasSecret is the whole of what this surface says about it.
+     * @return ApiResponse<McpServerList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getToolsMcpServersWithHttpInfo() : ApiResponse<McpServerList?> {
+        val localVariableConfig = getToolsMcpServersRequestConfig()
+
+        return request<Unit, McpServerList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getToolsMcpServers
+     *
+     * @return RequestConfig
+     */
+    fun getToolsMcpServersRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/tools/mcp/servers",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/tools/plugins
+     * Reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on.
+     * Reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on. A plugin here is MOUNTED CODE that extends the deployment&#39;s own surface — not a tool an agent calls — so this is an inventory and not a tool source. It is read off the same boot snapshot every traced request resolves its subsystem label against, so it cannot drift from what is serving. Enabled-only by default, because a caller asking what this deployment can do wants what is running; ?all&#x3D;true adds the configured-but-off ones.
+     * @param all All includes the configured-but-disabled subsystems too, but only when it is exactly the string \&quot;true\&quot;. Otherwise only the running ones are reported. (optional)
+     * @return PluginMountList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getToolsPlugins(all: kotlin.String? = null) : PluginMountList {
+        val localVarResponse = getToolsPluginsWithHttpInfo(all = all)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PluginMountList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/tools/plugins
+     * Reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on.
+     * Reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on. A plugin here is MOUNTED CODE that extends the deployment&#39;s own surface — not a tool an agent calls — so this is an inventory and not a tool source. It is read off the same boot snapshot every traced request resolves its subsystem label against, so it cannot drift from what is serving. Enabled-only by default, because a caller asking what this deployment can do wants what is running; ?all&#x3D;true adds the configured-but-off ones.
+     * @param all All includes the configured-but-disabled subsystems too, but only when it is exactly the string \&quot;true\&quot;. Otherwise only the running ones are reported. (optional)
+     * @return ApiResponse<PluginMountList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getToolsPluginsWithHttpInfo(all: kotlin.String?) : ApiResponse<PluginMountList?> {
+        val localVariableConfig = getToolsPluginsRequestConfig(all = all)
+
+        return request<Unit, PluginMountList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getToolsPlugins
+     *
+     * @param all All includes the configured-but-disabled subsystems too, but only when it is exactly the string \&quot;true\&quot;. Otherwise only the running ones are reported. (optional)
+     * @return RequestConfig
+     */
+    fun getToolsPluginsRequestConfig(all: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (all != null) {
+                    put("all", listOf(all.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/tools/plugins",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/tools/plugins/authored
+     * Lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored.
+     * Lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored. That is a different set with a different lifecycle from GET /v1/tools/plugins, which reports the subsystems this deployment mounted. The bundled CommonJS the runtime executes is never included, and neither is any credential — a plugin names the connectors provider it needs and reads the credential from ctx.auth at run time.
+     * @return AuthoredPluginList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getToolsPluginsAuthored() : AuthoredPluginList {
+        val localVarResponse = getToolsPluginsAuthoredWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuthoredPluginList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/tools/plugins/authored
+     * Lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored.
+     * Lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored. That is a different set with a different lifecycle from GET /v1/tools/plugins, which reports the subsystems this deployment mounted. The bundled CommonJS the runtime executes is never included, and neither is any credential — a plugin names the connectors provider it needs and reads the credential from ctx.auth at run time.
+     * @return ApiResponse<AuthoredPluginList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getToolsPluginsAuthoredWithHttpInfo() : ApiResponse<AuthoredPluginList?> {
+        val localVariableConfig = getToolsPluginsAuthoredRequestConfig()
+
+        return request<Unit, AuthoredPluginList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getToolsPluginsAuthored
+     *
+     * @return RequestConfig
+     */
+    fun getToolsPluginsAuthoredRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/tools/plugins/authored",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/tools/skills
+     * Lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag.
+     * Lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag. A skill is discovery and activation metadata attached to an agent, never called directly, so every entry here is non-dispatchable. It is GET /v1/tools narrowed to one source, not a second store: a name a caller sees here is the same entry, with the same activation state, that discovery reports.
+     * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
+     * @return SourceToolList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getToolsSkills(activated: kotlin.String? = null) : SourceToolList {
+        val localVarResponse = getToolsSkillsWithHttpInfo(activated = activated)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SourceToolList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/tools/skills
+     * Lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag.
+     * Lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag. A skill is discovery and activation metadata attached to an agent, never called directly, so every entry here is non-dispatchable. It is GET /v1/tools narrowed to one source, not a second store: a name a caller sees here is the same entry, with the same activation state, that discovery reports.
+     * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
+     * @return ApiResponse<SourceToolList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getToolsSkillsWithHttpInfo(activated: kotlin.String?) : ApiResponse<SourceToolList?> {
+        val localVariableConfig = getToolsSkillsRequestConfig(activated = activated)
+
+        return request<Unit, SourceToolList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getToolsSkills
+     *
+     * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
+     * @return RequestConfig
+     */
+    fun getToolsSkillsRequestConfig(activated: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (activated != null) {
+                    put("activated", listOf(activated.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/tools/skills",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/tools/skills/authored
+     * Lists the caller org&#39;s OWN skills with their SKILL.md bodies.
+     * Lists the caller org&#39;s OWN skills with their SKILL.md bodies. GET /v1/tools/skills is the registry view — the brand&#39;s catalogue plus this org&#39;s, with activation flags and no bodies; this is the EDITABLE set, so it carries the content that view omits and nothing the org did not write.
+     * @return AuthoredSkillList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getToolsSkillsAuthored() : AuthoredSkillList {
+        val localVarResponse = getToolsSkillsAuthoredWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuthoredSkillList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/tools/skills/authored
+     * Lists the caller org&#39;s OWN skills with their SKILL.md bodies.
+     * Lists the caller org&#39;s OWN skills with their SKILL.md bodies. GET /v1/tools/skills is the registry view — the brand&#39;s catalogue plus this org&#39;s, with activation flags and no bodies; this is the EDITABLE set, so it carries the content that view omits and nothing the org did not write.
+     * @return ApiResponse<AuthoredSkillList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getToolsSkillsAuthoredWithHttpInfo() : ApiResponse<AuthoredSkillList?> {
+        val localVariableConfig = getToolsSkillsAuthoredRequestConfig()
+
+        return request<Unit, AuthoredSkillList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getToolsSkillsAuthored
+     *
+     * @return RequestConfig
+     */
+    fun getToolsSkillsAuthoredRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/tools/skills/authored",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -596,6 +1191,228 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/tools/catalog/sync",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/tools/mcp/servers
+     * Gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door.
+     * Gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door. It is the ONE way an org gains a server, whether it typed the URL in or enabled a catalog listing: both write the SAME record, and &#x60;source&#x60; says which it was. A second registration path would be a second place for a server to exist, and then a second place to forget to check the credential.  The credential VALUE is sealed in KMS under a per-org ref; the row keeps only the URL, the header name to inject it into, and a has-secret flag — so a secret with no KMS configured is refused 503 rather than stored in the clear. The URL is SSRF-validated here and re-checked by the dialer at connect time, which is the DNS-rebinding defense.  Enabling a listing the org already enabled REVISES that server rather than adding a near-duplicate beside it, so a retried enable is the same one server. Answers 201 with the stored record.
+     * @param createServerReq 
+     * @return MCPServer
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postToolsMcpServers(createServerReq: CreateServerReq) : MCPServer {
+        val localVarResponse = postToolsMcpServersWithHttpInfo(createServerReq = createServerReq)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MCPServer
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/tools/mcp/servers
+     * Gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door.
+     * Gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door. It is the ONE way an org gains a server, whether it typed the URL in or enabled a catalog listing: both write the SAME record, and &#x60;source&#x60; says which it was. A second registration path would be a second place for a server to exist, and then a second place to forget to check the credential.  The credential VALUE is sealed in KMS under a per-org ref; the row keeps only the URL, the header name to inject it into, and a has-secret flag — so a secret with no KMS configured is refused 503 rather than stored in the clear. The URL is SSRF-validated here and re-checked by the dialer at connect time, which is the DNS-rebinding defense.  Enabling a listing the org already enabled REVISES that server rather than adding a near-duplicate beside it, so a retried enable is the same one server. Answers 201 with the stored record.
+     * @param createServerReq 
+     * @return ApiResponse<MCPServer?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postToolsMcpServersWithHttpInfo(createServerReq: CreateServerReq) : ApiResponse<MCPServer?> {
+        val localVariableConfig = postToolsMcpServersRequestConfig(createServerReq = createServerReq)
+
+        return request<CreateServerReq, MCPServer>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postToolsMcpServers
+     *
+     * @param createServerReq 
+     * @return RequestConfig
+     */
+    fun postToolsMcpServersRequestConfig(createServerReq: CreateServerReq) : RequestConfig<CreateServerReq> {
+        val localVariableBody = createServerReq
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/tools/mcp/servers",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/tools/plugins/build
+     * Builds and stores one plugin for the caller&#39;s org.
+     * Builds and stores one plugin for the caller&#39;s org. The 201 carries the bundle&#39;s size, whether a model wrote the source, and the plugin as stored.  Post &#x60;source&#x60; to build TypeScript as-is, or &#x60;spec&#x60; — an OpenAPI document or plain prose describing the endpoints — to have one generated; the generated source comes back in the answer, so a caller reads what will run before it runs. Exactly one of the two, and &#x60;name&#x60; must be one lowercase path segment; both or neither is 400.  COMPILING IS THE GATE. The source goes through the same pipeline the committed connectors do — esbuild to one CommonJS program, then compiled in the goja runtime that will actually execute it — and anything that fails is rejected and NEVER stored. So a plugin in the store is one this deployment has already loaded once, not one a model claimed was fine. A failed build answers 422 carrying the diagnostics a caller needs to fix it: the bundler&#39;s error (&#x60;detail&#x60;), the source that failed, and whether the model wrote it.  CREDENTIALS ARE NOT PART OF A PLUGIN. A plugin names the connectors &#x60;provider&#x60; it needs and reads that credential from &#x60;ctx.auth&#x60; at run time, under KMS custody. Source that carries something key-shaped is REFUSED rather than silently persisted — a scrubbed key looks like it worked.
+     * @param buildRequest 
+     * @return BuildOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postToolsPluginsBuild(buildRequest: BuildRequest) : BuildOut {
+        val localVarResponse = postToolsPluginsBuildWithHttpInfo(buildRequest = buildRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BuildOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/tools/plugins/build
+     * Builds and stores one plugin for the caller&#39;s org.
+     * Builds and stores one plugin for the caller&#39;s org. The 201 carries the bundle&#39;s size, whether a model wrote the source, and the plugin as stored.  Post &#x60;source&#x60; to build TypeScript as-is, or &#x60;spec&#x60; — an OpenAPI document or plain prose describing the endpoints — to have one generated; the generated source comes back in the answer, so a caller reads what will run before it runs. Exactly one of the two, and &#x60;name&#x60; must be one lowercase path segment; both or neither is 400.  COMPILING IS THE GATE. The source goes through the same pipeline the committed connectors do — esbuild to one CommonJS program, then compiled in the goja runtime that will actually execute it — and anything that fails is rejected and NEVER stored. So a plugin in the store is one this deployment has already loaded once, not one a model claimed was fine. A failed build answers 422 carrying the diagnostics a caller needs to fix it: the bundler&#39;s error (&#x60;detail&#x60;), the source that failed, and whether the model wrote it.  CREDENTIALS ARE NOT PART OF A PLUGIN. A plugin names the connectors &#x60;provider&#x60; it needs and reads that credential from &#x60;ctx.auth&#x60; at run time, under KMS custody. Source that carries something key-shaped is REFUSED rather than silently persisted — a scrubbed key looks like it worked.
+     * @param buildRequest 
+     * @return ApiResponse<BuildOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postToolsPluginsBuildWithHttpInfo(buildRequest: BuildRequest) : ApiResponse<BuildOut?> {
+        val localVariableConfig = postToolsPluginsBuildRequestConfig(buildRequest = buildRequest)
+
+        return request<BuildRequest, BuildOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postToolsPluginsBuild
+     *
+     * @param buildRequest 
+     * @return RequestConfig
+     */
+    fun postToolsPluginsBuildRequestConfig(buildRequest: BuildRequest) : RequestConfig<BuildRequest> {
+        val localVariableBody = buildRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/tools/plugins/build",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/tools/skills
+     * Adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record.
+     * Adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record. The id is derived from the name, so writing the same name again REVISES that skill rather than accumulating near-duplicates that would then collide in the registry. An org&#39;s skills are private to it by construction — they live in a different store from the brand&#39;s embedded catalogue and have no path into the public gallery — and a brand skill always wins a name collision against an org&#39;s.
+     * @param skillIn 
+     * @return SkillWritten
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postToolsSkills(skillIn: SkillIn) : SkillWritten {
+        val localVarResponse = postToolsSkillsWithHttpInfo(skillIn = skillIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SkillWritten
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/tools/skills
+     * Adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record.
+     * Adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record. The id is derived from the name, so writing the same name again REVISES that skill rather than accumulating near-duplicates that would then collide in the registry. An org&#39;s skills are private to it by construction — they live in a different store from the brand&#39;s embedded catalogue and have no path into the public gallery — and a brand skill always wins a name collision against an org&#39;s.
+     * @param skillIn 
+     * @return ApiResponse<SkillWritten?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postToolsSkillsWithHttpInfo(skillIn: SkillIn) : ApiResponse<SkillWritten?> {
+        val localVariableConfig = postToolsSkillsRequestConfig(skillIn = skillIn)
+
+        return request<SkillIn, SkillWritten>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postToolsSkills
+     *
+     * @param skillIn 
+     * @return RequestConfig
+     */
+    fun postToolsSkillsRequestConfig(skillIn: SkillIn) : RequestConfig<SkillIn> {
+        val localVariableBody = skillIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/tools/skills",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

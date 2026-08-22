@@ -21,27 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param args 
+ * @param args Args are the tool's default arguments, merged under whatever the caller passes at run time.
  * @param automatable Automatable is true when the Business AI can run this step (it names a tool).
  * @param available Available is true when every dependency is done or skipped.
  * @param blockedBy BlockedBy lists the unfinished dependencies keeping the step unavailable.
  * @param deps Dependencies are step ids that must be done/skipped before this step is available. The wire key is `deps` (the blueprint contract).
  * @param detail Detail is the prose/juncture — what the Guide asks or explains here.
- * @param draft 
- * @param draftInto 
+ * @param draft Draft, when set, is the prompt the embedded AI answers first; its output is folded into one of Args before the tool runs.
+ * @param draftInto DraftInto names the argument the drafted text lands in. Empty means \"brief\".
  * @param enabled Enabled is the admin on/off lever; absent reads as enabled.
  * @param id ID is the step's id, as it appears in the journey (e.g. \"gsuite\").
  * @param section Section is the phase (section id) this step groups under.
  * @param signal Signal names the machine detector that auto-marks this step done.
  * @param source Source records what marked the state: manual, auto (detected) or agent.
  * @param state State is the step's per-org lifecycle state: todo|in_progress|done|skipped.
- * @param title 
- * @param tool Tool is the MCP tool the Business AI runs for \"do it for me\"; Args are its default arguments, Draft an optional AI prompt whose output fills the DraftInto arg (default \"brief\").
+ * @param title Title is the one-line quest as a person reads it in the checklist.
+ * @param tool Tool is the MCP tool the Business AI runs for \"do it for me\". A step naming none can only be completed by a person.
  */
 
 
 data class StepView (
 
+    /* Args are the tool's default arguments, merged under whatever the caller passes at run time. */
     @SerializedName("args")
     val args: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null,
 
@@ -65,9 +66,11 @@ data class StepView (
     @SerializedName("detail")
     val detail: kotlin.String? = null,
 
+    /* Draft, when set, is the prompt the embedded AI answers first; its output is folded into one of Args before the tool runs. */
     @SerializedName("draft")
     val draft: kotlin.String? = null,
 
+    /* DraftInto names the argument the drafted text lands in. Empty means \"brief\". */
     @SerializedName("draftInto")
     val draftInto: kotlin.String? = null,
 
@@ -95,10 +98,11 @@ data class StepView (
     @SerializedName("state")
     val state: kotlin.String? = null,
 
+    /* Title is the one-line quest as a person reads it in the checklist. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
-    /* Tool is the MCP tool the Business AI runs for \"do it for me\"; Args are its default arguments, Draft an optional AI prompt whose output fills the DraftInto arg (default \"brief\"). */
+    /* Tool is the MCP tool the Business AI runs for \"do it for me\". A step naming none can only be completed by a person. */
     @SerializedName("tool")
     val tool: kotlin.String? = null
 

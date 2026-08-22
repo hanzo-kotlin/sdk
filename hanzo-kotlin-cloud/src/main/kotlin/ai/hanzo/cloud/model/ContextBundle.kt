@@ -22,28 +22,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param budgetTokens 
- * @param query 
- * @param repo 
- * @param spans 
- * @param usedTokens 
+ * @param budgetTokens BudgetTokens is the ceiling the caller asked for. Packing stops under it, so this is a bound and not a target.
+ * @param query Query is the ask this bundle was packed for, echoed back so a cached or forwarded bundle still says what it answers.
+ * @param repo Repo narrows the retrieval to one repository. Absent means every indexed repo was searched.
+ * @param spans Spans are the packed chunks, most relevant first, each expanded with the definitions it calls and its notable callers. The top match is always present even if it had to be truncated to fit, so a matched query never comes back with nothing.
+ * @param usedTokens UsedTokens is what the returned spans actually cost, by the same estimate the packer used (roughly one token per four characters — an estimate, not a tokenizer's count, so size a real window with headroom).
  */
 
 
 data class ContextBundle (
 
+    /* BudgetTokens is the ceiling the caller asked for. Packing stops under it, so this is a bound and not a target. */
     @SerializedName("budgetTokens")
     val budgetTokens: kotlin.Int? = null,
 
+    /* Query is the ask this bundle was packed for, echoed back so a cached or forwarded bundle still says what it answers. */
     @SerializedName("query")
     val query: kotlin.String? = null,
 
+    /* Repo narrows the retrieval to one repository. Absent means every indexed repo was searched. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* Spans are the packed chunks, most relevant first, each expanded with the definitions it calls and its notable callers. The top match is always present even if it had to be truncated to fit, so a matched query never comes back with nothing. */
     @SerializedName("spans")
     val spans: kotlin.collections.List<Span>? = null,
 
+    /* UsedTokens is what the returned spans actually cost, by the same estimate the packer used (roughly one token per four characters — an estimate, not a tokenizer's count, so size a real window with headroom). */
     @SerializedName("usedTokens")
     val usedTokens: kotlin.Int? = null
 

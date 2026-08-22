@@ -24,11 +24,11 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param checkedAt CheckedAt is when the underlying availability read was taken, RFC3339 UTC. Not part of the status-page schema the panel parses (which ignores unknown fields); it is here because a status document with no timestamp cannot be told apart from a stale one.
- * @param inProgressMaintenances 
- * @param ongoingIncidents 
- * @param pageTitle 
+ * @param inProgressMaintenances InProgressMaintenances is always empty: this platform has no maintenance scheduling plane, so \"nothing is running\" is a true statement rather than a placeholder.
+ * @param ongoingIncidents OngoingIncidents is one entry per service that failed its health probe, sorted by name. Empty means every probed service answered — which is a measurement, not an absence of reports.
+ * @param pageTitle PageTitle is the brand's own status-page title, resolved per request from the Host — a lux caller must never be shown Hanzo's.
  * @param pageUrl PageURL is the HUMAN status page — an HTML page for people, distinct from this JSON endpoint. Every link in this document points there.
- * @param scheduledMaintenances 
+ * @param scheduledMaintenances ScheduledMaintenances is always empty, for the same reason.
  */
 
 
@@ -38,12 +38,15 @@ data class O11yStatusSummary (
     @SerializedName("checked_at")
     val checkedAt: kotlin.String? = null,
 
+    /* InProgressMaintenances is always empty: this platform has no maintenance scheduling plane, so \"nothing is running\" is a true statement rather than a placeholder. */
     @SerializedName("in_progress_maintenances")
     val inProgressMaintenances: kotlin.collections.List<O11yStatusMaintenance>? = null,
 
+    /* OngoingIncidents is one entry per service that failed its health probe, sorted by name. Empty means every probed service answered — which is a measurement, not an absence of reports. */
     @SerializedName("ongoing_incidents")
     val ongoingIncidents: kotlin.collections.List<O11yStatusIncident>? = null,
 
+    /* PageTitle is the brand's own status-page title, resolved per request from the Host — a lux caller must never be shown Hanzo's. */
     @SerializedName("page_title")
     val pageTitle: kotlin.String? = null,
 
@@ -51,6 +54,7 @@ data class O11yStatusSummary (
     @SerializedName("page_url")
     val pageUrl: kotlin.String? = null,
 
+    /* ScheduledMaintenances is always empty, for the same reason. */
     @SerializedName("scheduled_maintenances")
     val scheduledMaintenances: kotlin.collections.List<O11yStatusMaintenance>? = null
 

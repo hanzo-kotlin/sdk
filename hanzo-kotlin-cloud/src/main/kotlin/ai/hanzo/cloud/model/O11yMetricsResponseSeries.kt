@@ -20,7 +20,7 @@ import ai.hanzo.cloud.model.O11ypoint
 import com.google.gson.annotations.SerializedName
 
 /**
- * 
+ * Series is the RED trend: request rate, error rate and two latency quantiles, bucketed at range.stepSec and oldest bucket first. Latencies are in MILLISECONDS.
  *
  * @param errors 
  * @param latencyP50Ms 

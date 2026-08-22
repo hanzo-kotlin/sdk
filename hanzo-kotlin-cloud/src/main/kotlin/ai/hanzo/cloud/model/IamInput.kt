@@ -21,38 +21,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param action 
+ * @param clientIp 
  * @param createdTime 
- * @param description 
- * @param displayName 
- * @param isDefault 
- * @param metadata 
+ * @param isTriggered 
+ * @param language 
+ * @param method 
  * @param name 
+ * @param `object` 
  * @param organization 
  * @param owner 
- * @param tags 
- * @param workspace 
+ * @param requestUri 
+ * @param response 
+ * @param statusCode 
+ * @param user 
  */
 
 
 data class IamInput (
 
+    @SerializedName("action")
+    val action: kotlin.String? = null,
+
+    @SerializedName("clientIp")
+    val clientIp: kotlin.String? = null,
+
     @SerializedName("createdTime")
     val createdTime: kotlin.String? = null,
 
-    @SerializedName("description")
-    val description: kotlin.String? = null,
+    @SerializedName("isTriggered")
+    val isTriggered: kotlin.Boolean? = null,
 
-    @SerializedName("displayName")
-    val displayName: kotlin.String? = null,
+    @SerializedName("language")
+    val language: kotlin.String? = null,
 
-    @SerializedName("isDefault")
-    val isDefault: kotlin.Boolean? = null,
-
-    @SerializedName("metadata")
-    val metadata: kotlin.String? = null,
+    @SerializedName("method")
+    val method: kotlin.String? = null,
 
     @SerializedName("name")
     val name: kotlin.String? = null,
+
+    @SerializedName("object")
+    val `object`: kotlin.String? = null,
 
     @SerializedName("organization")
     val organization: kotlin.String? = null,
@@ -60,11 +70,17 @@ data class IamInput (
     @SerializedName("owner")
     val owner: kotlin.String? = null,
 
-    @SerializedName("tags")
-    val tags: kotlin.collections.List<kotlin.String>? = null,
+    @SerializedName("requestUri")
+    val requestUri: kotlin.String? = null,
 
-    @SerializedName("workspace")
-    val workspace: kotlin.String? = null
+    @SerializedName("response")
+    val response: kotlin.String? = null,
+
+    @SerializedName("statusCode")
+    val statusCode: kotlin.Int? = null,
+
+    @SerializedName("user")
+    val user: kotlin.String? = null
 
 ) {
 

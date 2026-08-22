@@ -23,16 +23,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param items 
- * @param metadata 
+ * @param items Items is one entry per distinct destination server, in first-seen order with the in-cluster destination first. Never empty: an empty fleet still has the one cluster it would deploy into.
+ * @param metadata Metadata is the list envelope the SPA expects; it carries no resume point.
  */
 
 
 data class ArgoClusterList (
 
+    /* Items is one entry per distinct destination server, in first-seen order with the in-cluster destination first. Never empty: an empty fleet still has the one cluster it would deploy into. */
     @SerializedName("items")
     val items: kotlin.collections.List<ArgoCluster>? = null,
 
+    /* Metadata is the list envelope the SPA expects; it carries no resume point. */
     @SerializedName("metadata")
     val metadata: ArgoListMeta? = null
 

@@ -26,45 +26,53 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param brand 
- * @param enabled 
- * @param principles the 64-principle spine (Zen of Hanzo archetypes)
- * @param sections 
- * @param steps 
- * @param strategies 
- * @param templates 
- * @param title 
- * @param version 
+ * @param brand Brand is the white-label key this playbook serves. Empty is the shared default every unbranded deployment falls back to.
+ * @param enabled Enabled is the whole-playbook lever. Absent reads as ON; an explicit false makes resolution skip this playbook entirely and fall through to the next tier, rather than serving an empty journey.
+ * @param principles Principles are the fixed 64-archetype spine a tactic files under. It is authored data an operator organises the corpus by; nothing in the checklist engine reads it.
+ * @param sections Sections are the journey's ordered phases.
+ * @param steps Steps are every checklist item, disabled ones included — this is the authored document, not the projection an org runs.
+ * @param strategies Strategies are the tactics corpus the recommendation reads narrow.
+ * @param templates Templates are the reusable prompts and snippets steps reference by id.
+ * @param title Title is the playbook's name as a person reads it.
+ * @param version Version is the playbook's own name for this edition of its content, chosen by whoever authored it. It travels onto every journey projected from it. The store's numeric revision is a separate value and lives beside it.
  */
 
 
 data class Blueprint (
 
+    /* Brand is the white-label key this playbook serves. Empty is the shared default every unbranded deployment falls back to. */
     @SerializedName("brand")
     val brand: kotlin.String? = null,
 
+    /* Enabled is the whole-playbook lever. Absent reads as ON; an explicit false makes resolution skip this playbook entirely and fall through to the next tier, rather than serving an empty journey. */
     @SerializedName("enabled")
     val enabled: kotlin.Boolean? = null,
 
-    /* the 64-principle spine (Zen of Hanzo archetypes) */
+    /* Principles are the fixed 64-archetype spine a tactic files under. It is authored data an operator organises the corpus by; nothing in the checklist engine reads it. */
     @SerializedName("principles")
     val principles: kotlin.collections.List<Principle>? = null,
 
+    /* Sections are the journey's ordered phases. */
     @SerializedName("sections")
     val sections: kotlin.collections.List<Section>? = null,
 
+    /* Steps are every checklist item, disabled ones included — this is the authored document, not the projection an org runs. */
     @SerializedName("steps")
     val steps: kotlin.collections.List<JourneyStep>? = null,
 
+    /* Strategies are the tactics corpus the recommendation reads narrow. */
     @SerializedName("strategies")
     val strategies: kotlin.collections.List<Strategy>? = null,
 
+    /* Templates are the reusable prompts and snippets steps reference by id. */
     @SerializedName("templates")
     val templates: kotlin.collections.List<Page>? = null,
 
+    /* Title is the playbook's name as a person reads it. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* Version is the playbook's own name for this edition of its content, chosen by whoever authored it. It travels onto every journey projected from it. The store's numeric revision is a separate value and lives beside it. */
     @SerializedName("version")
     val version: kotlin.String? = null
 

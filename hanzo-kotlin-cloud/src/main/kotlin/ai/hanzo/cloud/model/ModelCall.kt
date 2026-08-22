@@ -21,33 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param agent 
- * @param from 
- * @param id 
- * @param org 
- * @param status queued | ringing | answered | completed | failed
- * @param to 
+ * @param agent Agent names the Hanzo assistant handling the call. Set means the call was answered by that assistant rather than connected to a person.
+ * @param from From is the calling number in E.164. It must be one this org holds: a carrier refuses an origination from a number nobody proved they own.
+ * @param id ID is the carrier's handle for the call — what a hangup or a lookup names.
+ * @param org Org is the tenant the call was placed for or received by.
+ * @param status Status is where the call is: \"queued\", \"ringing\", \"answered\", \"completed\" or \"failed\". Only the last two are terminal.
+ * @param to To is the called number in E.164.
  */
 
 
 data class ModelCall (
 
+    /* Agent names the Hanzo assistant handling the call. Set means the call was answered by that assistant rather than connected to a person. */
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* From is the calling number in E.164. It must be one this org holds: a carrier refuses an origination from a number nobody proved they own. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
+    /* ID is the carrier's handle for the call — what a hangup or a lookup names. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Org is the tenant the call was placed for or received by. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
-    /* queued | ringing | answered | completed | failed */
+    /* Status is where the call is: \"queued\", \"ringing\", \"answered\", \"completed\" or \"failed\". Only the last two are terminal. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* To is the called number in E.164. */
     @SerializedName("to")
     val to: kotlin.String? = null
 

@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param from 
- * @param media 
- * @param text 
- * @param to 
+ * @param from From is the number to send FROM, in E.164. It must be one this org holds and it must be sms-capable.
+ * @param media Media are URLs to attach. A message with any is an MMS to the carrier — the distinction is the carrier's to make, not something the caller declares.
+ * @param text Text is the message body. It may be empty when Media carries the message.
+ * @param to To is the number to send to, in E.164.
  */
 
 
 data class MessageInput (
 
+    /* From is the number to send FROM, in E.164. It must be one this org holds and it must be sms-capable. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
+    /* Media are URLs to attach. A message with any is an MMS to the carrier — the distinction is the carrier's to make, not something the caller declares. */
     @SerializedName("media")
     val media: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Text is the message body. It may be empty when Media carries the message. */
     @SerializedName("text")
     val text: kotlin.String? = null,
 
+    /* To is the number to send to, in E.164. */
     @SerializedName("to")
     val to: kotlin.String? = null
 

@@ -21,19 +21,21 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param cloneUrl 
- * @param defaultBranch 
+ * @param cloneUrl CloneURL is the fork's https git remote. GitHub populates a new fork in the background, so a clone issued the moment this answers can still find it empty.
+ * @param defaultBranch DefaultBranch is the branch the fork checks out, inherited from upstream.
  * @param existing Existing reports that the fork was already there. GitHub answers 202 either way, so without this a caller cannot tell \"made you one\" from \"you had one\".
- * @param fullName 
- * @param htmlUrl 
+ * @param fullName FullName is the fork's \"owner/repo\". The owner is the account it landed in — the request's org, or the installation's own account when none was named.
+ * @param htmlUrl HTMLURL is the fork's page on github.com.
  */
 
 
 data class GithubForkOut (
 
+    /* CloneURL is the fork's https git remote. GitHub populates a new fork in the background, so a clone issued the moment this answers can still find it empty. */
     @SerializedName("clone_url")
     val cloneUrl: kotlin.String? = null,
 
+    /* DefaultBranch is the branch the fork checks out, inherited from upstream. */
     @SerializedName("default_branch")
     val defaultBranch: kotlin.String? = null,
 
@@ -41,9 +43,11 @@ data class GithubForkOut (
     @SerializedName("existing")
     val existing: kotlin.Boolean? = null,
 
+    /* FullName is the fork's \"owner/repo\". The owner is the account it landed in — the request's org, or the installation's own account when none was named. */
     @SerializedName("full_name")
     val fullName: kotlin.String? = null,
 
+    /* HTMLURL is the fork's page on github.com. */
     @SerializedName("html_url")
     val htmlUrl: kotlin.String? = null
 

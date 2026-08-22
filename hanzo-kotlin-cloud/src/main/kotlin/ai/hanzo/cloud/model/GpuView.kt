@@ -21,45 +21,53 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param id 
- * @param location 
- * @param machine 
- * @param memory 
- * @param model 
- * @param name 
- * @param provider Provider distinguishes a BYO accelerator (\"byo\") from a Visor-provisioned one (the machine's real provider). Memory is VRAM when known (BYO reports it from nvidia-smi; Visor's machine object carries none, so it stays empty and the UI renders \"—\"). Both are additive + omitempty: existing rows are unaffected and the console normalizer ignores fields it does not read.
- * @param region 
- * @param status 
+ * @param id ID is the card's address: its host machine's id, \"#\", and the card's ordinal within that machine (\"gpu-1#0\"). Stable for as long as the machine is, and the only id a single accelerator has — providers do not name cards.
+ * @param location Location is where the card physically sits, which for every source today is the same value Region carries — the console renders it in its own column.
+ * @param machine Machine is the id of the machine holding this card, addressable as-is on /v1/visor/machines/:id.
+ * @param memory Memory is the card's VRAM as its own tooling reported it (\"122880 MiB\") — a display string in the reporter's units, not a byte count. BYO cards carry it (nvidia-smi); Visor's machine object states no VRAM, so a rented card leaves it empty and the console renders \"—\" rather than a fabricated 0.
+ * @param model Model is the accelerator: the model token read out of the size slug for a Visor GPU droplet (\"H100\", \"MI300X\"), or the name nvidia-smi reported for a BYO card (\"NVIDIA GB10\").
+ * @param name Name is the HOST MACHINE's display name, not the card's — every card in a gpu-h100x8 node repeats it. Model is what says which accelerator this is.
+ * @param provider Provider distinguishes a BYO accelerator (\"byo\") from a Visor-provisioned one (the host machine's real provider). It is what tells a card the org owns from a card the org rents.
+ * @param region Region is the host machine's provider region slug; \"on-prem\" for a BYO card.
+ * @param status Status is the HOST MACHINE's lifecycle state, because nothing upstream reports a card's own health. A card reads running because its machine does.
  */
 
 
 data class GpuView (
 
+    /* ID is the card's address: its host machine's id, \"#\", and the card's ordinal within that machine (\"gpu-1#0\"). Stable for as long as the machine is, and the only id a single accelerator has — providers do not name cards. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Location is where the card physically sits, which for every source today is the same value Region carries — the console renders it in its own column. */
     @SerializedName("location")
     val location: kotlin.String? = null,
 
+    /* Machine is the id of the machine holding this card, addressable as-is on /v1/visor/machines/:id. */
     @SerializedName("machine")
     val machine: kotlin.String? = null,
 
+    /* Memory is the card's VRAM as its own tooling reported it (\"122880 MiB\") — a display string in the reporter's units, not a byte count. BYO cards carry it (nvidia-smi); Visor's machine object states no VRAM, so a rented card leaves it empty and the console renders \"—\" rather than a fabricated 0. */
     @SerializedName("memory")
     val memory: kotlin.String? = null,
 
+    /* Model is the accelerator: the model token read out of the size slug for a Visor GPU droplet (\"H100\", \"MI300X\"), or the name nvidia-smi reported for a BYO card (\"NVIDIA GB10\"). */
     @SerializedName("model")
     val model: kotlin.String? = null,
 
+    /* Name is the HOST MACHINE's display name, not the card's — every card in a gpu-h100x8 node repeats it. Model is what says which accelerator this is. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
-    /* Provider distinguishes a BYO accelerator (\"byo\") from a Visor-provisioned one (the machine's real provider). Memory is VRAM when known (BYO reports it from nvidia-smi; Visor's machine object carries none, so it stays empty and the UI renders \"—\"). Both are additive + omitempty: existing rows are unaffected and the console normalizer ignores fields it does not read. */
+    /* Provider distinguishes a BYO accelerator (\"byo\") from a Visor-provisioned one (the host machine's real provider). It is what tells a card the org owns from a card the org rents. */
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* Region is the host machine's provider region slug; \"on-prem\" for a BYO card. */
     @SerializedName("region")
     val region: kotlin.String? = null,
 
+    /* Status is the HOST MACHINE's lifecycle state, because nothing upstream reports a card's own health. A card reads running because its machine does. */
     @SerializedName("status")
     val status: kotlin.String? = null
 

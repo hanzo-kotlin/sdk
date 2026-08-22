@@ -21,53 +21,63 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param created 
- * @param deliveries7d Deliveries7d / Failures7d are cheap usage counters computed from the delivery log over usageWindow (not stored columns) and populated ONLY on list/get. They are 0 when there is no delivery history — never omitempty, so the console always sees them.
- * @param description 
- * @param events 
- * @param failures7d 
- * @param id 
- * @param org 
- * @param secret 
- * @param status 
- * @param updated 
- * @param url 
+ * @param created CreatedAt is when the endpoint was registered, RFC3339 in UTC — stored in that spelling because it sorts as a string.
+ * @param deliveries7d Deliveries7d is how many deliveries SETTLED in the trailing 7 days — the attempts that ended ok or failed, so a delivery still retrying is in neither counter yet. It is counted from the log at read time rather than stored, and it is filled only on a list or a get; a create answers 0 because there is no history, which is why it is never omitted.
+ * @param description Description is the operator's own label for the endpoint. Never sent anywhere.
+ * @param events Events are the subject patterns this endpoint subscribes to (\"commerce.order.>\"). An EMPTY list means every event, not none.
+ * @param failures7d Failures7d is how many of those settled as failed — the subscriber never accepted it and no further attempt will be made. It is the numerator to Deliveries7d, over the same window.
+ * @param id ID is the endpoint's handle, server-minted and stable for its life. It is what every other route here addresses.
+ * @param org Org is the tenant that owns the endpoint, taken from the validated principal rather than from any request field.
+ * @param secret Secret is the HMAC-SHA256 signing key a subscriber recomputes the signature with. It is returned exactly ONCE, on create: a later read of the endpoint omits it, so a lost secret is replaced rather than recovered.
+ * @param status Status is \"active\" or \"disabled\" — nothing else is accepted. A disabled endpoint keeps its subscription and receives no deliveries, except a manual test send, which goes out anyway.
+ * @param updated UpdatedAt is when its url, events, status or description last changed.
+ * @param url URL is where the POST goes. Changing it is the one edit that redirects an org's events, which is why it is never bindable from a query string.
  */
 
 
 data class Endpoint (
 
+    /* CreatedAt is when the endpoint was registered, RFC3339 in UTC — stored in that spelling because it sorts as a string. */
     @SerializedName("created")
     val created: kotlin.String? = null,
 
-    /* Deliveries7d / Failures7d are cheap usage counters computed from the delivery log over usageWindow (not stored columns) and populated ONLY on list/get. They are 0 when there is no delivery history — never omitempty, so the console always sees them. */
+    /* Deliveries7d is how many deliveries SETTLED in the trailing 7 days — the attempts that ended ok or failed, so a delivery still retrying is in neither counter yet. It is counted from the log at read time rather than stored, and it is filled only on a list or a get; a create answers 0 because there is no history, which is why it is never omitted. */
     @SerializedName("deliveries7d")
     val deliveries7d: kotlin.Int? = null,
 
+    /* Description is the operator's own label for the endpoint. Never sent anywhere. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* Events are the subject patterns this endpoint subscribes to (\"commerce.order.>\"). An EMPTY list means every event, not none. */
     @SerializedName("events")
     val events: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Failures7d is how many of those settled as failed — the subscriber never accepted it and no further attempt will be made. It is the numerator to Deliveries7d, over the same window. */
     @SerializedName("failures7d")
     val failures7d: kotlin.Int? = null,
 
+    /* ID is the endpoint's handle, server-minted and stable for its life. It is what every other route here addresses. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Org is the tenant that owns the endpoint, taken from the validated principal rather than from any request field. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Secret is the HMAC-SHA256 signing key a subscriber recomputes the signature with. It is returned exactly ONCE, on create: a later read of the endpoint omits it, so a lost secret is replaced rather than recovered. */
     @SerializedName("secret")
     val secret: kotlin.String? = null,
 
+    /* Status is \"active\" or \"disabled\" — nothing else is accepted. A disabled endpoint keeps its subscription and receives no deliveries, except a manual test send, which goes out anyway. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* UpdatedAt is when its url, events, status or description last changed. */
     @SerializedName("updated")
     val updated: kotlin.String? = null,
 
+    /* URL is where the POST goes. Changing it is the one edit that redirects an org's events, which is why it is never bindable from a query string. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

@@ -21,44 +21,53 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param computeRef 
- * @param description 
- * @param executionMode 
- * @param instructions 
- * @param model 
- * @param name 
- * @param schedule 
- * @param serviceAccountId 
- * @param tools 
+ * @param computeRef ComputeRef optionally binds this bot to a visor machine. Opaque here, bounded at 256 characters, and not resolved — this package stores the reference and the binding's lifecycle belongs elsewhere.
+ * @param description Description is the one line published as the description of the `agent_<name>` tool, which is how another agent decides whether to call this one. Optional, and worth writing for exactly that reason.
+ * @param executionMode ExecutionMode is one-shot or long-running. Empty takes one-shot, which runs only when something POSTs to it. long-running additionally requires Schedule, and counts against a per-org cap that answers 409 when it is full.
+ * @param instructions Instructions is the system prompt, up to 32 KiB, stored verbatim. This is what the model reads; Description is what other CALLERS read.
+ * @param model Model names the model to run on. Omit it to take the deployment's configured default; name one and it is checked against the gateway's served catalogue here, so a model this deployment cannot serve is refused now rather than at the first run. Stored under our own name for it, whatever spelling arrives.
+ * @param name Name is the agent's org-unique handle and the only required field. It must match ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$, and a name already taken in this org is a 409 rather than an overwrite. It is permanent: no update route moves it.
+ * @param schedule Schedule is the 5-field cron a long-running agent fires on, parsed here so a bad expression is a 400 and not an agent that silently never runs. Required with long-running; DISCARDED for one-shot rather than stored unused.
+ * @param serviceAccountId ServiceAccountID optionally names the IAM agent service account (<org>-<agent>) a scheduled run should be billed AS, so an autonomous run is attributable to a principal rather than only to the org. Same 256-character bound, also unresolved here.
+ * @param tools Tools are the tool names this agent may call. Omitted or empty grants NONE — that default is the agent's authority and is not widened anywhere. The single entry \"*\" means whatever the fleet's tool door serves at the time of each run.
  */
 
 
 data class CreateAgentIn (
 
+    /* ComputeRef optionally binds this bot to a visor machine. Opaque here, bounded at 256 characters, and not resolved — this package stores the reference and the binding's lifecycle belongs elsewhere. */
     @SerializedName("computeRef")
     val computeRef: kotlin.String? = null,
 
+    /* Description is the one line published as the description of the `agent_<name>` tool, which is how another agent decides whether to call this one. Optional, and worth writing for exactly that reason. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* ExecutionMode is one-shot or long-running. Empty takes one-shot, which runs only when something POSTs to it. long-running additionally requires Schedule, and counts against a per-org cap that answers 409 when it is full. */
     @SerializedName("executionMode")
     val executionMode: kotlin.String? = null,
 
+    /* Instructions is the system prompt, up to 32 KiB, stored verbatim. This is what the model reads; Description is what other CALLERS read. */
     @SerializedName("instructions")
     val instructions: kotlin.String? = null,
 
+    /* Model names the model to run on. Omit it to take the deployment's configured default; name one and it is checked against the gateway's served catalogue here, so a model this deployment cannot serve is refused now rather than at the first run. Stored under our own name for it, whatever spelling arrives. */
     @SerializedName("model")
     val model: kotlin.String? = null,
 
+    /* Name is the agent's org-unique handle and the only required field. It must match ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$, and a name already taken in this org is a 409 rather than an overwrite. It is permanent: no update route moves it. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Schedule is the 5-field cron a long-running agent fires on, parsed here so a bad expression is a 400 and not an agent that silently never runs. Required with long-running; DISCARDED for one-shot rather than stored unused. */
     @SerializedName("schedule")
     val schedule: kotlin.String? = null,
 
+    /* ServiceAccountID optionally names the IAM agent service account (<org>-<agent>) a scheduled run should be billed AS, so an autonomous run is attributable to a principal rather than only to the org. Same 256-character bound, also unresolved here. */
     @SerializedName("serviceAccountId")
     val serviceAccountId: kotlin.String? = null,
 
+    /* Tools are the tool names this agent may call. Omitted or empty grants NONE — that default is the agent's authority and is not widened anywhere. The single entry \"*\" means whatever the fleet's tool door serves at the time of each run. */
     @SerializedName("tools")
     val tools: kotlin.collections.List<kotlin.String>? = null
 

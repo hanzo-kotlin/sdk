@@ -22,42 +22,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param category proposed slug (software|cloud|office|…)
- * @param currency 
- * @param issuedAt YYYY-MM-DD
- * @param lineItems 
- * @param merchant 
- * @param note 
- * @param taxCents 
- * @param totalCents 
+ * @param category Category is the expense bucket the SCANNER guessed, as a slug — a hint only. Vendor rules override it whenever they know better, so this is the model's reading and not the account the entry will land on.
+ * @param currency Currency is the ISO code the document is denominated in.
+ * @param issuedAt IssuedAt is the document's OWN date as YYYY-MM-DD — when the bill was issued, which is not when it was uploaded or when it will post.
+ * @param lineItems LineItems are the individual lines read off the document, where it had any. They need not sum to totalCents: a document may carry lines the scanner could not read, and the total is taken from the total.
+ * @param merchant Merchant is the supplier as printed on the document.
+ * @param note Note is anything else worth carrying from the document that has no field of its own.
+ * @param taxCents TaxCents is how much of that total is tax, in cents. It is part of totalCents, not additional to it.
+ * @param totalCents TotalCents is the document total in whole cents, tax INCLUDED.
  */
 
 
 data class Extracted (
 
-    /* proposed slug (software|cloud|office|…) */
+    /* Category is the expense bucket the SCANNER guessed, as a slug — a hint only. Vendor rules override it whenever they know better, so this is the model's reading and not the account the entry will land on. */
     @SerializedName("category")
     val category: kotlin.String? = null,
 
+    /* Currency is the ISO code the document is denominated in. */
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
-    /* YYYY-MM-DD */
+    /* IssuedAt is the document's OWN date as YYYY-MM-DD — when the bill was issued, which is not when it was uploaded or when it will post. */
     @SerializedName("issuedAt")
     val issuedAt: kotlin.String? = null,
 
+    /* LineItems are the individual lines read off the document, where it had any. They need not sum to totalCents: a document may carry lines the scanner could not read, and the total is taken from the total. */
     @SerializedName("lineItems")
     val lineItems: kotlin.collections.List<LineItem>? = null,
 
+    /* Merchant is the supplier as printed on the document. */
     @SerializedName("merchant")
     val merchant: kotlin.String? = null,
 
+    /* Note is anything else worth carrying from the document that has no field of its own. */
     @SerializedName("note")
     val note: kotlin.String? = null,
 
+    /* TaxCents is how much of that total is tax, in cents. It is part of totalCents, not additional to it. */
     @SerializedName("taxCents")
     val taxCents: kotlin.Int? = null,
 
+    /* TotalCents is the document total in whole cents, tax INCLUDED. */
     @SerializedName("totalCents")
     val totalCents: kotlin.Int? = null
 

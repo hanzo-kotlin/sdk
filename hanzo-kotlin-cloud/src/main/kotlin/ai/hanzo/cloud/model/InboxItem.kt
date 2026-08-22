@@ -22,41 +22,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param category 
- * @param confidence 
- * @param createdAt 
- * @param extracted 
- * @param filename 
- * @param id the file hash (== a scan's ScanID)
- * @param status 
- * @param vendor 
+ * @param category Category is the expense account the scanner proposed, as a chart number — a PROPOSAL, not a posting: nothing is booked until it is accepted.
+ * @param confidence Confidence is how sure the scanner is of that reading, and is the signal for whether a person needs to check it before it is booked.
+ * @param createdAt CreatedAt is when the document was uploaded.
+ * @param extracted Extracted is what the scanner read off the document. Absent until it has been scanned, so its absence is \"not read yet\", never \"nothing on it\".
+ * @param filename Filename is the name the document was uploaded under, for a person to recognise it by. It is not part of the item's identity.
+ * @param id ID is the CONTENT HASH of the uploaded bytes, which is what makes the queue idempotent: re-uploading the same document returns this item rather than adding a second one. It is also the id the scan of this document carries.
+ * @param status Status is where the document is in the queue — unsorted until the scanner has read it, and thereafter whether it is waiting on a person or has been booked.
+ * @param vendor Vendor is the supplier the scanner identified, surfaced beside the item so a queue renders without opening each document.
  */
 
 
 data class InboxItem (
 
+    /* Category is the expense account the scanner proposed, as a chart number — a PROPOSAL, not a posting: nothing is booked until it is accepted. */
     @SerializedName("category")
     val category: kotlin.String? = null,
 
+    /* Confidence is how sure the scanner is of that reading, and is the signal for whether a person needs to check it before it is booked. */
     @SerializedName("confidence")
     val confidence: kotlin.String? = null,
 
+    /* CreatedAt is when the document was uploaded. */
     @SerializedName("createdAt")
     val createdAt: kotlin.String? = null,
 
+    /* Extracted is what the scanner read off the document. Absent until it has been scanned, so its absence is \"not read yet\", never \"nothing on it\". */
     @SerializedName("extracted")
     val extracted: Extracted? = null,
 
+    /* Filename is the name the document was uploaded under, for a person to recognise it by. It is not part of the item's identity. */
     @SerializedName("filename")
     val filename: kotlin.String? = null,
 
-    /* the file hash (== a scan's ScanID) */
+    /* ID is the CONTENT HASH of the uploaded bytes, which is what makes the queue idempotent: re-uploading the same document returns this item rather than adding a second one. It is also the id the scan of this document carries. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Status is where the document is in the queue — unsorted until the scanner has read it, and thereafter whether it is waiting on a person or has been booked. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Vendor is the supplier the scanner identified, surfaced beside the item so a queue renders without opening each document. */
     @SerializedName("vendor")
     val vendor: kotlin.String? = null
 

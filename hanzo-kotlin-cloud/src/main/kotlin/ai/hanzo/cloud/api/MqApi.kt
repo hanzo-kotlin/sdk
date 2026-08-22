@@ -57,7 +57,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/mq/streams/{name}
+     * DELETE /v1/mq/stream/{name}
      * Removes a stream with all its messages and consumers.
      * Removes a stream with all its messages and consumers. Irreversible.
      * @param name Name is the stream name, from the path.
@@ -69,8 +69,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteMqStreamsByName(name: kotlin.String) : Unit {
-        val localVarResponse = deleteMqStreamsByNameWithHttpInfo(name = name)
+    fun deleteMqStreamByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteMqStreamByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -88,7 +88,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/mq/streams/{name}
+     * DELETE /v1/mq/stream/{name}
      * Removes a stream with all its messages and consumers.
      * Removes a stream with all its messages and consumers. Irreversible.
      * @param name Name is the stream name, from the path.
@@ -97,8 +97,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteMqStreamsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteMqStreamsByNameRequestConfig(name = name)
+    fun deleteMqStreamByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMqStreamByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -106,19 +106,19 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteMqStreamsByName
+     * To obtain the request config of the operation deleteMqStreamByName
      *
      * @param name Name is the stream name, from the path.
      * @return RequestConfig
      */
-    fun deleteMqStreamsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMqStreamByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/mq/stream/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -127,7 +127,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/mq/streams/{name}/messages/{seq}
+     * DELETE /v1/mq/stream/{name}/message/{seq}
      * Erases one message by sequence; the sequence gap remains.
      * Erases one message by sequence; the sequence gap remains.
      * @param name Name is the stream name, from the path.
@@ -140,8 +140,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteMqStreamsByNameMessagesBySeq(name: kotlin.String, seq: kotlin.Int) : Unit {
-        val localVarResponse = deleteMqStreamsByNameMessagesBySeqWithHttpInfo(name = name, seq = seq)
+    fun deleteMqStreamByNameMessageBySeq(name: kotlin.String, seq: kotlin.Int) : Unit {
+        val localVarResponse = deleteMqStreamByNameMessageBySeqWithHttpInfo(name = name, seq = seq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -159,7 +159,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/mq/streams/{name}/messages/{seq}
+     * DELETE /v1/mq/stream/{name}/message/{seq}
      * Erases one message by sequence; the sequence gap remains.
      * Erases one message by sequence; the sequence gap remains.
      * @param name Name is the stream name, from the path.
@@ -169,8 +169,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteMqStreamsByNameMessagesBySeqWithHttpInfo(name: kotlin.String, seq: kotlin.Int) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteMqStreamsByNameMessagesBySeqRequestConfig(name = name, seq = seq)
+    fun deleteMqStreamByNameMessageBySeqWithHttpInfo(name: kotlin.String, seq: kotlin.Int) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMqStreamByNameMessageBySeqRequestConfig(name = name, seq = seq)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -178,20 +178,20 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteMqStreamsByNameMessagesBySeq
+     * To obtain the request config of the operation deleteMqStreamByNameMessageBySeq
      *
      * @param name Name is the stream name, from the path.
      * @param seq Seq is the message&#39;s stream sequence, from the path.
      * @return RequestConfig
      */
-    fun deleteMqStreamsByNameMessagesBySeqRequestConfig(name: kotlin.String, seq: kotlin.Int) : RequestConfig<Unit> {
+    fun deleteMqStreamByNameMessageBySeqRequestConfig(name: kotlin.String, seq: kotlin.Int) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/mq/streams/{name}/messages/{seq}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"seq"+"}", encodeURIComponent(seq.toString())),
+            path = "/v1/mq/stream/{name}/message/{seq}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"seq"+"}", encodeURIComponent(seq.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -200,7 +200,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/mq/streams/{stream}/consumers/{name}
+     * DELETE /v1/mq/stream/{stream}/consumer/{name}
      * Removes a consumer and its delivery state; unacknowledged messages stay in the stream.
      * Removes a consumer and its delivery state; unacknowledged messages stay in the stream.
      * @param stream Stream is the stream name, from the path.
@@ -213,8 +213,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteMqStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : Unit {
-        val localVarResponse = deleteMqStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
+    fun deleteMqStreamByStreamConsumerByName(stream: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = deleteMqStreamByStreamConsumerByNameWithHttpInfo(stream = stream, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -232,7 +232,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * DELETE /v1/mq/streams/{stream}/consumers/{name}
+     * DELETE /v1/mq/stream/{stream}/consumer/{name}
      * Removes a consumer and its delivery state; unacknowledged messages stay in the stream.
      * Removes a consumer and its delivery state; unacknowledged messages stay in the stream.
      * @param stream Stream is the stream name, from the path.
@@ -242,8 +242,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteMqStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteMqStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
+    fun deleteMqStreamByStreamConsumerByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMqStreamByStreamConsumerByNameRequestConfig(stream = stream, name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -251,20 +251,20 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation deleteMqStreamsByStreamConsumersByName
+     * To obtain the request config of the operation deleteMqStreamByStreamConsumerByName
      *
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
      * @return RequestConfig
      */
-    fun deleteMqStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMqStreamByStreamConsumerByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/mq/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/mq/stream/{stream}/consumer/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -413,7 +413,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams
+     * GET /v1/mq/stream
      * Returns the org&#39;s streams, name-ordered, with their live state.
      * Returns the org&#39;s streams, name-ordered, with their live state.
      * @param limit Limit caps the streams returned (1–1000, default 100). (optional)
@@ -427,8 +427,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getMqStreams(limit: kotlin.Int? = null, offset: kotlin.Int? = null) : Streams {
-        val localVarResponse = getMqStreamsWithHttpInfo(limit = limit, offset = offset)
+    fun getMqStream(limit: kotlin.Int? = null, offset: kotlin.Int? = null) : Streams {
+        val localVarResponse = getMqStreamWithHttpInfo(limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Streams
@@ -446,7 +446,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams
+     * GET /v1/mq/stream
      * Returns the org&#39;s streams, name-ordered, with their live state.
      * Returns the org&#39;s streams, name-ordered, with their live state.
      * @param limit Limit caps the streams returned (1–1000, default 100). (optional)
@@ -457,8 +457,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getMqStreamsWithHttpInfo(limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<Streams?> {
-        val localVariableConfig = getMqStreamsRequestConfig(limit = limit, offset = offset)
+    fun getMqStreamWithHttpInfo(limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<Streams?> {
+        val localVariableConfig = getMqStreamRequestConfig(limit = limit, offset = offset)
 
         return request<Unit, Streams>(
             localVariableConfig
@@ -466,13 +466,13 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getMqStreams
+     * To obtain the request config of the operation getMqStream
      *
      * @param limit Limit caps the streams returned (1–1000, default 100). (optional)
      * @param offset Offset skips that many streams, name-ordered. (optional)
      * @return RequestConfig
      */
-    fun getMqStreamsRequestConfig(limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMqStreamRequestConfig(limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -488,7 +488,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/mq/streams",
+            path = "/v1/mq/stream",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -497,7 +497,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams/{name}
+     * GET /v1/mq/stream/{name}
      * Returns one stream&#39;s configuration and live state.
      * Returns one stream&#39;s configuration and live state.
      * @param name Name is the stream name, from the path.
@@ -510,8 +510,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getMqStreamsByName(name: kotlin.String) : Stream {
-        val localVarResponse = getMqStreamsByNameWithHttpInfo(name = name)
+    fun getMqStreamByName(name: kotlin.String) : Stream {
+        val localVarResponse = getMqStreamByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Stream
@@ -529,7 +529,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams/{name}
+     * GET /v1/mq/stream/{name}
      * Returns one stream&#39;s configuration and live state.
      * Returns one stream&#39;s configuration and live state.
      * @param name Name is the stream name, from the path.
@@ -539,8 +539,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getMqStreamsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Stream?> {
-        val localVariableConfig = getMqStreamsByNameRequestConfig(name = name)
+    fun getMqStreamByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Stream?> {
+        val localVariableConfig = getMqStreamByNameRequestConfig(name = name)
 
         return request<Unit, Stream>(
             localVariableConfig
@@ -548,12 +548,12 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getMqStreamsByName
+     * To obtain the request config of the operation getMqStreamByName
      *
      * @param name Name is the stream name, from the path.
      * @return RequestConfig
      */
-    fun getMqStreamsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getMqStreamByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -561,7 +561,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/mq/stream/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -570,7 +570,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams/{name}/messages
+     * GET /v1/mq/stream/{name}/message
      * Reads stored messages without a consumer: by sequence, by newest on a subject, or walking a subject forward from a sequence.
      * Reads stored messages without a consumer: by sequence, by newest on a subject, or walking a subject forward from a sequence.
      * @param name Name is the stream name, from the path.
@@ -587,8 +587,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getMqStreamsByNameMessages(name: kotlin.String, seq: kotlin.Int? = null, lastBySubject: kotlin.String? = null, nextBySubject: kotlin.String? = null, limit: kotlin.Int? = null) : ReadOut {
-        val localVarResponse = getMqStreamsByNameMessagesWithHttpInfo(name = name, seq = seq, lastBySubject = lastBySubject, nextBySubject = nextBySubject, limit = limit)
+    fun getMqStreamByNameMessage(name: kotlin.String, seq: kotlin.Int? = null, lastBySubject: kotlin.String? = null, nextBySubject: kotlin.String? = null, limit: kotlin.Int? = null) : ReadOut {
+        val localVarResponse = getMqStreamByNameMessageWithHttpInfo(name = name, seq = seq, lastBySubject = lastBySubject, nextBySubject = nextBySubject, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReadOut
@@ -606,7 +606,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams/{name}/messages
+     * GET /v1/mq/stream/{name}/message
      * Reads stored messages without a consumer: by sequence, by newest on a subject, or walking a subject forward from a sequence.
      * Reads stored messages without a consumer: by sequence, by newest on a subject, or walking a subject forward from a sequence.
      * @param name Name is the stream name, from the path.
@@ -620,8 +620,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getMqStreamsByNameMessagesWithHttpInfo(name: kotlin.String, seq: kotlin.Int?, lastBySubject: kotlin.String?, nextBySubject: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ReadOut?> {
-        val localVariableConfig = getMqStreamsByNameMessagesRequestConfig(name = name, seq = seq, lastBySubject = lastBySubject, nextBySubject = nextBySubject, limit = limit)
+    fun getMqStreamByNameMessageWithHttpInfo(name: kotlin.String, seq: kotlin.Int?, lastBySubject: kotlin.String?, nextBySubject: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ReadOut?> {
+        val localVariableConfig = getMqStreamByNameMessageRequestConfig(name = name, seq = seq, lastBySubject = lastBySubject, nextBySubject = nextBySubject, limit = limit)
 
         return request<Unit, ReadOut>(
             localVariableConfig
@@ -629,7 +629,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getMqStreamsByNameMessages
+     * To obtain the request config of the operation getMqStreamByNameMessage
      *
      * @param name Name is the stream name, from the path.
      * @param seq Seq reads the message at this sequence (with next_by_subject: the walk&#39;s start). (optional)
@@ -638,7 +638,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param limit Limit caps a next_by_subject walk (1–1000, default 100). (optional)
      * @return RequestConfig
      */
-    fun getMqStreamsByNameMessagesRequestConfig(name: kotlin.String, seq: kotlin.Int?, lastBySubject: kotlin.String?, nextBySubject: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMqStreamByNameMessageRequestConfig(name: kotlin.String, seq: kotlin.Int?, lastBySubject: kotlin.String?, nextBySubject: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -660,7 +660,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/mq/streams/{name}/messages".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/mq/stream/{name}/message".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -669,7 +669,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams/{stream}/consumers
+     * GET /v1/mq/stream/{stream}/consumer
      * Returns a stream&#39;s consumers, name-ordered, with delivery state.
      * Returns a stream&#39;s consumers, name-ordered, with delivery state.
      * @param stream Stream is the stream name, from the path.
@@ -684,8 +684,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getMqStreamsByStreamConsumers(stream: kotlin.String, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : PickOut {
-        val localVarResponse = getMqStreamsByStreamConsumersWithHttpInfo(stream = stream, limit = limit, offset = offset)
+    fun getMqStreamByStreamConsumer(stream: kotlin.String, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : PickOut {
+        val localVarResponse = getMqStreamByStreamConsumerWithHttpInfo(stream = stream, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PickOut
@@ -703,7 +703,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams/{stream}/consumers
+     * GET /v1/mq/stream/{stream}/consumer
      * Returns a stream&#39;s consumers, name-ordered, with delivery state.
      * Returns a stream&#39;s consumers, name-ordered, with delivery state.
      * @param stream Stream is the stream name, from the path.
@@ -715,8 +715,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getMqStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<PickOut?> {
-        val localVariableConfig = getMqStreamsByStreamConsumersRequestConfig(stream = stream, limit = limit, offset = offset)
+    fun getMqStreamByStreamConsumerWithHttpInfo(stream: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<PickOut?> {
+        val localVariableConfig = getMqStreamByStreamConsumerRequestConfig(stream = stream, limit = limit, offset = offset)
 
         return request<Unit, PickOut>(
             localVariableConfig
@@ -724,14 +724,14 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getMqStreamsByStreamConsumers
+     * To obtain the request config of the operation getMqStreamByStreamConsumer
      *
      * @param stream Stream is the stream name, from the path.
      * @param limit Limit caps the consumers returned (1–1000, default 100). (optional)
      * @param offset Offset skips that many consumers, name-ordered. (optional)
      * @return RequestConfig
      */
-    fun getMqStreamsByStreamConsumersRequestConfig(stream: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getMqStreamByStreamConsumerRequestConfig(stream: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -747,7 +747,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/mq/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
+            path = "/v1/mq/stream/{stream}/consumer".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -756,7 +756,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams/{stream}/consumers/{name}
+     * GET /v1/mq/stream/{stream}/consumer/{name}
      * Returns one consumer&#39;s configuration and delivery state.
      * Returns one consumer&#39;s configuration and delivery state.
      * @param stream Stream is the stream name, from the path.
@@ -770,8 +770,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getMqStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : Consumer {
-        val localVarResponse = getMqStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
+    fun getMqStreamByStreamConsumerByName(stream: kotlin.String, name: kotlin.String) : Consumer {
+        val localVarResponse = getMqStreamByStreamConsumerByNameWithHttpInfo(stream = stream, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Consumer
@@ -789,7 +789,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * GET /v1/mq/streams/{stream}/consumers/{name}
+     * GET /v1/mq/stream/{stream}/consumer/{name}
      * Returns one consumer&#39;s configuration and delivery state.
      * Returns one consumer&#39;s configuration and delivery state.
      * @param stream Stream is the stream name, from the path.
@@ -800,8 +800,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getMqStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Consumer?> {
-        val localVariableConfig = getMqStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
+    fun getMqStreamByStreamConsumerByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Consumer?> {
+        val localVariableConfig = getMqStreamByStreamConsumerByNameRequestConfig(stream = stream, name = name)
 
         return request<Unit, Consumer>(
             localVariableConfig
@@ -809,13 +809,13 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation getMqStreamsByStreamConsumersByName
+     * To obtain the request config of the operation getMqStreamByStreamConsumerByName
      *
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
      * @return RequestConfig
      */
-    fun getMqStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getMqStreamByStreamConsumerByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -823,7 +823,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/mq/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/mq/stream/{stream}/consumer/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -832,7 +832,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/mq/streams
+     * POST /v1/mq/stream
      * Creates a durable stream in the org&#39;s namespace and returns it.
      * Creates a durable stream in the org&#39;s namespace and returns it.
      * @param config 
@@ -845,8 +845,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postMqStreams(config: Config) : Stream {
-        val localVarResponse = postMqStreamsWithHttpInfo(config = config)
+    fun postMqStream(config: Config) : Stream {
+        val localVarResponse = postMqStreamWithHttpInfo(config = config)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Stream
@@ -864,7 +864,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/mq/streams
+     * POST /v1/mq/stream
      * Creates a durable stream in the org&#39;s namespace and returns it.
      * Creates a durable stream in the org&#39;s namespace and returns it.
      * @param config 
@@ -874,8 +874,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postMqStreamsWithHttpInfo(config: Config) : ApiResponse<Stream?> {
-        val localVariableConfig = postMqStreamsRequestConfig(config = config)
+    fun postMqStreamWithHttpInfo(config: Config) : ApiResponse<Stream?> {
+        val localVariableConfig = postMqStreamRequestConfig(config = config)
 
         return request<Config, Stream>(
             localVariableConfig
@@ -883,12 +883,12 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postMqStreams
+     * To obtain the request config of the operation postMqStream
      *
      * @param config 
      * @return RequestConfig
      */
-    fun postMqStreamsRequestConfig(config: Config) : RequestConfig<Config> {
+    fun postMqStreamRequestConfig(config: Config) : RequestConfig<Config> {
         val localVariableBody = config
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -897,7 +897,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/mq/streams",
+            path = "/v1/mq/stream",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -906,7 +906,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/mq/streams/{name}/purge
+     * POST /v1/mq/stream/{name}/purge
      * Removes messages from a stream, leaving its consumers in place.
      * Removes messages from a stream, leaving its consumers in place.
      * @param name Name is the stream name, from the path.
@@ -920,8 +920,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postMqStreamsByNamePurge(name: kotlin.String, purge: Purge) : PurgeOut {
-        val localVarResponse = postMqStreamsByNamePurgeWithHttpInfo(name = name, purge = purge)
+    fun postMqStreamByNamePurge(name: kotlin.String, purge: Purge) : PurgeOut {
+        val localVarResponse = postMqStreamByNamePurgeWithHttpInfo(name = name, purge = purge)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PurgeOut
@@ -939,7 +939,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/mq/streams/{name}/purge
+     * POST /v1/mq/stream/{name}/purge
      * Removes messages from a stream, leaving its consumers in place.
      * Removes messages from a stream, leaving its consumers in place.
      * @param name Name is the stream name, from the path.
@@ -950,8 +950,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postMqStreamsByNamePurgeWithHttpInfo(name: kotlin.String, purge: Purge) : ApiResponse<PurgeOut?> {
-        val localVariableConfig = postMqStreamsByNamePurgeRequestConfig(name = name, purge = purge)
+    fun postMqStreamByNamePurgeWithHttpInfo(name: kotlin.String, purge: Purge) : ApiResponse<PurgeOut?> {
+        val localVariableConfig = postMqStreamByNamePurgeRequestConfig(name = name, purge = purge)
 
         return request<Purge, PurgeOut>(
             localVariableConfig
@@ -959,13 +959,13 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postMqStreamsByNamePurge
+     * To obtain the request config of the operation postMqStreamByNamePurge
      *
      * @param name Name is the stream name, from the path.
      * @param purge 
      * @return RequestConfig
      */
-    fun postMqStreamsByNamePurgeRequestConfig(name: kotlin.String, purge: Purge) : RequestConfig<Purge> {
+    fun postMqStreamByNamePurgeRequestConfig(name: kotlin.String, purge: Purge) : RequestConfig<Purge> {
         val localVariableBody = purge
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -974,7 +974,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/mq/streams/{name}/purge".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/mq/stream/{name}/purge".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -983,7 +983,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/mq/streams/{stream}/consumers
+     * POST /v1/mq/stream/{stream}/consumer
      * Creates a durable pull consumer on a stream and returns it.
      * Creates a durable pull consumer on a stream and returns it.
      * @param stream Stream is the stream name, from the path.
@@ -997,8 +997,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postMqStreamsByStreamConsumers(stream: kotlin.String, makeIn: MakeIn) : Consumer {
-        val localVarResponse = postMqStreamsByStreamConsumersWithHttpInfo(stream = stream, makeIn = makeIn)
+    fun postMqStreamByStreamConsumer(stream: kotlin.String, makeIn: MakeIn) : Consumer {
+        val localVarResponse = postMqStreamByStreamConsumerWithHttpInfo(stream = stream, makeIn = makeIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Consumer
@@ -1016,7 +1016,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/mq/streams/{stream}/consumers
+     * POST /v1/mq/stream/{stream}/consumer
      * Creates a durable pull consumer on a stream and returns it.
      * Creates a durable pull consumer on a stream and returns it.
      * @param stream Stream is the stream name, from the path.
@@ -1027,8 +1027,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postMqStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String, makeIn: MakeIn) : ApiResponse<Consumer?> {
-        val localVariableConfig = postMqStreamsByStreamConsumersRequestConfig(stream = stream, makeIn = makeIn)
+    fun postMqStreamByStreamConsumerWithHttpInfo(stream: kotlin.String, makeIn: MakeIn) : ApiResponse<Consumer?> {
+        val localVariableConfig = postMqStreamByStreamConsumerRequestConfig(stream = stream, makeIn = makeIn)
 
         return request<MakeIn, Consumer>(
             localVariableConfig
@@ -1036,13 +1036,13 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postMqStreamsByStreamConsumers
+     * To obtain the request config of the operation postMqStreamByStreamConsumer
      *
      * @param stream Stream is the stream name, from the path.
      * @param makeIn 
      * @return RequestConfig
      */
-    fun postMqStreamsByStreamConsumersRequestConfig(stream: kotlin.String, makeIn: MakeIn) : RequestConfig<MakeIn> {
+    fun postMqStreamByStreamConsumerRequestConfig(stream: kotlin.String, makeIn: MakeIn) : RequestConfig<MakeIn> {
         val localVariableBody = makeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1051,7 +1051,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/mq/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
+            path = "/v1/mq/stream/{stream}/consumer".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1060,7 +1060,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/mq/streams/{stream}/consumers/{name}/next
+     * POST /v1/mq/stream/{stream}/consumer/{name}/next
      * Pulls the consumer&#39;s next batch.
      * Pulls the consumer&#39;s next batch. Delivered messages are acknowledged on delivery — the broker will not redeliver what this call returns; an empty wait answers 408.
      * @param stream Stream is the stream name, from the path.
@@ -1075,8 +1075,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postMqStreamsByStreamConsumersByNameNext(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : ReadOut {
-        val localVarResponse = postMqStreamsByStreamConsumersByNameNextWithHttpInfo(stream = stream, name = name, nextIn = nextIn)
+    fun postMqStreamByStreamConsumerByNameNext(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : ReadOut {
+        val localVarResponse = postMqStreamByStreamConsumerByNameNextWithHttpInfo(stream = stream, name = name, nextIn = nextIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ReadOut
@@ -1094,7 +1094,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * POST /v1/mq/streams/{stream}/consumers/{name}/next
+     * POST /v1/mq/stream/{stream}/consumer/{name}/next
      * Pulls the consumer&#39;s next batch.
      * Pulls the consumer&#39;s next batch. Delivered messages are acknowledged on delivery — the broker will not redeliver what this call returns; an empty wait answers 408.
      * @param stream Stream is the stream name, from the path.
@@ -1106,8 +1106,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postMqStreamsByStreamConsumersByNameNextWithHttpInfo(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : ApiResponse<ReadOut?> {
-        val localVariableConfig = postMqStreamsByStreamConsumersByNameNextRequestConfig(stream = stream, name = name, nextIn = nextIn)
+    fun postMqStreamByStreamConsumerByNameNextWithHttpInfo(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : ApiResponse<ReadOut?> {
+        val localVariableConfig = postMqStreamByStreamConsumerByNameNextRequestConfig(stream = stream, name = name, nextIn = nextIn)
 
         return request<NextIn, ReadOut>(
             localVariableConfig
@@ -1115,14 +1115,14 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation postMqStreamsByStreamConsumersByNameNext
+     * To obtain the request config of the operation postMqStreamByStreamConsumerByNameNext
      *
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
      * @param nextIn 
      * @return RequestConfig
      */
-    fun postMqStreamsByStreamConsumersByNameNextRequestConfig(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : RequestConfig<NextIn> {
+    fun postMqStreamByStreamConsumerByNameNextRequestConfig(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : RequestConfig<NextIn> {
         val localVariableBody = nextIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1131,7 +1131,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/mq/streams/{stream}/consumers/{name}/next".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/mq/stream/{stream}/consumer/{name}/next".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1140,7 +1140,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * PUT /v1/mq/streams/{name}
+     * PUT /v1/mq/stream/{name}
      * Reconfigures an existing stream; the path names the stream, and the immutable fields (storage, retention) must restate what they are.
      * Reconfigures an existing stream; the path names the stream, and the immutable fields (storage, retention) must restate what they are.
      * @param name Name is the stream name, unique within the org (alphanumeric, hyphens, underscores).
@@ -1154,8 +1154,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putMqStreamsByName(name: kotlin.String, config: Config) : Stream {
-        val localVarResponse = putMqStreamsByNameWithHttpInfo(name = name, config = config)
+    fun putMqStreamByName(name: kotlin.String, config: Config) : Stream {
+        val localVarResponse = putMqStreamByNameWithHttpInfo(name = name, config = config)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as Stream
@@ -1173,7 +1173,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * PUT /v1/mq/streams/{name}
+     * PUT /v1/mq/stream/{name}
      * Reconfigures an existing stream; the path names the stream, and the immutable fields (storage, retention) must restate what they are.
      * Reconfigures an existing stream; the path names the stream, and the immutable fields (storage, retention) must restate what they are.
      * @param name Name is the stream name, unique within the org (alphanumeric, hyphens, underscores).
@@ -1184,8 +1184,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putMqStreamsByNameWithHttpInfo(name: kotlin.String, config: Config) : ApiResponse<Stream?> {
-        val localVariableConfig = putMqStreamsByNameRequestConfig(name = name, config = config)
+    fun putMqStreamByNameWithHttpInfo(name: kotlin.String, config: Config) : ApiResponse<Stream?> {
+        val localVariableConfig = putMqStreamByNameRequestConfig(name = name, config = config)
 
         return request<Config, Stream>(
             localVariableConfig
@@ -1193,13 +1193,13 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation putMqStreamsByName
+     * To obtain the request config of the operation putMqStreamByName
      *
      * @param name Name is the stream name, unique within the org (alphanumeric, hyphens, underscores).
      * @param config 
      * @return RequestConfig
      */
-    fun putMqStreamsByNameRequestConfig(name: kotlin.String, config: Config) : RequestConfig<Config> {
+    fun putMqStreamByNameRequestConfig(name: kotlin.String, config: Config) : RequestConfig<Config> {
         val localVariableBody = config
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1208,7 +1208,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
         return RequestConfig(
             method = RequestMethod.PUT,
-            path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            path = "/v1/mq/stream/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

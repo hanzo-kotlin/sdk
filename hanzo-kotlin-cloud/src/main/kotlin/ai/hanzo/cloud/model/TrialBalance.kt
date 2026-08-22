@@ -22,32 +22,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param balanced 
- * @param from 
- * @param rows 
- * @param to 
- * @param totalCredit 
- * @param totalDebit 
+ * @param balanced Balanced is the proof this report exists to give: whether total debits equal total credits. It is computed from the rows above, never assumed, and false means the ledger itself is broken rather than that the report is wrong.
+ * @param from From is the posting time the window opens at, as it was asked for. Absent means the report runs from the beginning of the ledger.
+ * @param rows Rows are the accounts that MOVED in one of the windows. An account that never moved is omitted rather than listed at zero, so this is shorter than the chart.
+ * @param to To is the posting time the window closes at, inclusive. Absent means \"up to now\" — every posting the ledger holds.
+ * @param totalCredit TotalCredit is the sum of every row's closing credit column, in cents.
+ * @param totalDebit TotalDebit is the sum of every row's CLOSING debit column, in cents.
  */
 
 
 data class TrialBalance (
 
+    /* Balanced is the proof this report exists to give: whether total debits equal total credits. It is computed from the rows above, never assumed, and false means the ledger itself is broken rather than that the report is wrong. */
     @SerializedName("balanced")
     val balanced: kotlin.Boolean? = null,
 
+    /* From is the posting time the window opens at, as it was asked for. Absent means the report runs from the beginning of the ledger. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
+    /* Rows are the accounts that MOVED in one of the windows. An account that never moved is omitted rather than listed at zero, so this is shorter than the chart. */
     @SerializedName("rows")
     val rows: kotlin.collections.List<TrialBalanceRow>? = null,
 
+    /* To is the posting time the window closes at, inclusive. Absent means \"up to now\" — every posting the ledger holds. */
     @SerializedName("to")
     val to: kotlin.String? = null,
 
+    /* TotalCredit is the sum of every row's closing credit column, in cents. */
     @SerializedName("totalCredit")
     val totalCredit: kotlin.Int? = null,
 
+    /* TotalDebit is the sum of every row's CLOSING debit column, in cents. */
     @SerializedName("totalDebit")
     val totalDebit: kotlin.Int? = null
 

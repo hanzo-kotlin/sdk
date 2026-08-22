@@ -24,32 +24,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param custom 
- * @param funnel 
- * @param progress 
- * @param steps 
- * @param title 
- * @param version 
+ * @param custom Custom is true when the org replaced the shared playbook with one of its own — the difference between \"everyone's checklist\" and \"the one you authored\".
+ * @param funnel Funnel is the org's analytics lens, present only where the read asked for it — absent means it was not requested, never that the org has no traffic.
+ * @param progress Progress is how far through the journey the org is.
+ * @param steps Steps are every enabled step with the org's own state folded in, in authoring order.
+ * @param title Title is the playbook's name as it heads the checklist.
+ * @param version Version identifies the playbook this journey came from, so a caller can tell that the checklist itself changed under them.
  */
 
 
 data class OverviewView (
 
+    /* Custom is true when the org replaced the shared playbook with one of its own — the difference between \"everyone's checklist\" and \"the one you authored\". */
     @SerializedName("custom")
     val custom: kotlin.Boolean? = null,
 
+    /* Funnel is the org's analytics lens, present only where the read asked for it — absent means it was not requested, never that the org has no traffic. */
     @SerializedName("funnel")
     val funnel: Funnel? = null,
 
+    /* Progress is how far through the journey the org is. */
     @SerializedName("progress")
     val progress: ProgressView? = null,
 
+    /* Steps are every enabled step with the org's own state folded in, in authoring order. */
     @SerializedName("steps")
     val steps: kotlin.collections.List<StepView>? = null,
 
+    /* Title is the playbook's name as it heads the checklist. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* Version identifies the playbook this journey came from, so a caller can tell that the checklist itself changed under them. */
     @SerializedName("version")
     val version: kotlin.String? = null
 

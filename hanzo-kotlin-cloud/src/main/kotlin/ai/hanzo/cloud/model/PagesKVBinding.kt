@@ -21,12 +21,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param namespaceId 
+ * @param namespaceId NamespaceID is the KV namespace this binding points at, by Cloudflare's id rather than its title. The BINDING NAME — what the Worker code reads it as — is the map key this value sits under, not a field here.
  */
 
 
 data class PagesKVBinding (
 
+    /* NamespaceID is the KV namespace this binding points at, by Cloudflare's id rather than its title. The BINDING NAME — what the Worker code reads it as — is the map key this value sits under, not a field here. */
     @SerializedName("namespace_id")
     val namespaceId: kotlin.String? = null
 

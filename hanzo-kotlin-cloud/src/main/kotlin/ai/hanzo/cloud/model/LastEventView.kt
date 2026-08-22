@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param actor 
- * @param at 
- * @param kind 
- * @param preview 
- * @param seq 
+ * @param actor Actor is who produced the turn, defaulted to the calling principal when the writer named nobody.
+ * @param at At is when the turn was recorded, RFC 3339 in UTC to the second.
+ * @param kind Kind is what the turn was, from the log's closed six: message, tool-call, spawn, log, status, control.
+ * @param preview Preview is the first 240 bytes of the event's payload, cut without regard for the JSON inside it — it is a string to SHOW, never a value to parse. Read the detail or the stream for the whole payload.
+ * @param seq Seq is that event's position in the session's log — monotonic from 1, per session. A reader holding it can ask the detail or stream reads for everything after it, so this doubles as the list's resume cursor.
  */
 
 
 data class LastEventView (
 
+    /* Actor is who produced the turn, defaulted to the calling principal when the writer named nobody. */
     @SerializedName("actor")
     val actor: kotlin.String? = null,
 
+    /* At is when the turn was recorded, RFC 3339 in UTC to the second. */
     @SerializedName("at")
     val at: kotlin.String? = null,
 
+    /* Kind is what the turn was, from the log's closed six: message, tool-call, spawn, log, status, control. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Preview is the first 240 bytes of the event's payload, cut without regard for the JSON inside it — it is a string to SHOW, never a value to parse. Read the detail or the stream for the whole payload. */
     @SerializedName("preview")
     val preview: kotlin.String? = null,
 
+    /* Seq is that event's position in the session's log — monotonic from 1, per session. A reader holding it can ask the detail or stream reads for everything after it, so this doubles as the list's resume cursor. */
     @SerializedName("seq")
     val seq: kotlin.Int? = null
 

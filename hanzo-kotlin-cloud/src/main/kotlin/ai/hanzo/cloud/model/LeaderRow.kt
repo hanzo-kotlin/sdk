@@ -21,24 +21,51 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param ciHigh CIHigh is the upper bound of that interval. Wilson rather than the normal approximation because the normal one produces bounds past 100 exactly where benchmark scores live — at 194/198 that is the top of the board, not a corner case.
+ * @param ciLow CILow and CIHigh are the 95% Wilson interval on Measured, in percent. They are what makes the score comparable: at n=198 a 98% carries roughly ±2 points, so most differences at the top of a board are not distinguishable and a bare number implies a precision it does not have. Absent when there is no measurement.
+ * @param claims Claims is how many independent claims exist for this model on this benchmark. More than one means several sources reported it.
  * @param gap published − measured (the arena signal)
+ * @param mean Mean is the unweighted average of every claim, which answers a different question from Published: what the field says on average, rather than what the vendor says about itself. With one claim the two are equal.
  * @param measured hanzo-measured accuracy % (nil if unrun)
+ * @param measuredAt MeasuredAt is when the run behind Measured was recorded.
  * @param model the model this row scores
  * @param n coverage — NEVER compare across different n
  * @param protocol how the vendor scored their claim: single-attempt, pass@k or agentic
  * @param published provider-claimed % (nil if none)
+ * @param run Run names the measurement Measured came from, and MeasuredAt is when it ran. A score with no date is not a fact about a model, it is a fact about a model on a day — and models change, so the date is what makes the number checkable rather than merely quoted.
+ * @param spread Spread is the distance between the highest and lowest of them, nil when there is only one. It is the disagreement AMONG sources, which a single Published number cannot show — signal in the same way the published-minus-measured gap is.
  */
 
 
 data class LeaderRow (
 
+    /* CIHigh is the upper bound of that interval. Wilson rather than the normal approximation because the normal one produces bounds past 100 exactly where benchmark scores live — at 194/198 that is the top of the board, not a corner case. */
+    @SerializedName("ciHigh")
+    val ciHigh: java.math.BigDecimal? = null,
+
+    /* CILow and CIHigh are the 95% Wilson interval on Measured, in percent. They are what makes the score comparable: at n=198 a 98% carries roughly ±2 points, so most differences at the top of a board are not distinguishable and a bare number implies a precision it does not have. Absent when there is no measurement. */
+    @SerializedName("ciLow")
+    val ciLow: java.math.BigDecimal? = null,
+
+    /* Claims is how many independent claims exist for this model on this benchmark. More than one means several sources reported it. */
+    @SerializedName("claims")
+    val claims: kotlin.Int? = null,
+
     /* published − measured (the arena signal) */
     @SerializedName("gap")
     val gap: java.math.BigDecimal? = null,
 
+    /* Mean is the unweighted average of every claim, which answers a different question from Published: what the field says on average, rather than what the vendor says about itself. With one claim the two are equal. */
+    @SerializedName("mean")
+    val mean: java.math.BigDecimal? = null,
+
     /* hanzo-measured accuracy % (nil if unrun) */
     @SerializedName("measured")
     val measured: java.math.BigDecimal? = null,
+
+    /* MeasuredAt is when the run behind Measured was recorded. */
+    @SerializedName("measuredAt")
+    val measuredAt: java.time.OffsetDateTime? = null,
 
     /* the model this row scores */
     @SerializedName("model")
@@ -54,7 +81,15 @@ data class LeaderRow (
 
     /* provider-claimed % (nil if none) */
     @SerializedName("published")
-    val published: java.math.BigDecimal? = null
+    val published: java.math.BigDecimal? = null,
+
+    /* Run names the measurement Measured came from, and MeasuredAt is when it ran. A score with no date is not a fact about a model, it is a fact about a model on a day — and models change, so the date is what makes the number checkable rather than merely quoted. */
+    @SerializedName("run")
+    val run: kotlin.String? = null,
+
+    /* Spread is the distance between the highest and lowest of them, nil when there is only one. It is the disagreement AMONG sources, which a single Published number cannot show — signal in the same way the published-minus-measured gap is. */
+    @SerializedName("spread")
+    val spread: java.math.BigDecimal? = null
 
 ) {
 

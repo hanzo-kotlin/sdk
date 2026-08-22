@@ -22,53 +22,64 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param agent 
- * @param endedAt 
- * @param model 
- * @param org 
- * @param project 
- * @param repo 
- * @param session 
- * @param startedAt 
- * @param status 
- * @param title 
- * @param turns 
+ * @param agent Agent is the label the surface that did the work calls itself by.
+ * @param endedAt EndedAt is when it finished, same format. Empty means it has not — the build is still going.
+ * @param model Model is the model that did the work, taken from the FIRST turn whose body names one — a transcript states it, this route does not resolve it. Empty when no turn said.
+ * @param org Org is the org that published this build, echoed from the URL. It is part of the build's public ADDRESS and not a tenant key — this route is anonymous, and the only rows it can reach are ones an author explicitly published.
+ * @param project Project is the product's slug, the other half of that address.
+ * @param repo Repo is the repository the work was done in, as the session reported it.
+ * @param session Session is the id of the agent session this story IS — the same value a produced commit carries in its `Hanzo-Session:` trailer, which is what ties the repository's history to this page.
+ * @param startedAt StartedAt is when the session opened, RFC 3339 in UTC.
+ * @param status Status is the session's own: running, paused, done or error. A build can be read while it is still being written, so this is not always terminal — and an `error` build is still a readable story, not a missing page.
+ * @param title Title is the human line the session was opened or renamed with. Empty when nobody gave it one.
+ * @param turns Turns is the whole transcript, oldest first, capped at 1000: a published build is a story to read down, not an archive to page.
  * @param verify Verify is the exact command that re-derives every commit binding below straight from git, so nothing here has to be taken on trust.
  */
 
 
 data class BuildView (
 
+    /* Agent is the label the surface that did the work calls itself by. */
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* EndedAt is when it finished, same format. Empty means it has not — the build is still going. */
     @SerializedName("endedAt")
     val endedAt: kotlin.String? = null,
 
+    /* Model is the model that did the work, taken from the FIRST turn whose body names one — a transcript states it, this route does not resolve it. Empty when no turn said. */
     @SerializedName("model")
     val model: kotlin.String? = null,
 
+    /* Org is the org that published this build, echoed from the URL. It is part of the build's public ADDRESS and not a tenant key — this route is anonymous, and the only rows it can reach are ones an author explicitly published. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Project is the product's slug, the other half of that address. */
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Repo is the repository the work was done in, as the session reported it. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* Session is the id of the agent session this story IS — the same value a produced commit carries in its `Hanzo-Session:` trailer, which is what ties the repository's history to this page. */
     @SerializedName("session")
     val session: kotlin.String? = null,
 
+    /* StartedAt is when the session opened, RFC 3339 in UTC. */
     @SerializedName("startedAt")
     val startedAt: kotlin.String? = null,
 
+    /* Status is the session's own: running, paused, done or error. A build can be read while it is still being written, so this is not always terminal — and an `error` build is still a readable story, not a missing page. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Title is the human line the session was opened or renamed with. Empty when nobody gave it one. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* Turns is the whole transcript, oldest first, capped at 1000: a published build is a story to read down, not an archive to page. */
     @SerializedName("turns")
     val turns: kotlin.collections.List<BuildTurn>? = null,
 
