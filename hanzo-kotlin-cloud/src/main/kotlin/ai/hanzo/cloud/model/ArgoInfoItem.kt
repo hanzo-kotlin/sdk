@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param name 
- * @param `value` 
+ * @param name Name is the chip's label. The only one this projection produces is \"Image Tag\".
+ * @param `value` Value is the chip's value — for \"Image Tag\", the tag the node runs.
  */
 
 
 data class ArgoInfoItem (
 
+    /* Name is the chip's label. The only one this projection produces is \"Image Tag\". */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Value is the chip's value — for \"Image Tag\", the tag the node runs. */
     @SerializedName("value")
     val `value`: kotlin.String? = null
 

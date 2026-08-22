@@ -22,12 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `data` 
+ * @param `data` Data is this org's own messages, newest first — from our store rather than the carrier's, so it is the set an audit or a bill has to agree with.
  */
 
 
 data class MessageList (
 
+    /* Data is this org's own messages, newest first — from our store rather than the carrier's, so it is the set an audit or a bill has to agree with. */
     @SerializedName("data")
     val `data`: kotlin.collections.List<SMS>? = null
 

@@ -25,7 +25,6 @@ import ai.hanzo.cloud.model.DefsOut
 import ai.hanzo.cloud.model.DeletedOut
 import ai.hanzo.cloud.model.EvaluateIn
 import ai.hanzo.cloud.model.HealthOut
-import ai.hanzo.cloud.model.WaitlistModeView
 
 import com.google.gson.annotations.SerializedName
 
@@ -408,84 +407,6 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/flags/health",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/flags/waitlist
-     * Reports whether ONE host is currently gated by the launch waitlist.
-     * Reports whether ONE host is currently gated by the launch waitlist. It resolves the host to the service that governs it and reads that service&#39;s waitlist switch, so a guard sitting in front of a hosted surface can decide in one call whether to show the waitlist or the product. It answers for the ONE host asked about and never enumerates the registry, which is why it needs no credential. It FAILS OPEN: an unregistered host, an unmounted registry and a store fault all answer known&#x3D;false with mode&#x3D;false, so a request is never gated pre-boot or on a registry fault.
-     * @param host Host is the host to resolve, e.g. \&quot;chat.hanzo.ai\&quot;. Defaults to the request&#39;s own Host header when omitted, which is what lets a guard running on the governed host ask about itself with no argument. (optional)
-     * @return WaitlistModeView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getFlagsWaitlist(host: kotlin.String? = null) : WaitlistModeView {
-        val localVarResponse = getFlagsWaitlistWithHttpInfo(host = host)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as WaitlistModeView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/flags/waitlist
-     * Reports whether ONE host is currently gated by the launch waitlist.
-     * Reports whether ONE host is currently gated by the launch waitlist. It resolves the host to the service that governs it and reads that service&#39;s waitlist switch, so a guard sitting in front of a hosted surface can decide in one call whether to show the waitlist or the product. It answers for the ONE host asked about and never enumerates the registry, which is why it needs no credential. It FAILS OPEN: an unregistered host, an unmounted registry and a store fault all answer known&#x3D;false with mode&#x3D;false, so a request is never gated pre-boot or on a registry fault.
-     * @param host Host is the host to resolve, e.g. \&quot;chat.hanzo.ai\&quot;. Defaults to the request&#39;s own Host header when omitted, which is what lets a guard running on the governed host ask about itself with no argument. (optional)
-     * @return ApiResponse<WaitlistModeView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getFlagsWaitlistWithHttpInfo(host: kotlin.String?) : ApiResponse<WaitlistModeView?> {
-        val localVariableConfig = getFlagsWaitlistRequestConfig(host = host)
-
-        return request<Unit, WaitlistModeView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getFlagsWaitlist
-     *
-     * @param host Host is the host to resolve, e.g. \&quot;chat.hanzo.ai\&quot;. Defaults to the request&#39;s own Host header when omitted, which is what lets a guard running on the governed host ask about itself with no argument. (optional)
-     * @return RequestConfig
-     */
-    fun getFlagsWaitlistRequestConfig(host: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (host != null) {
-                    put("host", listOf(host.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/flags/waitlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

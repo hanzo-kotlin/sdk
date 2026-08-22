@@ -21,18 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param buildJobId BuildJobID is the queued build's id, and what a release is followed by.
+ * @param buildJobId BuildJobID is the queued build's id, and what its progress is read by.
  * @param image Image is the ref the image lane will push.
  * @param index Index is the binaries.json URL the artifact lane will publish.
  * @param runnerPool RunnerPool is the runner class the build was placed on.
- * @param status Status is `queued` for an ordinary build, `releasing` for a self-publish.
+ * @param status Status is `queued` — the build was accepted and has not finished.
  * @param target Target is the multi-stage build target, echoed back.
  */
 
 
 data class RunnerBuildResp (
 
-    /* BuildJobID is the queued build's id, and what a release is followed by. */
+    /* BuildJobID is the queued build's id, and what its progress is read by. */
     @SerializedName("buildJobId")
     val buildJobId: kotlin.String? = null,
 
@@ -48,7 +48,7 @@ data class RunnerBuildResp (
     @SerializedName("runnerPool")
     val runnerPool: kotlin.String? = null,
 
-    /* Status is `queued` for an ordinary build, `releasing` for a self-publish. */
+    /* Status is `queued` — the build was accepted and has not finished. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 

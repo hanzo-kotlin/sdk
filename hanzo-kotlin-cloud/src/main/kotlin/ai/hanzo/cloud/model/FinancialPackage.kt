@@ -25,40 +25,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param balanceSheet 
- * @param from 
- * @param generatedAt 
- * @param gl 
- * @param org 
- * @param pnl 
- * @param to 
- * @param trialBalance 
+ * @param balanceSheet BalanceSheet is struck as of the period END, not the start.
+ * @param from From opens the reporting period. Absent means from the beginning of the ledger.
+ * @param generatedAt GeneratedAt is when the bundle was assembled — the moment the statements were struck, which is what makes two exports of the same period comparable.
+ * @param gl GL is the newest slice of ledger detail, as the audit trail behind the statements. It is CAPPED, so on a busy ledger it is a sample rather than the full support for the figures above.
+ * @param org Org is the organisation whose books these are — the validated caller's own, stamped so a downloaded bundle still says whose it is.
+ * @param pnl PnL is the income statement for the period, on an accrual basis.
+ * @param to To closes it. Absent means up to now.
+ * @param trialBalance TrialBalance is the proof the ledger balances over the period.
  */
 
 
 data class FinancialPackage (
 
+    /* BalanceSheet is struck as of the period END, not the start. */
     @SerializedName("balanceSheet")
     val balanceSheet: BalanceSheet? = null,
 
+    /* From opens the reporting period. Absent means from the beginning of the ledger. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
+    /* GeneratedAt is when the bundle was assembled — the moment the statements were struck, which is what makes two exports of the same period comparable. */
     @SerializedName("generatedAt")
     val generatedAt: kotlin.String? = null,
 
+    /* GL is the newest slice of ledger detail, as the audit trail behind the statements. It is CAPPED, so on a busy ledger it is a sample rather than the full support for the figures above. */
     @SerializedName("gl")
     val gl: kotlin.collections.List<GLRow>? = null,
 
+    /* Org is the organisation whose books these are — the validated caller's own, stamped so a downloaded bundle still says whose it is. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* PnL is the income statement for the period, on an accrual basis. */
     @SerializedName("pnl")
     val pnl: PnL? = null,
 
+    /* To closes it. Absent means up to now. */
     @SerializedName("to")
     val to: kotlin.String? = null,
 
+    /* TrialBalance is the proof the ledger balances over the period. */
     @SerializedName("trialBalance")
     val trialBalance: TrialBalance? = null
 

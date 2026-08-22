@@ -22,20 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param applications 
- * @param installed 
- * @param reason 
+ * @param applications Applications is every CD Application in the cluster, ordered by namespace then name. Empty (never null) when the plane is not installed, and equally empty when it is installed and tracks nothing — Installed is what separates those two.
+ * @param installed Installed is whether this cluster serves the CD Application CRD at all. False is a fact about the cluster, not a failure of the request: the caller says \"no CD plane here\" rather than rendering an error it cannot act on.
+ * @param reason Reason says why the plane is absent, in words a caller can show. Empty when Installed.
  */
 
 
 data class GitOpsPlane (
 
+    /* Applications is every CD Application in the cluster, ordered by namespace then name. Empty (never null) when the plane is not installed, and equally empty when it is installed and tracks nothing — Installed is what separates those two. */
     @SerializedName("applications")
     val applications: kotlin.collections.List<GitOpsApp>? = null,
 
+    /* Installed is whether this cluster serves the CD Application CRD at all. False is a fact about the cluster, not a failure of the request: the caller says \"no CD plane here\" rather than rendering an error it cannot act on. */
     @SerializedName("installed")
     val installed: kotlin.Boolean? = null,
 
+    /* Reason says why the plane is absent, in words a caller can show. Empty when Installed. */
     @SerializedName("reason")
     val reason: kotlin.String? = null
 

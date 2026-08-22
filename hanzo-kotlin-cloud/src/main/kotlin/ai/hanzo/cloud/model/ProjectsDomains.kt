@@ -24,8 +24,8 @@ import com.google.gson.annotations.SerializedName
  *
  * @param claims Claims is one row per host — live, or pending with the DNS records it still owes.
  * @param domains Domains are the hostnames that are VERIFIED and routing right now.
- * @param org Org and Slug identify the site the panel belongs to.
- * @param slug 
+ * @param org Org is the organisation that owns the site.
+ * @param slug Slug is the site the panel belongs to.
  */
 
 
@@ -39,10 +39,11 @@ data class ProjectsDomains (
     @SerializedName("domains")
     val domains: kotlin.collections.List<kotlin.String>? = null,
 
-    /* Org and Slug identify the site the panel belongs to. */
+    /* Org is the organisation that owns the site. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Slug is the site the panel belongs to. */
     @SerializedName("slug")
     val slug: kotlin.String? = null
 

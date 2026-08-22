@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param range echoes the requested window (24H|7D|30D)
- * @param resource 
+ * @param resource Resource is the Resource Usage panel's rollup, and every field of it is currently null — see resourceUsage. It is present rather than omitted so a panel renders \"—\" instead of guessing.
  * @param series per-agent invocation histogram (real)
  */
 
@@ -35,6 +35,7 @@ data class MetricsView (
     @SerializedName("range")
     val range: kotlin.String? = null,
 
+    /* Resource is the Resource Usage panel's rollup, and every field of it is currently null — see resourceUsage. It is present rather than omitted so a panel renders \"—\" instead of guessing. */
     @SerializedName("resource")
     val resource: ResourceUsage? = null,
 

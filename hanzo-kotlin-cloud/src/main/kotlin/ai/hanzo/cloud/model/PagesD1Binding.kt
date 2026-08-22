@@ -21,12 +21,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param id 
+ * @param id ID is the D1 database this binding points at, by Cloudflare's uuid. The binding name the Worker code reads it as is the map key, not a field here.
  */
 
 
 data class PagesD1Binding (
 
+    /* ID is the D1 database this binding points at, by Cloudflare's uuid. The binding name the Worker code reads it as is the map key, not a field here. */
     @SerializedName("id")
     val id: kotlin.String? = null
 

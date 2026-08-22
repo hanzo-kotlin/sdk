@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param action 
- * @param category 
- * @param id 
- * @param tags 
- * @param workload 
+ * @param action Action is the tactic itself: the thing to go and do.
+ * @param category Category is the growth discipline the tactic belongs to — the axis `?category=` narrows on.
+ * @param id ID is the tactic's stable slug in the corpus.
+ * @param tags Tags are the PRECONDITIONS this tactic already satisfied to appear in the answer — `stage:<name>` and `has:<capability>` predicates over the org's observed profile. They are carried back so a caller can show why a tactic surfaced, not so it can filter again.
+ * @param workload Workload is how much effort running the tactic costs, so a corpus can be cut to what the org has the hands for.
  */
 
 
 data class StrategyView (
 
+    /* Action is the tactic itself: the thing to go and do. */
     @SerializedName("action")
     val action: kotlin.String? = null,
 
+    /* Category is the growth discipline the tactic belongs to — the axis `?category=` narrows on. */
     @SerializedName("category")
     val category: kotlin.String? = null,
 
+    /* ID is the tactic's stable slug in the corpus. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Tags are the PRECONDITIONS this tactic already satisfied to appear in the answer — `stage:<name>` and `has:<capability>` predicates over the org's observed profile. They are carried back so a caller can show why a tactic surfaced, not so it can filter again. */
     @SerializedName("tags")
     val tags: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Workload is how much effort running the tactic costs, so a corpus can be cut to what the org has the hands for. */
     @SerializedName("workload")
     val workload: kotlin.String? = null
 

@@ -21,32 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param action 
- * @param actor 
- * @param at 
- * @param detail 
- * @param id 
- * @param key 
+ * @param action Action is one of created, updated, deleted.
+ * @param actor Actor is the email of the principal who made the change. Empty for a write by an in-process composer; a project key can never appear here, because evaluating flags is all a key may do.
+ * @param at At is when the change was made, RFC 3339 UTC.
+ * @param detail Detail is free-form context about the change. Nothing writes it today, so it is absent from every row the store serves.
+ * @param id ID is the log's own sequence number, rising with each entry. The log is served newest-first, which is this descending.
+ * @param key Key is the flag that changed. It survives a delete, so the log still names flags the definition store no longer holds.
  */
 
 
 data class ActivityRow (
 
+    /* Action is one of created, updated, deleted. */
     @SerializedName("action")
     val action: kotlin.String? = null,
 
+    /* Actor is the email of the principal who made the change. Empty for a write by an in-process composer; a project key can never appear here, because evaluating flags is all a key may do. */
     @SerializedName("actor")
     val actor: kotlin.String? = null,
 
+    /* At is when the change was made, RFC 3339 UTC. */
     @SerializedName("at")
     val at: kotlin.String? = null,
 
+    /* Detail is free-form context about the change. Nothing writes it today, so it is absent from every row the store serves. */
     @SerializedName("detail")
     val detail: kotlin.String? = null,
 
+    /* ID is the log's own sequence number, rising with each entry. The log is served newest-first, which is this descending. */
     @SerializedName("id")
     val id: kotlin.Int? = null,
 
+    /* Key is the flag that changed. It survives a delete, so the log still names flags the definition store no longer holds. */
     @SerializedName("key")
     val key: kotlin.String? = null
 

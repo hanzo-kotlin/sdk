@@ -22,19 +22,20 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param affectedComponents 
+ * @param affectedComponents AffectedComponents is what this incident covers. It is COUNTED rather than classified: some services down is a partial outage and every probed service down is a full one, because deciding that one service is critical and another is not would need a judgement nobody has measured.
  * @param currentWorstImpact CurrentWorstImpact is the incident's impact on the PLATFORM, which is not the same question as the component's own condition above.
- * @param id 
+ * @param id ID is derived from the service, so the same outage keeps one id across reads rather than being reported as a new incident every 15 seconds.
  * @param lastUpdateAt LastUpdateAt is when the failing measurement this incident reports was read, RFC3339 UTC.
- * @param lastUpdateMessage 
- * @param name 
- * @param status 
- * @param url 
+ * @param lastUpdateMessage LastUpdateMessage says what was observed, not what is being done about it — there is no operator writing updates here, only the probe that failed.
+ * @param name Name is the one-line headline, built from the service that stopped answering.
+ * @param status Status is always \"investigating\" — the member of the client's closed set that means detected, cause not yet established, which is exactly what an automated prober knows. Nothing here ever claims \"identified\": that would assert a diagnosis no measurement made.
+ * @param url URL points at the HUMAN status page, not back at this JSON. Every link in this document goes to the same place.
  */
 
 
 data class O11yStatusIncident (
 
+    /* AffectedComponents is what this incident covers. It is COUNTED rather than classified: some services down is a partial outage and every probed service down is a full one, because deciding that one service is critical and another is not would need a judgement nobody has measured. */
     @SerializedName("affected_components")
     val affectedComponents: kotlin.collections.List<O11yStatusComponent>? = null,
 
@@ -42,6 +43,7 @@ data class O11yStatusIncident (
     @SerializedName("current_worst_impact")
     val currentWorstImpact: kotlin.String? = null,
 
+    /* ID is derived from the service, so the same outage keeps one id across reads rather than being reported as a new incident every 15 seconds. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
@@ -49,15 +51,19 @@ data class O11yStatusIncident (
     @SerializedName("last_update_at")
     val lastUpdateAt: kotlin.String? = null,
 
+    /* LastUpdateMessage says what was observed, not what is being done about it — there is no operator writing updates here, only the probe that failed. */
     @SerializedName("last_update_message")
     val lastUpdateMessage: kotlin.String? = null,
 
+    /* Name is the one-line headline, built from the service that stopped answering. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Status is always \"investigating\" — the member of the client's closed set that means detected, cause not yet established, which is exactly what an automated prober knows. Nothing here ever claims \"identified\": that would assert a diagnosis no measurement made. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* URL points at the HUMAN status page, not back at this JSON. Every link in this document goes to the same place. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

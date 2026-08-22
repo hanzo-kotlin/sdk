@@ -22,52 +22,58 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param action 
- * @param blog long-form explainer (nil for un-blogged tactics)
- * @param category 
- * @param enabled 
- * @param era modern | heritage
- * @param id 
- * @param principle the spine slug this tactic files under
- * @param source provenance / attribution
- * @param tags 
- * @param workload 
+ * @param action Action is the tactic itself: the thing to go and do, stated imperatively.
+ * @param blog Blog is the tactic's long-form explainer; absent for tactics that have none.
+ * @param category Category is the growth discipline the tactic belongs to — the axis `?category=` narrows the corpus on, and one of the facets a caller browses by.
+ * @param enabled Enabled is the admin lever. Absent reads as ON; an explicit false drops the tactic from every org-facing corpus read while leaving it in the document.
+ * @param era Era separates an AI-era tactic (`modern`) from a classical one (`heritage`).
+ * @param id ID is the tactic's stable slug, unique across the corpus.
+ * @param principle Principle is the spine slug this tactic files under (a Principle.Slug).
+ * @param source Source is where the tactic came from — the attribution a reader is owed.
+ * @param tags Tags are PRECONDITIONS, not labels — every one must be satisfied by the org's observed profile before the tactic surfaces, so an untagged tactic is universally applicable. Two vocabularies: `stage:<research|formed|launched| activated|scaling>` reads the org's growth stage, `has:<capability>` reads an observed signal.
+ * @param workload Workload is how much effort running the tactic costs, so a corpus can be narrowed to what an org has the hands for right now.
  */
 
 
 data class Strategy (
 
+    /* Action is the tactic itself: the thing to go and do, stated imperatively. */
     @SerializedName("action")
     val action: kotlin.String? = null,
 
-    /* long-form explainer (nil for un-blogged tactics) */
+    /* Blog is the tactic's long-form explainer; absent for tactics that have none. */
     @SerializedName("blog")
     val blog: Blog? = null,
 
+    /* Category is the growth discipline the tactic belongs to — the axis `?category=` narrows the corpus on, and one of the facets a caller browses by. */
     @SerializedName("category")
     val category: kotlin.String? = null,
 
+    /* Enabled is the admin lever. Absent reads as ON; an explicit false drops the tactic from every org-facing corpus read while leaving it in the document. */
     @SerializedName("enabled")
     val enabled: kotlin.Boolean? = null,
 
-    /* modern | heritage */
+    /* Era separates an AI-era tactic (`modern`) from a classical one (`heritage`). */
     @SerializedName("era")
     val era: kotlin.String? = null,
 
+    /* ID is the tactic's stable slug, unique across the corpus. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* the spine slug this tactic files under */
+    /* Principle is the spine slug this tactic files under (a Principle.Slug). */
     @SerializedName("principle")
     val principle: kotlin.String? = null,
 
-    /* provenance / attribution */
+    /* Source is where the tactic came from — the attribution a reader is owed. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Tags are PRECONDITIONS, not labels — every one must be satisfied by the org's observed profile before the tactic surfaces, so an untagged tactic is universally applicable. Two vocabularies: `stage:<research|formed|launched| activated|scaling>` reads the org's growth stage, `has:<capability>` reads an observed signal. */
     @SerializedName("tags")
     val tags: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Workload is how much effort running the tactic costs, so a corpus can be narrowed to what an org has the hands for right now. */
     @SerializedName("workload")
     val workload: kotlin.String? = null
 

@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param expiresAt 
- * @param fields 
- * @param maxBytes 
- * @param prefix 
- * @param url 
+ * @param expiresAt ExpiresAt is when the grant stops being accepted, as Unix seconds. It is short-lived by design and is handed out ONCE, on the response that queues the deployment — a later read of that deployment does not carry it, so a grant cannot be fetched again after the build it was minted for.
+ * @param fields Fields are form values every POST must carry VERBATIM, alongside `key` and `file`. The signature covers them, so altering any one of them — including widening the key to reach outside the prefix — invalidates the grant rather than extending it.
+ * @param maxBytes MaxBytes bounds ONE object, not the upload as a whole.
+ * @param prefix Prefix is the only place this grant can write: the deployment's own key prefix. It authorizes WRITES ONLY, which is why completing a deployment reconciles the prefix against a manifest instead of letting CI delete.
+ * @param url URL is the address to POST each object to. It is signed for the PUBLIC endpoint, because the signature covers the host and CI posts from outside the cluster.
  */
 
 
 data class ProjectsUploadGrant (
 
+    /* ExpiresAt is when the grant stops being accepted, as Unix seconds. It is short-lived by design and is handed out ONCE, on the response that queues the deployment — a later read of that deployment does not carry it, so a grant cannot be fetched again after the build it was minted for. */
     @SerializedName("expiresAt")
     val expiresAt: kotlin.Int? = null,
 
+    /* Fields are form values every POST must carry VERBATIM, alongside `key` and `file`. The signature covers them, so altering any one of them — including widening the key to reach outside the prefix — invalidates the grant rather than extending it. */
     @SerializedName("fields")
     val fields: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
 
+    /* MaxBytes bounds ONE object, not the upload as a whole. */
     @SerializedName("maxBytes")
     val maxBytes: kotlin.Int? = null,
 
+    /* Prefix is the only place this grant can write: the deployment's own key prefix. It authorizes WRITES ONLY, which is why completing a deployment reconciles the prefix against a manifest instead of letting CI delete. */
     @SerializedName("prefix")
     val prefix: kotlin.String? = null,
 
+    /* URL is the address to POST each object to. It is signed for the PUBLIC endpoint, because the signature covers the host and CI posts from outside the cluster. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

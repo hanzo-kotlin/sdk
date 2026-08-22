@@ -22,45 +22,53 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param actor 
- * @param createdAt 
- * @param direction 
- * @param id 
- * @param kind 
- * @param source 
- * @param target 
- * @param trigger 
- * @param updatedAt bumped on every reconcile — the last-synced time
+ * @param actor Actor is the identity a reconcile writes AS. It is the loop guard: a change this identity made is one we already have, so it is not synced back.
+ * @param createdAt CreatedAt is when the link was first declared, RFC3339 in UTC.
+ * @param direction Direction is which way work flows: \"both\", \"pull\" (target ← source), \"push\" (source → target), or \"off\" — which keeps the link declared and moves nothing.
+ * @param id ID is the link's handle, derived from its source and target — which is what makes re-declaring the same pair an update rather than a duplicate.
+ * @param kind Kind is what is being synced. \"git\" today; the field exists so a storage or database link is a value here rather than a second route family.
+ * @param source Source is the side read FROM on a pull.
+ * @param target Target is the side written TO on a push.
+ * @param trigger Trigger is what starts a reconcile: \"webhook\" (the provider tells us), \"poll\" (we ask on a schedule), or \"manual\" (only an explicit call).
+ * @param updatedAt UpdatedAt is bumped by every reconcile, so it reads as the LAST-SYNCED time rather than the last edit. Absent until the first one runs.
  */
 
 
 data class SyncView (
 
+    /* Actor is the identity a reconcile writes AS. It is the loop guard: a change this identity made is one we already have, so it is not synced back. */
     @SerializedName("actor")
     val actor: kotlin.String? = null,
 
+    /* CreatedAt is when the link was first declared, RFC3339 in UTC. */
     @SerializedName("createdAt")
     val createdAt: kotlin.String? = null,
 
+    /* Direction is which way work flows: \"both\", \"pull\" (target ← source), \"push\" (source → target), or \"off\" — which keeps the link declared and moves nothing. */
     @SerializedName("direction")
     val direction: kotlin.String? = null,
 
+    /* ID is the link's handle, derived from its source and target — which is what makes re-declaring the same pair an update rather than a duplicate. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Kind is what is being synced. \"git\" today; the field exists so a storage or database link is a value here rather than a second route family. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Source is the side read FROM on a pull. */
     @SerializedName("source")
     val source: EndpointView? = null,
 
+    /* Target is the side written TO on a push. */
     @SerializedName("target")
     val target: EndpointView? = null,
 
+    /* Trigger is what starts a reconcile: \"webhook\" (the provider tells us), \"poll\" (we ask on a schedule), or \"manual\" (only an explicit call). */
     @SerializedName("trigger")
     val trigger: kotlin.String? = null,
 
-    /* bumped on every reconcile — the last-synced time */
+    /* UpdatedAt is bumped by every reconcile, so it reads as the LAST-SYNCED time rather than the last edit. Absent until the first one runs. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.String? = null
 

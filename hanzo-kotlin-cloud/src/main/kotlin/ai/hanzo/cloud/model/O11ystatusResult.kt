@@ -22,32 +22,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param checkedAt 
- * @param deployments 
- * @param latencyMs 
- * @param product 
- * @param source 
- * @param up 
+ * @param checkedAt CheckedAt is when this answer was measured, RFC3339 UTC.
+ * @param deployments Deployments is the per-replica inventory behind the verdict. Empty means the telemetry store reported none, not that the service runs on none.
+ * @param latencyMs LatencyMs is the health probe's round trip in MILLISECONDS, time-boxed at two seconds. It is 0 when no probe answered, which is not a fast service.
+ * @param product Product is the service this answer is about, echoed back.
+ * @param source Source is where the verdict came from: \"probe\" (we asked and it answered), \"datastore\" (the probe did not answer and the replica inventory decided it), \"unreachable\" (neither), or \"unknown-service\" for a well-formed product name nothing backs — which is answered without probing, since dialling an arbitrary host on a caller's say-so is the request forgery this refuses.
+ * @param up Up is true when the health probe succeeded OR any replica reports up, so a service reachable by either route reads up. Read Source to know which.
  */
 
 
 data class O11ystatusResult (
 
+    /* CheckedAt is when this answer was measured, RFC3339 UTC. */
     @SerializedName("checkedAt")
     val checkedAt: kotlin.String? = null,
 
+    /* Deployments is the per-replica inventory behind the verdict. Empty means the telemetry store reported none, not that the service runs on none. */
     @SerializedName("deployments")
     val deployments: kotlin.collections.List<O11ydeployment>? = null,
 
+    /* LatencyMs is the health probe's round trip in MILLISECONDS, time-boxed at two seconds. It is 0 when no probe answered, which is not a fast service. */
     @SerializedName("latencyMs")
     val latencyMs: kotlin.Int? = null,
 
+    /* Product is the service this answer is about, echoed back. */
     @SerializedName("product")
     val product: kotlin.String? = null,
 
+    /* Source is where the verdict came from: \"probe\" (we asked and it answered), \"datastore\" (the probe did not answer and the replica inventory decided it), \"unreachable\" (neither), or \"unknown-service\" for a well-formed product name nothing backs — which is answered without probing, since dialling an arbitrary host on a caller's say-so is the request forgery this refuses. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Up is true when the health probe succeeded OR any replica reports up, so a service reachable by either route reads up. Read Source to know which. */
     @SerializedName("up")
     val up: kotlin.Boolean? = null
 

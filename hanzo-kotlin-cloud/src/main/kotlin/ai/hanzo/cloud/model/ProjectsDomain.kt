@@ -22,36 +22,43 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param createdAt 
- * @param detail 
- * @param host 
- * @param records 
- * @param status 
- * @param url 
- * @param verified 
+ * @param createdAt CreatedAt is when the host was claimed, as Unix seconds — not when it went live.
+ * @param detail Detail is what is holding the claim up, in words a person can act on.
+ * @param host Host is the custom hostname claimed for this site.
+ * @param records Records are EXACTLY the DNS records to publish to prove ownership and route the host. Present only while pending, because a live host has already proved it; absent is therefore \"nothing left to do\", not \"we cannot say what to do\".
+ * @param status Status is `live` when the edge answers for this host now, `pending` while the claim is waiting on DNS proof of ownership. A pending host is claimed but serves nothing.
+ * @param url URL is where the host will serve once it is live — present on a pending claim too, so a console can show the destination before it works.
+ * @param verified Verified is the same fact as a boolean, for a caller that only needs the yes or no. It cannot disagree with status.
  */
 
 
 data class ProjectsDomain (
 
+    /* CreatedAt is when the host was claimed, as Unix seconds — not when it went live. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* Detail is what is holding the claim up, in words a person can act on. */
     @SerializedName("detail")
     val detail: kotlin.String? = null,
 
+    /* Host is the custom hostname claimed for this site. */
     @SerializedName("host")
     val host: kotlin.String? = null,
 
+    /* Records are EXACTLY the DNS records to publish to prove ownership and route the host. Present only while pending, because a live host has already proved it; absent is therefore \"nothing left to do\", not \"we cannot say what to do\". */
     @SerializedName("records")
     val records: kotlin.collections.List<Record>? = null,
 
+    /* Status is `live` when the edge answers for this host now, `pending` while the claim is waiting on DNS proof of ownership. A pending host is claimed but serves nothing. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* URL is where the host will serve once it is live — present on a pending claim too, so a console can show the destination before it works. */
     @SerializedName("url")
     val url: kotlin.String? = null,
 
+    /* Verified is the same fact as a boolean, for a caller that only needs the yes or no. It cannot disagree with status. */
     @SerializedName("verified")
     val verified: kotlin.Boolean? = null
 

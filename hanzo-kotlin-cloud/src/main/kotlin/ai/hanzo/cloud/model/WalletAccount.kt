@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param createdAt 
- * @param id 
- * @param name 
- * @param org 
+ * @param createdAt CreatedAt is when the account was opened, Unix seconds. Listings order by it, newest first.
+ * @param id ID is the account id, minted by the server as \"acct_\" + 24 hex. Wallets name it as their accountId, and it becomes a segment of each of their key refs — so it addresses key material and cannot be reassigned.
+ * @param name Name is the label given at creation, trimmed and required. It groups wallets: it is not a key, holds no balance, and is not unique in the org.
+ * @param org Org is the tenant that owns the account, stamped from the validated principal rather than taken from the request. Every read is physically scoped to it, so another tenant's accounts are not reachable at all.
  */
 
 
 data class WalletAccount (
 
+    /* CreatedAt is when the account was opened, Unix seconds. Listings order by it, newest first. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* ID is the account id, minted by the server as \"acct_\" + 24 hex. Wallets name it as their accountId, and it becomes a segment of each of their key refs — so it addresses key material and cannot be reassigned. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Name is the label given at creation, trimmed and required. It groups wallets: it is not a key, holds no balance, and is not unique in the org. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Org is the tenant that owns the account, stamped from the validated principal rather than taken from the request. Every read is physically scoped to it, so another tenant's accounts are not reachable at all. */
     @SerializedName("org")
     val org: kotlin.String? = null
 

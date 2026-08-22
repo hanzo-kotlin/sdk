@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param branch 
- * @param provider 
- * @param url 
+ * @param branch Branch is the ref a push has to touch for this project to rebuild. Pushes to any other branch are ignored.
+ * @param provider Provider is the forge the URL was recognised as — it decides which webhook and which credential reach the repository, and is DERIVED from the URL rather than chosen by the caller.
+ * @param url URL is the clone address of the repository this project builds from.
  */
 
 
 data class ProjectsRepo (
 
+    /* Branch is the ref a push has to touch for this project to rebuild. Pushes to any other branch are ignored. */
     @SerializedName("branch")
     val branch: kotlin.String? = null,
 
+    /* Provider is the forge the URL was recognised as — it decides which webhook and which credential reach the repository, and is DERIVED from the URL rather than chosen by the caller. */
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* URL is the clone address of the repository this project builds from. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

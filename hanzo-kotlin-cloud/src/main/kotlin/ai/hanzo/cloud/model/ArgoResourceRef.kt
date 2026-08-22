@@ -21,32 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param group 
- * @param kind 
- * @param name 
- * @param namespace 
- * @param uid 
- * @param version 
+ * @param group Group is the object's API group: empty for the core group (Pod, Service, ConfigMap), otherwise apps, networking.k8s.io, autoscaling or policy — and hanzo.ai for the App CR at the root.
+ * @param kind Kind is the object kind. The root is the App CR; below it come Deployment, ReplicaSet, Pod, Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMap. Never Secret — the walk does not visit them, so no materialized environment can reach the tree.
+ * @param name Name is the object's metadata.name.
+ * @param namespace Namespace is the namespace the walk ran in, the same for every node of one tree.
+ * @param uid UID is the object's metadata.uid. Absent on a PARENT reference, which addresses its target by kind and name rather than by identity.
+ * @param version Version is the object's API version as the live object reports it: v1 for every kind the walk reaches except the HorizontalPodAutoscaler, which is autoscaling/v2.
  */
 
 
 data class ArgoResourceRef (
 
+    /* Group is the object's API group: empty for the core group (Pod, Service, ConfigMap), otherwise apps, networking.k8s.io, autoscaling or policy — and hanzo.ai for the App CR at the root. */
     @SerializedName("group")
     val group: kotlin.String? = null,
 
+    /* Kind is the object kind. The root is the App CR; below it come Deployment, ReplicaSet, Pod, Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMap. Never Secret — the walk does not visit them, so no materialized environment can reach the tree. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Name is the object's metadata.name. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Namespace is the namespace the walk ran in, the same for every node of one tree. */
     @SerializedName("namespace")
     val namespace: kotlin.String? = null,
 
+    /* UID is the object's metadata.uid. Absent on a PARENT reference, which addresses its target by kind and name rather than by identity. */
     @SerializedName("uid")
     val uid: kotlin.String? = null,
 
+    /* Version is the object's API version as the live object reports it: v1 for every kind the walk reaches except the HorizontalPodAutoscaler, which is autoscaling/v2. */
     @SerializedName("version")
     val version: kotlin.String? = null
 

@@ -22,8 +22,8 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param currentStatus CurrentStatus is this component's own condition: \"full_outage\" for a service that did not answer its health probe at all.
- * @param id 
- * @param name 
+ * @param id ID is the component's stable handle, which on this platform IS the service name — there is no separate component registry to allocate ids from.
+ * @param name Name is the service as the fleet prober knows it (the `service` label on hanzo_service_up), so a reader can match a component to what is being probed.
  */
 
 
@@ -33,9 +33,11 @@ data class O11yStatusComponent (
     @SerializedName("current_status")
     val currentStatus: kotlin.String? = null,
 
+    /* ID is the component's stable handle, which on this platform IS the service name — there is no separate component registry to allocate ids from. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Name is the service as the fleet prober knows it (the `service` label on hanzo_service_up), so a reader can match a component to what is being probed. */
     @SerializedName("name")
     val name: kotlin.String? = null
 

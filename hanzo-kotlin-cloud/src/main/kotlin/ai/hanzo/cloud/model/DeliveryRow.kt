@@ -21,44 +21,53 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param attempt 
- * @param created 
- * @param delivery 
- * @param durationMs 
- * @param endpoint 
- * @param error 
- * @param httpStatus 
- * @param status 
- * @param subject 
+ * @param attempt Attempt is which try this row is, starting at 1. The ladder waits 1s, then 5s, then 25s before the next one.
+ * @param created Created is when the attempt was made, RFC3339 in UTC.
+ * @param delivery DeliveryID groups the attempts for ONE event to ONE endpoint. Rows sharing it are the same delivery being retried, not separate events.
+ * @param durationMs DurationMs is how long this attempt took end to end, in MILLISECONDS.
+ * @param endpoint EndpointID is which subscriber this attempt was for.
+ * @param error Error says what went wrong on a non-ok attempt. Empty on success.
+ * @param httpStatus HTTPStatus is what the subscriber answered. ZERO means it never answered — a refused connection, a DNS failure or a timeout — which is why a zero here is not a 200.
+ * @param status Status is \"ok\" when the subscriber accepted it, \"retrying\" while a further attempt will follow, and \"failed\" when none will. Exactly one row of a delivery is terminal.
+ * @param subject Subject is the event that was delivered (\"commerce.order.created\"). A manual test send carries \"webhook.test\".
  */
 
 
 data class DeliveryRow (
 
+    /* Attempt is which try this row is, starting at 1. The ladder waits 1s, then 5s, then 25s before the next one. */
     @SerializedName("attempt")
     val attempt: kotlin.Int? = null,
 
+    /* Created is when the attempt was made, RFC3339 in UTC. */
     @SerializedName("created")
     val created: kotlin.String? = null,
 
+    /* DeliveryID groups the attempts for ONE event to ONE endpoint. Rows sharing it are the same delivery being retried, not separate events. */
     @SerializedName("delivery")
     val delivery: kotlin.String? = null,
 
+    /* DurationMs is how long this attempt took end to end, in MILLISECONDS. */
     @SerializedName("durationMs")
     val durationMs: kotlin.Int? = null,
 
+    /* EndpointID is which subscriber this attempt was for. */
     @SerializedName("endpoint")
     val endpoint: kotlin.String? = null,
 
+    /* Error says what went wrong on a non-ok attempt. Empty on success. */
     @SerializedName("error")
     val error: kotlin.String? = null,
 
+    /* HTTPStatus is what the subscriber answered. ZERO means it never answered — a refused connection, a DNS failure or a timeout — which is why a zero here is not a 200. */
     @SerializedName("httpStatus")
     val httpStatus: kotlin.Int? = null,
 
+    /* Status is \"ok\" when the subscriber accepted it, \"retrying\" while a further attempt will follow, and \"failed\" when none will. Exactly one row of a delivery is terminal. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Subject is the event that was delivered (\"commerce.order.created\"). A manual test send carries \"webhook.test\". */
     @SerializedName("subject")
     val subject: kotlin.String? = null
 

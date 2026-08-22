@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param instance 
- * @param up 
+ * @param instance Instance is the replica as the telemetry store labels it — the address the series was recorded against, which is what distinguishes two replicas of one service.
+ * @param up Up is that replica's last reported state. Every target emits on every cycle, so a replica missing from the list is one the prober is not reporting at all, which is a different fact from down.
  */
 
 
 data class O11ydeployment (
 
+    /* Instance is the replica as the telemetry store labels it — the address the series was recorded against, which is what distinguishes two replicas of one service. */
     @SerializedName("instance")
     val instance: kotlin.String? = null,
 
+    /* Up is that replica's last reported state. Every target emits on every cycle, so a replica missing from the list is one the prober is not reporting at all, which is a different fact from down. */
     @SerializedName("up")
     val up: kotlin.Boolean? = null
 

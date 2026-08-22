@@ -22,16 +22,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param end 
- * @param start 
+ * @param end End is the position just past the span, excluded — the range is half-open, so an empty range has Start equal to End.
+ * @param start Start is the first position in the span, included.
  */
 
 
 data class Range (
 
+    /* End is the position just past the span, excluded — the range is half-open, so an empty range has Start equal to End. */
     @SerializedName("end")
     val end: Position? = null,
 
+    /* Start is the first position in the span, included. */
     @SerializedName("start")
     val start: Position? = null
 

@@ -22,13 +22,11 @@ import okhttp3.HttpUrl
 import ai.hanzo.cloud.model.IamAnswer
 import ai.hanzo.cloud.model.IamApplication
 import ai.hanzo.cloud.model.IamApplicationListResult
-import ai.hanzo.cloud.model.IamApplicationRef
 import ai.hanzo.cloud.model.IamAuditLog
 import ai.hanzo.cloud.model.IamCert
 import ai.hanzo.cloud.model.IamCreateInput
 import ai.hanzo.cloud.model.IamCreateOrganizationInput
 import ai.hanzo.cloud.model.IamCreateSessionIn
-import ai.hanzo.cloud.model.IamDeleteOrganizationInput
 import ai.hanzo.cloud.model.IamDeleteOrganizationOutput
 import ai.hanzo.cloud.model.IamDeleteOutput
 import ai.hanzo.cloud.model.IamDeleteResponse
@@ -40,17 +38,14 @@ import ai.hanzo.cloud.model.IamKey
 import ai.hanzo.cloud.model.IamKeyList
 import ai.hanzo.cloud.model.IamListOrganizationsOutput
 import ai.hanzo.cloud.model.IamListOutput
-import ai.hanzo.cloud.model.IamListSessionsIn
 import ai.hanzo.cloud.model.IamListSessionsOut
 import ai.hanzo.cloud.model.IamOrganization
 import ai.hanzo.cloud.model.IamPermission
 import ai.hanzo.cloud.model.IamProject
 import ai.hanzo.cloud.model.IamProvider
-import ai.hanzo.cloud.model.IamRef
-import ai.hanzo.cloud.model.IamResponse
 import ai.hanzo.cloud.model.IamRole
 import ai.hanzo.cloud.model.IamSession
-import ai.hanzo.cloud.model.IamSessionRef
+import ai.hanzo.cloud.model.IamSetAvatarInput
 import ai.hanzo.cloud.model.IamToken
 import ai.hanzo.cloud.model.IamUpdateInput
 import ai.hanzo.cloud.model.IamUpdateOrganizationInput
@@ -58,16 +53,14 @@ import ai.hanzo.cloud.model.IamUpdateSessionIn
 import ai.hanzo.cloud.model.IamUser
 import ai.hanzo.cloud.model.IamWebauthnCredential
 import ai.hanzo.cloud.model.IamWorkspace
-import ai.hanzo.cloud.model.IamauditlogsInput
+import ai.hanzo.cloud.model.IamaccountBody
+import ai.hanzo.cloud.model.IamassumeBody
 import ai.hanzo.cloud.model.IamcertsDeleteOutput
 import ai.hanzo.cloud.model.IamcertsListOutput
-import ai.hanzo.cloud.model.IamcertsRef
 import ai.hanzo.cloud.model.Iamconfig
 import ai.hanzo.cloud.model.IaminvitationsDeleteOutput
 import ai.hanzo.cloud.model.IaminvitationsInput
 import ai.hanzo.cloud.model.IaminvitationsListOutput
-import ai.hanzo.cloud.model.IaminvitationsRef
-import ai.hanzo.cloud.model.IamkeysRef
 import ai.hanzo.cloud.model.IamlistProvidersOut
 import ai.hanzo.cloud.model.IamlistResponse
 import ai.hanzo.cloud.model.IamlistTokensOut
@@ -76,33 +69,25 @@ import ai.hanzo.cloud.model.IammutationResult
 import ai.hanzo.cloud.model.IampasswordBody
 import ai.hanzo.cloud.model.IampermissionDeleteResponse
 import ai.hanzo.cloud.model.IampermissionListResponse
-import ai.hanzo.cloud.model.IampermissionRef
 import ai.hanzo.cloud.model.Iamperson
 import ai.hanzo.cloud.model.IamprojectsDeleteOutput
+import ai.hanzo.cloud.model.IamprojectsInput
 import ai.hanzo.cloud.model.IamprojectsListOutput
-import ai.hanzo.cloud.model.IamprojectsRef
-import ai.hanzo.cloud.model.IamproviderKey
 import ai.hanzo.cloud.model.IamproviderResult
 import ai.hanzo.cloud.model.Iamregistration
 import ai.hanzo.cloud.model.Iamreply
 import ai.hanzo.cloud.model.IamrolesDeleteOutput
 import ai.hanzo.cloud.model.IamrolesInput
 import ai.hanzo.cloud.model.IamrolesListOutput
-import ai.hanzo.cloud.model.IamrolesRef
-import ai.hanzo.cloud.model.IamtokenKey
 import ai.hanzo.cloud.model.IamtokenMutation
 import ai.hanzo.cloud.model.IamtokenResult
-import ai.hanzo.cloud.model.IamuserBody
 import ai.hanzo.cloud.model.IamusersDeleteOutput
 import ai.hanzo.cloud.model.IamusersListOutput
-import ai.hanzo.cloud.model.IamusersRef
-import ai.hanzo.cloud.model.IamwebauthnCredentialKey
 import ai.hanzo.cloud.model.IamwebauthnCredentialMutationResult
 import ai.hanzo.cloud.model.IamwebauthnCredentialResult
 import ai.hanzo.cloud.model.IamworkspacesDeleteOutput
 import ai.hanzo.cloud.model.IamworkspacesInput
 import ai.hanzo.cloud.model.IamworkspacesListOutput
-import ai.hanzo.cloud.model.IamworkspacesRef
 
 import com.google.gson.annotations.SerializedName
 
@@ -425,7 +410,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/create
+     * POST /v1/iam/sessions
      * Records a sign-in.
      * Records a sign-in. Signing in again from another browser adds to the session rather than replacing it, so one person can be signed in from a laptop and a phone at once.  Ask for an exclusive sign-in and the opposite holds: the new sign-in is the only one left and every other browser is signed out. That is the setting to use when one person may hold only one live session at a time.
      * @param iamCreateSessionIn 
@@ -457,7 +442,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/create
+     * POST /v1/iam/sessions
      * Records a sign-in.
      * Records a sign-in. Signing in again from another browser adds to the session rather than replacing it, so one person can be signed in from a laptop and a phone at once.  Ask for an exclusive sign-in and the opposite holds: the new sign-in is the only one left and every other browser is signed out. That is the setting to use when one person may hold only one live session at a time.
      * @param iamCreateSessionIn 
@@ -490,7 +475,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/iam/sessions/create",
+            path = "/v1/iam/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -499,7 +484,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * DELETE /v1/iam/application
+     * DELETE /v1/iam/applications/{owner}/{name}
      * Removes an application.
      * Removes an application. Anyone mid-sign-in through it is turned away and its client credentials stop working, so retire the integration before deleting it.
      * @param owner 
@@ -513,8 +498,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteIamApplication(owner: kotlin.String, name: kotlin.String) : IamDeleteResult {
-        val localVarResponse = deleteIamApplicationWithHttpInfo(owner = owner, name = name)
+    fun deleteIamApplicationsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamDeleteResult {
+        val localVarResponse = deleteIamApplicationsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteResult
@@ -532,7 +517,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * DELETE /v1/iam/application
+     * DELETE /v1/iam/applications/{owner}/{name}
      * Removes an application.
      * Removes an application. Anyone mid-sign-in through it is turned away and its client credentials stop working, so retire the integration before deleting it.
      * @param owner 
@@ -543,8 +528,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteIamApplicationWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamDeleteResult?> {
-        val localVariableConfig = deleteIamApplicationRequestConfig(owner = owner, name = name)
+    fun deleteIamApplicationsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamDeleteResult?> {
+        val localVariableConfig = deleteIamApplicationsByOwnerByNameRequestConfig(owner = owner, name = name)
 
         return request<Unit, IamDeleteResult>(
             localVariableConfig
@@ -552,25 +537,620 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation deleteIamApplication
+     * To obtain the request config of the operation deleteIamApplicationsByOwnerByName
      *
      * @param owner 
      * @param name 
      * @return RequestConfig
      */
-    fun deleteIamApplicationRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteIamApplicationsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("owner", listOf(owner.toString()))
-                put("name", listOf(name.toString()))
-            }
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/iam/application",
+            path = "/v1/iam/applications/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/audit-logs/{owner}/{name}
+     * Removes an audit entry.
+     * Removes an audit entry. Retention policy is normally what should expire a trail; deleting by hand leaves a gap a reviewer will notice.
+     * @param owner 
+     * @param name 
+     * @return IamDeleteOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamAuditLogsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamDeleteOutput {
+        val localVarResponse = deleteIamAuditLogsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/audit-logs/{owner}/{name}
+     * Removes an audit entry.
+     * Removes an audit entry. Retention policy is normally what should expire a trail; deleting by hand leaves a gap a reviewer will notice.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamDeleteOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamAuditLogsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamDeleteOutput?> {
+        val localVariableConfig = deleteIamAuditLogsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamDeleteOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamAuditLogsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamAuditLogsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/audit-logs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/certs/{owner}/{name}
+     * Removes a signing certificate.
+     * Removes a signing certificate. Tokens signed with it can no longer be verified, so retire it only once nothing is still presenting them.
+     * @param owner 
+     * @param name 
+     * @return IamcertsDeleteOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamCertsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamcertsDeleteOutput {
+        val localVarResponse = deleteIamCertsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamcertsDeleteOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/certs/{owner}/{name}
+     * Removes a signing certificate.
+     * Removes a signing certificate. Tokens signed with it can no longer be verified, so retire it only once nothing is still presenting them.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamcertsDeleteOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamCertsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamcertsDeleteOutput?> {
+        val localVariableConfig = deleteIamCertsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamcertsDeleteOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamCertsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamCertsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/certs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/invitations/{owner}/{name}
+     * Withdraws an invitation.
+     * Withdraws an invitation. It stops being redeemable at once; anyone who already joined through it keeps their account.
+     * @param owner 
+     * @param name 
+     * @return IaminvitationsDeleteOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamInvitationsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IaminvitationsDeleteOutput {
+        val localVarResponse = deleteIamInvitationsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IaminvitationsDeleteOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/invitations/{owner}/{name}
+     * Withdraws an invitation.
+     * Withdraws an invitation. It stops being redeemable at once; anyone who already joined through it keeps their account.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IaminvitationsDeleteOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamInvitationsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IaminvitationsDeleteOutput?> {
+        val localVariableConfig = deleteIamInvitationsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IaminvitationsDeleteOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamInvitationsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamInvitationsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/invitations/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/keys/{owner}/{name}
+     * Revokes an API key.
+     * Revokes an API key. Anything still presenting it stops being authorized at once, so roll the replacement out before you revoke.
+     * @param owner 
+     * @param name 
+     * @return IamDeleteResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamKeysByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamDeleteResponse {
+        val localVarResponse = deleteIamKeysByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/keys/{owner}/{name}
+     * Revokes an API key.
+     * Revokes an API key. Anything still presenting it stops being authorized at once, so roll the replacement out before you revoke.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamDeleteResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamKeysByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamDeleteResponse?> {
+        val localVariableConfig = deleteIamKeysByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamDeleteResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamKeysByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamKeysByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/keys/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/mfa
+     * Turns a factor off, so sign-in stops asking for it.
+     * Turns a factor off, so sign-in stops asking for it. Naming no factor turns off ALL of them — the reset path. People may do this for themselves; doing it for somebody else takes an administrator, which is what makes it the way back in when a phone is lost.  The recovery codes go with the last factor: they are the way past a challenge, so keeping them alive for an account with nothing to challenge would leave a standing credential behind.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamMfa() : Unit {
+        val localVarResponse = deleteIamMfaWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/mfa
+     * Turns a factor off, so sign-in stops asking for it.
+     * Turns a factor off, so sign-in stops asking for it. Naming no factor turns off ALL of them — the reset path. People may do this for themselves; doing it for somebody else takes an administrator, which is what makes it the way back in when a phone is lost.  The recovery codes go with the last factor: they are the way past a challenge, so keeping them alive for an account with nothing to challenge would leave a standing credential behind.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamMfaWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteIamMfaRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamMfa
+     *
+     * @return RequestConfig
+     */
+    fun deleteIamMfaRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/mfa",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/permissions/{owner}/{name}
+     * Revokes a permission.
+     * Revokes a permission. Everyone who held access only through it loses that access immediately; grants they hold by another route are untouched.
+     * @param owner 
+     * @param name 
+     * @return IampermissionDeleteResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamPermissionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IampermissionDeleteResponse {
+        val localVarResponse = deleteIamPermissionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IampermissionDeleteResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/permissions/{owner}/{name}
+     * Revokes a permission.
+     * Revokes a permission. Everyone who held access only through it loses that access immediately; grants they hold by another route are untouched.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IampermissionDeleteResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamPermissionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IampermissionDeleteResponse?> {
+        val localVariableConfig = deleteIamPermissionsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IampermissionDeleteResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamPermissionsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamPermissionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/permissions/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/projects/{owner}/{name}
+     * Removes a project.
+     * Removes a project. The people and roles in your organization are unchanged; what goes is the scope itself, so move anything addressed by it first.
+     * @param owner 
+     * @param name 
+     * @return IamprojectsDeleteOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamProjectsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamprojectsDeleteOutput {
+        val localVarResponse = deleteIamProjectsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamprojectsDeleteOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/projects/{owner}/{name}
+     * Removes a project.
+     * Removes a project. The people and roles in your organization are unchanged; what goes is the scope itself, so move anything addressed by it first.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamprojectsDeleteOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamProjectsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamprojectsDeleteOutput?> {
+        val localVariableConfig = deleteIamProjectsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamprojectsDeleteOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamProjectsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamProjectsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/projects/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/roles/{owner}/{name}
+     * Removes a role.
+     * Removes a role. Everyone in it loses the access it carried; their accounts, and any other role they hold, are untouched.
+     * @param owner 
+     * @param name 
+     * @return IamrolesDeleteOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamRolesByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamrolesDeleteOutput {
+        val localVarResponse = deleteIamRolesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamrolesDeleteOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/roles/{owner}/{name}
+     * Removes a role.
+     * Removes a role. Everyone in it loses the access it carried; their accounts, and any other role they hold, are untouched.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamrolesDeleteOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamRolesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamrolesDeleteOutput?> {
+        val localVariableConfig = deleteIamRolesByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamrolesDeleteOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamRolesByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamRolesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/roles/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -722,10 +1302,236 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/organizations/delete
+     * DELETE /v1/iam/users/{owner}/{name}
+     * Removes a person from your organization.
+     * Removes a person from your organization. Their sessions stop working immediately and the account is gone rather than suspended — to keep the record and only stop sign-in, update the user instead.
+     * @param owner 
+     * @param name 
+     * @return IamusersDeleteOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamUsersByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamusersDeleteOutput {
+        val localVarResponse = deleteIamUsersByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamusersDeleteOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/users/{owner}/{name}
+     * Removes a person from your organization.
+     * Removes a person from your organization. Their sessions stop working immediately and the account is gone rather than suspended — to keep the record and only stop sign-in, update the user instead.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamusersDeleteOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamUsersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamusersDeleteOutput?> {
+        val localVariableConfig = deleteIamUsersByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamusersDeleteOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamUsersByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamUsersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/users/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/users/{owner}/{name}/keys
+     * Clears the target user&#39;s key of the requested TYPE (immediate revoke).
+     * Clears the target user&#39;s key of the requested TYPE (immediate revoke). Scoped by the same &#x60;?type&#x60; field mint takes, so revoking the browser key leaves the server key working. A secret key&#39;s stored value is the sk- in its schema.Key row.
+     * @param owner 
+     * @param name 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamUsersByOwnerByNameKeys(owner: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = deleteIamUsersByOwnerByNameKeysWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/users/{owner}/{name}/keys
+     * Clears the target user&#39;s key of the requested TYPE (immediate revoke).
+     * Clears the target user&#39;s key of the requested TYPE (immediate revoke). Scoped by the same &#x60;?type&#x60; field mint takes, so revoking the browser key leaves the server key working. A secret key&#39;s stored value is the sk- in its schema.Key row.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamUsersByOwnerByNameKeysWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteIamUsersByOwnerByNameKeysRequestConfig(owner = owner, name = name)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamUsersByOwnerByNameKeys
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamUsersByOwnerByNameKeysRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/users/{owner}/{name}/keys".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/workspaces/{owner}/{name}
+     * Removes a workspace.
+     * Removes a workspace. The people and roles in your organization are unchanged; what goes is the scope itself.
+     * @param owner 
+     * @param name 
+     * @return IamworkspacesDeleteOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamWorkspacesByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamworkspacesDeleteOutput {
+        val localVarResponse = deleteIamWorkspacesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamworkspacesDeleteOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/workspaces/{owner}/{name}
+     * Removes a workspace.
+     * Removes a workspace. The people and roles in your organization are unchanged; what goes is the scope itself.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamworkspacesDeleteOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamWorkspacesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamworkspacesDeleteOutput?> {
+        val localVariableConfig = deleteIamWorkspacesByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamworkspacesDeleteOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamWorkspacesByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamWorkspacesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/workspaces/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/organizations/{owner}/{name}
      * Removes an organization and everything named inside it.
      * Removes an organization and everything named inside it. There is no undo, and every session issued under it stops working.  The built-in admin organization cannot be deleted — losing it would leave the account with no way back in.
-     * @param iamDeleteOrganizationInput 
+     * @param owner 
+     * @param name 
      * @return IamDeleteOrganizationOutput
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -735,8 +1541,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteOrganization(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : IamDeleteOrganizationOutput {
-        val localVarResponse = deleteOrganizationWithHttpInfo(iamDeleteOrganizationInput = iamDeleteOrganizationInput)
+    fun deleteOrganization(owner: kotlin.String, name: kotlin.String) : IamDeleteOrganizationOutput {
+        val localVarResponse = deleteOrganizationWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteOrganizationOutput
@@ -754,20 +1560,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/organizations/delete
+     * DELETE /v1/iam/organizations/{owner}/{name}
      * Removes an organization and everything named inside it.
      * Removes an organization and everything named inside it. There is no undo, and every session issued under it stops working.  The built-in admin organization cannot be deleted — losing it would leave the account with no way back in.
-     * @param iamDeleteOrganizationInput 
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamDeleteOrganizationOutput?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteOrganizationWithHttpInfo(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : ApiResponse<IamDeleteOrganizationOutput?> {
-        val localVariableConfig = deleteOrganizationRequestConfig(iamDeleteOrganizationInput = iamDeleteOrganizationInput)
+    fun deleteOrganizationWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamDeleteOrganizationOutput?> {
+        val localVariableConfig = deleteOrganizationRequestConfig(owner = owner, name = name)
 
-        return request<IamDeleteOrganizationInput, IamDeleteOrganizationOutput>(
+        return request<Unit, IamDeleteOrganizationOutput>(
             localVariableConfig
         )
     }
@@ -775,19 +1582,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation deleteOrganization
      *
-     * @param iamDeleteOrganizationInput 
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun deleteOrganizationRequestConfig(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : RequestConfig<IamDeleteOrganizationInput> {
-        val localVariableBody = iamDeleteOrganizationInput
+    fun deleteOrganizationRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/organizations/delete",
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/organizations/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -796,10 +1603,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/providers/delete
+     * DELETE /v1/iam/providers/{owner}/{name}
      * Removes a provider.
      * Removes a provider. Sign-in through it stops for every application that used it, so give those applications another method first.  A provider that is already gone answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
-     * @param iamproviderKey 
+     * @param owner 
+     * @param name 
      * @return IammutationResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -809,8 +1617,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteProvider(iamproviderKey: IamproviderKey) : IammutationResult {
-        val localVarResponse = deleteProviderWithHttpInfo(iamproviderKey = iamproviderKey)
+    fun deleteProvider(owner: kotlin.String, name: kotlin.String) : IammutationResult {
+        val localVarResponse = deleteProviderWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IammutationResult
@@ -828,20 +1636,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/providers/delete
+     * DELETE /v1/iam/providers/{owner}/{name}
      * Removes a provider.
      * Removes a provider. Sign-in through it stops for every application that used it, so give those applications another method first.  A provider that is already gone answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
-     * @param iamproviderKey 
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IammutationResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteProviderWithHttpInfo(iamproviderKey: IamproviderKey) : ApiResponse<IammutationResult?> {
-        val localVariableConfig = deleteProviderRequestConfig(iamproviderKey = iamproviderKey)
+    fun deleteProviderWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IammutationResult?> {
+        val localVariableConfig = deleteProviderRequestConfig(owner = owner, name = name)
 
-        return request<IamproviderKey, IammutationResult>(
+        return request<Unit, IammutationResult>(
             localVariableConfig
         )
     }
@@ -849,19 +1658,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation deleteProvider
      *
-     * @param iamproviderKey 
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun deleteProviderRequestConfig(iamproviderKey: IamproviderKey) : RequestConfig<IamproviderKey> {
-        val localVariableBody = iamproviderKey
+    fun deleteProviderRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/providers/delete",
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/providers/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -870,10 +1679,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/delete
+     * DELETE /v1/iam/sessions/{owner}/{name}/{application}
      * Signs a person out of one application — the session ends and every browser carrying it stops being authenticated.
      * Signs a person out of one application — the session ends and every browser carrying it stops being authenticated.  A session that is already gone reports that nothing was deleted rather than an error, so the call is safe to repeat.
-     * @param iamSessionRef 
+     * @param owner 
+     * @param name 
+     * @param application 
      * @return IamDeleteSessionOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -883,8 +1694,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteSession(iamSessionRef: IamSessionRef) : IamDeleteSessionOut {
-        val localVarResponse = deleteSessionWithHttpInfo(iamSessionRef = iamSessionRef)
+    fun deleteSession(owner: kotlin.String, name: kotlin.String, application: kotlin.String) : IamDeleteSessionOut {
+        val localVarResponse = deleteSessionWithHttpInfo(owner = owner, name = name, application = application)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteSessionOut
@@ -902,20 +1713,22 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/delete
+     * DELETE /v1/iam/sessions/{owner}/{name}/{application}
      * Signs a person out of one application — the session ends and every browser carrying it stops being authenticated.
      * Signs a person out of one application — the session ends and every browser carrying it stops being authenticated.  A session that is already gone reports that nothing was deleted rather than an error, so the call is safe to repeat.
-     * @param iamSessionRef 
+     * @param owner 
+     * @param name 
+     * @param application 
      * @return ApiResponse<IamDeleteSessionOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteSessionWithHttpInfo(iamSessionRef: IamSessionRef) : ApiResponse<IamDeleteSessionOut?> {
-        val localVariableConfig = deleteSessionRequestConfig(iamSessionRef = iamSessionRef)
+    fun deleteSessionWithHttpInfo(owner: kotlin.String, name: kotlin.String, application: kotlin.String) : ApiResponse<IamDeleteSessionOut?> {
+        val localVariableConfig = deleteSessionRequestConfig(owner = owner, name = name, application = application)
 
-        return request<IamSessionRef, IamDeleteSessionOut>(
+        return request<Unit, IamDeleteSessionOut>(
             localVariableConfig
         )
     }
@@ -923,19 +1736,20 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation deleteSession
      *
-     * @param iamSessionRef 
+     * @param owner 
+     * @param name 
+     * @param application 
      * @return RequestConfig
      */
-    fun deleteSessionRequestConfig(iamSessionRef: IamSessionRef) : RequestConfig<IamSessionRef> {
-        val localVariableBody = iamSessionRef
+    fun deleteSessionRequestConfig(owner: kotlin.String, name: kotlin.String, application: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/sessions/delete",
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/sessions/{owner}/{name}/{application}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"application"+"}", encodeURIComponent(application.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -944,10 +1758,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/tokens/delete
+     * DELETE /v1/iam/tokens/{owner}/{name}
      * Revokes an access token.
      * Revokes an access token. Whatever was using it stops being authorized at once.  A token that is already gone answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
-     * @param iamtokenKey 
+     * @param owner 
+     * @param name 
      * @return IamtokenMutation
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -957,8 +1772,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteToken(iamtokenKey: IamtokenKey) : IamtokenMutation {
-        val localVarResponse = deleteTokenWithHttpInfo(iamtokenKey = iamtokenKey)
+    fun deleteToken(owner: kotlin.String, name: kotlin.String) : IamtokenMutation {
+        val localVarResponse = deleteTokenWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamtokenMutation
@@ -976,20 +1791,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/tokens/delete
+     * DELETE /v1/iam/tokens/{owner}/{name}
      * Revokes an access token.
      * Revokes an access token. Whatever was using it stops being authorized at once.  A token that is already gone answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
-     * @param iamtokenKey 
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamtokenMutation?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteTokenWithHttpInfo(iamtokenKey: IamtokenKey) : ApiResponse<IamtokenMutation?> {
-        val localVariableConfig = deleteTokenRequestConfig(iamtokenKey = iamtokenKey)
+    fun deleteTokenWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamtokenMutation?> {
+        val localVariableConfig = deleteTokenRequestConfig(owner = owner, name = name)
 
-        return request<IamtokenKey, IamtokenMutation>(
+        return request<Unit, IamtokenMutation>(
             localVariableConfig
         )
     }
@@ -997,19 +1813,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation deleteToken
      *
-     * @param iamtokenKey 
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun deleteTokenRequestConfig(iamtokenKey: IamtokenKey) : RequestConfig<IamtokenKey> {
-        val localVariableBody = iamtokenKey
+    fun deleteTokenRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/tokens/delete",
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/tokens/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1018,10 +1834,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/webauthn-credentials/delete
+     * DELETE /v1/iam/webauthn-credentials/{owner}/{name}
      * Removes a passkey or security key — what you call when a device is lost.
      * Removes a passkey or security key — what you call when a device is lost. Make sure the person has another way to sign in first.  A credential that is already gone answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
-     * @param iamwebauthnCredentialKey 
+     * @param owner 
+     * @param name 
      * @return IamwebauthnCredentialMutationResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1031,8 +1848,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteWebauthnCredential(iamwebauthnCredentialKey: IamwebauthnCredentialKey) : IamwebauthnCredentialMutationResult {
-        val localVarResponse = deleteWebauthnCredentialWithHttpInfo(iamwebauthnCredentialKey = iamwebauthnCredentialKey)
+    fun deleteWebauthnCredential(owner: kotlin.String, name: kotlin.String) : IamwebauthnCredentialMutationResult {
+        val localVarResponse = deleteWebauthnCredentialWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamwebauthnCredentialMutationResult
@@ -1050,20 +1867,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/webauthn-credentials/delete
+     * DELETE /v1/iam/webauthn-credentials/{owner}/{name}
      * Removes a passkey or security key — what you call when a device is lost.
      * Removes a passkey or security key — what you call when a device is lost. Make sure the person has another way to sign in first.  A credential that is already gone answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
-     * @param iamwebauthnCredentialKey 
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamwebauthnCredentialMutationResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteWebauthnCredentialWithHttpInfo(iamwebauthnCredentialKey: IamwebauthnCredentialKey) : ApiResponse<IamwebauthnCredentialMutationResult?> {
-        val localVariableConfig = deleteWebauthnCredentialRequestConfig(iamwebauthnCredentialKey = iamwebauthnCredentialKey)
+    fun deleteWebauthnCredentialWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamwebauthnCredentialMutationResult?> {
+        val localVariableConfig = deleteWebauthnCredentialRequestConfig(owner = owner, name = name)
 
-        return request<IamwebauthnCredentialKey, IamwebauthnCredentialMutationResult>(
+        return request<Unit, IamwebauthnCredentialMutationResult>(
             localVariableConfig
         )
     }
@@ -1071,19 +1889,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation deleteWebauthnCredential
      *
-     * @param iamwebauthnCredentialKey 
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun deleteWebauthnCredentialRequestConfig(iamwebauthnCredentialKey: IamwebauthnCredentialKey) : RequestConfig<IamwebauthnCredentialKey> {
-        val localVariableBody = iamwebauthnCredentialKey
+    fun deleteWebauthnCredentialRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/webauthn-credentials/delete",
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/webauthn-credentials/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1151,86 +1969,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/iam/account",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/application
-     * Returns one application: its sign-in methods, its allowed redirect URIs and the client credentials your integration authenticates with.
-     * Returns one application: its sign-in methods, its allowed redirect URIs and the client credentials your integration authenticates with.
-     * @param owner 
-     * @param name 
-     * @return IamApplication
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamApplication(owner: kotlin.String, name: kotlin.String) : IamApplication {
-        val localVarResponse = getIamApplicationWithHttpInfo(owner = owner, name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamApplication
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/application
-     * Returns one application: its sign-in methods, its allowed redirect URIs and the client credentials your integration authenticates with.
-     * Returns one application: its sign-in methods, its allowed redirect URIs and the client credentials your integration authenticates with.
-     * @param owner 
-     * @param name 
-     * @return ApiResponse<IamApplication?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamApplicationWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamApplication?> {
-        val localVariableConfig = getIamApplicationRequestConfig(owner = owner, name = name)
-
-        return request<Unit, IamApplication>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamApplication
-     *
-     * @param owner 
-     * @param name 
-     * @return RequestConfig
-     */
-    fun getIamApplicationRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("owner", listOf(owner.toString()))
-                put("name", listOf(name.toString()))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1315,7 +2053,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/applications/get
+     * GET /v1/iam/applications/{owner}/{name}
      * Returns one application: its sign-in methods, its allowed redirect URIs and the client credentials your integration authenticates with.
      * Returns one application: its sign-in methods, its allowed redirect URIs and the client credentials your integration authenticates with.
      * @param owner 
@@ -1329,8 +2067,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamApplicationsGet(owner: kotlin.String, name: kotlin.String) : IamApplication {
-        val localVarResponse = getIamApplicationsGetWithHttpInfo(owner = owner, name = name)
+    fun getIamApplicationsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamApplication {
+        val localVarResponse = getIamApplicationsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamApplication
@@ -1348,7 +2086,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/applications/get
+     * GET /v1/iam/applications/{owner}/{name}
      * Returns one application: its sign-in methods, its allowed redirect URIs and the client credentials your integration authenticates with.
      * Returns one application: its sign-in methods, its allowed redirect URIs and the client credentials your integration authenticates with.
      * @param owner 
@@ -1359,8 +2097,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getIamApplicationsGetWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamApplication?> {
-        val localVariableConfig = getIamApplicationsGetRequestConfig(owner = owner, name = name)
+    fun getIamApplicationsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamApplication?> {
+        val localVariableConfig = getIamApplicationsByOwnerByNameRequestConfig(owner = owner, name = name)
 
         return request<Unit, IamApplication>(
             localVariableConfig
@@ -1368,25 +2106,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getIamApplicationsGet
+     * To obtain the request config of the operation getIamApplicationsByOwnerByName
      *
      * @param owner 
      * @param name 
      * @return RequestConfig
      */
-    fun getIamApplicationsGetRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getIamApplicationsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("owner", listOf(owner.toString()))
-                put("name", listOf(name.toString()))
-            }
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/iam/applications/get",
+            path = "/v1/iam/applications/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1465,6 +2199,82 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/iam/audit-logs",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/audit-logs/{owner}/{name}
+     * Returns one audit entry in full: the action, the person or key behind it, and the request it came in on.
+     * Returns one audit entry in full: the action, the person or key behind it, and the request it came in on.
+     * @param owner 
+     * @param name 
+     * @return IamAuditLog
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamAuditLogsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamAuditLog {
+        val localVarResponse = getIamAuditLogsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamAuditLog
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/audit-logs/{owner}/{name}
+     * Returns one audit entry in full: the action, the person or key behind it, and the request it came in on.
+     * Returns one audit entry in full: the action, the person or key behind it, and the request it came in on.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamAuditLog?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamAuditLogsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamAuditLog?> {
+        val localVariableConfig = getIamAuditLogsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamAuditLog>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamAuditLogsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun getIamAuditLogsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/audit-logs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1713,6 +2523,82 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
+     * GET /v1/iam/certs/{owner}/{name}
+     * Returns one signing certificate — its algorithm, its validity window and its public half.
+     * Returns one signing certificate — its algorithm, its validity window and its public half. The private key is masked.
+     * @param owner 
+     * @param name 
+     * @return IamCert
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamCertsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamCert {
+        val localVarResponse = getIamCertsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamCert
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/certs/{owner}/{name}
+     * Returns one signing certificate — its algorithm, its validity window and its public half.
+     * Returns one signing certificate — its algorithm, its validity window and its public half. The private key is masked.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamCert?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamCertsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamCert?> {
+        val localVariableConfig = getIamCertsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamCert>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamCertsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun getIamCertsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/certs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/iam/consent
      * Returns the calling person&#39;s own privacy and communication choices.
      * Returns the calling person&#39;s own privacy and communication choices. Somebody who has never set them gets the defaults rather than nothing, so a consent screen always has something to show — insights on, and training UNANSWERED, which is the state that means the screen still has to ask.
@@ -1931,1363 +2817,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/get-application
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetApplication() : Unit {
-        val localVarResponse = getIamGetApplicationWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-application
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetApplicationWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetApplicationRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetApplication
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetApplicationRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-application",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-applications
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetApplications() : Unit {
-        val localVarResponse = getIamGetApplicationsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-applications
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetApplicationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetApplicationsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetApplications
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetApplicationsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-applications",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-cert
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetCert() : Unit {
-        val localVarResponse = getIamGetCertWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-cert
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetCertWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetCertRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetCert
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetCertRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-cert",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-certs
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetCerts() : Unit {
-        val localVarResponse = getIamGetCertsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-certs
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetCertsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetCertsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetCerts
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetCertsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-certs",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-global-users
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetGlobalUsers() : Unit {
-        val localVarResponse = getIamGetGlobalUsersWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-global-users
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetGlobalUsersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetGlobalUsersRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetGlobalUsers
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetGlobalUsersRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-global-users",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-invitations
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetInvitations() : Unit {
-        val localVarResponse = getIamGetInvitationsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-invitations
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetInvitationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetInvitationsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetInvitations
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetInvitationsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-invitations",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-memberships
-     * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.
-     * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.  Both are org-scoped: a non-SuperAdmin may ask about ITS OWN org&#39;s roster, or about a user whose home org is its own, and nothing else. The bound comes from the verified credential via authz.Scope, so a request parameter can never widen it — a membership row names who may act and spend in an org, so a cross-tenant read is a customer roster leak.
-     * @param user User is \&quot;&lt;homeOrg&gt;/&lt;username&gt;\&quot; — which organizations that identity may act in. (optional)
-     * @param org Org is an organization — who may act in it. (optional)
-     * @return IamAnswer
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetMemberships(user: kotlin.String? = null, org: kotlin.String? = null) : IamAnswer {
-        val localVarResponse = getIamGetMembershipsWithHttpInfo(user = user, org = org)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamAnswer
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-memberships
-     * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.
-     * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.  Both are org-scoped: a non-SuperAdmin may ask about ITS OWN org&#39;s roster, or about a user whose home org is its own, and nothing else. The bound comes from the verified credential via authz.Scope, so a request parameter can never widen it — a membership row names who may act and spend in an org, so a cross-tenant read is a customer roster leak.
-     * @param user User is \&quot;&lt;homeOrg&gt;/&lt;username&gt;\&quot; — which organizations that identity may act in. (optional)
-     * @param org Org is an organization — who may act in it. (optional)
-     * @return ApiResponse<IamAnswer?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetMembershipsWithHttpInfo(user: kotlin.String?, org: kotlin.String?) : ApiResponse<IamAnswer?> {
-        val localVariableConfig = getIamGetMembershipsRequestConfig(user = user, org = org)
-
-        return request<Unit, IamAnswer>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetMemberships
-     *
-     * @param user User is \&quot;&lt;homeOrg&gt;/&lt;username&gt;\&quot; — which organizations that identity may act in. (optional)
-     * @param org Org is an organization — who may act in it. (optional)
-     * @return RequestConfig
-     */
-    fun getIamGetMembershipsRequestConfig(user: kotlin.String?, org: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (user != null) {
-                    put("user", listOf(user.toString()))
-                }
-                if (org != null) {
-                    put("org", listOf(org.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-memberships",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-organization
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetOrganization() : Unit {
-        val localVarResponse = getIamGetOrganizationWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-organization
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetOrganizationWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetOrganizationRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetOrganization
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetOrganizationRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-organization",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-organization-projects
-     * Returns one organization&#39;s projects — what a scope switcher lists so somebody can move between them.
-     * Returns one organization&#39;s projects — what a scope switcher lists so somebody can move between them.  You see your own organization and no other, whatever the request asks for.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetOrganizationProjects() : Unit {
-        val localVarResponse = getIamGetOrganizationProjectsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-organization-projects
-     * Returns one organization&#39;s projects — what a scope switcher lists so somebody can move between them.
-     * Returns one organization&#39;s projects — what a scope switcher lists so somebody can move between them.  You see your own organization and no other, whatever the request asks for.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetOrganizationProjectsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetOrganizationProjectsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetOrganizationProjects
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetOrganizationProjectsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-organization-projects",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-organization-workspaces
-     * Returns one organization&#39;s workspaces — what a scope switcher lists so somebody can move between them.
-     * Returns one organization&#39;s workspaces — what a scope switcher lists so somebody can move between them.  You see your own organization and no other, whatever the request asks for.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetOrganizationWorkspaces() : Unit {
-        val localVarResponse = getIamGetOrganizationWorkspacesWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-organization-workspaces
-     * Returns one organization&#39;s workspaces — what a scope switcher lists so somebody can move between them.
-     * Returns one organization&#39;s workspaces — what a scope switcher lists so somebody can move between them.  You see your own organization and no other, whatever the request asks for.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetOrganizationWorkspacesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetOrganizationWorkspacesRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetOrganizationWorkspaces
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetOrganizationWorkspacesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-organization-workspaces",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-organizations
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetOrganizations() : Unit {
-        val localVarResponse = getIamGetOrganizationsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-organizations
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetOrganizationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetOrganizationsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetOrganizations
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetOrganizationsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-organizations",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-permission
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetPermission() : Unit {
-        val localVarResponse = getIamGetPermissionWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-permission
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetPermissionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetPermissionRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetPermission
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetPermissionRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-permission",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-permissions
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetPermissions() : Unit {
-        val localVarResponse = getIamGetPermissionsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-permissions
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetPermissionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetPermissionsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetPermissions
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetPermissionsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-permissions",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-provider
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetProvider() : Unit {
-        val localVarResponse = getIamGetProviderWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-provider
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetProviderWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetProviderRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetProvider
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetProviderRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-provider",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-providers
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetProviders() : Unit {
-        val localVarResponse = getIamGetProvidersWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-providers
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetProvidersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetProvidersRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetProviders
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetProvidersRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-providers",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-records
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetRecords() : Unit {
-        val localVarResponse = getIamGetRecordsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-records
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetRecordsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetRecordsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetRecords
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetRecordsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-records",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-role
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetRole() : Unit {
-        val localVarResponse = getIamGetRoleWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-role
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.
-     * Reads one record — the older spelling of the single reads on the REST surface, over the same data and the same permissions.  Secrets are stripped. Naming a record in another organization does not reach it, however the request spells it.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetRoleWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetRoleRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetRole
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetRoleRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-role",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-roles
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetRoles() : Unit {
-        val localVarResponse = getIamGetRolesWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-roles
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetRolesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetRolesRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetRoles
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetRolesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-roles",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-user
-     * Reads one person, two ways.
-     * Reads one person, two ways.  Name them and it is an ordinary read, with secrets stripped. Or hand it a SECRET API key and it answers with the person that key belongs to — how a service of yours turns a credential on an incoming request into an identity.  A publishable key resolves to nobody here, deliberately: it is safe to ship in a browser precisely because it names an organization and never a person.  get-user is handler-authorized (authz.handlerAuthorizedExact) because the key variant carries no owner/name for the Guard to authorize; so the owner/name variant reinstates the SAME read authorization the Guard applies, through the ONE policy function (authz.Can) — identical behavior, a cross-tenant or non-self read still refused 403 — then reuses the generic getHandler verbatim for resolution and redaction. No authz and no CRUD is reimplemented.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetUser() : Unit {
-        val localVarResponse = getIamGetUserWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-user
-     * Reads one person, two ways.
-     * Reads one person, two ways.  Name them and it is an ordinary read, with secrets stripped. Or hand it a SECRET API key and it answers with the person that key belongs to — how a service of yours turns a credential on an incoming request into an identity.  A publishable key resolves to nobody here, deliberately: it is safe to ship in a browser precisely because it names an organization and never a person.  get-user is handler-authorized (authz.handlerAuthorizedExact) because the key variant carries no owner/name for the Guard to authorize; so the owner/name variant reinstates the SAME read authorization the Guard applies, through the ONE policy function (authz.Can) — identical behavior, a cross-tenant or non-self read still refused 403 — then reuses the generic getHandler verbatim for resolution and redaction. No authz and no CRUD is reimplemented.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetUserWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetUserRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetUser
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetUserRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-user",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/get-users
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamGetUsers() : Unit {
-        val localVarResponse = getIamGetUsersWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/get-users
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.
-     * Lists one kind of record in your organization — the older spelling of the collection reads on the REST surface, over the same data and the same permissions.  Secrets are stripped from every row. Send both a page number and a page size to page, and the total comes back alongside; send neither and you get the whole set. You see your own organization and no other, whatever the request asks for.  Scoping note (intentional, fail-closed): iam&#39;s ownership model is mixed — users/roles/permissions are owned by their tenant org, while organizations/ applications/providers/certs are platform-owned (Owner \&quot;admin\&quot;). A SuperAdmin (Scope → the requested owner, empty &#x3D; all) therefore lists every entity, which is the console-admin path. A non-super is pinned by Scope to its own org, so it lists its tenant-owned entities correctly and is refused the platform-owned lists at the Guard (owner \&quot;\&quot; or \&quot;admin\&quot; both deny) — a safe 403, never another tenant&#39;s rows. Non-super, membership-scoped views of the platform-owned entities (e.g. an org console&#39;s own app list keyed on Application.Organization) are a separate, additive surface, not a silent behavior of this generic lister.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamGetUsersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamGetUsersRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamGetUsers
-     *
-     * @return RequestConfig
-     */
-    fun getIamGetUsersRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/get-users",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/iam/invitations
      * Returns your organization&#39;s invitations, newest first — who has been asked to join, on what terms, and how many seats each invitation still has left.
      * Returns your organization&#39;s invitations, newest first — who has been asked to join, on what terms, and how many seats each invitation still has left.  You see your own organization&#39;s invitations and no one else&#39;s; which organization that is comes from your credentials, not from the request.
@@ -3358,6 +2887,82 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/iam/invitations",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/invitations/{owner}/{name}
+     * Returns one invitation: who it is for, what it grants on acceptance, and when it expires.
+     * Returns one invitation: who it is for, what it grants on acceptance, and when it expires.
+     * @param owner 
+     * @param name 
+     * @return IamInvitation
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamInvitationsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamInvitation {
+        val localVarResponse = getIamInvitationsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamInvitation
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/invitations/{owner}/{name}
+     * Returns one invitation: who it is for, what it grants on acceptance, and when it expires.
+     * Returns one invitation: who it is for, what it grants on acceptance, and when it expires.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamInvitation?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamInvitationsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamInvitation?> {
+        val localVariableConfig = getIamInvitationsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamInvitation>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamInvitationsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun getIamInvitationsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/invitations/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -3444,11 +3049,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/keys/get
+     * GET /v1/iam/keys/{owner}/{name}
      * Returns one API key: what it is called, what it may reach, and when it was issued.
      * Returns one API key: what it is called, what it may reach, and when it was issued.
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return IamKey
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -3458,8 +3063,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamKeysGet(owner: kotlin.String? = null, name: kotlin.String? = null) : IamKey {
-        val localVarResponse = getIamKeysGetWithHttpInfo(owner = owner, name = name)
+    fun getIamKeysByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamKey {
+        val localVarResponse = getIamKeysByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamKey
@@ -3477,19 +3082,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/keys/get
+     * GET /v1/iam/keys/{owner}/{name}
      * Returns one API key: what it is called, what it may reach, and when it was issued.
      * Returns one API key: what it is called, what it may reach, and when it was issued.
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamKey?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getIamKeysGetWithHttpInfo(owner: kotlin.String?, name: kotlin.String?) : ApiResponse<IamKey?> {
-        val localVariableConfig = getIamKeysGetRequestConfig(owner = owner, name = name)
+    fun getIamKeysByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamKey?> {
+        val localVariableConfig = getIamKeysByOwnerByNameRequestConfig(owner = owner, name = name)
 
         return request<Unit, IamKey>(
             localVariableConfig
@@ -3497,29 +3102,155 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getIamKeysGet
+     * To obtain the request config of the operation getIamKeysByOwnerByName
      *
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun getIamKeysGetRequestConfig(owner: kotlin.String?, name: kotlin.String?) : RequestConfig<Unit> {
+    fun getIamKeysByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (owner != null) {
-                    put("owner", listOf(owner.toString()))
-                }
-                if (name != null) {
-                    put("name", listOf(name.toString()))
-                }
-            }
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/iam/keys/get",
+            path = "/v1/iam/keys/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/keys/org
+     * Resolve a PUBLISHABLE key to the organization that owns it
+     * Answers which organization a publishable key belongs to — what a service calls to attribute a request that arrived carrying a key shipped in a browser. This is the noun spelling of &#x60;/v1/iam/resolve-key&#x60;, the same handler at the address that replaces it; both answer while callers migrate.  It names an ORGANIZATION and never a person. No path through it loads or returns a user, so a key placed in client code cannot become a way to learn who anyone is — which is the whole reason this is a separate door from the one below.  A key that is expired, secret rather than publishable, or simply unknown all answer with the same sentence and a &#x60;code&#x60; saying which it was. Only a confidential service that has already proved it may resolve keys reads that code — there is no anonymous caller here to probe which keys exist — and telling those apart is what lets a holder be told to re-mint an expired key instead of hunting a configuration error.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamKeysOrg() : Unit {
+        val localVarResponse = getIamKeysOrgWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/keys/org
+     * Resolve a PUBLISHABLE key to the organization that owns it
+     * Answers which organization a publishable key belongs to — what a service calls to attribute a request that arrived carrying a key shipped in a browser. This is the noun spelling of &#x60;/v1/iam/resolve-key&#x60;, the same handler at the address that replaces it; both answer while callers migrate.  It names an ORGANIZATION and never a person. No path through it loads or returns a user, so a key placed in client code cannot become a way to learn who anyone is — which is the whole reason this is a separate door from the one below.  A key that is expired, secret rather than publishable, or simply unknown all answer with the same sentence and a &#x60;code&#x60; saying which it was. Only a confidential service that has already proved it may resolve keys reads that code — there is no anonymous caller here to probe which keys exist — and telling those apart is what lets a holder be told to re-mint an expired key instead of hunting a configuration error.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamKeysOrgWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIamKeysOrgRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamKeysOrg
+     *
+     * @return RequestConfig
+     */
+    fun getIamKeysOrgRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/keys/org",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/keys/principal
+     * Resolve a SECRET key to the principal it authenticates
+     * Answers who a secret key belongs to — the owner and name a gateway needs to attribute and bill a request that arrived carrying an &#x60;sk-&#x60;. This is the noun spelling of &#x60;/v1/iam/get-user?accessKey&#x3D;&#x60;, the same handler at the address that replaces it; both answer while callers migrate.  It resolves a KEY and nothing else. The verb it replaces also reads a user by &#x60;?id&#x3D;&#x60;, and carrying that here would make this a second address for the user read — the exact thing being retired. Ask for a person by name at the user read; ask here only what a credential resolves to.  Requires a confidential caller: the resolver authenticates as an app, so a request without that credential resolves nothing rather than falling back to an anonymous lookup. An unresolvable key answers with a &#x60;code&#x60; distinguishing expired from wrong-door from unknown, so the holder can be told which one cure applies.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamKeysPrincipal() : Unit {
+        val localVarResponse = getIamKeysPrincipalWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/keys/principal
+     * Resolve a SECRET key to the principal it authenticates
+     * Answers who a secret key belongs to — the owner and name a gateway needs to attribute and bill a request that arrived carrying an &#x60;sk-&#x60;. This is the noun spelling of &#x60;/v1/iam/get-user?accessKey&#x3D;&#x60;, the same handler at the address that replaces it; both answer while callers migrate.  It resolves a KEY and nothing else. The verb it replaces also reads a user by &#x60;?id&#x3D;&#x60;, and carrying that here would make this a second address for the user read — the exact thing being retired. Ask for a person by name at the user read; ask here only what a credential resolves to.  Requires a confidential caller: the resolver authenticates as an app, so a request without that credential resolves nothing rather than falling back to an anonymous lookup. An unresolvable key answers with a &#x60;code&#x60; distinguishing expired from wrong-door from unknown, so the holder can be told which one cure applies.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamKeysPrincipalWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIamKeysPrincipalRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamKeysPrincipal
+     *
+     * @return RequestConfig
+     */
+    fun getIamKeysPrincipalRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/keys/principal",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -3815,7 +3546,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * GET /v1/iam/oauth/logout
      * Ends a sign-in and sends the browser somewhere sensible.
-     * Ends a sign-in and sends the browser somewhere sensible. Accepts GET or POST, so it works as a plain link.  It ACTUALLY signs you out, which is worth stating because the endpoint spent a release not doing it: the whole body computed a redirect and answered {\&quot;status\&quot;:\&quot;ok\&quot;} unconditionally — no session ended, no token revoked. A logout that reports success while leaving the session live is worse than no logout at all, because the person on the shared machine believes it worked. Three things happen here now, in this order:   1. The browser session dies — sid revoked server-side AND the cookie expired     (sessions.Clear). Server-side revocation is the load-bearing half: a copy     of the cookie taken before logout must not still resolve.  2. The relying party&#39;s tokens are revoked when an id_token_hint names it, so     the refresh token cannot mint a fresh access token after the human left.     Revocation state is authoritative — a JWT&#39;s &#x60;exp&#x60; still reads valid for     days, so expiry is necessary but never sufficient.  3. Only then is a redirect considered, and only to a REGISTERED uri.  The open-redirect guard is unchanged: a redirect happens only when a VERIFIED id_token_hint identifies the application and that application has registered the target. Anything else refuses to redirect — nobody can turn your logout link into a redirect to a site of their choosing.
+     * Ends a sign-in and sends the browser somewhere sensible. Accepts GET or POST, so it works as a plain link.  It ACTUALLY signs you out — worth stating, because a logout that computes a redirect and answers {\&quot;status\&quot;:\&quot;ok\&quot;} while ending no session and revoking no token is worse than none: the person on the shared machine believes it worked. Three things happen here, in this order:   1. The browser session dies — sid revoked server-side AND the cookie expired     (sessions.Clear). Server-side revocation is the load-bearing half: a copy     of the cookie taken before logout must not still resolve.  2. The relying party&#39;s tokens are revoked when an id_token_hint names it, so     the refresh token cannot mint a fresh access token after the human left.     Revocation state is authoritative — a JWT&#39;s &#x60;exp&#x60; still reads valid for     days, so expiry is necessary but never sufficient.  3. Only then is a redirect considered, and only to a REGISTERED uri.  The open-redirect guard is unchanged: a redirect happens only when a VERIFIED id_token_hint identifies the application and that application has registered the target. Anything else refuses to redirect — nobody can turn your logout link into a redirect to a site of their choosing.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -3845,7 +3576,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * GET /v1/iam/oauth/logout
      * Ends a sign-in and sends the browser somewhere sensible.
-     * Ends a sign-in and sends the browser somewhere sensible. Accepts GET or POST, so it works as a plain link.  It ACTUALLY signs you out, which is worth stating because the endpoint spent a release not doing it: the whole body computed a redirect and answered {\&quot;status\&quot;:\&quot;ok\&quot;} unconditionally — no session ended, no token revoked. A logout that reports success while leaving the session live is worse than no logout at all, because the person on the shared machine believes it worked. Three things happen here now, in this order:   1. The browser session dies — sid revoked server-side AND the cookie expired     (sessions.Clear). Server-side revocation is the load-bearing half: a copy     of the cookie taken before logout must not still resolve.  2. The relying party&#39;s tokens are revoked when an id_token_hint names it, so     the refresh token cannot mint a fresh access token after the human left.     Revocation state is authoritative — a JWT&#39;s &#x60;exp&#x60; still reads valid for     days, so expiry is necessary but never sufficient.  3. Only then is a redirect considered, and only to a REGISTERED uri.  The open-redirect guard is unchanged: a redirect happens only when a VERIFIED id_token_hint identifies the application and that application has registered the target. Anything else refuses to redirect — nobody can turn your logout link into a redirect to a site of their choosing.
+     * Ends a sign-in and sends the browser somewhere sensible. Accepts GET or POST, so it works as a plain link.  It ACTUALLY signs you out — worth stating, because a logout that computes a redirect and answers {\&quot;status\&quot;:\&quot;ok\&quot;} while ending no session and revoking no token is worse than none: the person on the shared machine believes it worked. Three things happen here, in this order:   1. The browser session dies — sid revoked server-side AND the cookie expired     (sessions.Clear). Server-side revocation is the load-bearing half: a copy     of the cookie taken before logout must not still resolve.  2. The relying party&#39;s tokens are revoked when an id_token_hint names it, so     the refresh token cannot mint a fresh access token after the human left.     Revocation state is authoritative — a JWT&#39;s &#x60;exp&#x60; still reads valid for     days, so expiry is necessary but never sufficient.  3. Only then is a redirect considered, and only to a REGISTERED uri.  The open-redirect guard is unchanged: a redirect happens only when a VERIFIED id_token_hint identifies the application and that application has registered the target. Anything else refuses to redirect — nobody can turn your logout link into a redirect to a site of their choosing.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -4025,11 +3756,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/permissions/get
+     * GET /v1/iam/permissions/{owner}/{name}
      * Returns one permission: who it grants to, what it allows, and the resources it covers.
      * Returns one permission: who it grants to, what it allows, and the resources it covers.
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return IamPermission
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -4039,8 +3770,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamPermissionsGet(owner: kotlin.String? = null, name: kotlin.String? = null) : IamPermission {
-        val localVarResponse = getIamPermissionsGetWithHttpInfo(owner = owner, name = name)
+    fun getIamPermissionsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamPermission {
+        val localVarResponse = getIamPermissionsByOwnerByNameWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamPermission
@@ -4058,19 +3789,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/permissions/get
+     * GET /v1/iam/permissions/{owner}/{name}
      * Returns one permission: who it grants to, what it allows, and the resources it covers.
      * Returns one permission: who it grants to, what it allows, and the resources it covers.
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamPermission?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getIamPermissionsGetWithHttpInfo(owner: kotlin.String?, name: kotlin.String?) : ApiResponse<IamPermission?> {
-        val localVariableConfig = getIamPermissionsGetRequestConfig(owner = owner, name = name)
+    fun getIamPermissionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamPermission?> {
+        val localVariableConfig = getIamPermissionsByOwnerByNameRequestConfig(owner = owner, name = name)
 
         return request<Unit, IamPermission>(
             localVariableConfig
@@ -4078,29 +3809,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getIamPermissionsGet
+     * To obtain the request config of the operation getIamPermissionsByOwnerByName
      *
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun getIamPermissionsGetRequestConfig(owner: kotlin.String?, name: kotlin.String?) : RequestConfig<Unit> {
+    fun getIamPermissionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (owner != null) {
-                    put("owner", listOf(owner.toString()))
-                }
-                if (name != null) {
-                    put("name", listOf(name.toString()))
-                }
-            }
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/iam/permissions/get",
+            path = "/v1/iam/permissions/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -4179,6 +3902,82 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/iam/projects",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/projects/{owner}/{name}
+     * Returns one project: what it is called and how it is set up.
+     * Returns one project: what it is called and how it is set up.
+     * @param owner 
+     * @param name 
+     * @return IamProject
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamProjectsByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamProject {
+        val localVarResponse = getIamProjectsByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamProject
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/projects/{owner}/{name}
+     * Returns one project: what it is called and how it is set up.
+     * Returns one project: what it is called and how it is set up.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamProject?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamProjectsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamProject?> {
+        val localVariableConfig = getIamProjectsByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamProject>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamProjectsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun getIamProjectsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/projects/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -4321,73 +4120,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/resolve-key
-     * Answers which organization a PUBLISHABLE key belongs to — what a service of yours calls to attribute a request that arrived carrying a key shipped in a browser.
-     * Answers which organization a PUBLISHABLE key belongs to — what a service of yours calls to attribute a request that arrived carrying a key shipped in a browser.  It names an organization and never a person: no path through it can load or return a user, so a key you put in client code cannot become a way to learn who anyone is. A key that is expired, secret rather than publishable, or simply unknown all answer with the same sentence, and with a &#x60;code&#x60; saying which of those it was. Only a confidential service that already proved it may resolve keys at all ever reads that code — there is no anonymous caller here to probe for which keys exist — and telling it apart is what lets the holder be told to re-mint an expired key instead of hunting a configuration error.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamResolveKey() : Unit {
-        val localVarResponse = getIamResolveKeyWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/resolve-key
-     * Answers which organization a PUBLISHABLE key belongs to — what a service of yours calls to attribute a request that arrived carrying a key shipped in a browser.
-     * Answers which organization a PUBLISHABLE key belongs to — what a service of yours calls to attribute a request that arrived carrying a key shipped in a browser.  It names an organization and never a person: no path through it can load or return a user, so a key you put in client code cannot become a way to learn who anyone is. A key that is expired, secret rather than publishable, or simply unknown all answer with the same sentence, and with a &#x60;code&#x60; saying which of those it was. Only a confidential service that already proved it may resolve keys at all ever reads that code — there is no anonymous caller here to probe for which keys exist — and telling it apart is what lets the holder be told to re-mint an expired key instead of hunting a configuration error.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getIamResolveKeyWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getIamResolveKeyRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getIamResolveKey
-     *
-     * @return RequestConfig
-     */
-    fun getIamResolveKeyRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/resolve-key",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/iam/roles
      * Returns your organization&#39;s roles, newest first — each a named group of people that permissions are granted to.
      * Returns your organization&#39;s roles, newest first — each a named group of people that permissions are granted to.  You see your own organization&#39;s roles and no one else&#39;s; which organization that is comes from your credentials, not from the request.
@@ -4458,6 +4190,82 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/iam/roles",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/roles/{owner}/{name}
+     * Returns one role: who is in it, and the roles it includes.
+     * Returns one role: who is in it, and the roles it includes.
+     * @param owner 
+     * @param name 
+     * @return IamRole
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamRolesByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamRole {
+        val localVarResponse = getIamRolesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamRole
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/roles/{owner}/{name}
+     * Returns one role: who is in it, and the roles it includes.
+     * Returns one role: who is in it, and the roles it includes.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamRole?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamRolesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamRole?> {
+        val localVariableConfig = getIamRolesByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamRole>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamRolesByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun getIamRolesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/roles/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5056,6 +4864,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns a page of the people in your organization, with the total so you can page through the rest.
      * Returns a page of the people in your organization, with the total so you can page through the rest. Passwords, API secrets and MFA material are stripped from every entry.
      * @param owner 
+     * @param email Email narrows the page to the accounts carrying one address. Looking a person up by their address is a QUERY over the collection, not an item read: an address is not the natural key, two rows in one org can carry one, and a caller that gets a page SEES both — where a single-item read would have to choose, and choosing is how somebody joins a team under a colleague&#39;s identity. (optional)
      * @param limit  (optional)
      * @param offset  (optional)
      * @return IamusersListOutput
@@ -5067,8 +4876,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamUsers(owner: kotlin.String, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : IamusersListOutput {
-        val localVarResponse = getIamUsersWithHttpInfo(owner = owner, limit = limit, offset = offset)
+    fun getIamUsers(owner: kotlin.String, email: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : IamusersListOutput {
+        val localVarResponse = getIamUsersWithHttpInfo(owner = owner, email = email, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamusersListOutput
@@ -5090,6 +4899,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns a page of the people in your organization, with the total so you can page through the rest.
      * Returns a page of the people in your organization, with the total so you can page through the rest. Passwords, API secrets and MFA material are stripped from every entry.
      * @param owner 
+     * @param email Email narrows the page to the accounts carrying one address. Looking a person up by their address is a QUERY over the collection, not an item read: an address is not the natural key, two rows in one org can carry one, and a caller that gets a page SEES both — where a single-item read would have to choose, and choosing is how somebody joins a team under a colleague&#39;s identity. (optional)
      * @param limit  (optional)
      * @param offset  (optional)
      * @return ApiResponse<IamusersListOutput?>
@@ -5098,8 +4908,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getIamUsersWithHttpInfo(owner: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<IamusersListOutput?> {
-        val localVariableConfig = getIamUsersRequestConfig(owner = owner, limit = limit, offset = offset)
+    fun getIamUsersWithHttpInfo(owner: kotlin.String, email: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<IamusersListOutput?> {
+        val localVariableConfig = getIamUsersRequestConfig(owner = owner, email = email, limit = limit, offset = offset)
 
         return request<Unit, IamusersListOutput>(
             localVariableConfig
@@ -5110,15 +4920,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * To obtain the request config of the operation getIamUsers
      *
      * @param owner 
+     * @param email Email narrows the page to the accounts carrying one address. Looking a person up by their address is a QUERY over the collection, not an item read: an address is not the natural key, two rows in one org can carry one, and a caller that gets a page SEES both — where a single-item read would have to choose, and choosing is how somebody joins a team under a colleague&#39;s identity. (optional)
      * @param limit  (optional)
      * @param offset  (optional)
      * @return RequestConfig
      */
-    fun getIamUsersRequestConfig(owner: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getIamUsersRequestConfig(owner: kotlin.String, email: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("owner", listOf(owner.toString()))
+                if (email != null) {
+                    put("email", listOf(email.toString()))
+                }
                 if (limit != null) {
                     put("limit", listOf(limit.toString()))
                 }
@@ -5140,11 +4954,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/users/get
+     * GET /v1/iam/users/{owner}/{name}
      * Returns one person in your organization, addressed by their username or by their email address.
      * Returns one person in your organization, addressed by their username or by their email address. Passwords, API secrets and MFA material are stripped from the response.  An address that names two accounts names none: the read refuses rather than picking one, and says so instead of reporting \&quot;no such user\&quot;. Handing back an arbitrary one of two rows is how somebody gets added to a team under a colleague&#39;s identity.
      * @param owner 
-     * @param name  (optional)
+     * @param name 
      * @param email  (optional)
      * @return IamUser
      * @throws IllegalStateException If the request is not correctly configured
@@ -5155,8 +4969,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamUsersGet(owner: kotlin.String, name: kotlin.String? = null, email: kotlin.String? = null) : IamUser {
-        val localVarResponse = getIamUsersGetWithHttpInfo(owner = owner, name = name, email = email)
+    fun getIamUsersByOwnerByName(owner: kotlin.String, name: kotlin.String, email: kotlin.String? = null) : IamUser {
+        val localVarResponse = getIamUsersByOwnerByNameWithHttpInfo(owner = owner, name = name, email = email)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamUser
@@ -5174,11 +4988,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/users/get
+     * GET /v1/iam/users/{owner}/{name}
      * Returns one person in your organization, addressed by their username or by their email address.
      * Returns one person in your organization, addressed by their username or by their email address. Passwords, API secrets and MFA material are stripped from the response.  An address that names two accounts names none: the read refuses rather than picking one, and says so instead of reporting \&quot;no such user\&quot;. Handing back an arbitrary one of two rows is how somebody gets added to a team under a colleague&#39;s identity.
      * @param owner 
-     * @param name  (optional)
+     * @param name 
      * @param email  (optional)
      * @return ApiResponse<IamUser?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -5186,8 +5000,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getIamUsersGetWithHttpInfo(owner: kotlin.String, name: kotlin.String?, email: kotlin.String?) : ApiResponse<IamUser?> {
-        val localVariableConfig = getIamUsersGetRequestConfig(owner = owner, name = name, email = email)
+    fun getIamUsersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, email: kotlin.String?) : ApiResponse<IamUser?> {
+        val localVariableConfig = getIamUsersByOwnerByNameRequestConfig(owner = owner, name = name, email = email)
 
         return request<Unit, IamUser>(
             localVariableConfig
@@ -5195,21 +5009,17 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation getIamUsersGet
+     * To obtain the request config of the operation getIamUsersByOwnerByName
      *
      * @param owner 
-     * @param name  (optional)
+     * @param name 
      * @param email  (optional)
      * @return RequestConfig
      */
-    fun getIamUsersGetRequestConfig(owner: kotlin.String, name: kotlin.String?, email: kotlin.String?) : RequestConfig<Unit> {
+    fun getIamUsersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, email: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
-                put("owner", listOf(owner.toString()))
-                if (name != null) {
-                    put("name", listOf(name.toString()))
-                }
                 if (email != null) {
                     put("email", listOf(email.toString()))
                 }
@@ -5219,7 +5029,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/iam/users/get",
+            path = "/v1/iam/users/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5287,6 +5097,140 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/iam/web3/nonce",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/webauthn/signin/begin
+     * Starts a passkey sign-in: it returns the challenge the person&#39;s authenticator signs.
+     * Starts a passkey sign-in: it returns the challenge the person&#39;s authenticator signs.  The account is named in the query, and the challenge is bound to it, so what may answer is decided here — by the server, from the row — and the finish checks the answer against that decision rather than recomputing it.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamWebauthnSigninBegin() : Unit {
+        val localVarResponse = getIamWebauthnSigninBeginWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/webauthn/signin/begin
+     * Starts a passkey sign-in: it returns the challenge the person&#39;s authenticator signs.
+     * Starts a passkey sign-in: it returns the challenge the person&#39;s authenticator signs.  The account is named in the query, and the challenge is bound to it, so what may answer is decided here — by the server, from the row — and the finish checks the answer against that decision rather than recomputing it.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamWebauthnSigninBeginWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIamWebauthnSigninBeginRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamWebauthnSigninBegin
+     *
+     * @return RequestConfig
+     */
+    fun getIamWebauthnSigninBeginRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/webauthn/signin/begin",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/webauthn/signup/begin
+     * Starts enrolling a passkey for the signed-in person: it returns the options their browser hands to the authenticator.
+     * Starts enrolling a passkey for the signed-in person: it returns the options their browser hands to the authenticator.  Passkeys already on the account are EXCLUDED, so a second enrollment on a device that already holds one is refused by the authenticator itself rather than silently producing a duplicate the person cannot tell apart.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamWebauthnSignupBegin() : Unit {
+        val localVarResponse = getIamWebauthnSignupBeginWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/webauthn/signup/begin
+     * Starts enrolling a passkey for the signed-in person: it returns the options their browser hands to the authenticator.
+     * Starts enrolling a passkey for the signed-in person: it returns the options their browser hands to the authenticator.  Passkeys already on the account are EXCLUDED, so a second enrollment on a device that already holds one is refused by the authenticator itself rather than silently producing a duplicate the person cannot tell apart.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamWebauthnSignupBeginWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getIamWebauthnSignupBeginRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamWebauthnSignupBegin
+     *
+     * @return RequestConfig
+     */
+    fun getIamWebauthnSignupBeginRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/webauthn/signup/begin",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5641,11 +5585,87 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/organizations/get
+     * GET /v1/iam/workspaces/{owner}/{name}
+     * Returns one workspace: what it is called and how it is set up.
+     * Returns one workspace: what it is called and how it is set up.
+     * @param owner 
+     * @param name 
+     * @return IamWorkspace
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamWorkspacesByOwnerByName(owner: kotlin.String, name: kotlin.String) : IamWorkspace {
+        val localVarResponse = getIamWorkspacesByOwnerByNameWithHttpInfo(owner = owner, name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamWorkspace
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/workspaces/{owner}/{name}
+     * Returns one workspace: what it is called and how it is set up.
+     * Returns one workspace: what it is called and how it is set up.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<IamWorkspace?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamWorkspacesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamWorkspace?> {
+        val localVariableConfig = getIamWorkspacesByOwnerByNameRequestConfig(owner = owner, name = name)
+
+        return request<Unit, IamWorkspace>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamWorkspacesByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @return RequestConfig
+     */
+    fun getIamWorkspacesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/workspaces/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/organizations/{owner}/{name}
      * Returns one organization: its display, its defaults and the sign-in rules everyone in it inherits.
      * Returns one organization: its display, its defaults and the sign-in rules everyone in it inherits.
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return IamOrganization
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -5655,7 +5675,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getOrganization(owner: kotlin.String? = null, name: kotlin.String? = null) : IamOrganization {
+    fun getOrganization(owner: kotlin.String, name: kotlin.String) : IamOrganization {
         val localVarResponse = getOrganizationWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
@@ -5674,18 +5694,18 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/iam/organizations/get
+     * GET /v1/iam/organizations/{owner}/{name}
      * Returns one organization: its display, its defaults and the sign-in rules everyone in it inherits.
      * Returns one organization: its display, its defaults and the sign-in rules everyone in it inherits.
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamOrganization?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getOrganizationWithHttpInfo(owner: kotlin.String?, name: kotlin.String?) : ApiResponse<IamOrganization?> {
+    fun getOrganizationWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamOrganization?> {
         val localVariableConfig = getOrganizationRequestConfig(owner = owner, name = name)
 
         return request<Unit, IamOrganization>(
@@ -5696,27 +5716,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation getOrganization
      *
-     * @param owner  (optional)
-     * @param name  (optional)
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun getOrganizationRequestConfig(owner: kotlin.String?, name: kotlin.String?) : RequestConfig<Unit> {
+    fun getOrganizationRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (owner != null) {
-                    put("owner", listOf(owner.toString()))
-                }
-                if (name != null) {
-                    put("name", listOf(name.toString()))
-                }
-            }
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/iam/organizations/get",
+            path = "/v1/iam/organizations/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5725,10 +5737,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/providers/get
+     * GET /v1/iam/providers/{owner}/{name}
      * Returns one provider: what it connects to and how it is configured.
      * Returns one provider: what it connects to and how it is configured. Its credentials come back masked.
-     * @param iamproviderKey 
+     * @param owner 
+     * @param name 
      * @return IamproviderResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -5738,8 +5751,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getProvider(iamproviderKey: IamproviderKey) : IamproviderResult {
-        val localVarResponse = getProviderWithHttpInfo(iamproviderKey = iamproviderKey)
+    fun getProvider(owner: kotlin.String, name: kotlin.String) : IamproviderResult {
+        val localVarResponse = getProviderWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamproviderResult
@@ -5757,20 +5770,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/providers/get
+     * GET /v1/iam/providers/{owner}/{name}
      * Returns one provider: what it connects to and how it is configured.
      * Returns one provider: what it connects to and how it is configured. Its credentials come back masked.
-     * @param iamproviderKey 
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamproviderResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getProviderWithHttpInfo(iamproviderKey: IamproviderKey) : ApiResponse<IamproviderResult?> {
-        val localVariableConfig = getProviderRequestConfig(iamproviderKey = iamproviderKey)
+    fun getProviderWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamproviderResult?> {
+        val localVariableConfig = getProviderRequestConfig(owner = owner, name = name)
 
-        return request<IamproviderKey, IamproviderResult>(
+        return request<Unit, IamproviderResult>(
             localVariableConfig
         )
     }
@@ -5778,19 +5792,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation getProvider
      *
-     * @param iamproviderKey 
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun getProviderRequestConfig(iamproviderKey: IamproviderKey) : RequestConfig<IamproviderKey> {
-        val localVariableBody = iamproviderKey
+    fun getProviderRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/providers/get",
+            method = RequestMethod.GET,
+            path = "/v1/iam/providers/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5799,10 +5813,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/get
+     * GET /v1/iam/sessions/{owner}/{name}/{application}
      * Returns one person&#39;s session in one application — when it began and which browsers or devices are still carrying it.
      * Returns one person&#39;s session in one application — when it began and which browsers or devices are still carrying it.
-     * @param iamSessionRef 
+     * @param owner 
+     * @param name 
+     * @param application 
      * @return IamSession
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -5812,8 +5828,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getSession(iamSessionRef: IamSessionRef) : IamSession {
-        val localVarResponse = getSessionWithHttpInfo(iamSessionRef = iamSessionRef)
+    fun getSession(owner: kotlin.String, name: kotlin.String, application: kotlin.String) : IamSession {
+        val localVarResponse = getSessionWithHttpInfo(owner = owner, name = name, application = application)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamSession
@@ -5831,20 +5847,22 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/get
+     * GET /v1/iam/sessions/{owner}/{name}/{application}
      * Returns one person&#39;s session in one application — when it began and which browsers or devices are still carrying it.
      * Returns one person&#39;s session in one application — when it began and which browsers or devices are still carrying it.
-     * @param iamSessionRef 
+     * @param owner 
+     * @param name 
+     * @param application 
      * @return ApiResponse<IamSession?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getSessionWithHttpInfo(iamSessionRef: IamSessionRef) : ApiResponse<IamSession?> {
-        val localVariableConfig = getSessionRequestConfig(iamSessionRef = iamSessionRef)
+    fun getSessionWithHttpInfo(owner: kotlin.String, name: kotlin.String, application: kotlin.String) : ApiResponse<IamSession?> {
+        val localVariableConfig = getSessionRequestConfig(owner = owner, name = name, application = application)
 
-        return request<IamSessionRef, IamSession>(
+        return request<Unit, IamSession>(
             localVariableConfig
         )
     }
@@ -5852,19 +5870,20 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation getSession
      *
-     * @param iamSessionRef 
+     * @param owner 
+     * @param name 
+     * @param application 
      * @return RequestConfig
      */
-    fun getSessionRequestConfig(iamSessionRef: IamSessionRef) : RequestConfig<IamSessionRef> {
-        val localVariableBody = iamSessionRef
+    fun getSessionRequestConfig(owner: kotlin.String, name: kotlin.String, application: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/sessions/get",
+            method = RequestMethod.GET,
+            path = "/v1/iam/sessions/{owner}/{name}/{application}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"application"+"}", encodeURIComponent(application.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5873,10 +5892,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/tokens/get
+     * GET /v1/iam/tokens/{owner}/{name}
      * Returns one access token: who and what it was issued to, and when it expires.
      * Returns one access token: who and what it was issued to, and when it expires.
-     * @param iamtokenKey 
+     * @param owner 
+     * @param name 
      * @return IamtokenResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -5886,8 +5906,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getToken(iamtokenKey: IamtokenKey) : IamtokenResult {
-        val localVarResponse = getTokenWithHttpInfo(iamtokenKey = iamtokenKey)
+    fun getToken(owner: kotlin.String, name: kotlin.String) : IamtokenResult {
+        val localVarResponse = getTokenWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamtokenResult
@@ -5905,20 +5925,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/tokens/get
+     * GET /v1/iam/tokens/{owner}/{name}
      * Returns one access token: who and what it was issued to, and when it expires.
      * Returns one access token: who and what it was issued to, and when it expires.
-     * @param iamtokenKey 
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamtokenResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getTokenWithHttpInfo(iamtokenKey: IamtokenKey) : ApiResponse<IamtokenResult?> {
-        val localVariableConfig = getTokenRequestConfig(iamtokenKey = iamtokenKey)
+    fun getTokenWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamtokenResult?> {
+        val localVariableConfig = getTokenRequestConfig(owner = owner, name = name)
 
-        return request<IamtokenKey, IamtokenResult>(
+        return request<Unit, IamtokenResult>(
             localVariableConfig
         )
     }
@@ -5926,19 +5947,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation getToken
      *
-     * @param iamtokenKey 
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun getTokenRequestConfig(iamtokenKey: IamtokenKey) : RequestConfig<IamtokenKey> {
-        val localVariableBody = iamtokenKey
+    fun getTokenRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/tokens/get",
+            method = RequestMethod.GET,
+            path = "/v1/iam/tokens/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5947,10 +5968,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/webauthn-credentials/get
+     * GET /v1/iam/webauthn-credentials/{owner}/{name}
      * Returns one passkey or security key: whose it is, what device it lives on, and when it was registered.
      * Returns one passkey or security key: whose it is, what device it lives on, and when it was registered.
-     * @param iamwebauthnCredentialKey 
+     * @param owner 
+     * @param name 
      * @return IamwebauthnCredentialResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -5960,8 +5982,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getWebauthnCredential(iamwebauthnCredentialKey: IamwebauthnCredentialKey) : IamwebauthnCredentialResult {
-        val localVarResponse = getWebauthnCredentialWithHttpInfo(iamwebauthnCredentialKey = iamwebauthnCredentialKey)
+    fun getWebauthnCredential(owner: kotlin.String, name: kotlin.String) : IamwebauthnCredentialResult {
+        val localVarResponse = getWebauthnCredentialWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamwebauthnCredentialResult
@@ -5979,20 +6001,21 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/webauthn-credentials/get
+     * GET /v1/iam/webauthn-credentials/{owner}/{name}
      * Returns one passkey or security key: whose it is, what device it lives on, and when it was registered.
      * Returns one passkey or security key: whose it is, what device it lives on, and when it was registered.
-     * @param iamwebauthnCredentialKey 
+     * @param owner 
+     * @param name 
      * @return ApiResponse<IamwebauthnCredentialResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getWebauthnCredentialWithHttpInfo(iamwebauthnCredentialKey: IamwebauthnCredentialKey) : ApiResponse<IamwebauthnCredentialResult?> {
-        val localVariableConfig = getWebauthnCredentialRequestConfig(iamwebauthnCredentialKey = iamwebauthnCredentialKey)
+    fun getWebauthnCredentialWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<IamwebauthnCredentialResult?> {
+        val localVariableConfig = getWebauthnCredentialRequestConfig(owner = owner, name = name)
 
-        return request<IamwebauthnCredentialKey, IamwebauthnCredentialResult>(
+        return request<Unit, IamwebauthnCredentialResult>(
             localVariableConfig
         )
     }
@@ -6000,19 +6023,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation getWebauthnCredential
      *
-     * @param iamwebauthnCredentialKey 
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun getWebauthnCredentialRequestConfig(iamwebauthnCredentialKey: IamwebauthnCredentialKey) : RequestConfig<IamwebauthnCredentialKey> {
-        val localVariableBody = iamwebauthnCredentialKey
+    fun getWebauthnCredentialRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/webauthn-credentials/get",
+            method = RequestMethod.GET,
+            path = "/v1/iam/webauthn-credentials/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -6022,11 +6045,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/organizations
-     * Returns the organizations you can see, newest first.
-     * Returns the organizations you can see, newest first. Narrow it to one parent account, and set a limit and offset to page through the rest.
-     * @param owner  (optional)
+     * Returns the organizations you can act in, the ones you belong to first and the rest after, newest first, narrowed by an optional query against the name or the display name.
+     * Returns the organizations you can act in, the ones you belong to first and the rest after, newest first, narrowed by an optional query against the name or the display name.  Platform operators see every organization; everyone else sees their own. Pass the cursor from the previous page to continue; an empty cursor in the answer means there is nothing more.  THE SCOPE IS THE HANDLER&#39;S OWN, so it holds at every door. The Guard refuses a bearerless request before this runs, but the agent door carries a typed op to its handler with no middleware in front of it — a handler that read no principal would answer such a caller with the whole registry. Reading the principal here is what makes the answer the same one over both.
+     * @param xForwardedFor  (optional)
+     * @param q  (optional)
      * @param limit  (optional)
-     * @param offset  (optional)
+     * @param cursor  (optional)
      * @return IamListOrganizationsOutput
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -6036,8 +6060,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun listOrganizations(owner: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : IamListOrganizationsOutput {
-        val localVarResponse = listOrganizationsWithHttpInfo(owner = owner, limit = limit, offset = offset)
+    fun listOrganizations(xForwardedFor: kotlin.String? = null, q: kotlin.String? = null, limit: kotlin.Int? = null, cursor: kotlin.String? = null) : IamListOrganizationsOutput {
+        val localVarResponse = listOrganizationsWithHttpInfo(xForwardedFor = xForwardedFor, q = q, limit = limit, cursor = cursor)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamListOrganizationsOutput
@@ -6056,19 +6080,20 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/organizations
-     * Returns the organizations you can see, newest first.
-     * Returns the organizations you can see, newest first. Narrow it to one parent account, and set a limit and offset to page through the rest.
-     * @param owner  (optional)
+     * Returns the organizations you can act in, the ones you belong to first and the rest after, newest first, narrowed by an optional query against the name or the display name.
+     * Returns the organizations you can act in, the ones you belong to first and the rest after, newest first, narrowed by an optional query against the name or the display name.  Platform operators see every organization; everyone else sees their own. Pass the cursor from the previous page to continue; an empty cursor in the answer means there is nothing more.  THE SCOPE IS THE HANDLER&#39;S OWN, so it holds at every door. The Guard refuses a bearerless request before this runs, but the agent door carries a typed op to its handler with no middleware in front of it — a handler that read no principal would answer such a caller with the whole registry. Reading the principal here is what makes the answer the same one over both.
+     * @param xForwardedFor  (optional)
+     * @param q  (optional)
      * @param limit  (optional)
-     * @param offset  (optional)
+     * @param cursor  (optional)
      * @return ApiResponse<IamListOrganizationsOutput?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun listOrganizationsWithHttpInfo(owner: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<IamListOrganizationsOutput?> {
-        val localVariableConfig = listOrganizationsRequestConfig(owner = owner, limit = limit, offset = offset)
+    fun listOrganizationsWithHttpInfo(xForwardedFor: kotlin.String?, q: kotlin.String?, limit: kotlin.Int?, cursor: kotlin.String?) : ApiResponse<IamListOrganizationsOutput?> {
+        val localVariableConfig = listOrganizationsRequestConfig(xForwardedFor = xForwardedFor, q = q, limit = limit, cursor = cursor)
 
         return request<Unit, IamListOrganizationsOutput>(
             localVariableConfig
@@ -6078,26 +6103,28 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation listOrganizations
      *
-     * @param owner  (optional)
+     * @param xForwardedFor  (optional)
+     * @param q  (optional)
      * @param limit  (optional)
-     * @param offset  (optional)
+     * @param cursor  (optional)
      * @return RequestConfig
      */
-    fun listOrganizationsRequestConfig(owner: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun listOrganizationsRequestConfig(xForwardedFor: kotlin.String?, q: kotlin.String?, limit: kotlin.Int?, cursor: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
-                if (owner != null) {
-                    put("owner", listOf(owner.toString()))
+                if (q != null) {
+                    put("q", listOf(q.toString()))
                 }
                 if (limit != null) {
                     put("limit", listOf(limit.toString()))
                 }
-                if (offset != null) {
-                    put("offset", listOf(offset.toString()))
+                if (cursor != null) {
+                    put("cursor", listOf(cursor.toString()))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        xForwardedFor?.apply { localVariableHeaders["X-Forwarded-For"] = this.toString() }
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
@@ -6189,10 +6216,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/list
+     * GET /v1/iam/sessions
      * Returns who is currently signed in to your organization, newest first, and can be narrowed to one person or one application.
      * Returns who is currently signed in to your organization, newest first, and can be narrowed to one person or one application. It is what you read before signing someone out.
-     * @param iamListSessionsIn 
+     * @param owner 
+     * @param name  (optional)
+     * @param application  (optional)
      * @return IamListSessionsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -6202,8 +6231,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun listSessions(iamListSessionsIn: IamListSessionsIn) : IamListSessionsOut {
-        val localVarResponse = listSessionsWithHttpInfo(iamListSessionsIn = iamListSessionsIn)
+    fun listSessions(owner: kotlin.String, name: kotlin.String? = null, application: kotlin.String? = null) : IamListSessionsOut {
+        val localVarResponse = listSessionsWithHttpInfo(owner = owner, name = name, application = application)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamListSessionsOut
@@ -6221,20 +6250,22 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/list
+     * GET /v1/iam/sessions
      * Returns who is currently signed in to your organization, newest first, and can be narrowed to one person or one application.
      * Returns who is currently signed in to your organization, newest first, and can be narrowed to one person or one application. It is what you read before signing someone out.
-     * @param iamListSessionsIn 
+     * @param owner 
+     * @param name  (optional)
+     * @param application  (optional)
      * @return ApiResponse<IamListSessionsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun listSessionsWithHttpInfo(iamListSessionsIn: IamListSessionsIn) : ApiResponse<IamListSessionsOut?> {
-        val localVariableConfig = listSessionsRequestConfig(iamListSessionsIn = iamListSessionsIn)
+    fun listSessionsWithHttpInfo(owner: kotlin.String, name: kotlin.String?, application: kotlin.String?) : ApiResponse<IamListSessionsOut?> {
+        val localVariableConfig = listSessionsRequestConfig(owner = owner, name = name, application = application)
 
-        return request<IamListSessionsIn, IamListSessionsOut>(
+        return request<Unit, IamListSessionsOut>(
             localVariableConfig
         )
     }
@@ -6242,19 +6273,29 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation listSessions
      *
-     * @param iamListSessionsIn 
+     * @param owner 
+     * @param name  (optional)
+     * @param application  (optional)
      * @return RequestConfig
      */
-    fun listSessionsRequestConfig(iamListSessionsIn: IamListSessionsIn) : RequestConfig<IamListSessionsIn> {
-        val localVariableBody = iamListSessionsIn
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+    fun listSessionsRequestConfig(owner: kotlin.String, name: kotlin.String?, application: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("owner", listOf(owner.toString()))
+                if (name != null) {
+                    put("name", listOf(name.toString()))
+                }
+                if (application != null) {
+                    put("application", listOf(application.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/sessions/list",
+            method = RequestMethod.GET,
+            path = "/v1/iam/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -6348,9 +6389,9 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/webauthn-credentials
-     * Returns the passkeys and security keys registered in your organization, newest first — which device each belongs to and when it was last used.
-     * Returns the passkeys and security keys registered in your organization, newest first — which device each belongs to and when it was last used.
-     * @param owner  (optional)
+     * Returns the passkeys and security keys registered to one person, newest first — which device each lives on and when it was registered.
+     * Returns the passkeys and security keys registered to one person, newest first — which device each lives on and when it was registered.  Yours by default. Name somebody else and you get them only if you already administer their account, which is the same authority that governs reading their user record — so this list can never show more people than the surface beside it already does.  There is no organization-wide list, by design. Scoping to the ORG would hand an org admin every member&#39;s credential rows in one answer and a SuperAdmin every tenant&#39;s, while a plain member could not read even their own (an unnamed target fails the Guard&#39;s tenant rule). One scope answers both halves cleanly: the answer is a person&#39;s, and the caller is that person unless they say otherwise and may.
+     * @param user  (optional)
      * @return IamlistWebauthnCredentialsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -6360,8 +6401,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun listWebauthnCredentials(owner: kotlin.String? = null) : IamlistWebauthnCredentialsOut {
-        val localVarResponse = listWebauthnCredentialsWithHttpInfo(owner = owner)
+    fun listWebauthnCredentials(user: kotlin.String? = null) : IamlistWebauthnCredentialsOut {
+        val localVarResponse = listWebauthnCredentialsWithHttpInfo(user = user)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamlistWebauthnCredentialsOut
@@ -6380,17 +6421,17 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/webauthn-credentials
-     * Returns the passkeys and security keys registered in your organization, newest first — which device each belongs to and when it was last used.
-     * Returns the passkeys and security keys registered in your organization, newest first — which device each belongs to and when it was last used.
-     * @param owner  (optional)
+     * Returns the passkeys and security keys registered to one person, newest first — which device each lives on and when it was registered.
+     * Returns the passkeys and security keys registered to one person, newest first — which device each lives on and when it was registered.  Yours by default. Name somebody else and you get them only if you already administer their account, which is the same authority that governs reading their user record — so this list can never show more people than the surface beside it already does.  There is no organization-wide list, by design. Scoping to the ORG would hand an org admin every member&#39;s credential rows in one answer and a SuperAdmin every tenant&#39;s, while a plain member could not read even their own (an unnamed target fails the Guard&#39;s tenant rule). One scope answers both halves cleanly: the answer is a person&#39;s, and the caller is that person unless they say otherwise and may.
+     * @param user  (optional)
      * @return ApiResponse<IamlistWebauthnCredentialsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun listWebauthnCredentialsWithHttpInfo(owner: kotlin.String?) : ApiResponse<IamlistWebauthnCredentialsOut?> {
-        val localVariableConfig = listWebauthnCredentialsRequestConfig(owner = owner)
+    fun listWebauthnCredentialsWithHttpInfo(user: kotlin.String?) : ApiResponse<IamlistWebauthnCredentialsOut?> {
+        val localVariableConfig = listWebauthnCredentialsRequestConfig(user = user)
 
         return request<Unit, IamlistWebauthnCredentialsOut>(
             localVariableConfig
@@ -6400,15 +6441,15 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation listWebauthnCredentials
      *
-     * @param owner  (optional)
+     * @param user  (optional)
      * @return RequestConfig
      */
-    fun listWebauthnCredentialsRequestConfig(owner: kotlin.String?) : RequestConfig<Unit> {
+    fun listWebauthnCredentialsRequestConfig(user: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
-                if (owner != null) {
-                    put("owner", listOf(owner.toString()))
+                if (user != null) {
+                    put("user", listOf(user.toString()))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6498,591 +6539,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/add-application
-     * Registers an application in your organization — one product or site your people sign in to, with its own client credentials, sign-in methods and allowed redirect URIs.
-     * Registers an application in your organization — one product or site your people sign in to, with its own client credentials, sign-in methods and allowed redirect URIs.  The older spelling of POST /v1/iam/application. A name already used in the organization is refused rather than overwritten.
-     * @param iamApplication 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAddApplication(iamApplication: IamApplication) : IamResponse {
-        val localVarResponse = postIamAddApplicationWithHttpInfo(iamApplication = iamApplication)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/add-application
-     * Registers an application in your organization — one product or site your people sign in to, with its own client credentials, sign-in methods and allowed redirect URIs.
-     * Registers an application in your organization — one product or site your people sign in to, with its own client credentials, sign-in methods and allowed redirect URIs.  The older spelling of POST /v1/iam/application. A name already used in the organization is refused rather than overwritten.
-     * @param iamApplication 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAddApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamAddApplicationRequestConfig(iamApplication = iamApplication)
-
-        return request<IamApplication, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAddApplication
-     *
-     * @param iamApplication 
-     * @return RequestConfig
-     */
-    fun postIamAddApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
-        val localVariableBody = iamApplication
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/add-application",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/add-membership
-     * Lets a person or an application act in an organization.
-     * Lets a person or an application act in an organization. It is the grant behind \&quot;add someone to the team\&quot;, and it is safe to repeat — granting a membership that already exists changes nothing. Granting membership IS the org&#39;s authority to give, so it takes the same gate a write to that org&#39;s own registry row takes: a SuperAdmin, an admin of the org itself, or an org-admin-capable confidential client. One rule, one place (internal/authz).
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAddMembership() : Unit {
-        val localVarResponse = postIamAddMembershipWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/add-membership
-     * Lets a person or an application act in an organization.
-     * Lets a person or an application act in an organization. It is the grant behind \&quot;add someone to the team\&quot;, and it is safe to repeat — granting a membership that already exists changes nothing. Granting membership IS the org&#39;s authority to give, so it takes the same gate a write to that org&#39;s own registry row takes: a SuperAdmin, an admin of the org itself, or an org-admin-capable confidential client. One rule, one place (internal/authz).
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAddMembershipWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postIamAddMembershipRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAddMembership
-     *
-     * @return RequestConfig
-     */
-    fun postIamAddMembershipRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/add-membership",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/add-organization
-     * Creates an organization — the account everything else in your directory hangs from.
-     * Creates an organization — the account everything else in your directory hangs from. Users, applications, roles, projects and workspaces are all named inside one organization, so this is the first write in a new tenant.  The older spelling of POST /v1/iam/organizations. Both reach the same create, so a name already taken is refused here too.
-     * @param iamCreateOrganizationInput 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAddOrganization(iamCreateOrganizationInput: IamCreateOrganizationInput) : IamResponse {
-        val localVarResponse = postIamAddOrganizationWithHttpInfo(iamCreateOrganizationInput = iamCreateOrganizationInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/add-organization
-     * Creates an organization — the account everything else in your directory hangs from.
-     * Creates an organization — the account everything else in your directory hangs from. Users, applications, roles, projects and workspaces are all named inside one organization, so this is the first write in a new tenant.  The older spelling of POST /v1/iam/organizations. Both reach the same create, so a name already taken is refused here too.
-     * @param iamCreateOrganizationInput 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAddOrganizationWithHttpInfo(iamCreateOrganizationInput: IamCreateOrganizationInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamAddOrganizationRequestConfig(iamCreateOrganizationInput = iamCreateOrganizationInput)
-
-        return request<IamCreateOrganizationInput, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAddOrganization
-     *
-     * @param iamCreateOrganizationInput 
-     * @return RequestConfig
-     */
-    fun postIamAddOrganizationRequestConfig(iamCreateOrganizationInput: IamCreateOrganizationInput) : RequestConfig<IamCreateOrganizationInput> {
-        val localVariableBody = iamCreateOrganizationInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/add-organization",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/add-project
-     * Creates a project inside your organization — the scope people pick between when their work is separated by product or client rather than by team.
-     * Creates a project inside your organization — the scope people pick between when their work is separated by product or client rather than by team.  The older spelling of POST /v1/iam/projects. Creating one takes an administrator of the owning organization.
-     * @param iamInput 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAddProject(iamInput: IamInput) : IamResponse {
-        val localVarResponse = postIamAddProjectWithHttpInfo(iamInput = iamInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/add-project
-     * Creates a project inside your organization — the scope people pick between when their work is separated by product or client rather than by team.
-     * Creates a project inside your organization — the scope people pick between when their work is separated by product or client rather than by team.  The older spelling of POST /v1/iam/projects. Creating one takes an administrator of the owning organization.
-     * @param iamInput 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAddProjectWithHttpInfo(iamInput: IamInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamAddProjectRequestConfig(iamInput = iamInput)
-
-        return request<IamInput, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAddProject
-     *
-     * @param iamInput 
-     * @return RequestConfig
-     */
-    fun postIamAddProjectRequestConfig(iamInput: IamInput) : RequestConfig<IamInput> {
-        val localVariableBody = iamInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/add-project",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/add-provider
-     * Adds an identity provider your people can sign in with, or a service your applications send through — a social or enterprise login, an email or SMS sender, a storage or payment connector.
-     * Adds an identity provider your people can sign in with, or a service your applications send through — a social or enterprise login, an email or SMS sender, a storage or payment connector.  A provider is configured once here and then switched on per application, so several applications can share one set of credentials.  The older spelling of POST /v1/iam/providers.
-     * @param iamProvider 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAddProvider(iamProvider: IamProvider) : IamResponse {
-        val localVarResponse = postIamAddProviderWithHttpInfo(iamProvider = iamProvider)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/add-provider
-     * Adds an identity provider your people can sign in with, or a service your applications send through — a social or enterprise login, an email or SMS sender, a storage or payment connector.
-     * Adds an identity provider your people can sign in with, or a service your applications send through — a social or enterprise login, an email or SMS sender, a storage or payment connector.  A provider is configured once here and then switched on per application, so several applications can share one set of credentials.  The older spelling of POST /v1/iam/providers.
-     * @param iamProvider 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAddProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamAddProviderRequestConfig(iamProvider = iamProvider)
-
-        return request<IamProvider, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAddProvider
-     *
-     * @param iamProvider 
-     * @return RequestConfig
-     */
-    fun postIamAddProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
-        val localVariableBody = iamProvider
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/add-provider",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/add-role
-     * Creates a role — a named group of people that permissions are granted to.
-     * Creates a role — a named group of people that permissions are granted to. Granting to a role rather than to each person is what keeps access correct as your team changes: add someone to the role and they inherit everything it can do.  The older spelling of POST /v1/iam/roles.
-     * @param iamrolesInput 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAddRole(iamrolesInput: IamrolesInput) : IamResponse {
-        val localVarResponse = postIamAddRoleWithHttpInfo(iamrolesInput = iamrolesInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/add-role
-     * Creates a role — a named group of people that permissions are granted to.
-     * Creates a role — a named group of people that permissions are granted to. Granting to a role rather than to each person is what keeps access correct as your team changes: add someone to the role and they inherit everything it can do.  The older spelling of POST /v1/iam/roles.
-     * @param iamrolesInput 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAddRoleWithHttpInfo(iamrolesInput: IamrolesInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamAddRoleRequestConfig(iamrolesInput = iamrolesInput)
-
-        return request<IamrolesInput, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAddRole
-     *
-     * @param iamrolesInput 
-     * @return RequestConfig
-     */
-    fun postIamAddRoleRequestConfig(iamrolesInput: IamrolesInput) : RequestConfig<IamrolesInput> {
-        val localVariableBody = iamrolesInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/add-role",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/add-user
-     * Adds a person to your organization and, if you send a password, sets the one they will sign in with.
-     * Adds a person to your organization and, if you send a password, sets the one they will sign in with. The password is hashed before it is stored and is never returned to you or to anyone else.  Usernames are checked against one rule wherever an account is created — this verb, password signup, a social sign-in, or SCIM — so a name accepted here is a name accepted everywhere.  The older spelling of POST /v1/iam/users, and it posts the user&#39;s fields at the top level rather than wrapped in {user, password}.
-     * @param iamuserBody 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAddUser(iamuserBody: IamuserBody) : IamResponse {
-        val localVarResponse = postIamAddUserWithHttpInfo(iamuserBody = iamuserBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/add-user
-     * Adds a person to your organization and, if you send a password, sets the one they will sign in with.
-     * Adds a person to your organization and, if you send a password, sets the one they will sign in with. The password is hashed before it is stored and is never returned to you or to anyone else.  Usernames are checked against one rule wherever an account is created — this verb, password signup, a social sign-in, or SCIM — so a name accepted here is a name accepted everywhere.  The older spelling of POST /v1/iam/users, and it posts the user&#39;s fields at the top level rather than wrapped in {user, password}.
-     * @param iamuserBody 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAddUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamAddUserRequestConfig(iamuserBody = iamuserBody)
-
-        return request<IamuserBody, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAddUser
-     *
-     * @param iamuserBody 
-     * @return RequestConfig
-     */
-    fun postIamAddUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
-        val localVariableBody = iamuserBody
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/add-user",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/add-workspace
-     * Creates a workspace inside your organization — the scope a team works in, alongside projects rather than instead of them.
-     * Creates a workspace inside your organization — the scope a team works in, alongside projects rather than instead of them.  The older spelling of POST /v1/iam/workspaces. Creating one takes an administrator of the owning organization.
-     * @param iamworkspacesInput 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAddWorkspace(iamworkspacesInput: IamworkspacesInput) : IamResponse {
-        val localVarResponse = postIamAddWorkspaceWithHttpInfo(iamworkspacesInput = iamworkspacesInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/add-workspace
-     * Creates a workspace inside your organization — the scope a team works in, alongside projects rather than instead of them.
-     * Creates a workspace inside your organization — the scope a team works in, alongside projects rather than instead of them.  The older spelling of POST /v1/iam/workspaces. Creating one takes an administrator of the owning organization.
-     * @param iamworkspacesInput 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAddWorkspaceWithHttpInfo(iamworkspacesInput: IamworkspacesInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamAddWorkspaceRequestConfig(iamworkspacesInput = iamworkspacesInput)
-
-        return request<IamworkspacesInput, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAddWorkspace
-     *
-     * @param iamworkspacesInput 
-     * @return RequestConfig
-     */
-    fun postIamAddWorkspaceRequestConfig(iamworkspacesInput: IamworkspacesInput) : RequestConfig<IamworkspacesInput> {
-        val localVariableBody = iamworkspacesInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/add-workspace",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /v1/iam/admin/provision
      * Sets up an account on someone&#39;s behalf — the same onboarding a person gets themselves, driven by one of your own services instead of by them.
      * Sets up an account on someone&#39;s behalf — the same onboarding a person gets themselves, driven by one of your own services instead of by them.  It authenticates as your service rather than as a person, which is why the person to provision is named in the request. The setup it performs is identical to self-service onboarding; there is one provisioning path, not two that can drift.
@@ -7142,80 +6598,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/iam/admin/provision",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/application
-     * Registers an application in your organization — one product or site your people sign in to, with its own client credentials, sign-in methods and allowed redirect URIs.
-     * Registers an application in your organization — one product or site your people sign in to, with its own client credentials, sign-in methods and allowed redirect URIs. A name already used in the organization is refused rather than overwritten.  Exported so the legacy add-application alias reuses this exact path — one create, two spellings.
-     * @param iamApplication 
-     * @return IamApplication
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamApplication(iamApplication: IamApplication) : IamApplication {
-        val localVarResponse = postIamApplicationWithHttpInfo(iamApplication = iamApplication)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamApplication
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/application
-     * Registers an application in your organization — one product or site your people sign in to, with its own client credentials, sign-in methods and allowed redirect URIs.
-     * Registers an application in your organization — one product or site your people sign in to, with its own client credentials, sign-in methods and allowed redirect URIs. A name already used in the organization is refused rather than overwritten.  Exported so the legacy add-application alias reuses this exact path — one create, two spellings.
-     * @param iamApplication 
-     * @return ApiResponse<IamApplication?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamApplication?> {
-        val localVariableConfig = postIamApplicationRequestConfig(iamApplication = iamApplication)
-
-        return request<IamApplication, IamApplication>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamApplication
-     *
-     * @param iamApplication 
-     * @return RequestConfig
-     */
-    fun postIamApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
-        val localVariableBody = iamApplication
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/application",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -7298,11 +6680,13 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/applications/delete
-     * Removes an application.
-     * Removes an application. Anyone mid-sign-in through it is turned away and its client credentials stop working, so retire the integration before deleting it.
-     * @param iamApplicationRef 
-     * @return IamDeleteResult
+     * POST /v1/iam/assume
+     * Steps a platform operator into an organization: it returns their own access token re-scoped to that tenant, so they see what the tenant sees.
+     * Steps a platform operator into an organization: it returns their own access token re-scoped to that tenant, so they see what the tenant sees.  The token still names the operator — stepping in is not becoming somebody else — and records the organization it was scoped to, so everything done with it is attributed to the person who did it. Only a platform operator may, and the attempt is recorded whether or not it succeeds.
+     * @param iamassumeBody 
+     * @param authorization  (optional)
+     * @param xForwardedFor  (optional)
+     * @return IamAnswer
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7311,11 +6695,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamApplicationsDelete(iamApplicationRef: IamApplicationRef) : IamDeleteResult {
-        val localVarResponse = postIamApplicationsDeleteWithHttpInfo(iamApplicationRef = iamApplicationRef)
+    fun postIamAssume(iamassumeBody: IamassumeBody, authorization: kotlin.String? = null, xForwardedFor: kotlin.String? = null) : IamAnswer {
+        val localVarResponse = postIamAssumeWithHttpInfo(iamassumeBody = iamassumeBody, authorization = authorization, xForwardedFor = xForwardedFor)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamAnswer
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7330,114 +6714,46 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/applications/delete
-     * Removes an application.
-     * Removes an application. Anyone mid-sign-in through it is turned away and its client credentials stop working, so retire the integration before deleting it.
-     * @param iamApplicationRef 
-     * @return ApiResponse<IamDeleteResult?>
+     * POST /v1/iam/assume
+     * Steps a platform operator into an organization: it returns their own access token re-scoped to that tenant, so they see what the tenant sees.
+     * Steps a platform operator into an organization: it returns their own access token re-scoped to that tenant, so they see what the tenant sees.  The token still names the operator — stepping in is not becoming somebody else — and records the organization it was scoped to, so everything done with it is attributed to the person who did it. Only a platform operator may, and the attempt is recorded whether or not it succeeds.
+     * @param iamassumeBody 
+     * @param authorization  (optional)
+     * @param xForwardedFor  (optional)
+     * @return ApiResponse<IamAnswer?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postIamApplicationsDeleteWithHttpInfo(iamApplicationRef: IamApplicationRef) : ApiResponse<IamDeleteResult?> {
-        val localVariableConfig = postIamApplicationsDeleteRequestConfig(iamApplicationRef = iamApplicationRef)
+    fun postIamAssumeWithHttpInfo(iamassumeBody: IamassumeBody, authorization: kotlin.String?, xForwardedFor: kotlin.String?) : ApiResponse<IamAnswer?> {
+        val localVariableConfig = postIamAssumeRequestConfig(iamassumeBody = iamassumeBody, authorization = authorization, xForwardedFor = xForwardedFor)
 
-        return request<IamApplicationRef, IamDeleteResult>(
+        return request<IamassumeBody, IamAnswer>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postIamApplicationsDelete
+     * To obtain the request config of the operation postIamAssume
      *
-     * @param iamApplicationRef 
+     * @param iamassumeBody 
+     * @param authorization  (optional)
+     * @param xForwardedFor  (optional)
      * @return RequestConfig
      */
-    fun postIamApplicationsDeleteRequestConfig(iamApplicationRef: IamApplicationRef) : RequestConfig<IamApplicationRef> {
-        val localVariableBody = iamApplicationRef
+    fun postIamAssumeRequestConfig(iamassumeBody: IamassumeBody, authorization: kotlin.String?, xForwardedFor: kotlin.String?) : RequestConfig<IamassumeBody> {
+        val localVariableBody = iamassumeBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        authorization?.apply { localVariableHeaders["Authorization"] = this.toString() }
+        xForwardedFor?.apply { localVariableHeaders["X-Forwarded-For"] = this.toString() }
         localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/iam/applications/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/applications/update
-     * Changes an application&#39;s display, its sign-in methods and the redirect URIs it may return to — the call that makes login work from a new host.
-     * Changes an application&#39;s display, its sign-in methods and the redirect URIs it may return to — the call that makes login work from a new host. Which organization it belongs to and what it is named are fixed when it is created and are not editable here.  Exported so the legacy update-application alias reuses this exact path — one update, two spellings.
-     * @param iamApplication 
-     * @return IamApplication
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamApplicationsUpdate(iamApplication: IamApplication) : IamApplication {
-        val localVarResponse = postIamApplicationsUpdateWithHttpInfo(iamApplication = iamApplication)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamApplication
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/applications/update
-     * Changes an application&#39;s display, its sign-in methods and the redirect URIs it may return to — the call that makes login work from a new host.
-     * Changes an application&#39;s display, its sign-in methods and the redirect URIs it may return to — the call that makes login work from a new host. Which organization it belongs to and what it is named are fixed when it is created and are not editable here.  Exported so the legacy update-application alias reuses this exact path — one update, two spellings.
-     * @param iamApplication 
-     * @return ApiResponse<IamApplication?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamApplicationsUpdateWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamApplication?> {
-        val localVariableConfig = postIamApplicationsUpdateRequestConfig(iamApplication = iamApplication)
-
-        return request<IamApplication, IamApplication>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamApplicationsUpdate
-     *
-     * @param iamApplication 
-     * @return RequestConfig
-     */
-    fun postIamApplicationsUpdateRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
-        val localVariableBody = iamApplication
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/applications/update",
+            path = "/v1/iam/assume",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -7449,7 +6765,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/iam/audit-logs
      * Records an audit entry, so activity from your own systems lands in the same trail as everything the Hanzo Cloud records for you.
      * Records an audit entry, so activity from your own systems lands in the same trail as everything the Hanzo Cloud records for you.
-     * @param iamauditlogsInput 
+     * @param iamInput 
      * @return IamAuditLog
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -7459,8 +6775,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAuditLogs(iamauditlogsInput: IamauditlogsInput) : IamAuditLog {
-        val localVarResponse = postIamAuditLogsWithHttpInfo(iamauditlogsInput = iamauditlogsInput)
+    fun postIamAuditLogs(iamInput: IamInput) : IamAuditLog {
+        val localVarResponse = postIamAuditLogsWithHttpInfo(iamInput = iamInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamAuditLog
@@ -7481,17 +6797,17 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/iam/audit-logs
      * Records an audit entry, so activity from your own systems lands in the same trail as everything the Hanzo Cloud records for you.
      * Records an audit entry, so activity from your own systems lands in the same trail as everything the Hanzo Cloud records for you.
-     * @param iamauditlogsInput 
+     * @param iamInput 
      * @return ApiResponse<IamAuditLog?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAuditLogsWithHttpInfo(iamauditlogsInput: IamauditlogsInput) : ApiResponse<IamAuditLog?> {
-        val localVariableConfig = postIamAuditLogsRequestConfig(iamauditlogsInput = iamauditlogsInput)
+    fun postIamAuditLogsWithHttpInfo(iamInput: IamInput) : ApiResponse<IamAuditLog?> {
+        val localVariableConfig = postIamAuditLogsRequestConfig(iamInput = iamInput)
 
-        return request<IamauditlogsInput, IamAuditLog>(
+        return request<IamInput, IamAuditLog>(
             localVariableConfig
         )
     }
@@ -7499,11 +6815,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation postIamAuditLogs
      *
-     * @param iamauditlogsInput 
+     * @param iamInput 
      * @return RequestConfig
      */
-    fun postIamAuditLogsRequestConfig(iamauditlogsInput: IamauditlogsInput) : RequestConfig<IamauditlogsInput> {
-        val localVariableBody = iamauditlogsInput
+    fun postIamAuditLogsRequestConfig(iamInput: IamInput) : RequestConfig<IamInput> {
+        val localVariableBody = iamInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -7520,231 +6836,9 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/audit-logs/delete
-     * Removes an audit entry.
-     * Removes an audit entry. Retention policy is normally what should expire a trail; deleting by hand leaves a gap a reviewer will notice.
-     * @param iamRef 
-     * @return IamDeleteOutput
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAuditLogsDelete(iamRef: IamRef) : IamDeleteOutput {
-        val localVarResponse = postIamAuditLogsDeleteWithHttpInfo(iamRef = iamRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteOutput
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/audit-logs/delete
-     * Removes an audit entry.
-     * Removes an audit entry. Retention policy is normally what should expire a trail; deleting by hand leaves a gap a reviewer will notice.
-     * @param iamRef 
-     * @return ApiResponse<IamDeleteOutput?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAuditLogsDeleteWithHttpInfo(iamRef: IamRef) : ApiResponse<IamDeleteOutput?> {
-        val localVariableConfig = postIamAuditLogsDeleteRequestConfig(iamRef = iamRef)
-
-        return request<IamRef, IamDeleteOutput>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAuditLogsDelete
-     *
-     * @param iamRef 
-     * @return RequestConfig
-     */
-    fun postIamAuditLogsDeleteRequestConfig(iamRef: IamRef) : RequestConfig<IamRef> {
-        val localVariableBody = iamRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/audit-logs/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/audit-logs/get
-     * Returns one audit entry in full: the action, the person or key behind it, and the request it came in on.
-     * Returns one audit entry in full: the action, the person or key behind it, and the request it came in on.
-     * @param iamRef 
-     * @return IamAuditLog
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAuditLogsGet(iamRef: IamRef) : IamAuditLog {
-        val localVarResponse = postIamAuditLogsGetWithHttpInfo(iamRef = iamRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamAuditLog
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/audit-logs/get
-     * Returns one audit entry in full: the action, the person or key behind it, and the request it came in on.
-     * Returns one audit entry in full: the action, the person or key behind it, and the request it came in on.
-     * @param iamRef 
-     * @return ApiResponse<IamAuditLog?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAuditLogsGetWithHttpInfo(iamRef: IamRef) : ApiResponse<IamAuditLog?> {
-        val localVariableConfig = postIamAuditLogsGetRequestConfig(iamRef = iamRef)
-
-        return request<IamRef, IamAuditLog>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAuditLogsGet
-     *
-     * @param iamRef 
-     * @return RequestConfig
-     */
-    fun postIamAuditLogsGetRequestConfig(iamRef: IamRef) : RequestConfig<IamRef> {
-        val localVariableBody = iamRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/audit-logs/get",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/audit-logs/update
-     * Corrects an audit entry.
-     * Corrects an audit entry. The trail is append-only in normal operation and nothing in the Hanzo Cloud rewrites it — this exists for an administrator to correct an entry their own systems recorded wrongly.
-     * @param iamauditlogsInput 
-     * @return IamAuditLog
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamAuditLogsUpdate(iamauditlogsInput: IamauditlogsInput) : IamAuditLog {
-        val localVarResponse = postIamAuditLogsUpdateWithHttpInfo(iamauditlogsInput = iamauditlogsInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamAuditLog
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/audit-logs/update
-     * Corrects an audit entry.
-     * Corrects an audit entry. The trail is append-only in normal operation and nothing in the Hanzo Cloud rewrites it — this exists for an administrator to correct an entry their own systems recorded wrongly.
-     * @param iamauditlogsInput 
-     * @return ApiResponse<IamAuditLog?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamAuditLogsUpdateWithHttpInfo(iamauditlogsInput: IamauditlogsInput) : ApiResponse<IamAuditLog?> {
-        val localVariableConfig = postIamAuditLogsUpdateRequestConfig(iamauditlogsInput = iamauditlogsInput)
-
-        return request<IamauditlogsInput, IamAuditLog>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamAuditLogsUpdate
-     *
-     * @param iamauditlogsInput 
-     * @return RequestConfig
-     */
-    fun postIamAuditLogsUpdateRequestConfig(iamauditlogsInput: IamauditlogsInput) : RequestConfig<IamauditlogsInput> {
-        val localVariableBody = iamauditlogsInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/audit-logs/update",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /v1/iam/certs
-     * Adds a signing certificate your applications can verify tokens against — the call you make to bring your own key, or to stage the next one before a rotation.
-     * Adds a signing certificate your applications can verify tokens against — the call you make to bring your own key, or to stage the next one before a rotation. A name already used in your organization is refused.
+     * Adds a signing certificate your applications can verify tokens against — the call you make to stage the next one before a rotation.
+     * Adds a signing certificate your applications can verify tokens against — the call you make to stage the next one before a rotation. A name already used in your organization is refused.  It registers the certificate&#39;s IDENTITY: its name (which is the JWKS &#x60;kid&#x60;), its algorithm, its expiry. Key material does not travel this way and cannot: the private key is not part of the Cert&#39;s JSON, so it is neither served here nor accepted here. It is supplied to the process by the deployment, under the name registered here (internal/keyring). Staging a rotation is therefore two halves — this call names the key, and the deployment provides it.
      * @param iamCert 
      * @return IamCert
      * @throws IllegalStateException If the request is not correctly configured
@@ -7775,8 +6869,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/iam/certs
-     * Adds a signing certificate your applications can verify tokens against — the call you make to bring your own key, or to stage the next one before a rotation.
-     * Adds a signing certificate your applications can verify tokens against — the call you make to bring your own key, or to stage the next one before a rotation. A name already used in your organization is refused.
+     * Adds a signing certificate your applications can verify tokens against — the call you make to stage the next one before a rotation.
+     * Adds a signing certificate your applications can verify tokens against — the call you make to stage the next one before a rotation. A name already used in your organization is refused.  It registers the certificate&#39;s IDENTITY: its name (which is the JWKS &#x60;kid&#x60;), its algorithm, its expiry. Key material does not travel this way and cannot: the private key is not part of the Cert&#39;s JSON, so it is neither served here nor accepted here. It is supplied to the process by the deployment, under the name registered here (internal/keyring). Staging a rotation is therefore two halves — this call names the key, and the deployment provides it.
      * @param iamCert 
      * @return ApiResponse<IamCert?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -7808,302 +6902,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/iam/certs",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/certs/delete
-     * Removes a signing certificate.
-     * Removes a signing certificate. Tokens signed with it can no longer be verified, so retire it only once nothing is still presenting them.
-     * @param iamcertsRef 
-     * @return IamcertsDeleteOutput
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamCertsDelete(iamcertsRef: IamcertsRef) : IamcertsDeleteOutput {
-        val localVarResponse = postIamCertsDeleteWithHttpInfo(iamcertsRef = iamcertsRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamcertsDeleteOutput
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/certs/delete
-     * Removes a signing certificate.
-     * Removes a signing certificate. Tokens signed with it can no longer be verified, so retire it only once nothing is still presenting them.
-     * @param iamcertsRef 
-     * @return ApiResponse<IamcertsDeleteOutput?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamCertsDeleteWithHttpInfo(iamcertsRef: IamcertsRef) : ApiResponse<IamcertsDeleteOutput?> {
-        val localVariableConfig = postIamCertsDeleteRequestConfig(iamcertsRef = iamcertsRef)
-
-        return request<IamcertsRef, IamcertsDeleteOutput>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamCertsDelete
-     *
-     * @param iamcertsRef 
-     * @return RequestConfig
-     */
-    fun postIamCertsDeleteRequestConfig(iamcertsRef: IamcertsRef) : RequestConfig<IamcertsRef> {
-        val localVariableBody = iamcertsRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/certs/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/certs/get
-     * Returns one signing certificate — its algorithm, its validity window and its public half.
-     * Returns one signing certificate — its algorithm, its validity window and its public half. The private key is masked.
-     * @param iamcertsRef 
-     * @return IamCert
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamCertsGet(iamcertsRef: IamcertsRef) : IamCert {
-        val localVarResponse = postIamCertsGetWithHttpInfo(iamcertsRef = iamcertsRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamCert
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/certs/get
-     * Returns one signing certificate — its algorithm, its validity window and its public half.
-     * Returns one signing certificate — its algorithm, its validity window and its public half. The private key is masked.
-     * @param iamcertsRef 
-     * @return ApiResponse<IamCert?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamCertsGetWithHttpInfo(iamcertsRef: IamcertsRef) : ApiResponse<IamCert?> {
-        val localVariableConfig = postIamCertsGetRequestConfig(iamcertsRef = iamcertsRef)
-
-        return request<IamcertsRef, IamCert>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamCertsGet
-     *
-     * @param iamcertsRef 
-     * @return RequestConfig
-     */
-    fun postIamCertsGetRequestConfig(iamcertsRef: IamcertsRef) : RequestConfig<IamcertsRef> {
-        val localVariableBody = iamcertsRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/certs/get",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/certs/update
-     * Changes a signing certificate&#39;s settings.
-     * Changes a signing certificate&#39;s settings. What it is called does not change, and neither does when it was added.
-     * @param iamCert 
-     * @return IamCert
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamCertsUpdate(iamCert: IamCert) : IamCert {
-        val localVarResponse = postIamCertsUpdateWithHttpInfo(iamCert = iamCert)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamCert
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/certs/update
-     * Changes a signing certificate&#39;s settings.
-     * Changes a signing certificate&#39;s settings. What it is called does not change, and neither does when it was added.
-     * @param iamCert 
-     * @return ApiResponse<IamCert?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamCertsUpdateWithHttpInfo(iamCert: IamCert) : ApiResponse<IamCert?> {
-        val localVariableConfig = postIamCertsUpdateRequestConfig(iamCert = iamCert)
-
-        return request<IamCert, IamCert>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamCertsUpdate
-     *
-     * @param iamCert 
-     * @return RequestConfig
-     */
-    fun postIamCertsUpdateRequestConfig(iamCert: IamCert) : RequestConfig<IamCert> {
-        val localVariableBody = iamCert
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/certs/update",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/delete-application
-     * Deletes an application.
-     * Deletes an application. Anyone mid-sign-in through it is turned away and its client credentials stop working, so retire the integration first.  The older spelling of DELETE /v1/iam/application.
-     * @param iamApplication 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamDeleteApplication(iamApplication: IamApplication) : IamResponse {
-        val localVarResponse = postIamDeleteApplicationWithHttpInfo(iamApplication = iamApplication)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/delete-application
-     * Deletes an application.
-     * Deletes an application. Anyone mid-sign-in through it is turned away and its client credentials stop working, so retire the integration first.  The older spelling of DELETE /v1/iam/application.
-     * @param iamApplication 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamDeleteApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamDeleteApplicationRequestConfig(iamApplication = iamApplication)
-
-        return request<IamApplication, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamDeleteApplication
-     *
-     * @param iamApplication 
-     * @return RequestConfig
-     */
-    fun postIamDeleteApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
-        val localVariableBody = iamApplication
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/delete-application",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -8246,450 +7044,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/delete-organization
-     * Deletes an organization and everything named inside it — its users, applications, roles, projects and workspaces.
-     * Deletes an organization and everything named inside it — its users, applications, roles, projects and workspaces. There is no undo, and every session issued under it stops working.  The older spelling of POST /v1/iam/organizations/delete.
-     * @param iamDeleteOrganizationInput 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamDeleteOrganization(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : IamResponse {
-        val localVarResponse = postIamDeleteOrganizationWithHttpInfo(iamDeleteOrganizationInput = iamDeleteOrganizationInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/delete-organization
-     * Deletes an organization and everything named inside it — its users, applications, roles, projects and workspaces.
-     * Deletes an organization and everything named inside it — its users, applications, roles, projects and workspaces. There is no undo, and every session issued under it stops working.  The older spelling of POST /v1/iam/organizations/delete.
-     * @param iamDeleteOrganizationInput 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamDeleteOrganizationWithHttpInfo(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamDeleteOrganizationRequestConfig(iamDeleteOrganizationInput = iamDeleteOrganizationInput)
-
-        return request<IamDeleteOrganizationInput, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamDeleteOrganization
-     *
-     * @param iamDeleteOrganizationInput 
-     * @return RequestConfig
-     */
-    fun postIamDeleteOrganizationRequestConfig(iamDeleteOrganizationInput: IamDeleteOrganizationInput) : RequestConfig<IamDeleteOrganizationInput> {
-        val localVariableBody = iamDeleteOrganizationInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/delete-organization",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/delete-project
-     * Deletes a project.
-     * Deletes a project. The people and roles in your organization are unchanged; what goes is the scope itself, so anything addressed by it must move first.  The older spelling of POST /v1/iam/projects/delete.
-     * @param iamprojectsRef 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamDeleteProject(iamprojectsRef: IamprojectsRef) : IamResponse {
-        val localVarResponse = postIamDeleteProjectWithHttpInfo(iamprojectsRef = iamprojectsRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/delete-project
-     * Deletes a project.
-     * Deletes a project. The people and roles in your organization are unchanged; what goes is the scope itself, so anything addressed by it must move first.  The older spelling of POST /v1/iam/projects/delete.
-     * @param iamprojectsRef 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamDeleteProjectWithHttpInfo(iamprojectsRef: IamprojectsRef) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamDeleteProjectRequestConfig(iamprojectsRef = iamprojectsRef)
-
-        return request<IamprojectsRef, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamDeleteProject
-     *
-     * @param iamprojectsRef 
-     * @return RequestConfig
-     */
-    fun postIamDeleteProjectRequestConfig(iamprojectsRef: IamprojectsRef) : RequestConfig<IamprojectsRef> {
-        val localVariableBody = iamprojectsRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/delete-project",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/delete-provider
-     * Removes a provider.
-     * Removes a provider. Sign-in through it stops for every application that used it, so detach those applications first if they have no other method.  The older spelling of POST /v1/iam/providers/delete.
-     * @param iamProvider 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamDeleteProvider(iamProvider: IamProvider) : IamResponse {
-        val localVarResponse = postIamDeleteProviderWithHttpInfo(iamProvider = iamProvider)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/delete-provider
-     * Removes a provider.
-     * Removes a provider. Sign-in through it stops for every application that used it, so detach those applications first if they have no other method.  The older spelling of POST /v1/iam/providers/delete.
-     * @param iamProvider 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamDeleteProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamDeleteProviderRequestConfig(iamProvider = iamProvider)
-
-        return request<IamProvider, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamDeleteProvider
-     *
-     * @param iamProvider 
-     * @return RequestConfig
-     */
-    fun postIamDeleteProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
-        val localVariableBody = iamProvider
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/delete-provider",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/delete-role
-     * Deletes a role.
-     * Deletes a role. Everyone in it loses the access it carried; their accounts and any other roles they hold are untouched.  The older spelling of POST /v1/iam/roles/delete.
-     * @param iamrolesRef 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamDeleteRole(iamrolesRef: IamrolesRef) : IamResponse {
-        val localVarResponse = postIamDeleteRoleWithHttpInfo(iamrolesRef = iamrolesRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/delete-role
-     * Deletes a role.
-     * Deletes a role. Everyone in it loses the access it carried; their accounts and any other roles they hold are untouched.  The older spelling of POST /v1/iam/roles/delete.
-     * @param iamrolesRef 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamDeleteRoleWithHttpInfo(iamrolesRef: IamrolesRef) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamDeleteRoleRequestConfig(iamrolesRef = iamrolesRef)
-
-        return request<IamrolesRef, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamDeleteRole
-     *
-     * @param iamrolesRef 
-     * @return RequestConfig
-     */
-    fun postIamDeleteRoleRequestConfig(iamrolesRef: IamrolesRef) : RequestConfig<IamrolesRef> {
-        val localVariableBody = iamrolesRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/delete-role",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/delete-user
-     * Removes a person from your organization.
-     * Removes a person from your organization. Their sessions stop working and the account is gone, not suspended — to keep the record and only stop sign-in, update the user instead.  The older spelling of POST /v1/iam/users/delete.
-     * @param iamuserBody 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamDeleteUser(iamuserBody: IamuserBody) : IamResponse {
-        val localVarResponse = postIamDeleteUserWithHttpInfo(iamuserBody = iamuserBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/delete-user
-     * Removes a person from your organization.
-     * Removes a person from your organization. Their sessions stop working and the account is gone, not suspended — to keep the record and only stop sign-in, update the user instead.  The older spelling of POST /v1/iam/users/delete.
-     * @param iamuserBody 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamDeleteUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamDeleteUserRequestConfig(iamuserBody = iamuserBody)
-
-        return request<IamuserBody, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamDeleteUser
-     *
-     * @param iamuserBody 
-     * @return RequestConfig
-     */
-    fun postIamDeleteUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
-        val localVariableBody = iamuserBody
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/delete-user",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/delete-workspace
-     * Deletes a workspace.
-     * Deletes a workspace. The people and roles in your organization are unchanged; what goes is the scope itself.  The older spelling of POST /v1/iam/workspaces/delete.
-     * @param iamworkspacesRef 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamDeleteWorkspace(iamworkspacesRef: IamworkspacesRef) : IamResponse {
-        val localVarResponse = postIamDeleteWorkspaceWithHttpInfo(iamworkspacesRef = iamworkspacesRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/delete-workspace
-     * Deletes a workspace.
-     * Deletes a workspace. The people and roles in your organization are unchanged; what goes is the scope itself.  The older spelling of POST /v1/iam/workspaces/delete.
-     * @param iamworkspacesRef 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamDeleteWorkspaceWithHttpInfo(iamworkspacesRef: IamworkspacesRef) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamDeleteWorkspaceRequestConfig(iamworkspacesRef = iamworkspacesRef)
-
-        return request<IamworkspacesRef, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamDeleteWorkspace
-     *
-     * @param iamworkspacesRef 
-     * @return RequestConfig
-     */
-    fun postIamDeleteWorkspaceRequestConfig(iamworkspacesRef: IamworkspacesRef) : RequestConfig<IamworkspacesRef> {
-        val localVariableBody = iamworkspacesRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/delete-workspace",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /v1/iam/invitations
      * Issues an invitation to join your organization — the code or link a new member redeems, with the role they arrive holding and the date it stops working.
      * Issues an invitation to join your organization — the code or link a new member redeems, with the role they arrive holding and the date it stops working. A name already used in the organization is refused.
@@ -8756,228 +7110,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/iam/invitations",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/invitations/delete
-     * Withdraws an invitation.
-     * Withdraws an invitation. It stops being redeemable at once; anyone who already joined through it keeps their account.
-     * @param iaminvitationsRef 
-     * @return IaminvitationsDeleteOutput
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamInvitationsDelete(iaminvitationsRef: IaminvitationsRef) : IaminvitationsDeleteOutput {
-        val localVarResponse = postIamInvitationsDeleteWithHttpInfo(iaminvitationsRef = iaminvitationsRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IaminvitationsDeleteOutput
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/invitations/delete
-     * Withdraws an invitation.
-     * Withdraws an invitation. It stops being redeemable at once; anyone who already joined through it keeps their account.
-     * @param iaminvitationsRef 
-     * @return ApiResponse<IaminvitationsDeleteOutput?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamInvitationsDeleteWithHttpInfo(iaminvitationsRef: IaminvitationsRef) : ApiResponse<IaminvitationsDeleteOutput?> {
-        val localVariableConfig = postIamInvitationsDeleteRequestConfig(iaminvitationsRef = iaminvitationsRef)
-
-        return request<IaminvitationsRef, IaminvitationsDeleteOutput>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamInvitationsDelete
-     *
-     * @param iaminvitationsRef 
-     * @return RequestConfig
-     */
-    fun postIamInvitationsDeleteRequestConfig(iaminvitationsRef: IaminvitationsRef) : RequestConfig<IaminvitationsRef> {
-        val localVariableBody = iaminvitationsRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/invitations/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/invitations/get
-     * Returns one invitation: who it is for, what it grants on acceptance, and when it expires.
-     * Returns one invitation: who it is for, what it grants on acceptance, and when it expires.
-     * @param iaminvitationsRef 
-     * @return IamInvitation
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamInvitationsGet(iaminvitationsRef: IaminvitationsRef) : IamInvitation {
-        val localVarResponse = postIamInvitationsGetWithHttpInfo(iaminvitationsRef = iaminvitationsRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamInvitation
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/invitations/get
-     * Returns one invitation: who it is for, what it grants on acceptance, and when it expires.
-     * Returns one invitation: who it is for, what it grants on acceptance, and when it expires.
-     * @param iaminvitationsRef 
-     * @return ApiResponse<IamInvitation?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamInvitationsGetWithHttpInfo(iaminvitationsRef: IaminvitationsRef) : ApiResponse<IamInvitation?> {
-        val localVariableConfig = postIamInvitationsGetRequestConfig(iaminvitationsRef = iaminvitationsRef)
-
-        return request<IaminvitationsRef, IamInvitation>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamInvitationsGet
-     *
-     * @param iaminvitationsRef 
-     * @return RequestConfig
-     */
-    fun postIamInvitationsGetRequestConfig(iaminvitationsRef: IaminvitationsRef) : RequestConfig<IaminvitationsRef> {
-        val localVariableBody = iaminvitationsRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/invitations/get",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/invitations/update
-     * Changes an invitation&#39;s terms — the role it grants, how many may redeem it, or when it expires.
-     * Changes an invitation&#39;s terms — the role it grants, how many may redeem it, or when it expires. What it is called does not change.
-     * @param iaminvitationsInput 
-     * @return IamInvitation
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamInvitationsUpdate(iaminvitationsInput: IaminvitationsInput) : IamInvitation {
-        val localVarResponse = postIamInvitationsUpdateWithHttpInfo(iaminvitationsInput = iaminvitationsInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamInvitation
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/invitations/update
-     * Changes an invitation&#39;s terms — the role it grants, how many may redeem it, or when it expires.
-     * Changes an invitation&#39;s terms — the role it grants, how many may redeem it, or when it expires. What it is called does not change.
-     * @param iaminvitationsInput 
-     * @return ApiResponse<IamInvitation?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamInvitationsUpdateWithHttpInfo(iaminvitationsInput: IaminvitationsInput) : ApiResponse<IamInvitation?> {
-        val localVariableConfig = postIamInvitationsUpdateRequestConfig(iaminvitationsInput = iaminvitationsInput)
-
-        return request<IaminvitationsInput, IamInvitation>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamInvitationsUpdate
-     *
-     * @param iaminvitationsInput 
-     * @return RequestConfig
-     */
-    fun postIamInvitationsUpdateRequestConfig(iaminvitationsInput: IaminvitationsInput) : RequestConfig<IaminvitationsInput> {
-        val localVariableBody = iaminvitationsInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/invitations/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -9119,288 +7251,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/iam/keys",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/keys/delete
-     * Revokes an API key.
-     * Revokes an API key. Anything still presenting it stops being authorized at once, so roll the replacement out before you revoke.
-     * @param iamkeysRef 
-     * @return IamDeleteResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamKeysDelete(iamkeysRef: IamkeysRef) : IamDeleteResponse {
-        val localVarResponse = postIamKeysDeleteWithHttpInfo(iamkeysRef = iamkeysRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamDeleteResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/keys/delete
-     * Revokes an API key.
-     * Revokes an API key. Anything still presenting it stops being authorized at once, so roll the replacement out before you revoke.
-     * @param iamkeysRef 
-     * @return ApiResponse<IamDeleteResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamKeysDeleteWithHttpInfo(iamkeysRef: IamkeysRef) : ApiResponse<IamDeleteResponse?> {
-        val localVariableConfig = postIamKeysDeleteRequestConfig(iamkeysRef = iamkeysRef)
-
-        return request<IamkeysRef, IamDeleteResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamKeysDelete
-     *
-     * @param iamkeysRef 
-     * @return RequestConfig
-     */
-    fun postIamKeysDeleteRequestConfig(iamkeysRef: IamkeysRef) : RequestConfig<IamkeysRef> {
-        val localVariableBody = iamkeysRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/keys/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/keys/mint
-     * (re)generates the target user&#39;s key of the requested TYPE and returns it once, over the shared authorizeMinter + mintTarget seam.
-     * (re)generates the target user&#39;s key of the requested TYPE and returns it once, over the shared authorizeMinter + mintTarget seam. &#x60;?type&#x3D;secret&#x60; (the default) yields the confidential sk-; &#x60;?type&#x3D;publishable&#x60; yields the pk- that is safe to ship in client JS and resolves to an org, never a principal.  It writes the schema.Key row that the resolvers actually read. schema.User.AccessKey is not a credential and nothing resolves it, so a key stamped there would authenticate nobody.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamKeysMint() : Unit {
-        val localVarResponse = postIamKeysMintWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/keys/mint
-     * (re)generates the target user&#39;s key of the requested TYPE and returns it once, over the shared authorizeMinter + mintTarget seam.
-     * (re)generates the target user&#39;s key of the requested TYPE and returns it once, over the shared authorizeMinter + mintTarget seam. &#x60;?type&#x3D;secret&#x60; (the default) yields the confidential sk-; &#x60;?type&#x3D;publishable&#x60; yields the pk- that is safe to ship in client JS and resolves to an org, never a principal.  It writes the schema.Key row that the resolvers actually read. schema.User.AccessKey is not a credential and nothing resolves it, so a key stamped there would authenticate nobody.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamKeysMintWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postIamKeysMintRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamKeysMint
-     *
-     * @return RequestConfig
-     */
-    fun postIamKeysMintRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/keys/mint",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/keys/revoke
-     * Clears the target user&#39;s key of the requested TYPE (immediate revoke).
-     * Clears the target user&#39;s key of the requested TYPE (immediate revoke). Scoped by the same &#x60;?type&#x60; field mint takes, so revoking the browser key leaves the server key working. A secret key&#39;s stored value is the sk- in its schema.Key row.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamKeysRevoke() : Unit {
-        val localVarResponse = postIamKeysRevokeWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/keys/revoke
-     * Clears the target user&#39;s key of the requested TYPE (immediate revoke).
-     * Clears the target user&#39;s key of the requested TYPE (immediate revoke). Scoped by the same &#x60;?type&#x60; field mint takes, so revoking the browser key leaves the server key working. A secret key&#39;s stored value is the sk- in its schema.Key row.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamKeysRevokeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postIamKeysRevokeRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamKeysRevoke
-     *
-     * @return RequestConfig
-     */
-    fun postIamKeysRevokeRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/keys/revoke",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/keys/update
-     * Changes what a key is called or what it may reach.
-     * Changes what a key is called or what it may reach. The credential itself is not reissued — the key in your deployment keeps working.
-     * @param iamKey 
-     * @return IamKey
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamKeysUpdate(iamKey: IamKey) : IamKey {
-        val localVarResponse = postIamKeysUpdateWithHttpInfo(iamKey = iamKey)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamKey
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/keys/update
-     * Changes what a key is called or what it may reach.
-     * Changes what a key is called or what it may reach. The credential itself is not reissued — the key in your deployment keeps working.
-     * @param iamKey 
-     * @return ApiResponse<IamKey?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamKeysUpdateWithHttpInfo(iamKey: IamKey) : ApiResponse<IamKey?> {
-        val localVariableConfig = postIamKeysUpdateRequestConfig(iamKey = iamKey)
-
-        return request<IamKey, IamKey>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamKeysUpdate
-     *
-     * @param iamKey 
-     * @return RequestConfig
-     */
-    fun postIamKeysUpdateRequestConfig(iamKey: IamKey) : RequestConfig<IamKey> {
-        val localVariableBody = iamKey
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/keys/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -9610,73 +7460,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/mfa/disable
-     * Turns a factor off, so sign-in stops asking for it.
-     * Turns a factor off, so sign-in stops asking for it. Naming no factor turns off ALL of them — the reset path. People may do this for themselves; doing it for somebody else takes an administrator, which is what makes it the way back in when a phone is lost.  The recovery codes go with the last factor: they are the way past a challenge, so keeping them alive for an account with nothing to challenge would leave a standing credential behind.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamMfaDisable() : Unit {
-        val localVarResponse = postIamMfaDisableWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/mfa/disable
-     * Turns a factor off, so sign-in stops asking for it.
-     * Turns a factor off, so sign-in stops asking for it. Naming no factor turns off ALL of them — the reset path. People may do this for themselves; doing it for somebody else takes an administrator, which is what makes it the way back in when a phone is lost.  The recovery codes go with the last factor: they are the way past a challenge, so keeping them alive for an account with nothing to challenge would leave a standing credential behind.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamMfaDisableWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postIamMfaDisableRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamMfaDisable
-     *
-     * @return RequestConfig
-     */
-    fun postIamMfaDisableRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/mfa/disable",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /v1/iam/mfa/preferred
      * Picks which second factor an account is asked for first when it has more than one.
      * Picks which second factor an account is asked for first when it has more than one. Only a factor the account actually holds: storing an unheld one told the login gate \&quot;MFA is on\&quot; — factor.Enabled reads that column — while leaving it nothing to ask for, so the sign-in required the password alone.
@@ -9746,7 +7529,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/mfa/setup/enable
      * Finishes the enrolment: from here the account&#39;s sign-ins ask for this factor.
-     * Finishes the enrolment: from here the account&#39;s sign-ins ask for this factor. It requires the proof initiate handed out — a passcode from the authenticator, or the code that was sent — and verifies it BEFORE writing anything.  It used to write on the strength of a &#x60;secret&#x60; field alone. A client that skipped the verify step, scanned the QR into the wrong app, or was simply buggy switched on a factor no code would ever satisfy, and the account was then locked out with no self-service way back: the gate holds the sign-in before minting, so the person cannot obtain the bearer that disable requires.  The recovery codes are minted here and returned ONCE, on the first factor the account adds. Answering with them is the way back in when no factor can be produced, so they are the same value the row&#39;s digests were made from — by construction, not by a client echoing them back.
+     * Finishes the enrolment: from here the account&#39;s sign-ins ask for this factor. It requires the proof initiate handed out — a passcode from the authenticator, or the code that was sent — and verifies it BEFORE writing anything.  Verifying BEFORE writing is what keeps a client that never completed the proof — a skipped verify step, a QR scanned into the wrong app, a bug — from switching on a factor no code can satisfy. That would lock the account out with no self-service way back: the gate holds the sign-in before minting, so the person could not obtain the bearer that disable requires.  The recovery codes are minted here and returned ONCE, on the first factor the account adds. Answering with them is the way back in when no factor can be produced, so they are the same value the row&#39;s digests were made from — by construction, not by a client echoing them back.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -9776,7 +7559,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/mfa/setup/enable
      * Finishes the enrolment: from here the account&#39;s sign-ins ask for this factor.
-     * Finishes the enrolment: from here the account&#39;s sign-ins ask for this factor. It requires the proof initiate handed out — a passcode from the authenticator, or the code that was sent — and verifies it BEFORE writing anything.  It used to write on the strength of a &#x60;secret&#x60; field alone. A client that skipped the verify step, scanned the QR into the wrong app, or was simply buggy switched on a factor no code would ever satisfy, and the account was then locked out with no self-service way back: the gate holds the sign-in before minting, so the person cannot obtain the bearer that disable requires.  The recovery codes are minted here and returned ONCE, on the first factor the account adds. Answering with them is the way back in when no factor can be produced, so they are the same value the row&#39;s digests were made from — by construction, not by a client echoing them back.
+     * Finishes the enrolment: from here the account&#39;s sign-ins ask for this factor. It requires the proof initiate handed out — a passcode from the authenticator, or the code that was sent — and verifies it BEFORE writing anything.  Verifying BEFORE writing is what keeps a client that never completed the proof — a skipped verify step, a QR scanned into the wrong app, a bug — from switching on a factor no code can satisfy. That would lock the account out with no self-service way back: the gate holds the sign-in before minting, so the person could not obtain the bearer that disable requires.  The recovery codes are minted here and returned ONCE, on the first factor the account adds. Answering with them is the way back in when no factor can be produced, so they are the same value the row&#39;s digests were made from — by construction, not by a client echoing them back.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -10081,7 +7864,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/oauth/device/info
      * Answers \&quot;what am I approving?\&quot; for a pending device code.
-     * Answers \&quot;what am I approving?\&quot; for a pending device code.  The approval page exists to tell a human WHICH application they are authorizing; a page that names the wrong one defeats the control it implements. It used to render the portal&#39;s own app name — a constant, &#x60;hanzo-console&#x60; for every code — so a device code minted by &#x60;hanzo-cli&#x60; was approved under a screen naming a different application entirely. The client is a property of the CODE, so it is read from the code&#39;s row here and nowhere else.  Requires a signed-in session, and answers with the same ONE opaque refusal approveDevice uses. That is deliberate: the user_code is only 40 bits and is the one secret in this flow, so an unauthenticated lookup — or one that distinguished unknown from expired from already-approved — would be an oracle for hunting live codes. Gated and opaque, it reveals strictly less than the approval the same caller could already attempt.
+     * Answers \&quot;what am I approving?\&quot; for a pending device code.  The approval page exists to tell a human WHICH application they are authorizing; a page that names any other one defeats the control it implements. The client is a property of the CODE, not of the page or of whatever app the browser happens to be signed in to, so it is read from the code&#39;s row here and nowhere else.  Requires a signed-in session, and answers with the same ONE opaque refusal approveDevice uses. That is deliberate: the user_code is only 40 bits and is the one secret in this flow, so an unauthenticated lookup — or one that distinguished unknown from expired from already-approved — would be an oracle for hunting live codes. Gated and opaque, it reveals strictly less than the approval the same caller could already attempt.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -10111,7 +7894,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/oauth/device/info
      * Answers \&quot;what am I approving?\&quot; for a pending device code.
-     * Answers \&quot;what am I approving?\&quot; for a pending device code.  The approval page exists to tell a human WHICH application they are authorizing; a page that names the wrong one defeats the control it implements. It used to render the portal&#39;s own app name — a constant, &#x60;hanzo-console&#x60; for every code — so a device code minted by &#x60;hanzo-cli&#x60; was approved under a screen naming a different application entirely. The client is a property of the CODE, so it is read from the code&#39;s row here and nowhere else.  Requires a signed-in session, and answers with the same ONE opaque refusal approveDevice uses. That is deliberate: the user_code is only 40 bits and is the one secret in this flow, so an unauthenticated lookup — or one that distinguished unknown from expired from already-approved — would be an oracle for hunting live codes. Gated and opaque, it reveals strictly less than the approval the same caller could already attempt.
+     * Answers \&quot;what am I approving?\&quot; for a pending device code.  The approval page exists to tell a human WHICH application they are authorizing; a page that names any other one defeats the control it implements. The client is a property of the CODE, not of the page or of whatever app the browser happens to be signed in to, so it is read from the code&#39;s row here and nowhere else.  Requires a signed-in session, and answers with the same ONE opaque refusal approveDevice uses. That is deliberate: the user_code is only 40 bits and is the one secret in this flow, so an unauthenticated lookup — or one that distinguished unknown from expired from already-approved — would be an oracle for hunting live codes. Gated and opaque, it reveals strictly less than the approval the same caller could already attempt.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -10282,7 +8065,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/oauth/logout
      * Ends a sign-in and sends the browser somewhere sensible.
-     * Ends a sign-in and sends the browser somewhere sensible. Accepts GET or POST, so it works as a plain link.  It ACTUALLY signs you out, which is worth stating because the endpoint spent a release not doing it: the whole body computed a redirect and answered {\&quot;status\&quot;:\&quot;ok\&quot;} unconditionally — no session ended, no token revoked. A logout that reports success while leaving the session live is worse than no logout at all, because the person on the shared machine believes it worked. Three things happen here now, in this order:   1. The browser session dies — sid revoked server-side AND the cookie expired     (sessions.Clear). Server-side revocation is the load-bearing half: a copy     of the cookie taken before logout must not still resolve.  2. The relying party&#39;s tokens are revoked when an id_token_hint names it, so     the refresh token cannot mint a fresh access token after the human left.     Revocation state is authoritative — a JWT&#39;s &#x60;exp&#x60; still reads valid for     days, so expiry is necessary but never sufficient.  3. Only then is a redirect considered, and only to a REGISTERED uri.  The open-redirect guard is unchanged: a redirect happens only when a VERIFIED id_token_hint identifies the application and that application has registered the target. Anything else refuses to redirect — nobody can turn your logout link into a redirect to a site of their choosing.
+     * Ends a sign-in and sends the browser somewhere sensible. Accepts GET or POST, so it works as a plain link.  It ACTUALLY signs you out — worth stating, because a logout that computes a redirect and answers {\&quot;status\&quot;:\&quot;ok\&quot;} while ending no session and revoking no token is worse than none: the person on the shared machine believes it worked. Three things happen here, in this order:   1. The browser session dies — sid revoked server-side AND the cookie expired     (sessions.Clear). Server-side revocation is the load-bearing half: a copy     of the cookie taken before logout must not still resolve.  2. The relying party&#39;s tokens are revoked when an id_token_hint names it, so     the refresh token cannot mint a fresh access token after the human left.     Revocation state is authoritative — a JWT&#39;s &#x60;exp&#x60; still reads valid for     days, so expiry is necessary but never sufficient.  3. Only then is a redirect considered, and only to a REGISTERED uri.  The open-redirect guard is unchanged: a redirect happens only when a VERIFIED id_token_hint identifies the application and that application has registered the target. Anything else refuses to redirect — nobody can turn your logout link into a redirect to a site of their choosing.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -10312,7 +8095,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/oauth/logout
      * Ends a sign-in and sends the browser somewhere sensible.
-     * Ends a sign-in and sends the browser somewhere sensible. Accepts GET or POST, so it works as a plain link.  It ACTUALLY signs you out, which is worth stating because the endpoint spent a release not doing it: the whole body computed a redirect and answered {\&quot;status\&quot;:\&quot;ok\&quot;} unconditionally — no session ended, no token revoked. A logout that reports success while leaving the session live is worse than no logout at all, because the person on the shared machine believes it worked. Three things happen here now, in this order:   1. The browser session dies — sid revoked server-side AND the cookie expired     (sessions.Clear). Server-side revocation is the load-bearing half: a copy     of the cookie taken before logout must not still resolve.  2. The relying party&#39;s tokens are revoked when an id_token_hint names it, so     the refresh token cannot mint a fresh access token after the human left.     Revocation state is authoritative — a JWT&#39;s &#x60;exp&#x60; still reads valid for     days, so expiry is necessary but never sufficient.  3. Only then is a redirect considered, and only to a REGISTERED uri.  The open-redirect guard is unchanged: a redirect happens only when a VERIFIED id_token_hint identifies the application and that application has registered the target. Anything else refuses to redirect — nobody can turn your logout link into a redirect to a site of their choosing.
+     * Ends a sign-in and sends the browser somewhere sensible. Accepts GET or POST, so it works as a plain link.  It ACTUALLY signs you out — worth stating, because a logout that computes a redirect and answers {\&quot;status\&quot;:\&quot;ok\&quot;} while ending no session and revoking no token is worse than none: the person on the shared machine believes it worked. Three things happen here, in this order:   1. The browser session dies — sid revoked server-side AND the cookie expired     (sessions.Clear). Server-side revocation is the load-bearing half: a copy     of the cookie taken before logout must not still resolve.  2. The relying party&#39;s tokens are revoked when an id_token_hint names it, so     the refresh token cannot mint a fresh access token after the human left.     Revocation state is authoritative — a JWT&#39;s &#x60;exp&#x60; still reads valid for     days, so expiry is necessary but never sufficient.  3. Only then is a redirect considered, and only to a REGISTERED uri.  The open-redirect guard is unchanged: a redirect happens only when a VERIFIED id_token_hint identifies the application and that application has registered the target. Anything else refuses to redirect — nobody can turn your logout link into a redirect to a site of their choosing.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -10349,7 +8132,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/oauth/revoke
      * Retires a token before it expires — what you call when someone signs out or a credential may have leaked.
-     * Retires a token before it expires — what you call when someone signs out or a credential may have leaked.  Revoking an access token kills that token. Revoking a REFRESH token kills the whole chain it belongs to, so no further access tokens can be minted from it and every token already minted from it dies with it.  A token that is not yours, or that never existed, answers success and does nothing — so the endpoint cannot be used to discover which tokens are real.  PUBLIC clients revoke too, and must: sign-out is the only control a long-lived refresh token has. hanzo-cli is a public PKCE client holding a 30-day rotating refresh token, so a confidential-only revocation endpoint made &#x60;hanzo auth logout&#x60; a LOCAL DELETE — the credential it dropped stayed spendable at hanzo.id for the rest of the month, with nothing able to kill it. Measured 2026-08-01: revoke answered 401 invalid_client and the refresh token went on minting access tokens.  Widening authentication does not widen authority. The caller must still POSSESS the token — and possession already permits USE, of which revocation is the strict opposite — and the row must belong to the client that presents it, so a public client_id buys the ability to destroy exactly what its holder could otherwise spend. RFC 6749 §3.2.1 is the same reading: a client with no credentials identifies itself with client_id.
+     * Retires a token before it expires — what you call when someone signs out or a credential may have leaked.  Revoking an access token kills that token. Revoking a REFRESH token kills the whole chain it belongs to, so no further access tokens can be minted from it and every token already minted from it dies with it.  A token that is not yours, or that never existed, answers success and does nothing — so the endpoint cannot be used to discover which tokens are real.  PUBLIC clients revoke too, and must: sign-out is the only control a long-lived refresh token has. A native app or CLI is a public PKCE client and holds no secret, so requiring one here would leave signing out as a local delete — forgetting a credential that stays spendable for the rest of its lifetime.  Widening authentication does not widen authority. The caller must still POSSESS the token — and possession already permits USE, of which revocation is the strict opposite — and the row must belong to the client that presents it, so a public client_id buys the ability to destroy exactly what its holder could otherwise spend. RFC 6749 §3.2.1 is the same reading: a client with no credentials identifies itself with client_id.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -10379,7 +8162,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/oauth/revoke
      * Retires a token before it expires — what you call when someone signs out or a credential may have leaked.
-     * Retires a token before it expires — what you call when someone signs out or a credential may have leaked.  Revoking an access token kills that token. Revoking a REFRESH token kills the whole chain it belongs to, so no further access tokens can be minted from it and every token already minted from it dies with it.  A token that is not yours, or that never existed, answers success and does nothing — so the endpoint cannot be used to discover which tokens are real.  PUBLIC clients revoke too, and must: sign-out is the only control a long-lived refresh token has. hanzo-cli is a public PKCE client holding a 30-day rotating refresh token, so a confidential-only revocation endpoint made &#x60;hanzo auth logout&#x60; a LOCAL DELETE — the credential it dropped stayed spendable at hanzo.id for the rest of the month, with nothing able to kill it. Measured 2026-08-01: revoke answered 401 invalid_client and the refresh token went on minting access tokens.  Widening authentication does not widen authority. The caller must still POSSESS the token — and possession already permits USE, of which revocation is the strict opposite — and the row must belong to the client that presents it, so a public client_id buys the ability to destroy exactly what its holder could otherwise spend. RFC 6749 §3.2.1 is the same reading: a client with no credentials identifies itself with client_id.
+     * Retires a token before it expires — what you call when someone signs out or a credential may have leaked.  Revoking an access token kills that token. Revoking a REFRESH token kills the whole chain it belongs to, so no further access tokens can be minted from it and every token already minted from it dies with it.  A token that is not yours, or that never existed, answers success and does nothing — so the endpoint cannot be used to discover which tokens are real.  PUBLIC clients revoke too, and must: sign-out is the only control a long-lived refresh token has. A native app or CLI is a public PKCE client and holds no secret, so requiring one here would leave signing out as a local delete — forgetting a credential that stays spendable for the rest of its lifetime.  Widening authentication does not widen authority. The caller must still POSSESS the token — and possession already permits USE, of which revocation is the strict opposite — and the row must belong to the client that presents it, so a public client_id buys the ability to destroy exactly what its holder could otherwise spend. RFC 6749 §3.2.1 is the same reading: a client with no credentials identifies itself with client_id.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -10689,154 +8472,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/permissions/delete
-     * Revokes a permission.
-     * Revokes a permission. Everyone who held access only through it loses that access immediately; grants they hold by another route are untouched.
-     * @param iampermissionRef 
-     * @return IampermissionDeleteResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamPermissionsDelete(iampermissionRef: IampermissionRef) : IampermissionDeleteResponse {
-        val localVarResponse = postIamPermissionsDeleteWithHttpInfo(iampermissionRef = iampermissionRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IampermissionDeleteResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/permissions/delete
-     * Revokes a permission.
-     * Revokes a permission. Everyone who held access only through it loses that access immediately; grants they hold by another route are untouched.
-     * @param iampermissionRef 
-     * @return ApiResponse<IampermissionDeleteResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamPermissionsDeleteWithHttpInfo(iampermissionRef: IampermissionRef) : ApiResponse<IampermissionDeleteResponse?> {
-        val localVariableConfig = postIamPermissionsDeleteRequestConfig(iampermissionRef = iampermissionRef)
-
-        return request<IampermissionRef, IampermissionDeleteResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamPermissionsDelete
-     *
-     * @param iampermissionRef 
-     * @return RequestConfig
-     */
-    fun postIamPermissionsDeleteRequestConfig(iampermissionRef: IampermissionRef) : RequestConfig<IampermissionRef> {
-        val localVariableBody = iampermissionRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/permissions/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/permissions/update
-     * Changes who a permission grants to, what it allows, or the resources it covers.
-     * Changes who a permission grants to, what it allows, or the resources it covers. Access changes as soon as the write lands. What the permission is called does not change, and neither does when it was created.
-     * @param iamPermission 
-     * @return IamPermission
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamPermissionsUpdate(iamPermission: IamPermission) : IamPermission {
-        val localVarResponse = postIamPermissionsUpdateWithHttpInfo(iamPermission = iamPermission)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamPermission
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/permissions/update
-     * Changes who a permission grants to, what it allows, or the resources it covers.
-     * Changes who a permission grants to, what it allows, or the resources it covers. Access changes as soon as the write lands. What the permission is called does not change, and neither does when it was created.
-     * @param iamPermission 
-     * @return ApiResponse<IamPermission?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamPermissionsUpdateWithHttpInfo(iamPermission: IamPermission) : ApiResponse<IamPermission?> {
-        val localVariableConfig = postIamPermissionsUpdateRequestConfig(iamPermission = iamPermission)
-
-        return request<IamPermission, IamPermission>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamPermissionsUpdate
-     *
-     * @param iamPermission 
-     * @return RequestConfig
-     */
-    fun postIamPermissionsUpdateRequestConfig(iamPermission: IamPermission) : RequestConfig<IamPermission> {
-        val localVariableBody = iamPermission
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/permissions/update",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /v1/iam/preferences
      * Saves the calling person&#39;s own settings and returns the full set afterwards.
      * Saves the calling person&#39;s own settings and returns the full set afterwards. Send only the settings you are changing — the rest are kept, so two screens can save at once without one undoing the other.
@@ -10907,7 +8542,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/iam/projects
      * Makes a project inside your organization — the scope people pick between when their work is separated by product or client rather than by team.
      * Makes a project inside your organization — the scope people pick between when their work is separated by product or client rather than by team. A name already used in the organization is refused.
-     * @param iamInput 
+     * @param iamprojectsInput 
      * @return IamProject
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -10917,8 +8552,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamProjects(iamInput: IamInput) : IamProject {
-        val localVarResponse = postIamProjectsWithHttpInfo(iamInput = iamInput)
+    fun postIamProjects(iamprojectsInput: IamprojectsInput) : IamProject {
+        val localVarResponse = postIamProjectsWithHttpInfo(iamprojectsInput = iamprojectsInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamProject
@@ -10939,17 +8574,17 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/iam/projects
      * Makes a project inside your organization — the scope people pick between when their work is separated by product or client rather than by team.
      * Makes a project inside your organization — the scope people pick between when their work is separated by product or client rather than by team. A name already used in the organization is refused.
-     * @param iamInput 
+     * @param iamprojectsInput 
      * @return ApiResponse<IamProject?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postIamProjectsWithHttpInfo(iamInput: IamInput) : ApiResponse<IamProject?> {
-        val localVariableConfig = postIamProjectsRequestConfig(iamInput = iamInput)
+    fun postIamProjectsWithHttpInfo(iamprojectsInput: IamprojectsInput) : ApiResponse<IamProject?> {
+        val localVariableConfig = postIamProjectsRequestConfig(iamprojectsInput = iamprojectsInput)
 
-        return request<IamInput, IamProject>(
+        return request<IamprojectsInput, IamProject>(
             localVariableConfig
         )
     }
@@ -10957,11 +8592,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation postIamProjects
      *
-     * @param iamInput 
+     * @param iamprojectsInput 
      * @return RequestConfig
      */
-    fun postIamProjectsRequestConfig(iamInput: IamInput) : RequestConfig<IamInput> {
-        val localVariableBody = iamInput
+    fun postIamProjectsRequestConfig(iamprojectsInput: IamprojectsInput) : RequestConfig<IamprojectsInput> {
+        val localVariableBody = iamprojectsInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -10970,228 +8605,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/iam/projects",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/projects/delete
-     * Removes a project.
-     * Removes a project. The people and roles in your organization are unchanged; what goes is the scope itself, so move anything addressed by it first.
-     * @param iamprojectsRef 
-     * @return IamprojectsDeleteOutput
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamProjectsDelete(iamprojectsRef: IamprojectsRef) : IamprojectsDeleteOutput {
-        val localVarResponse = postIamProjectsDeleteWithHttpInfo(iamprojectsRef = iamprojectsRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamprojectsDeleteOutput
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/projects/delete
-     * Removes a project.
-     * Removes a project. The people and roles in your organization are unchanged; what goes is the scope itself, so move anything addressed by it first.
-     * @param iamprojectsRef 
-     * @return ApiResponse<IamprojectsDeleteOutput?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamProjectsDeleteWithHttpInfo(iamprojectsRef: IamprojectsRef) : ApiResponse<IamprojectsDeleteOutput?> {
-        val localVariableConfig = postIamProjectsDeleteRequestConfig(iamprojectsRef = iamprojectsRef)
-
-        return request<IamprojectsRef, IamprojectsDeleteOutput>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamProjectsDelete
-     *
-     * @param iamprojectsRef 
-     * @return RequestConfig
-     */
-    fun postIamProjectsDeleteRequestConfig(iamprojectsRef: IamprojectsRef) : RequestConfig<IamprojectsRef> {
-        val localVariableBody = iamprojectsRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/projects/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/projects/get
-     * Returns one project: what it is called and how it is set up.
-     * Returns one project: what it is called and how it is set up.
-     * @param iamprojectsRef 
-     * @return IamProject
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamProjectsGet(iamprojectsRef: IamprojectsRef) : IamProject {
-        val localVarResponse = postIamProjectsGetWithHttpInfo(iamprojectsRef = iamprojectsRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamProject
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/projects/get
-     * Returns one project: what it is called and how it is set up.
-     * Returns one project: what it is called and how it is set up.
-     * @param iamprojectsRef 
-     * @return ApiResponse<IamProject?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamProjectsGetWithHttpInfo(iamprojectsRef: IamprojectsRef) : ApiResponse<IamProject?> {
-        val localVariableConfig = postIamProjectsGetRequestConfig(iamprojectsRef = iamprojectsRef)
-
-        return request<IamprojectsRef, IamProject>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamProjectsGet
-     *
-     * @param iamprojectsRef 
-     * @return RequestConfig
-     */
-    fun postIamProjectsGetRequestConfig(iamprojectsRef: IamprojectsRef) : RequestConfig<IamprojectsRef> {
-        val localVariableBody = iamprojectsRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/projects/get",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/projects/update
-     * Changes a project&#39;s settings.
-     * Changes a project&#39;s settings. What it is called does not change, and neither does when it was created.
-     * @param iamInput 
-     * @return IamProject
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamProjectsUpdate(iamInput: IamInput) : IamProject {
-        val localVarResponse = postIamProjectsUpdateWithHttpInfo(iamInput = iamInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamProject
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/projects/update
-     * Changes a project&#39;s settings.
-     * Changes a project&#39;s settings. What it is called does not change, and neither does when it was created.
-     * @param iamInput 
-     * @return ApiResponse<IamProject?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamProjectsUpdateWithHttpInfo(iamInput: IamInput) : ApiResponse<IamProject?> {
-        val localVariableConfig = postIamProjectsUpdateRequestConfig(iamInput = iamInput)
-
-        return request<IamInput, IamProject>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamProjectsUpdate
-     *
-     * @param iamInput 
-     * @return RequestConfig
-     */
-    fun postIamProjectsUpdateRequestConfig(iamInput: IamInput) : RequestConfig<IamInput> {
-        val localVariableBody = iamInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/projects/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -11259,6 +8672,88 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/iam/registry/token",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/iam/release
+     * Steps a platform operator back out: it returns their own access token with no organization assumed, which is the credential they had before they stepped in.
+     * Steps a platform operator back out: it returns their own access token with no organization assumed, which is the credential they had before they stepped in. Recorded like the step in.
+     * @param iamassumeBody 
+     * @param authorization  (optional)
+     * @param xForwardedFor  (optional)
+     * @return IamAnswer
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIamRelease(iamassumeBody: IamassumeBody, authorization: kotlin.String? = null, xForwardedFor: kotlin.String? = null) : IamAnswer {
+        val localVarResponse = postIamReleaseWithHttpInfo(iamassumeBody = iamassumeBody, authorization = authorization, xForwardedFor = xForwardedFor)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamAnswer
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/iam/release
+     * Steps a platform operator back out: it returns their own access token with no organization assumed, which is the credential they had before they stepped in.
+     * Steps a platform operator back out: it returns their own access token with no organization assumed, which is the credential they had before they stepped in. Recorded like the step in.
+     * @param iamassumeBody 
+     * @param authorization  (optional)
+     * @param xForwardedFor  (optional)
+     * @return ApiResponse<IamAnswer?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIamReleaseWithHttpInfo(iamassumeBody: IamassumeBody, authorization: kotlin.String?, xForwardedFor: kotlin.String?) : ApiResponse<IamAnswer?> {
+        val localVariableConfig = postIamReleaseRequestConfig(iamassumeBody = iamassumeBody, authorization = authorization, xForwardedFor = xForwardedFor)
+
+        return request<IamassumeBody, IamAnswer>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIamRelease
+     *
+     * @param iamassumeBody 
+     * @param authorization  (optional)
+     * @param xForwardedFor  (optional)
+     * @return RequestConfig
+     */
+    fun postIamReleaseRequestConfig(iamassumeBody: IamassumeBody, authorization: kotlin.String?, xForwardedFor: kotlin.String?) : RequestConfig<IamassumeBody> {
+        val localVariableBody = iamassumeBody
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        authorization?.apply { localVariableHeaders["Authorization"] = this.toString() }
+        xForwardedFor?.apply { localVariableHeaders["X-Forwarded-For"] = this.toString() }
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/iam/release",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -11400,228 +8895,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/iam/roles",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/roles/delete
-     * Removes a role.
-     * Removes a role. Everyone in it loses the access it carried; their accounts, and any other role they hold, are untouched.
-     * @param iamrolesRef 
-     * @return IamrolesDeleteOutput
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamRolesDelete(iamrolesRef: IamrolesRef) : IamrolesDeleteOutput {
-        val localVarResponse = postIamRolesDeleteWithHttpInfo(iamrolesRef = iamrolesRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamrolesDeleteOutput
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/roles/delete
-     * Removes a role.
-     * Removes a role. Everyone in it loses the access it carried; their accounts, and any other role they hold, are untouched.
-     * @param iamrolesRef 
-     * @return ApiResponse<IamrolesDeleteOutput?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamRolesDeleteWithHttpInfo(iamrolesRef: IamrolesRef) : ApiResponse<IamrolesDeleteOutput?> {
-        val localVariableConfig = postIamRolesDeleteRequestConfig(iamrolesRef = iamrolesRef)
-
-        return request<IamrolesRef, IamrolesDeleteOutput>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamRolesDelete
-     *
-     * @param iamrolesRef 
-     * @return RequestConfig
-     */
-    fun postIamRolesDeleteRequestConfig(iamrolesRef: IamrolesRef) : RequestConfig<IamrolesRef> {
-        val localVariableBody = iamrolesRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/roles/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/roles/get
-     * Returns one role: who is in it, and the roles it includes.
-     * Returns one role: who is in it, and the roles it includes.
-     * @param iamrolesRef 
-     * @return IamRole
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamRolesGet(iamrolesRef: IamrolesRef) : IamRole {
-        val localVarResponse = postIamRolesGetWithHttpInfo(iamrolesRef = iamrolesRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamRole
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/roles/get
-     * Returns one role: who is in it, and the roles it includes.
-     * Returns one role: who is in it, and the roles it includes.
-     * @param iamrolesRef 
-     * @return ApiResponse<IamRole?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamRolesGetWithHttpInfo(iamrolesRef: IamrolesRef) : ApiResponse<IamRole?> {
-        val localVariableConfig = postIamRolesGetRequestConfig(iamrolesRef = iamrolesRef)
-
-        return request<IamrolesRef, IamRole>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamRolesGet
-     *
-     * @param iamrolesRef 
-     * @return RequestConfig
-     */
-    fun postIamRolesGetRequestConfig(iamrolesRef: IamrolesRef) : RequestConfig<IamrolesRef> {
-        val localVariableBody = iamrolesRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/roles/get",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/roles/update
-     * Changes who is in a role, or which roles it includes.
-     * Changes who is in a role, or which roles it includes. Access changes for everyone in it as soon as the write lands. What the role is called does not change, and neither does when it was created.
-     * @param iamrolesInput 
-     * @return IamRole
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamRolesUpdate(iamrolesInput: IamrolesInput) : IamRole {
-        val localVarResponse = postIamRolesUpdateWithHttpInfo(iamrolesInput = iamrolesInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamRole
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/roles/update
-     * Changes who is in a role, or which roles it includes.
-     * Changes who is in a role, or which roles it includes. Access changes for everyone in it as soon as the write lands. What the role is called does not change, and neither does when it was created.
-     * @param iamrolesInput 
-     * @return ApiResponse<IamRole?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamRolesUpdateWithHttpInfo(iamrolesInput: IamrolesInput) : ApiResponse<IamRole?> {
-        val localVariableConfig = postIamRolesUpdateRequestConfig(iamrolesInput = iamrolesInput)
-
-        return request<IamrolesInput, IamRole>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamRolesUpdate
-     *
-     * @param iamrolesInput 
-     * @return RequestConfig
-     */
-    fun postIamRolesUpdateRequestConfig(iamrolesInput: IamrolesInput) : RequestConfig<IamrolesInput> {
-        val localVariableBody = iamrolesInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/roles/update",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -12236,154 +9509,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/update-application
-     * Updates one of your applications — its display, its sign-in methods and the redirect URIs it is allowed to return to.
-     * Updates one of your applications — its display, its sign-in methods and the redirect URIs it is allowed to return to. Which organization and name the application has are fixed when it is created and are not editable here.  A redirect URI you add becomes an allowed sign-in origin, so this is the call that makes login work from a new host.  The older spelling of PUT /v1/iam/application.
-     * @param iamApplication 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamUpdateApplication(iamApplication: IamApplication) : IamResponse {
-        val localVarResponse = postIamUpdateApplicationWithHttpInfo(iamApplication = iamApplication)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/update-application
-     * Updates one of your applications — its display, its sign-in methods and the redirect URIs it is allowed to return to.
-     * Updates one of your applications — its display, its sign-in methods and the redirect URIs it is allowed to return to. Which organization and name the application has are fixed when it is created and are not editable here.  A redirect URI you add becomes an allowed sign-in origin, so this is the call that makes login work from a new host.  The older spelling of PUT /v1/iam/application.
-     * @param iamApplication 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamUpdateApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamUpdateApplicationRequestConfig(iamApplication = iamApplication)
-
-        return request<IamApplication, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamUpdateApplication
-     *
-     * @param iamApplication 
-     * @return RequestConfig
-     */
-    fun postIamUpdateApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
-        val localVariableBody = iamApplication
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/update-application",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/update-organization
-     * Updates your organization — its display, its default settings and the sign-in rules everyone in it inherits.
-     * Updates your organization — its display, its default settings and the sign-in rules everyone in it inherits.  The older spelling of POST /v1/iam/organizations/update.
-     * @param iamUpdateOrganizationInput 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamUpdateOrganization(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : IamResponse {
-        val localVarResponse = postIamUpdateOrganizationWithHttpInfo(iamUpdateOrganizationInput = iamUpdateOrganizationInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/update-organization
-     * Updates your organization — its display, its default settings and the sign-in rules everyone in it inherits.
-     * Updates your organization — its display, its default settings and the sign-in rules everyone in it inherits.  The older spelling of POST /v1/iam/organizations/update.
-     * @param iamUpdateOrganizationInput 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamUpdateOrganizationWithHttpInfo(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamUpdateOrganizationRequestConfig(iamUpdateOrganizationInput = iamUpdateOrganizationInput)
-
-        return request<IamUpdateOrganizationInput, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamUpdateOrganization
-     *
-     * @param iamUpdateOrganizationInput 
-     * @return RequestConfig
-     */
-    fun postIamUpdateOrganizationRequestConfig(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : RequestConfig<IamUpdateOrganizationInput> {
-        val localVariableBody = iamUpdateOrganizationInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/update-organization",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /v1/iam/update-preferences
      * Saves the calling person&#39;s own settings and returns the full set afterwards.
      * Saves the calling person&#39;s own settings and returns the full set afterwards. Send only the settings you are changing — the rest are kept, so two screens can save at once without one undoing the other.
@@ -12443,228 +9568,6 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/iam/update-preferences",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/update-provider
-     * Updates a provider&#39;s settings or rotates the credentials it holds.
-     * Updates a provider&#39;s settings or rotates the credentials it holds. The change takes effect on the next sign-in through it — sessions already issued are unaffected.  The older spelling of POST /v1/iam/providers/update.
-     * @param iamProvider 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamUpdateProvider(iamProvider: IamProvider) : IamResponse {
-        val localVarResponse = postIamUpdateProviderWithHttpInfo(iamProvider = iamProvider)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/update-provider
-     * Updates a provider&#39;s settings or rotates the credentials it holds.
-     * Updates a provider&#39;s settings or rotates the credentials it holds. The change takes effect on the next sign-in through it — sessions already issued are unaffected.  The older spelling of POST /v1/iam/providers/update.
-     * @param iamProvider 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamUpdateProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamUpdateProviderRequestConfig(iamProvider = iamProvider)
-
-        return request<IamProvider, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamUpdateProvider
-     *
-     * @param iamProvider 
-     * @return RequestConfig
-     */
-    fun postIamUpdateProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
-        val localVariableBody = iamProvider
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/update-provider",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/update-role
-     * Updates a role&#39;s members or the roles it includes.
-     * Updates a role&#39;s members or the roles it includes. Access changes for everyone in it as soon as the write lands.  The older spelling of POST /v1/iam/roles/update.
-     * @param iamrolesInput 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamUpdateRole(iamrolesInput: IamrolesInput) : IamResponse {
-        val localVarResponse = postIamUpdateRoleWithHttpInfo(iamrolesInput = iamrolesInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/update-role
-     * Updates a role&#39;s members or the roles it includes.
-     * Updates a role&#39;s members or the roles it includes. Access changes for everyone in it as soon as the write lands.  The older spelling of POST /v1/iam/roles/update.
-     * @param iamrolesInput 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamUpdateRoleWithHttpInfo(iamrolesInput: IamrolesInput) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamUpdateRoleRequestConfig(iamrolesInput = iamrolesInput)
-
-        return request<IamrolesInput, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamUpdateRole
-     *
-     * @param iamrolesInput 
-     * @return RequestConfig
-     */
-    fun postIamUpdateRoleRequestConfig(iamrolesInput: IamrolesInput) : RequestConfig<IamrolesInput> {
-        val localVariableBody = iamrolesInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/update-role",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/update-user
-     * Updates one of your users&#39; profile, roles or credentials.
-     * Updates one of your users&#39; profile, roles or credentials. Send a password to reset it; leave it out and the current one stands.  The older spelling of POST /v1/iam/users/update, with the user&#39;s fields at the top level rather than wrapped in {user, password}.
-     * @param iamuserBody 
-     * @return IamResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamUpdateUser(iamuserBody: IamuserBody) : IamResponse {
-        val localVarResponse = postIamUpdateUserWithHttpInfo(iamuserBody = iamuserBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/update-user
-     * Updates one of your users&#39; profile, roles or credentials.
-     * Updates one of your users&#39; profile, roles or credentials. Send a password to reset it; leave it out and the current one stands.  The older spelling of POST /v1/iam/users/update, with the user&#39;s fields at the top level rather than wrapped in {user, password}.
-     * @param iamuserBody 
-     * @return ApiResponse<IamResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamUpdateUserWithHttpInfo(iamuserBody: IamuserBody) : ApiResponse<IamResponse?> {
-        val localVariableConfig = postIamUpdateUserRequestConfig(iamuserBody = iamuserBody)
-
-        return request<IamuserBody, IamResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamUpdateUser
-     *
-     * @param iamuserBody 
-     * @return RequestConfig
-     */
-    fun postIamUpdateUserRequestConfig(iamuserBody: IamuserBody) : RequestConfig<IamuserBody> {
-        val localVariableBody = iamuserBody
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/update-user",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -12747,24 +9650,24 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/users/delete
-     * Removes a person from your organization.
-     * Removes a person from your organization. Their sessions stop working immediately and the account is gone rather than suspended — to keep the record and only stop sign-in, update the user instead.
-     * @param iamusersRef 
-     * @return IamusersDeleteOutput
+     * POST /v1/iam/users/{owner}/{name}/keys
+     * (re)generates the target user&#39;s key of the requested TYPE and returns it once, over the shared authorizeMinter + mintTarget seam.
+     * (re)generates the target user&#39;s key of the requested TYPE and returns it once, over the shared authorizeMinter + mintTarget seam. &#x60;?type&#x3D;secret&#x60; (the default) yields the confidential sk-; &#x60;?type&#x3D;publishable&#x60; yields the pk- that is safe to ship in client JS and resolves to an org, never a principal.  It writes the schema.Key row that the resolvers actually read. schema.User.AccessKey is not a credential and nothing resolves it, so a key stamped there would authenticate nobody.
+     * @param owner 
+     * @param name 
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamUsersDelete(iamusersRef: IamusersRef) : IamusersDeleteOutput {
-        val localVarResponse = postIamUsersDeleteWithHttpInfo(iamusersRef = iamusersRef)
+    fun postIamUsersByOwnerByNameKeys(owner: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = postIamUsersByOwnerByNameKeysWithHttpInfo(owner = owner, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamusersDeleteOutput
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -12779,114 +9682,39 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/users/delete
-     * Removes a person from your organization.
-     * Removes a person from your organization. Their sessions stop working immediately and the account is gone rather than suspended — to keep the record and only stop sign-in, update the user instead.
-     * @param iamusersRef 
-     * @return ApiResponse<IamusersDeleteOutput?>
+     * POST /v1/iam/users/{owner}/{name}/keys
+     * (re)generates the target user&#39;s key of the requested TYPE and returns it once, over the shared authorizeMinter + mintTarget seam.
+     * (re)generates the target user&#39;s key of the requested TYPE and returns it once, over the shared authorizeMinter + mintTarget seam. &#x60;?type&#x3D;secret&#x60; (the default) yields the confidential sk-; &#x60;?type&#x3D;publishable&#x60; yields the pk- that is safe to ship in client JS and resolves to an org, never a principal.  It writes the schema.Key row that the resolvers actually read. schema.User.AccessKey is not a credential and nothing resolves it, so a key stamped there would authenticate nobody.
+     * @param owner 
+     * @param name 
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postIamUsersDeleteWithHttpInfo(iamusersRef: IamusersRef) : ApiResponse<IamusersDeleteOutput?> {
-        val localVariableConfig = postIamUsersDeleteRequestConfig(iamusersRef = iamusersRef)
+    fun postIamUsersByOwnerByNameKeysWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postIamUsersByOwnerByNameKeysRequestConfig(owner = owner, name = name)
 
-        return request<IamusersRef, IamusersDeleteOutput>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postIamUsersDelete
+     * To obtain the request config of the operation postIamUsersByOwnerByNameKeys
      *
-     * @param iamusersRef 
+     * @param owner 
+     * @param name 
      * @return RequestConfig
      */
-    fun postIamUsersDeleteRequestConfig(iamusersRef: IamusersRef) : RequestConfig<IamusersRef> {
-        val localVariableBody = iamusersRef
+    fun postIamUsersByOwnerByNameKeysRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/iam/users/delete",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/users/update
-     * Changes a person&#39;s profile, their roles, or the credentials they sign in with.
-     * Changes a person&#39;s profile, their roles, or the credentials they sign in with. Send a password to reset it; leave it out and their current one keeps working.  Who they are does not change: their organization, username and the identifier their existing sessions are keyed on all survive the write, so an update never signs anyone out.
-     * @param iamUpdateInput 
-     * @return IamUser
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamUsersUpdate(iamUpdateInput: IamUpdateInput) : IamUser {
-        val localVarResponse = postIamUsersUpdateWithHttpInfo(iamUpdateInput = iamUpdateInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamUser
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/users/update
-     * Changes a person&#39;s profile, their roles, or the credentials they sign in with.
-     * Changes a person&#39;s profile, their roles, or the credentials they sign in with. Send a password to reset it; leave it out and their current one keeps working.  Who they are does not change: their organization, username and the identifier their existing sessions are keyed on all survive the write, so an update never signs anyone out.
-     * @param iamUpdateInput 
-     * @return ApiResponse<IamUser?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamUsersUpdateWithHttpInfo(iamUpdateInput: IamUpdateInput) : ApiResponse<IamUser?> {
-        val localVariableConfig = postIamUsersUpdateRequestConfig(iamUpdateInput = iamUpdateInput)
-
-        return request<IamUpdateInput, IamUser>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamUsersUpdate
-     *
-     * @param iamUpdateInput 
-     * @return RequestConfig
-     */
-    fun postIamUsersUpdateRequestConfig(iamUpdateInput: IamUpdateInput) : RequestConfig<IamUpdateInput> {
-        val localVariableBody = iamUpdateInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/users/update",
+            path = "/v1/iam/users/{owner}/{name}/keys".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -13029,6 +9857,140 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
+     * POST /v1/iam/webauthn/signin/finish
+     * Verifies the signed challenge and signs the person in.
+     * Verifies the signed challenge and signs the person in.  It answers exactly as a password sign-in does — the same envelope, through the same grant — so nothing downstream branches on how somebody arrived.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIamWebauthnSigninFinish() : Unit {
+        val localVarResponse = postIamWebauthnSigninFinishWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/iam/webauthn/signin/finish
+     * Verifies the signed challenge and signs the person in.
+     * Verifies the signed challenge and signs the person in.  It answers exactly as a password sign-in does — the same envelope, through the same grant — so nothing downstream branches on how somebody arrived.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIamWebauthnSigninFinishWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIamWebauthnSigninFinishRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIamWebauthnSigninFinish
+     *
+     * @return RequestConfig
+     */
+    fun postIamWebauthnSigninFinishRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/iam/webauthn/signin/finish",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/iam/webauthn/signup/finish
+     * Verifies the newly created passkey and stores it, so the person can sign in with their device from then on.
+     * Verifies the newly created passkey and stores it, so the person can sign in with their device from then on.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIamWebauthnSignupFinish() : Unit {
+        val localVarResponse = postIamWebauthnSignupFinishWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/iam/webauthn/signup/finish
+     * Verifies the newly created passkey and stores it, so the person can sign in with their device from then on.
+     * Verifies the newly created passkey and stores it, so the person can sign in with their device from then on.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIamWebauthnSignupFinishWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIamWebauthnSignupFinishRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIamWebauthnSignupFinish
+     *
+     * @return RequestConfig
+     */
+    fun postIamWebauthnSignupFinishRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/iam/webauthn/signup/finish",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * POST /v1/iam/workspaces
      * Makes a workspace inside your organization — the scope a team works in, alongside projects rather than instead of them.
      * Makes a workspace inside your organization — the scope a team works in, alongside projects rather than instead of them. A name already used in the organization is refused.
@@ -13103,11 +10065,13 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/workspaces/delete
-     * Removes a workspace.
-     * Removes a workspace. The people and roles in your organization are unchanged; what goes is the scope itself.
-     * @param iamworkspacesRef 
-     * @return IamworkspacesDeleteOutput
+     * PUT /v1/iam/account
+     * Saves the calling person&#39;s own profile — the name they are shown by, their picture, a line about themselves and a link.
+     * Saves the calling person&#39;s own profile — the name they are shown by, their picture, a line about themselves and a link.  Only their own: the request names nobody, so it cannot reach another account. Send only what you are changing; a field you leave out keeps the value it had, and a field you send empty is cleared.  A picture is an https link or an inline image up to 96 KiB, the same value an organization&#39;s mark is (schema.AvatarRef) — one rule for how a subject appears, whether the subject is a person or an organization.
+     * @param iamaccountBody 
+     * @param cookie  (optional)
+     * @param authorization  (optional)
+     * @return IamAnswer
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -13116,11 +10080,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamWorkspacesDelete(iamworkspacesRef: IamworkspacesRef) : IamworkspacesDeleteOutput {
-        val localVarResponse = postIamWorkspacesDeleteWithHttpInfo(iamworkspacesRef = iamworkspacesRef)
+    fun putIamAccount(iamaccountBody: IamaccountBody, cookie: kotlin.String? = null, authorization: kotlin.String? = null) : IamAnswer {
+        val localVarResponse = putIamAccountWithHttpInfo(iamaccountBody = iamaccountBody, cookie = cookie, authorization = authorization)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamworkspacesDeleteOutput
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamAnswer
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -13135,40 +10099,46 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/workspaces/delete
-     * Removes a workspace.
-     * Removes a workspace. The people and roles in your organization are unchanged; what goes is the scope itself.
-     * @param iamworkspacesRef 
-     * @return ApiResponse<IamworkspacesDeleteOutput?>
+     * PUT /v1/iam/account
+     * Saves the calling person&#39;s own profile — the name they are shown by, their picture, a line about themselves and a link.
+     * Saves the calling person&#39;s own profile — the name they are shown by, their picture, a line about themselves and a link.  Only their own: the request names nobody, so it cannot reach another account. Send only what you are changing; a field you leave out keeps the value it had, and a field you send empty is cleared.  A picture is an https link or an inline image up to 96 KiB, the same value an organization&#39;s mark is (schema.AvatarRef) — one rule for how a subject appears, whether the subject is a person or an organization.
+     * @param iamaccountBody 
+     * @param cookie  (optional)
+     * @param authorization  (optional)
+     * @return ApiResponse<IamAnswer?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postIamWorkspacesDeleteWithHttpInfo(iamworkspacesRef: IamworkspacesRef) : ApiResponse<IamworkspacesDeleteOutput?> {
-        val localVariableConfig = postIamWorkspacesDeleteRequestConfig(iamworkspacesRef = iamworkspacesRef)
+    fun putIamAccountWithHttpInfo(iamaccountBody: IamaccountBody, cookie: kotlin.String?, authorization: kotlin.String?) : ApiResponse<IamAnswer?> {
+        val localVariableConfig = putIamAccountRequestConfig(iamaccountBody = iamaccountBody, cookie = cookie, authorization = authorization)
 
-        return request<IamworkspacesRef, IamworkspacesDeleteOutput>(
+        return request<IamaccountBody, IamAnswer>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postIamWorkspacesDelete
+     * To obtain the request config of the operation putIamAccount
      *
-     * @param iamworkspacesRef 
+     * @param iamaccountBody 
+     * @param cookie  (optional)
+     * @param authorization  (optional)
      * @return RequestConfig
      */
-    fun postIamWorkspacesDeleteRequestConfig(iamworkspacesRef: IamworkspacesRef) : RequestConfig<IamworkspacesRef> {
-        val localVariableBody = iamworkspacesRef
+    fun putIamAccountRequestConfig(iamaccountBody: IamaccountBody, cookie: kotlin.String?, authorization: kotlin.String?) : RequestConfig<IamaccountBody> {
+        val localVariableBody = iamaccountBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        cookie?.apply { localVariableHeaders["Cookie"] = this.toString() }
+        authorization?.apply { localVariableHeaders["Authorization"] = this.toString() }
         localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/workspaces/delete",
+            method = RequestMethod.PUT,
+            path = "/v1/iam/account",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -13177,157 +10147,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/workspaces/get
-     * Returns one workspace: what it is called and how it is set up.
-     * Returns one workspace: what it is called and how it is set up.
-     * @param iamworkspacesRef 
-     * @return IamWorkspace
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamWorkspacesGet(iamworkspacesRef: IamworkspacesRef) : IamWorkspace {
-        val localVarResponse = postIamWorkspacesGetWithHttpInfo(iamworkspacesRef = iamworkspacesRef)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamWorkspace
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/workspaces/get
-     * Returns one workspace: what it is called and how it is set up.
-     * Returns one workspace: what it is called and how it is set up.
-     * @param iamworkspacesRef 
-     * @return ApiResponse<IamWorkspace?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamWorkspacesGetWithHttpInfo(iamworkspacesRef: IamworkspacesRef) : ApiResponse<IamWorkspace?> {
-        val localVariableConfig = postIamWorkspacesGetRequestConfig(iamworkspacesRef = iamworkspacesRef)
-
-        return request<IamworkspacesRef, IamWorkspace>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamWorkspacesGet
-     *
-     * @param iamworkspacesRef 
-     * @return RequestConfig
-     */
-    fun postIamWorkspacesGetRequestConfig(iamworkspacesRef: IamworkspacesRef) : RequestConfig<IamworkspacesRef> {
-        val localVariableBody = iamworkspacesRef
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/workspaces/get",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/workspaces/update
-     * Changes a workspace&#39;s settings.
-     * Changes a workspace&#39;s settings. What it is called does not change, and neither does when it was created.
-     * @param iamworkspacesInput 
-     * @return IamWorkspace
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIamWorkspacesUpdate(iamworkspacesInput: IamworkspacesInput) : IamWorkspace {
-        val localVarResponse = postIamWorkspacesUpdateWithHttpInfo(iamworkspacesInput = iamworkspacesInput)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamWorkspace
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/workspaces/update
-     * Changes a workspace&#39;s settings.
-     * Changes a workspace&#39;s settings. What it is called does not change, and neither does when it was created.
-     * @param iamworkspacesInput 
-     * @return ApiResponse<IamWorkspace?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postIamWorkspacesUpdateWithHttpInfo(iamworkspacesInput: IamworkspacesInput) : ApiResponse<IamWorkspace?> {
-        val localVariableConfig = postIamWorkspacesUpdateRequestConfig(iamworkspacesInput = iamworkspacesInput)
-
-        return request<IamworkspacesInput, IamWorkspace>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postIamWorkspacesUpdate
-     *
-     * @param iamworkspacesInput 
-     * @return RequestConfig
-     */
-    fun postIamWorkspacesUpdateRequestConfig(iamworkspacesInput: IamworkspacesInput) : RequestConfig<IamworkspacesInput> {
-        val localVariableBody = iamworkspacesInput
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/workspaces/update",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/iam/application
+     * PUT /v1/iam/applications/{owner}/{name}
      * Changes an application&#39;s display, its sign-in methods and the redirect URIs it may return to — the call that makes login work from a new host.
      * Changes an application&#39;s display, its sign-in methods and the redirect URIs it may return to — the call that makes login work from a new host. Which organization it belongs to and what it is named are fixed when it is created and are not editable here.  Exported so the legacy update-application alias reuses this exact path — one update, two spellings.
+     * @param owner 
+     * @param name 
      * @param iamApplication 
      * @return IamApplication
      * @throws IllegalStateException If the request is not correctly configured
@@ -13338,8 +10162,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putIamApplication(iamApplication: IamApplication) : IamApplication {
-        val localVarResponse = putIamApplicationWithHttpInfo(iamApplication = iamApplication)
+    fun putIamApplicationsByOwnerByName(owner: kotlin.String, name: kotlin.String, iamApplication: IamApplication) : IamApplication {
+        val localVarResponse = putIamApplicationsByOwnerByNameWithHttpInfo(owner = owner, name = name, iamApplication = iamApplication)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamApplication
@@ -13357,9 +10181,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * PUT /v1/iam/application
+     * PUT /v1/iam/applications/{owner}/{name}
      * Changes an application&#39;s display, its sign-in methods and the redirect URIs it may return to — the call that makes login work from a new host.
      * Changes an application&#39;s display, its sign-in methods and the redirect URIs it may return to — the call that makes login work from a new host. Which organization it belongs to and what it is named are fixed when it is created and are not editable here.  Exported so the legacy update-application alias reuses this exact path — one update, two spellings.
+     * @param owner 
+     * @param name 
      * @param iamApplication 
      * @return ApiResponse<IamApplication?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -13367,8 +10193,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putIamApplicationWithHttpInfo(iamApplication: IamApplication) : ApiResponse<IamApplication?> {
-        val localVariableConfig = putIamApplicationRequestConfig(iamApplication = iamApplication)
+    fun putIamApplicationsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamApplication: IamApplication) : ApiResponse<IamApplication?> {
+        val localVariableConfig = putIamApplicationsByOwnerByNameRequestConfig(owner = owner, name = name, iamApplication = iamApplication)
 
         return request<IamApplication, IamApplication>(
             localVariableConfig
@@ -13376,12 +10202,14 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation putIamApplication
+     * To obtain the request config of the operation putIamApplicationsByOwnerByName
      *
+     * @param owner 
+     * @param name 
      * @param iamApplication 
      * @return RequestConfig
      */
-    fun putIamApplicationRequestConfig(iamApplication: IamApplication) : RequestConfig<IamApplication> {
+    fun putIamApplicationsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamApplication: IamApplication) : RequestConfig<IamApplication> {
         val localVariableBody = iamApplication
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13390,7 +10218,167 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
         return RequestConfig(
             method = RequestMethod.PUT,
-            path = "/v1/iam/application",
+            path = "/v1/iam/applications/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/iam/audit-logs/{owner}/{name}
+     * Corrects an audit entry.
+     * Corrects an audit entry. The trail is append-only in normal operation and nothing in the Hanzo Cloud rewrites it — this exists for an administrator to correct an entry their own systems recorded wrongly.
+     * @param owner 
+     * @param name 
+     * @param iamInput 
+     * @return IamAuditLog
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamAuditLogsByOwnerByName(owner: kotlin.String, name: kotlin.String, iamInput: IamInput) : IamAuditLog {
+        val localVarResponse = putIamAuditLogsByOwnerByNameWithHttpInfo(owner = owner, name = name, iamInput = iamInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamAuditLog
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/audit-logs/{owner}/{name}
+     * Corrects an audit entry.
+     * Corrects an audit entry. The trail is append-only in normal operation and nothing in the Hanzo Cloud rewrites it — this exists for an administrator to correct an entry their own systems recorded wrongly.
+     * @param owner 
+     * @param name 
+     * @param iamInput 
+     * @return ApiResponse<IamAuditLog?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamAuditLogsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamInput: IamInput) : ApiResponse<IamAuditLog?> {
+        val localVariableConfig = putIamAuditLogsByOwnerByNameRequestConfig(owner = owner, name = name, iamInput = iamInput)
+
+        return request<IamInput, IamAuditLog>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamAuditLogsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @param iamInput 
+     * @return RequestConfig
+     */
+    fun putIamAuditLogsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamInput: IamInput) : RequestConfig<IamInput> {
+        val localVariableBody = iamInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/audit-logs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/iam/certs/{owner}/{name}
+     * Changes a signing certificate&#39;s settings.
+     * Changes a signing certificate&#39;s settings. What it is called does not change, and neither does when it was added.  A PUT here is a METADATA edit — display name, expiry, provider. It overlays only the fields the request actually SET onto the loaded row: a field the JSON omits (or leaves at its zero value) keeps what the row holds, rather than blanking it. That is load-bearing, not a nicety. A read serves the public Certificate (Mask hides only PrivateKey and AccessSecret), so a client that reads a cert, changes one field, and writes it back sends the masked halves empty and every other field it did not touch at its zero value — and the old full-struct overlay wrote all of those blanks back. Blanking CryptoAlgorithm alone drops the cert from the JWKS (oidc.Publishes turns false), so every token under its &#x60;kid&#x60; stops verifying; blanking Provider/Account/ExpireTime breaks ACME renewal and expiry — all from a request that only meant to rename it. Absent-or-zero means \&quot;unchanged\&quot;, so the deployment (key) and a rotation (cert) remain the only way key or published material changes; the metadata API cannot clear it.  The overlay is generic — it copies every set field, so a field nobody has added yet is carried without a line here — and leaves three things the request may not move: the bound Model (id, createdAt, key, snapshot), the natural key (owner/name address the row, they do not mutate it), and the creation stamp.
+     * @param owner 
+     * @param name 
+     * @param iamCert 
+     * @return IamCert
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamCertsByOwnerByName(owner: kotlin.String, name: kotlin.String, iamCert: IamCert) : IamCert {
+        val localVarResponse = putIamCertsByOwnerByNameWithHttpInfo(owner = owner, name = name, iamCert = iamCert)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamCert
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/certs/{owner}/{name}
+     * Changes a signing certificate&#39;s settings.
+     * Changes a signing certificate&#39;s settings. What it is called does not change, and neither does when it was added.  A PUT here is a METADATA edit — display name, expiry, provider. It overlays only the fields the request actually SET onto the loaded row: a field the JSON omits (or leaves at its zero value) keeps what the row holds, rather than blanking it. That is load-bearing, not a nicety. A read serves the public Certificate (Mask hides only PrivateKey and AccessSecret), so a client that reads a cert, changes one field, and writes it back sends the masked halves empty and every other field it did not touch at its zero value — and the old full-struct overlay wrote all of those blanks back. Blanking CryptoAlgorithm alone drops the cert from the JWKS (oidc.Publishes turns false), so every token under its &#x60;kid&#x60; stops verifying; blanking Provider/Account/ExpireTime breaks ACME renewal and expiry — all from a request that only meant to rename it. Absent-or-zero means \&quot;unchanged\&quot;, so the deployment (key) and a rotation (cert) remain the only way key or published material changes; the metadata API cannot clear it.  The overlay is generic — it copies every set field, so a field nobody has added yet is carried without a line here — and leaves three things the request may not move: the bound Model (id, createdAt, key, snapshot), the natural key (owner/name address the row, they do not mutate it), and the creation stamp.
+     * @param owner 
+     * @param name 
+     * @param iamCert 
+     * @return ApiResponse<IamCert?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamCertsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamCert: IamCert) : ApiResponse<IamCert?> {
+        val localVariableConfig = putIamCertsByOwnerByNameRequestConfig(owner = owner, name = name, iamCert = iamCert)
+
+        return request<IamCert, IamCert>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamCertsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @param iamCert 
+     * @return RequestConfig
+     */
+    fun putIamCertsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamCert: IamCert) : RequestConfig<IamCert> {
+        val localVariableBody = iamCert
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/certs/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -13458,6 +10446,166 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.PUT,
             path = "/v1/iam/consent",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/iam/invitations/{owner}/{name}
+     * Changes an invitation&#39;s terms — the role it grants, how many may redeem it, or when it expires.
+     * Changes an invitation&#39;s terms — the role it grants, how many may redeem it, or when it expires. What it is called does not change.
+     * @param owner 
+     * @param name 
+     * @param iaminvitationsInput 
+     * @return IamInvitation
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamInvitationsByOwnerByName(owner: kotlin.String, name: kotlin.String, iaminvitationsInput: IaminvitationsInput) : IamInvitation {
+        val localVarResponse = putIamInvitationsByOwnerByNameWithHttpInfo(owner = owner, name = name, iaminvitationsInput = iaminvitationsInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamInvitation
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/invitations/{owner}/{name}
+     * Changes an invitation&#39;s terms — the role it grants, how many may redeem it, or when it expires.
+     * Changes an invitation&#39;s terms — the role it grants, how many may redeem it, or when it expires. What it is called does not change.
+     * @param owner 
+     * @param name 
+     * @param iaminvitationsInput 
+     * @return ApiResponse<IamInvitation?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamInvitationsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iaminvitationsInput: IaminvitationsInput) : ApiResponse<IamInvitation?> {
+        val localVariableConfig = putIamInvitationsByOwnerByNameRequestConfig(owner = owner, name = name, iaminvitationsInput = iaminvitationsInput)
+
+        return request<IaminvitationsInput, IamInvitation>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamInvitationsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @param iaminvitationsInput 
+     * @return RequestConfig
+     */
+    fun putIamInvitationsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iaminvitationsInput: IaminvitationsInput) : RequestConfig<IaminvitationsInput> {
+        val localVariableBody = iaminvitationsInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/invitations/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/iam/keys/{owner}/{name}
+     * Changes what a key is called or what it may reach.
+     * Changes what a key is called or what it may reach. The credential itself is not reissued — the key in your deployment keeps working.
+     * @param owner Owner is the tenant that holds the key; Name is unique within Owner.
+     * @param name 
+     * @param iamKey 
+     * @return IamKey
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamKeysByOwnerByName(owner: kotlin.String, name: kotlin.String, iamKey: IamKey) : IamKey {
+        val localVarResponse = putIamKeysByOwnerByNameWithHttpInfo(owner = owner, name = name, iamKey = iamKey)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamKey
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/keys/{owner}/{name}
+     * Changes what a key is called or what it may reach.
+     * Changes what a key is called or what it may reach. The credential itself is not reissued — the key in your deployment keeps working.
+     * @param owner Owner is the tenant that holds the key; Name is unique within Owner.
+     * @param name 
+     * @param iamKey 
+     * @return ApiResponse<IamKey?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamKeysByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamKey: IamKey) : ApiResponse<IamKey?> {
+        val localVariableConfig = putIamKeysByOwnerByNameRequestConfig(owner = owner, name = name, iamKey = iamKey)
+
+        return request<IamKey, IamKey>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamKeysByOwnerByName
+     *
+     * @param owner Owner is the tenant that holds the key; Name is unique within Owner.
+     * @param name 
+     * @param iamKey 
+     * @return RequestConfig
+     */
+    fun putIamKeysByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamKey: IamKey) : RequestConfig<IamKey> {
+        val localVariableBody = iamKey
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/keys/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -13548,6 +10696,246 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
+     * PUT /v1/iam/permissions/{owner}/{name}
+     * Changes who a permission grants to, what it allows, or the resources it covers.
+     * Changes who a permission grants to, what it allows, or the resources it covers. Access changes as soon as the write lands. What the permission is called does not change, and neither does when it was created.
+     * @param owner Identity — the (owner, name) natural key.
+     * @param name 
+     * @param iamPermission 
+     * @return IamPermission
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamPermissionsByOwnerByName(owner: kotlin.String, name: kotlin.String, iamPermission: IamPermission) : IamPermission {
+        val localVarResponse = putIamPermissionsByOwnerByNameWithHttpInfo(owner = owner, name = name, iamPermission = iamPermission)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamPermission
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/permissions/{owner}/{name}
+     * Changes who a permission grants to, what it allows, or the resources it covers.
+     * Changes who a permission grants to, what it allows, or the resources it covers. Access changes as soon as the write lands. What the permission is called does not change, and neither does when it was created.
+     * @param owner Identity — the (owner, name) natural key.
+     * @param name 
+     * @param iamPermission 
+     * @return ApiResponse<IamPermission?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamPermissionsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamPermission: IamPermission) : ApiResponse<IamPermission?> {
+        val localVariableConfig = putIamPermissionsByOwnerByNameRequestConfig(owner = owner, name = name, iamPermission = iamPermission)
+
+        return request<IamPermission, IamPermission>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamPermissionsByOwnerByName
+     *
+     * @param owner Identity — the (owner, name) natural key.
+     * @param name 
+     * @param iamPermission 
+     * @return RequestConfig
+     */
+    fun putIamPermissionsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamPermission: IamPermission) : RequestConfig<IamPermission> {
+        val localVariableBody = iamPermission
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/permissions/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/iam/projects/{owner}/{name}
+     * Changes a project&#39;s settings.
+     * Changes a project&#39;s settings. What it is called does not change, and neither does when it was created.
+     * @param owner 
+     * @param name 
+     * @param iamprojectsInput 
+     * @return IamProject
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamProjectsByOwnerByName(owner: kotlin.String, name: kotlin.String, iamprojectsInput: IamprojectsInput) : IamProject {
+        val localVarResponse = putIamProjectsByOwnerByNameWithHttpInfo(owner = owner, name = name, iamprojectsInput = iamprojectsInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamProject
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/projects/{owner}/{name}
+     * Changes a project&#39;s settings.
+     * Changes a project&#39;s settings. What it is called does not change, and neither does when it was created.
+     * @param owner 
+     * @param name 
+     * @param iamprojectsInput 
+     * @return ApiResponse<IamProject?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamProjectsByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamprojectsInput: IamprojectsInput) : ApiResponse<IamProject?> {
+        val localVariableConfig = putIamProjectsByOwnerByNameRequestConfig(owner = owner, name = name, iamprojectsInput = iamprojectsInput)
+
+        return request<IamprojectsInput, IamProject>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamProjectsByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @param iamprojectsInput 
+     * @return RequestConfig
+     */
+    fun putIamProjectsByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamprojectsInput: IamprojectsInput) : RequestConfig<IamprojectsInput> {
+        val localVariableBody = iamprojectsInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/projects/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/iam/roles/{owner}/{name}
+     * Changes who is in a role, or which roles it includes.
+     * Changes who is in a role, or which roles it includes. Access changes for everyone in it as soon as the write lands. What the role is called does not change, and neither does when it was created.
+     * @param owner 
+     * @param name 
+     * @param iamrolesInput 
+     * @return IamRole
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamRolesByOwnerByName(owner: kotlin.String, name: kotlin.String, iamrolesInput: IamrolesInput) : IamRole {
+        val localVarResponse = putIamRolesByOwnerByNameWithHttpInfo(owner = owner, name = name, iamrolesInput = iamrolesInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamRole
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/roles/{owner}/{name}
+     * Changes who is in a role, or which roles it includes.
+     * Changes who is in a role, or which roles it includes. Access changes for everyone in it as soon as the write lands. What the role is called does not change, and neither does when it was created.
+     * @param owner 
+     * @param name 
+     * @param iamrolesInput 
+     * @return ApiResponse<IamRole?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamRolesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamrolesInput: IamrolesInput) : ApiResponse<IamRole?> {
+        val localVariableConfig = putIamRolesByOwnerByNameRequestConfig(owner = owner, name = name, iamrolesInput = iamrolesInput)
+
+        return request<IamrolesInput, IamRole>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamRolesByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @param iamrolesInput 
+     * @return RequestConfig
+     */
+    fun putIamRolesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamrolesInput: IamrolesInput) : RequestConfig<IamrolesInput> {
+        val localVariableBody = iamrolesInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/roles/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * PUT /v1/iam/scim/v2/Users/{owner}/{name}
      * Overwrites a person&#39;s SCIM attributes with what your identity provider sends — how a change made there lands here.
      * Overwrites a person&#39;s SCIM attributes with what your identity provider sends — how a change made there lands here.  Only the attributes SCIM describes are replaced. Anything the standard does not cover — their multi-factor enrolment above all — survives untouched, so a routine sync from your IdP can never quietly strip someone&#39;s second factor or bring a deleted account back.
@@ -13621,10 +11009,170 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/organizations/update
-     * Changes an organization&#39;s display, its defaults and the sign-in rules everyone in it inherits.
-     * Changes an organization&#39;s display, its defaults and the sign-in rules everyone in it inherits. Which organization it is does not change, and neither does when it was created.
-     * @param iamUpdateOrganizationInput 
+     * PUT /v1/iam/users/{owner}/{name}
+     * Changes a person&#39;s profile, their roles, or the credentials they sign in with.
+     * Changes a person&#39;s profile, their roles, or the credentials they sign in with. Send a password to reset it; leave it out and their current one keeps working.  Who they are does not change: their organization, username and the identifier their existing sessions are keyed on all survive the write, so an update never signs anyone out.
+     * @param owner 
+     * @param name 
+     * @param iamUpdateInput 
+     * @return IamUser
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamUsersByOwnerByName(owner: kotlin.String, name: kotlin.String, iamUpdateInput: IamUpdateInput) : IamUser {
+        val localVarResponse = putIamUsersByOwnerByNameWithHttpInfo(owner = owner, name = name, iamUpdateInput = iamUpdateInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamUser
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/users/{owner}/{name}
+     * Changes a person&#39;s profile, their roles, or the credentials they sign in with.
+     * Changes a person&#39;s profile, their roles, or the credentials they sign in with. Send a password to reset it; leave it out and their current one keeps working.  Who they are does not change: their organization, username and the identifier their existing sessions are keyed on all survive the write, so an update never signs anyone out.
+     * @param owner 
+     * @param name 
+     * @param iamUpdateInput 
+     * @return ApiResponse<IamUser?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamUsersByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamUpdateInput: IamUpdateInput) : ApiResponse<IamUser?> {
+        val localVariableConfig = putIamUsersByOwnerByNameRequestConfig(owner = owner, name = name, iamUpdateInput = iamUpdateInput)
+
+        return request<IamUpdateInput, IamUser>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamUsersByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @param iamUpdateInput 
+     * @return RequestConfig
+     */
+    fun putIamUsersByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamUpdateInput: IamUpdateInput) : RequestConfig<IamUpdateInput> {
+        val localVariableBody = iamUpdateInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/users/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/iam/workspaces/{owner}/{name}
+     * Changes a workspace&#39;s settings.
+     * Changes a workspace&#39;s settings. What it is called does not change, and neither does when it was created.
+     * @param owner 
+     * @param name 
+     * @param iamworkspacesInput 
+     * @return IamWorkspace
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamWorkspacesByOwnerByName(owner: kotlin.String, name: kotlin.String, iamworkspacesInput: IamworkspacesInput) : IamWorkspace {
+        val localVarResponse = putIamWorkspacesByOwnerByNameWithHttpInfo(owner = owner, name = name, iamworkspacesInput = iamworkspacesInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamWorkspace
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/workspaces/{owner}/{name}
+     * Changes a workspace&#39;s settings.
+     * Changes a workspace&#39;s settings. What it is called does not change, and neither does when it was created.
+     * @param owner 
+     * @param name 
+     * @param iamworkspacesInput 
+     * @return ApiResponse<IamWorkspace?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamWorkspacesByOwnerByNameWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamworkspacesInput: IamworkspacesInput) : ApiResponse<IamWorkspace?> {
+        val localVariableConfig = putIamWorkspacesByOwnerByNameRequestConfig(owner = owner, name = name, iamworkspacesInput = iamworkspacesInput)
+
+        return request<IamworkspacesInput, IamWorkspace>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamWorkspacesByOwnerByName
+     *
+     * @param owner 
+     * @param name 
+     * @param iamworkspacesInput 
+     * @return RequestConfig
+     */
+    fun putIamWorkspacesByOwnerByNameRequestConfig(owner: kotlin.String, name: kotlin.String, iamworkspacesInput: IamworkspacesInput) : RequestConfig<IamworkspacesInput> {
+        val localVariableBody = iamworkspacesInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/workspaces/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/iam/organizations/avatar
+     * Changes how an organization appears across Hanzo: the square mark beside its name, as an uploaded image or as a single emoji.
+     * Changes how an organization appears across Hanzo: the square mark beside its name, as an uploaded image or as a single emoji. Sending an image clears the emoji and sending an emoji clears the image — an organization has one mark, not a preference order — and sending neither clears both, which is how it goes back to being drawn as its initial.  An image is an https link or the bytes inline as a data URL, up to 96 KiB. Anyone who administers the organization may set this; it is not reserved to the platform.  It writes the two fields onto the stored row and touches nothing else, which update cannot do: update replaces the whole record, and a record read back first arrives masked, so a read-modify-write through it would persist the mask over the organization&#39;s own credential settings.
+     * @param iamSetAvatarInput 
      * @return IamOrganization
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -13634,8 +11182,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun updateOrganization(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : IamOrganization {
-        val localVarResponse = updateOrganizationWithHttpInfo(iamUpdateOrganizationInput = iamUpdateOrganizationInput)
+    fun setOrganizationAvatar(iamSetAvatarInput: IamSetAvatarInput) : IamOrganization {
+        val localVarResponse = setOrganizationAvatarWithHttpInfo(iamSetAvatarInput = iamSetAvatarInput)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamOrganization
@@ -13653,9 +11201,87 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/organizations/update
+     * POST /v1/iam/organizations/avatar
+     * Changes how an organization appears across Hanzo: the square mark beside its name, as an uploaded image or as a single emoji.
+     * Changes how an organization appears across Hanzo: the square mark beside its name, as an uploaded image or as a single emoji. Sending an image clears the emoji and sending an emoji clears the image — an organization has one mark, not a preference order — and sending neither clears both, which is how it goes back to being drawn as its initial.  An image is an https link or the bytes inline as a data URL, up to 96 KiB. Anyone who administers the organization may set this; it is not reserved to the platform.  It writes the two fields onto the stored row and touches nothing else, which update cannot do: update replaces the whole record, and a record read back first arrives masked, so a read-modify-write through it would persist the mask over the organization&#39;s own credential settings.
+     * @param iamSetAvatarInput 
+     * @return ApiResponse<IamOrganization?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun setOrganizationAvatarWithHttpInfo(iamSetAvatarInput: IamSetAvatarInput) : ApiResponse<IamOrganization?> {
+        val localVariableConfig = setOrganizationAvatarRequestConfig(iamSetAvatarInput = iamSetAvatarInput)
+
+        return request<IamSetAvatarInput, IamOrganization>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation setOrganizationAvatar
+     *
+     * @param iamSetAvatarInput 
+     * @return RequestConfig
+     */
+    fun setOrganizationAvatarRequestConfig(iamSetAvatarInput: IamSetAvatarInput) : RequestConfig<IamSetAvatarInput> {
+        val localVariableBody = iamSetAvatarInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/iam/organizations/avatar",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/iam/organizations/{owner}/{name}
      * Changes an organization&#39;s display, its defaults and the sign-in rules everyone in it inherits.
      * Changes an organization&#39;s display, its defaults and the sign-in rules everyone in it inherits. Which organization it is does not change, and neither does when it was created.
+     * @param owner 
+     * @param name 
+     * @param iamUpdateOrganizationInput 
+     * @return IamOrganization
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun updateOrganization(owner: kotlin.String, name: kotlin.String, iamUpdateOrganizationInput: IamUpdateOrganizationInput) : IamOrganization {
+        val localVarResponse = updateOrganizationWithHttpInfo(owner = owner, name = name, iamUpdateOrganizationInput = iamUpdateOrganizationInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamOrganization
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/organizations/{owner}/{name}
+     * Changes an organization&#39;s display, its defaults and the sign-in rules everyone in it inherits.
+     * Changes an organization&#39;s display, its defaults and the sign-in rules everyone in it inherits. Which organization it is does not change, and neither does when it was created.
+     * @param owner 
+     * @param name 
      * @param iamUpdateOrganizationInput 
      * @return ApiResponse<IamOrganization?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -13663,8 +11289,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun updateOrganizationWithHttpInfo(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : ApiResponse<IamOrganization?> {
-        val localVariableConfig = updateOrganizationRequestConfig(iamUpdateOrganizationInput = iamUpdateOrganizationInput)
+    fun updateOrganizationWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamUpdateOrganizationInput: IamUpdateOrganizationInput) : ApiResponse<IamOrganization?> {
+        val localVariableConfig = updateOrganizationRequestConfig(owner = owner, name = name, iamUpdateOrganizationInput = iamUpdateOrganizationInput)
 
         return request<IamUpdateOrganizationInput, IamOrganization>(
             localVariableConfig
@@ -13674,10 +11300,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation updateOrganization
      *
+     * @param owner 
+     * @param name 
      * @param iamUpdateOrganizationInput 
      * @return RequestConfig
      */
-    fun updateOrganizationRequestConfig(iamUpdateOrganizationInput: IamUpdateOrganizationInput) : RequestConfig<IamUpdateOrganizationInput> {
+    fun updateOrganizationRequestConfig(owner: kotlin.String, name: kotlin.String, iamUpdateOrganizationInput: IamUpdateOrganizationInput) : RequestConfig<IamUpdateOrganizationInput> {
         val localVariableBody = iamUpdateOrganizationInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13685,8 +11313,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/organizations/update",
+            method = RequestMethod.PUT,
+            path = "/v1/iam/organizations/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -13695,9 +11323,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/providers/update
+     * PUT /v1/iam/providers/{owner}/{name}
      * Changes a provider&#39;s settings or rotates the credentials it holds.
      * Changes a provider&#39;s settings or rotates the credentials it holds. The change takes effect on the next sign-in through it — sessions already issued are unaffected.  A provider that is not there answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
+     * @param owner 
+     * @param name 
      * @param iamProvider 
      * @return IammutationResult
      * @throws IllegalStateException If the request is not correctly configured
@@ -13708,8 +11338,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun updateProvider(iamProvider: IamProvider) : IammutationResult {
-        val localVarResponse = updateProviderWithHttpInfo(iamProvider = iamProvider)
+    fun updateProvider(owner: kotlin.String, name: kotlin.String, iamProvider: IamProvider) : IammutationResult {
+        val localVarResponse = updateProviderWithHttpInfo(owner = owner, name = name, iamProvider = iamProvider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IammutationResult
@@ -13727,9 +11357,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/providers/update
+     * PUT /v1/iam/providers/{owner}/{name}
      * Changes a provider&#39;s settings or rotates the credentials it holds.
      * Changes a provider&#39;s settings or rotates the credentials it holds. The change takes effect on the next sign-in through it — sessions already issued are unaffected.  A provider that is not there answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
+     * @param owner 
+     * @param name 
      * @param iamProvider 
      * @return ApiResponse<IammutationResult?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -13737,8 +11369,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun updateProviderWithHttpInfo(iamProvider: IamProvider) : ApiResponse<IammutationResult?> {
-        val localVariableConfig = updateProviderRequestConfig(iamProvider = iamProvider)
+    fun updateProviderWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamProvider: IamProvider) : ApiResponse<IammutationResult?> {
+        val localVariableConfig = updateProviderRequestConfig(owner = owner, name = name, iamProvider = iamProvider)
 
         return request<IamProvider, IammutationResult>(
             localVariableConfig
@@ -13748,10 +11380,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation updateProvider
      *
+     * @param owner 
+     * @param name 
      * @param iamProvider 
      * @return RequestConfig
      */
-    fun updateProviderRequestConfig(iamProvider: IamProvider) : RequestConfig<IamProvider> {
+    fun updateProviderRequestConfig(owner: kotlin.String, name: kotlin.String, iamProvider: IamProvider) : RequestConfig<IamProvider> {
         val localVariableBody = iamProvider
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13759,8 +11393,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/providers/update",
+            method = RequestMethod.PUT,
+            path = "/v1/iam/providers/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -13769,9 +11403,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/update
+     * PUT /v1/iam/sessions/{owner}/{name}/{application}
      * Replaces the set of browsers a session covers — signing out the ones you leave off while the session itself stays live.
      * Replaces the set of browsers a session covers — signing out the ones you leave off while the session itself stays live. A session that does not exist is reported as missing rather than created.
+     * @param owner 
+     * @param name 
+     * @param application 
      * @param iamUpdateSessionIn 
      * @return IamSession
      * @throws IllegalStateException If the request is not correctly configured
@@ -13782,8 +11419,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun updateSession(iamUpdateSessionIn: IamUpdateSessionIn) : IamSession {
-        val localVarResponse = updateSessionWithHttpInfo(iamUpdateSessionIn = iamUpdateSessionIn)
+    fun updateSession(owner: kotlin.String, name: kotlin.String, application: kotlin.String, iamUpdateSessionIn: IamUpdateSessionIn) : IamSession {
+        val localVarResponse = updateSessionWithHttpInfo(owner = owner, name = name, application = application, iamUpdateSessionIn = iamUpdateSessionIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamSession
@@ -13801,9 +11438,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/sessions/update
+     * PUT /v1/iam/sessions/{owner}/{name}/{application}
      * Replaces the set of browsers a session covers — signing out the ones you leave off while the session itself stays live.
      * Replaces the set of browsers a session covers — signing out the ones you leave off while the session itself stays live. A session that does not exist is reported as missing rather than created.
+     * @param owner 
+     * @param name 
+     * @param application 
      * @param iamUpdateSessionIn 
      * @return ApiResponse<IamSession?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -13811,8 +11451,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun updateSessionWithHttpInfo(iamUpdateSessionIn: IamUpdateSessionIn) : ApiResponse<IamSession?> {
-        val localVariableConfig = updateSessionRequestConfig(iamUpdateSessionIn = iamUpdateSessionIn)
+    fun updateSessionWithHttpInfo(owner: kotlin.String, name: kotlin.String, application: kotlin.String, iamUpdateSessionIn: IamUpdateSessionIn) : ApiResponse<IamSession?> {
+        val localVariableConfig = updateSessionRequestConfig(owner = owner, name = name, application = application, iamUpdateSessionIn = iamUpdateSessionIn)
 
         return request<IamUpdateSessionIn, IamSession>(
             localVariableConfig
@@ -13822,10 +11462,13 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation updateSession
      *
+     * @param owner 
+     * @param name 
+     * @param application 
      * @param iamUpdateSessionIn 
      * @return RequestConfig
      */
-    fun updateSessionRequestConfig(iamUpdateSessionIn: IamUpdateSessionIn) : RequestConfig<IamUpdateSessionIn> {
+    fun updateSessionRequestConfig(owner: kotlin.String, name: kotlin.String, application: kotlin.String, iamUpdateSessionIn: IamUpdateSessionIn) : RequestConfig<IamUpdateSessionIn> {
         val localVariableBody = iamUpdateSessionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13833,8 +11476,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/sessions/update",
+            method = RequestMethod.PUT,
+            path = "/v1/iam/sessions/{owner}/{name}/{application}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"application"+"}", encodeURIComponent(application.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -13843,9 +11486,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/tokens/update
+     * PUT /v1/iam/tokens/{owner}/{name}
      * Changes an access token&#39;s scope or expiry.
      * Changes an access token&#39;s scope or expiry.  A token that is not there answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
+     * @param owner 
+     * @param name 
      * @param iamToken 
      * @return IamtokenMutation
      * @throws IllegalStateException If the request is not correctly configured
@@ -13856,8 +11501,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun updateToken(iamToken: IamToken) : IamtokenMutation {
-        val localVarResponse = updateTokenWithHttpInfo(iamToken = iamToken)
+    fun updateToken(owner: kotlin.String, name: kotlin.String, iamToken: IamToken) : IamtokenMutation {
+        val localVarResponse = updateTokenWithHttpInfo(owner = owner, name = name, iamToken = iamToken)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamtokenMutation
@@ -13875,9 +11520,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/tokens/update
+     * PUT /v1/iam/tokens/{owner}/{name}
      * Changes an access token&#39;s scope or expiry.
      * Changes an access token&#39;s scope or expiry.  A token that is not there answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
+     * @param owner 
+     * @param name 
      * @param iamToken 
      * @return ApiResponse<IamtokenMutation?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -13885,8 +11532,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun updateTokenWithHttpInfo(iamToken: IamToken) : ApiResponse<IamtokenMutation?> {
-        val localVariableConfig = updateTokenRequestConfig(iamToken = iamToken)
+    fun updateTokenWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamToken: IamToken) : ApiResponse<IamtokenMutation?> {
+        val localVariableConfig = updateTokenRequestConfig(owner = owner, name = name, iamToken = iamToken)
 
         return request<IamToken, IamtokenMutation>(
             localVariableConfig
@@ -13896,10 +11543,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation updateToken
      *
+     * @param owner 
+     * @param name 
      * @param iamToken 
      * @return RequestConfig
      */
-    fun updateTokenRequestConfig(iamToken: IamToken) : RequestConfig<IamToken> {
+    fun updateTokenRequestConfig(owner: kotlin.String, name: kotlin.String, iamToken: IamToken) : RequestConfig<IamToken> {
         val localVariableBody = iamToken
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13907,8 +11556,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/tokens/update",
+            method = RequestMethod.PUT,
+            path = "/v1/iam/tokens/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -13917,9 +11566,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/webauthn-credentials/update
+     * PUT /v1/iam/webauthn-credentials/{owner}/{name}
      * Renames a registered passkey or security key, so a person can tell their devices apart.
      * Renames a registered passkey or security key, so a person can tell their devices apart.  A credential that is not there answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
+     * @param owner 
+     * @param name 
      * @param iamWebauthnCredential 
      * @return IamwebauthnCredentialMutationResult
      * @throws IllegalStateException If the request is not correctly configured
@@ -13930,8 +11581,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun updateWebauthnCredential(iamWebauthnCredential: IamWebauthnCredential) : IamwebauthnCredentialMutationResult {
-        val localVarResponse = updateWebauthnCredentialWithHttpInfo(iamWebauthnCredential = iamWebauthnCredential)
+    fun updateWebauthnCredential(owner: kotlin.String, name: kotlin.String, iamWebauthnCredential: IamWebauthnCredential) : IamwebauthnCredentialMutationResult {
+        val localVarResponse = updateWebauthnCredentialWithHttpInfo(owner = owner, name = name, iamWebauthnCredential = iamWebauthnCredential)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IamwebauthnCredentialMutationResult
@@ -13949,9 +11600,11 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/iam/webauthn-credentials/update
+     * PUT /v1/iam/webauthn-credentials/{owner}/{name}
      * Renames a registered passkey or security key, so a person can tell their devices apart.
      * Renames a registered passkey or security key, so a person can tell their devices apart.  A credential that is not there answers \&quot;nothing changed\&quot; rather than an error, so the call is safe to repeat.
+     * @param owner 
+     * @param name 
      * @param iamWebauthnCredential 
      * @return ApiResponse<IamwebauthnCredentialMutationResult?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -13959,8 +11612,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun updateWebauthnCredentialWithHttpInfo(iamWebauthnCredential: IamWebauthnCredential) : ApiResponse<IamwebauthnCredentialMutationResult?> {
-        val localVariableConfig = updateWebauthnCredentialRequestConfig(iamWebauthnCredential = iamWebauthnCredential)
+    fun updateWebauthnCredentialWithHttpInfo(owner: kotlin.String, name: kotlin.String, iamWebauthnCredential: IamWebauthnCredential) : ApiResponse<IamwebauthnCredentialMutationResult?> {
+        val localVariableConfig = updateWebauthnCredentialRequestConfig(owner = owner, name = name, iamWebauthnCredential = iamWebauthnCredential)
 
         return request<IamWebauthnCredential, IamwebauthnCredentialMutationResult>(
             localVariableConfig
@@ -13970,10 +11623,12 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation updateWebauthnCredential
      *
+     * @param owner 
+     * @param name 
      * @param iamWebauthnCredential 
      * @return RequestConfig
      */
-    fun updateWebauthnCredentialRequestConfig(iamWebauthnCredential: IamWebauthnCredential) : RequestConfig<IamWebauthnCredential> {
+    fun updateWebauthnCredentialRequestConfig(owner: kotlin.String, name: kotlin.String, iamWebauthnCredential: IamWebauthnCredential) : RequestConfig<IamWebauthnCredential> {
         val localVariableBody = iamWebauthnCredential
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -13981,8 +11636,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/webauthn-credentials/update",
+            method = RequestMethod.PUT,
+            path = "/v1/iam/webauthn-credentials/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -14071,7 +11726,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/admin/users/upsert
      * Creates a person or updates them in place, so a deployment can declare the accounts it needs and re-run that declaration safely.
-     * Creates a person or updates them in place, so a deployment can declare the accounts it needs and re-run that declaration safely.  Passwords are hashed before they are stored. Leave the password out and their current one is kept, so a redeploy never locks somebody out.
+     * Creates a person or updates them in place, so a deployment can declare the accounts it needs and re-run that declaration safely.  It DESCRIBES an account it meets and GRANTS only to one it creates: org-admin is never raised on a row that already exists, and a machine identity is answered by name rather than adopted. Both are properties of the update itself, so a steady-state reconcile — which changes neither — is unaffected.  Passwords are hashed before they are stored. Leave the password out and their current one is kept, so a redeploy never locks somebody out; send the same one again and it is kept too, so a steady-state re-run is not a rotation.
      * @param iamperson 
      * @param authorization  (optional)
      * @return Iamreply
@@ -14104,7 +11759,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/iam/admin/users/upsert
      * Creates a person or updates them in place, so a deployment can declare the accounts it needs and re-run that declaration safely.
-     * Creates a person or updates them in place, so a deployment can declare the accounts it needs and re-run that declaration safely.  Passwords are hashed before they are stored. Leave the password out and their current one is kept, so a redeploy never locks somebody out.
+     * Creates a person or updates them in place, so a deployment can declare the accounts it needs and re-run that declaration safely.  It DESCRIBES an account it meets and GRANTS only to one it creates: org-admin is never raised on a row that already exists, and a machine identity is answered by name rather than adopted. Both are properties of the update itself, so a steady-state reconcile — which changes neither — is unaffected.  Passwords are hashed before they are stored. Leave the password out and their current one is kept, so a redeploy never locks somebody out; send the same one again and it is kept too, so a steady-state re-run is not a rotation.
      * @param iamperson 
      * @param authorization  (optional)
      * @return ApiResponse<Iamreply?>

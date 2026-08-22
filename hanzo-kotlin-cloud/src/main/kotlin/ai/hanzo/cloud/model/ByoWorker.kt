@@ -23,97 +23,113 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param arch Arch/CPUs/Memory are the connecting host's static CPU spec, mirrored from the registration: Arch is runtime.GOARCH (amd64 | arm64), Memory is total RAM in BYTES — the same fields a code-linked run-target carries, so the /v1/fleet board renders a linked node's arch + cores + RAM like any other unit.
- * @param capabilities Capabilities the worker advertises (\"studio.render\", \"engine.serve\"); Engine is present when it runs a hanzo-engine model server. Both additive + omitempty.
- * @param cpuModel 
- * @param cpus 
- * @param cuda 
- * @param driver 
- * @param engine 
- * @param firstSeen 
- * @param gpus 
- * @param hip 
- * @param hostname 
- * @param id 
- * @param jobQueue 
- * @param lastHeartbeat 
- * @param location \"on-prem\" (BYO has no cloud region)
- * @param memory 
- * @param os 
- * @param provider always \"byo\"
- * @param rocm 
- * @param status online | offline
- * @param version 
+ * @param arch Arch/CPUs/Memory are the connecting host's static CPU spec, mirrored from the registration: Arch is runtime.GOARCH (amd64 | arm64), Memory is total RAM in BYTES — the same fields a code-linked run-target carries, so the /v1/visor/fleet board renders a linked node's arch + cores + RAM like any other unit.
+ * @param capabilities Capabilities is what this worker offers the org: \"studio.render\" when the node can render, \"engine.serve\" when it serves a model endpoint. A node advertises one only once it can honour it, so an absent list means a node that has dialed in but is not ready to serve any of them yet.
+ * @param cpuModel CPUModel is the processor as the host names it (\"Apple M3 Max\"), for display.
+ * @param cpus CPUs is the host's logical core count.
+ * @param cuda Cuda is the host's CUDA toolkit version. NVIDIA hosts report it.
+ * @param driver Driver is the host's NVIDIA kernel driver version — distinct from Cuda, and the one that bounds which CUDA versions can run on this box.
+ * @param engine Engine is the hanzo-engine model server this node runs, when it runs one (`hanzo link --serve-engine`). Absent means the node takes jobs but serves no model endpoint.
+ * @param firstSeen FirstSeen is when this node first dialed in, RFC 3339 — the start of its presence record, which `hanzo unlink` ends.
+ * @param gpus GPUs are the accelerators the host found on itself. Empty is a real answer: a CPU-only machine can dial in and take non-GPU work.
+ * @param hip Hip is the host's HIP runtime version, the AMD counterpart to Cuda.
+ * @param hostname Hostname is what the host calls itself. It equals ID for any hostname already in the [a-z0-9-] alphabet, and differs when sanitizing had to change it.
+ * @param id ID is the node's id in the fleet — the sanitized hostname it registered under, which is also the `unit` its samples and its gpu-jobs lane key on. This is the id to use everywhere else on the compute surface.
+ * @param jobQueue JobQueue is the tasks NAMESPACE this worker claims render jobs out of — \"gpu-jobs\" unless `hanzo link` was pointed at another. Within it, a job aimed at this node alone rides the task-queue value \"gpu:<id>\".
+ * @param lastHeartbeat LastHeartbeat is the most recent beat this node sent, RFC 3339. It is what Status is computed from, so a reader can check the judgement.
+ * @param location Location is always \"on-prem\" — a machine that dialed in has no cloud region, and inventing one would put it somewhere it is not.
+ * @param memory Memory is the host's total RAM in BYTES.
+ * @param os Os is the host's operating system: linux, darwin or windows.
+ * @param provider Provider is always \"byo\": this machine is the operator's, not one Hanzo provisioned. It exists so a fold into the machines/GPUs pages says which rows are rented and which are the customer's own.
+ * @param rocm Rocm is the host's ROCm version. AMD hosts report it; empty otherwise.
+ * @param status Status is \"online\" when the last heartbeat landed within 90s, else \"offline\" — so it is a fact about heartbeat freshness, not about the box being powered on. A worker that has never beaten reads offline.
+ * @param version Version is the `hanzo` CLI version running on the node. It is what to check when a worker is missing a field a newer registration reports.
  */
 
 
 data class ByoWorker (
 
-    /* Arch/CPUs/Memory are the connecting host's static CPU spec, mirrored from the registration: Arch is runtime.GOARCH (amd64 | arm64), Memory is total RAM in BYTES — the same fields a code-linked run-target carries, so the /v1/fleet board renders a linked node's arch + cores + RAM like any other unit. */
+    /* Arch/CPUs/Memory are the connecting host's static CPU spec, mirrored from the registration: Arch is runtime.GOARCH (amd64 | arm64), Memory is total RAM in BYTES — the same fields a code-linked run-target carries, so the /v1/visor/fleet board renders a linked node's arch + cores + RAM like any other unit. */
     @SerializedName("arch")
     val arch: kotlin.String? = null,
 
-    /* Capabilities the worker advertises (\"studio.render\", \"engine.serve\"); Engine is present when it runs a hanzo-engine model server. Both additive + omitempty. */
+    /* Capabilities is what this worker offers the org: \"studio.render\" when the node can render, \"engine.serve\" when it serves a model endpoint. A node advertises one only once it can honour it, so an absent list means a node that has dialed in but is not ready to serve any of them yet. */
     @SerializedName("capabilities")
     val capabilities: kotlin.collections.List<kotlin.String>? = null,
 
+    /* CPUModel is the processor as the host names it (\"Apple M3 Max\"), for display. */
     @SerializedName("cpuModel")
     val cpuModel: kotlin.String? = null,
 
+    /* CPUs is the host's logical core count. */
     @SerializedName("cpus")
     val cpus: kotlin.Int? = null,
 
+    /* Cuda is the host's CUDA toolkit version. NVIDIA hosts report it. */
     @SerializedName("cuda")
     val cuda: kotlin.String? = null,
 
+    /* Driver is the host's NVIDIA kernel driver version — distinct from Cuda, and the one that bounds which CUDA versions can run on this box. */
     @SerializedName("driver")
     val driver: kotlin.String? = null,
 
+    /* Engine is the hanzo-engine model server this node runs, when it runs one (`hanzo link --serve-engine`). Absent means the node takes jobs but serves no model endpoint. */
     @SerializedName("engine")
     val engine: EngineAdvertisement? = null,
 
+    /* FirstSeen is when this node first dialed in, RFC 3339 — the start of its presence record, which `hanzo unlink` ends. */
     @SerializedName("firstSeen")
     val firstSeen: kotlin.String? = null,
 
+    /* GPUs are the accelerators the host found on itself. Empty is a real answer: a CPU-only machine can dial in and take non-GPU work. */
     @SerializedName("gpus")
     val gpus: kotlin.collections.List<ByoGPU>? = null,
 
+    /* Hip is the host's HIP runtime version, the AMD counterpart to Cuda. */
     @SerializedName("hip")
     val hip: kotlin.String? = null,
 
+    /* Hostname is what the host calls itself. It equals ID for any hostname already in the [a-z0-9-] alphabet, and differs when sanitizing had to change it. */
     @SerializedName("hostname")
     val hostname: kotlin.String? = null,
 
+    /* ID is the node's id in the fleet — the sanitized hostname it registered under, which is also the `unit` its samples and its gpu-jobs lane key on. This is the id to use everywhere else on the compute surface. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* JobQueue is the tasks NAMESPACE this worker claims render jobs out of — \"gpu-jobs\" unless `hanzo link` was pointed at another. Within it, a job aimed at this node alone rides the task-queue value \"gpu:<id>\". */
     @SerializedName("jobQueue")
     val jobQueue: kotlin.String? = null,
 
+    /* LastHeartbeat is the most recent beat this node sent, RFC 3339. It is what Status is computed from, so a reader can check the judgement. */
     @SerializedName("lastHeartbeat")
     val lastHeartbeat: kotlin.String? = null,
 
-    /* \"on-prem\" (BYO has no cloud region) */
+    /* Location is always \"on-prem\" — a machine that dialed in has no cloud region, and inventing one would put it somewhere it is not. */
     @SerializedName("location")
     val location: kotlin.String? = null,
 
+    /* Memory is the host's total RAM in BYTES. */
     @SerializedName("memory")
     val memory: kotlin.Int? = null,
 
+    /* Os is the host's operating system: linux, darwin or windows. */
     @SerializedName("os")
     val os: kotlin.String? = null,
 
-    /* always \"byo\" */
+    /* Provider is always \"byo\": this machine is the operator's, not one Hanzo provisioned. It exists so a fold into the machines/GPUs pages says which rows are rented and which are the customer's own. */
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* Rocm is the host's ROCm version. AMD hosts report it; empty otherwise. */
     @SerializedName("rocm")
     val rocm: kotlin.String? = null,
 
-    /* online | offline */
+    /* Status is \"online\" when the last heartbeat landed within 90s, else \"offline\" — so it is a fact about heartbeat freshness, not about the box being powered on. A worker that has never beaten reads offline. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Version is the `hanzo` CLI version running on the node. It is what to check when a worker is missing a field a newer registration reports. */
     @SerializedName("version")
     val version: kotlin.String? = null
 

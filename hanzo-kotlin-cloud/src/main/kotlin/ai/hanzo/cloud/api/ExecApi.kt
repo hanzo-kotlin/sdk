@@ -47,9 +47,79 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
+     * GET /v1/exec/files/{sid}
+     * List the files in an execution session
+     * Lists what a session&#39;s sandbox holds — the uploads a run can read and the artifacts it produced — each then fetched from /v1/exec/download.  It answers a BARE JSON ARRAY of {name, lastModified}, where &#x60;name&#x60; is the same {session_id}/{fileId} identifier download takes, because that is what the client matches on. An object wrapper would be a wire change, which is why this is not a typed operation.
+     * @param sid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getExecFilesBySid(sid: kotlin.String) : Unit {
+        val localVarResponse = getExecFilesBySidWithHttpInfo(sid = sid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/exec/files/{sid}
+     * List the files in an execution session
+     * Lists what a session&#39;s sandbox holds — the uploads a run can read and the artifacts it produced — each then fetched from /v1/exec/download.  It answers a BARE JSON ARRAY of {name, lastModified}, where &#x60;name&#x60; is the same {session_id}/{fileId} identifier download takes, because that is what the client matches on. An object wrapper would be a wire change, which is why this is not a typed operation.
+     * @param sid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getExecFilesBySidWithHttpInfo(sid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getExecFilesBySidRequestConfig(sid = sid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getExecFilesBySid
+     *
+     * @param sid 
+     * @return RequestConfig
+     */
+    fun getExecFilesBySidRequestConfig(sid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/exec/files/{sid}".replace("{"+"sid"+"}", encodeURIComponent(sid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * POST /v1/exec
      * Run a code snippet in a sandboxed interpreter
-     * Executes a program in a throwaway sandbox and answers with what it printed and what it left behind.  &#x60;lang&#x60; names one of the thirteen the sandbox image carries — py, js, ts, bash, r, php, go, rs, c, cpp, java, d, f90 — and &#x60;code&#x60; is the whole program, not a fragment: a compiled language is compiled and then run, an interpreted one is interpreted, and &#x60;args&#x60; becomes the program&#39;s own argv either way. Nothing is installed for you; the image is the environment.  A PROGRAM THAT FAILS IS A SUCCESSFUL CALL. A non-zero exit answers 200 with the diagnostics on &#x60;stderr&#x60;, because \&quot;the code threw\&quot; and \&quot;the interpreter is down\&quot; are different facts a caller renders differently. Only the second is an error status.  Runs are stateful through &#x60;session_id&#x60;. Omit it and the run gets a fresh sandbox whose id comes back on the answer; pass that id again and the next run sees the same filesystem, so a program can write a file one call and read it the next. &#x60;files&#x60; names bytes already uploaded to a session (POST /v1/upload), copied in before the program starts. &#x60;files&#x60; on the ANSWER is what the program created or changed, by comparison against a marker taken at start — so it is the run&#39;s real output, not a listing of the directory — and each is fetched from GET /v1/download/{session}/{name}.  The tenant is the caller&#39;s, never the body&#39;s, at every door. A typed op is also an MCP tool and an op-plane op; MCP&#39;s tools/call invokes it directly, with no route and therefore no middleware, so nothing there could have checked a credential. tenantOf refuses a context carrying neither a validated principal nor exec&#39;s own admission marker, so those doors fail closed without a second gate to keep in step.
+     * Executes a program in a throwaway sandbox and answers with what it printed and what it left behind.  &#x60;lang&#x60; names one of the thirteen the sandbox image carries — py, js, ts, bash, r, php, go, rs, c, cpp, java, d, f90 — and &#x60;code&#x60; is the whole program, not a fragment: a compiled language is compiled and then run, an interpreted one is interpreted, and &#x60;args&#x60; becomes the program&#39;s own argv either way. Nothing is installed for you; the image is the environment.  A PROGRAM THAT FAILS IS A SUCCESSFUL CALL. A non-zero exit answers 200 with the diagnostics on &#x60;stderr&#x60;, because \&quot;the code threw\&quot; and \&quot;the interpreter is down\&quot; are different facts a caller renders differently. Only the second is an error status.  Runs are stateful through &#x60;session_id&#x60;. Omit it and the run gets a fresh sandbox whose id comes back on the answer; pass that id again and the next run sees the same filesystem, so a program can write a file one call and read it the next. &#x60;files&#x60; names bytes already uploaded to a session (POST /v1/exec/upload), copied in before the program starts. &#x60;files&#x60; on the ANSWER is what the program created or changed, by comparison against a marker taken at start — so it is the run&#39;s real output, not a listing of the directory — and each is fetched from GET /v1/exec/download/{session}/{name}.  The tenant is the caller&#39;s, never the body&#39;s, at every door. A typed op is also an MCP tool and an op-plane op; MCP&#39;s tools/call invokes it directly, with no route and therefore no middleware, so nothing there could have checked a credential. tenantOf refuses a context carrying neither a validated principal nor exec&#39;s own admission marker, so those doors fail closed without a second gate to keep in step.
      * @param codeRun 
      * @return CodeResult
      * @throws IllegalStateException If the request is not correctly configured
@@ -81,7 +151,7 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     /**
      * POST /v1/exec
      * Run a code snippet in a sandboxed interpreter
-     * Executes a program in a throwaway sandbox and answers with what it printed and what it left behind.  &#x60;lang&#x60; names one of the thirteen the sandbox image carries — py, js, ts, bash, r, php, go, rs, c, cpp, java, d, f90 — and &#x60;code&#x60; is the whole program, not a fragment: a compiled language is compiled and then run, an interpreted one is interpreted, and &#x60;args&#x60; becomes the program&#39;s own argv either way. Nothing is installed for you; the image is the environment.  A PROGRAM THAT FAILS IS A SUCCESSFUL CALL. A non-zero exit answers 200 with the diagnostics on &#x60;stderr&#x60;, because \&quot;the code threw\&quot; and \&quot;the interpreter is down\&quot; are different facts a caller renders differently. Only the second is an error status.  Runs are stateful through &#x60;session_id&#x60;. Omit it and the run gets a fresh sandbox whose id comes back on the answer; pass that id again and the next run sees the same filesystem, so a program can write a file one call and read it the next. &#x60;files&#x60; names bytes already uploaded to a session (POST /v1/upload), copied in before the program starts. &#x60;files&#x60; on the ANSWER is what the program created or changed, by comparison against a marker taken at start — so it is the run&#39;s real output, not a listing of the directory — and each is fetched from GET /v1/download/{session}/{name}.  The tenant is the caller&#39;s, never the body&#39;s, at every door. A typed op is also an MCP tool and an op-plane op; MCP&#39;s tools/call invokes it directly, with no route and therefore no middleware, so nothing there could have checked a credential. tenantOf refuses a context carrying neither a validated principal nor exec&#39;s own admission marker, so those doors fail closed without a second gate to keep in step.
+     * Executes a program in a throwaway sandbox and answers with what it printed and what it left behind.  &#x60;lang&#x60; names one of the thirteen the sandbox image carries — py, js, ts, bash, r, php, go, rs, c, cpp, java, d, f90 — and &#x60;code&#x60; is the whole program, not a fragment: a compiled language is compiled and then run, an interpreted one is interpreted, and &#x60;args&#x60; becomes the program&#39;s own argv either way. Nothing is installed for you; the image is the environment.  A PROGRAM THAT FAILS IS A SUCCESSFUL CALL. A non-zero exit answers 200 with the diagnostics on &#x60;stderr&#x60;, because \&quot;the code threw\&quot; and \&quot;the interpreter is down\&quot; are different facts a caller renders differently. Only the second is an error status.  Runs are stateful through &#x60;session_id&#x60;. Omit it and the run gets a fresh sandbox whose id comes back on the answer; pass that id again and the next run sees the same filesystem, so a program can write a file one call and read it the next. &#x60;files&#x60; names bytes already uploaded to a session (POST /v1/exec/upload), copied in before the program starts. &#x60;files&#x60; on the ANSWER is what the program created or changed, by comparison against a marker taken at start — so it is the run&#39;s real output, not a listing of the directory — and each is fetched from GET /v1/exec/download/{session}/{name}.  The tenant is the caller&#39;s, never the body&#39;s, at every door. A typed op is also an MCP tool and an op-plane op; MCP&#39;s tools/call invokes it directly, with no route and therefore no middleware, so nothing there could have checked a credential. tenantOf refuses a context carrying neither a validated principal nor exec&#39;s own admission marker, so those doors fail closed without a second gate to keep in step.
      * @param codeRun 
      * @return ApiResponse<CodeResult?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -180,6 +250,73 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/exec/programmatic",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/exec/upload
+     * Upload a file into an execution session
+     * Takes a multipart upload and writes the file into the session&#39;s sandbox, so a later run can read it. Answers the session id and the identifier the file is addressed by; &#x60;session_id&#x60; in the form joins an existing session instead of opening one.  The body is multipart/form-data, which is why this is not a typed operation: every non-empty typed body is decoded as JSON.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postExecUpload() : Unit {
+        val localVarResponse = postExecUploadWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/exec/upload
+     * Upload a file into an execution session
+     * Takes a multipart upload and writes the file into the session&#39;s sandbox, so a later run can read it. Answers the session id and the identifier the file is addressed by; &#x60;session_id&#x60; in the form joins an existing session instead of opening one.  The body is multipart/form-data, which is why this is not a typed operation: every non-empty typed body is decoded as JSON.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postExecUploadWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postExecUploadRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postExecUpload
+     *
+     * @return RequestConfig
+     */
+    fun postExecUploadRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/exec/upload",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

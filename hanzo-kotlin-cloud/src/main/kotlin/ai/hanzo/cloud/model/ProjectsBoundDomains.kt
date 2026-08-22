@@ -24,8 +24,8 @@ import com.google.gson.annotations.SerializedName
  *
  * @param bound Bound is the result of THIS call, one row per host in the request: live for an already-vouched host, pending with the DNS records to publish otherwise.
  * @param domains Domains are the hostnames that are VERIFIED and routing right now, after this bind.
- * @param org Org and Slug identify the site the hosts were bound to.
- * @param slug 
+ * @param org Org is the organisation that owns the site.
+ * @param slug Slug is the site the hosts were bound to.
  */
 
 
@@ -39,10 +39,11 @@ data class ProjectsBoundDomains (
     @SerializedName("domains")
     val domains: kotlin.collections.List<kotlin.String>? = null,
 
-    /* Org and Slug identify the site the hosts were bound to. */
+    /* Org is the organisation that owns the site. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Slug is the site the hosts were bound to. */
     @SerializedName("slug")
     val slug: kotlin.String? = null
 

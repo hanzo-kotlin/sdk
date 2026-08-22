@@ -21,33 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param from 
- * @param id 
- * @param org 
- * @param status queued | sent | delivered | failed
- * @param text 
- * @param to 
+ * @param from From is the sending number in E.164, and must be one this org holds.
+ * @param id ID is the carrier's handle for the message.
+ * @param org Org is the tenant the message was sent for or received by.
+ * @param status Status is where the message is: \"queued\", \"sent\", \"delivered\" or \"failed\". \"sent\" means the carrier took it; \"delivered\" means the handset got it, and not every carrier or destination reports that.
+ * @param text Text is the message body. Empty is legal when the message carried only media.
+ * @param to To is the receiving number in E.164.
  */
 
 
 data class SMS (
 
+    /* From is the sending number in E.164, and must be one this org holds. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
+    /* ID is the carrier's handle for the message. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Org is the tenant the message was sent for or received by. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
-    /* queued | sent | delivered | failed */
+    /* Status is where the message is: \"queued\", \"sent\", \"delivered\" or \"failed\". \"sent\" means the carrier took it; \"delivered\" means the handset got it, and not every carrier or destination reports that. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Text is the message body. Empty is legal when the message carried only media. */
     @SerializedName("text")
     val text: kotlin.String? = null,
 
+    /* To is the receiving number in E.164. */
     @SerializedName("to")
     val to: kotlin.String? = null
 

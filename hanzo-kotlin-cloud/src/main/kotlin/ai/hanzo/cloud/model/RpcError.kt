@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param code 
- * @param message 
+ * @param code Code is the JSON-RPC error code the chain reported, passed through as it came. -32603 (internal error) is the one value this deployment mints itself, for an upstream that could not be reached at all.
+ * @param message Message is the chain's own explanation, e.g. \"execution reverted\". It is \"upstream unavailable\" when the deployment minted the error rather than the chain — that is the one message this side writes.
  */
 
 
 data class RpcError (
 
+    /* Code is the JSON-RPC error code the chain reported, passed through as it came. -32603 (internal error) is the one value this deployment mints itself, for an upstream that could not be reached at all. */
     @SerializedName("code")
     val code: kotlin.Int? = null,
 
+    /* Message is the chain's own explanation, e.g. \"execution reverted\". It is \"upstream unavailable\" when the deployment minted the error rather than the chain — that is the one message this side writes. */
     @SerializedName("message")
     val message: kotlin.String? = null
 

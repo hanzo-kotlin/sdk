@@ -21,88 +21,30 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param cluster hanzo-k8s
- * @param declaredTag spec.image.tag on the App CR (declared truth)
- * @param drift any drift flag present
- * @param driftSeverity ok|yellow|red (rolled-up)
- * @param env main|test|dev (lifecycle namespace)
- * @param health green|yellow|red|unknown
- * @param kind operator App CR spec.role (sql|kv|generic|ingress) or \"\"
- * @param latestTag newest released tag (GH release reader — empty until wired)
- * @param name 
- * @param namespace k8s namespace
- * @param org image namespace (hanzoai|luxfi|docker.io/…)
- * @param phase operator status.phase (Running/Creating/…)
- * @param repo owner/repo image coordinate
- * @param runningTag observed from the live Deployment
- * @param tier derived: cloud|data|edge|daemon|paas|app (grouping)
- * @param updated 
+ * @param orders Orders is how many order_completed events carried it.
+ * @param productId ProductID is the product the order events named.
+ * @param revenue Revenue is the total they carried, in the events' own currency unit.
+ * @param units Units is the summed quantity sold.
  */
 
 
 data class ProductRow (
 
-    /* hanzo-k8s */
-    @SerializedName("cluster")
-    val cluster: kotlin.String? = null,
+    /* Orders is how many order_completed events carried it. */
+    @SerializedName("orders")
+    val orders: kotlin.Int? = null,
 
-    /* spec.image.tag on the App CR (declared truth) */
-    @SerializedName("declaredTag")
-    val declaredTag: kotlin.String? = null,
+    /* ProductID is the product the order events named. */
+    @SerializedName("productId")
+    val productId: kotlin.String? = null,
 
-    /* any drift flag present */
-    @SerializedName("drift")
-    val drift: kotlin.Boolean? = null,
+    /* Revenue is the total they carried, in the events' own currency unit. */
+    @SerializedName("revenue")
+    val revenue: java.math.BigDecimal? = null,
 
-    /* ok|yellow|red (rolled-up) */
-    @SerializedName("driftSeverity")
-    val driftSeverity: kotlin.String? = null,
-
-    /* main|test|dev (lifecycle namespace) */
-    @SerializedName("env")
-    val env: kotlin.String? = null,
-
-    /* green|yellow|red|unknown */
-    @SerializedName("health")
-    val health: kotlin.String? = null,
-
-    /* operator App CR spec.role (sql|kv|generic|ingress) or \"\" */
-    @SerializedName("kind")
-    val kind: kotlin.String? = null,
-
-    /* newest released tag (GH release reader — empty until wired) */
-    @SerializedName("latestTag")
-    val latestTag: kotlin.String? = null,
-
-    @SerializedName("name")
-    val name: kotlin.String? = null,
-
-    /* k8s namespace */
-    @SerializedName("namespace")
-    val namespace: kotlin.String? = null,
-
-    /* image namespace (hanzoai|luxfi|docker.io/…) */
-    @SerializedName("org")
-    val org: kotlin.String? = null,
-
-    /* operator status.phase (Running/Creating/…) */
-    @SerializedName("phase")
-    val phase: kotlin.String? = null,
-
-    /* owner/repo image coordinate */
-    @SerializedName("repo")
-    val repo: kotlin.String? = null,
-
-    /* observed from the live Deployment */
-    @SerializedName("runningTag")
-    val runningTag: kotlin.String? = null,
-
-    /* derived: cloud|data|edge|daemon|paas|app (grouping) */
-    @SerializedName("tier")
-    val tier: kotlin.String? = null,
-
-    @SerializedName("updated")
-    val updated: kotlin.String? = null
+    /* Units is the summed quantity sold. */
+    @SerializedName("units")
+    val units: kotlin.Int? = null
 
 ) {
 

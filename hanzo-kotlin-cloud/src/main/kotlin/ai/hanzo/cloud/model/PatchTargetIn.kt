@@ -23,22 +23,24 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param capacity 
- * @param host 
+ * @param capacity Capacity rewrites the human summary, up to 256 characters. \"\" clears it.
+ * @param host Host re-points the hostname sessions are matched by. Moving it moves the load: the session counts follow the new name from the next read.
  * @param id ID is the target to update, from the path.
- * @param kind 
- * @param label 
- * @param metrics present => a heartbeat; the server stamps its time
- * @param spec 
- * @param status 
+ * @param kind Kind re-files it under laptop | cloud | gpu | cluster | machine.
+ * @param label Label renames the machine, up to 128 characters. Empty STRING is refused — a target with no name is a row nobody can pick out of a fleet.
+ * @param metrics Metrics replaces the live sample, and sending one IS A HEARTBEAT: the server stamps the time and appends the point to the fleet series. Sending an all-zero sample CLEARS the heartbeat — the machine goes back to having no liveness fact at all, and its stored status is taken at face value again.
+ * @param spec Spec replaces the static capability whole, sanitized and clamped the same way a register's is.
+ * @param status Status sets operator INTENT: online | offline | draining. Draining is how a machine is taken out of dispatch without ending what is already on it. What comes back may still read offline, because the heartbeat outranks the intent.
  */
 
 
 data class PatchTargetIn (
 
+    /* Capacity rewrites the human summary, up to 256 characters. \"\" clears it. */
     @SerializedName("capacity")
     val capacity: kotlin.String? = null,
 
+    /* Host re-points the hostname sessions are matched by. Moving it moves the load: the session counts follow the new name from the next read. */
     @SerializedName("host")
     val host: kotlin.String? = null,
 
@@ -46,19 +48,23 @@ data class PatchTargetIn (
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Kind re-files it under laptop | cloud | gpu | cluster | machine. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Label renames the machine, up to 128 characters. Empty STRING is refused — a target with no name is a row nobody can pick out of a fleet. */
     @SerializedName("label")
     val label: kotlin.String? = null,
 
-    /* present => a heartbeat; the server stamps its time */
+    /* Metrics replaces the live sample, and sending one IS A HEARTBEAT: the server stamps the time and appends the point to the fleet series. Sending an all-zero sample CLEARS the heartbeat — the machine goes back to having no liveness fact at all, and its stored status is taken at face value again. */
     @SerializedName("metrics")
     val metrics: Metrics? = null,
 
+    /* Spec replaces the static capability whole, sanitized and clamped the same way a register's is. */
     @SerializedName("spec")
     val spec: Spec? = null,
 
+    /* Status sets operator INTENT: online | offline | draining. Draining is how a machine is taken out of dispatch without ending what is already on it. What comes back may still read offline, because the heartbeat outranks the intent. */
     @SerializedName("status")
     val status: kotlin.String? = null
 

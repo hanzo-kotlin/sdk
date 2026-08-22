@@ -23,71 +23,83 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param automated 
- * @param health Healthy|Degraded|Progressing|…
- * @param history 
- * @param name 
- * @param namespace 
- * @param operation 
- * @param path 
- * @param project 
- * @param reconciledAt 
- * @param repoURL 
- * @param resources 
- * @param revision the commit last applied
- * @param selfHeal 
- * @param sync Synced|OutOfSync|Unknown
- * @param targetRevision 
+ * @param automated Automated is whether CD applies new commits without being asked. It reads the PRESENCE of spec.syncPolicy.automated, which is a block rather than a boolean; false means drift is reported and nothing moves.
+ * @param health Health is CD's verdict on the objects it manages, verbatim: Healthy, Progressing, Degraded, Suspended, Missing or Unknown.
+ * @param history History is the recent deploy log, NEWEST FIRST and capped at ten. CD appends oldest-first and bounds the list itself; the reversal happens here so a caller never has to know the storage order to show what shipped last. Empty (never null) for an Application that has deployed nothing.
+ * @param name Name is what CD calls this tracked source, not the workload it deploys — the Application CR's own metadata.name. The fleet ApplicationSet mints these as <namespace>-<app>.
+ * @param namespace Namespace is where the Application OBJECT lives: CD's own controller namespace, which is the same one for every row here. It is NOT the destination the workloads land in — this endpoint lists cluster-wide and never reads spec.destination.
+ * @param operation Operation is the last sync attempt and how it ended. Absent when CD has run none, which is the honest gap between \"never tried\" and \"tried and failed\".
+ * @param path Path is the directory inside that repository CD renders, relative to its root.
+ * @param project Project is the AppProject fence the sync is admitted under: which repos this Application may pull from and which destinations it may write to. Empty when the CR declares none.
+ * @param reconciledAt ReconciledAt is when CD last COMPARED this Application against git, RFC 3339. It moves on every comparison, including ones that applied nothing.
+ * @param repoURL RepoURL is the git repository CD polls for this Application's desired state.
+ * @param resources Resources is how MANY objects CD manages for this Application (len(status.resources)) — a count, not the objects. Zero for an Application CD has not reconciled.
+ * @param revision Revision is the commit CD last APPLIED (status.sync.revision). Empty means it has applied none — never read that as the head of TargetRevision.
+ * @param selfHeal SelfHeal is whether CD also reverts changes made directly in the cluster (syncPolicy.automated.selfHeal). Meaningless unless Automated.
+ * @param sync Sync is CD's verdict on git versus cluster, verbatim: Synced, OutOfSync or Unknown. It is about the applied REVISION, so an Application can be Synced to a commit that is several behind the branch it tracks.
+ * @param targetRevision TargetRevision is the git ref CD TRACKS — usually a branch such as \"main\". It is what CD aims at; Revision is what it has reached.
  */
 
 
 data class GitOpsApp (
 
+    /* Automated is whether CD applies new commits without being asked. It reads the PRESENCE of spec.syncPolicy.automated, which is a block rather than a boolean; false means drift is reported and nothing moves. */
     @SerializedName("automated")
     val automated: kotlin.Boolean? = null,
 
-    /* Healthy|Degraded|Progressing|… */
+    /* Health is CD's verdict on the objects it manages, verbatim: Healthy, Progressing, Degraded, Suspended, Missing or Unknown. */
     @SerializedName("health")
     val health: kotlin.String? = null,
 
+    /* History is the recent deploy log, NEWEST FIRST and capped at ten. CD appends oldest-first and bounds the list itself; the reversal happens here so a caller never has to know the storage order to show what shipped last. Empty (never null) for an Application that has deployed nothing. */
     @SerializedName("history")
     val history: kotlin.collections.List<GitOpsDeploy>? = null,
 
+    /* Name is what CD calls this tracked source, not the workload it deploys — the Application CR's own metadata.name. The fleet ApplicationSet mints these as <namespace>-<app>. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Namespace is where the Application OBJECT lives: CD's own controller namespace, which is the same one for every row here. It is NOT the destination the workloads land in — this endpoint lists cluster-wide and never reads spec.destination. */
     @SerializedName("namespace")
     val namespace: kotlin.String? = null,
 
+    /* Operation is the last sync attempt and how it ended. Absent when CD has run none, which is the honest gap between \"never tried\" and \"tried and failed\". */
     @SerializedName("operation")
     val operation: GitOpsOperation? = null,
 
+    /* Path is the directory inside that repository CD renders, relative to its root. */
     @SerializedName("path")
     val path: kotlin.String? = null,
 
+    /* Project is the AppProject fence the sync is admitted under: which repos this Application may pull from and which destinations it may write to. Empty when the CR declares none. */
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* ReconciledAt is when CD last COMPARED this Application against git, RFC 3339. It moves on every comparison, including ones that applied nothing. */
     @SerializedName("reconciledAt")
     val reconciledAt: kotlin.String? = null,
 
+    /* RepoURL is the git repository CD polls for this Application's desired state. */
     @SerializedName("repoURL")
     val repoURL: kotlin.String? = null,
 
+    /* Resources is how MANY objects CD manages for this Application (len(status.resources)) — a count, not the objects. Zero for an Application CD has not reconciled. */
     @SerializedName("resources")
     val resources: kotlin.Int? = null,
 
-    /* the commit last applied */
+    /* Revision is the commit CD last APPLIED (status.sync.revision). Empty means it has applied none — never read that as the head of TargetRevision. */
     @SerializedName("revision")
     val revision: kotlin.String? = null,
 
+    /* SelfHeal is whether CD also reverts changes made directly in the cluster (syncPolicy.automated.selfHeal). Meaningless unless Automated. */
     @SerializedName("selfHeal")
     val selfHeal: kotlin.Boolean? = null,
 
-    /* Synced|OutOfSync|Unknown */
+    /* Sync is CD's verdict on git versus cluster, verbatim: Synced, OutOfSync or Unknown. It is about the applied REVISION, so an Application can be Synced to a commit that is several behind the branch it tracks. */
     @SerializedName("sync")
     val sync: kotlin.String? = null,
 
+    /* TargetRevision is the git ref CD TRACKS — usually a branch such as \"main\". It is what CD aims at; Revision is what it has reached. */
     @SerializedName("targetRevision")
     val targetRevision: kotlin.String? = null
 

@@ -23,24 +23,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param funnel 
- * @param launchProgress 
- * @param records 
- * @param revenueCents 
+ * @param funnel Funnel is what the org's analytics observed over the trailing window. Read its `available` first: an org with no analytics reports zeros here, and zero traffic and no measurement are different facts.
+ * @param launchProgress LaunchProgress is the org's own position in the launch checklist, folded in so a profile carries both what the org has BUILT and what it has DONE.
+ * @param records Records is how many business records the org holds — the volume that tells a real book of customers from an empty account. It feeds the `customers` signal, which crosses at a threshold rather than at one row.
+ * @param revenueCents RevenueCents is the org's money OF RECORD — what its books say, in whole cents, never a float and never a display string. This is the number the scaling stage is decided on; funnel.revenue is the beacon's separate, unreconciled view of the same business. Zero when the org has none, and also zero when the books could not be read, which is why the `revenue` signal beside it is the thing to trust.
  */
 
 
 data class ProfileMetrics (
 
+    /* Funnel is what the org's analytics observed over the trailing window. Read its `available` first: an org with no analytics reports zeros here, and zero traffic and no measurement are different facts. */
     @SerializedName("funnel")
     val funnel: Funnel? = null,
 
+    /* LaunchProgress is the org's own position in the launch checklist, folded in so a profile carries both what the org has BUILT and what it has DONE. */
     @SerializedName("launchProgress")
     val launchProgress: ProgressView? = null,
 
+    /* Records is how many business records the org holds — the volume that tells a real book of customers from an empty account. It feeds the `customers` signal, which crosses at a threshold rather than at one row. */
     @SerializedName("records")
     val records: kotlin.Int? = null,
 
+    /* RevenueCents is the org's money OF RECORD — what its books say, in whole cents, never a float and never a display string. This is the number the scaling stage is decided on; funnel.revenue is the beacon's separate, unreconciled view of the same business. Zero when the org has none, and also zero when the books could not be read, which is why the `revenue` signal beside it is the thing to trust. */
     @SerializedName("revenueCents")
     val revenueCents: kotlin.Int? = null
 

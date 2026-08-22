@@ -21,12 +21,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param stopped 
+ * @param stopped Stopped counts the commands that were still running and were interrupted. Zero says the sandbox was idle, not that the stop failed — see above.
  */
 
 
 data class Stopped (
 
+    /* Stopped counts the commands that were still running and were interrupted. Zero says the sandbox was idle, not that the stop failed — see above. */
     @SerializedName("stopped")
     val stopped: kotlin.Int? = null
 

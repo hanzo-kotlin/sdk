@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param imageUrl 
- * @param slug 
- * @param status 
- * @param store 
+ * @param imageUrl ImageURL is the absolute URL the listing's headerImage now points at. The image is REFERENCED, not copied — it stays in the org's studio output bucket, so removing it there empties the storefront tile.
+ * @param slug Slug is the product handle the image was attached to. It IS the asset's `design` field — that equality is the whole join between the studio and the catalog, which is why an asset with no design produces no storefront result at all.
+ * @param status Status is one of \"published\" (the product image was set), \"not_configured\" (no commerce edge, no store provisioned for the org, or a token that is not admin on the store — a fail-closed no-op) or \"failed\" (commerce answered and errored). None of the three fails the transition that produced it.
+ * @param store Store is the commerce store id the image landed in, resolved for the org mid-call. Present only on \"published\": a result that never got that far carries none.
  */
 
 
 data class StorefrontResult (
 
+    /* ImageURL is the absolute URL the listing's headerImage now points at. The image is REFERENCED, not copied — it stays in the org's studio output bucket, so removing it there empties the storefront tile. */
     @SerializedName("imageUrl")
     val imageUrl: kotlin.String? = null,
 
+    /* Slug is the product handle the image was attached to. It IS the asset's `design` field — that equality is the whole join between the studio and the catalog, which is why an asset with no design produces no storefront result at all. */
     @SerializedName("slug")
     val slug: kotlin.String? = null,
 
+    /* Status is one of \"published\" (the product image was set), \"not_configured\" (no commerce edge, no store provisioned for the org, or a token that is not admin on the store — a fail-closed no-op) or \"failed\" (commerce answered and errored). None of the three fails the transition that produced it. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Store is the commerce store id the image landed in, resolved for the org mid-call. Present only on \"published\": a result that never got that far carries none. */
     @SerializedName("store")
     val store: kotlin.String? = null
 

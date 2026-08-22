@@ -22,28 +22,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param code 
- * @param message 
- * @param range 
- * @param severity 
- * @param source 
+ * @param code Code is the checker's own identifier for the rule, a string or a number depending on the server. Absent when it published none.
+ * @param message Message is the problem in the server's own words, meant to be shown.
+ * @param range Range is the span the problem is about.
+ * @param severity Severity is the LSP's: 1 error, 2 warning, 3 information, 4 hint. A file with only 3s and 4s still compiles.
+ * @param source Source is which checker reported it (\"compiler\", \"go vet\", a linter's name), which is what separates a build error from a style opinion.
  */
 
 
 data class Diagnostic (
 
+    /* Code is the checker's own identifier for the rule, a string or a number depending on the server. Absent when it published none. */
     @SerializedName("code")
     val code: kotlin.Any? = null,
 
+    /* Message is the problem in the server's own words, meant to be shown. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
+    /* Range is the span the problem is about. */
     @SerializedName("range")
     val range: Range? = null,
 
+    /* Severity is the LSP's: 1 error, 2 warning, 3 information, 4 hint. A file with only 3s and 4s still compiles. */
     @SerializedName("severity")
     val severity: kotlin.Int? = null,
 
+    /* Source is which checker reported it (\"compiler\", \"go vet\", a linter's name), which is what separates a build error from a style opinion. */
     @SerializedName("source")
     val source: kotlin.String? = null
 

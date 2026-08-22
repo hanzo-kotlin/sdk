@@ -23,13 +23,13 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param analytics Analytics is the opt-OUT for the wired-by-default analytics beacon: absent (nil) ⇒ ON (the default); explicit false ⇒ off. A pointer so \"unset\" is distinguishable from \"false\" — the only way to turn the default off.
- * @param description 
- * @param framework 
- * @param license 
- * @param name 
+ * @param description Description is the one-line summary, copied onto anything forked from this project.
+ * @param framework Framework is a BUILD HINT from a closed set, defaulting to static. It tells CI how to build a linked repo and never gates a deploy.
+ * @param license License is the terms that upstream work carries.
+ * @param name Name is the project's display name and the only REQUIRED field. When slug is omitted it is also what the slug is derived from.
  * @param repo 
- * @param slug 
- * @param upstream Upstream/License credit the third-party work this project was published from. Taken from any caller: disclaiming authorship can only cost the publisher credit, so it needs no gate (see Project.Upstream).
+ * @param slug Slug is the handle everything else addresses this project by: the public host `<slug>.hanzo.app`, the object-store key segment, and the path parameter of every later call. Derived from the name when omitted. It is a hostname label, so it is constrained and reserved labels such as `api` or `admin` are refused.
+ * @param upstream Upstream credits the third-party work this project was published from. It is accepted from any caller: giving away credit can only cost the publisher, so it needs no gate.
  * @param visibility Visibility is \"public\" (the default when absent) or \"private\". Publishing publicly is ungated — that is the point of a community. Going PRIVATE is the paid feature, so an unfunded org asking for it is refused rather than silently downgraded (see resolve).
  */
 
@@ -40,25 +40,30 @@ data class ProjectsCreate (
     @SerializedName("analytics")
     val analytics: kotlin.Boolean? = null,
 
+    /* Description is the one-line summary, copied onto anything forked from this project. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* Framework is a BUILD HINT from a closed set, defaulting to static. It tells CI how to build a linked repo and never gates a deploy. */
     @SerializedName("framework")
     val framework: kotlin.String? = null,
 
+    /* License is the terms that upstream work carries. */
     @SerializedName("license")
     val license: kotlin.String? = null,
 
+    /* Name is the project's display name and the only REQUIRED field. When slug is omitted it is also what the slug is derived from. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
     @SerializedName("repo")
     val repo: ProjectsCreateRepo? = null,
 
+    /* Slug is the handle everything else addresses this project by: the public host `<slug>.hanzo.app`, the object-store key segment, and the path parameter of every later call. Derived from the name when omitted. It is a hostname label, so it is constrained and reserved labels such as `api` or `admin` are refused. */
     @SerializedName("slug")
     val slug: kotlin.String? = null,
 
-    /* Upstream/License credit the third-party work this project was published from. Taken from any caller: disclaiming authorship can only cost the publisher credit, so it needs no gate (see Project.Upstream). */
+    /* Upstream credits the third-party work this project was published from. It is accepted from any caller: giving away credit can only cost the publisher, so it needs no gate. */
     @SerializedName("upstream")
     val upstream: kotlin.String? = null,
 

@@ -27,7 +27,7 @@ import com.google.gson.annotations.SerializedName
  * @param account 
  * @param actor 
  * @param agent 
- * @param childSessions 
+ * @param childSessions Children is the session's DIRECT children, one level down, each with its own counts. The promoted `children` integer beside it is how many there are; this is who they are. For the whole subtree, read the tree.
  * @param children 
  * @param createdAt 
  * @param cwd 
@@ -41,7 +41,7 @@ import com.google.gson.annotations.SerializedName
  * @param project 
  * @param provider 
  * @param published 
- * @param recentEvents 
+ * @param recentEvents RecentEvents is the 50 most recent turns, OLDEST of those first — a transcript to read down, not a feed. The promoted `events` integer says how many the log holds in total; page the rest from a seq.
  * @param repo 
  * @param rootSessionId 
  * @param startedAt 
@@ -66,6 +66,7 @@ data class SessionDetail (
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* Children is the session's DIRECT children, one level down, each with its own counts. The promoted `children` integer beside it is how many there are; this is who they are. For the whole subtree, read the tree. */
     @SerializedName("childSessions")
     val childSessions: kotlin.collections.List<SessionView>? = null,
 
@@ -108,6 +109,7 @@ data class SessionDetail (
     @SerializedName("published")
     val published: kotlin.Boolean? = null,
 
+    /* RecentEvents is the 50 most recent turns, OLDEST of those first — a transcript to read down, not a feed. The promoted `events` integer says how many the log holds in total; page the rest from a seq. */
     @SerializedName("recentEvents")
     val recentEvents: kotlin.collections.List<EventView>? = null,
 

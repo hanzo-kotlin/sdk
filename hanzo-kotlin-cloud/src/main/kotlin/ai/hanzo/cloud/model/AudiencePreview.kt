@@ -23,11 +23,11 @@ import com.google.gson.annotations.SerializedName
  *
  * @param available Available is false when the roster or the warehouse could not be read; the counts are then zero because nothing was measured, not because the cohort is empty, and Reason says which read failed.
  * @param count Count is the cohort size: distinct warehouse identifiers for an event audience, mailable customers for an event-less (whole-org) one.
- * @param deliverable Deliverable is how many de-duplicated addresses a send would reach, and Unmatched how many cohort identifiers named no customer. Unmatched is reported rather than hidden: it is the honest explanation for a cohort of 500 that mails 3.
- * @param reason 
+ * @param deliverable Deliverable is how many de-duplicated mailboxes a send would reach. Two customers sharing an address count once, so it is <= Count.
+ * @param reason Reason is the error text of the read that failed: the org's roster could not be loaded (\"identity store unavailable…\"), or the cohort query had no warehouse to run against (\"analytics warehouse not configured\"). Absent when the evaluation succeeded, so its presence and Available=false are one fact seen twice.
  * @param sample Sample is up to 1000 cohort IDENTIFIERS — never addresses, which product analytics does not hold. Empty for an event-less (whole-org) audience.
  * @param source Source names where the cohort was read: the events table for an event audience, \"iam:<org>\" for the whole-org one.
- * @param unmatched 
+ * @param unmatched Unmatched is how many cohort identifiers named nobody on the org's roster and so have no address to mail. It is reported rather than hidden: it is the honest explanation for a cohort of 500 that mails 3. Always 0 for an event-less (whole-org) audience, which starts from the roster and has nothing to match.
  */
 
 
@@ -41,10 +41,11 @@ data class AudiencePreview (
     @SerializedName("count")
     val count: kotlin.Int? = null,
 
-    /* Deliverable is how many de-duplicated addresses a send would reach, and Unmatched how many cohort identifiers named no customer. Unmatched is reported rather than hidden: it is the honest explanation for a cohort of 500 that mails 3. */
+    /* Deliverable is how many de-duplicated mailboxes a send would reach. Two customers sharing an address count once, so it is <= Count. */
     @SerializedName("deliverable")
     val deliverable: kotlin.Int? = null,
 
+    /* Reason is the error text of the read that failed: the org's roster could not be loaded (\"identity store unavailable…\"), or the cohort query had no warehouse to run against (\"analytics warehouse not configured\"). Absent when the evaluation succeeded, so its presence and Available=false are one fact seen twice. */
     @SerializedName("reason")
     val reason: kotlin.String? = null,
 
@@ -56,6 +57,7 @@ data class AudiencePreview (
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Unmatched is how many cohort identifiers named nobody on the org's roster and so have no address to mail. It is reported rather than hidden: it is the honest explanation for a cohort of 500 that mails 3. Always 0 for an event-less (whole-org) audience, which starts from the roster and has nothing to match. */
     @SerializedName("unmatched")
     val unmatched: kotlin.Int? = null
 

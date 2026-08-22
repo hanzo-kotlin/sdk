@@ -23,6 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param aaguid 
  * @param attachment 
+ * @param attestationFormat AttestationFormat is the statement format the authenticator attested in (\"packed\", \"apple\", \"none\", …), which is a DIFFERENT value from the attestation type above. The library reads it back when resolving the FIDO AppID extension, so a row that dropped it would round-trip a credential the verifier no longer recognises as the one it stored.
  * @param attestationType 
  * @param backupEligible 
  * @param backupState 
@@ -51,6 +52,10 @@ data class IamWebauthnCredential (
 
     @SerializedName("attachment")
     val attachment: kotlin.String? = null,
+
+    /* AttestationFormat is the statement format the authenticator attested in (\"packed\", \"apple\", \"none\", …), which is a DIFFERENT value from the attestation type above. The library reads it back when resolving the FIDO AppID extension, so a row that dropped it would round-trip a credential the verifier no longer recognises as the one it stored. */
+    @SerializedName("attestationFormat")
+    val attestationFormat: kotlin.String? = null,
 
     @SerializedName("attestationType")
     val attestationType: kotlin.String? = null,

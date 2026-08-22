@@ -27,10 +27,10 @@ import com.google.gson.annotations.SerializedName
  * @param description 
  * @param executionMode 
  * @param id 
- * @param instructions 
+ * @param instructions Instructions is the agent's system prompt, verbatim, up to 32 KiB. It is the one field the list read withholds, because it is the agent's whole behaviour and a page of them would be a page of prompts.
  * @param model 
  * @param name 
- * @param recentRuns 
+ * @param recentRuns RecentRuns is the agent's 20 most recent executions, newest first. It is a window on the history, not the history: the count beside it is `runs`.
  * @param runs 
  * @param schedule 
  * @param serviceAccountId 
@@ -57,6 +57,7 @@ data class AgentDetail (
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Instructions is the agent's system prompt, verbatim, up to 32 KiB. It is the one field the list read withholds, because it is the agent's whole behaviour and a page of them would be a page of prompts. */
     @SerializedName("instructions")
     val instructions: kotlin.String? = null,
 
@@ -66,6 +67,7 @@ data class AgentDetail (
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* RecentRuns is the agent's 20 most recent executions, newest first. It is a window on the history, not the history: the count beside it is `runs`. */
     @SerializedName("recentRuns")
     val recentRuns: kotlin.collections.List<AgentRunView>? = null,
 

@@ -23,13 +23,13 @@ import com.google.gson.annotations.SerializedName
  *
  * @param cuts Cuts are the two RFC 3339 instants dividing train | val | test. Omit them to take 70% and 85% of the window by time. Splitting is TEMPORAL and then grouped by subject — a random split puts one device on both sides of the line and the model memorises the entity instead of the behaviour.
  * @param dims Dims are the coordinates to carry, by published name. Empty takes the whole surface. They are stored in the plane's own order, never the order given, so two requests naming the same dims produce identical rows.
- * @param from From and To bound the event window, half-open, RFC 3339. The window may not be longer than the source's own retention: past that, its older half is already gone and the dataset would silently be shorter than it says.
+ * @param from From is where the event window opens, RFC 3339, INCLUSIVE. The window may not be longer than the source's own retention: past that, its older half is already gone and the dataset would silently be shorter than it says.
  * @param horizon Horizon is how many days a row must have aged before it may be admitted. It is what keeps a fact that was not yet knowable at scoring time out of a training set: a chargeback lands 30 to 120 days after the transaction it condemns, so 120 for the payment lane and 14 for signup abuse. Zero admits the whole window and is honest only where the outcome is immediate.
  * @param kind Kind narrows to one subject kind — person, session or account. Empty takes every kind.
  * @param name Name identifies the dataset across its versions: lower-case letters, digits and hyphens, starting with a letter.
  * @param rows Rows caps the materialisation. Zero takes the plane's own bound.
  * @param seed Seed decides WHICH subjects are admitted when the window holds more rows than the cap allows. It is recorded on the version, so a capped dataset is reproducible rather than being whichever rows the store returned first. Omit it to seed from the dataset's name.
- * @param to 
+ * @param to To is where the window ends, EXCLUSIVE, so two datasets meeting at one instant share no row. A materialisation reads less than this — the end is pulled back by Horizon, and the lineage reports the window it actually read.
  */
 
 
@@ -43,7 +43,7 @@ data class RiskDatasetSpec (
     @SerializedName("dims")
     val dims: kotlin.collections.List<kotlin.String>? = null,
 
-    /* From and To bound the event window, half-open, RFC 3339. The window may not be longer than the source's own retention: past that, its older half is already gone and the dataset would silently be shorter than it says. */
+    /* From is where the event window opens, RFC 3339, INCLUSIVE. The window may not be longer than the source's own retention: past that, its older half is already gone and the dataset would silently be shorter than it says. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
@@ -67,6 +67,7 @@ data class RiskDatasetSpec (
     @SerializedName("seed")
     val seed: kotlin.String? = null,
 
+    /* To is where the window ends, EXCLUSIVE, so two datasets meeting at one instant share no row. A materialisation reads less than this — the end is pulled back by Horizon, and the lineage reports the window it actually read. */
     @SerializedName("to")
     val to: kotlin.String? = null
 

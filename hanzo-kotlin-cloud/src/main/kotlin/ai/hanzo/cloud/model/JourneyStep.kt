@@ -21,22 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param args 
+ * @param args Args are the tool's default arguments, merged under whatever the caller passes at run time, so a step ships with the arguments that make it work.
  * @param deps Dependencies are step ids that must be done/skipped before this step is available. The wire key is `deps` (the blueprint contract); the Go field keeps its descriptive name.
- * @param detail the prose/juncture — what the Guide asks/explains here
- * @param draft 
- * @param draftInto 
+ * @param detail Detail is the juncture — what the Guide explains, or asks for, at this step.
+ * @param draft Draft, when set, is the prompt the embedded AI answers first; its output is folded into one of Args before the tool runs, so the model writes the content and the tool only delivers it.
+ * @param draftInto DraftInto names the argument the drafted text lands in. Empty means \"brief\".
  * @param enabled Enabled is the admin on/off lever. A NIL pointer reads as ENABLED (absence == on): a legacy/org curriculum that omits the field keeps every step, and only an explicit `enabled: false` (an admin disable) drops a step from the journey. See on() in blueprint.go and the Blueprint.Curriculum() projection.
- * @param id 
- * @param section the phase (section id) this step groups under
+ * @param id ID is the stable slug the whole plane addresses this step by — the value in `deps`, in `next`, in the progress rows, and in the URL of every step route. Renaming it orphans an org's recorded progress for this step.
+ * @param section Section is the id of the phase this step groups under. A disabled section takes its steps out of the journey with it.
  * @param signal Signal, when set, names a machine detector (detect.go). When the detector reports the org's real state present, the step auto-marks done.
- * @param title 
- * @param tool Tool, when set, is the MCP tool the Business AI runs for \"do it for me\". Args are its default arguments; Draft is an optional AI prompt whose output fills the DraftInto arg (default \"brief\").
+ * @param title Title is the one-line quest as a person reads it in the checklist.
+ * @param tool Tool, when set, names the MCP tool the Business AI runs for \"do it for me\". A step with no tool can only be completed by a person; it is the field the `automatable` flag on every projection of this step is derived from.
  */
 
 
 data class JourneyStep (
 
+    /* Args are the tool's default arguments, merged under whatever the caller passes at run time, so a step ships with the arguments that make it work. */
     @SerializedName("args")
     val args: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null,
 
@@ -44,13 +45,15 @@ data class JourneyStep (
     @SerializedName("deps")
     val deps: kotlin.collections.List<kotlin.String>? = null,
 
-    /* the prose/juncture — what the Guide asks/explains here */
+    /* Detail is the juncture — what the Guide explains, or asks for, at this step. */
     @SerializedName("detail")
     val detail: kotlin.String? = null,
 
+    /* Draft, when set, is the prompt the embedded AI answers first; its output is folded into one of Args before the tool runs, so the model writes the content and the tool only delivers it. */
     @SerializedName("draft")
     val draft: kotlin.String? = null,
 
+    /* DraftInto names the argument the drafted text lands in. Empty means \"brief\". */
     @SerializedName("draftInto")
     val draftInto: kotlin.String? = null,
 
@@ -58,10 +61,11 @@ data class JourneyStep (
     @SerializedName("enabled")
     val enabled: kotlin.Boolean? = null,
 
+    /* ID is the stable slug the whole plane addresses this step by — the value in `deps`, in `next`, in the progress rows, and in the URL of every step route. Renaming it orphans an org's recorded progress for this step. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* the phase (section id) this step groups under */
+    /* Section is the id of the phase this step groups under. A disabled section takes its steps out of the journey with it. */
     @SerializedName("section")
     val section: kotlin.String? = null,
 
@@ -69,10 +73,11 @@ data class JourneyStep (
     @SerializedName("signal")
     val signal: kotlin.String? = null,
 
+    /* Title is the one-line quest as a person reads it in the checklist. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
-    /* Tool, when set, is the MCP tool the Business AI runs for \"do it for me\". Args are its default arguments; Draft is an optional AI prompt whose output fills the DraftInto arg (default \"brief\"). */
+    /* Tool, when set, names the MCP tool the Business AI runs for \"do it for me\". A step with no tool can only be completed by a person; it is the field the `automatable` flag on every projection of this step is derived from. */
     @SerializedName("tool")
     val tool: kotlin.String? = null
 

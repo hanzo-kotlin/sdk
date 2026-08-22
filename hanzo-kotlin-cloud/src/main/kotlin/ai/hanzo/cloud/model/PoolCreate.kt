@@ -24,8 +24,8 @@ import com.google.gson.annotations.SerializedName
  * @param autoScale AutoScale turns the provider's cluster autoscaler on for this pool.
  * @param clusterId ClusterID is the cluster to add the pool to, from the URL path.
  * @param count Count is how many nodes the pool starts with.
- * @param maxNodes 
- * @param minNodes MinNodes and MaxNodes bound the autoscaler; they are ignored unless AutoScale is set.
+ * @param maxNodes MaxNodes is the ceiling the autoscaler may not grow the pool past, and so the bound on what this pool can spend. Ignored unless AutoScale is set.
+ * @param minNodes MinNodes is the floor the autoscaler may not shrink the pool below. Ignored unless AutoScale is set.
  * @param name Name is the pool's name.
  * @param provider Provider is the cloud the cluster lives on (e.g. \"digitalocean\"). Required — Visor routes the create by it. Accepted from the body or ?provider=.
  * @param propertySize Size is the provider size slug for each node (e.g. \"s-4vcpu-8gb\").
@@ -46,10 +46,11 @@ data class PoolCreate (
     @SerializedName("count")
     val count: kotlin.Int? = null,
 
+    /* MaxNodes is the ceiling the autoscaler may not grow the pool past, and so the bound on what this pool can spend. Ignored unless AutoScale is set. */
     @SerializedName("maxNodes")
     val maxNodes: kotlin.Int? = null,
 
-    /* MinNodes and MaxNodes bound the autoscaler; they are ignored unless AutoScale is set. */
+    /* MinNodes is the floor the autoscaler may not shrink the pool below. Ignored unless AutoScale is set. */
     @SerializedName("minNodes")
     val minNodes: kotlin.Int? = null,
 

@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param branch 
- * @param provider 
- * @param url 
+ * @param branch Branch is the branch a push-to-deploy build tracks, `main` when the create named none — a push to any other branch, and every tag push, builds nothing here. A deploy may name a commit instead, for that deploy alone.
+ * @param provider Provider is derived from the URL — github, gitlab, bitbucket, or `git` for anything else. It is a label for display; no behaviour keys on it.
+ * @param url URL is the clone URL a git app builds from, stored as sent once the build path's allowlist accepted it (validateRepoURL). It is also what a landed push is MATCHED against, so a push to any other repo never builds this app.
  */
 
 
 data class GitSource (
 
+    /* Branch is the branch a push-to-deploy build tracks, `main` when the create named none — a push to any other branch, and every tag push, builds nothing here. A deploy may name a commit instead, for that deploy alone. */
     @SerializedName("branch")
     val branch: kotlin.String? = null,
 
+    /* Provider is derived from the URL — github, gitlab, bitbucket, or `git` for anything else. It is a label for display; no behaviour keys on it. */
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* URL is the clone URL a git app builds from, stored as sent once the build path's allowlist accepted it (validateRepoURL). It is also what a landed push is MATCHED against, so a push to any other repo never builds this app. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

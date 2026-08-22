@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param id ID is the org-derived id of the overlay network — the key GET /v1/networks/{id} addresses.
+ * @param id ID is the org-derived id of the overlay network — the key GET /v1/network/{id} addresses.
  * @param name Name is the org the overlay belongs to.
  * @param nodes Nodes is how many edge-routers the org has on the fabric.
  * @param status Status is \"connected\" once at least one of the org's edge-routers is online, else \"provisioning\" (routers exist but none has dialed home).
@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
 
 data class NetworkView (
 
-    /* ID is the org-derived id of the overlay network — the key GET /v1/networks/{id} addresses. */
+    /* ID is the org-derived id of the overlay network — the key GET /v1/network/{id} addresses. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 

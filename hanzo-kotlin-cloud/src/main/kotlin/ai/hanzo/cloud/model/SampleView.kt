@@ -21,72 +21,88 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param at 
- * @param costCents 
- * @param cpus 
- * @param gpuModel 
- * @param gpuUtil 
- * @param gpus 
- * @param host 
- * @param kind 
- * @param load1 
- * @param load5 
- * @param load15 
- * @param memFree 
- * @param memUsed 
- * @param memory 
- * @param source 
- * @param unit 
+ * @param at At is when the reading was MEASURED, RFC 3339 in UTC — the x-axis a chart plots against. The series is returned oldest first, so it only increases.
+ * @param costCents CostCents is what this unit resold for over the hour the reading falls in, in whole US cents. 0 means UNPRICED, not free: the operator's own machines — a linked run-target, a dialed-in BYO worker — are metered for utilization and never resold, so only a priced source ever fills it.
+ * @param cpus CPUs is logical cores. The static capability rides every row on purpose: a chart can size load against cores without joining a registry whose row may since have been rewritten or the unit deregistered.
+ * @param gpuModel GPUModel names the representative accelerator (\"GB10\"); GPUs carries how many.
+ * @param gpuUtil GPUUtil is aggregate accelerator utilization as a FRACTION of 1 — 0.42 is 42% busy. Anything a reporter sends outside 0..1 is clamped into it on write.
+ * @param gpus GPUs is how many accelerators the reading covers.
+ * @param host Host is the hostname the unit reported at the time of the reading.
+ * @param kind Kind is what the measured unit is: laptop, cloud, gpu, cluster, machine or worker.
+ * @param load1 Load1 is the 1-minute load average — runnable processes, not a percentage.
+ * @param load5 Load5 is the 5-minute load average, the same units as Load1.
+ * @param load15 Load15 is the 15-minute load average, the same units as Load1.
+ * @param memFree MemFree is host memory available, in BYTES, as reported rather than derived.
+ * @param memUsed MemUsed is host memory in use, in BYTES.
+ * @param memory Memory is total system RAM in BYTES at the time of the reading.
+ * @param source Source is the plane that reported the reading: \"agent\", \"byo\" or \"visor\" — the same vocabulary the board's rows carry, and what ?source= narrows on.
+ * @param unit Unit is the source's own id for the measured unit. With Source it is the key the chart groups by, and the key the board joins a unit's latest reading on.
  */
 
 
 data class SampleView (
 
+    /* At is when the reading was MEASURED, RFC 3339 in UTC — the x-axis a chart plots against. The series is returned oldest first, so it only increases. */
     @SerializedName("at")
     val at: kotlin.String? = null,
 
+    /* CostCents is what this unit resold for over the hour the reading falls in, in whole US cents. 0 means UNPRICED, not free: the operator's own machines — a linked run-target, a dialed-in BYO worker — are metered for utilization and never resold, so only a priced source ever fills it. */
     @SerializedName("costCents")
     val costCents: kotlin.Int? = null,
 
+    /* CPUs is logical cores. The static capability rides every row on purpose: a chart can size load against cores without joining a registry whose row may since have been rewritten or the unit deregistered. */
     @SerializedName("cpus")
     val cpus: kotlin.Int? = null,
 
+    /* GPUModel names the representative accelerator (\"GB10\"); GPUs carries how many. */
     @SerializedName("gpuModel")
     val gpuModel: kotlin.String? = null,
 
+    /* GPUUtil is aggregate accelerator utilization as a FRACTION of 1 — 0.42 is 42% busy. Anything a reporter sends outside 0..1 is clamped into it on write. */
     @SerializedName("gpuUtil")
     val gpuUtil: java.math.BigDecimal? = null,
 
+    /* GPUs is how many accelerators the reading covers. */
     @SerializedName("gpus")
     val gpus: kotlin.Int? = null,
 
+    /* Host is the hostname the unit reported at the time of the reading. */
     @SerializedName("host")
     val host: kotlin.String? = null,
 
+    /* Kind is what the measured unit is: laptop, cloud, gpu, cluster, machine or worker. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Load1 is the 1-minute load average — runnable processes, not a percentage. */
     @SerializedName("load1")
     val load1: java.math.BigDecimal? = null,
 
+    /* Load5 is the 5-minute load average, the same units as Load1. */
     @SerializedName("load5")
     val load5: java.math.BigDecimal? = null,
 
+    /* Load15 is the 15-minute load average, the same units as Load1. */
     @SerializedName("load15")
     val load15: java.math.BigDecimal? = null,
 
+    /* MemFree is host memory available, in BYTES, as reported rather than derived. */
     @SerializedName("memFree")
     val memFree: kotlin.Int? = null,
 
+    /* MemUsed is host memory in use, in BYTES. */
     @SerializedName("memUsed")
     val memUsed: kotlin.Int? = null,
 
+    /* Memory is total system RAM in BYTES at the time of the reading. */
     @SerializedName("memory")
     val memory: kotlin.Int? = null,
 
+    /* Source is the plane that reported the reading: \"agent\", \"byo\" or \"visor\" — the same vocabulary the board's rows carry, and what ?source= narrows on. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Unit is the source's own id for the measured unit. With Source it is the key the chart groups by, and the key the board joins a unit's latest reading on. */
     @SerializedName("unit")
     val unit: kotlin.String? = null
 

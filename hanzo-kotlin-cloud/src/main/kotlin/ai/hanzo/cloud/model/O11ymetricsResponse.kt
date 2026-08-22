@@ -15,7 +15,7 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.O11yAvailabilityResponseRange
+import ai.hanzo.cloud.model.O11yMetricsResponseRange
 import ai.hanzo.cloud.model.O11yMetricsResponseSeries
 import ai.hanzo.cloud.model.O11yMetricsResponseSummary
 import ai.hanzo.cloud.model.O11yMetricsResponseUsage
@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param product 
+ * @param product Product is the service these numbers are about, echoed back.
  * @param range 
  * @param series 
  * @param summary 
@@ -35,11 +35,12 @@ import com.google.gson.annotations.SerializedName
 
 data class O11ymetricsResponse (
 
+    /* Product is the service these numbers are about, echoed back. */
     @SerializedName("product")
     val product: kotlin.String? = null,
 
     @SerializedName("range")
-    val range: O11yAvailabilityResponseRange? = null,
+    val range: O11yMetricsResponseRange? = null,
 
     @SerializedName("series")
     val series: O11yMetricsResponseSeries? = null,

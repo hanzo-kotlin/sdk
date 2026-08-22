@@ -212,8 +212,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/audit
-     * AuditRead is the compliance-scoped read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when).
-     * AuditRead is the compliance-scoped read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when). The org is PINNED to the caller&#39;s validated org and the rows are narrowed to compliance.* actions. Fail-closed: no principal is a 403, no configured audit store a 501.
+     * AuditRead is the compliance read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when).
+     * AuditRead is the compliance read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when). The org is PINNED to the caller&#39;s validated org and the rows are narrowed to compliance.* actions. Fail-closed: no principal is a 403, no configured audit store a 501.
      * @param result Result filters rows by outcome result: success, deny, or error; empty means all. (optional)
      * @return AuditList
      * @throws IllegalStateException If the request is not correctly configured
@@ -244,8 +244,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/audit
-     * AuditRead is the compliance-scoped read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when).
-     * AuditRead is the compliance-scoped read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when). The org is PINNED to the caller&#39;s validated org and the rows are narrowed to compliance.* actions. Fail-closed: no principal is a 403, no configured audit store a 501.
+     * AuditRead is the compliance read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when).
+     * AuditRead is the compliance read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when). The org is PINNED to the caller&#39;s validated org and the rows are narrowed to compliance.* actions. Fail-closed: no principal is a 403, no configured audit store a 501.
      * @param result Result filters rows by outcome result: success, deny, or error; empty means all. (optional)
      * @return ApiResponse<AuditList?>
      * @throws IllegalStateException If the request is not correctly configured

@@ -21,36 +21,40 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param account 
- * @param actor 
- * @param agent 
- * @param cwd 
+ * @param account Account is which subscription or API account under that provider served the run, up to 256 characters. It is what lets a revoke of that login stop exactly the sessions it was paying for.
+ * @param actor Actor is the \"org/sub\" identity to record the session under, up to 256 characters. Omit it and the calling principal is used, which is almost always what you want: it is what a login revoke matches on to stop this session.
+ * @param agent Agent is the label the surface opening this session calls itself by (\"hanzo-dev\"). REQUIRED, up to 128 characters, and free text — nothing resolves it against a defined agent.
+ * @param cwd Cwd is the directory the session starts in, up to 1024 characters. It can be moved later, because a linked shell walks around.
  * @param host Execution context — where this session runs (all optional).
- * @param parentSessionId 
+ * @param parentSessionId ParentSessionID makes this a subagent of that session: it inherits the parent's root, so one flow stays one tree. The parent must exist IN THE SAME ORG — a foreign or unknown id is a 400, never a tree across tenants. Empty opens a root session.
  * @param project The readable build (provenance.go): which product this session builds, and whether its story may be read by the world.
  * @param provider Account tag — the linked AI account this session ran under (login manager).
- * @param published 
- * @param repo 
- * @param status 
- * @param target 
- * @param taskRunId 
- * @param taskWorkflowId 
+ * @param published Published opens this session's story to the public build route. It is refused without a Project, because that route is keyed on (org, project) — a build with no product is not a story anyone can open. False keeps it org-only.
+ * @param repo Repo is the code being worked on, up to 512 characters. A label the surface states; nothing resolves it against the forge.
+ * @param status Status opens the session in one of running, paused, done or error. Empty means running. A TERMINAL status here (done, error) records a session that has already finished — its end time is stamped now — and nothing can move it afterwards.
+ * @param target Target names a run-target the org has registered. Unlike Host and Repo it IS resolved: a target that does not exist in this org is a 400, so a session can never claim to run on another tenant's machine. Empty names no machine.
+ * @param taskRunId TaskRunID is that workflow's particular run, same bound. Recorded, not resolved: this surface does not check the workflow exists.
+ * @param taskWorkflowId TaskWorkflowID links this session to the hanzoai/tasks workflow that executes it, up to 256 characters. Set it and control commands are forwarded to that engine; leave it and the running surface polls for them instead.
  * @param terminal Terminal is the URL this session's live terminal is published at, so the console can watch it. Optional — a session that publishes nothing is still a session.
- * @param title 
+ * @param title Title is the human line a card shows, up to 512 characters. Optional, and changeable later.
  */
 
 
 data class RegisterReq (
 
+    /* Account is which subscription or API account under that provider served the run, up to 256 characters. It is what lets a revoke of that login stop exactly the sessions it was paying for. */
     @SerializedName("account")
     val account: kotlin.String? = null,
 
+    /* Actor is the \"org/sub\" identity to record the session under, up to 256 characters. Omit it and the calling principal is used, which is almost always what you want: it is what a login revoke matches on to stop this session. */
     @SerializedName("actor")
     val actor: kotlin.String? = null,
 
+    /* Agent is the label the surface opening this session calls itself by (\"hanzo-dev\"). REQUIRED, up to 128 characters, and free text — nothing resolves it against a defined agent. */
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* Cwd is the directory the session starts in, up to 1024 characters. It can be moved later, because a linked shell walks around. */
     @SerializedName("cwd")
     val cwd: kotlin.String? = null,
 
@@ -58,6 +62,7 @@ data class RegisterReq (
     @SerializedName("host")
     val host: kotlin.String? = null,
 
+    /* ParentSessionID makes this a subagent of that session: it inherits the parent's root, so one flow stays one tree. The parent must exist IN THE SAME ORG — a foreign or unknown id is a 400, never a tree across tenants. Empty opens a root session. */
     @SerializedName("parentSessionId")
     val parentSessionId: kotlin.String? = null,
 
@@ -69,21 +74,27 @@ data class RegisterReq (
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* Published opens this session's story to the public build route. It is refused without a Project, because that route is keyed on (org, project) — a build with no product is not a story anyone can open. False keeps it org-only. */
     @SerializedName("published")
     val published: kotlin.Boolean? = null,
 
+    /* Repo is the code being worked on, up to 512 characters. A label the surface states; nothing resolves it against the forge. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* Status opens the session in one of running, paused, done or error. Empty means running. A TERMINAL status here (done, error) records a session that has already finished — its end time is stamped now — and nothing can move it afterwards. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Target names a run-target the org has registered. Unlike Host and Repo it IS resolved: a target that does not exist in this org is a 400, so a session can never claim to run on another tenant's machine. Empty names no machine. */
     @SerializedName("target")
     val target: kotlin.String? = null,
 
+    /* TaskRunID is that workflow's particular run, same bound. Recorded, not resolved: this surface does not check the workflow exists. */
     @SerializedName("taskRunId")
     val taskRunId: kotlin.String? = null,
 
+    /* TaskWorkflowID links this session to the hanzoai/tasks workflow that executes it, up to 256 characters. Set it and control commands are forwarded to that engine; leave it and the running surface polls for them instead. */
     @SerializedName("taskWorkflowId")
     val taskWorkflowId: kotlin.String? = null,
 
@@ -91,6 +102,7 @@ data class RegisterReq (
     @SerializedName("terminal")
     val terminal: kotlin.String? = null,
 
+    /* Title is the human line a card shows, up to 512 characters. Optional, and changeable later. */
     @SerializedName("title")
     val title: kotlin.String? = null
 

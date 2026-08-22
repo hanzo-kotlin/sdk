@@ -31,10 +31,8 @@ import com.google.gson.annotations.SerializedName
  * @param dockerTarget DockerTarget is the multi-stage build target to stop at.
  * @param dockerfile Dockerfile is the path to build from; empty uses the zero-config frontend.
  * @param image Image is the output image ref to push. Required on the image lane, and it must target a registry namespace the caller's org owns.
- * @param organizationId OrgID attributes the build to an org. On the IAM path it defaults to the caller's own validated org, and a foreign one is refused unless the caller is a platform SuperAdmin.
  * @param os OS is the target operating system for the artifact lane.
  * @param ref Ref is the git ref to build when no SHA is given.
- * @param release Release requests native release semantics for cloud's self-publish: compute the next version, build+push ghcr.io/hanzoai/cloud, smoke it, then tag (the receipt) and notify universe. It owns its output image (release.go), and it takes SuperAdmin.
  * @param repo Repo is the repository clone URL to build. Required on the image lane.
  * @param sha SHA is the commit to pin; it wins over Ref and Branch.
  * @param tag Tag is the publish path segment, so both front doors write ONE index at ONE URL. It defaults to the pinned ref, and must be named explicitly for a branch.
@@ -79,10 +77,6 @@ data class RunnerBuildReq (
     @SerializedName("image")
     val image: kotlin.String? = null,
 
-    /* OrgID attributes the build to an org. On the IAM path it defaults to the caller's own validated org, and a foreign one is refused unless the caller is a platform SuperAdmin. */
-    @SerializedName("organizationId")
-    val organizationId: kotlin.String? = null,
-
     /* OS is the target operating system for the artifact lane. */
     @SerializedName("os")
     val os: kotlin.String? = null,
@@ -90,10 +84,6 @@ data class RunnerBuildReq (
     /* Ref is the git ref to build when no SHA is given. */
     @SerializedName("ref")
     val ref: kotlin.String? = null,
-
-    /* Release requests native release semantics for cloud's self-publish: compute the next version, build+push ghcr.io/hanzoai/cloud, smoke it, then tag (the receipt) and notify universe. It owns its output image (release.go), and it takes SuperAdmin. */
-    @SerializedName("release")
-    val release: kotlin.Boolean? = null,
 
     /* Repo is the repository clone URL to build. Required on the image lane. */
     @SerializedName("repo")

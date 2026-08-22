@@ -22,16 +22,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param items 
- * @param name 
+ * @param items Items is every version of it, newest first — including the disposed ones, whose record outlives their rows. Never null.
+ * @param name Name is the dataset these versions belong to, as the register holds it.
  */
 
 
 data class RiskDatasetVersions (
 
+    /* Items is every version of it, newest first — including the disposed ones, whose record outlives their rows. Never null. */
     @SerializedName("items")
     val items: kotlin.collections.List<RiskDataset>? = null,
 
+    /* Name is the dataset these versions belong to, as the register holds it. */
     @SerializedName("name")
     val name: kotlin.String? = null
 

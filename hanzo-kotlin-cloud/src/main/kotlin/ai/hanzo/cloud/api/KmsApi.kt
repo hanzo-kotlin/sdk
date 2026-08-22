@@ -19,6 +19,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.KmsConfig
+import ai.hanzo.cloud.model.KmsHealth
+import ai.hanzo.cloud.model.KmsLogin
+import ai.hanzo.cloud.model.KmsPut
+import ai.hanzo.cloud.model.KmsSecrets
+import ai.hanzo.cloud.model.KmsStored
+import ai.hanzo.cloud.model.KmsToken
 
 import com.google.gson.annotations.SerializedName
 
@@ -45,92 +52,23 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * DELETE /v1/kms/secrets/{wildcard1}
-     * Delete one secret from your org
-     * Removes one secret from the caller&#39;s own org and confirms the name and environment that were removed. Deleting a secret that is not there is a 404, not a silent success, so a caller can tell a real deletion from a typo.  The trailing path is the secret&#39;s subpath and name beneath the caller&#39;s org root, and &#x60;env&#x60; selects the environment, defaulting when omitted. Scoped to the caller&#39;s own org — the store root comes from the validated claim, never from the request.  Requires ADMIN authority over the org, like the write: destroying a secret is an administrative act, and a credential distributed to read one must not be able to remove it.
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteKmsSecretsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = deleteKmsSecretsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/kms/secrets/{wildcard1}
-     * Delete one secret from your org
-     * Removes one secret from the caller&#39;s own org and confirms the name and environment that were removed. Deleting a secret that is not there is a 404, not a silent success, so a caller can tell a real deletion from a typo.  The trailing path is the secret&#39;s subpath and name beneath the caller&#39;s org root, and &#x60;env&#x60; selects the environment, defaulting when omitted. Scoped to the caller&#39;s own org — the store root comes from the validated claim, never from the request.  Requires ADMIN authority over the org, like the write: destroying a secret is an administrative act, and a credential distributed to read one must not be able to remove it.
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun deleteKmsSecretsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteKmsSecretsByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation deleteKmsSecretsByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun deleteKmsSecretsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/kms/secrets/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/kms/config
-     * Runtime configuration for the KMS console
-     * Returns what the console needs before anyone has signed in: the brand, the OIDC issuer it authenticates against, the API base for this subsystem and the path of the login exchange.  Public on purpose, and it holds nothing sensitive — it is deliberately kept under this subsystem&#39;s own namespace rather than under an admin prefix, so a gateway that admin-gates the admin routes cannot break the console&#39;s legitimate pre-login fetch.
-     * @return void
+     * Returns the runtime configuration for the KMS console.
+     * Returns the runtime configuration for the KMS console.  What the console needs before anyone has signed in: the brand, the OIDC issuer it authenticates against, the API base for this subsystem and the path of the login exchange.  Public on purpose, and it holds nothing sensitive — it is deliberately kept under this subsystem&#39;s own namespace rather than under an admin prefix, so a gateway that admin-gates the admin routes cannot break the console&#39;s legitimate pre-login fetch.
+     * @return KmsConfig
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getKmsConfig() : Unit {
+    fun getKmsConfig() : KmsConfig {
         val localVarResponse = getKmsConfigWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KmsConfig
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -146,17 +84,18 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/kms/config
-     * Runtime configuration for the KMS console
-     * Returns what the console needs before anyone has signed in: the brand, the OIDC issuer it authenticates against, the API base for this subsystem and the path of the login exchange.  Public on purpose, and it holds nothing sensitive — it is deliberately kept under this subsystem&#39;s own namespace rather than under an admin prefix, so a gateway that admin-gates the admin routes cannot break the console&#39;s legitimate pre-login fetch.
-     * @return ApiResponse<Unit?>
+     * Returns the runtime configuration for the KMS console.
+     * Returns the runtime configuration for the KMS console.  What the console needs before anyone has signed in: the brand, the OIDC issuer it authenticates against, the API base for this subsystem and the path of the login exchange.  Public on purpose, and it holds nothing sensitive — it is deliberately kept under this subsystem&#39;s own namespace rather than under an admin prefix, so a gateway that admin-gates the admin routes cannot break the console&#39;s legitimate pre-login fetch.
+     * @return ApiResponse<KmsConfig?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getKmsConfigWithHttpInfo() : ApiResponse<Unit?> {
+    fun getKmsConfigWithHttpInfo() : ApiResponse<KmsConfig?> {
         val localVariableConfig = getKmsConfigRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, KmsConfig>(
             localVariableConfig
         )
     }
@@ -170,7 +109,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/kms/config",
@@ -183,21 +123,22 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/kms/health
-     * Whether this broker can actually serve secrets
-     * A real readiness probe, not a liveness stub: 200 only when the store is open AND a master key is configured, with &#x60;signing&#x60; reporting whether signing keys are set up too. Anything less answers 503 with &#x60;ready:false&#x60; and the reason — no in-process store, or no master key — which are exactly the two states in which the secret operations refuse.  Not token-gated, because the platform must be able to probe it without a credential. It reports the broker&#39;s configuration state only; no secret, no key material and no tenant name appears in it.
-     * @return void
+     * Reports whether this broker can actually serve secrets.
+     * Reports whether this broker can actually serve secrets.  A real readiness probe, not a liveness stub: 200 only when the store is open AND a master key is configured, with &#x60;signing&#x60; reporting whether signing keys are set up too. Anything less answers 503 with &#x60;ready:false&#x60; and the reason — no in-process store, or no master key — which are exactly the two states in which the secret operations refuse.  Not token-gated, because the platform must be able to probe it without a credential. It reports the broker&#39;s configuration state only; no secret, no key material and no tenant name appears in it.
+     * @return KmsHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getKmsHealth() : Unit {
+    fun getKmsHealth() : KmsHealth {
         val localVarResponse = getKmsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KmsHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -213,17 +154,18 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/kms/health
-     * Whether this broker can actually serve secrets
-     * A real readiness probe, not a liveness stub: 200 only when the store is open AND a master key is configured, with &#x60;signing&#x60; reporting whether signing keys are set up too. Anything less answers 503 with &#x60;ready:false&#x60; and the reason — no in-process store, or no master key — which are exactly the two states in which the secret operations refuse.  Not token-gated, because the platform must be able to probe it without a credential. It reports the broker&#39;s configuration state only; no secret, no key material and no tenant name appears in it.
-     * @return ApiResponse<Unit?>
+     * Reports whether this broker can actually serve secrets.
+     * Reports whether this broker can actually serve secrets.  A real readiness probe, not a liveness stub: 200 only when the store is open AND a master key is configured, with &#x60;signing&#x60; reporting whether signing keys are set up too. Anything less answers 503 with &#x60;ready:false&#x60; and the reason — no in-process store, or no master key — which are exactly the two states in which the secret operations refuse.  Not token-gated, because the platform must be able to probe it without a credential. It reports the broker&#39;s configuration state only; no secret, no key material and no tenant name appears in it.
+     * @return ApiResponse<KmsHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getKmsHealthWithHttpInfo() : ApiResponse<Unit?> {
+    fun getKmsHealthWithHttpInfo() : ApiResponse<KmsHealth?> {
         val localVariableConfig = getKmsHealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, KmsHealth>(
             localVariableConfig
         )
     }
@@ -237,7 +179,8 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/kms/health",
@@ -250,21 +193,26 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/kms/secrets
-     * List the secrets your org holds, without their values
-     * Returns the METADATA of the caller&#39;s own secrets: each one&#39;s name, path, environment and sealing scheme. No value and no ciphertext is included — this operation exists to enumerate what is held, and reading a value is a separate, per-secret call.  Scoped to the caller&#39;s own org and nothing else, structurally: there is no org in the path, the store root is derived from the validated org claim, and a caller therefore has no way to name another tenant&#39;s namespace. &#x60;path&#x60; narrows to a subpath and &#x60;env&#x60; selects the environment; both are also accepted under the operator&#39;s spellings, &#x60;secretPath&#x60; and &#x60;environment&#x60;.  Admission is fail-closed and in order: a validated member, an org that is a DNS-1123 label, and a store holding a master key — 403, 400 and 503 respectively, all decided before any record is touched.
-     * @return void
+     * Lists the secrets your org holds, without their values.
+     * Lists the secrets your org holds, without their values.  Returns the METADATA of the caller&#39;s own secrets: each one&#39;s name, path, environment and sealing scheme. No value and no ciphertext is included — this operation exists to enumerate what is held, and reading a value is a separate, per-secret call.  Scoped to the caller&#39;s own org and nothing else, structurally: there is no org in the path, the store root is derived from the validated org claim, and a caller therefore has no way to name another tenant&#39;s namespace. &#x60;path&#x60; narrows to a subpath and &#x60;env&#x60; selects the environment; both are also accepted under the operator&#39;s spellings, &#x60;secretPath&#x60; and &#x60;environment&#x60;. An omitted &#x60;env&#x60; means every environment and an omitted &#x60;path&#x60; means the whole org, because a default here reported a populated store as empty.  Admission is fail-closed and in order: a validated member, an org that is a DNS-1123 label, and a store holding a master key — 403, 400 and 503 respectively, all decided before any record is touched.
+     * @param env  (optional)
+     * @param environment  (optional)
+     * @param path  (optional)
+     * @param secretPath  (optional)
+     * @return KmsSecrets
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getKmsSecrets() : Unit {
-        val localVarResponse = getKmsSecretsWithHttpInfo()
+    fun getKmsSecrets(env: kotlin.String? = null, environment: kotlin.String? = null, path: kotlin.String? = null, secretPath: kotlin.String? = null) : KmsSecrets {
+        val localVarResponse = getKmsSecretsWithHttpInfo(env = env, environment = environment, path = path, secretPath = secretPath)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KmsSecrets
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -280,17 +228,22 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/kms/secrets
-     * List the secrets your org holds, without their values
-     * Returns the METADATA of the caller&#39;s own secrets: each one&#39;s name, path, environment and sealing scheme. No value and no ciphertext is included — this operation exists to enumerate what is held, and reading a value is a separate, per-secret call.  Scoped to the caller&#39;s own org and nothing else, structurally: there is no org in the path, the store root is derived from the validated org claim, and a caller therefore has no way to name another tenant&#39;s namespace. &#x60;path&#x60; narrows to a subpath and &#x60;env&#x60; selects the environment; both are also accepted under the operator&#39;s spellings, &#x60;secretPath&#x60; and &#x60;environment&#x60;.  Admission is fail-closed and in order: a validated member, an org that is a DNS-1123 label, and a store holding a master key — 403, 400 and 503 respectively, all decided before any record is touched.
-     * @return ApiResponse<Unit?>
+     * Lists the secrets your org holds, without their values.
+     * Lists the secrets your org holds, without their values.  Returns the METADATA of the caller&#39;s own secrets: each one&#39;s name, path, environment and sealing scheme. No value and no ciphertext is included — this operation exists to enumerate what is held, and reading a value is a separate, per-secret call.  Scoped to the caller&#39;s own org and nothing else, structurally: there is no org in the path, the store root is derived from the validated org claim, and a caller therefore has no way to name another tenant&#39;s namespace. &#x60;path&#x60; narrows to a subpath and &#x60;env&#x60; selects the environment; both are also accepted under the operator&#39;s spellings, &#x60;secretPath&#x60; and &#x60;environment&#x60;. An omitted &#x60;env&#x60; means every environment and an omitted &#x60;path&#x60; means the whole org, because a default here reported a populated store as empty.  Admission is fail-closed and in order: a validated member, an org that is a DNS-1123 label, and a store holding a master key — 403, 400 and 503 respectively, all decided before any record is touched.
+     * @param env  (optional)
+     * @param environment  (optional)
+     * @param path  (optional)
+     * @param secretPath  (optional)
+     * @return ApiResponse<KmsSecrets?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getKmsSecretsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getKmsSecretsRequestConfig()
+    fun getKmsSecretsWithHttpInfo(env: kotlin.String?, environment: kotlin.String?, path: kotlin.String?, secretPath: kotlin.String?) : ApiResponse<KmsSecrets?> {
+        val localVariableConfig = getKmsSecretsRequestConfig(env = env, environment = environment, path = path, secretPath = secretPath)
 
-        return request<Unit, Unit>(
+        return request<Unit, KmsSecrets>(
             localVariableConfig
         )
     }
@@ -298,13 +251,32 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation getKmsSecrets
      *
+     * @param env  (optional)
+     * @param environment  (optional)
+     * @param path  (optional)
+     * @param secretPath  (optional)
      * @return RequestConfig
      */
-    fun getKmsSecretsRequestConfig() : RequestConfig<Unit> {
+    fun getKmsSecretsRequestConfig(env: kotlin.String?, environment: kotlin.String?, path: kotlin.String?, secretPath: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (env != null) {
+                    put("env", listOf(env.toString()))
+                }
+                if (environment != null) {
+                    put("environment", listOf(environment.toString()))
+                }
+                if (path != null) {
+                    put("path", listOf(path.toString()))
+                }
+                if (secretPath != null) {
+                    put("secretPath", listOf(secretPath.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/kms/secrets",
@@ -316,92 +288,24 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * GET /v1/kms/secrets/{wildcard1}
-     * Read one secret&#39;s value
-     * Opens one sealed secret belonging to the caller&#39;s own org and returns its value in the response body, with the name and environment it was resolved under. This is the broker&#39;s purpose, and the response body is the ONLY place the value appears — it is not logged, and it is never carried in an error.  The trailing path is the secret&#39;s subpath and name beneath the caller&#39;s org root; &#x60;env&#x60; selects the environment and falls back to the default when omitted. A secret that is not there is a plain 404 that names nothing about the store.  Scoped to the caller&#39;s own org and nothing else: there is no org in the path, so another tenant&#39;s secret is not merely refused, it is unnameable. Admission is fail-closed — validated member, well-formed org, master key present — and an unconfigured master key is 503 rather than an empty read.
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getKmsSecretsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = getKmsSecretsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/kms/secrets/{wildcard1}
-     * Read one secret&#39;s value
-     * Opens one sealed secret belonging to the caller&#39;s own org and returns its value in the response body, with the name and environment it was resolved under. This is the broker&#39;s purpose, and the response body is the ONLY place the value appears — it is not logged, and it is never carried in an error.  The trailing path is the secret&#39;s subpath and name beneath the caller&#39;s org root; &#x60;env&#x60; selects the environment and falls back to the default when omitted. A secret that is not there is a plain 404 that names nothing about the store.  Scoped to the caller&#39;s own org and nothing else: there is no org in the path, so another tenant&#39;s secret is not merely refused, it is unnameable. Admission is fail-closed — validated member, well-formed org, master key present — and an unconfigured master key is 503 rather than an empty read.
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getKmsSecretsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getKmsSecretsByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getKmsSecretsByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun getKmsSecretsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/kms/secrets/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /v1/kms/auth/login
-     * Exchange a machine credential for an IAM bearer token
-     * Takes a tenant&#39;s machine credential — a client id and client secret — and returns an owner-scoped IAM access token with its lifetime, which is the bearer the caller then carries on the org-scoped secret operations.  It is deliberately public and unauthenticated, because it IS the credential exchange and runs before any principal exists. That makes it the one route in this subsystem rate-limited PER SOURCE IP, keyed on the real TCP peer rather than on any caller-supplied header.  The submitted secret is never logged and never echoed, and failures collapse to one clean status with no upstream detail: 401 when the credential does not authenticate, 502 when the identity provider is unreachable, 503 when no issuer is configured. That is on purpose — a richer error would be a validity oracle for guessed credentials.
-     * @return void
+     * Exchanges a machine credential for an IAM bearer token.
+     * Exchanges a machine credential for an IAM bearer token.  Takes a tenant&#39;s machine credential — a client id and client secret — and returns an owner-scoped IAM access token with its lifetime, which is the bearer the caller then carries on the org-scoped secret operations.  It is deliberately public and unauthenticated, because it IS the credential exchange and runs before any principal exists. That makes it the one route in this subsystem rate-limited PER SOURCE IP, keyed on the real TCP peer rather than on any caller-supplied header, and body-capped at the same door.  The submitted secret is never logged and never echoed, and failures collapse to one clean status with no upstream detail: 401 when the credential does not authenticate, 502 when the identity provider is unreachable, 503 when no issuer is configured. That is on purpose — a richer error would be a validity oracle for guessed credentials.
+     * @param kmsLogin 
+     * @return KmsToken
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postKmsAuthLogin() : Unit {
-        val localVarResponse = postKmsAuthLoginWithHttpInfo()
+    fun postKmsAuthLogin(kmsLogin: KmsLogin) : KmsToken {
+        val localVarResponse = postKmsAuthLoginWithHttpInfo(kmsLogin = kmsLogin)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KmsToken
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -417,17 +321,19 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/kms/auth/login
-     * Exchange a machine credential for an IAM bearer token
-     * Takes a tenant&#39;s machine credential — a client id and client secret — and returns an owner-scoped IAM access token with its lifetime, which is the bearer the caller then carries on the org-scoped secret operations.  It is deliberately public and unauthenticated, because it IS the credential exchange and runs before any principal exists. That makes it the one route in this subsystem rate-limited PER SOURCE IP, keyed on the real TCP peer rather than on any caller-supplied header.  The submitted secret is never logged and never echoed, and failures collapse to one clean status with no upstream detail: 401 when the credential does not authenticate, 502 when the identity provider is unreachable, 503 when no issuer is configured. That is on purpose — a richer error would be a validity oracle for guessed credentials.
-     * @return ApiResponse<Unit?>
+     * Exchanges a machine credential for an IAM bearer token.
+     * Exchanges a machine credential for an IAM bearer token.  Takes a tenant&#39;s machine credential — a client id and client secret — and returns an owner-scoped IAM access token with its lifetime, which is the bearer the caller then carries on the org-scoped secret operations.  It is deliberately public and unauthenticated, because it IS the credential exchange and runs before any principal exists. That makes it the one route in this subsystem rate-limited PER SOURCE IP, keyed on the real TCP peer rather than on any caller-supplied header, and body-capped at the same door.  The submitted secret is never logged and never echoed, and failures collapse to one clean status with no upstream detail: 401 when the credential does not authenticate, 502 when the identity provider is unreachable, 503 when no issuer is configured. That is on purpose — a richer error would be a validity oracle for guessed credentials.
+     * @param kmsLogin 
+     * @return ApiResponse<KmsToken?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postKmsAuthLoginWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postKmsAuthLoginRequestConfig()
+    fun postKmsAuthLoginWithHttpInfo(kmsLogin: KmsLogin) : ApiResponse<KmsToken?> {
+        val localVariableConfig = postKmsAuthLoginRequestConfig(kmsLogin = kmsLogin)
 
-        return request<Unit, Unit>(
+        return request<KmsLogin, KmsToken>(
             localVariableConfig
         )
     }
@@ -435,13 +341,16 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation postKmsAuthLogin
      *
+     * @param kmsLogin 
      * @return RequestConfig
      */
-    fun postKmsAuthLoginRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postKmsAuthLoginRequestConfig(kmsLogin: KmsLogin) : RequestConfig<KmsLogin> {
+        val localVariableBody = kmsLogin
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/kms/auth/login",
@@ -454,21 +363,23 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/kms/secrets
-     * Store or replace one secret in your org
-     * Upserts one secret under the caller&#39;s own org. The value is sealed before it is written — a fresh per-secret data key, itself wrapped by the master key — so plaintext never reaches disk. The receipt confirms the name and environment that were written and does not echo the value.  &#x60;env&#x60; is REQUIRED on a write and has no default, which is the rule most easily got wrong here: reads and deletes still fall back to the default environment for older callers, but a write must not, because the environment is part of the storage key. A silently defaulted write lands in a bucket the readers that resolve project, environment and path never look in, and the stale value keeps being served — so the write fails loudly instead.  &#x60;name&#x60; is required, &#x60;path&#x60; is an optional subpath beneath the org root, and the org is taken from the validated claim rather than the body.  Requires ADMIN authority over the org — a member reads, an admin writes. A machine credential holds no membership and so is never an org admin: it can read the secrets it was issued for and cannot replace one. Fail-closed admission, in order: admin of the org, well-formed org, master key present — 403, 400 and 503, all decided before any record is touched.
-     * @return void
+     * Stores or replaces one secret in your org.
+     * Stores or replaces one secret in your org.  Upserts one secret under the caller&#39;s own org. The value is sealed before it is written — a fresh per-secret data key, itself wrapped by the master key — so plaintext never reaches disk. The receipt confirms the name and environment that were written and does not echo the value.  &#x60;env&#x60; is REQUIRED on a write and has no default, which is the rule most easily got wrong here: reads and deletes still fall back to the default environment for older callers, but a write must not, because the environment is part of the storage key. A silently defaulted write lands in a bucket the readers that resolve project, environment and path never look in, and the stale value keeps being served — so the write fails loudly instead.  &#x60;name&#x60; is required, &#x60;path&#x60; is an optional subpath beneath the org root, and the org is taken from the validated claim rather than the body.  Requires ADMIN authority over the org — a member reads, an admin writes. A machine credential holds no membership and so is never an org admin: it can read the secrets it was issued for and cannot replace one. Fail-closed admission, in order: admin of the org, well-formed org, master key present — 403, 400 and 503, all decided before any record is touched.
+     * @param kmsPut 
+     * @return KmsStored
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postKmsSecrets() : Unit {
-        val localVarResponse = postKmsSecretsWithHttpInfo()
+    fun postKmsSecrets(kmsPut: KmsPut) : KmsStored {
+        val localVarResponse = postKmsSecretsWithHttpInfo(kmsPut = kmsPut)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KmsStored
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -484,17 +395,19 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/kms/secrets
-     * Store or replace one secret in your org
-     * Upserts one secret under the caller&#39;s own org. The value is sealed before it is written — a fresh per-secret data key, itself wrapped by the master key — so plaintext never reaches disk. The receipt confirms the name and environment that were written and does not echo the value.  &#x60;env&#x60; is REQUIRED on a write and has no default, which is the rule most easily got wrong here: reads and deletes still fall back to the default environment for older callers, but a write must not, because the environment is part of the storage key. A silently defaulted write lands in a bucket the readers that resolve project, environment and path never look in, and the stale value keeps being served — so the write fails loudly instead.  &#x60;name&#x60; is required, &#x60;path&#x60; is an optional subpath beneath the org root, and the org is taken from the validated claim rather than the body.  Requires ADMIN authority over the org — a member reads, an admin writes. A machine credential holds no membership and so is never an org admin: it can read the secrets it was issued for and cannot replace one. Fail-closed admission, in order: admin of the org, well-formed org, master key present — 403, 400 and 503, all decided before any record is touched.
-     * @return ApiResponse<Unit?>
+     * Stores or replaces one secret in your org.
+     * Stores or replaces one secret in your org.  Upserts one secret under the caller&#39;s own org. The value is sealed before it is written — a fresh per-secret data key, itself wrapped by the master key — so plaintext never reaches disk. The receipt confirms the name and environment that were written and does not echo the value.  &#x60;env&#x60; is REQUIRED on a write and has no default, which is the rule most easily got wrong here: reads and deletes still fall back to the default environment for older callers, but a write must not, because the environment is part of the storage key. A silently defaulted write lands in a bucket the readers that resolve project, environment and path never look in, and the stale value keeps being served — so the write fails loudly instead.  &#x60;name&#x60; is required, &#x60;path&#x60; is an optional subpath beneath the org root, and the org is taken from the validated claim rather than the body.  Requires ADMIN authority over the org — a member reads, an admin writes. A machine credential holds no membership and so is never an org admin: it can read the secrets it was issued for and cannot replace one. Fail-closed admission, in order: admin of the org, well-formed org, master key present — 403, 400 and 503, all decided before any record is touched.
+     * @param kmsPut 
+     * @return ApiResponse<KmsStored?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postKmsSecretsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postKmsSecretsRequestConfig()
+    fun postKmsSecretsWithHttpInfo(kmsPut: KmsPut) : ApiResponse<KmsStored?> {
+        val localVariableConfig = postKmsSecretsRequestConfig(kmsPut = kmsPut)
 
-        return request<Unit, Unit>(
+        return request<KmsPut, KmsStored>(
             localVariableConfig
         )
     }
@@ -502,13 +415,16 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation postKmsSecrets
      *
+     * @param kmsPut 
      * @return RequestConfig
      */
-    fun postKmsSecretsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postKmsSecretsRequestConfig(kmsPut: KmsPut) : RequestConfig<KmsPut> {
+        val localVariableBody = kmsPut
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/kms/secrets",

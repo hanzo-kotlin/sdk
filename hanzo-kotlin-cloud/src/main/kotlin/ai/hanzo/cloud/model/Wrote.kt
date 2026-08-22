@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param bytes 
- * @param path 
+ * @param bytes Bytes is how many bytes the file now holds. A write REPLACES the file, so this is its whole length and not an amount appended, and 0 is a legitimate answer: a WriteIn with no Data truncates the file to nothing.
+ * @param path Path is where the bytes actually landed: the caller's path resolved against the sandbox's working directory (Leased.Workdir), which is what a later read or a shell line inside the sandbox has to name.
  */
 
 
 data class Wrote (
 
+    /* Bytes is how many bytes the file now holds. A write REPLACES the file, so this is its whole length and not an amount appended, and 0 is a legitimate answer: a WriteIn with no Data truncates the file to nothing. */
     @SerializedName("bytes")
     val bytes: kotlin.Int? = null,
 
+    /* Path is where the bytes actually landed: the caller's path resolved against the sandbox's working directory (Leased.Workdir), which is what a later read or a shell line inside the sandbox has to name. */
     @SerializedName("path")
     val path: kotlin.String? = null
 

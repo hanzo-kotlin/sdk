@@ -23,24 +23,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param clusterResourceWhitelist 
- * @param description 
- * @param destinations 
- * @param sourceRepos 
+ * @param clusterResourceWhitelist ClusterResourceWhitelist are the cluster-scoped kinds it may create — [{group:\"*\", kind:\"*\"}] on a synthesized project.
+ * @param description Description is the project's human label: the IAM project's display name, or its description when it has no display name. Absent when IAM carries neither.
+ * @param destinations Destinations are the cluster/namespace pairs it may write to — a single {server:\"*\", namespace:\"*\"} on a synthesized project, for the same reason.
+ * @param sourceRepos SourceRepos are the git repos applications in this project may pull from. [\"*\"] for every project this plane synthesizes or reflects from IAM: the boundary that actually holds on this platform is the IAM org, resolved before a row is ever projected, so the projected fence is deliberately permissive and is NOT an authorization statement.
  */
 
 
 data class ArgoProjectSpec (
 
+    /* ClusterResourceWhitelist are the cluster-scoped kinds it may create — [{group:\"*\", kind:\"*\"}] on a synthesized project. */
     @SerializedName("clusterResourceWhitelist")
     val clusterResourceWhitelist: kotlin.collections.List<ArgoGroupKind>? = null,
 
+    /* Description is the project's human label: the IAM project's display name, or its description when it has no display name. Absent when IAM carries neither. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* Destinations are the cluster/namespace pairs it may write to — a single {server:\"*\", namespace:\"*\"} on a synthesized project, for the same reason. */
     @SerializedName("destinations")
     val destinations: kotlin.collections.List<ArgoDestination>? = null,
 
+    /* SourceRepos are the git repos applications in this project may pull from. [\"*\"] for every project this plane synthesizes or reflects from IAM: the boundary that actually holds on this platform is the IAM org, resolved before a row is ever projected, so the projected fence is deliberately permissive and is NOT an authorization statement. */
     @SerializedName("sourceRepos")
     val sourceRepos: kotlin.collections.List<kotlin.String>? = null
 

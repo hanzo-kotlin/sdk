@@ -21,12 +21,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param e164 
+ * @param e164 E164 is the number to buy, in E.164 (a leading + and digits), exactly as the search returned it. This is the number itself, not the id from a search result.
  */
 
 
 data class BuyInput (
 
+    /* E164 is the number to buy, in E.164 (a leading + and digits), exactly as the search returned it. This is the number itself, not the id from a search result. */
     @SerializedName("e164")
     val e164: kotlin.String? = null
 

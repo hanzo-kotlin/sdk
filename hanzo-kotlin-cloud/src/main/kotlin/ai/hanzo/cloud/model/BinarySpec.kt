@@ -21,36 +21,43 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param image 
- * @param ldflags 
- * @param main 
- * @param name 
- * @param `out` 
- * @param platforms 
- * @param run 
+ * @param image Image is the toolchain image the recipe runs in, a Go bookworm image by default. It is the one field the GitHub lane ignores: there the runner IS the toolchain, and a cluster has to be told what a runner already is.
+ * @param ldflags Ldflags are the Go linker flags, `-s -w` when the recipe names none, on one line. Go lane only.
+ * @param main Main is the Go package to build, repo-relative (`.` or `./cmd/x`), and it selects the GO LANE. Defaults to `.` when neither lane is named; declaring it together with `run` is refused.
+ * @param name Name is the artifact's base name: the prefix of every file published for this entry, and the name a host later asks for. It must match `^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$`, which is what makes it safe as both a filename and a URL path segment.
+ * @param `out` Out is the glob of files `run` produced, relative to the repo root; matching nothing FAILS the build rather than publishing an empty entry. It expands unquoted, so it is bounded to path and glob characters. The Go lane names its own files and ignores this.
+ * @param platforms Platforms are the `<os>/<arch>` pairs the Go lane cross-compiles, [linux/amd64] by default. Each one publishes as `<name>-<os>-<arch>`, which is the shape a host resolves a binary BY — so the list is what a caller can ask for later.
+ * @param run Run is any other toolchain's build command, run by `sh -c` in this entry's image, and it selects the OTHER LANE. Arbitrary shell is the point — it is the same trust as a Dockerfile RUN — which is why it executes with no object-store credential and no service-account token. It requires `out`.
  */
 
 
 data class BinarySpec (
 
+    /* Image is the toolchain image the recipe runs in, a Go bookworm image by default. It is the one field the GitHub lane ignores: there the runner IS the toolchain, and a cluster has to be told what a runner already is. */
     @SerializedName("image")
     val image: kotlin.String? = null,
 
+    /* Ldflags are the Go linker flags, `-s -w` when the recipe names none, on one line. Go lane only. */
     @SerializedName("ldflags")
     val ldflags: kotlin.String? = null,
 
+    /* Main is the Go package to build, repo-relative (`.` or `./cmd/x`), and it selects the GO LANE. Defaults to `.` when neither lane is named; declaring it together with `run` is refused. */
     @SerializedName("main")
     val main: kotlin.String? = null,
 
+    /* Name is the artifact's base name: the prefix of every file published for this entry, and the name a host later asks for. It must match `^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$`, which is what makes it safe as both a filename and a URL path segment. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Out is the glob of files `run` produced, relative to the repo root; matching nothing FAILS the build rather than publishing an empty entry. It expands unquoted, so it is bounded to path and glob characters. The Go lane names its own files and ignores this. */
     @SerializedName("out")
     val `out`: kotlin.String? = null,
 
+    /* Platforms are the `<os>/<arch>` pairs the Go lane cross-compiles, [linux/amd64] by default. Each one publishes as `<name>-<os>-<arch>`, which is the shape a host resolves a binary BY — so the list is what a caller can ask for later. */
     @SerializedName("platforms")
     val platforms: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Run is any other toolchain's build command, run by `sh -c` in this entry's image, and it selects the OTHER LANE. Arbitrary shell is the point — it is the same trust as a Dockerfile RUN — which is why it executes with no object-store credential and no service-account token. It requires `out`. */
     @SerializedName("run")
     val run: kotlin.String? = null
 

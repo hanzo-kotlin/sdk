@@ -21,32 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param arch 
- * @param cpus 
- * @param gpuModel 
- * @param gpus 
- * @param memory 
- * @param os 
+ * @param arch Arch is the CPU architecture, amd64 or arm64, and it is what decides whether a binary built for the fleet will run here. Only the sources that report one carry it (a linked run-target, a BYO worker).
+ * @param cpus CPUs is logical cores on the unit.
+ * @param gpuModel GPUModel names the FIRST accelerator (\"NVIDIA GB10\") as the representative of the set; GPUs carries how many. Empty for a cluster, whose cards are counted rather than modelled, and for a unit with none.
+ * @param gpus GPUs is how many accelerators the unit has. For a cluster it is the vendor totals summed across every node, so it counts cards, not machines.
+ * @param memory Memory is total system RAM in BYTES — not GB, and not what is free right now (fleetMetrics carries that). Absent when the source reports no RAM figure.
+ * @param os OS is the operating system the unit runs: linux, darwin or windows. Empty when the source does not report one — a cluster row does not.
  */
 
 
 data class FleetSpec (
 
+    /* Arch is the CPU architecture, amd64 or arm64, and it is what decides whether a binary built for the fleet will run here. Only the sources that report one carry it (a linked run-target, a BYO worker). */
     @SerializedName("arch")
     val arch: kotlin.String? = null,
 
+    /* CPUs is logical cores on the unit. */
     @SerializedName("cpus")
     val cpus: kotlin.Int? = null,
 
+    /* GPUModel names the FIRST accelerator (\"NVIDIA GB10\") as the representative of the set; GPUs carries how many. Empty for a cluster, whose cards are counted rather than modelled, and for a unit with none. */
     @SerializedName("gpuModel")
     val gpuModel: kotlin.String? = null,
 
+    /* GPUs is how many accelerators the unit has. For a cluster it is the vendor totals summed across every node, so it counts cards, not machines. */
     @SerializedName("gpus")
     val gpus: kotlin.Int? = null,
 
+    /* Memory is total system RAM in BYTES — not GB, and not what is free right now (fleetMetrics carries that). Absent when the source reports no RAM figure. */
     @SerializedName("memory")
     val memory: kotlin.Int? = null,
 
+    /* OS is the operating system the unit runs: linux, darwin or windows. Empty when the source does not report one — a cluster row does not. */
     @SerializedName("os")
     val os: kotlin.String? = null
 

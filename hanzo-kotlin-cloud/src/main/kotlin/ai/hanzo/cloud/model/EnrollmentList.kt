@@ -22,12 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `data` 
+ * @param `data` Data is the page: every contact walking this ONE sequence, in any state — active, completed and canceled walks all appear, since the history of who was reached is the point. An empty array when nobody has been enrolled.
  */
 
 
 data class EnrollmentList (
 
+    /* Data is the page: every contact walking this ONE sequence, in any state — active, completed and canceled walks all appear, since the history of who was reached is the point. An empty array when nobody has been enrolled. */
     @SerializedName("data")
     val `data`: kotlin.collections.List<Enrollment>? = null
 

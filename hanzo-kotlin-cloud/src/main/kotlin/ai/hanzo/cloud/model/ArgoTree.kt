@@ -22,20 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param hosts 
- * @param nodes 
- * @param orphanedNodes 
+ * @param hosts Hosts is ArgoCD's per-node machine inventory. Always empty: this plane projects applications and serves no cluster-node view.
+ * @param nodes Nodes is the FLAT node list, root first: the App CR, then the objects the operator owns, then their ReplicaSets and Pods. The hierarchy is in ParentRefs, not in the ordering.
+ * @param orphanedNodes OrphanedNodes are objects in the namespace belonging to no application. Always empty: this walk reaches an object only THROUGH ownership from the App CR, so it can never hold one that is orphaned.
  */
 
 
 data class ArgoTree (
 
+    /* Hosts is ArgoCD's per-node machine inventory. Always empty: this plane projects applications and serves no cluster-node view. */
     @SerializedName("hosts")
     val hosts: kotlin.collections.List<kotlin.Any>? = null,
 
+    /* Nodes is the FLAT node list, root first: the App CR, then the objects the operator owns, then their ReplicaSets and Pods. The hierarchy is in ParentRefs, not in the ordering. */
     @SerializedName("nodes")
     val nodes: kotlin.collections.List<ArgoNode>? = null,
 
+    /* OrphanedNodes are objects in the namespace belonging to no application. Always empty: this walk reaches an object only THROUGH ownership from the App CR, so it can never hold one that is orphaned. */
     @SerializedName("orphanedNodes")
     val orphanedNodes: kotlin.collections.List<ArgoNode>? = null
 

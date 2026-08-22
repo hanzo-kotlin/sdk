@@ -22,44 +22,53 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param affectedComponents 
- * @param endsAt 
- * @param id 
- * @param lastUpdateAt 
- * @param lastUpdateMessage 
- * @param name 
- * @param startsAt 
- * @param status 
- * @param url 
+ * @param affectedComponents AffectedComponents is what the window touches.
+ * @param endsAt EndsAt is when it is expected to finish, RFC3339 UTC.
+ * @param id ID is the window's handle.
+ * @param lastUpdateAt LastUpdateAt is when the window was last revised, RFC3339 UTC.
+ * @param lastUpdateMessage LastUpdateMessage is the text of that revision.
+ * @param name Name is its one-line headline.
+ * @param startsAt StartsAt is when work begins, RFC3339 UTC.
+ * @param status Status is where the window is in its life, in the client's own vocabulary.
+ * @param url URL points at the human status page, as every link in this document does.
  */
 
 
 data class O11yStatusMaintenance (
 
+    /* AffectedComponents is what the window touches. */
     @SerializedName("affected_components")
     val affectedComponents: kotlin.collections.List<O11yStatusComponent>? = null,
 
+    /* EndsAt is when it is expected to finish, RFC3339 UTC. */
     @SerializedName("ends_at")
     val endsAt: kotlin.String? = null,
 
+    /* ID is the window's handle. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* LastUpdateAt is when the window was last revised, RFC3339 UTC. */
     @SerializedName("last_update_at")
     val lastUpdateAt: kotlin.String? = null,
 
+    /* LastUpdateMessage is the text of that revision. */
     @SerializedName("last_update_message")
     val lastUpdateMessage: kotlin.String? = null,
 
+    /* Name is its one-line headline. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* StartsAt is when work begins, RFC3339 UTC. */
     @SerializedName("starts_at")
     val startsAt: kotlin.String? = null,
 
+    /* Status is where the window is in its life, in the client's own vocabulary. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* URL points at the human status page, as every link in this document does. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

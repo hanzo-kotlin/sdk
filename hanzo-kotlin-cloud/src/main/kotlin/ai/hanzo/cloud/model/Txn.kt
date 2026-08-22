@@ -21,42 +21,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param amountCents 
- * @param category COA account number of the P&L line
- * @param categoryName 
- * @param date 
- * @param description 
- * @param source source_kind: bank_txn | scan | commerce_txn
- * @param vendor 
- * @param voucherId 
+ * @param amountCents AmountCents is the voucher's total, in whole cents — its total debit, which equals its total credit because every voucher balances. It is the size of the entry and carries no direction; the category says which way it went.
+ * @param category Category is the chart-of-accounts NUMBER of the income or expense account this voucher touched — where it lands on the P&L, not a free-text label.
+ * @param categoryName CategoryName is that account's human name, so a caller need not carry the chart to render the row.
+ * @param date Date is when the voucher POSTED — the accounting date the reports window on, which for an imported bank row is the bank's date and not the day it landed here.
+ * @param description Description is the line a person reads: the memo carried in from the source.
+ * @param source Source is where the entry came from: bank_txn for an imported statement line, scan for a receipt or bill read by the scanner, commerce_txn for a sale booked by the store.
+ * @param vendor Vendor is the counterparty, resolved from whatever the source knew — a bank row's merchant, a scanned bill's supplier. Absent when the source named none.
+ * @param voucherId VoucherID identifies the underlying double-entry voucher, so a caller can open the full set of legs behind this single register line.
  */
 
 
 data class Txn (
 
+    /* AmountCents is the voucher's total, in whole cents — its total debit, which equals its total credit because every voucher balances. It is the size of the entry and carries no direction; the category says which way it went. */
     @SerializedName("amountCents")
     val amountCents: kotlin.Int? = null,
 
-    /* COA account number of the P&L line */
+    /* Category is the chart-of-accounts NUMBER of the income or expense account this voucher touched — where it lands on the P&L, not a free-text label. */
     @SerializedName("category")
     val category: kotlin.String? = null,
 
+    /* CategoryName is that account's human name, so a caller need not carry the chart to render the row. */
     @SerializedName("categoryName")
     val categoryName: kotlin.String? = null,
 
+    /* Date is when the voucher POSTED — the accounting date the reports window on, which for an imported bank row is the bank's date and not the day it landed here. */
     @SerializedName("date")
     val date: kotlin.String? = null,
 
+    /* Description is the line a person reads: the memo carried in from the source. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
-    /* source_kind: bank_txn | scan | commerce_txn */
+    /* Source is where the entry came from: bank_txn for an imported statement line, scan for a receipt or bill read by the scanner, commerce_txn for a sale booked by the store. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Vendor is the counterparty, resolved from whatever the source knew — a bank row's merchant, a scanned bill's supplier. Absent when the source named none. */
     @SerializedName("vendor")
     val vendor: kotlin.String? = null,
 
+    /* VoucherID identifies the underlying double-entry voucher, so a caller can open the full set of legs behind this single register line. */
     @SerializedName("voucherId")
     val voucherId: kotlin.Int? = null
 

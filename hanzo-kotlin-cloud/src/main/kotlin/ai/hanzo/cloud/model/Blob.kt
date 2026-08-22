@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `data` 
- * @param dir 
- * @param propertyEntries 
- * @param path 
+ * @param `data` Data is the file's bytes, verbatim, base64 on the wire. Empty for a directory and for an empty file alike; Dir is what tells those apart.
+ * @param dir Dir says which of the two answers this is: true and the path is a directory, so read Entries; false and it is a file, so read Data. Nothing else distinguishes them — an empty file and an empty directory look alike here.
+ * @param propertyEntries Entries is a directory's contents as bare NAMES, not paths — one level, no recursion, dotfiles included, \".\" and \"..\" excluded (`ls -1A`). Empty for a file, and for an empty directory.
+ * @param path Path is the RESOLVED absolute path that was read — the caller's relative path joined onto the sandbox's working directory (Leased.Workdir), so it names the same file for a reader who does not know the class.
  */
 
 
 data class Blob (
 
+    /* Data is the file's bytes, verbatim, base64 on the wire. Empty for a directory and for an empty file alike; Dir is what tells those apart. */
     @SerializedName("data")
     val `data`: kotlin.String? = null,
 
+    /* Dir says which of the two answers this is: true and the path is a directory, so read Entries; false and it is a file, so read Data. Nothing else distinguishes them — an empty file and an empty directory look alike here. */
     @SerializedName("dir")
     val dir: kotlin.Boolean? = null,
 
+    /* Entries is a directory's contents as bare NAMES, not paths — one level, no recursion, dotfiles included, \".\" and \"..\" excluded (`ls -1A`). Empty for a file, and for an empty directory. */
     @SerializedName("entries")
     val propertyEntries: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Path is the RESOLVED absolute path that was read — the caller's relative path joined onto the sandbox's working directory (Leased.Workdir), so it names the same file for a reader who does not know the class. */
     @SerializedName("path")
     val path: kotlin.String? = null
 

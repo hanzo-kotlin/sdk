@@ -21,48 +21,58 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param amountCents 
- * @param connector 
- * @param currency 
- * @param description 
- * @param direction 
- * @param externalId 
- * @param matchedVoucher 
- * @param merchant 
- * @param postedAt 
- * @param status 
+ * @param amountCents AmountCents is the size of the movement in whole cents, always POSITIVE — direction carries the sign, so a caller must read both to know which way money went.
+ * @param connector Connector names the feed this row arrived on — which bank or processor connection it was synced from. With externalId it is the row's identity, so re-syncing the same statement never books a second copy.
+ * @param currency Currency is the ISO code the bank reported the line in.
+ * @param description Description is the statement memo as the bank wrote it.
+ * @param direction Direction is which way the money moved: an inflow into the account or an outflow from it, from the org's point of view.
+ * @param externalId ExternalID is the bank's OWN id for the line, carried verbatim. It is unique only within its connector.
+ * @param matchedVoucher MatchedVoucher names the ledger voucher this line was reconciled against — the bill it paid, or the settlement it cleared. Absent when nothing matched, which for an inflow is what raises a question.
+ * @param merchant Merchant is the counterparty the feed identified, where it did.
+ * @param postedAt PostedAt is the bank's posting date for the line, not when we synced it.
+ * @param status Status is where the line got to: posted (an outflow booked straight to an expense), settled (an outflow that paid down a scanned bill), reconciled (an inflow that cleared a pending settlement), transfer (a move between the org's own accounts, recorded but with no effect on the books), or unmatched (an inflow nobody could place, which is waiting on a human answer).
  */
 
 
 data class BankTxnRow (
 
+    /* AmountCents is the size of the movement in whole cents, always POSITIVE — direction carries the sign, so a caller must read both to know which way money went. */
     @SerializedName("amountCents")
     val amountCents: kotlin.Int? = null,
 
+    /* Connector names the feed this row arrived on — which bank or processor connection it was synced from. With externalId it is the row's identity, so re-syncing the same statement never books a second copy. */
     @SerializedName("connector")
     val connector: kotlin.String? = null,
 
+    /* Currency is the ISO code the bank reported the line in. */
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
+    /* Description is the statement memo as the bank wrote it. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* Direction is which way the money moved: an inflow into the account or an outflow from it, from the org's point of view. */
     @SerializedName("direction")
     val direction: kotlin.String? = null,
 
+    /* ExternalID is the bank's OWN id for the line, carried verbatim. It is unique only within its connector. */
     @SerializedName("externalId")
     val externalId: kotlin.String? = null,
 
+    /* MatchedVoucher names the ledger voucher this line was reconciled against — the bill it paid, or the settlement it cleared. Absent when nothing matched, which for an inflow is what raises a question. */
     @SerializedName("matchedVoucher")
     val matchedVoucher: kotlin.String? = null,
 
+    /* Merchant is the counterparty the feed identified, where it did. */
     @SerializedName("merchant")
     val merchant: kotlin.String? = null,
 
+    /* PostedAt is the bank's posting date for the line, not when we synced it. */
     @SerializedName("postedAt")
     val postedAt: kotlin.String? = null,
 
+    /* Status is where the line got to: posted (an outflow booked straight to an expense), settled (an outflow that paid down a scanned bill), reconciled (an inflow that cleared a pending settlement), transfer (a move between the org's own accounts, recorded but with no effect on the books), or unmatched (an inflow nobody could place, which is waiting on a human answer). */
     @SerializedName("status")
     val status: kotlin.String? = null
 

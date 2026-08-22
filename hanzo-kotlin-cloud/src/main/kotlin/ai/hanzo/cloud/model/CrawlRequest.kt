@@ -21,12 +21,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param url 
+ * @param url URL is the page to read, absolute and http or https — no other scheme is dialled. It is resolved from inside the cluster, so an address that turns out to be loopback, link-local, private or multicast is refused at the dialer, redirects included. Empty is not an error status: the answer comes back with success false and the reason in error.
  */
 
 
 data class CrawlRequest (
 
+    /* URL is the page to read, absolute and http or https — no other scheme is dialled. It is resolved from inside the cluster, so an address that turns out to be loopback, link-local, private or multicast is refused at the dialer, redirects included. Empty is not an error status: the answer comes back with success false and the reason in error. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

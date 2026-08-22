@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param endLine 
- * @param file 
- * @param line 
- * @param repo 
- * @param symbol 
+ * @param endLine EndLine is its last line, inclusive.
+ * @param file File is the path inside the repo, relative to its root.
+ * @param line Line is the first line of the cited region, 1-based.
+ * @param repo Repo is the repository the cited code lives in (\"owner/name\"), absent when the ask was already scoped to one.
+ * @param symbol Symbol is the declaration the region belongs to, when it belongs to one.
  */
 
 
 data class Citation (
 
+    /* EndLine is its last line, inclusive. */
     @SerializedName("endLine")
     val endLine: kotlin.Int? = null,
 
+    /* File is the path inside the repo, relative to its root. */
     @SerializedName("file")
     val file: kotlin.String? = null,
 
+    /* Line is the first line of the cited region, 1-based. */
     @SerializedName("line")
     val line: kotlin.Int? = null,
 
+    /* Repo is the repository the cited code lives in (\"owner/name\"), absent when the ask was already scoped to one. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* Symbol is the declaration the region belongs to, when it belongs to one. */
     @SerializedName("symbol")
     val symbol: kotlin.String? = null
 

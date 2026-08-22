@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param buildCommand 
- * @param destinationDir 
- * @param rootDir 
+ * @param buildCommand BuildCommand is what Cloudflare runs to build the site (\"npm run build\"). Omitted means no build step: the repository is published as it stands.
+ * @param destinationDir DestinationDir is the directory the build leaves the site in (\"dist\"), relative to RootDir. It is what gets served.
+ * @param rootDir RootDir is where in the repository the build runs, for a project that is not at the repository root. Omitted means the root.
  */
 
 
 data class PagesBuildConfig (
 
+    /* BuildCommand is what Cloudflare runs to build the site (\"npm run build\"). Omitted means no build step: the repository is published as it stands. */
     @SerializedName("build_command")
     val buildCommand: kotlin.String? = null,
 
+    /* DestinationDir is the directory the build leaves the site in (\"dist\"), relative to RootDir. It is what gets served. */
     @SerializedName("destination_dir")
     val destinationDir: kotlin.String? = null,
 
+    /* RootDir is where in the repository the build runs, for a project that is not at the repository root. Omitted means the root. */
     @SerializedName("root_dir")
     val rootDir: kotlin.String? = null
 

@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param activeWindows 
- * @param assignedWindows 
- * @param canSync 
+ * @param activeWindows ActiveWindows are the sync windows in force right now. Always null: this platform declares none, so nothing is ever in force.
+ * @param assignedWindows AssignedWindows are the windows configured for this application at all, whether or not currently in force. Always null, for the same reason.
+ * @param canSync CanSync is whether a sync would be permitted at this moment. Always true — with no windows there is nothing to deny it. A caller must not read this as \"a sync will succeed\"; it only means no window is blocking one.
  */
 
 
 data class ArgoSyncWindows (
 
+    /* ActiveWindows are the sync windows in force right now. Always null: this platform declares none, so nothing is ever in force. */
     @SerializedName("activeWindows")
     val activeWindows: kotlin.collections.List<kotlin.Any>? = null,
 
+    /* AssignedWindows are the windows configured for this application at all, whether or not currently in force. Always null, for the same reason. */
     @SerializedName("assignedWindows")
     val assignedWindows: kotlin.collections.List<kotlin.Any>? = null,
 
+    /* CanSync is whether a sync would be permitted at this moment. Always true — with no windows there is nothing to deny it. A caller must not read this as \"a sync will succeed\"; it only means no window is blocking one. */
     @SerializedName("canSync")
     val canSync: kotlin.Boolean? = null
 

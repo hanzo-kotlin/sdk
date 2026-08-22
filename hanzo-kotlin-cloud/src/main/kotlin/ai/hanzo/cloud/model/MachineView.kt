@@ -21,64 +21,78 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param createdTime 
- * @param gpu 
- * @param id 
- * @param image 
- * @param mem 
- * @param name 
- * @param os 
- * @param privateIp 
- * @param provider 
- * @param publicIp 
- * @param region 
- * @param status 
- * @param type 
- * @param vcpu 
+ * @param createdTime CreatedTime is when the machine came into being: the provider's own creation timestamp for a Visor machine, passed through in whatever form it states it, and for a BYO machine the RFC 3339 moment it first dialed in.
+ * @param gpu GPU names the accelerators this machine holds (\"H100\", or \"2× NVIDIA GB10\" for a BYO machine reporting a matched pair). Empty means the machine is not a GPU machine — the size slug does not parse as one, or nvidia-smi found nothing.
+ * @param id ID addresses this machine on the /v1/visor/machines/:id routes: the org-scoped NAME Visor keys a machine by, falling back to the provider id for a machine that has no name. A BYO machine's is the id it dialed in under.
+ * @param image Image is the OS image the machine booted from, as the provider names it.
+ * @param mem Mem is system RAM rendered for a human (\"8 GB\"), not a number to compute with. Empty when the provider's figure is ambiguous, or when the only figure available is a GPU slug's gb — that is VRAM, and reporting it as system RAM would be a fabrication. A BYO machine's RAM is on /v1/visor/fleet/workers.
+ * @param name Name is the label to show a human — Visor's displayName, or the machine name when it carries none. A BYO machine's is its hostname. It is not an address: ID is what the routes take.
+ * @param os Os is the operating system on the machine — Visor's record for a provisioned one, the host's own report (linux, darwin, windows) for a BYO one.
+ * @param privateIp PrivateIp is the address on the provider's own network, reachable from the org's other machines in the same region. Empty on the same terms as PublicIp.
+ * @param provider Provider is the cloud that runs the machine (\"digitalocean\"), or \"byo\" for one the operator dialed in with `hanzo link`.
+ * @param publicIp PublicIp is the internet-facing address the provider assigned. Empty while a machine is still provisioning, and empty for a BYO machine — it dials out from behind NAT, so no address is ever learned for it.
+ * @param region Region is the provider region slug (\"sfo3\"), or the zone when the provider reports only that. \"on-prem\" for a BYO machine, which has no cloud region.
+ * @param status Status is the lifecycle state in the PROVIDER's own words (\"active\", \"running\", \"off\"), passed through rather than mapped onto a vocabulary of ours. A BYO machine's is \"online\" or \"offline\", decided by whether its last heartbeat is within 90s.
+ * @param type Type is the provider SIZE SLUG the machine runs at (\"s-2vcpu-4gb\", \"gpu-h100x8-640gb\") — the value a launch asks for, and what Vcpu/Mem/GPU are read out of when the provider states them no other way. \"byo-gpu\" for a dialed-in machine, which was never bought from a size catalog.
+ * @param vcpu Vcpu is logical cores — the provider's own cpuSize when that is a clean integer, else the count read out of the size slug (4 from \"s-4vcpu-8gb\"). ABSENT, never 0, when neither says. A BYO machine leaves it absent here; its real core count is on GET /v1/visor/fleet/workers.
  */
 
 
 data class MachineView (
 
+    /* CreatedTime is when the machine came into being: the provider's own creation timestamp for a Visor machine, passed through in whatever form it states it, and for a BYO machine the RFC 3339 moment it first dialed in. */
     @SerializedName("createdTime")
     val createdTime: kotlin.String? = null,
 
+    /* GPU names the accelerators this machine holds (\"H100\", or \"2× NVIDIA GB10\" for a BYO machine reporting a matched pair). Empty means the machine is not a GPU machine — the size slug does not parse as one, or nvidia-smi found nothing. */
     @SerializedName("gpu")
     val gpu: kotlin.String? = null,
 
+    /* ID addresses this machine on the /v1/visor/machines/:id routes: the org-scoped NAME Visor keys a machine by, falling back to the provider id for a machine that has no name. A BYO machine's is the id it dialed in under. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Image is the OS image the machine booted from, as the provider names it. */
     @SerializedName("image")
     val image: kotlin.String? = null,
 
+    /* Mem is system RAM rendered for a human (\"8 GB\"), not a number to compute with. Empty when the provider's figure is ambiguous, or when the only figure available is a GPU slug's gb — that is VRAM, and reporting it as system RAM would be a fabrication. A BYO machine's RAM is on /v1/visor/fleet/workers. */
     @SerializedName("mem")
     val mem: kotlin.String? = null,
 
+    /* Name is the label to show a human — Visor's displayName, or the machine name when it carries none. A BYO machine's is its hostname. It is not an address: ID is what the routes take. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Os is the operating system on the machine — Visor's record for a provisioned one, the host's own report (linux, darwin, windows) for a BYO one. */
     @SerializedName("os")
     val os: kotlin.String? = null,
 
+    /* PrivateIp is the address on the provider's own network, reachable from the org's other machines in the same region. Empty on the same terms as PublicIp. */
     @SerializedName("privateIp")
     val privateIp: kotlin.String? = null,
 
+    /* Provider is the cloud that runs the machine (\"digitalocean\"), or \"byo\" for one the operator dialed in with `hanzo link`. */
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* PublicIp is the internet-facing address the provider assigned. Empty while a machine is still provisioning, and empty for a BYO machine — it dials out from behind NAT, so no address is ever learned for it. */
     @SerializedName("publicIp")
     val publicIp: kotlin.String? = null,
 
+    /* Region is the provider region slug (\"sfo3\"), or the zone when the provider reports only that. \"on-prem\" for a BYO machine, which has no cloud region. */
     @SerializedName("region")
     val region: kotlin.String? = null,
 
+    /* Status is the lifecycle state in the PROVIDER's own words (\"active\", \"running\", \"off\"), passed through rather than mapped onto a vocabulary of ours. A BYO machine's is \"online\" or \"offline\", decided by whether its last heartbeat is within 90s. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Type is the provider SIZE SLUG the machine runs at (\"s-2vcpu-4gb\", \"gpu-h100x8-640gb\") — the value a launch asks for, and what Vcpu/Mem/GPU are read out of when the provider states them no other way. \"byo-gpu\" for a dialed-in machine, which was never bought from a size catalog. */
     @SerializedName("type")
     val type: kotlin.String? = null,
 
+    /* Vcpu is logical cores — the provider's own cpuSize when that is a clean integer, else the count read out of the size slug (4 from \"s-4vcpu-8gb\"). ABSENT, never 0, when neither says. A BYO machine leaves it absent here; its real core count is on GET /v1/visor/fleet/workers. */
     @SerializedName("vcpu")
     val vcpu: kotlin.Int? = null
 

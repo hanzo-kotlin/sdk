@@ -21,40 +21,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param cloneUrl 
- * @param defaultBranch 
- * @param description 
- * @param fullName 
- * @param htmlUrl 
- * @param language 
- * @param `private` 
- * @param stars 
+ * @param cloneUrl CloneURL is the repository's https git remote.
+ * @param defaultBranch DefaultBranch is the branch a clone checks out.
+ * @param description Description is the blurb the repository's owner wrote. Empty when it has none.
+ * @param fullName FullName is the repository's \"owner/repo\" on GitHub. Finding it here does NOT make it forkable: githubFork takes a repo the org's installation was granted, and a hit from the public index usually is not one.
+ * @param htmlUrl HTMLURL is the repository's page on github.com.
+ * @param language Language is the primary language GitHub detected from the file mix (\"Go\", \"TypeScript\"). Empty when GitHub attributes none.
+ * @param `private` Private is GitHub's visibility flag, passed through. This op reads the public index — the org's token only charges the rate limit to the installation — so it is false for everything a search can reach.
+ * @param stars Stars is GitHub's stargazers_count as the SEARCH INDEX held it when the query ran — a snapshot, not a live count off the repository.
  */
 
 
 data class GithubSearchHit (
 
+    /* CloneURL is the repository's https git remote. */
     @SerializedName("clone_url")
     val cloneUrl: kotlin.String? = null,
 
+    /* DefaultBranch is the branch a clone checks out. */
     @SerializedName("default_branch")
     val defaultBranch: kotlin.String? = null,
 
+    /* Description is the blurb the repository's owner wrote. Empty when it has none. */
     @SerializedName("description")
     val description: kotlin.String? = null,
 
+    /* FullName is the repository's \"owner/repo\" on GitHub. Finding it here does NOT make it forkable: githubFork takes a repo the org's installation was granted, and a hit from the public index usually is not one. */
     @SerializedName("full_name")
     val fullName: kotlin.String? = null,
 
+    /* HTMLURL is the repository's page on github.com. */
     @SerializedName("html_url")
     val htmlUrl: kotlin.String? = null,
 
+    /* Language is the primary language GitHub detected from the file mix (\"Go\", \"TypeScript\"). Empty when GitHub attributes none. */
     @SerializedName("language")
     val language: kotlin.String? = null,
 
+    /* Private is GitHub's visibility flag, passed through. This op reads the public index — the org's token only charges the rate limit to the installation — so it is false for everything a search can reach. */
     @SerializedName("private")
     val `private`: kotlin.Boolean? = null,
 
+    /* Stars is GitHub's stargazers_count as the SEARCH INDEX held it when the query ran — a snapshot, not a live count off the repository. */
     @SerializedName("stars")
     val stars: kotlin.Int? = null
 

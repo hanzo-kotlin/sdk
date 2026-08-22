@@ -15,57 +15,36 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.FormItem
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param category 
- * @param createdTime 
- * @param displayName 
- * @param formItems 
- * @param name 
- * @param owner 
- * @param position 
- * @param tag 
- * @param type 
- * @param url 
+ * @param code Code is the IRS designation, e.g. \"SS-4\".
+ * @param name Name is the form's own title, so a reader need not already know the code.
+ * @param signed Signed reports whether we hold the signature.
+ * @param why Why states what this form is for in this application — the same form is owed for different reasons on different paths.
  */
 
 
 data class Form (
 
-    @SerializedName("category")
-    val category: kotlin.String? = null,
+    /* Code is the IRS designation, e.g. \"SS-4\". */
+    @SerializedName("code")
+    val code: kotlin.String? = null,
 
-    @SerializedName("createdTime")
-    val createdTime: kotlin.String? = null,
-
-    @SerializedName("displayName")
-    val displayName: kotlin.String? = null,
-
-    @SerializedName("formItems")
-    val formItems: kotlin.collections.List<FormItem>? = null,
-
+    /* Name is the form's own title, so a reader need not already know the code. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
-    @SerializedName("owner")
-    val owner: kotlin.String? = null,
+    /* Signed reports whether we hold the signature. */
+    @SerializedName("signed")
+    val signed: kotlin.Boolean? = null,
 
-    @SerializedName("position")
-    val position: kotlin.String? = null,
-
-    @SerializedName("tag")
-    val tag: kotlin.String? = null,
-
-    @SerializedName("type")
-    val type: kotlin.String? = null,
-
-    @SerializedName("url")
-    val url: kotlin.String? = null
+    /* Why states what this form is for in this application — the same form is owed for different reasons on different paths. */
+    @SerializedName("why")
+    val why: kotlin.String? = null
 
 ) {
 

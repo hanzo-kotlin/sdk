@@ -21,25 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param account 
- * @param amount cents, display sign (income & expense both positive when normal)
- * @param name 
- * @param type 
+ * @param account Account is the chart-of-accounts number this line reports on.
+ * @param amount Amount is the account's movement over the period in whole cents, in its NATURAL sign: positive when the account behaved normally, for income and expense alike. Income is credit-normal so its stored net is flipped once here for display; the ledger underneath is never sign-flipped. A negative amount therefore means the account ran backwards — a refunded sale, a reversed cost.
+ * @param name Name is that account's human name from the fixed chart.
+ * @param type Type is the account's fundamental class, which on this statement is always income or expense — it tells a reader which half of the statement the line came from without re-deriving it from the array it arrived in.
  */
 
 
 data class PnLLine (
 
+    /* Account is the chart-of-accounts number this line reports on. */
     @SerializedName("account")
     val account: kotlin.String? = null,
 
-    /* cents, display sign (income & expense both positive when normal) */
+    /* Amount is the account's movement over the period in whole cents, in its NATURAL sign: positive when the account behaved normally, for income and expense alike. Income is credit-normal so its stored net is flipped once here for display; the ledger underneath is never sign-flipped. A negative amount therefore means the account ran backwards — a refunded sale, a reversed cost. */
     @SerializedName("amount")
     val amount: kotlin.Int? = null,
 
+    /* Name is that account's human name from the fixed chart. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Type is the account's fundamental class, which on this statement is always income or expense — it tells a reader which half of the statement the line came from without re-deriving it from the array it arrived in. */
     @SerializedName("type")
     val type: kotlin.String? = null
 

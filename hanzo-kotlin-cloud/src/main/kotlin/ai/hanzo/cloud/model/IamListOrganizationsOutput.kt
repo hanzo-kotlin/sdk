@@ -22,15 +22,15 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param count 
+ * @param cursor 
  * @param organizations 
  */
 
 
 data class IamListOrganizationsOutput (
 
-    @SerializedName("count")
-    val count: kotlin.Int? = null,
+    @SerializedName("cursor")
+    val cursor: kotlin.String? = null,
 
     @SerializedName("organizations")
     val organizations: kotlin.collections.List<IamOrganization>? = null

@@ -21,32 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param doctype 
- * @param name 
- * @param project 
- * @param status 
- * @param title 
- * @param updatedAt 
+ * @param doctype DocType is which content type the row came from: Campaign, SocialPost or Asset. The board spans all three at once, so this is what tells them apart.
+ * @param name Name is the document within that type. (doctype, name) is the pair every /v1/content write addresses an item by.
+ * @param project Project is the brand/site sub-scope within the org. Absent for an item held at org level rather than under one brand.
+ * @param status Status is the lifecycle state: draft, in_review, approved, queued, published or archived. It decides what a reader may see — the public site pulls exactly \"published\" and nothing else — so it is a visibility fact, not a workflow label.
+ * @param title Title is the item's headline, read from its type's own title field. Empty for a document that has none.
+ * @param updatedAt UpdatedAt is unix seconds of the document's last write, and the key the board sorts on, newest first.
  */
 
 
 data class BoardItem (
 
+    /* DocType is which content type the row came from: Campaign, SocialPost or Asset. The board spans all three at once, so this is what tells them apart. */
     @SerializedName("doctype")
     val doctype: kotlin.String? = null,
 
+    /* Name is the document within that type. (doctype, name) is the pair every /v1/content write addresses an item by. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Project is the brand/site sub-scope within the org. Absent for an item held at org level rather than under one brand. */
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Status is the lifecycle state: draft, in_review, approved, queued, published or archived. It decides what a reader may see — the public site pulls exactly \"published\" and nothing else — so it is a visibility fact, not a workflow label. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* Title is the item's headline, read from its type's own title field. Empty for a document that has none. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* UpdatedAt is unix seconds of the document's last write, and the key the board sorts on, newest first. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null
 

@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param initial 
- * @param live 
- * @param states 
- * @param transitions 
+ * @param initial Initial is the state a fresh document starts in — \"draft\". A stored document with no status at all is read as this too.
+ * @param live Live is the ONE state that is publicly readable — \"published\". The site pulls only documents in it, so reaching Live IS site-publish; every other state is invisible to a reader.
+ * @param states States is every lifecycle state in canonical order: draft, in_review, approved, queued, published, archived. The console lays its board columns out in exactly this order, so the order is part of the answer.
+ * @param transitions Transitions maps each state to the states it may move to. A target absent from a state's list is REFUSED, at the endpoint and again at the storage boundary — this is the whole rule, not a hint for the UI. A state never lists itself; a move that changes nothing is always legal.
  */
 
 
 data class StateGraph (
 
+    /* Initial is the state a fresh document starts in — \"draft\". A stored document with no status at all is read as this too. */
     @SerializedName("initial")
     val initial: kotlin.String? = null,
 
+    /* Live is the ONE state that is publicly readable — \"published\". The site pulls only documents in it, so reaching Live IS site-publish; every other state is invisible to a reader. */
     @SerializedName("live")
     val live: kotlin.String? = null,
 
+    /* States is every lifecycle state in canonical order: draft, in_review, approved, queued, published, archived. The console lays its board columns out in exactly this order, so the order is part of the answer. */
     @SerializedName("states")
     val states: kotlin.collections.List<kotlin.String>? = null,
 
+    /* Transitions maps each state to the states it may move to. A target absent from a state's list is REFUSED, at the endpoint and again at the storage boundary — this is the whole rule, not a hint for the UI. A state never lists itself; a move that changes nothing is always legal. */
     @SerializedName("transitions")
     val transitions: kotlin.collections.Map<kotlin.String, kotlin.collections.List<kotlin.String>>? = null
 

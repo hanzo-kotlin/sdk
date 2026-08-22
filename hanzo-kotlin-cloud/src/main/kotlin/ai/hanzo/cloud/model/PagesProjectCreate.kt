@@ -23,24 +23,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param buildConfig 
- * @param deploymentConfigs 
- * @param name 
- * @param productionBranch 
+ * @param buildConfig BuildConfig says how to build the site. Omitted means no build step.
+ * @param deploymentConfigs DeploymentConfigs carries the preview and production runtime configs — the bindings and variables the built site's functions run with.
+ * @param name Name is the project name, and it is also the address: the site answers at <name>.pages.dev. Cloudflare will not rename a project afterwards.
+ * @param productionBranch ProductionBranch is which git branch builds to production; every other branch builds a preview. Omitted leaves Cloudflare's own default.
  */
 
 
 data class PagesProjectCreate (
 
+    /* BuildConfig says how to build the site. Omitted means no build step. */
     @SerializedName("build_config")
     val buildConfig: PagesBuildConfig? = null,
 
+    /* DeploymentConfigs carries the preview and production runtime configs — the bindings and variables the built site's functions run with. */
     @SerializedName("deployment_configs")
     val deploymentConfigs: PagesDeploymentConfigs? = null,
 
+    /* Name is the project name, and it is also the address: the site answers at <name>.pages.dev. Cloudflare will not rename a project afterwards. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* ProductionBranch is which git branch builds to production; every other branch builds a preview. Omitted leaves Cloudflare's own default. */
     @SerializedName("production_branch")
     val productionBranch: kotlin.String? = null
 

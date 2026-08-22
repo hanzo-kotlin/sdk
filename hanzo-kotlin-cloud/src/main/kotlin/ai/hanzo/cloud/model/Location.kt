@@ -22,20 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `external` 
- * @param path 
- * @param range 
+ * @param `external` External is true when the answer left the repository — the case a static index cannot answer, and the reason this service resolves through dependencies.
+ * @param path Path is repo-relative while External is false, and the module coordinate (\"golang.org/x/mod@v0.14.0/semver/semver.go\") once it is true.
+ * @param range Range is the span inside that file, in LSP positions.
  */
 
 
 data class Location (
 
+    /* External is true when the answer left the repository — the case a static index cannot answer, and the reason this service resolves through dependencies. */
     @SerializedName("external")
     val `external`: kotlin.Boolean? = null,
 
+    /* Path is repo-relative while External is false, and the module coordinate (\"golang.org/x/mod@v0.14.0/semver/semver.go\") once it is true. */
     @SerializedName("path")
     val path: kotlin.String? = null,
 
+    /* Range is the span inside that file, in LSP positions. */
     @SerializedName("range")
     val range: Range? = null
 

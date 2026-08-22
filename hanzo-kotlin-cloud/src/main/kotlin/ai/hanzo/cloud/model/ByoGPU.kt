@@ -21,27 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param arch native target, e.g. \"gfx1151\"
- * @param memoryTotal VRAM (or unified pool), e.g. \"122880 MiB\"
- * @param name 
- * @param unified unified CPU/GPU memory pool (APU / SoC)
+ * @param arch Arch is the card's native compile target (\"gfx1151\"), which is what a kernel has to be built for. AMD reports one; NVIDIA cards leave it empty.
+ * @param memoryTotal MemoryTotal is the card's VRAM in the units the host reported it in (\"122880 MiB\") — a display string, not a byte count. On a unified part it is the shared CPU/GPU pool, so it is not memory reserved for the GPU.
+ * @param name Name is the card's model exactly as its own tooling named it (\"NVIDIA GB10\"), never normalized — an operator matches what they see here against what nvidia-smi tells them on the box.
+ * @param unified Unified reports that CPU and GPU share one memory pool (an APU or SoC), so MemoryTotal is not private to the GPU and the host competes for it.
  */
 
 
 data class ByoGPU (
 
-    /* native target, e.g. \"gfx1151\" */
+    /* Arch is the card's native compile target (\"gfx1151\"), which is what a kernel has to be built for. AMD reports one; NVIDIA cards leave it empty. */
     @SerializedName("arch")
     val arch: kotlin.String? = null,
 
-    /* VRAM (or unified pool), e.g. \"122880 MiB\" */
+    /* MemoryTotal is the card's VRAM in the units the host reported it in (\"122880 MiB\") — a display string, not a byte count. On a unified part it is the shared CPU/GPU pool, so it is not memory reserved for the GPU. */
     @SerializedName("memoryTotal")
     val memoryTotal: kotlin.String? = null,
 
+    /* Name is the card's model exactly as its own tooling named it (\"NVIDIA GB10\"), never normalized — an operator matches what they see here against what nvidia-smi tells them on the box. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
-    /* unified CPU/GPU memory pool (APU / SoC) */
+    /* Unified reports that CPU and GPU share one memory pool (an APU or SoC), so MemoryTotal is not private to the GPU and the host competes for it. */
     @SerializedName("unified")
     val unified: kotlin.Boolean? = null
 

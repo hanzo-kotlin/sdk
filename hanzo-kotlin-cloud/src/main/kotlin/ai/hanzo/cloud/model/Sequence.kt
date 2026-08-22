@@ -21,17 +21,17 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param createdAt CreatedAt and UpdatedAt are unix seconds, both server-assigned.
+ * @param createdAt CreatedAt is unix seconds when the sequence was registered, server-assigned and never rewritten.
  * @param id ID is the server-assigned sequence id (\"seq_\" + 128 random bits).
  * @param name Name is the sequence's label. Required, trimmed, capped at 1024 bytes.
  * @param status Status is the lifecycle: draft, active or archived. Empty means draft, and ONLY an active sequence accepts enrollments.
- * @param updatedAt 
+ * @param updatedAt UpdatedAt is unix seconds of the last status flip, server-assigned, and the key the sequence list is ordered by (newest first). Adding a step or enrolling a contact does NOT touch it — only draft/active/archived does — so it tracks activation rather than activity.
  */
 
 
 data class Sequence (
 
-    /* CreatedAt and UpdatedAt are unix seconds, both server-assigned. */
+    /* CreatedAt is unix seconds when the sequence was registered, server-assigned and never rewritten. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
@@ -47,6 +47,7 @@ data class Sequence (
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* UpdatedAt is unix seconds of the last status flip, server-assigned, and the key the sequence list is ordered by (newest first). Adding a step or enrolling a contact does NOT touch it — only draft/active/archived does — so it tracks activation rather than activity. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null
 

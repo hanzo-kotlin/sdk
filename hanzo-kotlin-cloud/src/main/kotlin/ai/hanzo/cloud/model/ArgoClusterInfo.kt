@@ -22,20 +22,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param applicationsCount 
- * @param connectionState 
- * @param serverVersion 
+ * @param applicationsCount ApplicationsCount is how many of THE CALLER'S applications reconcile into this cluster, so a tenant sees its own count and a SuperAdmin the fleet's. It is zero for the in-cluster destination when the caller owns nothing, since that destination is listed whether or not anything targets it.
+ * @param connectionState ConnectionState repeats the cluster's own connection state, which is where ArgoCD's UI reads it from on this object.
+ * @param serverVersion ServerVersion is the kubernetes version of the destination. Always absent: nothing here queries the API server for it.
  */
 
 
 data class ArgoClusterInfo (
 
+    /* ApplicationsCount is how many of THE CALLER'S applications reconcile into this cluster, so a tenant sees its own count and a SuperAdmin the fleet's. It is zero for the in-cluster destination when the caller owns nothing, since that destination is listed whether or not anything targets it. */
     @SerializedName("applicationsCount")
     val applicationsCount: kotlin.Int? = null,
 
+    /* ConnectionState repeats the cluster's own connection state, which is where ArgoCD's UI reads it from on this object. */
     @SerializedName("connectionState")
     val connectionState: ArgoConnectionState? = null,
 
+    /* ServerVersion is the kubernetes version of the destination. Always absent: nothing here queries the API server for it. */
     @SerializedName("serverVersion")
     val serverVersion: kotlin.String? = null
 

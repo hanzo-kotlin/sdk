@@ -23,20 +23,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param destination 
- * @param project 
- * @param source 
+ * @param destination Destination is which cluster and namespace it lands in. Zero-valued on a CD row: this projection reports CD's source, not its destination.
+ * @param project Project is the AppProject this application is grouped and filtered under. For an App CR it is the app.kubernetes.io/part-of label — the IAM project name — falling back to \"default\" when the CR carries no such label.
+ * @param source Source is where the desired state is declared.
  */
 
 
 data class ArgoSpec (
 
+    /* Destination is which cluster and namespace it lands in. Zero-valued on a CD row: this projection reports CD's source, not its destination. */
     @SerializedName("destination")
     val destination: ArgoDestination? = null,
 
+    /* Project is the AppProject this application is grouped and filtered under. For an App CR it is the app.kubernetes.io/part-of label — the IAM project name — falling back to \"default\" when the CR carries no such label. */
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Source is where the desired state is declared. */
     @SerializedName("source")
     val source: ArgoSource? = null
 

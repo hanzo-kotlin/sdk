@@ -23,13 +23,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param sequence 
+ * @param sequence Sequence is the definition itself — the same record create and the list return. Its status is the one that decides whether enroll is accepted.
  * @param steps Steps are in send order (idx ascending); empty for a sequence with no messages yet, which enrolls fine and completes immediately.
  */
 
 
 data class SequenceView (
 
+    /* Sequence is the definition itself — the same record create and the list return. Its status is the one that decides whether enroll is accepted. */
     @SerializedName("sequence")
     val sequence: Sequence? = null,
 

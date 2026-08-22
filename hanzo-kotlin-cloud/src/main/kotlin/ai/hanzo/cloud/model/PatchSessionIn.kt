@@ -24,11 +24,11 @@ import com.google.gson.annotations.SerializedName
  * @param cwd Cwd is where the session is working NOW.  It was write-once — captured at register and never again — which is right for a run that starts in a directory and stays there, and wrong for a linked shell, which is a place a person moves around in. The console showed the directory `hanzo link` happened to be run from and kept showing it after the shell had walked away, so the field answered \"which work is this\" with an answer that was true once. A pointer, so an unchanged path is an omitted field rather than a repeated write.
  * @param id ID is the session to update, from the path.
  * @param project Project tags the product this session built; Published is the author's decision to let anyone read the story (provenance.go). Both are pointers so \"absent\" and \"cleared\" are different requests.
- * @param published 
- * @param status 
+ * @param published Published opens the session's story to the public build route; false withdraws it, and withdrawing is always allowed. PUBLISHING is refused unless the session names a Project — the one set in this same request, or the one already stored — because that route is keyed on (org, project). It widens READ access to what is already there and grants nothing else.
+ * @param status Status moves the session to running, paused, done or error. A session that has already finished refuses any change with 409 — done and error are monotonic — and moving INTO one stamps the end time. This is the surface REPORTING what happened; a control command never writes it.
  * @param target Target re-dispatches a session to a run-target (the #48 association). \"\" detaches.
  * @param terminal Terminal publishes (or, with \"\", withdraws) the URL this session's live terminal can be watched at. A pointer so \"absent\" and \"withdrawn\" are different requests: a session that stops sharing must be able to say so.
- * @param title 
+ * @param title Title rewrites the human line, up to 512 characters — usually because the work turned out to be something other than what it was opened as.
  */
 
 
@@ -46,9 +46,11 @@ data class PatchSessionIn (
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Published opens the session's story to the public build route; false withdraws it, and withdrawing is always allowed. PUBLISHING is refused unless the session names a Project — the one set in this same request, or the one already stored — because that route is keyed on (org, project). It widens READ access to what is already there and grants nothing else. */
     @SerializedName("published")
     val published: kotlin.Boolean? = null,
 
+    /* Status moves the session to running, paused, done or error. A session that has already finished refuses any change with 409 — done and error are monotonic — and moving INTO one stamps the end time. This is the surface REPORTING what happened; a control command never writes it. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
@@ -60,6 +62,7 @@ data class PatchSessionIn (
     @SerializedName("terminal")
     val terminal: kotlin.String? = null,
 
+    /* Title rewrites the human line, up to 512 characters — usually because the work turned out to be something other than what it was opened as. */
     @SerializedName("title")
     val title: kotlin.String? = null
 

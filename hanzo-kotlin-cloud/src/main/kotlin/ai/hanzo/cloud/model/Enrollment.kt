@@ -24,12 +24,12 @@ import com.google.gson.annotations.SerializedName
  * @param address Address is the normalized (lower-cased, trimmed) recipient.
  * @param channel Channel is the delivery surface the steps go out on.
  * @param currentStep CurrentStep is the index of the step that sends next.
- * @param enrolledAt EnrolledAt and UpdatedAt are unix seconds.
+ * @param enrolledAt EnrolledAt is unix seconds when the contact joined the walk, and orders the enrollment list (newest first).
  * @param id ID is the server-assigned enrollment id (\"enr_\" + 128 random bits).
  * @param nextRunAt NextRunAt is the unix time the current step comes due; 0 once the walk has ended. It IS the schedule — durable in SQLite, so it survives restarts.
  * @param sequenceId SequenceID is the sequence being walked.
  * @param status Status is active, completed or canceled.
- * @param updatedAt 
+ * @param updatedAt UpdatedAt is unix seconds of the last move: the drip engine writes it each time it advances the walk a step, completes it or cancels it. Together with Status it says when the walk last did anything, which is how a stalled enrollment is told from a finished one.
  */
 
 
@@ -47,7 +47,7 @@ data class Enrollment (
     @SerializedName("currentStep")
     val currentStep: kotlin.Int? = null,
 
-    /* EnrolledAt and UpdatedAt are unix seconds. */
+    /* EnrolledAt is unix seconds when the contact joined the walk, and orders the enrollment list (newest first). */
     @SerializedName("enrolledAt")
     val enrolledAt: kotlin.Int? = null,
 
@@ -67,6 +67,7 @@ data class Enrollment (
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* UpdatedAt is unix seconds of the last move: the drip engine writes it each time it advances the walk a step, completes it or cancels it. Together with Status it says when the walk last did anything, which is how a stalled enrollment is told from a finished one. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null
 

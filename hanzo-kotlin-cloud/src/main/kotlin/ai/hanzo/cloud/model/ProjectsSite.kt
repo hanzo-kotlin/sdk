@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param name 
- * @param slug 
- * @param status 
- * @param updatedAt 
- * @param url 
+ * @param name Name is the site's display name.
+ * @param slug Slug is the site's handle — also the label of the host it serves at.
+ * @param status Status is the project's state behind the site — whether it is serving, still building, or failed its last build. A site that is listed is not necessarily one that answers.
+ * @param updatedAt UpdatedAt is when the project last changed, as Unix seconds.
+ * @param url URL is the pretty address readers use, not the object-store path behind it.
  */
 
 
 data class ProjectsSite (
 
+    /* Name is the site's display name. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Slug is the site's handle — also the label of the host it serves at. */
     @SerializedName("slug")
     val slug: kotlin.String? = null,
 
+    /* Status is the project's state behind the site — whether it is serving, still building, or failed its last build. A site that is listed is not necessarily one that answers. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* UpdatedAt is when the project last changed, as Unix seconds. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null,
 
+    /* URL is the pretty address readers use, not the object-store path behind it. */
     @SerializedName("url")
     val url: kotlin.String? = null
 

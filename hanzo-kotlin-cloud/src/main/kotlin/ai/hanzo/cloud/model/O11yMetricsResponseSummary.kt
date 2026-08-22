@@ -19,7 +19,7 @@ package ai.hanzo.cloud.model
 import com.google.gson.annotations.SerializedName
 
 /**
- * 
+ * Summary totals the window in one object, so a tile does not have to sum the series to render. errorRate is a RATIO of the window's requests, not a percentage, and p95Ms is over the window rather than the worst bucket.
  *
  * @param errorRate 
  * @param errors 

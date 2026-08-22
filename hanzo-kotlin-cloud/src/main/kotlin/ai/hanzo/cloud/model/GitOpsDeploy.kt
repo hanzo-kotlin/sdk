@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param automated 
- * @param deployedAt 
- * @param id 
- * @param revision 
- * @param startedAt 
+ * @param automated Automated is whether CD started this deploy itself, from its own polling of the tracked git ref (initiatedBy.automated), rather than someone asking for it.
+ * @param deployedAt DeployedAt is when the apply finished, RFC 3339. Absent when CD recorded none.
+ * @param id ID is CD's own sequence number for this deploy (status.history[].id). It increases with every applied revision, so the largest id in `history` is the most recent deploy — which is the first entry, since the list is reversed.
+ * @param revision Revision is the git commit this deploy applied, as CD recorded it.
+ * @param startedAt StartedAt is when CD began applying the revision (deployStartedAt), RFC 3339. Absent when CD recorded none.
  */
 
 
 data class GitOpsDeploy (
 
+    /* Automated is whether CD started this deploy itself, from its own polling of the tracked git ref (initiatedBy.automated), rather than someone asking for it. */
     @SerializedName("automated")
     val automated: kotlin.Boolean? = null,
 
+    /* DeployedAt is when the apply finished, RFC 3339. Absent when CD recorded none. */
     @SerializedName("deployedAt")
     val deployedAt: kotlin.String? = null,
 
+    /* ID is CD's own sequence number for this deploy (status.history[].id). It increases with every applied revision, so the largest id in `history` is the most recent deploy — which is the first entry, since the list is reversed. */
     @SerializedName("id")
     val id: kotlin.Int? = null,
 
+    /* Revision is the git commit this deploy applied, as CD recorded it. */
     @SerializedName("revision")
     val revision: kotlin.String? = null,
 
+    /* StartedAt is when CD began applying the revision (deployStartedAt), RFC 3339. Absent when CD recorded none. */
     @SerializedName("startedAt")
     val startedAt: kotlin.String? = null
 

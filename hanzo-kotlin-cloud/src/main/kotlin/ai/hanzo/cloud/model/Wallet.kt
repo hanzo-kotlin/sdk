@@ -22,17 +22,17 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param accountId 
- * @param address 
+ * @param address Address is the on-chain address. For kms/mpc/treasury it is the EOA a signature from this wallet recovers to; for safe it is the CREATE2 address of the Safe CONTRACT, which holds no key — its approvals recover to the MPC owner instead. Rotating a kms wallet mints a new key and therefore a NEW address, and funds and approvals at the old one do not follow; mpc, treasury and safe addresses are invariant under rotation.
  * @param agent 
- * @param chain 
- * @param createdAt 
- * @param custody 
- * @param financeAccount 
- * @param id 
- * @param name 
+ * @param chain Chain is the EVM chain the wallet is bound to, CAIP-2 \"eip155:<n>\" or a bare decimal chain id. Empty is chain-agnostic: the ring signs an unbound digest, and a Safe falls back to the Hanzo L1 (36963) because a Safe and its EIP-712 domain must be chain-bound.
+ * @param createdAt CreatedAt is when the wallet was provisioned, Unix seconds. Listings order by it, newest first.
+ * @param custody Custody is the backend holding the signing material, fixed at creation: \"kms\" (a secp256k1 key sealed under KMS and opened in-process), \"mpc\" or \"treasury\" (an m-of-n threshold key on the deployed ring, which differ by governance and not by signing mechanics), or \"safe\" (a Safe contract owned by an MPC key). A kind the deployment has not wired refuses with 503 rather than fabricating a signature.
+ * @param financeAccount FinanceAccount is the finance ledger account bound to this wallet — the lookup that turns a ledger account back into an on-chain signer. Absent is the normal state and means unbound; the column is NULL until something binds it.
+ * @param id ID is the wallet id, minted by the server as \"wal_\" + 24 hex. It is the last segment of the key ref, and it is the LEDGER SUBJECT an x402 payment into this wallet credits — so it names money as well as key material.
+ * @param name Name is the display label given at creation. It addresses nothing: the key ref is derived from the scope and the id, so renaming moves no material.
  * @param org 
  * @param project 
- * @param tier 
+ * @param tier Tier is the wallet tier the ring keys its TierPolicy on: hot, warm, cold, gas, bridge, contract_admin, validator, quarantine or disaster_recovery. It defaults to hot and is refused at the boundary if it is none of the nine.
  */
 
 
@@ -41,27 +41,34 @@ data class Wallet (
     @SerializedName("accountId")
     val accountId: kotlin.String? = null,
 
+    /* Address is the on-chain address. For kms/mpc/treasury it is the EOA a signature from this wallet recovers to; for safe it is the CREATE2 address of the Safe CONTRACT, which holds no key — its approvals recover to the MPC owner instead. Rotating a kms wallet mints a new key and therefore a NEW address, and funds and approvals at the old one do not follow; mpc, treasury and safe addresses are invariant under rotation. */
     @SerializedName("address")
     val address: kotlin.String? = null,
 
     @SerializedName("agent")
     val agent: kotlin.String? = null,
 
+    /* Chain is the EVM chain the wallet is bound to, CAIP-2 \"eip155:<n>\" or a bare decimal chain id. Empty is chain-agnostic: the ring signs an unbound digest, and a Safe falls back to the Hanzo L1 (36963) because a Safe and its EIP-712 domain must be chain-bound. */
     @SerializedName("chain")
     val chain: kotlin.String? = null,
 
+    /* CreatedAt is when the wallet was provisioned, Unix seconds. Listings order by it, newest first. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* Custody is the backend holding the signing material, fixed at creation: \"kms\" (a secp256k1 key sealed under KMS and opened in-process), \"mpc\" or \"treasury\" (an m-of-n threshold key on the deployed ring, which differ by governance and not by signing mechanics), or \"safe\" (a Safe contract owned by an MPC key). A kind the deployment has not wired refuses with 503 rather than fabricating a signature. */
     @SerializedName("custody")
     val custody: kotlin.String? = null,
 
+    /* FinanceAccount is the finance ledger account bound to this wallet — the lookup that turns a ledger account back into an on-chain signer. Absent is the normal state and means unbound; the column is NULL until something binds it. */
     @SerializedName("financeAccount")
     val financeAccount: kotlin.String? = null,
 
+    /* ID is the wallet id, minted by the server as \"wal_\" + 24 hex. It is the last segment of the key ref, and it is the LEDGER SUBJECT an x402 payment into this wallet credits — so it names money as well as key material. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Name is the display label given at creation. It addresses nothing: the key ref is derived from the scope and the id, so renaming moves no material. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
@@ -71,6 +78,7 @@ data class Wallet (
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Tier is the wallet tier the ring keys its TierPolicy on: hot, warm, cold, gas, bridge, contract_admin, validator, quarantine or disaster_recovery. It defaults to hot and is refused at the boundary if it is none of the nine. */
     @SerializedName("tier")
     val tier: kotlin.String? = null
 

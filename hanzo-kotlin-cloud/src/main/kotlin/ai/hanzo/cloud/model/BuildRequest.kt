@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param name 
- * @param provider 
- * @param source 
- * @param spec 
+ * @param name Name is the plugin's name: one lowercase path segment (a-z0-9, _ or -), and the id the runtime loads it by.
+ * @param provider Provider is the connectors provider whose credential the plugin reads at run time. Empty for a plugin that needs none.
+ * @param source Source is TypeScript to build as-is. Exactly one of Source or Spec.
+ * @param spec Spec is API documentation — an OpenAPI document, or prose describing the endpoints — that the generator turns into Source. The generated source is returned in the response, so a caller can read what will run before it runs.
  */
 
 
 data class BuildRequest (
 
+    /* Name is the plugin's name: one lowercase path segment (a-z0-9, _ or -), and the id the runtime loads it by. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Provider is the connectors provider whose credential the plugin reads at run time. Empty for a plugin that needs none. */
     @SerializedName("provider")
     val provider: kotlin.String? = null,
 
+    /* Source is TypeScript to build as-is. Exactly one of Source or Spec. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Spec is API documentation — an OpenAPI document, or prose describing the endpoints — that the generator turns into Source. The generated source is returned in the response, so a caller can read what will run before it runs. */
     @SerializedName("spec")
     val spec: kotlin.String? = null
 

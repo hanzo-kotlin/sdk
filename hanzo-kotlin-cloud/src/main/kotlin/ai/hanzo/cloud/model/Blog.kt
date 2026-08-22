@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param caseStudy 
- * @param how 
- * @param slug 
- * @param title 
- * @param why 
+ * @param caseStudy CaseStudy is one worked instance — somebody who ran it, and what happened.
+ * @param how How is the run book: the steps to execute the tactic.
+ * @param slug Slug is the post's address — the last path segment it is published at.
+ * @param title Title is the post's headline.
+ * @param why Why is the mechanism: the reason the tactic works, stated as a principle rather than as instructions.
  */
 
 
 data class Blog (
 
+    /* CaseStudy is one worked instance — somebody who ran it, and what happened. */
     @SerializedName("caseStudy")
     val caseStudy: kotlin.String? = null,
 
+    /* How is the run book: the steps to execute the tactic. */
     @SerializedName("how")
     val how: kotlin.String? = null,
 
+    /* Slug is the post's address — the last path segment it is published at. */
     @SerializedName("slug")
     val slug: kotlin.String? = null,
 
+    /* Title is the post's headline. */
     @SerializedName("title")
     val title: kotlin.String? = null,
 
+    /* Why is the mechanism: the reason the tactic works, stated as a principle rather than as instructions. */
     @SerializedName("why")
     val why: kotlin.String? = null
 

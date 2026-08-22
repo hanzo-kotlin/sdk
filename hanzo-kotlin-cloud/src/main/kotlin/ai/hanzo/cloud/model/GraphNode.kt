@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param id \"<doctype>:<name>\" — globally unique, click-to-open key
  * @param name the document name (empty for synthetic nodes)
- * @param project 
+ * @param project Project is the project scope the underlying document was saved under. Absent for a document saved with none, and for the synthetic nodes — unresolved link targets and connectors belong to no project. When ?project= narrows the graph, every page, memory and source node carries that value.
  * @param title display label
  * @param type kb-page | kb-memory | kb-source | kb-connector | unresolved
  */
@@ -39,6 +39,7 @@ data class GraphNode (
     @SerializedName("name")
     val name: kotlin.String? = null,
 
+    /* Project is the project scope the underlying document was saved under. Absent for a document saved with none, and for the synthetic nodes — unresolved link targets and connectors belong to no project. When ?project= narrows the graph, every page, memory and source node carries that value. */
     @SerializedName("project")
     val project: kotlin.String? = null,
 

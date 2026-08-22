@@ -22,41 +22,48 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param asOf 
- * @param assets 
- * @param balanced TotalAssets == TotalLiabilities + TotalEquity
- * @param equity 
- * @param liabilities 
- * @param totalAssets 
- * @param totalEquity 
- * @param totalLiabilities 
+ * @param asOf AsOf is the posting time the statement is taken at, inclusive. A balance sheet is a snapshot, not a window, so there is no From. Absent means as of now.
+ * @param assets Assets are what the org OWNS at that instant, one line per account that has a balance. Cash, receivables, funds captured but not yet settled.
+ * @param balanced Balanced is whether assets equal liabilities plus equity — the accounting equation, computed from the totals above rather than assumed. False means the ledger is broken, not that the statement is.
+ * @param equity Equity is what is left over for the owners. It carries a DERIVED retained earnings line holding cumulative income minus expense, because this ledger has no period close that sweeps the P&L into equity — without that line the equation would not close.
+ * @param liabilities Liabilities are what the org OWES — including customers' unspent prepaid credit, which is their money until it is consumed and so is carried here rather than counted as revenue.
+ * @param totalAssets TotalAssets is the sum of the asset lines, in cents.
+ * @param totalEquity TotalEquity is the sum of the equity lines including retained earnings, in cents.
+ * @param totalLiabilities TotalLiabilities is the sum of the liability lines, in cents.
  */
 
 
 data class BalanceSheet (
 
+    /* AsOf is the posting time the statement is taken at, inclusive. A balance sheet is a snapshot, not a window, so there is no From. Absent means as of now. */
     @SerializedName("asOf")
     val asOf: kotlin.String? = null,
 
+    /* Assets are what the org OWNS at that instant, one line per account that has a balance. Cash, receivables, funds captured but not yet settled. */
     @SerializedName("assets")
     val assets: kotlin.collections.List<BalanceLine>? = null,
 
-    /* TotalAssets == TotalLiabilities + TotalEquity */
+    /* Balanced is whether assets equal liabilities plus equity — the accounting equation, computed from the totals above rather than assumed. False means the ledger is broken, not that the statement is. */
     @SerializedName("balanced")
     val balanced: kotlin.Boolean? = null,
 
+    /* Equity is what is left over for the owners. It carries a DERIVED retained earnings line holding cumulative income minus expense, because this ledger has no period close that sweeps the P&L into equity — without that line the equation would not close. */
     @SerializedName("equity")
     val equity: kotlin.collections.List<BalanceLine>? = null,
 
+    /* Liabilities are what the org OWES — including customers' unspent prepaid credit, which is their money until it is consumed and so is carried here rather than counted as revenue. */
     @SerializedName("liabilities")
     val liabilities: kotlin.collections.List<BalanceLine>? = null,
 
+    /* TotalAssets is the sum of the asset lines, in cents. */
     @SerializedName("totalAssets")
     val totalAssets: kotlin.Int? = null,
 
+    /* TotalEquity is the sum of the equity lines including retained earnings, in cents. */
     @SerializedName("totalEquity")
     val totalEquity: kotlin.Int? = null,
 
+    /* TotalLiabilities is the sum of the liability lines, in cents. */
     @SerializedName("totalLiabilities")
     val totalLiabilities: kotlin.Int? = null
 

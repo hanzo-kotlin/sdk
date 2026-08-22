@@ -21,26 +21,29 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param bytes 
- * @param commit 
- * @param files 
+ * @param bytes Bytes is their total size in bytes.
+ * @param commit Commit is the revision that was built, recorded on the deployment.
+ * @param files Files is how many objects CI published.
  * @param id ID is the queued deployment to complete, from the path.
  * @param propertyKeys Keys is the manifest CI just uploaded, RELATIVE to the deployment prefix. It is what replaces `aws s3 sync --delete`: an upload grant authorizes writes only, so CI cannot remove a file, and cloud reconciles the prefix against this list instead (grant.go). Omit it and nothing is deleted — the prefix only grows, which is the old pre-grant behaviour and a safe default.
- * @param liveUrl 
- * @param message 
+ * @param liveUrl LiveURL is a HINT at the address the site should serve at. The public host is claimed by cloud first, so this can refine the URL a deployment reports but can never assert a subdomain another tenant holds.
+ * @param message Message is what happened, in words — on an error completion, why it failed.
  * @param slug Slug is the project the deployment belongs to, from the path.
- * @param status live | error
+ * @param status Status is how the build ended: `live` if it succeeded, `error` if it did not. Nothing else is accepted.
  */
 
 
 data class ProjectsComplete (
 
+    /* Bytes is their total size in bytes. */
     @SerializedName("bytes")
     val bytes: kotlin.Int? = null,
 
+    /* Commit is the revision that was built, recorded on the deployment. */
     @SerializedName("commit")
     val commit: kotlin.String? = null,
 
+    /* Files is how many objects CI published. */
     @SerializedName("files")
     val files: kotlin.Int? = null,
 
@@ -52,9 +55,11 @@ data class ProjectsComplete (
     @SerializedName("keys")
     val propertyKeys: kotlin.collections.List<kotlin.String>? = null,
 
+    /* LiveURL is a HINT at the address the site should serve at. The public host is claimed by cloud first, so this can refine the URL a deployment reports but can never assert a subdomain another tenant holds. */
     @SerializedName("liveUrl")
     val liveUrl: kotlin.String? = null,
 
+    /* Message is what happened, in words — on an error completion, why it failed. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
@@ -62,7 +67,7 @@ data class ProjectsComplete (
     @SerializedName("slug")
     val slug: kotlin.String? = null,
 
-    /* live | error */
+    /* Status is how the build ended: `live` if it succeeded, `error` if it did not. Nothing else is accepted. */
     @SerializedName("status")
     val status: kotlin.String? = null
 

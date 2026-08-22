@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param key 
- * @param label 
+ * @param key Key is the identifier the body substitutes ({{.key}}) and the key a generation's data map must carry. snake_case by convention across the built-ins — effective_date, company_name, governing_law. An override whose body references a key no Field declares is refused on save.
+ * @param label Label is the human prompt for whoever fills the value in — \"Governing law (state)\". It never reaches the rendered document; only Key does.
  */
 
 
 data class Field (
 
+    /* Key is the identifier the body substitutes ({{.key}}) and the key a generation's data map must carry. snake_case by convention across the built-ins — effective_date, company_name, governing_law. An override whose body references a key no Field declares is refused on save. */
     @SerializedName("key")
     val key: kotlin.String? = null,
 
+    /* Label is the human prompt for whoever fills the value in — \"Governing law (state)\". It never reaches the rendered document; only Key does. */
     @SerializedName("label")
     val label: kotlin.String? = null
 

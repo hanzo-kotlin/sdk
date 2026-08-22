@@ -21,11 +21,11 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param base 
- * @param branch 
- * @param cloneUrl 
- * @param project 
- * @param prompt 
+ * @param base Base is the branch to start FROM. Empty means the repository's default — resolve it on the machine, since the machine is the one holding the clone.
+ * @param branch Branch is the ref the run must push its work to, and the ONLY one it is permitted to write: the forge's ref policy refuses anything else from this run's credential. It is decided at dispatch and exists before the work does.
+ * @param cloneUrl CloneURL is how to fetch the repository. It carries NO credential — the machine authenticates with the git identity it already holds — which is why this whole shape is safe to hand to a claimed runner.
+ * @param project Project is the product slug the run is filed under, so the machine can tag what it produces. Empty when the dispatch named none.
+ * @param prompt Prompt is the task, in full, as the person wrote it. There is no second field for context.
  * @param repo Repo is the repository to work in and CloneURL is how to fetch it.
  * @param sessionId SessionID is the live session opened at dispatch; the machine streams its turns into it.
  * @param timeoutSeconds TimeoutSeconds bounds the run on the machine; 0 means the machine's own default.
@@ -34,18 +34,23 @@ import com.google.gson.annotations.SerializedName
 
 data class RoutedRunOut (
 
+    /* Base is the branch to start FROM. Empty means the repository's default — resolve it on the machine, since the machine is the one holding the clone. */
     @SerializedName("base")
     val base: kotlin.String? = null,
 
+    /* Branch is the ref the run must push its work to, and the ONLY one it is permitted to write: the forge's ref policy refuses anything else from this run's credential. It is decided at dispatch and exists before the work does. */
     @SerializedName("branch")
     val branch: kotlin.String? = null,
 
+    /* CloneURL is how to fetch the repository. It carries NO credential — the machine authenticates with the git identity it already holds — which is why this whole shape is safe to hand to a claimed runner. */
     @SerializedName("cloneUrl")
     val cloneUrl: kotlin.String? = null,
 
+    /* Project is the product slug the run is filed under, so the machine can tag what it produces. Empty when the dispatch named none. */
     @SerializedName("project")
     val project: kotlin.String? = null,
 
+    /* Prompt is the task, in full, as the person wrote it. There is no second field for context. */
     @SerializedName("prompt")
     val prompt: kotlin.String? = null,
 

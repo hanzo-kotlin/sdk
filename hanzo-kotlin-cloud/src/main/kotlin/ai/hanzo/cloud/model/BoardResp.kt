@@ -25,12 +25,12 @@ import com.google.gson.annotations.SerializedName
  * @param account Account is the account the series narrows to, when one was named.
  * @param available Available reports whether the warehouse answered; false is an honest \"we have no data\", NOT zero usage.
  * @param current Current is the live state of each lane — the dash headline.
- * @param from From and To are the resolved [from, to) window, RFC 3339 UTC.
+ * @param from From is when the resolved window opens, RFC 3339 UTC.
  * @param provider Provider is the provider whose meter answered.
  * @param range Range is the resolved period label.
  * @param scope Scope is always \"user\": the caller's own linked accounts.
  * @param source Source is always \"account\": the provider's own meter, not a Hanzo charge.
- * @param to 
+ * @param to To is where it closes, EXCLUSIVE, RFC 3339 UTC — the instant the read was served, so the window walks forward with the clock and two reads a minute apart do not cover the same period.
  * @param windows Windows is every window instance in range, newest first.
  */
 
@@ -49,7 +49,7 @@ data class BoardResp (
     @SerializedName("current")
     val current: kotlin.collections.List<ReadingView>? = null,
 
-    /* From and To are the resolved [from, to) window, RFC 3339 UTC. */
+    /* From is when the resolved window opens, RFC 3339 UTC. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
@@ -69,6 +69,7 @@ data class BoardResp (
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* To is where it closes, EXCLUSIVE, RFC 3339 UTC — the instant the read was served, so the window walks forward with the clock and two reads a minute apart do not cover the same period. */
     @SerializedName("to")
     val to: kotlin.String? = null,
 

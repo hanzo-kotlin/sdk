@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param connector 
- * @param createdAt 
- * @param externalId 
- * @param prompt 
- * @param status 
+ * @param connector Connector names the feed the unplaceable line arrived on. With externalId it identifies both the question and the bank line it is about, so re-syncing the same deposit never asks twice.
+ * @param createdAt CreatedAt is when the question was raised.
+ * @param externalId ExternalID is the bank's own id for the line in question.
+ * @param prompt Prompt is the question put to the founder in plain language — what this money was, since the books cannot place it on their own.
+ * @param status Status is whether the question is still open or has been answered.
  */
 
 
 data class BankQuestion (
 
+    /* Connector names the feed the unplaceable line arrived on. With externalId it identifies both the question and the bank line it is about, so re-syncing the same deposit never asks twice. */
     @SerializedName("connector")
     val connector: kotlin.String? = null,
 
+    /* CreatedAt is when the question was raised. */
     @SerializedName("createdAt")
     val createdAt: kotlin.String? = null,
 
+    /* ExternalID is the bank's own id for the line in question. */
     @SerializedName("externalId")
     val externalId: kotlin.String? = null,
 
+    /* Prompt is the question put to the founder in plain language — what this money was, since the books cannot place it on their own. */
     @SerializedName("prompt")
     val prompt: kotlin.String? = null,
 
+    /* Status is whether the question is still open or has been answered. */
     @SerializedName("status")
     val status: kotlin.String? = null
 

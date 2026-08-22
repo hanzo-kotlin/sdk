@@ -21,22 +21,22 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param budget Budget and Spend are minor units (USD cents), clamped to >= 0.
+ * @param budget Budget is what the campaign is allowed to cost, in USD cents. A negative value is clamped to 0; nothing enforces the ceiling here.
  * @param channel Channel is the delivery surface: email, sms, social, meta, google or tiktok. Empty means email.
- * @param createdAt CreatedAt and UpdatedAt are unix seconds, both server-assigned.
+ * @param createdAt CreatedAt is unix seconds when the campaign was registered. Server-assigned and never rewritten — an update leaves it as it was.
  * @param id ID is the server-assigned campaign id (\"camp_\" + 128 random bits).
  * @param name Name is the campaign's label. Required, trimmed, capped at 1024 bytes.
  * @param objective Objective is the free-text goal (\"signups\"), capped at 1024 bytes.
  * @param scheduledAt ScheduledAt is the unix send time; 0 means unscheduled. Setting it on a campaign with no explicit status makes that status \"scheduled\".
- * @param spend 
+ * @param spend Spend is what the campaign has cost so far, in USD cents, clamped to >= 0. The CALLER owns it: no send, ad buy or invoice moves it, so it changes only when create or update carries a new value. It is summed across the org's campaigns into GET /v1/marketing/summary.
  * @param status Status is the lifecycle: draft, scheduled, active, paused or completed. Empty means draft.
- * @param updatedAt 
+ * @param updatedAt UpdatedAt is unix seconds of the last write. Server-assigned on create and on every update or schedule change, and the campaign list is ordered by it, newest first.
  */
 
 
 data class Campaign (
 
-    /* Budget and Spend are minor units (USD cents), clamped to >= 0. */
+    /* Budget is what the campaign is allowed to cost, in USD cents. A negative value is clamped to 0; nothing enforces the ceiling here. */
     @SerializedName("budget")
     val budget: kotlin.Int? = null,
 
@@ -44,7 +44,7 @@ data class Campaign (
     @SerializedName("channel")
     val channel: kotlin.String? = null,
 
-    /* CreatedAt and UpdatedAt are unix seconds, both server-assigned. */
+    /* CreatedAt is unix seconds when the campaign was registered. Server-assigned and never rewritten — an update leaves it as it was. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
@@ -64,6 +64,7 @@ data class Campaign (
     @SerializedName("scheduledAt")
     val scheduledAt: kotlin.Int? = null,
 
+    /* Spend is what the campaign has cost so far, in USD cents, clamped to >= 0. The CALLER owns it: no send, ad buy or invoice moves it, so it changes only when create or update carries a new value. It is summed across the org's campaigns into GET /v1/marketing/summary. */
     @SerializedName("spend")
     val spend: kotlin.Int? = null,
 
@@ -71,6 +72,7 @@ data class Campaign (
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* UpdatedAt is unix seconds of the last write. Server-assigned on create and on every update or schedule change, and the campaign list is ordered by it, newest first. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null
 

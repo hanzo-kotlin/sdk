@@ -24,28 +24,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param apiVersion 
- * @param kind 
- * @param metadata 
- * @param spec 
- * @param status 
+ * @param apiVersion APIVersion is the constant \"argoproj.io/v1alpha1\" — the shape, not the source. These are projections of operator App CRs and Hanzo CD Applications; no argoproj.io object is stored anywhere behind this plane.
+ * @param kind Kind is the constant \"Application\".
+ * @param metadata Metadata is the projected object's identity.
+ * @param spec Spec is the desired state: where it comes from, where it lands, what project it belongs to.
+ * @param status Status is what was observed: the sync verdict, the health, and the owned objects when this is a detail read.
  */
 
 
 data class ArgoApp (
 
+    /* APIVersion is the constant \"argoproj.io/v1alpha1\" — the shape, not the source. These are projections of operator App CRs and Hanzo CD Applications; no argoproj.io object is stored anywhere behind this plane. */
     @SerializedName("apiVersion")
     val apiVersion: kotlin.String? = null,
 
+    /* Kind is the constant \"Application\". */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Metadata is the projected object's identity. */
     @SerializedName("metadata")
     val metadata: ArgoMeta? = null,
 
+    /* Spec is the desired state: where it comes from, where it lands, what project it belongs to. */
     @SerializedName("spec")
     val spec: ArgoSpec? = null,
 
+    /* Status is what was observed: the sync verdict, the health, and the owned objects when this is a detail read. */
     @SerializedName("status")
     val status: ArgoStatus? = null
 

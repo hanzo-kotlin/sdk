@@ -23,24 +23,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param apiVersion 
- * @param items 
- * @param kind 
- * @param metadata 
+ * @param apiVersion APIVersion is the constant \"argoproj.io/v1alpha1\".
+ * @param items Items is one entry per operator App CR the caller may see — its own org's, or every platform namespace's for a SuperAdmin — followed, for a SuperAdmin only, by every Hanzo CD Application in the cluster. Empty (never null) rather than absent when the caller owns nothing.
+ * @param kind Kind is the constant \"ApplicationList\".
+ * @param metadata Metadata is the list envelope the SPA expects; it carries no resume point.
  */
 
 
 data class ArgoAppList (
 
+    /* APIVersion is the constant \"argoproj.io/v1alpha1\". */
     @SerializedName("apiVersion")
     val apiVersion: kotlin.String? = null,
 
+    /* Items is one entry per operator App CR the caller may see — its own org's, or every platform namespace's for a SuperAdmin — followed, for a SuperAdmin only, by every Hanzo CD Application in the cluster. Empty (never null) rather than absent when the caller owns nothing. */
     @SerializedName("items")
     val items: kotlin.collections.List<ArgoApp>? = null,
 
+    /* Kind is the constant \"ApplicationList\". */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Metadata is the list envelope the SPA expects; it carries no resume point. */
     @SerializedName("metadata")
     val metadata: ArgoListMeta? = null
 

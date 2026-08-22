@@ -22,37 +22,43 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param expense 
- * @param from 
- * @param income 
- * @param netIncome TotalIncome − TotalExpense
- * @param to 
- * @param totalExpense 
- * @param totalIncome 
+ * @param expense Expense is the cost lines that moved in the period, one per account.
+ * @param from From opens the period and is EXCLUSIVE — movement strictly after it, matching the trial balance's opening boundary so the two reports agree on what belongs to a period. Absent means from the beginning of the ledger.
+ * @param income Income is the revenue lines that moved in the period, one per account. Accounts that did not move are omitted rather than listed at zero.
+ * @param netIncome NetIncome is totalIncome minus totalExpense, in cents. Negative is a loss.
+ * @param to To closes the period and is inclusive. Absent means up to now.
+ * @param totalExpense TotalExpense is cost MATCHED to that revenue, in cents, including accrued infrastructure that has not been billed yet.
+ * @param totalIncome TotalIncome is revenue RECOGNIZED in the period, in cents — accrual, not cash, so a prepaid top-up is not in it until the credit is consumed.
  */
 
 
 data class PnL (
 
+    /* Expense is the cost lines that moved in the period, one per account. */
     @SerializedName("expense")
     val expense: kotlin.collections.List<PnLLine>? = null,
 
+    /* From opens the period and is EXCLUSIVE — movement strictly after it, matching the trial balance's opening boundary so the two reports agree on what belongs to a period. Absent means from the beginning of the ledger. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
+    /* Income is the revenue lines that moved in the period, one per account. Accounts that did not move are omitted rather than listed at zero. */
     @SerializedName("income")
     val income: kotlin.collections.List<PnLLine>? = null,
 
-    /* TotalIncome − TotalExpense */
+    /* NetIncome is totalIncome minus totalExpense, in cents. Negative is a loss. */
     @SerializedName("netIncome")
     val netIncome: kotlin.Int? = null,
 
+    /* To closes the period and is inclusive. Absent means up to now. */
     @SerializedName("to")
     val to: kotlin.String? = null,
 
+    /* TotalExpense is cost MATCHED to that revenue, in cents, including accrued infrastructure that has not been billed yet. */
     @SerializedName("totalExpense")
     val totalExpense: kotlin.Int? = null,
 
+    /* TotalIncome is revenue RECOGNIZED in the period, in cents — accrual, not cash, so a prepaid top-up is not in it until the credit is consumed. */
     @SerializedName("totalIncome")
     val totalIncome: kotlin.Int? = null
 

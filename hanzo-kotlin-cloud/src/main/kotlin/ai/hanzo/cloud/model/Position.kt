@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param character 
- * @param line 
+ * @param character Character is a 0-based UTF-16 code-unit offset within Line, per the LSP specification: not a byte offset and not a rune index. An emoji before the cursor counts as one here and as two in Go's arithmetic.
+ * @param line Line is 0-BASED, per the LSP specification — one less than the line an editor shows a human.
  */
 
 
 data class Position (
 
+    /* Character is a 0-based UTF-16 code-unit offset within Line, per the LSP specification: not a byte offset and not a rune index. An emoji before the cursor counts as one here and as two in Go's arithmetic. */
     @SerializedName("character")
     val character: kotlin.Int? = null,
 
+    /* Line is 0-BASED, per the LSP specification — one less than the line an editor shows a human. */
     @SerializedName("line")
     val line: kotlin.Int? = null
 

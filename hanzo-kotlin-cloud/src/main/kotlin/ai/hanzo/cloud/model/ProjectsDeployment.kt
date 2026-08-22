@@ -22,62 +22,75 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param bucket 
- * @param bytes 
- * @param commit 
- * @param createdAt 
- * @param files 
- * @param id 
- * @param liveUrl 
- * @param message 
- * @param prefix 
- * @param projectId 
- * @param source 
- * @param status 
- * @param updatedAt 
+ * @param bucket Bucket is the object-store bucket its files were written to.
+ * @param bytes Bytes is their total size in bytes.
+ * @param commit Commit is the revision that was built, for a deployment that came from a repository. Absent for an uploaded artifact, which has no revision.
+ * @param createdAt CreatedAt is when the deployment was queued, as Unix seconds.
+ * @param files Files is how many objects the deployment published.
+ * @param id ID identifies this one deployment attempt, and is what CI quotes back to complete it.
+ * @param liveUrl LiveURL is where this deployment serves, once it is live.
+ * @param message Message is what happened, in words — the build's own note, or on a failure why it failed.
+ * @param prefix Prefix is the key prefix within that bucket holding EXACTLY this deployment's objects — the unit an upload grant is scoped to, so a grant for one deployment cannot write over another.
+ * @param projectId ProjectID is the project this deployment belongs to.
+ * @param source Source is what caused the deployment — a git push, an uploaded artifact, a generated site.
+ * @param status Status is where the attempt got to — queued, live, or failed. A deployment that is live is not necessarily the one SERVING: the project's own currentDeploymentId says which is.
+ * @param updatedAt UpdatedAt is when it last changed state, as Unix seconds — so the gap between the two is how long the build took.
  * @param upload Upload is the prefix-scoped, short-lived S3 write grant handed to CI with a queued git deployment, so it needs no bucket credential (grant.go). Present ONLY on the 202 that creates the deployment — it is never stored and never replayed on a later read, so a grant cannot outlive the build it was minted for by being fetched again.
- * @param version 
+ * @param version Version counts deployments of this project from 1, so the history reads as an ordered sequence rather than by timestamp. It is per project, not global.
  */
 
 
 data class ProjectsDeployment (
 
+    /* Bucket is the object-store bucket its files were written to. */
     @SerializedName("bucket")
     val bucket: kotlin.String? = null,
 
+    /* Bytes is their total size in bytes. */
     @SerializedName("bytes")
     val bytes: kotlin.Int? = null,
 
+    /* Commit is the revision that was built, for a deployment that came from a repository. Absent for an uploaded artifact, which has no revision. */
     @SerializedName("commit")
     val commit: kotlin.String? = null,
 
+    /* CreatedAt is when the deployment was queued, as Unix seconds. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* Files is how many objects the deployment published. */
     @SerializedName("files")
     val files: kotlin.Int? = null,
 
+    /* ID identifies this one deployment attempt, and is what CI quotes back to complete it. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* LiveURL is where this deployment serves, once it is live. */
     @SerializedName("liveUrl")
     val liveUrl: kotlin.String? = null,
 
+    /* Message is what happened, in words — the build's own note, or on a failure why it failed. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
+    /* Prefix is the key prefix within that bucket holding EXACTLY this deployment's objects — the unit an upload grant is scoped to, so a grant for one deployment cannot write over another. */
     @SerializedName("prefix")
     val prefix: kotlin.String? = null,
 
+    /* ProjectID is the project this deployment belongs to. */
     @SerializedName("projectId")
     val projectId: kotlin.String? = null,
 
+    /* Source is what caused the deployment — a git push, an uploaded artifact, a generated site. */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Status is where the attempt got to — queued, live, or failed. A deployment that is live is not necessarily the one SERVING: the project's own currentDeploymentId says which is. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* UpdatedAt is when it last changed state, as Unix seconds — so the gap between the two is how long the build took. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null,
 
@@ -85,6 +98,7 @@ data class ProjectsDeployment (
     @SerializedName("upload")
     val upload: ProjectsUploadGrant? = null,
 
+    /* Version counts deployments of this project from 1, so the history reads as an ordered sequence rather than by timestamp. It is per project, not global. */
     @SerializedName("version")
     val version: kotlin.Int? = null
 

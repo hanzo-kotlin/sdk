@@ -22,7 +22,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param files Files are what this run CREATED OR CHANGED, decided by mtime against a marker taken before the program started — so it is the run's output, not a listing of the directory. Fetch each from GET /v1/download/{session}/{id}.
+ * @param files Files are what this run CREATED OR CHANGED, decided by mtime against a marker taken before the program started — so it is the run's output, not a listing of the directory. Fetch each from GET /v1/exec/download/{session}/{id}.
  * @param sessionId SessionID is the sandbox this run used — the one that was passed in, or the fresh one that was leased. Pass it to the next run to keep the filesystem.
  * @param stderr Stderr is what the program wrote to standard error, INCLUDING a compiler's diagnostics and the trace of a program that exited non-zero. Its presence is not a failed call.
  * @param stdout Stdout is what the program wrote to standard output.
@@ -31,7 +31,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CodeResult (
 
-    /* Files are what this run CREATED OR CHANGED, decided by mtime against a marker taken before the program started — so it is the run's output, not a listing of the directory. Fetch each from GET /v1/download/{session}/{id}. */
+    /* Files are what this run CREATED OR CHANGED, decided by mtime against a marker taken before the program started — so it is the run's output, not a listing of the directory. Fetch each from GET /v1/exec/download/{session}/{id}. */
     @SerializedName("files")
     val files: kotlin.collections.List<CodeFile>? = null,
 

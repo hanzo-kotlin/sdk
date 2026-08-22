@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param detail 
- * @param kind 
- * @param label 
+ * @param detail Detail is the server's short elaboration, typically the type or signature.
+ * @param kind Kind is the LSP CompletionItemKind number (2 method, 3 function, 5 field, 6 variable, …), passed through as the protocol spells it.
+ * @param label Label is the text a client would insert, and what an editor lists.
  */
 
 
 data class Completion (
 
+    /* Detail is the server's short elaboration, typically the type or signature. */
     @SerializedName("detail")
     val detail: kotlin.String? = null,
 
+    /* Kind is the LSP CompletionItemKind number (2 method, 3 function, 5 field, 6 variable, …), passed through as the protocol spells it. */
     @SerializedName("kind")
     val kind: kotlin.Int? = null,
 
+    /* Label is the text a client would insert, and what an editor lists. */
     @SerializedName("label")
     val label: kotlin.String? = null
 

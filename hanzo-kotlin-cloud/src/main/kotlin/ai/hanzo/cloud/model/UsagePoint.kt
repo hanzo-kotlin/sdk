@@ -21,24 +21,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param date 
- * @param requests 
- * @param spendCents 
- * @param tokens 
+ * @param requests Requests is how many LLM calls fell in this bucket.
+ * @param spendCents SpendCents is what they cost, in cents.
+ * @param t T is the bucket's start, RFC3339 UTC, aligned to the interval.
+ * @param tokens Tokens is prompt plus completion tokens over those calls.
  */
 
 
 data class UsagePoint (
 
-    @SerializedName("date")
-    val date: kotlin.String? = null,
-
+    /* Requests is how many LLM calls fell in this bucket. */
     @SerializedName("requests")
     val requests: kotlin.Int? = null,
 
+    /* SpendCents is what they cost, in cents. */
     @SerializedName("spendCents")
     val spendCents: kotlin.Int? = null,
 
+    /* T is the bucket's start, RFC3339 UTC, aligned to the interval. */
+    @SerializedName("t")
+    val t: kotlin.String? = null,
+
+    /* Tokens is prompt plus completion tokens over those calls. */
     @SerializedName("tokens")
     val tokens: kotlin.Int? = null
 

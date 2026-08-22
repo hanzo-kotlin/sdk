@@ -23,36 +23,43 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param capacity 
- * @param host 
- * @param kind 
- * @param label 
- * @param metrics 
- * @param spec 
- * @param status 
+ * @param capacity Capacity is a human summary of the machine's size, up to 256 characters. Prose only; a scheduler reads Spec.
+ * @param host Host is the hostname sessions on this machine will report. It is what makes a re-link IDEMPOTENT: the same (org, host, owner) refreshes the existing row and answers 200, while a request with no host always creates a new target and answers 201. It never adopts a row owned by somebody else.
+ * @param kind Kind is laptop | cloud | gpu | cluster | machine. Empty registers a `machine`; anything outside the five is a 400.
+ * @param label Label is the name to show for this machine, up to 128 characters. REQUIRED — it is the only field here a person reads.
+ * @param metrics Metrics is a live sample, and sending one IS A HEARTBEAT: it refreshes the row and starts the 90-second liveness window, and it is appended to the fleet series as one point. Its own `at` is ignored — the server stamps the time, so a client can never age or backdate its own machine. Omit it to register a machine without claiming it is alive.
+ * @param spec Spec is the machine's static capability — os, arch, cores, RAM, accelerators. Every field is bounded on write and at most 32 accelerators are accepted, so what comes back may be clamped. Omit it for a destination nothing probes.
+ * @param status Status is online | offline | draining. Empty registers `online`. It states INTENT — a heartbeat is what decides whether an online machine is actually reachable, so declaring online does not make it so.
  */
 
 
 data class TargetReq (
 
+    /* Capacity is a human summary of the machine's size, up to 256 characters. Prose only; a scheduler reads Spec. */
     @SerializedName("capacity")
     val capacity: kotlin.String? = null,
 
+    /* Host is the hostname sessions on this machine will report. It is what makes a re-link IDEMPOTENT: the same (org, host, owner) refreshes the existing row and answers 200, while a request with no host always creates a new target and answers 201. It never adopts a row owned by somebody else. */
     @SerializedName("host")
     val host: kotlin.String? = null,
 
+    /* Kind is laptop | cloud | gpu | cluster | machine. Empty registers a `machine`; anything outside the five is a 400. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Label is the name to show for this machine, up to 128 characters. REQUIRED — it is the only field here a person reads. */
     @SerializedName("label")
     val label: kotlin.String? = null,
 
+    /* Metrics is a live sample, and sending one IS A HEARTBEAT: it refreshes the row and starts the 90-second liveness window, and it is appended to the fleet series as one point. Its own `at` is ignored — the server stamps the time, so a client can never age or backdate its own machine. Omit it to register a machine without claiming it is alive. */
     @SerializedName("metrics")
     val metrics: Metrics? = null,
 
+    /* Spec is the machine's static capability — os, arch, cores, RAM, accelerators. Every field is bounded on write and at most 32 accelerators are accepted, so what comes back may be clamped. Omit it for a destination nothing probes. */
     @SerializedName("spec")
     val spec: Spec? = null,
 
+    /* Status is online | offline | draining. Empty registers `online`. It states INTENT — a heartbeat is what decides whether an online machine is actually reachable, so declaring online does not make it so. */
     @SerializedName("status")
     val status: kotlin.String? = null
 

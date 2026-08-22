@@ -21,28 +21,33 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param finishedAt 
- * @param message 
- * @param phase 
- * @param revision 
- * @param startedAt 
+ * @param finishedAt FinishedAt is when it ended, RFC 3339. Absent while the phase is Running.
+ * @param message Message is CD's account of the phase — \"successfully synced (all tasks run)\" for a Succeeded operation, the reason it stopped for a Failed one.
+ * @param phase Phase is how the last sync operation ended, in CD's own vocabulary: Running, Succeeded or Failed. It is never empty — an Application whose phase is empty has no operation at all and omits this whole object.
+ * @param revision Revision is the commit this operation ATTEMPTED (operationState.syncResult). It differs from the Application's own revision exactly when the attempt did not land: revision is the last commit CD got applied, this is the last one it tried.
+ * @param startedAt StartedAt is when the operation began, RFC 3339.
  */
 
 
 data class GitOpsOperation (
 
+    /* FinishedAt is when it ended, RFC 3339. Absent while the phase is Running. */
     @SerializedName("finishedAt")
     val finishedAt: kotlin.String? = null,
 
+    /* Message is CD's account of the phase — \"successfully synced (all tasks run)\" for a Succeeded operation, the reason it stopped for a Failed one. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
+    /* Phase is how the last sync operation ended, in CD's own vocabulary: Running, Succeeded or Failed. It is never empty — an Application whose phase is empty has no operation at all and omits this whole object. */
     @SerializedName("phase")
     val phase: kotlin.String? = null,
 
+    /* Revision is the commit this operation ATTEMPTED (operationState.syncResult). It differs from the Application's own revision exactly when the attempt did not land: revision is the last commit CD got applied, this is the last one it tried. */
     @SerializedName("revision")
     val revision: kotlin.String? = null,
 
+    /* StartedAt is when the operation began, RFC 3339. */
     @SerializedName("startedAt")
     val startedAt: kotlin.String? = null
 

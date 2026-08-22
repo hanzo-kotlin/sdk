@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
  * @param commands Commands is the command list the node reported. Same standing as Caps: a self-report, checked again at the socket before anything runs.
  * @param connectedAt ConnectedAt is when this node's socket was established, RFC3339 UTC.
  * @param displayName DisplayName is the human name the node reported for itself.
- * @param id ID is the node's own identifier within the org — the value POST /v1/bot/nodes/{id}/invoke addresses it by.
+ * @param id ID is the node's own identifier within the org — the value POST /v1/node/{id}/invoke addresses it by.
  * @param platform Platform is the operating system and architecture the node reported.
  * @param version Version is the node agent's own version string.
  */
@@ -49,7 +49,7 @@ data class NodeView (
     @SerializedName("displayName")
     val displayName: kotlin.String? = null,
 
-    /* ID is the node's own identifier within the org — the value POST /v1/bot/nodes/{id}/invoke addresses it by. */
+    /* ID is the node's own identifier within the org — the value POST /v1/node/{id}/invoke addresses it by. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 

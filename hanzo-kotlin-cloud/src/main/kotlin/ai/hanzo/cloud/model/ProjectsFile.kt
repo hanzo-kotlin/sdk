@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param content 
- * @param path 
+ * @param content Content is the file's whole text, inline. There is no upload step and no reference to fetch: a site is sent as its bytes, and each file and the site as a whole are size-bounded.
+ * @param path Path is where the file lands in the site, RELATIVE to its root — so \"index.html\" is the page served at /. Leading slashes and any attempt to escape the root are refused.
  */
 
 
 data class ProjectsFile (
 
+    /* Content is the file's whole text, inline. There is no upload step and no reference to fetch: a site is sent as its bytes, and each file and the site as a whole are size-bounded. */
     @SerializedName("content")
     val content: kotlin.String? = null,
 
+    /* Path is where the file lands in the site, RELATIVE to its root — so \"index.html\" is the page served at /. Leading slashes and any attempt to escape the root are refused. */
     @SerializedName("path")
     val path: kotlin.String? = null
 

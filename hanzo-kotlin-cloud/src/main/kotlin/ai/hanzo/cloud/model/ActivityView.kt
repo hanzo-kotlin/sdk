@@ -23,9 +23,9 @@ import com.google.gson.annotations.SerializedName
  *
  * @param agent agent name
  * @param at RFC3339 UTC
- * @param id 
+ * @param id ID identifies the event, and its shape says which kind it is: a run event carries the run's own id, while an agent event is the agent id suffixed \":created\" or \":updated\". Unique within a feed, and not an address — there is nothing to fetch it by.
  * @param kind invoked|failed|created|updated (from real events)
- * @param message 
+ * @param message Message is the line to render, already bounded: \"Invoked <model>\" for a run that worked, the run's own error truncated to 200 characters for one that did not (or \"Run failed\" when it said nothing), and a fixed phrase for the two agent events. Nothing here is invented — every event is a row that exists.
  */
 
 
@@ -39,6 +39,7 @@ data class ActivityView (
     @SerializedName("at")
     val at: kotlin.String? = null,
 
+    /* ID identifies the event, and its shape says which kind it is: a run event carries the run's own id, while an agent event is the agent id suffixed \":created\" or \":updated\". Unique within a feed, and not an address — there is nothing to fetch it by. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
@@ -46,6 +47,7 @@ data class ActivityView (
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
+    /* Message is the line to render, already bounded: \"Invoked <model>\" for a run that worked, the run's own error truncated to 200 characters for one that did not (or \"Run failed\" when it said nothing), and a fixed phrase for the two agent events. Nothing here is invented — every event is a row that exists. */
     @SerializedName("message")
     val message: kotlin.String? = null
 

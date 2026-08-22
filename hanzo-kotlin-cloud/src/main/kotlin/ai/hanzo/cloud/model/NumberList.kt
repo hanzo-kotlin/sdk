@@ -22,12 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `data` 
+ * @param `data` Data is the numbers, and which numbers depends on the route: a search answers what the carrier has available, a list answers what this org already holds.
  */
 
 
 data class NumberList (
 
+    /* Data is the numbers, and which numbers depends on the route: a search answers what the carrier has available, a list answers what this org already holds. */
     @SerializedName("data")
     val `data`: kotlin.collections.List<Number>? = null
 

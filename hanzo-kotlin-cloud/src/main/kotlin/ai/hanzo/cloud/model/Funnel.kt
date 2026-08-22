@@ -21,25 +21,45 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param convertedOrgs ConvertedOrgs is how many distinct referred orgs have produced positive commission at least once — a referral that actually spent.
- * @param ratePct RatePct is convertedOrgs over referredOrgs as a PERCENTAGE, 0–100, and the one non-integer figure on this board. It is 0 when nothing has been referred yet, not undefined.
- * @param referredOrgs ReferredOrgs is how many attribution edges exist fleet-wide — one per referred org, first-touch, so it is also the count of distinct referred orgs.
+ * @param available Available separates \"this org has no traffic\" from \"we could not ask\". False means the warehouse was unreachable or the org has emitted nothing at all, and every count below is then a placeholder zero rather than a measurement — a caller must read this before reading any of them.
+ * @param orders Orders counts completed orders in the window — purchases, not carts started.
+ * @param pageviews Pageviews counts page events in the window, one per view rather than per person, so a single visitor reading ten pages counts ten.
+ * @param revenue Revenue is the sum of the amounts those orders reported, in whatever currency the beacon stamped on them (major units, e.g. 49.5 for $49.50) — NOT cents, and not converted to a single currency. Contrast revenueCents on the profile, which is the money of record.
+ * @param signups Signups counts completed signups in the window, the step where an anonymous visitor becomes somebody with an account.
+ * @param visitors Visitors is the number of DISTINCT people seen in the window, counted by the beacon's distinct id — so it is unique visitors, not sessions and not views.
+ * @param windowDays WindowDays is the length of the trailing window every count covers, so a reader knows whether 40 signups is a month or a day.
  */
 
 
 data class Funnel (
 
-    /* ConvertedOrgs is how many distinct referred orgs have produced positive commission at least once — a referral that actually spent. */
-    @SerializedName("convertedOrgs")
-    val convertedOrgs: kotlin.Int? = null,
+    /* Available separates \"this org has no traffic\" from \"we could not ask\". False means the warehouse was unreachable or the org has emitted nothing at all, and every count below is then a placeholder zero rather than a measurement — a caller must read this before reading any of them. */
+    @SerializedName("available")
+    val available: kotlin.Boolean? = null,
 
-    /* RatePct is convertedOrgs over referredOrgs as a PERCENTAGE, 0–100, and the one non-integer figure on this board. It is 0 when nothing has been referred yet, not undefined. */
-    @SerializedName("ratePct")
-    val ratePct: java.math.BigDecimal? = null,
+    /* Orders counts completed orders in the window — purchases, not carts started. */
+    @SerializedName("orders")
+    val orders: kotlin.Int? = null,
 
-    /* ReferredOrgs is how many attribution edges exist fleet-wide — one per referred org, first-touch, so it is also the count of distinct referred orgs. */
-    @SerializedName("referredOrgs")
-    val referredOrgs: kotlin.Int? = null
+    /* Pageviews counts page events in the window, one per view rather than per person, so a single visitor reading ten pages counts ten. */
+    @SerializedName("pageviews")
+    val pageviews: kotlin.Int? = null,
+
+    /* Revenue is the sum of the amounts those orders reported, in whatever currency the beacon stamped on them (major units, e.g. 49.5 for $49.50) — NOT cents, and not converted to a single currency. Contrast revenueCents on the profile, which is the money of record. */
+    @SerializedName("revenue")
+    val revenue: java.math.BigDecimal? = null,
+
+    /* Signups counts completed signups in the window, the step where an anonymous visitor becomes somebody with an account. */
+    @SerializedName("signups")
+    val signups: kotlin.Int? = null,
+
+    /* Visitors is the number of DISTINCT people seen in the window, counted by the beacon's distinct id — so it is unique visitors, not sessions and not views. */
+    @SerializedName("visitors")
+    val visitors: kotlin.Int? = null,
+
+    /* WindowDays is the length of the trailing window every count covers, so a reader knows whether 40 signups is a month or a day. */
+    @SerializedName("windowDays")
+    val windowDays: kotlin.Int? = null
 
 ) {
 

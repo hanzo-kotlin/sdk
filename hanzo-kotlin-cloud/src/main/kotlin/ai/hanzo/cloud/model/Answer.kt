@@ -26,16 +26,16 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param cold Cold reports that this request paid to PREPARE the revision — the tree write, the dependency fetch and the language server's first index. It is the billed event, surfaced so a caller can see what it was charged for.
- * @param completions 
- * @param diagnostics 
- * @param hover 
- * @param lang 
- * @param locations 
- * @param op 
- * @param path 
- * @param repo 
- * @param rev 
- * @param symbols 
+ * @param completions Completions is complete's answer: the candidates at the position, typed and resolved through the repository's dependencies rather than guessed from text.
+ * @param diagnostics Diagnostics is diagnostics' answer: every problem the server finds in the whole file, position ignored. Empty means it found none.
+ * @param hover Hover is hover's answer: the type and documentation as the language server itself renders them, so it is prose meant to be shown, not parsed.
+ * @param lang Lang is the language the server that answered speaks (\"go\"), as the daemon reports it. Empty when the daemon named none.
+ * @param locations Locations is locate's answer: where the symbol is defined, referenced, typed or implemented, per the relation asked for. Empty means the server resolved nothing there, which is an answer.
+ * @param op Op is the question that was asked: hover, locate, symbols, diagnostics or complete. It names which result field below is the populated one.
+ * @param path Path is the repo-relative file the question was about, echoed back.
+ * @param repo Repo is the repository the question was about, echoed back.
+ * @param rev Rev is the RESOLVED commit sha, never the branch or tag that was asked for. It is what makes an answer re-askable: a branch moves, this does not.
+ * @param symbols Symbols is symbols' answer: the file's whole outline, position ignored.
  */
 
 
@@ -45,33 +45,43 @@ data class Answer (
     @SerializedName("cold")
     val cold: kotlin.Boolean? = null,
 
+    /* Completions is complete's answer: the candidates at the position, typed and resolved through the repository's dependencies rather than guessed from text. */
     @SerializedName("completions")
     val completions: kotlin.collections.List<Completion>? = null,
 
+    /* Diagnostics is diagnostics' answer: every problem the server finds in the whole file, position ignored. Empty means it found none. */
     @SerializedName("diagnostics")
     val diagnostics: kotlin.collections.List<Diagnostic>? = null,
 
+    /* Hover is hover's answer: the type and documentation as the language server itself renders them, so it is prose meant to be shown, not parsed. */
     @SerializedName("hover")
     val hover: kotlin.String? = null,
 
+    /* Lang is the language the server that answered speaks (\"go\"), as the daemon reports it. Empty when the daemon named none. */
     @SerializedName("lang")
     val lang: kotlin.String? = null,
 
+    /* Locations is locate's answer: where the symbol is defined, referenced, typed or implemented, per the relation asked for. Empty means the server resolved nothing there, which is an answer. */
     @SerializedName("locations")
     val locations: kotlin.collections.List<Location>? = null,
 
+    /* Op is the question that was asked: hover, locate, symbols, diagnostics or complete. It names which result field below is the populated one. */
     @SerializedName("op")
     val op: kotlin.String? = null,
 
+    /* Path is the repo-relative file the question was about, echoed back. */
     @SerializedName("path")
     val path: kotlin.String? = null,
 
+    /* Repo is the repository the question was about, echoed back. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
 
+    /* Rev is the RESOLVED commit sha, never the branch or tag that was asked for. It is what makes an answer re-askable: a branch moves, this does not. */
     @SerializedName("rev")
     val rev: kotlin.String? = null,
 
+    /* Symbols is symbols' answer: the file's whole outline, position ignored. */
     @SerializedName("symbols")
     val symbols: kotlin.collections.List<Symbol>? = null
 

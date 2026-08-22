@@ -19,10 +19,19 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AutoCreate
-import ai.hanzo.cloud.model.AutoStart
-import ai.hanzo.cloud.model.AutoStatus
-import ai.hanzo.cloud.model.AutoUpdate
+import ai.hanzo.cloud.model.Catalog
+import ai.hanzo.cloud.model.CreateFlowReq
+import ai.hanzo.cloud.model.CreateVersionIn
+import ai.hanzo.cloud.model.Flow
+import ai.hanzo.cloud.model.FlowPage
+import ai.hanzo.cloud.model.FlowRun
+import ai.hanzo.cloud.model.FlowVersion
+import ai.hanzo.cloud.model.PatchFlowIn
+import ai.hanzo.cloud.model.PopulatedFlow
+import ai.hanzo.cloud.model.RunIn
+import ai.hanzo.cloud.model.RunPage
+import ai.hanzo.cloud.model.RunResp
+import ai.hanzo.cloud.model.VersionPage
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,24 +58,23 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * DELETE /v1/auto/flows/{flow}
-     * Deletes one of the caller&#39;s flows.
-     * Deletes one of the caller&#39;s flows. A foreign id answers 404 and deletes nothing.
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @return kotlin.Any
+     * DELETE /v1/auto/flows/{id}
+     * Deletes one automation, its versions and its run history.
+     * Deletes one automation, its versions and its run history. It answers no content, and a flow of another org answers not-found.
+     * @param id ID is the flow to act on, from the path.
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteAutoFlowsByFlow(flow: kotlin.String) : kotlin.Any {
-        val localVarResponse = deleteAutoFlowsByFlowWithHttpInfo(flow = flow)
+    fun deleteAutoFlowsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteAutoFlowsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -81,39 +89,107 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * DELETE /v1/auto/flows/{flow}
-     * Deletes one of the caller&#39;s flows.
-     * Deletes one of the caller&#39;s flows. A foreign id answers 404 and deletes nothing.
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @return ApiResponse<kotlin.Any?>
+     * DELETE /v1/auto/flows/{id}
+     * Deletes one automation, its versions and its run history.
+     * Deletes one automation, its versions and its run history. It answers no content, and a flow of another org answers not-found.
+     * @param id ID is the flow to act on, from the path.
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteAutoFlowsByFlowWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = deleteAutoFlowsByFlowRequestConfig(flow = flow)
+    fun deleteAutoFlowsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteAutoFlowsByIdRequestConfig(id = id)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation deleteAutoFlowsByFlow
+     * To obtain the request config of the operation deleteAutoFlowsById
      *
-     * @param flow Flow is the flow&#39;s id, taken from the path.
+     * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun deleteAutoFlowsByFlowRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
+    fun deleteAutoFlowsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/auto/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/auto/connectors
+     * Connectors returns the connector catalogue.
+     * Connectors returns the connector catalogue. Each entry is an external service a flow step can invoke, carrying its auth descriptor and the input properties of its actions and triggers. The catalogue is the same for every tenant, so the gate is a validated principal rather than a per-org view.
+     * @return Catalog
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getAutoConnectors() : Catalog {
+        val localVarResponse = getAutoConnectorsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Catalog
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/auto/connectors
+     * Connectors returns the connector catalogue.
+     * Connectors returns the connector catalogue. Each entry is an external service a flow step can invoke, carrying its auth descriptor and the input properties of its actions and triggers. The catalogue is the same for every tenant, so the gate is a validated principal rather than a per-org view.
+     * @return ApiResponse<Catalog?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getAutoConnectorsWithHttpInfo() : ApiResponse<Catalog?> {
+        val localVariableConfig = getAutoConnectorsRequestConfig()
+
+        return request<Unit, Catalog>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getAutoConnectors
+     *
+     * @return RequestConfig
+     */
+    fun getAutoConnectorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
+            method = RequestMethod.GET,
+            path = "/v1/auto/connectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -123,9 +199,10 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/auto/flows
-     * Flows lists the caller&#39;s flows, newest first.
-     * Flows lists the caller&#39;s flows, newest first. The list is scoped by the product to the caller&#39;s org — it can only ever hold the caller&#39;s own flows.
-     * @return kotlin.Any
+     * Returns the caller org&#39;s automations, most-recently-updated first.
+     * Returns the caller org&#39;s automations, most-recently-updated first. The optional &#x60;limit&#x60; query bounds the page.
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
+     * @return FlowPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -134,11 +211,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getAutoFlows() : kotlin.Any {
-        val localVarResponse = getAutoFlowsWithHttpInfo()
+    fun getAutoFlows(limit: kotlin.Int? = null) : FlowPage {
+        val localVarResponse = getAutoFlowsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -154,18 +231,19 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/auto/flows
-     * Flows lists the caller&#39;s flows, newest first.
-     * Flows lists the caller&#39;s flows, newest first. The list is scoped by the product to the caller&#39;s org — it can only ever hold the caller&#39;s own flows.
-     * @return ApiResponse<kotlin.Any?>
+     * Returns the caller org&#39;s automations, most-recently-updated first.
+     * Returns the caller org&#39;s automations, most-recently-updated first. The optional &#x60;limit&#x60; query bounds the page.
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
+     * @return ApiResponse<FlowPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getAutoFlowsWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getAutoFlowsRequestConfig()
+    fun getAutoFlowsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<FlowPage?> {
+        val localVariableConfig = getAutoFlowsRequestConfig(limit = limit)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, FlowPage>(
             localVariableConfig
         )
     }
@@ -173,11 +251,17 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     /**
      * To obtain the request config of the operation getAutoFlows
      *
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun getAutoFlowsRequestConfig() : RequestConfig<Unit> {
+    fun getAutoFlowsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
@@ -192,11 +276,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/auto/flows/{flow}
-     * Flow reads one of the caller&#39;s flows — the full record, graph included.
-     * Flow reads one of the caller&#39;s flows — the full record, graph included. A flow outside the caller&#39;s org answers 404, indistinguishable from one that does not exist.
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @return kotlin.Any
+     * GET /v1/auto/flows/{id}
+     * Returns one automation and its latest version.
+     * Returns one automation and its latest version. That is the flow record plus the step tree the builder edits; a flow of another org answers not-found.
+     * @param id ID is the flow to act on, from the path.
+     * @return PopulatedFlow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -205,11 +289,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getAutoFlowsByFlow(flow: kotlin.String) : kotlin.Any {
-        val localVarResponse = getAutoFlowsByFlowWithHttpInfo(flow = flow)
+    fun getAutoFlowsById(id: kotlin.String) : PopulatedFlow {
+        val localVarResponse = getAutoFlowsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PopulatedFlow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -224,31 +308,31 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/auto/flows/{flow}
-     * Flow reads one of the caller&#39;s flows — the full record, graph included.
-     * Flow reads one of the caller&#39;s flows — the full record, graph included. A flow outside the caller&#39;s org answers 404, indistinguishable from one that does not exist.
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @return ApiResponse<kotlin.Any?>
+     * GET /v1/auto/flows/{id}
+     * Returns one automation and its latest version.
+     * Returns one automation and its latest version. That is the flow record plus the step tree the builder edits; a flow of another org answers not-found.
+     * @param id ID is the flow to act on, from the path.
+     * @return ApiResponse<PopulatedFlow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getAutoFlowsByFlowWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getAutoFlowsByFlowRequestConfig(flow = flow)
+    fun getAutoFlowsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PopulatedFlow?> {
+        val localVariableConfig = getAutoFlowsByIdRequestConfig(id = id)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, PopulatedFlow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getAutoFlowsByFlow
+     * To obtain the request config of the operation getAutoFlowsById
      *
-     * @param flow Flow is the flow&#39;s id, taken from the path.
+     * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun getAutoFlowsByFlowRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
+    fun getAutoFlowsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -256,7 +340,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
+            path = "/v1/auto/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -265,10 +349,12 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/auto/pieces
-     * Pieces lists the product&#39;s built-in piece catalog: the trigger and action types a flow&#39;s nodes can use (webhook, schedule, http, set, branch), each with its input descriptors.
-     * Pieces lists the product&#39;s built-in piece catalog: the trigger and action types a flow&#39;s nodes can use (webhook, schedule, http, set, branch), each with its input descriptors. The catalog is compiled into the product — adding a piece is a product release, not a platform call.
-     * @return kotlin.Any
+     * GET /v1/auto/flows/{id}/versions
+     * Returns one flow&#39;s versions, newest first.
+     * Returns one flow&#39;s versions, newest first. The optional &#x60;limit&#x60; query bounds the page.
+     * @param id ID is the flow whose versions to list, from the path.
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
+     * @return VersionPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -277,11 +363,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getAutoPieces() : kotlin.Any {
-        val localVarResponse = getAutoPiecesWithHttpInfo()
+    fun getAutoFlowsByIdVersions(id: kotlin.String, limit: kotlin.Int? = null) : VersionPage {
+        val localVarResponse = getAutoFlowsByIdVersionsWithHttpInfo(id = id, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VersionPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -296,37 +382,46 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/auto/pieces
-     * Pieces lists the product&#39;s built-in piece catalog: the trigger and action types a flow&#39;s nodes can use (webhook, schedule, http, set, branch), each with its input descriptors.
-     * Pieces lists the product&#39;s built-in piece catalog: the trigger and action types a flow&#39;s nodes can use (webhook, schedule, http, set, branch), each with its input descriptors. The catalog is compiled into the product — adding a piece is a product release, not a platform call.
-     * @return ApiResponse<kotlin.Any?>
+     * GET /v1/auto/flows/{id}/versions
+     * Returns one flow&#39;s versions, newest first.
+     * Returns one flow&#39;s versions, newest first. The optional &#x60;limit&#x60; query bounds the page.
+     * @param id ID is the flow whose versions to list, from the path.
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
+     * @return ApiResponse<VersionPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getAutoPiecesWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getAutoPiecesRequestConfig()
+    fun getAutoFlowsByIdVersionsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<VersionPage?> {
+        val localVariableConfig = getAutoFlowsByIdVersionsRequestConfig(id = id, limit = limit)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, VersionPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getAutoPieces
+     * To obtain the request config of the operation getAutoFlowsByIdVersions
      *
+     * @param id ID is the flow whose versions to list, from the path.
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun getAutoPiecesRequestConfig() : RequestConfig<Unit> {
+    fun getAutoFlowsByIdVersionsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/auto/pieces",
+            path = "/v1/auto/flows/{id}/versions".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -336,10 +431,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/auto/runs
-     * Runs lists the caller&#39;s run records, newest first — optionally one flow&#39;s.
-     * Runs lists the caller&#39;s run records, newest first — optionally one flow&#39;s. Each record carries the run&#39;s status (queued, running, completed, failed), its input, and its output once the run finished.
-     * @param flow Flow narrows the list to one flow&#39;s runs when present. (optional)
-     * @return kotlin.Any
+     * Returns the caller org&#39;s run history, newest first.
+     * Returns the caller org&#39;s run history, newest first. The optional &#x60;flowId&#x60; query narrows it to one flow and &#x60;limit&#x60; bounds the page.
+     * @param flowId FlowID narrows the history to one flow. Omit it for the whole org&#39;s runs. (optional)
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
+     * @return RunPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -348,11 +444,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getAutoRuns(flow: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = getAutoRunsWithHttpInfo(flow = flow)
+    fun getAutoRuns(flowId: kotlin.String? = null, limit: kotlin.Int? = null) : RunPage {
+        val localVarResponse = getAutoRunsWithHttpInfo(flowId = flowId, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -368,19 +464,20 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/auto/runs
-     * Runs lists the caller&#39;s run records, newest first — optionally one flow&#39;s.
-     * Runs lists the caller&#39;s run records, newest first — optionally one flow&#39;s. Each record carries the run&#39;s status (queued, running, completed, failed), its input, and its output once the run finished.
-     * @param flow Flow narrows the list to one flow&#39;s runs when present. (optional)
-     * @return ApiResponse<kotlin.Any?>
+     * Returns the caller org&#39;s run history, newest first.
+     * Returns the caller org&#39;s run history, newest first. The optional &#x60;flowId&#x60; query narrows it to one flow and &#x60;limit&#x60; bounds the page.
+     * @param flowId FlowID narrows the history to one flow. Omit it for the whole org&#39;s runs. (optional)
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
+     * @return ApiResponse<RunPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getAutoRunsWithHttpInfo(flow: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getAutoRunsRequestConfig(flow = flow)
+    fun getAutoRunsWithHttpInfo(flowId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<RunPage?> {
+        val localVariableConfig = getAutoRunsRequestConfig(flowId = flowId, limit = limit)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, RunPage>(
             localVariableConfig
         )
     }
@@ -388,15 +485,19 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     /**
      * To obtain the request config of the operation getAutoRuns
      *
-     * @param flow Flow narrows the list to one flow&#39;s runs when present. (optional)
+     * @param flowId FlowID narrows the history to one flow. Omit it for the whole org&#39;s runs. (optional)
+     * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun getAutoRunsRequestConfig(flow: kotlin.String?) : RequestConfig<Unit> {
+    fun getAutoRunsRequestConfig(flowId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
-                if (flow != null) {
-                    put("flow", listOf(flow.toString()))
+                if (flowId != null) {
+                    put("flowId", listOf(flowId.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -413,11 +514,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/auto/runs/{run}
-     * Run reads one run record: status, input, output (each executed node&#39;s result keyed by node id once completed), error detail if it failed, and timestamps.
-     * Run reads one run record: status, input, output (each executed node&#39;s result keyed by node id once completed), error detail if it failed, and timestamps. A run outside the caller&#39;s org answers 404.
-     * @param run Run is the run&#39;s id, taken from the path.
-     * @return kotlin.Any
+     * GET /v1/auto/runs/{id}
+     * Returns one run.
+     * Returns one run. A run that has not reached a terminal status is refreshed from the durable engine first — scoped to the org&#39;s own namespace — so the caller sees live progress rather than the last status that happened to be persisted.
+     * @param id ID is the run to read, from the path.
+     * @return FlowRun
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -426,11 +527,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getAutoRunsByRun(run: kotlin.String) : kotlin.Any {
-        val localVarResponse = getAutoRunsByRunWithHttpInfo(run = run)
+    fun getAutoRunsById(id: kotlin.String) : FlowRun {
+        val localVarResponse = getAutoRunsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowRun
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -445,31 +546,31 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/auto/runs/{run}
-     * Run reads one run record: status, input, output (each executed node&#39;s result keyed by node id once completed), error detail if it failed, and timestamps.
-     * Run reads one run record: status, input, output (each executed node&#39;s result keyed by node id once completed), error detail if it failed, and timestamps. A run outside the caller&#39;s org answers 404.
-     * @param run Run is the run&#39;s id, taken from the path.
-     * @return ApiResponse<kotlin.Any?>
+     * GET /v1/auto/runs/{id}
+     * Returns one run.
+     * Returns one run. A run that has not reached a terminal status is refreshed from the durable engine first — scoped to the org&#39;s own namespace — so the caller sees live progress rather than the last status that happened to be persisted.
+     * @param id ID is the run to read, from the path.
+     * @return ApiResponse<FlowRun?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getAutoRunsByRunWithHttpInfo(run: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = getAutoRunsByRunRequestConfig(run = run)
+    fun getAutoRunsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<FlowRun?> {
+        val localVariableConfig = getAutoRunsByIdRequestConfig(id = id)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, FlowRun>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getAutoRunsByRun
+     * To obtain the request config of the operation getAutoRunsById
      *
-     * @param run Run is the run&#39;s id, taken from the path.
+     * @param id ID is the run to read, from the path.
      * @return RequestConfig
      */
-    fun getAutoRunsByRunRequestConfig(run: kotlin.String) : RequestConfig<Unit> {
+    fun getAutoRunsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -477,7 +578,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/auto/runs/{run}".replace("{"+"run"+"}", encodeURIComponent(run.toString())),
+            path = "/v1/auto/runs/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -486,10 +587,12 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/auto/status
-     * Status reports whether the auto service is reachable — its own health endpoint as an honest lens for \&quot;is the automation plane up\&quot;.
-     * Status reports whether the auto service is reachable — its own health endpoint as an honest lens for \&quot;is the automation plane up\&quot;.
-     * @return AutoStatus
+     * PATCH /v1/auto/flows/{id}
+     * Updates one automation&#39;s metadata in place.
+     * Updates one automation&#39;s metadata in place. Every field is optional; a field the request omits is left alone. Publishing a version pins which one runs, and is refused unless that version belongs to this flow.
+     * @param id ID is the flow to update, from the path.
+     * @param patchFlowIn 
+     * @return Flow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -498,11 +601,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getAutoStatus() : AutoStatus {
-        val localVarResponse = getAutoStatusWithHttpInfo()
+    fun patchAutoFlowsById(id: kotlin.String, patchFlowIn: PatchFlowIn) : Flow {
+        val localVarResponse = patchAutoFlowsByIdWithHttpInfo(id = id, patchFlowIn = patchFlowIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AutoStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -517,106 +620,34 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/auto/status
-     * Status reports whether the auto service is reachable — its own health endpoint as an honest lens for \&quot;is the automation plane up\&quot;.
-     * Status reports whether the auto service is reachable — its own health endpoint as an honest lens for \&quot;is the automation plane up\&quot;.
-     * @return ApiResponse<AutoStatus?>
+     * PATCH /v1/auto/flows/{id}
+     * Updates one automation&#39;s metadata in place.
+     * Updates one automation&#39;s metadata in place. Every field is optional; a field the request omits is left alone. Publishing a version pins which one runs, and is refused unless that version belongs to this flow.
+     * @param id ID is the flow to update, from the path.
+     * @param patchFlowIn 
+     * @return ApiResponse<Flow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getAutoStatusWithHttpInfo() : ApiResponse<AutoStatus?> {
-        val localVariableConfig = getAutoStatusRequestConfig()
+    fun patchAutoFlowsByIdWithHttpInfo(id: kotlin.String, patchFlowIn: PatchFlowIn) : ApiResponse<Flow?> {
+        val localVariableConfig = patchAutoFlowsByIdRequestConfig(id = id, patchFlowIn = patchFlowIn)
 
-        return request<Unit, AutoStatus>(
+        return request<PatchFlowIn, Flow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation getAutoStatus
+     * To obtain the request config of the operation patchAutoFlowsById
      *
+     * @param id ID is the flow to update, from the path.
+     * @param patchFlowIn 
      * @return RequestConfig
      */
-    fun getAutoStatusRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/auto/status",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/auto/flows/{flow}
-     * Patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
-     * Patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @param autoUpdate 
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchAutoFlowsByFlow(flow: kotlin.String, autoUpdate: AutoUpdate) : kotlin.Any {
-        val localVarResponse = patchAutoFlowsByFlowWithHttpInfo(flow = flow, autoUpdate = autoUpdate)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/auto/flows/{flow}
-     * Patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
-     * Patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @param autoUpdate 
-     * @return ApiResponse<kotlin.Any?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun patchAutoFlowsByFlowWithHttpInfo(flow: kotlin.String, autoUpdate: AutoUpdate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = patchAutoFlowsByFlowRequestConfig(flow = flow, autoUpdate = autoUpdate)
-
-        return request<AutoUpdate, kotlin.Any>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation patchAutoFlowsByFlow
-     *
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @param autoUpdate 
-     * @return RequestConfig
-     */
-    fun patchAutoFlowsByFlowRequestConfig(flow: kotlin.String, autoUpdate: AutoUpdate) : RequestConfig<AutoUpdate> {
-        val localVariableBody = autoUpdate
+    fun patchAutoFlowsByIdRequestConfig(id: kotlin.String, patchFlowIn: PatchFlowIn) : RequestConfig<PatchFlowIn> {
+        val localVariableBody = patchFlowIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -624,7 +655,84 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
         return RequestConfig(
             method = RequestMethod.PATCH,
-            path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
+            path = "/v1/auto/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/auto/connectors/{id}/run
+     * Run executes one connector action in-process and answers the outcome.
+     * Run executes one connector action in-process and answers the outcome. The caller&#39;s resolved credential travels in &#x60;auth&#x60;, delivered to the action verbatim — the runtime resolves no credential itself. An action that ran and failed (or an action name the connector does not have) answers ok:false with the failure message, not an HTTP error; an unknown connector is 404 and a missing action 422.
+     * @param id ID is the connector to run, from the path.
+     * @param runIn 
+     * @return RunResp
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postAutoConnectorsByIdRun(id: kotlin.String, runIn: RunIn) : RunResp {
+        val localVarResponse = postAutoConnectorsByIdRunWithHttpInfo(id = id, runIn = runIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunResp
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/auto/connectors/{id}/run
+     * Run executes one connector action in-process and answers the outcome.
+     * Run executes one connector action in-process and answers the outcome. The caller&#39;s resolved credential travels in &#x60;auth&#x60;, delivered to the action verbatim — the runtime resolves no credential itself. An action that ran and failed (or an action name the connector does not have) answers ok:false with the failure message, not an HTTP error; an unknown connector is 404 and a missing action 422.
+     * @param id ID is the connector to run, from the path.
+     * @param runIn 
+     * @return ApiResponse<RunResp?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postAutoConnectorsByIdRunWithHttpInfo(id: kotlin.String, runIn: RunIn) : ApiResponse<RunResp?> {
+        val localVariableConfig = postAutoConnectorsByIdRunRequestConfig(id = id, runIn = runIn)
+
+        return request<RunIn, RunResp>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postAutoConnectorsByIdRun
+     *
+     * @param id ID is the connector to run, from the path.
+     * @param runIn 
+     * @return RequestConfig
+     */
+    fun postAutoConnectorsByIdRunRequestConfig(id: kotlin.String, runIn: RunIn) : RequestConfig<RunIn> {
+        val localVariableBody = runIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/auto/connectors/{id}/run".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -634,10 +742,10 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/auto/flows
-     * Creates a flow in the caller&#39;s org.
-     * Creates a flow in the caller&#39;s org. The org is stamped server-side from the validated principal — there is no field by which a caller could place a flow in another org.
-     * @param autoCreate 
-     * @return kotlin.Any
+     * Creates an automation and its initial DRAFT version in one call.
+     * Creates an automation and its initial DRAFT version in one call. The new flow is DISABLED — creating it does not arm its trigger; POST /v1/auto/flows/{id}/enable does that.
+     * @param createFlowReq 
+     * @return PopulatedFlow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -646,11 +754,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postAutoFlows(autoCreate: AutoCreate) : kotlin.Any {
-        val localVarResponse = postAutoFlowsWithHttpInfo(autoCreate = autoCreate)
+    fun postAutoFlows(createFlowReq: CreateFlowReq) : PopulatedFlow {
+        val localVarResponse = postAutoFlowsWithHttpInfo(createFlowReq = createFlowReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PopulatedFlow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -666,19 +774,19 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/auto/flows
-     * Creates a flow in the caller&#39;s org.
-     * Creates a flow in the caller&#39;s org. The org is stamped server-side from the validated principal — there is no field by which a caller could place a flow in another org.
-     * @param autoCreate 
-     * @return ApiResponse<kotlin.Any?>
+     * Creates an automation and its initial DRAFT version in one call.
+     * Creates an automation and its initial DRAFT version in one call. The new flow is DISABLED — creating it does not arm its trigger; POST /v1/auto/flows/{id}/enable does that.
+     * @param createFlowReq 
+     * @return ApiResponse<PopulatedFlow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postAutoFlowsWithHttpInfo(autoCreate: AutoCreate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postAutoFlowsRequestConfig(autoCreate = autoCreate)
+    fun postAutoFlowsWithHttpInfo(createFlowReq: CreateFlowReq) : ApiResponse<PopulatedFlow?> {
+        val localVariableConfig = postAutoFlowsRequestConfig(createFlowReq = createFlowReq)
 
-        return request<AutoCreate, kotlin.Any>(
+        return request<CreateFlowReq, PopulatedFlow>(
             localVariableConfig
         )
     }
@@ -686,11 +794,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     /**
      * To obtain the request config of the operation postAutoFlows
      *
-     * @param autoCreate 
+     * @param createFlowReq 
      * @return RequestConfig
      */
-    fun postAutoFlowsRequestConfig(autoCreate: AutoCreate) : RequestConfig<AutoCreate> {
-        val localVariableBody = autoCreate
+    fun postAutoFlowsRequestConfig(createFlowReq: CreateFlowReq) : RequestConfig<CreateFlowReq> {
+        val localVariableBody = createFlowReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -707,11 +815,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * POST /v1/auto/flows/{flow}/publish
-     * Publish snapshots the flow&#39;s current graph as its next immutable version and arms the flow&#39;s triggers.
-     * Publish snapshots the flow&#39;s current graph as its next immutable version and arms the flow&#39;s triggers. Past versions stay addressable in the product for rollback; runs always execute the graph as it was dispatched.
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @return kotlin.Any
+     * POST /v1/auto/flows/{id}/disable
+     * Disarms a flow&#39;s trigger and marks it DISABLED.
+     * Disarms a flow&#39;s trigger and marks it DISABLED. Its schedule and its event subscriptions are dropped, so a disabled flow is never a live target; runs already in flight are unaffected, and it can still be started on demand.
+     * @param id ID is the flow to act on, from the path.
+     * @return Flow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -720,11 +828,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postAutoFlowsByFlowPublish(flow: kotlin.String) : kotlin.Any {
-        val localVarResponse = postAutoFlowsByFlowPublishWithHttpInfo(flow = flow)
+    fun postAutoFlowsByIdDisable(id: kotlin.String) : Flow {
+        val localVarResponse = postAutoFlowsByIdDisableWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -739,31 +847,31 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * POST /v1/auto/flows/{flow}/publish
-     * Publish snapshots the flow&#39;s current graph as its next immutable version and arms the flow&#39;s triggers.
-     * Publish snapshots the flow&#39;s current graph as its next immutable version and arms the flow&#39;s triggers. Past versions stay addressable in the product for rollback; runs always execute the graph as it was dispatched.
-     * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @return ApiResponse<kotlin.Any?>
+     * POST /v1/auto/flows/{id}/disable
+     * Disarms a flow&#39;s trigger and marks it DISABLED.
+     * Disarms a flow&#39;s trigger and marks it DISABLED. Its schedule and its event subscriptions are dropped, so a disabled flow is never a live target; runs already in flight are unaffected, and it can still be started on demand.
+     * @param id ID is the flow to act on, from the path.
+     * @return ApiResponse<Flow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postAutoFlowsByFlowPublishWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postAutoFlowsByFlowPublishRequestConfig(flow = flow)
+    fun postAutoFlowsByIdDisableWithHttpInfo(id: kotlin.String) : ApiResponse<Flow?> {
+        val localVariableConfig = postAutoFlowsByIdDisableRequestConfig(id = id)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, Flow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postAutoFlowsByFlowPublish
+     * To obtain the request config of the operation postAutoFlowsByIdDisable
      *
-     * @param flow Flow is the flow&#39;s id, taken from the path.
+     * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun postAutoFlowsByFlowPublishRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
+    fun postAutoFlowsByIdDisableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -771,7 +879,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/auto/flows/{flow}/publish".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
+            path = "/v1/auto/flows/{id}/disable".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -780,11 +888,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * POST /v1/auto/runs
-     * Start begins one asynchronous run of a flow: the product dispatches the graph to its durable execution engine (the hanzo tasks plane) and answers immediately with the run record in status running.
-     * Start begins one asynchronous run of a flow: the product dispatches the graph to its durable execution engine (the hanzo tasks plane) and answers immediately with the run record in status running. Poll the run until it reaches completed — its output then holds each node&#39;s result keyed by node id — or failed, with the error. A flow whose engine is unreachable answers the product&#39;s 503: dispatch is real or it is refused, never queued into the void.
-     * @param autoStart 
-     * @return kotlin.Any
+     * POST /v1/auto/flows/{id}/enable
+     * Arms a flow&#39;s trigger and marks it ENABLED.
+     * Arms a flow&#39;s trigger and marks it ENABLED. A POLLING trigger gets a cron schedule on the durable engine; a WEBHOOK trigger gets a subscription in the routing index, so an inbound event starts it; a MANUAL trigger arms nothing and still runs on demand.
+     * @param id ID is the flow to act on, from the path.
+     * @return Flow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -793,11 +901,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postAutoRuns(autoStart: AutoStart) : kotlin.Any {
-        val localVarResponse = postAutoRunsWithHttpInfo(autoStart = autoStart)
+    fun postAutoFlowsByIdEnable(id: kotlin.String) : Flow {
+        val localVarResponse = postAutoFlowsByIdEnableWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -812,32 +920,251 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * POST /v1/auto/runs
-     * Start begins one asynchronous run of a flow: the product dispatches the graph to its durable execution engine (the hanzo tasks plane) and answers immediately with the run record in status running.
-     * Start begins one asynchronous run of a flow: the product dispatches the graph to its durable execution engine (the hanzo tasks plane) and answers immediately with the run record in status running. Poll the run until it reaches completed — its output then holds each node&#39;s result keyed by node id — or failed, with the error. A flow whose engine is unreachable answers the product&#39;s 503: dispatch is real or it is refused, never queued into the void.
-     * @param autoStart 
-     * @return ApiResponse<kotlin.Any?>
+     * POST /v1/auto/flows/{id}/enable
+     * Arms a flow&#39;s trigger and marks it ENABLED.
+     * Arms a flow&#39;s trigger and marks it ENABLED. A POLLING trigger gets a cron schedule on the durable engine; a WEBHOOK trigger gets a subscription in the routing index, so an inbound event starts it; a MANUAL trigger arms nothing and still runs on demand.
+     * @param id ID is the flow to act on, from the path.
+     * @return ApiResponse<Flow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postAutoRunsWithHttpInfo(autoStart: AutoStart) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = postAutoRunsRequestConfig(autoStart = autoStart)
+    fun postAutoFlowsByIdEnableWithHttpInfo(id: kotlin.String) : ApiResponse<Flow?> {
+        val localVariableConfig = postAutoFlowsByIdEnableRequestConfig(id = id)
 
-        return request<AutoStart, kotlin.Any>(
+        return request<Unit, Flow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postAutoRuns
+     * To obtain the request config of the operation postAutoFlowsByIdEnable
      *
-     * @param autoStart 
+     * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun postAutoRunsRequestConfig(autoStart: AutoStart) : RequestConfig<AutoStart> {
-        val localVariableBody = autoStart
+    fun postAutoFlowsByIdEnableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/auto/flows/{id}/enable".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/auto/flows/{id}/operations
+     * Edit a flow — rename it, retarget its trigger, or add, move and delete steps
+     * Applies ONE flow operation and answers the thing it changed. The operation is named by &#x60;type&#x60;, with its arguments under &#x60;request&#x60;: &#x60;CHANGE_NAME&#x60;, &#x60;UPDATE_TRIGGER&#x60;, &#x60;ADD_ACTION&#x60;, &#x60;UPDATE_ACTION&#x60;, &#x60;MOVE_ACTION&#x60;, &#x60;DELETE_ACTION&#x60; edit the flow&#39;s LATEST version and answer with that version, and &#x60;CHANGE_STATUS&#x60; instead enables or disables the flow and answers with the FLOW. Two response shapes on one address is the rule a reader would otherwise get wrong, and it is why this route is not a typed op.  Edits land on the latest version only — the published version a run executes is untouched until it is republished — and the whole resulting step tree is re-validated against the step-count and size caps after every operation, so a long sequence of &#x60;ADD_ACTION&#x60; calls cannot grow a flow past a bound one step at a time (422 when it would). Org-scoped and fails closed: a validated principal is required (403 without one), the flow and its version are read under the caller&#39;s OWN org so another tenant&#39;s id is a 404, and an operation whose &#x60;request&#x60; does not decode is a 400.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postAutoFlowsByIdOperations(id: kotlin.String) : Unit {
+        val localVarResponse = postAutoFlowsByIdOperationsWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/auto/flows/{id}/operations
+     * Edit a flow — rename it, retarget its trigger, or add, move and delete steps
+     * Applies ONE flow operation and answers the thing it changed. The operation is named by &#x60;type&#x60;, with its arguments under &#x60;request&#x60;: &#x60;CHANGE_NAME&#x60;, &#x60;UPDATE_TRIGGER&#x60;, &#x60;ADD_ACTION&#x60;, &#x60;UPDATE_ACTION&#x60;, &#x60;MOVE_ACTION&#x60;, &#x60;DELETE_ACTION&#x60; edit the flow&#39;s LATEST version and answer with that version, and &#x60;CHANGE_STATUS&#x60; instead enables or disables the flow and answers with the FLOW. Two response shapes on one address is the rule a reader would otherwise get wrong, and it is why this route is not a typed op.  Edits land on the latest version only — the published version a run executes is untouched until it is republished — and the whole resulting step tree is re-validated against the step-count and size caps after every operation, so a long sequence of &#x60;ADD_ACTION&#x60; calls cannot grow a flow past a bound one step at a time (422 when it would). Org-scoped and fails closed: a validated principal is required (403 without one), the flow and its version are read under the caller&#39;s OWN org so another tenant&#39;s id is a 404, and an operation whose &#x60;request&#x60; does not decode is a 400.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postAutoFlowsByIdOperationsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAutoFlowsByIdOperationsRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postAutoFlowsByIdOperations
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun postAutoFlowsByIdOperationsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/auto/flows/{id}/operations".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/auto/flows/{id}/run
+     * Starts one durable run of a flow now.
+     * Starts one durable run of a flow now. It runs the flow&#39;s published version if one is pinned, else its latest, and answers the run record it created. The run is bounded by the org&#39;s per-minute run-start budget and its in-flight concurrency ceiling; over either, or with the engine not ready, no run is started and no run id is burned.
+     * @param id ID is the flow to act on, from the path.
+     * @return FlowRun
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postAutoFlowsByIdRun(id: kotlin.String) : FlowRun {
+        val localVarResponse = postAutoFlowsByIdRunWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowRun
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/auto/flows/{id}/run
+     * Starts one durable run of a flow now.
+     * Starts one durable run of a flow now. It runs the flow&#39;s published version if one is pinned, else its latest, and answers the run record it created. The run is bounded by the org&#39;s per-minute run-start budget and its in-flight concurrency ceiling; over either, or with the engine not ready, no run is started and no run id is burned.
+     * @param id ID is the flow to act on, from the path.
+     * @return ApiResponse<FlowRun?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postAutoFlowsByIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<FlowRun?> {
+        val localVariableConfig = postAutoFlowsByIdRunRequestConfig(id = id)
+
+        return request<Unit, FlowRun>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postAutoFlowsByIdRun
+     *
+     * @param id ID is the flow to act on, from the path.
+     * @return RequestConfig
+     */
+    fun postAutoFlowsByIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/auto/flows/{id}/run".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/auto/flows/{id}/versions
+     * Adds a new DRAFT version to a flow.
+     * Adds a new DRAFT version to a flow. The version is created invalid unless it carries a trigger, and it does not become the running version until it is published (PATCH the flow&#39;s publishedVersionId) or becomes the latest.
+     * @param id ID is the flow to add a version to, from the path.
+     * @param createVersionIn 
+     * @return FlowVersion
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postAutoFlowsByIdVersions(id: kotlin.String, createVersionIn: CreateVersionIn) : FlowVersion {
+        val localVarResponse = postAutoFlowsByIdVersionsWithHttpInfo(id = id, createVersionIn = createVersionIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowVersion
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/auto/flows/{id}/versions
+     * Adds a new DRAFT version to a flow.
+     * Adds a new DRAFT version to a flow. The version is created invalid unless it carries a trigger, and it does not become the running version until it is published (PATCH the flow&#39;s publishedVersionId) or becomes the latest.
+     * @param id ID is the flow to add a version to, from the path.
+     * @param createVersionIn 
+     * @return ApiResponse<FlowVersion?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postAutoFlowsByIdVersionsWithHttpInfo(id: kotlin.String, createVersionIn: CreateVersionIn) : ApiResponse<FlowVersion?> {
+        val localVariableConfig = postAutoFlowsByIdVersionsRequestConfig(id = id, createVersionIn = createVersionIn)
+
+        return request<CreateVersionIn, FlowVersion>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postAutoFlowsByIdVersions
+     *
+     * @param id ID is the flow to add a version to, from the path.
+     * @param createVersionIn 
+     * @return RequestConfig
+     */
+    fun postAutoFlowsByIdVersionsRequestConfig(id: kotlin.String, createVersionIn: CreateVersionIn) : RequestConfig<CreateVersionIn> {
+        val localVariableBody = createVersionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -845,7 +1172,150 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/auto/runs",
+            path = "/v1/auto/flows/{id}/versions".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/auto/hooks/{source}/{event}
+     * Fire an event that starts every enabled flow subscribed to it
+     * Delivers one event to the org&#39;s automation triggers and answers &#x60;{matched:n}&#x60; — how many enabled flows had a webhook trigger on this &#x60;(source, event)&#x60; key and were started by it. A zero match is a success, not an error: nothing was subscribed.  The path is the trigger key and the JSON object body is the event payload, threaded into each started run as &#x60;{{trigger.*}}&#x60; with all of its keys intact — which is why this is not a typed op, since a declared input struct would silently DISCARD every payload key it had no field for. Re-delivery is a no-op: an &#x60;X-Idempotency-Key&#x60; header dedupes, and with none the body is content-hashed instead, so a hammer of identical posts collapses to ONE run rather than minting a fresh one per post. An in-platform producer may propagate &#x60;X-Causation-Depth&#x60; so a firing that a flow caused is bounded against a loop; an absent or invalid header reads as depth 0, an external origin.  Authenticated and org-scoped, unlike a provider&#39;s public webhook URL: a validated principal is required (403 without one) and the org is that principal&#39;s, never the body&#39;s, so a producer can only fire into its own tenant&#39;s flows. Both path segments are required (400) and a payload over the size limit is a 413.
+     * @param source 
+     * @param event 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postAutoHooksBySourceByEvent(source: kotlin.String, event: kotlin.String) : Unit {
+        val localVarResponse = postAutoHooksBySourceByEventWithHttpInfo(source = source, event = event)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/auto/hooks/{source}/{event}
+     * Fire an event that starts every enabled flow subscribed to it
+     * Delivers one event to the org&#39;s automation triggers and answers &#x60;{matched:n}&#x60; — how many enabled flows had a webhook trigger on this &#x60;(source, event)&#x60; key and were started by it. A zero match is a success, not an error: nothing was subscribed.  The path is the trigger key and the JSON object body is the event payload, threaded into each started run as &#x60;{{trigger.*}}&#x60; with all of its keys intact — which is why this is not a typed op, since a declared input struct would silently DISCARD every payload key it had no field for. Re-delivery is a no-op: an &#x60;X-Idempotency-Key&#x60; header dedupes, and with none the body is content-hashed instead, so a hammer of identical posts collapses to ONE run rather than minting a fresh one per post. An in-platform producer may propagate &#x60;X-Causation-Depth&#x60; so a firing that a flow caused is bounded against a loop; an absent or invalid header reads as depth 0, an external origin.  Authenticated and org-scoped, unlike a provider&#39;s public webhook URL: a validated principal is required (403 without one) and the org is that principal&#39;s, never the body&#39;s, so a producer can only fire into its own tenant&#39;s flows. Both path segments are required (400) and a payload over the size limit is a 413.
+     * @param source 
+     * @param event 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postAutoHooksBySourceByEventWithHttpInfo(source: kotlin.String, event: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAutoHooksBySourceByEventRequestConfig(source = source, event = event)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postAutoHooksBySourceByEvent
+     *
+     * @param source 
+     * @param event 
+     * @return RequestConfig
+     */
+    fun postAutoHooksBySourceByEventRequestConfig(source: kotlin.String, event: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/auto/hooks/{source}/{event}".replace("{"+"source"+"}", encodeURIComponent(source.toString())).replace("{"+"event"+"}", encodeURIComponent(event.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/auto/runs/{id}/resume
+     * Release a run waiting at an approval step, with the approval payload
+     * Delivers the durable &#x60;resume&#x60; signal to a run parked on a &#x60;wait_for_approval&#x60; waitpoint and answers &#x60;{resumed:true}&#x60; once the engine has taken it.  The body is an ARBITRARY JSON value — object, array, string, number — delivered VERBATIM into the workflow as that waitpoint&#39;s output, so it is what the steps after the approval read as their input. An empty body resumes with no payload. That open shape is why this route is not a typed op: an operation&#39;s input can carry the payload or the run address, never both.  Org-scoped and fails closed: a validated principal is required (403 without one), the run is read under the caller&#39;s OWN org so another tenant&#39;s run id is a 404, a body that is not JSON is a 400, and a payload over the size limit is a 413 — it becomes durable engine state, so it is bounded here rather than after it lands. The resume is audited as &#x60;automations.run.resume&#x60;.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postAutoRunsByIdResume(id: kotlin.String) : Unit {
+        val localVarResponse = postAutoRunsByIdResumeWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/auto/runs/{id}/resume
+     * Release a run waiting at an approval step, with the approval payload
+     * Delivers the durable &#x60;resume&#x60; signal to a run parked on a &#x60;wait_for_approval&#x60; waitpoint and answers &#x60;{resumed:true}&#x60; once the engine has taken it.  The body is an ARBITRARY JSON value — object, array, string, number — delivered VERBATIM into the workflow as that waitpoint&#39;s output, so it is what the steps after the approval read as their input. An empty body resumes with no payload. That open shape is why this route is not a typed op: an operation&#39;s input can carry the payload or the run address, never both.  Org-scoped and fails closed: a validated principal is required (403 without one), the run is read under the caller&#39;s OWN org so another tenant&#39;s run id is a 404, a body that is not JSON is a 400, and a payload over the size limit is a 413 — it becomes durable engine state, so it is bounded here rather than after it lands. The resume is audited as &#x60;automations.run.resume&#x60;.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postAutoRunsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postAutoRunsByIdResumeRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postAutoRunsByIdResume
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun postAutoRunsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/auto/runs/{id}/resume".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

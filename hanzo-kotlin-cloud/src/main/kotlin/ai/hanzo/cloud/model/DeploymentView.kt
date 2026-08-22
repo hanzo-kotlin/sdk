@@ -21,56 +21,68 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param applicationId 
- * @param buildId 
- * @param commit 
- * @param createdAt 
- * @param id 
- * @param image 
- * @param message 
- * @param org 
- * @param source 
- * @param status 
- * @param updatedAt 
- * @param version 
+ * @param applicationId ApplicationID is the app this deployed — the app's `id`, not its slug.
+ * @param buildId BuildID is the build record behind a git deploy, whose logs and status live at /v1/platform/builds. Empty for an image deploy.
+ * @param commit Commit is the git ref this built — the commit a deploy or a push named, else the app's branch. Empty for an image deploy, which builds nothing.
+ * @param createdAt CreatedAt is when the attempt was recorded, unix seconds.
+ * @param id ID is the deployment's id (`dep_…`), minted when the attempt is recorded. The app's currentDeploymentId points at one of these.
+ * @param image Image is the full `repo:tag` this deployment put in the CR. For a git deploy it is the ref the in-cluster build pushes to, known before the build runs.
+ * @param message Message is why this attempt is not live: the failure, or the note that a newer deployment went live before this build finished. Empty while it is fine.
+ * @param org Org is the tenant the deployment belongs to, from the validated identity.
+ * @param source Source is which lane produced it: `git` (built from the repo) or `image` (an already-built ref deployed as-is, including promote and rollback).
+ * @param status Status is where the attempt got to: `building` while its image is being built, `deploying` once its CR reached the cluster — which is the terminal success state, the app's own status is what turns `live` — `error` with the reason in Message, or `superseded` when a newer version went live first.
+ * @param updatedAt UpdatedAt is its last transition, unix seconds — so for a terminal deployment it is when it reached that state.
+ * @param version Version counts this app's deployments, from 1 and monotonically. It is what ORDERS them: a deploy only goes live if no higher version already is, so a build that finishes late is superseded instead of overwriting a newer one.
  */
 
 
 data class DeploymentView (
 
+    /* ApplicationID is the app this deployed — the app's `id`, not its slug. */
     @SerializedName("applicationId")
     val applicationId: kotlin.String? = null,
 
+    /* BuildID is the build record behind a git deploy, whose logs and status live at /v1/platform/builds. Empty for an image deploy. */
     @SerializedName("buildId")
     val buildId: kotlin.String? = null,
 
+    /* Commit is the git ref this built — the commit a deploy or a push named, else the app's branch. Empty for an image deploy, which builds nothing. */
     @SerializedName("commit")
     val commit: kotlin.String? = null,
 
+    /* CreatedAt is when the attempt was recorded, unix seconds. */
     @SerializedName("createdAt")
     val createdAt: kotlin.Int? = null,
 
+    /* ID is the deployment's id (`dep_…`), minted when the attempt is recorded. The app's currentDeploymentId points at one of these. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Image is the full `repo:tag` this deployment put in the CR. For a git deploy it is the ref the in-cluster build pushes to, known before the build runs. */
     @SerializedName("image")
     val image: kotlin.String? = null,
 
+    /* Message is why this attempt is not live: the failure, or the note that a newer deployment went live before this build finished. Empty while it is fine. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
+    /* Org is the tenant the deployment belongs to, from the validated identity. */
     @SerializedName("org")
     val org: kotlin.String? = null,
 
+    /* Source is which lane produced it: `git` (built from the repo) or `image` (an already-built ref deployed as-is, including promote and rollback). */
     @SerializedName("source")
     val source: kotlin.String? = null,
 
+    /* Status is where the attempt got to: `building` while its image is being built, `deploying` once its CR reached the cluster — which is the terminal success state, the app's own status is what turns `live` — `error` with the reason in Message, or `superseded` when a newer version went live first. */
     @SerializedName("status")
     val status: kotlin.String? = null,
 
+    /* UpdatedAt is its last transition, unix seconds — so for a terminal deployment it is when it reached that state. */
     @SerializedName("updatedAt")
     val updatedAt: kotlin.Int? = null,
 
+    /* Version counts this app's deployments, from 1 and monotonically. It is what ORDERS them: a deploy only goes live if no higher version already is, so a build that finishes late is superseded instead of overwriting a newer one. */
     @SerializedName("version")
     val version: kotlin.Int? = null
 

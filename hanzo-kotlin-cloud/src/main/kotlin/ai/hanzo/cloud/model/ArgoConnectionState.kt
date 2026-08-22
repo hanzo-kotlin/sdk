@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param attemptedAt 
- * @param message 
- * @param status 
+ * @param attemptedAt AttemptedAt is when the connection was last probed. Always absent: nothing is probed, and a fabricated timestamp would claim a check that never ran.
+ * @param message Message is why a connection failed. Always absent, since none does.
+ * @param status Status is ArgoCD's ConnectionStatus — Successful, Failed or Unknown. Always Successful here: the destination is the cluster this process is already running in, so it is reachable by construction and there is no credential to probe.
  */
 
 
 data class ArgoConnectionState (
 
+    /* AttemptedAt is when the connection was last probed. Always absent: nothing is probed, and a fabricated timestamp would claim a check that never ran. */
     @SerializedName("attemptedAt")
     val attemptedAt: kotlin.String? = null,
 
+    /* Message is why a connection failed. Always absent, since none does. */
     @SerializedName("message")
     val message: kotlin.String? = null,
 
+    /* Status is ArgoCD's ConnectionStatus — Successful, Failed or Unknown. Always Successful here: the destination is the cluster this process is already running in, so it is reachable by construction and there is no credential to probe. */
     @SerializedName("status")
     val status: kotlin.String? = null
 

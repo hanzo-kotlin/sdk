@@ -21,11 +21,15 @@ import okhttp3.HttpUrl
 
 import ai.hanzo.cloud.model.Admission
 import ai.hanzo.cloud.model.BenchmarkCatalog
+import ai.hanzo.cloud.model.ClaimsOut
+import ai.hanzo.cloud.model.HistoryOut
 import ai.hanzo.cloud.model.Leaderboard
 import ai.hanzo.cloud.model.Pairing
 import ai.hanzo.cloud.model.Preset
 import ai.hanzo.cloud.model.PresetAccepted
 import ai.hanzo.cloud.model.PresetList
+import ai.hanzo.cloud.model.PutClaimsIn
+import ai.hanzo.cloud.model.PutClaimsOut
 import ai.hanzo.cloud.model.Suite
 
 import com.google.gson.annotations.SerializedName
@@ -123,6 +127,108 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
+     * GET /v1/benchmark/claims
+     * Lists the effective published claims: what the leaderboard will use for each (benchmark, model) after the seed, the import and any stored correction are layered.
+     * Lists the effective published claims: what the leaderboard will use for each (benchmark, model) after the seed, the import and any stored correction are layered. It answers the operator&#39;s question — what does this arena currently believe someone else reported, and did we ship that or fix it.  Effective values only. The history of a key lives in the append-only file and is not what this op is for; a list that returned every superseded row would make the common question the hard one.
+     * @param benchmark Benchmark filters to one benchmark id. Empty returns every benchmark. (optional)
+     * @param model Model filters to one model. Empty returns every model. (optional)
+     * @param provider Provider filters to one lab or leaderboard — the way to read what a single source claims across every model it covers. (optional)
+     * @param source Source filters to one citation, which is the finest grain there is: a source is what makes two claims about one model independent rather than a restatement of each other. (optional)
+     * @param protocol Protocol filters by HOW a claim was scored, so provider cards can be read apart from third parties running their own harness. (optional)
+     * @return ClaimsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getBenchmarkClaims(benchmark: kotlin.String? = null, model: kotlin.String? = null, provider: kotlin.String? = null, source: kotlin.String? = null, protocol: kotlin.String? = null) : ClaimsOut {
+        val localVarResponse = getBenchmarkClaimsWithHttpInfo(benchmark = benchmark, model = model, provider = provider, source = source, protocol = protocol)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClaimsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/benchmark/claims
+     * Lists the effective published claims: what the leaderboard will use for each (benchmark, model) after the seed, the import and any stored correction are layered.
+     * Lists the effective published claims: what the leaderboard will use for each (benchmark, model) after the seed, the import and any stored correction are layered. It answers the operator&#39;s question — what does this arena currently believe someone else reported, and did we ship that or fix it.  Effective values only. The history of a key lives in the append-only file and is not what this op is for; a list that returned every superseded row would make the common question the hard one.
+     * @param benchmark Benchmark filters to one benchmark id. Empty returns every benchmark. (optional)
+     * @param model Model filters to one model. Empty returns every model. (optional)
+     * @param provider Provider filters to one lab or leaderboard — the way to read what a single source claims across every model it covers. (optional)
+     * @param source Source filters to one citation, which is the finest grain there is: a source is what makes two claims about one model independent rather than a restatement of each other. (optional)
+     * @param protocol Protocol filters by HOW a claim was scored, so provider cards can be read apart from third parties running their own harness. (optional)
+     * @return ApiResponse<ClaimsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getBenchmarkClaimsWithHttpInfo(benchmark: kotlin.String?, model: kotlin.String?, provider: kotlin.String?, source: kotlin.String?, protocol: kotlin.String?) : ApiResponse<ClaimsOut?> {
+        val localVariableConfig = getBenchmarkClaimsRequestConfig(benchmark = benchmark, model = model, provider = provider, source = source, protocol = protocol)
+
+        return request<Unit, ClaimsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getBenchmarkClaims
+     *
+     * @param benchmark Benchmark filters to one benchmark id. Empty returns every benchmark. (optional)
+     * @param model Model filters to one model. Empty returns every model. (optional)
+     * @param provider Provider filters to one lab or leaderboard — the way to read what a single source claims across every model it covers. (optional)
+     * @param source Source filters to one citation, which is the finest grain there is: a source is what makes two claims about one model independent rather than a restatement of each other. (optional)
+     * @param protocol Protocol filters by HOW a claim was scored, so provider cards can be read apart from third parties running their own harness. (optional)
+     * @return RequestConfig
+     */
+    fun getBenchmarkClaimsRequestConfig(benchmark: kotlin.String?, model: kotlin.String?, provider: kotlin.String?, source: kotlin.String?, protocol: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (benchmark != null) {
+                    put("Benchmark", listOf(benchmark.toString()))
+                }
+                if (model != null) {
+                    put("Model", listOf(model.toString()))
+                }
+                if (provider != null) {
+                    put("Provider", listOf(provider.toString()))
+                }
+                if (source != null) {
+                    put("Source", listOf(source.toString()))
+                }
+                if (protocol != null) {
+                    put("Protocol", listOf(protocol.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/benchmark/claims",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/benchmark/compare
      * Is the ONLY valid arm-vs-arm test: it pairs the two models on the items BOTH completed, and answers rescue and damage counts with an exact-McNemar p.
      * Is the ONLY valid arm-vs-arm test: it pairs the two models on the items BOTH completed, and answers rescue and damage counts with an exact-McNemar p.  Pairing is what prevents the subset artifact — comparing one model&#39;s easy subset against another&#39;s full run — so n_common, not either arm&#39;s own coverage, is the number to read this by.  Both a and b are required. The benchmark defaults to gpqa_diamond.
@@ -201,6 +307,90 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/benchmark/compare",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/benchmark/history
+     * Returns each model&#39;s measured score per run over time, oldest first, with the change between runs.
+     * Returns each model&#39;s measured score per run over time, oldest first, with the change between runs.  This is the counterweight to a leaderboard: the board shows the latest run because that is what \&quot;how good is it\&quot; means, and a single latest number cannot distinguish a model that has always been strong from one that just improved, or from one that regressed after a provider changed something. Both matter for routing, and only one of them is visible on a board.  Runs with no id — attempts recorded before runs existed — group under the empty run, which is honestly what they are: one undated measurement.
+     * @param benchmark Benchmark is the catalog id to read, defaulting to gpqa_diamond. (optional)
+     * @param model Model filters to one model. Empty returns every model measured. (optional)
+     * @return HistoryOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getBenchmarkHistory(benchmark: kotlin.String? = null, model: kotlin.String? = null) : HistoryOut {
+        val localVarResponse = getBenchmarkHistoryWithHttpInfo(benchmark = benchmark, model = model)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HistoryOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/benchmark/history
+     * Returns each model&#39;s measured score per run over time, oldest first, with the change between runs.
+     * Returns each model&#39;s measured score per run over time, oldest first, with the change between runs.  This is the counterweight to a leaderboard: the board shows the latest run because that is what \&quot;how good is it\&quot; means, and a single latest number cannot distinguish a model that has always been strong from one that just improved, or from one that regressed after a provider changed something. Both matter for routing, and only one of them is visible on a board.  Runs with no id — attempts recorded before runs existed — group under the empty run, which is honestly what they are: one undated measurement.
+     * @param benchmark Benchmark is the catalog id to read, defaulting to gpqa_diamond. (optional)
+     * @param model Model filters to one model. Empty returns every model measured. (optional)
+     * @return ApiResponse<HistoryOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getBenchmarkHistoryWithHttpInfo(benchmark: kotlin.String?, model: kotlin.String?) : ApiResponse<HistoryOut?> {
+        val localVariableConfig = getBenchmarkHistoryRequestConfig(benchmark = benchmark, model = model)
+
+        return request<Unit, HistoryOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getBenchmarkHistory
+     *
+     * @param benchmark Benchmark is the catalog id to read, defaulting to gpqa_diamond. (optional)
+     * @param model Model filters to one model. Empty returns every model measured. (optional)
+     * @return RequestConfig
+     */
+    fun getBenchmarkHistoryRequestConfig(benchmark: kotlin.String?, model: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (benchmark != null) {
+                    put("Benchmark", listOf(benchmark.toString()))
+                }
+                if (model != null) {
+                    put("Model", listOf(model.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/benchmark/history",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -349,6 +539,80 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/benchmark/presets",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/benchmark/claims
+     * Records published claims: one to correct a number, many to import a leaderboard.
+     * Records published claims: one to correct a number, many to import a leaderboard. Every row must carry a Source, because a claim without its citation is a number nobody can check — and an unattributed number in the published plane is indistinguishable from a measurement, which is the one confusion this whole surface is built to prevent.  Writes are append-only, so this never destroys the value it replaces. A vendor restating a score leaves both rows on disk, which is how the restating itself becomes visible.
+     * @param putClaimsIn 
+     * @return PutClaimsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postBenchmarkClaims(putClaimsIn: PutClaimsIn) : PutClaimsOut {
+        val localVarResponse = postBenchmarkClaimsWithHttpInfo(putClaimsIn = putClaimsIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PutClaimsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/benchmark/claims
+     * Records published claims: one to correct a number, many to import a leaderboard.
+     * Records published claims: one to correct a number, many to import a leaderboard. Every row must carry a Source, because a claim without its citation is a number nobody can check — and an unattributed number in the published plane is indistinguishable from a measurement, which is the one confusion this whole surface is built to prevent.  Writes are append-only, so this never destroys the value it replaces. A vendor restating a score leaves both rows on disk, which is how the restating itself becomes visible.
+     * @param putClaimsIn 
+     * @return ApiResponse<PutClaimsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postBenchmarkClaimsWithHttpInfo(putClaimsIn: PutClaimsIn) : ApiResponse<PutClaimsOut?> {
+        val localVariableConfig = postBenchmarkClaimsRequestConfig(putClaimsIn = putClaimsIn)
+
+        return request<PutClaimsIn, PutClaimsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postBenchmarkClaims
+     *
+     * @param putClaimsIn 
+     * @return RequestConfig
+     */
+    fun postBenchmarkClaimsRequestConfig(putClaimsIn: PutClaimsIn) : RequestConfig<PutClaimsIn> {
+        val localVariableBody = putClaimsIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/benchmark/claims",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

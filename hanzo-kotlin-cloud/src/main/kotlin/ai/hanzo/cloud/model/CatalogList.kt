@@ -22,13 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param `data` Data is every starter prompt, each importable as-is with POST /v1/prompts.
+ * @param `data` Data is every starter prompt, each importable as-is with POST /v1/prompt.
  */
 
 
 data class CatalogList (
 
-    /* Data is every starter prompt, each importable as-is with POST /v1/prompts. */
+    /* Data is every starter prompt, each importable as-is with POST /v1/prompt. */
     @SerializedName("data")
     val `data`: kotlin.collections.List<CatalogEntry>? = null
 
