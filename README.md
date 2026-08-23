@@ -4,8 +4,7 @@
 
 Kotlin client for the [Hanzo Cloud](https://hanzo.ai) API, generated from the
 `openapi.yaml` hanzoai/cloud emits from its own routers — so every method here is
-a route the subsystem that publishes it registered. The document declares **2,479
-operations over 1,814 paths**; the client is **192 API classes and 2,461 models**
+a route the subsystem that publishes it registered. The document declares **<!--counts-->2,259 operations over 1,620 paths, grouped into 117 services<!--/counts-->**; the client is **192 API classes and 2,461 models**
 under `ai.hanzo.cloud`.
 
 Which release of the document this tree is a projection of is a fact about the
