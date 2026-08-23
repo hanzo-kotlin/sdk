@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Email **dev@hanzo.ai**. Please do not open a public issue for a security report.
+Email **security@hanzo.ai**. Please do not open a public issue for a security report.
 
 Give us a reasonable window to investigate and ship a fix before disclosing
 publicly.
