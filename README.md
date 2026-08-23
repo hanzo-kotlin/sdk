@@ -3,11 +3,10 @@
 # Hanzo Cloud — Kotlin SDK
 
 Kotlin client for the [Hanzo Cloud](https://hanzo.ai) API, generated from the
-`openapi.yaml` hanzoai/cloud emits from its own routers — so every method here is
-a route the subsystem that publishes it registered, under `ai.hanzo.cloud`.
+API's own OpenAPI document, under `ai.hanzo.cloud`.
 
-Which release of the document this tree is a projection of is a fact about the
-repo, in [`.spec-lock`](.spec-lock): the ref, and the digest of the bytes.
+[`.spec-lock`](.spec-lock) names the ref and the digest of the bytes this tree
+is a projection of.
 
 ## Install
 
@@ -33,10 +32,9 @@ dependencies { implementation("ai.hanzo:hanzo-kotlin-cloud:0.1.0-alpha.5") }
 
 <!-- x-release-please-end -->
 
-`-PpublishLocal` is the part that skips GPG signing; without it the publish stops
-at `signMavenPublication` with no configured signatory. Building wants a JDK 21
-toolchain. The jar it produces is Java 8 bytecode, so anything from Java 8 up can
-consume it.
+`-PpublishLocal` skips GPG signing; without it the publish stops at
+`signMavenPublication` with no configured signatory. Building wants a JDK 21
+toolchain. The jar it produces is Java 8 bytecode.
 
 ## Quickstart
 
@@ -56,14 +54,13 @@ export HANZO_API_KEY=sk-...
 ./gradlew :examples:hello:run    # the same call, in this repo
 ```
 
-With a key that prints the caller's own keys. With none, the API answers 403:
-this route refuses rather than pretending, which is what makes it a credential
-check. [`examples/hello`](examples/hello) catches that — see [Errors](#errors) —
-and opens with a call that needs no key at all, so it runs either way.
+With a key that prints the caller's own keys. With none, the API answers 403.
+[`examples/hello`](examples/hello) catches that — see [Errors](#errors) — and
+opens with a call that needs no key at all, so it runs either way.
 
-`Hanzo()` resolves the endpoint and credentials; `hanzo.api(::SomeApi)` builds any
-of the 192 generated API classes against them. The classes follow the document's
-tags under `ai.hanzo.cloud.api`, with their request and response types under
+`Hanzo()` resolves the endpoint and credentials; `hanzo.api(::SomeApi)` builds
+any generated API class against them. The classes follow the document's tags
+under `ai.hanzo.cloud.api`, with their request and response types under
 `ai.hanzo.cloud.model`. `propertyKeys` rather than `keys` is the generator
 prefixing a name on its reserved list — `size`, `keys`, `values`, `entries`,
 `class` — and `@SerializedName` still sends the original. Read method and field
@@ -73,7 +70,7 @@ names off the client; do not guess them.
 
 `HANZO_API_KEY` goes out as `Authorization: Bearer …` on every request. The
 document declares one scheme, `bearer`, and applies it to every operation but
-four, so what the client sends is what the API says it wants.
+four.
 
 Two kinds of token fit that header. A **Cloud API key** is `sk-` (secret, belongs
 on a server) or `pk-` (publishable, org-identifying, safe in a browser bundle);
@@ -87,10 +84,9 @@ export HANZO_API_KEY=$(curl -s https://hanzo.id/v1/iam/oauth/token \
   | python3 -c 'import json,sys; print(json.load(sys.stdin)["access_token"])')
 ```
 
-Four operations need neither, because the document exempts them with
-`security: []` — `get_models`, `get_models_providers`, `get_commands` and
-`get_openapi.json`. Every generated request config reports which side it is on
-as `requiresAuthentication`, so the client can be asked rather than guessed at.
+Four operations need neither: `get_models`, `get_models_providers`,
+`get_commands` and `get_openapi.json`. Every generated request config reports
+which side it is on as `requiresAuthentication`.
 
 | variable | meaning |
 | --- | --- |
@@ -104,9 +100,7 @@ handed; a second tenant cannot re-point the first one's calls.
 
 [`Hanzo`](hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/Hanzo.kt) is the one
 hand-written file under `src/main`, and it is where the credential lives. The
-generated `ApiClient` does carry the declaration's own credential field, but it
-is one field per process — fine for a single tenant, wrong for two — so the token
-rides the transport, per instance, alongside the `X-Org-Id` no generated
+token rides the transport, per instance, alongside the `X-Org-Id` no generated
 signature accepts.
 
 ## Errors
@@ -121,26 +115,26 @@ import ai.hanzo.cloud.infrastructure.ClientException
 try {
     Hanzo().api(::KeysApi).getKeys()
 } catch (e: ClientException) {
-    println("refused ${e.statusCode}") // 403 with no key: this route says no
+    println("refused ${e.statusCode}") // 403 with no key
 }
 ```
 
 ## Examples
 
 The six canonical flows every Hanzo SDK ships, under `examples/<flow>/`. They are
-Gradle subprojects compiled by the build, so they cannot rot.
+Gradle subprojects compiled by the build.
 
 | flow | operations | what it does |
 | --- | --- | --- |
-| [`hello`](examples/hello) | `get_models`, `get_keys` | the open call that proves the gateway is reachable, then the call that says no, so a 200 proves the key works |
-| [`chat`](examples/chat) | `post_chat_completions` | one completion — the route carries no schema in the document, so the flow prints the status it got rather than inventing a request |
-| [`money`](examples/money) | `get_billing_balance`, `get_billing_usage` | the balance and the usage that moved it, same shape and same reason |
+| [`hello`](examples/hello) | `get_models`, `get_keys` | the open call that proves the gateway is reachable, then the call that says no |
+| [`chat`](examples/chat) | `post_chat_completions` | one completion — the route carries no schema in the document, so the flow prints the status it got |
+| [`money`](examples/money) | `get_billing_balance`, `get_billing_usage` | the balance and the usage that moved it |
 | [`store`](examples/store) | `post_kv`, `get_kv_by_name`, `delete_kv_by_name` | provision a KV store, read it back, drop it |
 | [`agent`](examples/agent) | `post_agents`, `post_agents_by_ref_run`, `get_agents_by_ref_runs` | create an agent, run it, poll until the run is terminal |
 | [`tools`](examples/tools) | `get_tools` | the tools this key can reach, and which are activated |
 
 One command, no credential — `hello` opens on a route the document declares
-open, so this runs end to end against the live gateway as it stands:
+open:
 
 ```sh
 ./gradlew :examples:hello:run
@@ -159,7 +153,7 @@ keys     the key is good, and it owns no keys of its own
 ```
 
 `agent` runs on `zen5` and reads `HANZO_MODEL` to pick another;
-`curl https://catalog.hanzo.ai/v1/models` lists the other 499.
+`curl https://catalog.hanzo.ai/v1/models` lists the rest.
 
 Route reference: [docs.hanzo.ai](https://docs.hanzo.ai).
 
@@ -171,10 +165,9 @@ Route reference: [docs.hanzo.ai](https://docs.hanzo.ai).
 ./gradlew :hanzo-kotlin-cloud:test       # the flow tests
 ```
 
-The examples are the gate. The build compiles the client and all six flows
-against it, so a document change that renames or drops an operation goes red here
-instead of in someone's app. `FlowsTest` pins each flow to the route
-hanzoai/openapi `flows.yaml` names, asserts the client actually sends the bearer
+The build compiles the client and all six flows against it, so a document change
+that renames or drops an operation goes red here. `FlowsTest` pins each flow to
+the route hanzoai/openapi `flows.yaml` names, asserts the client sends the bearer
 token and the org header, that two clients in one process keep their own
 credentials, and that each route reports the `requiresAuthentication` the
 document declares for it.
@@ -191,10 +184,7 @@ SPEC=… OPENAPI=… ./scripts/generate.sh --check   # non-zero if the tree drif
 
 `scripts/generate.sh` is a call site: the invocation lives once in
 `hanzoai/openapi/generate.py`, and every knob — generator, HTTP library,
-coordinates, packages — is data in `sdks.yaml` beside it. Both inputs arrive as
-values: `SPEC` is the document, `OPENAPI` is the checkout holding the driver. CI
-sets both; by hand, point them at checkouts you already have. `CLAUDE.md` has the
-rest.
+coordinates, packages — is data in `sdks.yaml` beside it.
 
 ## Sibling repos
 
