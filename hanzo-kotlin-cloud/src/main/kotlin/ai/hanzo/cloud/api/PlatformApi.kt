@@ -22,7 +22,11 @@ import okhttp3.HttpUrl
 import ai.hanzo.cloud.model.AddDomainReq
 import ai.hanzo.cloud.model.AppView
 import ai.hanzo.cloud.model.BuildBoard
+import ai.hanzo.cloud.model.CDApp
+import ai.hanzo.cloud.model.CdResp
 import ai.hanzo.cloud.model.CreateAppReq
+import ai.hanzo.cloud.model.Declaration
+import ai.hanzo.cloud.model.DeclaredResp
 import ai.hanzo.cloud.model.DeployLogs
 import ai.hanzo.cloud.model.DeployReq
 import ai.hanzo.cloud.model.DeploymentView
@@ -222,21 +226,23 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/platform/apps
-     * What this organization has declared, and what CD did with it
-     * Returns the declarations in the caller&#39;s own org directory, each joined with the Hanzo CD Application reconciling it — sync verdict, health, the universe commit last applied. &#x60;cd&#x60; is null for a declaration the delivery plane has no Application for, which is the normal state of one that exists only on a branch.  If the delivery plane cannot be read, the declarations are still returned and &#x60;cdUnavailable&#x60; says why. An unreadable plane never renders as \&quot;nothing has been reconciled\&quot;.
-     * @return void
+     * Answers what this organisation has declared, joined with what the delivery plane has done about it.
+     * Answers what this organisation has declared, joined with what the delivery plane has done about it.  The join is best-effort BY DESIGN and says so when it is missing: the declarations ARE the answer to \&quot;what have I deployed\&quot;, so refusing the whole board because the cluster is unreadable would lose the half that is readable. What must never happen is a silent null — an unreadable plane is reported as &#x60;cd.unavailable&#x60; carrying the reason, never as an app with no reconciliation.
+     * @param org Org names the organisation whose declarations to read, defaulting to the caller&#39;s own. Only a SuperAdmin may name one that is not theirs; anyone else naming a foreign org is refused, so this widens nothing by itself. (optional)
+     * @return DeclaredResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformApps() : Unit {
-        val localVarResponse = getPlatformAppsWithHttpInfo()
+    fun getPlatformApps(org: kotlin.String? = null) : DeclaredResp {
+        val localVarResponse = getPlatformAppsWithHttpInfo(org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeclaredResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -252,17 +258,19 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/platform/apps
-     * What this organization has declared, and what CD did with it
-     * Returns the declarations in the caller&#39;s own org directory, each joined with the Hanzo CD Application reconciling it — sync verdict, health, the universe commit last applied. &#x60;cd&#x60; is null for a declaration the delivery plane has no Application for, which is the normal state of one that exists only on a branch.  If the delivery plane cannot be read, the declarations are still returned and &#x60;cdUnavailable&#x60; says why. An unreadable plane never renders as \&quot;nothing has been reconciled\&quot;.
-     * @return ApiResponse<Unit?>
+     * Answers what this organisation has declared, joined with what the delivery plane has done about it.
+     * Answers what this organisation has declared, joined with what the delivery plane has done about it.  The join is best-effort BY DESIGN and says so when it is missing: the declarations ARE the answer to \&quot;what have I deployed\&quot;, so refusing the whole board because the cluster is unreadable would lose the half that is readable. What must never happen is a silent null — an unreadable plane is reported as &#x60;cd.unavailable&#x60; carrying the reason, never as an app with no reconciliation.
+     * @param org Org names the organisation whose declarations to read, defaulting to the caller&#39;s own. Only a SuperAdmin may name one that is not theirs; anyone else naming a foreign org is refused, so this widens nothing by itself. (optional)
+     * @return ApiResponse<DeclaredResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformAppsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = getPlatformAppsRequestConfig()
+    fun getPlatformAppsWithHttpInfo(org: kotlin.String?) : ApiResponse<DeclaredResp?> {
+        val localVariableConfig = getPlatformAppsRequestConfig(org = org)
 
-        return request<Unit, Unit>(
+        return request<Unit, DeclaredResp>(
             localVariableConfig
         )
     }
@@ -270,13 +278,20 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation getPlatformApps
      *
+     * @param org Org names the organisation whose declarations to read, defaulting to the caller&#39;s own. Only a SuperAdmin may name one that is not theirs; anyone else naming a foreign org is refused, so this widens nothing by itself. (optional)
      * @return RequestConfig
      */
-    fun getPlatformAppsRequestConfig() : RequestConfig<Unit> {
+    fun getPlatformAppsRequestConfig(org: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (org != null) {
+                    put("org", listOf(org.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/platform/apps",
@@ -289,22 +304,24 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/platform/apps/{app}
-     * One declaration
-     * The values file for one app as git declares it: image repository and tag, hosts, replicas, and whether CD is automated on it. 404 when this organization declares no such app.
-     * @param app 
-     * @return void
+     * Answers ONE declaration — what git says this app is, before the delivery plane has had any say in it.
+     * Answers ONE declaration — what git says this app is, before the delivery plane has had any say in it.
+     * @param app App is the DNS-1123 label of the declaration. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which app is read whatever else is sent.
+     * @param org Org names the organisation the declaration lives in, defaulting to the caller&#39;s own and subject to the same SuperAdmin rule as the listing. (optional)
+     * @return Declaration
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformAppsByApp(app: kotlin.String) : Unit {
-        val localVarResponse = getPlatformAppsByAppWithHttpInfo(app = app)
+    fun getPlatformAppsByApp(app: kotlin.String, org: kotlin.String? = null) : Declaration {
+        val localVarResponse = getPlatformAppsByAppWithHttpInfo(app = app, org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Declaration
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -320,18 +337,20 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/platform/apps/{app}
-     * One declaration
-     * The values file for one app as git declares it: image repository and tag, hosts, replicas, and whether CD is automated on it. 404 when this organization declares no such app.
-     * @param app 
-     * @return ApiResponse<Unit?>
+     * Answers ONE declaration — what git says this app is, before the delivery plane has had any say in it.
+     * Answers ONE declaration — what git says this app is, before the delivery plane has had any say in it.
+     * @param app App is the DNS-1123 label of the declaration. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which app is read whatever else is sent.
+     * @param org Org names the organisation the declaration lives in, defaulting to the caller&#39;s own and subject to the same SuperAdmin rule as the listing. (optional)
+     * @return ApiResponse<Declaration?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformAppsByAppWithHttpInfo(app: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getPlatformAppsByAppRequestConfig(app = app)
+    fun getPlatformAppsByAppWithHttpInfo(app: kotlin.String, org: kotlin.String?) : ApiResponse<Declaration?> {
+        val localVariableConfig = getPlatformAppsByAppRequestConfig(app = app, org = org)
 
-        return request<Unit, Unit>(
+        return request<Unit, Declaration>(
             localVariableConfig
         )
     }
@@ -339,14 +358,21 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation getPlatformAppsByApp
      *
-     * @param app 
+     * @param app App is the DNS-1123 label of the declaration. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which app is read whatever else is sent.
+     * @param org Org names the organisation the declaration lives in, defaulting to the caller&#39;s own and subject to the same SuperAdmin rule as the listing. (optional)
      * @return RequestConfig
      */
-    fun getPlatformAppsByAppRequestConfig(app: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformAppsByAppRequestConfig(app: kotlin.String, org: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (org != null) {
+                    put("org", listOf(org.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/platform/apps/{app}".replace("{"+"app"+"}", encodeURIComponent(app.toString())),
@@ -359,22 +385,24 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/platform/apps/{app}/cd
-     * One app&#39;s reconciliation
-     * The Hanzo CD Application for one declaration, on its own — the poll a deploy view makes while it waits, without re-reading the whole inventory. 404 while the declaration exists only on a branch, because the generator reads main.
-     * @param app 
-     * @return void
+     * Answers ONE app&#39;s reconciliation alone — the poll a deploy console makes while it waits, without re-reading the whole inventory each time.
+     * Answers ONE app&#39;s reconciliation alone — the poll a deploy console makes while it waits, without re-reading the whole inventory each time.
+     * @param app App is the DNS-1123 label of the declaration. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which app is read whatever else is sent.
+     * @param org Org names the organisation the declaration lives in, defaulting to the caller&#39;s own and subject to the same SuperAdmin rule as the listing. (optional)
+     * @return CDApp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformAppsByAppCd(app: kotlin.String) : Unit {
-        val localVarResponse = getPlatformAppsByAppCdWithHttpInfo(app = app)
+    fun getPlatformAppsByAppCd(app: kotlin.String, org: kotlin.String? = null) : CDApp {
+        val localVarResponse = getPlatformAppsByAppCdWithHttpInfo(app = app, org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CDApp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -390,18 +418,20 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/platform/apps/{app}/cd
-     * One app&#39;s reconciliation
-     * The Hanzo CD Application for one declaration, on its own — the poll a deploy view makes while it waits, without re-reading the whole inventory. 404 while the declaration exists only on a branch, because the generator reads main.
-     * @param app 
-     * @return ApiResponse<Unit?>
+     * Answers ONE app&#39;s reconciliation alone — the poll a deploy console makes while it waits, without re-reading the whole inventory each time.
+     * Answers ONE app&#39;s reconciliation alone — the poll a deploy console makes while it waits, without re-reading the whole inventory each time.
+     * @param app App is the DNS-1123 label of the declaration. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which app is read whatever else is sent.
+     * @param org Org names the organisation the declaration lives in, defaulting to the caller&#39;s own and subject to the same SuperAdmin rule as the listing. (optional)
+     * @return ApiResponse<CDApp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformAppsByAppCdWithHttpInfo(app: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = getPlatformAppsByAppCdRequestConfig(app = app)
+    fun getPlatformAppsByAppCdWithHttpInfo(app: kotlin.String, org: kotlin.String?) : ApiResponse<CDApp?> {
+        val localVariableConfig = getPlatformAppsByAppCdRequestConfig(app = app, org = org)
 
-        return request<Unit, Unit>(
+        return request<Unit, CDApp>(
             localVariableConfig
         )
     }
@@ -409,14 +439,21 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation getPlatformAppsByAppCd
      *
-     * @param app 
+     * @param app App is the DNS-1123 label of the declaration. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which app is read whatever else is sent.
+     * @param org Org names the organisation the declaration lives in, defaulting to the caller&#39;s own and subject to the same SuperAdmin rule as the listing. (optional)
      * @return RequestConfig
      */
-    fun getPlatformAppsByAppCdRequestConfig(app: kotlin.String) : RequestConfig<Unit> {
+    fun getPlatformAppsByAppCdRequestConfig(app: kotlin.String, org: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (org != null) {
+                    put("org", listOf(org.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/platform/apps/{app}/cd".replace("{"+"app"+"}", encodeURIComponent(app.toString())),
@@ -499,21 +536,22 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/platform/cd
-     * The delivery plane
-     * Every Hanzo CD Application this caller may observe, with its sync verdict, health, the universe revision last applied, and whether automation and self-heal are on. A SuperAdmin sees the fleet; an org admin sees only Applications whose destination namespace IS its own organization, and never a reserved one.  A cluster with no CD installed answers an empty plane. A plane that cannot be READ answers 503 and says why — the two are opposite facts and never share a shape.
-     * @return void
+     * Answers every Application the delivery plane holds.
+     * Answers every Application the delivery plane holds.  Scoped to the namespaces the caller&#39;s own validated org owns: the ROLE opens the door and the tenant boundary is applied inside, so an admin of one org never observes another&#39;s.
+     * @return CdResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlatformCd() : Unit {
+    fun getPlatformCd() : CdResp {
         val localVarResponse = getPlatformCdWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CdResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -529,17 +567,18 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/platform/cd
-     * The delivery plane
-     * Every Hanzo CD Application this caller may observe, with its sync verdict, health, the universe revision last applied, and whether automation and self-heal are on. A SuperAdmin sees the fleet; an org admin sees only Applications whose destination namespace IS its own organization, and never a reserved one.  A cluster with no CD installed answers an empty plane. A plane that cannot be READ answers 503 and says why — the two are opposite facts and never share a shape.
-     * @return ApiResponse<Unit?>
+     * Answers every Application the delivery plane holds.
+     * Answers every Application the delivery plane holds.  Scoped to the namespaces the caller&#39;s own validated org owns: the ROLE opens the door and the tenant boundary is applied inside, so an admin of one org never observes another&#39;s.
+     * @return ApiResponse<CdResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getPlatformCdWithHttpInfo() : ApiResponse<Unit?> {
+    fun getPlatformCdWithHttpInfo() : ApiResponse<CdResp?> {
         val localVariableConfig = getPlatformCdRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, CdResp>(
             localVariableConfig
         )
     }
@@ -553,7 +592,8 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/platform/cd",
@@ -1837,7 +1877,7 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /v1/platform/hook
      * Receive a push from the forge and trigger its build
-     * The forge&#39;s push-to-deploy door. git.hanzo.ai runs as a separate server, so its pushes never reach this fleet&#39;s own receive-pack; without this a push to the host we call canonical builds nothing. A verified push is handed to the SAME two seams a native push travels — the single-registrant deploy trigger, and the many-subscriber lifecycle stream that notifies and indexes — and the build decision itself stays downstream in the one place that knows what a push means.  PUBLIC at the JWT layer, because the forge carries no Hanzo session: AUTHENTICATION IS THE SIGNATURE. The HMAC covers the raw bytes and is verified BEFORE the payload is parsed, so an unauthenticated body is never decoded. The secret is read from KMS; a deployment that cannot read it answers 503 and processes nothing, rather than trusting a delivery it could not check. The body is read UNCOMPRESSED — a request declaring a Content-Encoding is refused 415 before it is touched, because decoding one is unbounded work bought with a few bytes and no credential. A bad signature is 401, a payload over 8 MiB is 413, and a malformed one 400.  A verified push that reaches both seams answers 200 with fired true and the NUMBER OF BUILDS it launched — zero is ordinary, since most pushes track no application, and it is the answer &#39;fired&#39; cannot give. A push that could not be dispatched answers 500: the delivery page shows it red, and the Replay that prompts reaches a fresh attempt rather than being declined as already landed.  The deliveries deliberately ignored answer 200 with a reason and nothing else: a payload that is not a push, a ref DELETE (a zero &#x60;after&#x60; has no commit to build), a BOT-authored push (release automation pushes as the forge&#39;s own Actions user, and a release must never rebuild itself), a push from a forge namespace that maps to no org, and a redelivery of a push already fired. Branches and tags both reach the build trigger, because releases are cut by tag and filtering here would silently stop publishing.
+     * The forge&#39;s push-to-deploy door. git.hanzo.ai runs as a separate server, so its pushes never reach this fleet&#39;s own receive-pack; without this a push to the host we call canonical builds nothing. A verified push is handed to the SAME two clients a native push travels — the single-registrant deploy trigger, and the many-subscriber lifecycle stream that notifies and indexes — and the build decision itself stays downstream in the one place that knows what a push means.  PUBLIC at the JWT layer, because the forge carries no Hanzo session: AUTHENTICATION IS THE SIGNATURE. The HMAC covers the raw bytes and is verified BEFORE the payload is parsed, so an unauthenticated body is never decoded. The secret is read from KMS; a deployment that cannot read it answers 503 and processes nothing, rather than trusting a delivery it could not check. The body is read UNCOMPRESSED — a request declaring a Content-Encoding is refused 415 before it is touched, because decoding one is unbounded work bought with a few bytes and no credential. A bad signature is 401, a payload over 8 MiB is 413, and a malformed one 400.  A verified push that reaches both clients answers 200 with fired true and the NUMBER OF BUILDS it launched — zero is ordinary, since most pushes track no application, and it is the answer &#39;fired&#39; cannot give. A push that could not be dispatched answers 500: the delivery page shows it red, and the Replay that prompts reaches a fresh attempt rather than being declined as already landed.  The deliveries deliberately ignored answer 200 with a reason and nothing else: a payload that is not a push, a ref DELETE (a zero &#x60;after&#x60; has no commit to build), a BOT-authored push (release automation pushes as the forge&#39;s own Actions user, and a release must never rebuild itself), a push from a forge namespace that maps to no org, and a redelivery of a push already fired. Branches and tags both reach the build trigger, because releases are cut by tag and filtering here would silently stop publishing.
      * @param push  (optional)
      * @return Verdict
      * @throws IllegalStateException If the request is not correctly configured
@@ -1869,7 +1909,7 @@ class PlatformApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /v1/platform/hook
      * Receive a push from the forge and trigger its build
-     * The forge&#39;s push-to-deploy door. git.hanzo.ai runs as a separate server, so its pushes never reach this fleet&#39;s own receive-pack; without this a push to the host we call canonical builds nothing. A verified push is handed to the SAME two seams a native push travels — the single-registrant deploy trigger, and the many-subscriber lifecycle stream that notifies and indexes — and the build decision itself stays downstream in the one place that knows what a push means.  PUBLIC at the JWT layer, because the forge carries no Hanzo session: AUTHENTICATION IS THE SIGNATURE. The HMAC covers the raw bytes and is verified BEFORE the payload is parsed, so an unauthenticated body is never decoded. The secret is read from KMS; a deployment that cannot read it answers 503 and processes nothing, rather than trusting a delivery it could not check. The body is read UNCOMPRESSED — a request declaring a Content-Encoding is refused 415 before it is touched, because decoding one is unbounded work bought with a few bytes and no credential. A bad signature is 401, a payload over 8 MiB is 413, and a malformed one 400.  A verified push that reaches both seams answers 200 with fired true and the NUMBER OF BUILDS it launched — zero is ordinary, since most pushes track no application, and it is the answer &#39;fired&#39; cannot give. A push that could not be dispatched answers 500: the delivery page shows it red, and the Replay that prompts reaches a fresh attempt rather than being declined as already landed.  The deliveries deliberately ignored answer 200 with a reason and nothing else: a payload that is not a push, a ref DELETE (a zero &#x60;after&#x60; has no commit to build), a BOT-authored push (release automation pushes as the forge&#39;s own Actions user, and a release must never rebuild itself), a push from a forge namespace that maps to no org, and a redelivery of a push already fired. Branches and tags both reach the build trigger, because releases are cut by tag and filtering here would silently stop publishing.
+     * The forge&#39;s push-to-deploy door. git.hanzo.ai runs as a separate server, so its pushes never reach this fleet&#39;s own receive-pack; without this a push to the host we call canonical builds nothing. A verified push is handed to the SAME two clients a native push travels — the single-registrant deploy trigger, and the many-subscriber lifecycle stream that notifies and indexes — and the build decision itself stays downstream in the one place that knows what a push means.  PUBLIC at the JWT layer, because the forge carries no Hanzo session: AUTHENTICATION IS THE SIGNATURE. The HMAC covers the raw bytes and is verified BEFORE the payload is parsed, so an unauthenticated body is never decoded. The secret is read from KMS; a deployment that cannot read it answers 503 and processes nothing, rather than trusting a delivery it could not check. The body is read UNCOMPRESSED — a request declaring a Content-Encoding is refused 415 before it is touched, because decoding one is unbounded work bought with a few bytes and no credential. A bad signature is 401, a payload over 8 MiB is 413, and a malformed one 400.  A verified push that reaches both clients answers 200 with fired true and the NUMBER OF BUILDS it launched — zero is ordinary, since most pushes track no application, and it is the answer &#39;fired&#39; cannot give. A push that could not be dispatched answers 500: the delivery page shows it red, and the Replay that prompts reaches a fresh attempt rather than being declined as already landed.  The deliveries deliberately ignored answer 200 with a reason and nothing else: a payload that is not a push, a ref DELETE (a zero &#x60;after&#x60; has no commit to build), a BOT-authored push (release automation pushes as the forge&#39;s own Actions user, and a release must never rebuild itself), a push from a forge namespace that maps to no org, and a redelivery of a push already fired. Branches and tags both reach the build trigger, because releases are cut by tag and filtering here would silently stop publishing.
      * @param push  (optional)
      * @return ApiResponse<Verdict?>
      * @throws IllegalStateException If the request is not correctly configured

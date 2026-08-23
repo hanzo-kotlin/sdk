@@ -236,6 +236,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BankQuestion.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BankTally.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BankTxnRow.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BaseHealth.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BaseView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BeginIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Benchmark.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BenchmarkCatalog.kt
@@ -296,6 +297,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BusRequest.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/BuyInput.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ByoGPU.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ByoWorker.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CDApp.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CalendarPost.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CallInput.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CallList.kt
@@ -359,6 +361,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CatalogPage.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Category.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CategoryIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CategorySpend.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CdResp.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Centre.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Chain.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ChainList.kt
@@ -372,6 +375,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ChannelResult.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ChannelSpec.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ChannelView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Charge.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Charged.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ChatChannels.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ChatRequest.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ChatResponse.kt
@@ -441,7 +445,9 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ContextBundle.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ContextIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ControlCommandView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ControlDrain.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ControlIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ControlList.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ControlResult.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CookieAck.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CorpusView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CostLine.kt
@@ -489,6 +495,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DataroomLinkCreate.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DataroomLinkOne.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DataroomLinkStats.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DataroomLinks.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DataroomLiveness.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DataroomMember.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DataroomMembership.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DataroomPageStat.kt
@@ -504,6 +511,10 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DatasetView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DecideBody.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DecisionIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeckOut.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Declaration.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeclareEnv.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Declared.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeclaredResp.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DefRow.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Definition.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DefsOut.kt
@@ -512,6 +523,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeletedOut.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Delivery.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeliveryList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeliveryRow.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeployHealth.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeployLogs.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeployRecord.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeployReq.kt
@@ -522,6 +534,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DestinationField.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DestinationList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DestinationStatus.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DestinationTest.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Detachment.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DevicePollOut.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeviceStartIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/DeviceStartOut.kt
@@ -601,6 +614,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/EvaluatorList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/EvaluatorReq.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/EvaluatorView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Event.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/EventIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/EventList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/EventView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Exception.kt
@@ -1920,6 +1934,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProjectsRelease.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProjectsRepo.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProjectsSite.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProjectsSiteDeploy.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProjectsStar.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProjectsUpdate.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProjectsUpdateRepo.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProjectsUploadGrant.kt
@@ -1974,6 +1989,8 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ReadingReq.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ReadingView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ReadmeJSON.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Receipt.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Recharge.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Recharged.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Record.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RecordList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RedeemInput.kt
@@ -2314,6 +2331,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ToolResult.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Top.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TopModels.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TopProducts.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TopupIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TotalView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TraceList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TraceView.kt
@@ -2355,6 +2373,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TrustSettings.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TrustTally.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Txn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/UTM.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Unreadable.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/UnreconciledOut.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Unsubscribed.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/UpdateAgentIn.kt

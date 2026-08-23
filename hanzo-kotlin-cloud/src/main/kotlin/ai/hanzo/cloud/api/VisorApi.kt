@@ -1108,21 +1108,22 @@ class VisorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/visor/compute/regions
-     * The regions a machine or GPU can be launched into
-     * Lists the launch regions the compute catalog offers, passed through verbatim from the provider so the shape stays the provider&#39;s single source of truth. The catalog is GLOBAL, not per-tenant: no owner is forwarded and every org sees the same list. It is still gated — a validated principal is required, 403 without one — because the catalog is what backs the launch drawer, not public marketing copy.
-     * @return void
+     * Regions lists the regions a machine can be launched in.
+     * Regions lists the regions a machine can be launched in.  The catalog is GLOBAL — identical for every tenant — so no owner is forwarded upstream. It is still org-gated, because a catalog is a map of what this deployment can spend money in and an anonymous caller has no business reading it.
+     * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getVisorComputeRegions() : Unit {
+    fun getVisorComputeRegions() : kotlin.Any {
         val localVarResponse = getVisorComputeRegionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1138,17 +1139,18 @@ class VisorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/visor/compute/regions
-     * The regions a machine or GPU can be launched into
-     * Lists the launch regions the compute catalog offers, passed through verbatim from the provider so the shape stays the provider&#39;s single source of truth. The catalog is GLOBAL, not per-tenant: no owner is forwarded and every org sees the same list. It is still gated — a validated principal is required, 403 without one — because the catalog is what backs the launch drawer, not public marketing copy.
-     * @return ApiResponse<Unit?>
+     * Regions lists the regions a machine can be launched in.
+     * Regions lists the regions a machine can be launched in.  The catalog is GLOBAL — identical for every tenant — so no owner is forwarded upstream. It is still org-gated, because a catalog is a map of what this deployment can spend money in and an anonymous caller has no business reading it.
+     * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getVisorComputeRegionsWithHttpInfo() : ApiResponse<Unit?> {
+    fun getVisorComputeRegionsWithHttpInfo() : ApiResponse<kotlin.Any?> {
         val localVariableConfig = getVisorComputeRegionsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, kotlin.Any>(
             localVariableConfig
         )
     }
@@ -1162,7 +1164,8 @@ class VisorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/visor/compute/regions",
@@ -1175,21 +1178,22 @@ class VisorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/visor/compute/sizes
-     * The machine and GPU sizes that can be launched
-     * Lists the instance sizes the compute catalog offers, passed through verbatim from the provider so the shape stays the provider&#39;s single source of truth. These are the values &#x60;size&#x60; accepts on a launch. The catalog is GLOBAL, not per-tenant: no owner is forwarded and every org sees the same list. It is still gated — a validated principal is required, 403 without one.
-     * @return void
+     * Sizes lists the machine sizes available to launch, with their specifications.
+     * Sizes lists the machine sizes available to launch, with their specifications.  Global and org-gated, exactly as the region catalog is, and for the same reasons.
+     * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getVisorComputeSizes() : Unit {
+    fun getVisorComputeSizes() : kotlin.Any {
         val localVarResponse = getVisorComputeSizesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1205,17 +1209,18 @@ class VisorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/visor/compute/sizes
-     * The machine and GPU sizes that can be launched
-     * Lists the instance sizes the compute catalog offers, passed through verbatim from the provider so the shape stays the provider&#39;s single source of truth. These are the values &#x60;size&#x60; accepts on a launch. The catalog is GLOBAL, not per-tenant: no owner is forwarded and every org sees the same list. It is still gated — a validated principal is required, 403 without one.
-     * @return ApiResponse<Unit?>
+     * Sizes lists the machine sizes available to launch, with their specifications.
+     * Sizes lists the machine sizes available to launch, with their specifications.  Global and org-gated, exactly as the region catalog is, and for the same reasons.
+     * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getVisorComputeSizesWithHttpInfo() : ApiResponse<Unit?> {
+    fun getVisorComputeSizesWithHttpInfo() : ApiResponse<kotlin.Any?> {
         val localVariableConfig = getVisorComputeSizesRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, kotlin.Any>(
             localVariableConfig
         )
     }
@@ -1229,7 +1234,8 @@ class VisorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/visor/compute/sizes",

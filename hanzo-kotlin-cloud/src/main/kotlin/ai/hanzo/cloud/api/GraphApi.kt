@@ -379,6 +379,102 @@ class GraphApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
+     * GET /v1/graph/search
+     * Find assertions by their text rather than by an entity key
+     * Finds assertions by their text where read finds them by their keys.  It is the READ with one more term, not a second way to leave the store: same order, same ceiling, same tenancy, and searching composes with narrowing by relation and by instant because all of them are terms of one filter.  It resolves nothing. What matches is what was asserted, including claims that were later corrected — which is the honest answer to \&quot;where is this mentioned\&quot; and the reason the caller then asks resolve about what it found.
+     * @param q Q is what to look for: words, matched as prefixes, all of them required. Punctuation is text here rather than syntax, so an entity key searches as itself. (optional)
+     * @param relation Relation narrows to one relation. Absent matches every relation. (optional)
+     * @param asOf AsOf bounds the search to what was knowable at an instant, RFC 3339. Absent searches everything this plane holds. (optional)
+     * @param limit Limit caps how many assertions come back. Absent, zero, or anything above the walk ceiling is the ceiling. (optional)
+     * @return GraphReadOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun graphSearch(q: kotlin.String? = null, relation: kotlin.String? = null, asOf: kotlin.String? = null, limit: kotlin.Int? = null) : GraphReadOut {
+        val localVarResponse = graphSearchWithHttpInfo(q = q, relation = relation, asOf = asOf, limit = limit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GraphReadOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/graph/search
+     * Find assertions by their text rather than by an entity key
+     * Finds assertions by their text where read finds them by their keys.  It is the READ with one more term, not a second way to leave the store: same order, same ceiling, same tenancy, and searching composes with narrowing by relation and by instant because all of them are terms of one filter.  It resolves nothing. What matches is what was asserted, including claims that were later corrected — which is the honest answer to \&quot;where is this mentioned\&quot; and the reason the caller then asks resolve about what it found.
+     * @param q Q is what to look for: words, matched as prefixes, all of them required. Punctuation is text here rather than syntax, so an entity key searches as itself. (optional)
+     * @param relation Relation narrows to one relation. Absent matches every relation. (optional)
+     * @param asOf AsOf bounds the search to what was knowable at an instant, RFC 3339. Absent searches everything this plane holds. (optional)
+     * @param limit Limit caps how many assertions come back. Absent, zero, or anything above the walk ceiling is the ceiling. (optional)
+     * @return ApiResponse<GraphReadOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun graphSearchWithHttpInfo(q: kotlin.String?, relation: kotlin.String?, asOf: kotlin.String?, limit: kotlin.Int?) : ApiResponse<GraphReadOut?> {
+        val localVariableConfig = graphSearchRequestConfig(q = q, relation = relation, asOf = asOf, limit = limit)
+
+        return request<Unit, GraphReadOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation graphSearch
+     *
+     * @param q Q is what to look for: words, matched as prefixes, all of them required. Punctuation is text here rather than syntax, so an entity key searches as itself. (optional)
+     * @param relation Relation narrows to one relation. Absent matches every relation. (optional)
+     * @param asOf AsOf bounds the search to what was knowable at an instant, RFC 3339. Absent searches everything this plane holds. (optional)
+     * @param limit Limit caps how many assertions come back. Absent, zero, or anything above the walk ceiling is the ceiling. (optional)
+     * @return RequestConfig
+     */
+    fun graphSearchRequestConfig(q: kotlin.String?, relation: kotlin.String?, asOf: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (q != null) {
+                    put("q", listOf(q.toString()))
+                }
+                if (relation != null) {
+                    put("relation", listOf(relation.toString()))
+                }
+                if (asOf != null) {
+                    put("as_of", listOf(asOf.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/graph/search",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/graph/vocabulary
      * The relations in use, and the rule that resolves a conflict
      * 

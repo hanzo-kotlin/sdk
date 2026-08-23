@@ -1842,7 +1842,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * POST /v1/marketing/calendar/{id}/publish
      * Publishes a post NOW, synchronously, whatever its schedule.
-     * Publishes a post NOW, synchronously, whatever its schedule. No social connector is wired today, so every channel answers an honest 501 naming the seam a real one would plug into, and the post is recorded failed with that exact reason — never a faked \&quot;published\&quot;.
+     * Publishes a post NOW, synchronously, whatever its schedule. No social connector is wired today, so every channel answers an honest 501 naming the client a real one would plug into, and the post is recorded failed with that exact reason — never a faked \&quot;published\&quot;.
      * @param id ID is the post id from the path, as returned by create.
      * @return CalendarPost
      * @throws IllegalStateException If the request is not correctly configured
@@ -1874,7 +1874,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * POST /v1/marketing/calendar/{id}/publish
      * Publishes a post NOW, synchronously, whatever its schedule.
-     * Publishes a post NOW, synchronously, whatever its schedule. No social connector is wired today, so every channel answers an honest 501 naming the seam a real one would plug into, and the post is recorded failed with that exact reason — never a faked \&quot;published\&quot;.
+     * Publishes a post NOW, synchronously, whatever its schedule. No social connector is wired today, so every channel answers an honest 501 naming the client a real one would plug into, and the post is recorded failed with that exact reason — never a faked \&quot;published\&quot;.
      * @param id ID is the post id from the path, as returned by create.
      * @return ApiResponse<CalendarPost?>
      * @throws IllegalStateException If the request is not correctly configured

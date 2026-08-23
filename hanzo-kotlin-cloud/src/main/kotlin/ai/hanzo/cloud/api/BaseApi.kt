@@ -20,6 +20,7 @@ import okhttp3.Call
 import okhttp3.HttpUrl
 
 import ai.hanzo.cloud.model.BaseHealth
+import ai.hanzo.cloud.model.BaseView
 
 import com.google.gson.annotations.SerializedName
 
@@ -43,6 +44,149 @@ class BaseApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
         val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.baseUrlKey, "https://api.hanzo.ai")
         }
+    }
+
+    /**
+     * GET /v1/base/bases
+     * Lists every Base the caller can reach, one per org their token carries.
+     * Lists every Base the caller can reach, one per org their token carries.  The orgs come from IAM&#39;s signed membership set, so the list is exactly the orgs the caller is a member of and cannot be widened by asking. It is the account-wide view: a Base is per org, so this is one entry per org and there is nothing to page.  A caller with no membership set — a machine credential, an API key — reaches no Base and receives an empty list rather than a refusal, because holding no membership is an answer and not a failure.
+     * @return kotlin.collections.List<BaseView>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getBaseBases() : kotlin.collections.List<BaseView> {
+        val localVarResponse = getBaseBasesWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<BaseView>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/base/bases
+     * Lists every Base the caller can reach, one per org their token carries.
+     * Lists every Base the caller can reach, one per org their token carries.  The orgs come from IAM&#39;s signed membership set, so the list is exactly the orgs the caller is a member of and cannot be widened by asking. It is the account-wide view: a Base is per org, so this is one entry per org and there is nothing to page.  A caller with no membership set — a machine credential, an API key — reaches no Base and receives an empty list rather than a refusal, because holding no membership is an answer and not a failure.
+     * @return ApiResponse<kotlin.collections.List<BaseView>?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getBaseBasesWithHttpInfo() : ApiResponse<kotlin.collections.List<BaseView>?> {
+        val localVariableConfig = getBaseBasesRequestConfig()
+
+        return request<Unit, kotlin.collections.List<BaseView>>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getBaseBases
+     *
+     * @return RequestConfig
+     */
+    fun getBaseBasesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/base/bases",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/base/bases/{org}
+     * Describes ONE org&#39;s Base — whether its store exists, and what it occupies.
+     * Describes ONE org&#39;s Base — whether its store exists, and what it occupies.  The org must be one the caller&#39;s token carries; any other is not found, so this cannot be used to learn which orgs exist. That check is the same membership set the listing is built from, which is why the two can never disagree about what a caller may see.
+     * @param org Org is the org whose Base to describe, from the path. An org the caller&#39;s token does not carry is not found — the same answer a nonexistent one gets, so the listing cannot be used to discover which orgs exist.
+     * @return BaseView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getBaseBasesByOrg(org: kotlin.String) : BaseView {
+        val localVarResponse = getBaseBasesByOrgWithHttpInfo(org = org)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BaseView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/base/bases/{org}
+     * Describes ONE org&#39;s Base — whether its store exists, and what it occupies.
+     * Describes ONE org&#39;s Base — whether its store exists, and what it occupies.  The org must be one the caller&#39;s token carries; any other is not found, so this cannot be used to learn which orgs exist. That check is the same membership set the listing is built from, which is why the two can never disagree about what a caller may see.
+     * @param org Org is the org whose Base to describe, from the path. An org the caller&#39;s token does not carry is not found — the same answer a nonexistent one gets, so the listing cannot be used to discover which orgs exist.
+     * @return ApiResponse<BaseView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getBaseBasesByOrgWithHttpInfo(org: kotlin.String) : ApiResponse<BaseView?> {
+        val localVariableConfig = getBaseBasesByOrgRequestConfig(org = org)
+
+        return request<Unit, BaseView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getBaseBasesByOrg
+     *
+     * @param org Org is the org whose Base to describe, from the path. An org the caller&#39;s token does not carry is not found — the same answer a nonexistent one gets, so the listing cannot be used to discover which orgs exist.
+     * @return RequestConfig
+     */
+    fun getBaseBasesByOrgRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/base/bases/{org}".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
     }
 
     /**

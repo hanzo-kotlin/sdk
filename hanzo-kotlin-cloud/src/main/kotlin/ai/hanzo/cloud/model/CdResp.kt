@@ -15,24 +15,21 @@
 
 package ai.hanzo.cloud.model
 
+import ai.hanzo.cloud.model.CDApp
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param lastModified 
- * @param name 
+ * @param applications 
  */
 
 
-data class Listing (
+data class CdResp (
 
-    @SerializedName("lastModified")
-    val lastModified: kotlin.String? = null,
-
-    @SerializedName("name")
-    val name: kotlin.String? = null
+    @SerializedName("applications")
+    val applications: kotlin.collections.List<CDApp>? = null
 
 ) {
 

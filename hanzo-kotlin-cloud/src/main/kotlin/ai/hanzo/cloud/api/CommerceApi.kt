@@ -542,10 +542,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * DELETE /v1/commerce/rates/entries/{slug}
+     * DELETE /v1/commerce/rates/entries/{product}/{meter}
      * Remove a rate outright
      * Deletes the row. ARCHIVING is usually what is wanted instead — a deleted rate cannot price a historical charge, so a past invoice that has to re-resolve its rate finds nothing to read. Reach for status&#x3D;archived unless the rate never priced anything. SuperAdmin only.
-     * @param slug 
+     * @param product 
+     * @param meter 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -554,8 +555,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteCommerceRatesEntriesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = deleteCommerceRatesEntriesBySlugWithHttpInfo(slug = slug)
+    fun deleteCommerceRatesEntriesByProductByMeter(product: kotlin.String, meter: kotlin.String) : Unit {
+        val localVarResponse = deleteCommerceRatesEntriesByProductByMeterWithHttpInfo(product = product, meter = meter)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -573,17 +574,18 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * DELETE /v1/commerce/rates/entries/{slug}
+     * DELETE /v1/commerce/rates/entries/{product}/{meter}
      * Remove a rate outright
      * Deletes the row. ARCHIVING is usually what is wanted instead — a deleted rate cannot price a historical charge, so a past invoice that has to re-resolve its rate finds nothing to read. Reach for status&#x3D;archived unless the rate never priced anything. SuperAdmin only.
-     * @param slug 
+     * @param product 
+     * @param meter 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteCommerceRatesEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteCommerceRatesEntriesBySlugRequestConfig(slug = slug)
+    fun deleteCommerceRatesEntriesByProductByMeterWithHttpInfo(product: kotlin.String, meter: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteCommerceRatesEntriesByProductByMeterRequestConfig(product = product, meter = meter)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -591,19 +593,20 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation deleteCommerceRatesEntriesBySlug
+     * To obtain the request config of the operation deleteCommerceRatesEntriesByProductByMeter
      *
-     * @param slug 
+     * @param product 
+     * @param meter 
      * @return RequestConfig
      */
-    fun deleteCommerceRatesEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun deleteCommerceRatesEntriesByProductByMeterRequestConfig(product: kotlin.String, meter: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/commerce/rates/entries/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            path = "/v1/commerce/rates/entries/{product}/{meter}".replace("{"+"product"+"}", encodeURIComponent(product.toString())).replace("{"+"meter"+"}", encodeURIComponent(meter.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -8012,7 +8015,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /v1/commerce/rates/import
      * Load the published price document, reconciling rather than replacing
-     * Takes an array of rates and seeds the authority from it. This is the seed, driven from admin rather than compiled in, because 506 published prices in an embed made a price change wait for a build. It RECONCILES: a row that matches is left alone, a row that has drifted is corrected, and a row an operator edited is skipped — so importing the same document twice is a no-op and importing a corrected one moves exactly the rows that changed. Answers what it received, created, corrected and left unchanged, so an import that changes nothing reads as nothing to do rather than as a failure. An empty array is refused 400. SuperAdmin only.
+     * Takes an array of rates and seeds the authority from it — the same reconcile the boot catalog runs, driven from admin instead. It RECONCILES: a row that matches is left alone, a row that has drifted is corrected, and a row an operator edited is skipped — so importing the same document twice is a no-op and importing a corrected one moves exactly the rows that changed. Answers what it received, created, corrected and left unchanged, so an import that changes nothing reads as nothing to do rather than as a failure. An empty array is refused 400. SuperAdmin only.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -8042,7 +8045,7 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /v1/commerce/rates/import
      * Load the published price document, reconciling rather than replacing
-     * Takes an array of rates and seeds the authority from it. This is the seed, driven from admin rather than compiled in, because 506 published prices in an embed made a price change wait for a build. It RECONCILES: a row that matches is left alone, a row that has drifted is corrected, and a row an operator edited is skipped — so importing the same document twice is a no-op and importing a corrected one moves exactly the rows that changed. Answers what it received, created, corrected and left unchanged, so an import that changes nothing reads as nothing to do rather than as a failure. An empty array is refused 400. SuperAdmin only.
+     * Takes an array of rates and seeds the authority from it — the same reconcile the boot catalog runs, driven from admin instead. It RECONCILES: a row that matches is left alone, a row that has drifted is corrected, and a row an operator edited is skipped — so importing the same document twice is a no-op and importing a corrected one moves exactly the rows that changed. Answers what it received, created, corrected and left unchanged, so an import that changes nothing reads as nothing to do rather than as a failure. An empty array is refused 400. SuperAdmin only.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -11495,10 +11498,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * PUT /v1/commerce/rates/entries/{slug}
+     * PUT /v1/commerce/rates/entries/{product}/{meter}
      * Edit a rate, and mark it as operator-set
      * Edits one rate and MARKS it edited, which is the whole contract with the importer: an operator&#39;s price outranks the document it came from, so a later import leaves this row alone. Without that mark a price set here would apply, work, and silently revert on the next import. Only the editable fields move; identity and bookkeeping are not writable from the body. SuperAdmin only.
-     * @param slug 
+     * @param product 
+     * @param meter 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -11507,8 +11511,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putCommerceRatesEntriesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = putCommerceRatesEntriesBySlugWithHttpInfo(slug = slug)
+    fun putCommerceRatesEntriesByProductByMeter(product: kotlin.String, meter: kotlin.String) : Unit {
+        val localVarResponse = putCommerceRatesEntriesByProductByMeterWithHttpInfo(product = product, meter = meter)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -11526,17 +11530,18 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * PUT /v1/commerce/rates/entries/{slug}
+     * PUT /v1/commerce/rates/entries/{product}/{meter}
      * Edit a rate, and mark it as operator-set
      * Edits one rate and MARKS it edited, which is the whole contract with the importer: an operator&#39;s price outranks the document it came from, so a later import leaves this row alone. Without that mark a price set here would apply, work, and silently revert on the next import. Only the editable fields move; identity and bookkeeping are not writable from the body. SuperAdmin only.
-     * @param slug 
+     * @param product 
+     * @param meter 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun putCommerceRatesEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = putCommerceRatesEntriesBySlugRequestConfig(slug = slug)
+    fun putCommerceRatesEntriesByProductByMeterWithHttpInfo(product: kotlin.String, meter: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putCommerceRatesEntriesByProductByMeterRequestConfig(product = product, meter = meter)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -11544,19 +11549,20 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation putCommerceRatesEntriesBySlug
+     * To obtain the request config of the operation putCommerceRatesEntriesByProductByMeter
      *
-     * @param slug 
+     * @param product 
+     * @param meter 
      * @return RequestConfig
      */
-    fun putCommerceRatesEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun putCommerceRatesEntriesByProductByMeterRequestConfig(product: kotlin.String, meter: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.PUT,
-            path = "/v1/commerce/rates/entries/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            path = "/v1/commerce/rates/entries/{product}/{meter}".replace("{"+"product"+"}", encodeURIComponent(product.toString())).replace("{"+"meter"+"}", encodeURIComponent(meter.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

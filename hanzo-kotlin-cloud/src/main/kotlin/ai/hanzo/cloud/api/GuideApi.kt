@@ -994,22 +994,23 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/guide/steps/{id}/done
-     * Mark a step of your org&#39;s journey finished
-     * Moves one step of the caller org&#39;s journey to done and answers the whole refreshed journey, which is what unblocks everything downstream of it.  Dependency-GATED like start: finishing a step whose prerequisites are themselves unfinished is 409 carrying &#x60;{error, step, blockedBy}&#x60; naming what is in the way, not a silent success. A step id the org&#39;s active journey does not contain is 404. Skipping is the ungated alternative — a founder declaring a step does not apply — and it lives at /skip.  Requires a validated org; 403 without one. The mark is recorded as &#x60;manual&#x60;, and /reset returns the step to todo.
-     * @param id 
-     * @return void
+     * Marks one step of the caller org&#39;s journey complete and returns the refreshed journey.
+     * Marks one step of the caller org&#39;s journey complete and returns the refreshed journey.  Dependency-GATED, exactly as start is: a step whose prerequisites are unfinished is refused 409 carrying {error, step, blockedBy} naming what is in the way.
+     * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
+     * @return OverviewView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postGuideStepsByIdDone(id: kotlin.String) : Unit {
+    fun postGuideStepsByIdDone(id: kotlin.String) : OverviewView {
         val localVarResponse = postGuideStepsByIdDoneWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1025,18 +1026,19 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/guide/steps/{id}/done
-     * Mark a step of your org&#39;s journey finished
-     * Moves one step of the caller org&#39;s journey to done and answers the whole refreshed journey, which is what unblocks everything downstream of it.  Dependency-GATED like start: finishing a step whose prerequisites are themselves unfinished is 409 carrying &#x60;{error, step, blockedBy}&#x60; naming what is in the way, not a silent success. A step id the org&#39;s active journey does not contain is 404. Skipping is the ungated alternative — a founder declaring a step does not apply — and it lives at /skip.  Requires a validated org; 403 without one. The mark is recorded as &#x60;manual&#x60;, and /reset returns the step to todo.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Marks one step of the caller org&#39;s journey complete and returns the refreshed journey.
+     * Marks one step of the caller org&#39;s journey complete and returns the refreshed journey.  Dependency-GATED, exactly as start is: a step whose prerequisites are unfinished is refused 409 carrying {error, step, blockedBy} naming what is in the way.
+     * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
+     * @return ApiResponse<OverviewView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postGuideStepsByIdDoneWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun postGuideStepsByIdDoneWithHttpInfo(id: kotlin.String) : ApiResponse<OverviewView?> {
         val localVariableConfig = postGuideStepsByIdDoneRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, OverviewView>(
             localVariableConfig
         )
     }
@@ -1044,14 +1046,15 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * To obtain the request config of the operation postGuideStepsByIdDone
      *
-     * @param id 
+     * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
      * @return RequestConfig
      */
     fun postGuideStepsByIdDoneRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/guide/steps/{id}/done".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -1210,22 +1213,23 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/guide/steps/{id}/start
-     * Mark a step of your org&#39;s journey started
-     * Moves one step of the caller org&#39;s journey to in-progress and answers the whole refreshed journey, so a console needs no second read.  The transition is dependency-GATED, and that is why the answer set is wider than a success: a step whose prerequisites are unfinished is 409 carrying &#x60;{error, step, blockedBy}&#x60;, where &#x60;blockedBy&#x60; names the exact steps in the way — enough to render the blockage rather than merely report it. A step id the org&#39;s active journey does not contain is 404.  Requires a validated org; 403 without one, and the journey read and written is that org&#39;s alone. The mark is recorded as &#x60;manual&#x60;, and the journey is reconciled against the auto-detectors on every read, so a step the org has demonstrably completed elsewhere can still be moved to done underneath it.
-     * @param id 
-     * @return void
+     * Marks one step of the caller org&#39;s journey in progress and returns the refreshed journey.
+     * Marks one step of the caller org&#39;s journey in progress and returns the refreshed journey.  Dependency-GATED: a step whose prerequisites are unfinished is refused 409 carrying {error, step, blockedBy}, where blockedBy names the exact steps in the way — enough to render the reason without asking again.
+     * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
+     * @return OverviewView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postGuideStepsByIdStart(id: kotlin.String) : Unit {
+    fun postGuideStepsByIdStart(id: kotlin.String) : OverviewView {
         val localVarResponse = postGuideStepsByIdStartWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1241,18 +1245,19 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/guide/steps/{id}/start
-     * Mark a step of your org&#39;s journey started
-     * Moves one step of the caller org&#39;s journey to in-progress and answers the whole refreshed journey, so a console needs no second read.  The transition is dependency-GATED, and that is why the answer set is wider than a success: a step whose prerequisites are unfinished is 409 carrying &#x60;{error, step, blockedBy}&#x60;, where &#x60;blockedBy&#x60; names the exact steps in the way — enough to render the blockage rather than merely report it. A step id the org&#39;s active journey does not contain is 404.  Requires a validated org; 403 without one, and the journey read and written is that org&#39;s alone. The mark is recorded as &#x60;manual&#x60;, and the journey is reconciled against the auto-detectors on every read, so a step the org has demonstrably completed elsewhere can still be moved to done underneath it.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Marks one step of the caller org&#39;s journey in progress and returns the refreshed journey.
+     * Marks one step of the caller org&#39;s journey in progress and returns the refreshed journey.  Dependency-GATED: a step whose prerequisites are unfinished is refused 409 carrying {error, step, blockedBy}, where blockedBy names the exact steps in the way — enough to render the reason without asking again.
+     * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
+     * @return ApiResponse<OverviewView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postGuideStepsByIdStartWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun postGuideStepsByIdStartWithHttpInfo(id: kotlin.String) : ApiResponse<OverviewView?> {
         val localVariableConfig = postGuideStepsByIdStartRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, OverviewView>(
             localVariableConfig
         )
     }
@@ -1260,14 +1265,15 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * To obtain the request config of the operation postGuideStepsByIdStart
      *
-     * @param id 
+     * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
      * @return RequestConfig
      */
     fun postGuideStepsByIdStartRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/guide/steps/{id}/start".replace("{"+"id"+"}", encodeURIComponent(id.toString())),

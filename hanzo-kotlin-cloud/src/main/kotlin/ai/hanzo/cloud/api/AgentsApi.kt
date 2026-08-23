@@ -29,7 +29,11 @@ import ai.hanzo.cloud.model.ClaimKeyOut
 import ai.hanzo.cloud.model.CodingStartIn
 import ai.hanzo.cloud.model.CodingStarted
 import ai.hanzo.cloud.model.ControlDrain
+import ai.hanzo.cloud.model.ControlIn
+import ai.hanzo.cloud.model.ControlResult
 import ai.hanzo.cloud.model.CreateAgentIn
+import ai.hanzo.cloud.model.EventIn
+import ai.hanzo.cloud.model.EventView
 import ai.hanzo.cloud.model.MetricsView
 import ai.hanzo.cloud.model.PatchSessionIn
 import ai.hanzo.cloud.model.PatchTargetIn
@@ -2160,22 +2164,24 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/events
-     * Append one turn to a session&#39;s ordered log.
-     * Records a message, tool-call, spawn, log, status or control turn against the session and answers 201 with the stored event, including the monotonic &#x60;seq&#x60; the store assigned — the cursor every reader pages from. The same turn is fanned out live to every stream subscriber watching that session&#39;s tree.  Requires a validated principal carrying an org, and the session must already exist IN THAT ORG: an id belonging to another tenant is a 404 exactly like one that does not exist, so the log can never be written across a tenant boundary. &#x60;actor&#x60; defaults to the calling principal when the body names none. &#x60;kind&#x60; must be one of the six above, and &#x60;payload&#x60; must be valid JSON of at most 64 KiB.  The payload is scanned for credentials BEFORE it is stored, and a hit REFUSES the write with 422 rather than redacting it: {status, code: \&quot;secret_in_transcript\&quot;, error, findings:[…]}, each finding naming the rule, severity, line, a masked preview and a SHA-256 fingerprint the author can match against the value they rotate. The detected value itself appears nowhere in that body, because it was never stored. That in-band findings array is the reason this operation cannot be typed.
-     * @param id 
-     * @return void
+     * Records one turn of a session&#39;s transcript and answers 201 with it.
+     * Records one turn of a session&#39;s transcript and answers 201 with it.  THE TURN IS SCANNED BEFORE IT IS STORED. The same engine the code-security surface runs reads the payload at this boundary, and a credential in it refuses the append with 422 rather than redacting it — a redacted transcript is one that still had the secret in it once, and this way the author learns which value to rotate. The refusal carries every finding: the rule, the severity, the line, a MASKED preview and the fingerprint. The secret is never in the answer.
+     * @param id ID is the session to append to, from the path.
+     * @param eventIn 
+     * @return EventView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postAgentsSessionsByIdEvents(id: kotlin.String) : Unit {
-        val localVarResponse = postAgentsSessionsByIdEventsWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdEvents(id: kotlin.String, eventIn: EventIn) : EventView {
+        val localVarResponse = postAgentsSessionsByIdEventsWithHttpInfo(id = id, eventIn = eventIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EventView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2191,18 +2197,20 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/events
-     * Append one turn to a session&#39;s ordered log.
-     * Records a message, tool-call, spawn, log, status or control turn against the session and answers 201 with the stored event, including the monotonic &#x60;seq&#x60; the store assigned — the cursor every reader pages from. The same turn is fanned out live to every stream subscriber watching that session&#39;s tree.  Requires a validated principal carrying an org, and the session must already exist IN THAT ORG: an id belonging to another tenant is a 404 exactly like one that does not exist, so the log can never be written across a tenant boundary. &#x60;actor&#x60; defaults to the calling principal when the body names none. &#x60;kind&#x60; must be one of the six above, and &#x60;payload&#x60; must be valid JSON of at most 64 KiB.  The payload is scanned for credentials BEFORE it is stored, and a hit REFUSES the write with 422 rather than redacting it: {status, code: \&quot;secret_in_transcript\&quot;, error, findings:[…]}, each finding naming the rule, severity, line, a masked preview and a SHA-256 fingerprint the author can match against the value they rotate. The detected value itself appears nowhere in that body, because it was never stored. That in-band findings array is the reason this operation cannot be typed.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Records one turn of a session&#39;s transcript and answers 201 with it.
+     * Records one turn of a session&#39;s transcript and answers 201 with it.  THE TURN IS SCANNED BEFORE IT IS STORED. The same engine the code-security surface runs reads the payload at this boundary, and a credential in it refuses the append with 422 rather than redacting it — a redacted transcript is one that still had the secret in it once, and this way the author learns which value to rotate. The refusal carries every finding: the rule, the severity, the line, a MASKED preview and the fingerprint. The secret is never in the answer.
+     * @param id ID is the session to append to, from the path.
+     * @param eventIn 
+     * @return ApiResponse<EventView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postAgentsSessionsByIdEventsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postAgentsSessionsByIdEventsRequestConfig(id = id)
+    fun postAgentsSessionsByIdEventsWithHttpInfo(id: kotlin.String, eventIn: EventIn) : ApiResponse<EventView?> {
+        val localVariableConfig = postAgentsSessionsByIdEventsRequestConfig(id = id, eventIn = eventIn)
 
-        return request<Unit, Unit>(
+        return request<EventIn, EventView>(
             localVariableConfig
         )
     }
@@ -2210,14 +2218,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postAgentsSessionsByIdEvents
      *
-     * @param id 
+     * @param id ID is the session to append to, from the path.
+     * @param eventIn 
      * @return RequestConfig
      */
-    fun postAgentsSessionsByIdEventsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postAgentsSessionsByIdEventsRequestConfig(id: kotlin.String, eventIn: EventIn) : RequestConfig<EventIn> {
+        val localVariableBody = eventIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/agents/sessions/{id}/events".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -2230,22 +2241,24 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/message
-     * Send text into a running session.
-     * Records &#x60;message&#x60; as a durable control event carrying the caller&#39;s text and answers 200 with {command, event, forwarded} — this is how a dashboard steers an agent mid-run. It is the one command with a required body: a &#x60;message&#x60; (up to 16 KiB) or a &#x60;payload&#x60;, and 400 with neither. The credential scan that guards an appended turn covers &#x60;payload&#x60; here; &#x60;message&#x60; is bounded but not scanned.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
-     * @param id 
-     * @return void
+     * Sends a steering message to a running session — the door a human or another agent interrupts through.
+     * Sends a steering message to a running session — the door a human or another agent interrupts through. It requires a &#x60;message&#x60; or a &#x60;payload&#x60;; the other three commands do not.
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
+     * @return ControlResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postAgentsSessionsByIdMessage(id: kotlin.String) : Unit {
-        val localVarResponse = postAgentsSessionsByIdMessageWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdMessage(id: kotlin.String, controlIn: ControlIn) : ControlResult {
+        val localVarResponse = postAgentsSessionsByIdMessageWithHttpInfo(id = id, controlIn = controlIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ControlResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2261,18 +2274,20 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/message
-     * Send text into a running session.
-     * Records &#x60;message&#x60; as a durable control event carrying the caller&#39;s text and answers 200 with {command, event, forwarded} — this is how a dashboard steers an agent mid-run. It is the one command with a required body: a &#x60;message&#x60; (up to 16 KiB) or a &#x60;payload&#x60;, and 400 with neither. The credential scan that guards an appended turn covers &#x60;payload&#x60; here; &#x60;message&#x60; is bounded but not scanned.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Sends a steering message to a running session — the door a human or another agent interrupts through.
+     * Sends a steering message to a running session — the door a human or another agent interrupts through. It requires a &#x60;message&#x60; or a &#x60;payload&#x60;; the other three commands do not.
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
+     * @return ApiResponse<ControlResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postAgentsSessionsByIdMessageWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postAgentsSessionsByIdMessageRequestConfig(id = id)
+    fun postAgentsSessionsByIdMessageWithHttpInfo(id: kotlin.String, controlIn: ControlIn) : ApiResponse<ControlResult?> {
+        val localVariableConfig = postAgentsSessionsByIdMessageRequestConfig(id = id, controlIn = controlIn)
 
-        return request<Unit, Unit>(
+        return request<ControlIn, ControlResult>(
             localVariableConfig
         )
     }
@@ -2280,14 +2295,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postAgentsSessionsByIdMessage
      *
-     * @param id 
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
      * @return RequestConfig
      */
-    fun postAgentsSessionsByIdMessageRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postAgentsSessionsByIdMessageRequestConfig(id: kotlin.String, controlIn: ControlIn) : RequestConfig<ControlIn> {
+        val localVariableBody = controlIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/agents/sessions/{id}/message".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -2300,22 +2318,24 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/pause
-     * Ask a running session to pause.
-     * Records &#x60;pause&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded} — the stored event carries the &#x60;seq&#x60; that orders it against every other turn.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
-     * @param id 
-     * @return void
+     * Asks a running session to pause.
+     * Asks a running session to pause. Recorded durably, and forwarded to the durable-execution engine when the session is task-backed.
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
+     * @return ControlResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postAgentsSessionsByIdPause(id: kotlin.String) : Unit {
-        val localVarResponse = postAgentsSessionsByIdPauseWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdPause(id: kotlin.String, controlIn: ControlIn) : ControlResult {
+        val localVarResponse = postAgentsSessionsByIdPauseWithHttpInfo(id = id, controlIn = controlIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ControlResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2331,18 +2351,20 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/pause
-     * Ask a running session to pause.
-     * Records &#x60;pause&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded} — the stored event carries the &#x60;seq&#x60; that orders it against every other turn.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Asks a running session to pause.
+     * Asks a running session to pause. Recorded durably, and forwarded to the durable-execution engine when the session is task-backed.
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
+     * @return ApiResponse<ControlResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postAgentsSessionsByIdPauseWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postAgentsSessionsByIdPauseRequestConfig(id = id)
+    fun postAgentsSessionsByIdPauseWithHttpInfo(id: kotlin.String, controlIn: ControlIn) : ApiResponse<ControlResult?> {
+        val localVariableConfig = postAgentsSessionsByIdPauseRequestConfig(id = id, controlIn = controlIn)
 
-        return request<Unit, Unit>(
+        return request<ControlIn, ControlResult>(
             localVariableConfig
         )
     }
@@ -2350,14 +2372,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postAgentsSessionsByIdPause
      *
-     * @param id 
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
      * @return RequestConfig
      */
-    fun postAgentsSessionsByIdPauseRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postAgentsSessionsByIdPauseRequestConfig(id: kotlin.String, controlIn: ControlIn) : RequestConfig<ControlIn> {
+        val localVariableBody = controlIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/agents/sessions/{id}/pause".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -2370,22 +2395,24 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/resume
-     * Ask a paused session to carry on.
-     * Records &#x60;resume&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded}. The session is NOT required to be paused first: the only status this refuses is a finished one, because the live status is the running surface&#39;s to report rather than this endpoint&#39;s to enforce.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
-     * @param id 
-     * @return void
+     * Asks a paused session to continue, on the same terms as a pause.
+     * Asks a paused session to continue, on the same terms as a pause.
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
+     * @return ControlResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postAgentsSessionsByIdResume(id: kotlin.String) : Unit {
-        val localVarResponse = postAgentsSessionsByIdResumeWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdResume(id: kotlin.String, controlIn: ControlIn) : ControlResult {
+        val localVarResponse = postAgentsSessionsByIdResumeWithHttpInfo(id = id, controlIn = controlIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ControlResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2401,18 +2428,20 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/resume
-     * Ask a paused session to carry on.
-     * Records &#x60;resume&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded}. The session is NOT required to be paused first: the only status this refuses is a finished one, because the live status is the running surface&#39;s to report rather than this endpoint&#39;s to enforce.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Asks a paused session to continue, on the same terms as a pause.
+     * Asks a paused session to continue, on the same terms as a pause.
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
+     * @return ApiResponse<ControlResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postAgentsSessionsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postAgentsSessionsByIdResumeRequestConfig(id = id)
+    fun postAgentsSessionsByIdResumeWithHttpInfo(id: kotlin.String, controlIn: ControlIn) : ApiResponse<ControlResult?> {
+        val localVariableConfig = postAgentsSessionsByIdResumeRequestConfig(id = id, controlIn = controlIn)
 
-        return request<Unit, Unit>(
+        return request<ControlIn, ControlResult>(
             localVariableConfig
         )
     }
@@ -2420,14 +2449,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postAgentsSessionsByIdResume
      *
-     * @param id 
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
      * @return RequestConfig
      */
-    fun postAgentsSessionsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postAgentsSessionsByIdResumeRequestConfig(id: kotlin.String, controlIn: ControlIn) : RequestConfig<ControlIn> {
+        val localVariableBody = controlIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/agents/sessions/{id}/resume".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -2440,22 +2472,24 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/stop
-     * Ask a session to stop for good.
-     * Records &#x60;stop&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded}. Stop is the one command that CANCELS a task-backed session&#39;s durable workflow instead of signalling it — pause, resume and message are cooperative signals the workflow decides how to act on, while this tears it down, with the request&#39;s &#x60;message&#x60; recorded as the cancellation reason (a default stands in when none is given).   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
-     * @param id 
-     * @return void
+     * Ends a running session.
+     * Ends a running session. &#x60;message&#x60; is recorded as the cancellation reason, which is what a later reader of the transcript sees.  STOPPING IS NOT DELETING: the session, its transcript and anything it produced stay readable. A session that has already finished is 409 rather than a second stop.
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
+     * @return ControlResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postAgentsSessionsByIdStop(id: kotlin.String) : Unit {
-        val localVarResponse = postAgentsSessionsByIdStopWithHttpInfo(id = id)
+    fun postAgentsSessionsByIdStop(id: kotlin.String, controlIn: ControlIn) : ControlResult {
+        val localVarResponse = postAgentsSessionsByIdStopWithHttpInfo(id = id, controlIn = controlIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ControlResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2471,18 +2505,20 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/stop
-     * Ask a session to stop for good.
-     * Records &#x60;stop&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded}. Stop is the one command that CANCELS a task-backed session&#39;s durable workflow instead of signalling it — pause, resume and message are cooperative signals the workflow decides how to act on, while this tears it down, with the request&#39;s &#x60;message&#x60; recorded as the cancellation reason (a default stands in when none is given).   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Ends a running session.
+     * Ends a running session. &#x60;message&#x60; is recorded as the cancellation reason, which is what a later reader of the transcript sees.  STOPPING IS NOT DELETING: the session, its transcript and anything it produced stay readable. A session that has already finished is 409 rather than a second stop.
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
+     * @return ApiResponse<ControlResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postAgentsSessionsByIdStopWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postAgentsSessionsByIdStopRequestConfig(id = id)
+    fun postAgentsSessionsByIdStopWithHttpInfo(id: kotlin.String, controlIn: ControlIn) : ApiResponse<ControlResult?> {
+        val localVariableConfig = postAgentsSessionsByIdStopRequestConfig(id = id, controlIn = controlIn)
 
-        return request<Unit, Unit>(
+        return request<ControlIn, ControlResult>(
             localVariableConfig
         )
     }
@@ -2490,14 +2526,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postAgentsSessionsByIdStop
      *
-     * @param id 
+     * @param id ID is the session to steer, from the path.
+     * @param controlIn 
      * @return RequestConfig
      */
-    fun postAgentsSessionsByIdStopRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postAgentsSessionsByIdStopRequestConfig(id: kotlin.String, controlIn: ControlIn) : RequestConfig<ControlIn> {
+        val localVariableBody = controlIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/agents/sessions/{id}/stop".replace("{"+"id"+"}", encodeURIComponent(id.toString())),

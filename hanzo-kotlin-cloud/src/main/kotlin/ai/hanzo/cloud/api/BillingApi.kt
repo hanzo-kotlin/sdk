@@ -25,12 +25,14 @@ import ai.hanzo.cloud.model.AlertPatch
 import ai.hanzo.cloud.model.AlertSpec
 import ai.hanzo.cloud.model.BillingAccount
 import ai.hanzo.cloud.model.CapVerdict
+import ai.hanzo.cloud.model.Charged
 import ai.hanzo.cloud.model.Collected
 import ai.hanzo.cloud.model.CreditBalance
 import ai.hanzo.cloud.model.CreditGrants
 import ai.hanzo.cloud.model.CryptoAsset
 import ai.hanzo.cloud.model.CryptoDeposit
 import ai.hanzo.cloud.model.CryptoOptions
+import ai.hanzo.cloud.model.Detachment
 import ai.hanzo.cloud.model.FinanceLedgerEntry
 import ai.hanzo.cloud.model.Holder
 import ai.hanzo.cloud.model.Invoice
@@ -40,11 +42,13 @@ import ai.hanzo.cloud.model.ModeIn
 import ai.hanzo.cloud.model.PaymentConfig
 import ai.hanzo.cloud.model.Payout
 import ai.hanzo.cloud.model.RaiseIn
+import ai.hanzo.cloud.model.Recharge
 import ai.hanzo.cloud.model.Rollup
 import ai.hanzo.cloud.model.Subscription
 import ai.hanzo.cloud.model.SubscriptionRef
 import ai.hanzo.cloud.model.Subscriptions
 import ai.hanzo.cloud.model.Tier
+import ai.hanzo.cloud.model.TopupIn
 import ai.hanzo.cloud.model.Transactions
 import ai.hanzo.cloud.model.WireInstructions
 
@@ -224,9 +228,9 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/billing/alerts/{id}
-     * Remove one spend cap
-     * Deletes a budget the caller&#39;s org owns and answers 204.  Removing a cap REMOVES A CEILING, so it takes the same bar as setting one: a validated org admin, the platform SuperAdmin, or the trusted in-process service token. A member who could delete the org&#39;s cap would have unbounded spend.  A cap this org does not own is NOT FOUND rather than refused — the same answer whether the id is unknown or belongs to another customer — so an id cannot be probed for existence by trying to delete it.
-     * @param id 
+     * Removes one of the caller&#39;s spend caps and answers 204.
+     * Removes one of the caller&#39;s spend caps and answers 204.  Removing a cap RAISES what the org may spend, so it takes the same authority setting one does. The caps that remain still bind: this drops one, never the whole policy.
+     * @param id ID is the cap to remove, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -255,9 +259,9 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/billing/alerts/{id}
-     * Remove one spend cap
-     * Deletes a budget the caller&#39;s org owns and answers 204.  Removing a cap REMOVES A CEILING, so it takes the same bar as setting one: a validated org admin, the platform SuperAdmin, or the trusted in-process service token. A member who could delete the org&#39;s cap would have unbounded spend.  A cap this org does not own is NOT FOUND rather than refused — the same answer whether the id is unknown or belongs to another customer — so an id cannot be probed for existence by trying to delete it.
-     * @param id 
+     * Removes one of the caller&#39;s spend caps and answers 204.
+     * Removes one of the caller&#39;s spend caps and answers 204.  Removing a cap RAISES what the org may spend, so it takes the same authority setting one does. The caps that remain still bind: this drops one, never the whole policy.
+     * @param id ID is the cap to remove, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -274,7 +278,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * To obtain the request config of the operation deleteBillingAlertsById
      *
-     * @param id 
+     * @param id ID is the cap to remove, from the path.
      * @return RequestConfig
      */
     fun deleteBillingAlertsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
@@ -294,22 +298,23 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/billing/methods/{id}
-     * Remove one saved card or account
-     * Detaches the method at the processor and drops the row.  A method the caller does not own is NOT FOUND rather than refused — the same answer whether the id names nothing or names somebody else&#39;s card — so an id cannot be probed for existence.  A platform operator or the trusted in-process service token may act on any subject inside the org; everyone else may only remove their own.
-     * @param id 
-     * @return void
+     * Removes one card or account the caller has saved.
+     * Removes one card or account the caller has saved.  It detaches only the CALLER&#39;S own — the wallet this request bills from, resolved server-side — so an id belonging to another customer of the same org is not something this operation can reach. A platform or service caller detaches on the subject&#39;s behalf, and that authority is decided HERE, where the credential is, and travels as a value: authority decided twice is authority that eventually disagrees with itself.  The card is vaulted at the processor, so what goes is our token for it.
+     * @param id ID is the saved method to detach, from the path.
+     * @return Detachment
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteBillingMethodsById(id: kotlin.String) : Unit {
+    fun deleteBillingMethodsById(id: kotlin.String) : Detachment {
         val localVarResponse = deleteBillingMethodsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Detachment
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -325,18 +330,19 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/billing/methods/{id}
-     * Remove one saved card or account
-     * Detaches the method at the processor and drops the row.  A method the caller does not own is NOT FOUND rather than refused — the same answer whether the id names nothing or names somebody else&#39;s card — so an id cannot be probed for existence.  A platform operator or the trusted in-process service token may act on any subject inside the org; everyone else may only remove their own.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Removes one card or account the caller has saved.
+     * Removes one card or account the caller has saved.  It detaches only the CALLER&#39;S own — the wallet this request bills from, resolved server-side — so an id belonging to another customer of the same org is not something this operation can reach. A platform or service caller detaches on the subject&#39;s behalf, and that authority is decided HERE, where the credential is, and travels as a value: authority decided twice is authority that eventually disagrees with itself.  The card is vaulted at the processor, so what goes is our token for it.
+     * @param id ID is the saved method to detach, from the path.
+     * @return ApiResponse<Detachment?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteBillingMethodsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun deleteBillingMethodsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Detachment?> {
         val localVariableConfig = deleteBillingMethodsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, Detachment>(
             localVariableConfig
         )
     }
@@ -344,14 +350,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * To obtain the request config of the operation deleteBillingMethodsById
      *
-     * @param id 
+     * @param id ID is the saved method to detach, from the path.
      * @return RequestConfig
      */
     fun deleteBillingMethodsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/billing/methods/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -364,22 +371,23 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/billing/portal/methods/{id}
-     * Remove one saved card or account
-     * Detaches the method at the processor and drops the row.  A method the caller does not own is NOT FOUND rather than refused — the same answer whether the id names nothing or names somebody else&#39;s card — so an id cannot be probed for existence.  A platform operator or the trusted in-process service token may act on any subject inside the org; everyone else may only remove their own.
-     * @param id 
-     * @return void
+     * DetachPortalMethod is DetachMethod at the address a hosted checkout addresses it by.
+     * DetachPortalMethod is DetachMethod at the address a hosted checkout addresses it by. One set of rows, two spellings: a card detached at either is gone from both, because there is one store behind them.
+     * @param id ID is the saved method to detach, from the path.
+     * @return Detachment
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteBillingPortalMethodsById(id: kotlin.String) : Unit {
+    fun deleteBillingPortalMethodsById(id: kotlin.String) : Detachment {
         val localVarResponse = deleteBillingPortalMethodsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Detachment
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -395,18 +403,19 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/billing/portal/methods/{id}
-     * Remove one saved card or account
-     * Detaches the method at the processor and drops the row.  A method the caller does not own is NOT FOUND rather than refused — the same answer whether the id names nothing or names somebody else&#39;s card — so an id cannot be probed for existence.  A platform operator or the trusted in-process service token may act on any subject inside the org; everyone else may only remove their own.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * DetachPortalMethod is DetachMethod at the address a hosted checkout addresses it by.
+     * DetachPortalMethod is DetachMethod at the address a hosted checkout addresses it by. One set of rows, two spellings: a card detached at either is gone from both, because there is one store behind them.
+     * @param id ID is the saved method to detach, from the path.
+     * @return ApiResponse<Detachment?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun deleteBillingPortalMethodsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+    fun deleteBillingPortalMethodsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Detachment?> {
         val localVariableConfig = deleteBillingPortalMethodsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, Detachment>(
             localVariableConfig
         )
     }
@@ -414,14 +423,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * To obtain the request config of the operation deleteBillingPortalMethodsById
      *
-     * @param id 
+     * @param id ID is the saved method to detach, from the path.
      * @return RequestConfig
      */
     fun deleteBillingPortalMethodsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/billing/portal/methods/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -2808,21 +2818,22 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/recharge/run-all
-     * Recharge every org that has fallen below its threshold
-     * Sweeps every organization and, for those with auto-recharge on whose available balance has dropped below their own threshold, charges the default card and credits the balance.  It charges cards across EVERY tenant, so it is platform authority only — never an org owner, who could otherwise sweep-charge saved cards estate-wide. Its caller is a schedule, not a person.  &#x60;orgs&#x60; is the population considered, not the row count: that difference is how a reader tells &#39;nobody was below threshold&#39; from &#39;the sweep never ran&#39;. One org&#39;s failure is reported in its own row and does not stop the rest.
-     * @return void
+     * Sweeps every org&#39;s auto-recharge and answers what it did.
+     * Sweeps every org&#39;s auto-recharge and answers what it did.  PLATFORM AUTHORITY ONLY. It charges saved cards across every tenant, so an org owner reaching it could sweep-charge the estate; a caller without it is refused before anything is charged.  The answer explains a sweep that charged nobody as readily as one that charged: it names how many orgs were considered and how many needed charging, with a row each.
+     * @return Recharge
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postBillingRechargeRunAll() : Unit {
+    fun postBillingRechargeRunAll() : Recharge {
         val localVarResponse = postBillingRechargeRunAllWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Recharge
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2838,17 +2849,18 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/recharge/run-all
-     * Recharge every org that has fallen below its threshold
-     * Sweeps every organization and, for those with auto-recharge on whose available balance has dropped below their own threshold, charges the default card and credits the balance.  It charges cards across EVERY tenant, so it is platform authority only — never an org owner, who could otherwise sweep-charge saved cards estate-wide. Its caller is a schedule, not a person.  &#x60;orgs&#x60; is the population considered, not the row count: that difference is how a reader tells &#39;nobody was below threshold&#39; from &#39;the sweep never ran&#39;. One org&#39;s failure is reported in its own row and does not stop the rest.
-     * @return ApiResponse<Unit?>
+     * Sweeps every org&#39;s auto-recharge and answers what it did.
+     * Sweeps every org&#39;s auto-recharge and answers what it did.  PLATFORM AUTHORITY ONLY. It charges saved cards across every tenant, so an org owner reaching it could sweep-charge the estate; a caller without it is refused before anything is charged.  The answer explains a sweep that charged nobody as readily as one that charged: it names how many orgs were considered and how many needed charging, with a row each.
+     * @return ApiResponse<Recharge?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postBillingRechargeRunAllWithHttpInfo() : ApiResponse<Unit?> {
+    fun postBillingRechargeRunAllWithHttpInfo() : ApiResponse<Recharge?> {
         val localVariableConfig = postBillingRechargeRunAllRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, Recharge>(
             localVariableConfig
         )
     }
@@ -2862,7 +2874,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/billing/recharge/run-all",
@@ -2942,21 +2955,24 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/topup
-     * Add funds with a card already on file
-     * Charges a saved card and credits the caller&#39;s prepaid wallet.  The method must belong to the caller: one that does not is NOT FOUND rather than refused, so an id cannot be probed for existence. A saved row whose card is no longer chargeable is 422 — add the card again — which is a different thing to do than a decline (402) or a bad amount (400).  Retries behave exactly as they do for a token top-up: same key, same replay, same exactly-once at the processor.
-     * @return void
+     * Charges a card the caller already saved and credits the balance.
+     * Charges a card the caller already saved and credits the balance. Same receipt and the same retry safety as the token door; the only difference is which card, so a caller topping up from a saved method never re-enters one.
+     * @param topupIn 
+     * @param xIdempotencyKey  (optional)
+     * @return Charged
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postBillingTopup() : Unit {
-        val localVarResponse = postBillingTopupWithHttpInfo()
+    fun postBillingTopup(topupIn: TopupIn, xIdempotencyKey: kotlin.String? = null) : Charged {
+        val localVarResponse = postBillingTopupWithHttpInfo(topupIn = topupIn, xIdempotencyKey = xIdempotencyKey)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Charged
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2972,17 +2988,20 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/topup
-     * Add funds with a card already on file
-     * Charges a saved card and credits the caller&#39;s prepaid wallet.  The method must belong to the caller: one that does not is NOT FOUND rather than refused, so an id cannot be probed for existence. A saved row whose card is no longer chargeable is 422 — add the card again — which is a different thing to do than a decline (402) or a bad amount (400).  Retries behave exactly as they do for a token top-up: same key, same replay, same exactly-once at the processor.
-     * @return ApiResponse<Unit?>
+     * Charges a card the caller already saved and credits the balance.
+     * Charges a card the caller already saved and credits the balance. Same receipt and the same retry safety as the token door; the only difference is which card, so a caller topping up from a saved method never re-enters one.
+     * @param topupIn 
+     * @param xIdempotencyKey  (optional)
+     * @return ApiResponse<Charged?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postBillingTopupWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postBillingTopupRequestConfig()
+    fun postBillingTopupWithHttpInfo(topupIn: TopupIn, xIdempotencyKey: kotlin.String?) : ApiResponse<Charged?> {
+        val localVariableConfig = postBillingTopupRequestConfig(topupIn = topupIn, xIdempotencyKey = xIdempotencyKey)
 
-        return request<Unit, Unit>(
+        return request<TopupIn, Charged>(
             localVariableConfig
         )
     }
@@ -2990,13 +3009,18 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * To obtain the request config of the operation postBillingTopup
      *
+     * @param topupIn 
+     * @param xIdempotencyKey  (optional)
      * @return RequestConfig
      */
-    fun postBillingTopupRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postBillingTopupRequestConfig(topupIn: TopupIn, xIdempotencyKey: kotlin.String?) : RequestConfig<TopupIn> {
+        val localVariableBody = topupIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        xIdempotencyKey?.apply { localVariableHeaders["X-Idempotency-Key"] = this.toString() }
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/billing/topup",
@@ -3009,21 +3033,24 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/topup/token
-     * Add funds with a single-use card token
-     * Charges a card token from the browser&#39;s payment SDK and credits the caller&#39;s prepaid wallet — the cold-customer path, where nothing has to be saved first.  The wallet credited is the CALLER&#39;S OWN, resolved from their signed identity. It is never a value in the request: a client-set selector is how a customer once topped up one account while their usage drew from another.  &#x60;X-Idempotency-Key&#x60; makes a retry safe. With one, a repeat replays the first result; without one, the same amount from the same subject inside a short window does too. The key reaches the processor as well as our own guard, so the charge is exactly-once at the gateway even if our guard store is down.  The amount is bounded server-side. A decline is 402 and nothing is credited.
-     * @return void
+     * Charges a single-use card token and credits the caller&#39;s balance.
+     * Charges a single-use card token and credits the caller&#39;s balance.  The token comes from the payment form and is vaulted as part of the charge, so no card number reaches this service and none is stored here. The receipt names the ledger entry, the new balance, and the PROCESSOR&#39;s own reference — which is the only field that proves money moved at the gateway rather than only in our ledger.  Retry-safe on X-Idempotency-Key: the same key settles one charge and returns the first receipt.
+     * @param topupIn 
+     * @param xIdempotencyKey  (optional)
+     * @return Charged
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postBillingTopupToken() : Unit {
-        val localVarResponse = postBillingTopupTokenWithHttpInfo()
+    fun postBillingTopupToken(topupIn: TopupIn, xIdempotencyKey: kotlin.String? = null) : Charged {
+        val localVarResponse = postBillingTopupTokenWithHttpInfo(topupIn = topupIn, xIdempotencyKey = xIdempotencyKey)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Charged
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3039,17 +3066,20 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/topup/token
-     * Add funds with a single-use card token
-     * Charges a card token from the browser&#39;s payment SDK and credits the caller&#39;s prepaid wallet — the cold-customer path, where nothing has to be saved first.  The wallet credited is the CALLER&#39;S OWN, resolved from their signed identity. It is never a value in the request: a client-set selector is how a customer once topped up one account while their usage drew from another.  &#x60;X-Idempotency-Key&#x60; makes a retry safe. With one, a repeat replays the first result; without one, the same amount from the same subject inside a short window does too. The key reaches the processor as well as our own guard, so the charge is exactly-once at the gateway even if our guard store is down.  The amount is bounded server-side. A decline is 402 and nothing is credited.
-     * @return ApiResponse<Unit?>
+     * Charges a single-use card token and credits the caller&#39;s balance.
+     * Charges a single-use card token and credits the caller&#39;s balance.  The token comes from the payment form and is vaulted as part of the charge, so no card number reaches this service and none is stored here. The receipt names the ledger entry, the new balance, and the PROCESSOR&#39;s own reference — which is the only field that proves money moved at the gateway rather than only in our ledger.  Retry-safe on X-Idempotency-Key: the same key settles one charge and returns the first receipt.
+     * @param topupIn 
+     * @param xIdempotencyKey  (optional)
+     * @return ApiResponse<Charged?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postBillingTopupTokenWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postBillingTopupTokenRequestConfig()
+    fun postBillingTopupTokenWithHttpInfo(topupIn: TopupIn, xIdempotencyKey: kotlin.String?) : ApiResponse<Charged?> {
+        val localVariableConfig = postBillingTopupTokenRequestConfig(topupIn = topupIn, xIdempotencyKey = xIdempotencyKey)
 
-        return request<Unit, Unit>(
+        return request<TopupIn, Charged>(
             localVariableConfig
         )
     }
@@ -3057,13 +3087,18 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * To obtain the request config of the operation postBillingTopupToken
      *
+     * @param topupIn 
+     * @param xIdempotencyKey  (optional)
      * @return RequestConfig
      */
-    fun postBillingTopupTokenRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postBillingTopupTokenRequestConfig(topupIn: TopupIn, xIdempotencyKey: kotlin.String?) : RequestConfig<TopupIn> {
+        val localVariableBody = topupIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        xIdempotencyKey?.apply { localVariableHeaders["X-Idempotency-Key"] = this.toString() }
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/billing/topup/token",

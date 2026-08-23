@@ -27,6 +27,7 @@ import ai.hanzo.cloud.model.ArgoRevisionMetadata
 import ai.hanzo.cloud.model.ArgoSyncWindows
 import ai.hanzo.cloud.model.ArgoTree
 import ai.hanzo.cloud.model.ConsoleSettings
+import ai.hanzo.cloud.model.DeployHealth
 import ai.hanzo.cloud.model.GitOpsPlane
 import ai.hanzo.cloud.model.SessionUser
 import ai.hanzo.cloud.model.VersionMessage
@@ -629,21 +630,22 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/health
-     * Whether this control plane can actually reach the cluster it deploys to
-     * Reports the plane&#39;s real reachability: 200 only when the Kubernetes API server answers AND the App CRD is served, 503 with the same body shape otherwise, so a caller reads the same &#x60;k8s&#x60; and &#x60;crd&#x60; booleans either way rather than parsing an error envelope. It is a genuine dependency probe, not a process liveness ping — a running plane with no cluster behind it reports degraded.  This is the ONE unauthenticated route that reports state, because liveness must be probe-able without a JWT. It therefore discloses booleans only: the underlying failure — the API server address, an RBAC refusal — is logged server-side and never put on the wire.
-     * @return void
+     * Health reports whether this deployment can observe the delivery plane.
+     * Health reports whether this deployment can observe the delivery plane.  200 only when the Kubernetes API answers AND the App custom resource is served; 503 with the same shape otherwise, naming which half failed. It reports BOOLEANS and never the underlying error, because the route is unauthenticated — liveness must be probe-able without a token — and a raw client error can disclose the apiserver address or an RBAC detail. That detail is logged server-side instead.
+     * @return DeployHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getDeployHealth() : Unit {
+    fun getDeployHealth() : DeployHealth {
         val localVarResponse = getDeployHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeployHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -659,17 +661,18 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/health
-     * Whether this control plane can actually reach the cluster it deploys to
-     * Reports the plane&#39;s real reachability: 200 only when the Kubernetes API server answers AND the App CRD is served, 503 with the same body shape otherwise, so a caller reads the same &#x60;k8s&#x60; and &#x60;crd&#x60; booleans either way rather than parsing an error envelope. It is a genuine dependency probe, not a process liveness ping — a running plane with no cluster behind it reports degraded.  This is the ONE unauthenticated route that reports state, because liveness must be probe-able without a JWT. It therefore discloses booleans only: the underlying failure — the API server address, an RBAC refusal — is logged server-side and never put on the wire.
-     * @return ApiResponse<Unit?>
+     * Health reports whether this deployment can observe the delivery plane.
+     * Health reports whether this deployment can observe the delivery plane.  200 only when the Kubernetes API answers AND the App custom resource is served; 503 with the same shape otherwise, naming which half failed. It reports BOOLEANS and never the underlying error, because the route is unauthenticated — liveness must be probe-able without a token — and a raw client error can disclose the apiserver address or an RBAC detail. That detail is logged server-side instead.
+     * @return ApiResponse<DeployHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getDeployHealthWithHttpInfo() : ApiResponse<Unit?> {
+    fun getDeployHealthWithHttpInfo() : ApiResponse<DeployHealth?> {
         val localVariableConfig = getDeployHealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, DeployHealth>(
             localVariableConfig
         )
     }
@@ -683,7 +686,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/deploy/health",
@@ -1181,7 +1185,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * POST /v1/deploy/applications/{name}/rollback
      * The console&#39;s rollback control — today it requests a reconcile, nothing more
-     * Performs exactly what the sync action performs: it stamps the sync-requested timestamp onto the application&#39;s App CR and answers the application re-projected. It does NOT select, pin or revert to a prior image tag, and that is the one thing to know before wiring anything to it — the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release seam, which this address does not call yet.  SuperAdmin-only and fail-closed, reading no request body, with an unknown application name a 404 and no cluster client a 503 — the same gate and the same failures as the sync it shares a handler with.
+     * Performs exactly what the sync action performs: it stamps the sync-requested timestamp onto the application&#39;s App CR and answers the application re-projected. It does NOT select, pin or revert to a prior image tag, and that is the one thing to know before wiring anything to it — the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release client, which this address does not call yet.  SuperAdmin-only and fail-closed, reading no request body, with an unknown application name a 404 and no cluster client a 503 — the same gate and the same failures as the sync it shares a handler with.
      * @param name 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1212,7 +1216,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * POST /v1/deploy/applications/{name}/rollback
      * The console&#39;s rollback control — today it requests a reconcile, nothing more
-     * Performs exactly what the sync action performs: it stamps the sync-requested timestamp onto the application&#39;s App CR and answers the application re-projected. It does NOT select, pin or revert to a prior image tag, and that is the one thing to know before wiring anything to it — the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release seam, which this address does not call yet.  SuperAdmin-only and fail-closed, reading no request body, with an unknown application name a 404 and no cluster client a 503 — the same gate and the same failures as the sync it shares a handler with.
+     * Performs exactly what the sync action performs: it stamps the sync-requested timestamp onto the application&#39;s App CR and answers the application re-projected. It does NOT select, pin or revert to a prior image tag, and that is the one thing to know before wiring anything to it — the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release client, which this address does not call yet.  SuperAdmin-only and fail-closed, reading no request body, with an unknown application name a 404 and no cluster client a 503 — the same gate and the same failures as the sync it shares a handler with.
      * @param name 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured

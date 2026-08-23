@@ -27,7 +27,7 @@ import com.google.gson.annotations.SerializedName
  * @param dispatchable Dispatchable is whether the tool can be CALLED. False for a listing-only entry: a skill is activated and attached to an agent, never called.
  * @param inputSchema 
  * @param name Name is the tool's id in the flat, fleet-wide tool namespace — the value a tools/call passes. Unique across sources: a collision is resolved by source precedence before the caller ever sees it.
- * @param price Price is what a call costs and who is paid, absent for a free tool. Enforcement is the x402 settlement seam; this is the declaration.
+ * @param price Price is what a call costs and who is paid, absent for a free tool. Enforcement is the x402 settlement client; this is the declaration.
  * @param source Source is where the tool comes from: connector, function, zap-service, agent, skill or mcp.
  */
 
@@ -53,7 +53,7 @@ data class Tool (
     @SerializedName("name")
     val name: kotlin.String? = null,
 
-    /* Price is what a call costs and who is paid, absent for a free tool. Enforcement is the x402 settlement seam; this is the declaration. */
+    /* Price is what a call costs and who is paid, absent for a free tool. Enforcement is the x402 settlement client; this is the declaration. */
     @SerializedName("price")
     val price: Price? = null,
 

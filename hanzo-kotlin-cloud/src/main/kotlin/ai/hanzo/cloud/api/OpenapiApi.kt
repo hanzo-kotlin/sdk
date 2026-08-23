@@ -261,7 +261,7 @@ class OpenapiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * GET /v1/openapi.json
      * The API description this SDK was generated from
-     * Serves the OpenAPI document for the routes this process actually answers — generated from the live router at request time, not from a checked-in file that can disagree with it.  On an app it is that app&#39;s own surface; on the fleet&#39;s front door it is the woven document for every mounted app. Unauthenticated by design: a client has to be able to read the contract before it holds a credential, and the document grants nothing.  Rendered once and served as bytes thereafter, so the route table&#39;s immutability is what makes a repeat request a memcpy rather than a re-encode of a megabyte document.
+     * Serves the OpenAPI document for the routes this process actually answers — generated from the live router at request time, not from a checked-in file that can disagree with it.  On an app it is that app&#39;s own surface; on the fleet&#39;s front door it is the composed document for every mounted app. Unauthenticated by design: a client has to be able to read the contract before it holds a credential, and the document grants nothing.  Rendered once and served as bytes thereafter, so the route table&#39;s immutability is what makes a repeat request a memcpy rather than a re-encode of a megabyte document.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -291,7 +291,7 @@ class OpenapiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * GET /v1/openapi.json
      * The API description this SDK was generated from
-     * Serves the OpenAPI document for the routes this process actually answers — generated from the live router at request time, not from a checked-in file that can disagree with it.  On an app it is that app&#39;s own surface; on the fleet&#39;s front door it is the woven document for every mounted app. Unauthenticated by design: a client has to be able to read the contract before it holds a credential, and the document grants nothing.  Rendered once and served as bytes thereafter, so the route table&#39;s immutability is what makes a repeat request a memcpy rather than a re-encode of a megabyte document.
+     * Serves the OpenAPI document for the routes this process actually answers — generated from the live router at request time, not from a checked-in file that can disagree with it.  On an app it is that app&#39;s own surface; on the fleet&#39;s front door it is the composed document for every mounted app. Unauthenticated by design: a client has to be able to read the contract before it holds a credential, and the document grants nothing.  Rendered once and served as bytes thereafter, so the route table&#39;s immutability is what makes a repeat request a memcpy rather than a re-encode of a megabyte document.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception

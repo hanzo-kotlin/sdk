@@ -21,6 +21,7 @@ import okhttp3.HttpUrl
 
 import ai.hanzo.cloud.model.CodeResult
 import ai.hanzo.cloud.model.CodeRun
+import ai.hanzo.cloud.model.Listing
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,22 +49,23 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/exec/files/{sid}
-     * List the files in an execution session
-     * Lists what a session&#39;s sandbox holds — the uploads a run can read and the artifacts it produced — each then fetched from /v1/exec/download.  It answers a BARE JSON ARRAY of {name, lastModified}, where &#x60;name&#x60; is the same {session_id}/{fileId} identifier download takes, because that is what the client matches on. An object wrapper would be a wire change, which is why this is not a typed operation.
-     * @param sid 
-     * @return void
+     * Files lists what a session holds.
+     * Files lists what a session holds.  One recursive &#x60;find&#x60;, the same traversal the artifact sweep makes. It used to be &#x60;ls -1A&#x60; — top level only — while the sweep collected with &#x60;find&#x60;, so a run that wrote a nested artifact reported it in its reply and then omitted it here, and the client&#39;s prefix match read the file as expired. Two traversals of one directory is two answers about what a session holds; there is one now.
+     * @param sid SID is the session identifier — the sandbox this listing is of. The URL is the addressing authority: a path segment binds after the body and after the query, so the address decides which session is read whatever else is sent.
+     * @return kotlin.collections.List<Listing>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getExecFilesBySid(sid: kotlin.String) : Unit {
+    fun getExecFilesBySid(sid: kotlin.String) : kotlin.collections.List<Listing> {
         val localVarResponse = getExecFilesBySidWithHttpInfo(sid = sid)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Listing>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -79,18 +81,19 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/exec/files/{sid}
-     * List the files in an execution session
-     * Lists what a session&#39;s sandbox holds — the uploads a run can read and the artifacts it produced — each then fetched from /v1/exec/download.  It answers a BARE JSON ARRAY of {name, lastModified}, where &#x60;name&#x60; is the same {session_id}/{fileId} identifier download takes, because that is what the client matches on. An object wrapper would be a wire change, which is why this is not a typed operation.
-     * @param sid 
-     * @return ApiResponse<Unit?>
+     * Files lists what a session holds.
+     * Files lists what a session holds.  One recursive &#x60;find&#x60;, the same traversal the artifact sweep makes. It used to be &#x60;ls -1A&#x60; — top level only — while the sweep collected with &#x60;find&#x60;, so a run that wrote a nested artifact reported it in its reply and then omitted it here, and the client&#39;s prefix match read the file as expired. Two traversals of one directory is two answers about what a session holds; there is one now.
+     * @param sid SID is the session identifier — the sandbox this listing is of. The URL is the addressing authority: a path segment binds after the body and after the query, so the address decides which session is read whatever else is sent.
+     * @return ApiResponse<kotlin.collections.List<Listing>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getExecFilesBySidWithHttpInfo(sid: kotlin.String) : ApiResponse<Unit?> {
+    fun getExecFilesBySidWithHttpInfo(sid: kotlin.String) : ApiResponse<kotlin.collections.List<Listing>?> {
         val localVariableConfig = getExecFilesBySidRequestConfig(sid = sid)
 
-        return request<Unit, Unit>(
+        return request<Unit, kotlin.collections.List<Listing>>(
             localVariableConfig
         )
     }
@@ -98,14 +101,15 @@ class ExecApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     /**
      * To obtain the request config of the operation getExecFilesBySid
      *
-     * @param sid 
+     * @param sid SID is the session identifier — the sandbox this listing is of. The URL is the addressing authority: a path segment binds after the body and after the query, so the address decides which session is read whatever else is sent.
      * @return RequestConfig
      */
     fun getExecFilesBySidRequestConfig(sid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/exec/files/{sid}".replace("{"+"sid"+"}", encodeURIComponent(sid.toString())),

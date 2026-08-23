@@ -21,18 +21,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param lastModified 
- * @param name 
+ * @param reason 
  */
 
 
-data class Listing (
+data class Unreadable (
 
-    @SerializedName("lastModified")
-    val lastModified: kotlin.String? = null,
-
-    @SerializedName("name")
-    val name: kotlin.String? = null
+    @SerializedName("reason")
+    val reason: kotlin.String? = null
 
 ) {
 

@@ -27,6 +27,7 @@ import ai.hanzo.cloud.model.DataroomLinkCreate
 import ai.hanzo.cloud.model.DataroomLinkOne
 import ai.hanzo.cloud.model.DataroomLinkStats
 import ai.hanzo.cloud.model.DataroomLinks
+import ai.hanzo.cloud.model.DataroomLiveness
 import ai.hanzo.cloud.model.DataroomMembership
 import ai.hanzo.cloud.model.DataroomRoomDetailOne
 import ai.hanzo.cloud.model.DataroomRoomOne
@@ -572,21 +573,22 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/health
-     * Liveness of the dataroom subsystem
-     * Answers {service, status} unconditionally — no principal, no tenant. It is registered BEFORE the bundle, the link index and the object-storage seam are wired, so it keeps answering when any of those fail and the subsystem degrades to health-only. That is the point, and the limit: a 200 here says the process is alive, never that a data room can be read or written.
-     * @return void
+     * Health reports that the data room subsystem is up.
+     * Health reports that the data room subsystem is up.  It answers before the bundle loads, holds no state and touches no store, so it stays true in exactly the situation an operator is probing for. It says nothing about whether a room can be OPENED — that is what the room operations answer — because a liveness probe that fails on a dependency takes a working process out of rotation.
+     * @return DataroomLiveness
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getDataroomHealth() : Unit {
+    fun getDataroomHealth() : DataroomLiveness {
         val localVarResponse = getDataroomHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomLiveness
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -602,17 +604,18 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/health
-     * Liveness of the dataroom subsystem
-     * Answers {service, status} unconditionally — no principal, no tenant. It is registered BEFORE the bundle, the link index and the object-storage seam are wired, so it keeps answering when any of those fail and the subsystem degrades to health-only. That is the point, and the limit: a 200 here says the process is alive, never that a data room can be read or written.
-     * @return ApiResponse<Unit?>
+     * Health reports that the data room subsystem is up.
+     * Health reports that the data room subsystem is up.  It answers before the bundle loads, holds no state and touches no store, so it stays true in exactly the situation an operator is probing for. It says nothing about whether a room can be OPENED — that is what the room operations answer — because a liveness probe that fails on a dependency takes a working process out of rotation.
+     * @return ApiResponse<DataroomLiveness?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getDataroomHealthWithHttpInfo() : ApiResponse<Unit?> {
+    fun getDataroomHealthWithHttpInfo() : ApiResponse<DataroomLiveness?> {
         val localVariableConfig = getDataroomHealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, DataroomLiveness>(
             localVariableConfig
         )
     }
@@ -626,7 +629,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/health",
@@ -1297,7 +1301,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /v1/dataroom/documents
      * Upload a document&#39;s bytes and record it
-     * Takes the file ITSELF as the raw request body — not a JSON envelope, not multipart — stores it on the object-storage seam, and records the metadata row, answering with the new document. &#x60;?name&#x3D;&#x60; names it (default \&quot;document\&quot;), the request&#39;s Content-Type becomes the recorded mime type, and &#x60;?numPages&#x3D;&#x60; is optional.  Requires a validated principal; 403 without one. An empty body is 400 and anything over 64 MiB is 413 — a data room holds decks and PDFs, not a media library.  The storage key is 128 random bits under the tenant&#39;s own key prefix, minted before the bytes are written: if the system&#39;s randomness is unavailable the upload fails 500 rather than fall back to a predictable key that could overwrite another document&#39;s bytes. A storage write that fails is 502 and no metadata row is recorded, so a document never exists without its file.
+     * Takes the file ITSELF as the raw request body — not a JSON envelope, not multipart — stores it on the object-storage client, and records the metadata row, answering with the new document. &#x60;?name&#x3D;&#x60; names it (default \&quot;document\&quot;), the request&#39;s Content-Type becomes the recorded mime type, and &#x60;?numPages&#x3D;&#x60; is optional.  Requires a validated principal; 403 without one. An empty body is 400 and anything over 64 MiB is 413 — a data room holds decks and PDFs, not a media library.  The storage key is 128 random bits under the tenant&#39;s own key prefix, minted before the bytes are written: if the system&#39;s randomness is unavailable the upload fails 500 rather than fall back to a predictable key that could overwrite another document&#39;s bytes. A storage write that fails is 502 and no metadata row is recorded, so a document never exists without its file.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1327,7 +1331,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /v1/dataroom/documents
      * Upload a document&#39;s bytes and record it
-     * Takes the file ITSELF as the raw request body — not a JSON envelope, not multipart — stores it on the object-storage seam, and records the metadata row, answering with the new document. &#x60;?name&#x3D;&#x60; names it (default \&quot;document\&quot;), the request&#39;s Content-Type becomes the recorded mime type, and &#x60;?numPages&#x3D;&#x60; is optional.  Requires a validated principal; 403 without one. An empty body is 400 and anything over 64 MiB is 413 — a data room holds decks and PDFs, not a media library.  The storage key is 128 random bits under the tenant&#39;s own key prefix, minted before the bytes are written: if the system&#39;s randomness is unavailable the upload fails 500 rather than fall back to a predictable key that could overwrite another document&#39;s bytes. A storage write that fails is 502 and no metadata row is recorded, so a document never exists without its file.
+     * Takes the file ITSELF as the raw request body — not a JSON envelope, not multipart — stores it on the object-storage client, and records the metadata row, answering with the new document. &#x60;?name&#x3D;&#x60; names it (default \&quot;document\&quot;), the request&#39;s Content-Type becomes the recorded mime type, and &#x60;?numPages&#x3D;&#x60; is optional.  Requires a validated principal; 403 without one. An empty body is 400 and anything over 64 MiB is 413 — a data room holds decks and PDFs, not a media library.  The storage key is 128 random bits under the tenant&#39;s own key prefix, minted before the bytes are written: if the system&#39;s randomness is unavailable the upload fails 500 rather than fall back to a predictable key that could overwrite another document&#39;s bytes. A storage write that fails is 502 and no metadata row is recorded, so a document never exists without its file.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
