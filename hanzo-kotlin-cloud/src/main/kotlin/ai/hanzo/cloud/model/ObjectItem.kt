@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param etag 
+ * @param etag ETag is the store's entity tag for the bytes currently at this key, with the quotes the store wraps it in stripped. It is an opaque VERSION and not a checksum to verify against: a single-part upload's tag happens to be the MD5 of the content and a multipart upload's is not, and nothing here says which this was. Compare two reads of one key to learn whether the object changed; absent for a folder entry, and for an object the store reports none for.
  * @param isDir true for a folder (common prefix)
  * @param key key RELATIVE to the requested prefix
  * @param lastModified unix seconds (0 for a folder)
@@ -31,6 +31,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ObjectItem (
 
+    /* ETag is the store's entity tag for the bytes currently at this key, with the quotes the store wraps it in stripped. It is an opaque VERSION and not a checksum to verify against: a single-part upload's tag happens to be the MD5 of the content and a multipart upload's is not, and nothing here says which this was. Compare two reads of one key to learn whether the object changed; absent for a folder entry, and for an object the store reports none for. */
     @SerializedName("etag")
     val etag: kotlin.String? = null,
 

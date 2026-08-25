@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param at At is when it happened, RFC 3339. Empty means now. It must sit inside the thirty-day window the aggregates keep and no more than two minutes ahead of this plane's clock; anything outside that is REFUSED rather than quietly accepted, because a future timestamp moves the aggregates' leading edge and leaves every later event for that subject reading as though it never happened. History older than the window is folded in from your own event surface, not through this door.
+ * @param at At is when it happened, RFC 3339. Empty means now. It must sit inside the thirty-day window the aggregates keep and no more than two minutes ahead of this plane's clock; anything outside that is REFUSED rather than quietly accepted, because a future timestamp moves the aggregates' leading edge and leaves every later event for that subject reading as though it never happened. History older than the window is folded in from your own event surface, not through this endpoint.
  * @param device Device is the device fingerprint, if any. It is the axis that surfaces several nominally unrelated subjects acting as one.
  * @param id ID is the caller's own stable identifier for the event. It selects the below-the-line review sample by hash, so a counter would make the sample steerable — use the id the event already has.
  * @param kind Kind is whose behaviour this is: person, session or account. It namespaces the subject, so a person and an account that share an identifier stay two subjects.
@@ -33,7 +33,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RiskEvent (
 
-    /* At is when it happened, RFC 3339. Empty means now. It must sit inside the thirty-day window the aggregates keep and no more than two minutes ahead of this plane's clock; anything outside that is REFUSED rather than quietly accepted, because a future timestamp moves the aggregates' leading edge and leaves every later event for that subject reading as though it never happened. History older than the window is folded in from your own event surface, not through this door. */
+    /* At is when it happened, RFC 3339. Empty means now. It must sit inside the thirty-day window the aggregates keep and no more than two minutes ahead of this plane's clock; anything outside that is REFUSED rather than quietly accepted, because a future timestamp moves the aggregates' leading edge and leaves every later event for that subject reading as though it never happened. History older than the window is folded in from your own event surface, not through this endpoint. */
     @SerializedName("at")
     val at: kotlin.String? = null,
 

@@ -22,10 +22,10 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param actions Actions is whether the transport renders an INTERACTIVE control natively, and it is the flag to read before composing one. The vocabulary is a closed kind-tagged union (envelope.go), exactly four kinds, each carrying only its own field plus an optional label:   command  — a bot command to run (`command`), rendered as a button that             invokes it.  url      — an external link (`url`), rendered as a link button.  select   — a menu (`options`, each a label and the value choosing it             returns), rendered as a picker.  approval — a reference to an approval request (`approval.id`), rendered as             approve/deny controls bound to that id.  False on all four transports this pass, and nothing refuses a send for it: actions are accepted, validated per kind, and flattened by renderText to one line each after the text — `[label] command`, `[label] url`, `[label] opt | opt`, `[label] approval requested: <id>`. So a caller that needs a real control must read this flag and degrade itself; a caller that only needs the choice communicated can send actions and take the text form.
- * @param dm DM is whether the transport carries a DIRECT message at all. True for slack, teams and telegram. False for discord, honestly: that ingress is guild-scoped slash commands — an interaction without a guild id is refused at the door — so nothing ever arrives classified as a DM, no reply route is ever learned for one, and a send addressed at a Discord DM is refused 409.
+ * @param dm DM is whether the transport carries a DIRECT message at all. True for slack, teams and telegram. False for discord, honestly: that ingress is guild-scoped slash commands — an interaction without a guild id is refused at the endpoint — so nothing ever arrives classified as a DM, no reply route is ever learned for one, and a send addressed at a Discord DM is refused 409.
  * @param group Group is whether the transport carries multi-person rooms — a Discord guild channel, a Slack channel, a Teams channel or group chat, a Telegram group or supergroup. True on all four.
  * @param media Media is whether the transport renders an ATTACHMENT natively. False on all four this pass, and a send is not refused for it: renderText flattens each attachment to one `kind: url (mime)` line after the text rather than dropping it.
- * @param thread Thread is whether a reply can be threaded UNDER a specific message. True for slack alone: it is the only transport whose ingress reports a thread (thread_ts, published as the envelope's replyTo) and whose door posts back into it. Discord's replyTo makes an inline reply rather than a thread, Telegram's answers one message id, and Teams carries no reply target at all — a replyTo sent to it is ignored.
+ * @param thread Thread is whether a reply can be threaded UNDER a specific message. True for slack alone: it is the only transport whose ingress reports a thread (thread_ts, published as the envelope's replyTo) and whose send posts back into it. Discord's replyTo makes an inline reply rather than a thread, Telegram's answers one message id, and Teams carries no reply target at all — a replyTo sent to it is ignored.
  */
 
 
@@ -35,7 +35,7 @@ data class Capabilities (
     @SerializedName("actions")
     val actions: kotlin.Boolean? = null,
 
-    /* DM is whether the transport carries a DIRECT message at all. True for slack, teams and telegram. False for discord, honestly: that ingress is guild-scoped slash commands — an interaction without a guild id is refused at the door — so nothing ever arrives classified as a DM, no reply route is ever learned for one, and a send addressed at a Discord DM is refused 409. */
+    /* DM is whether the transport carries a DIRECT message at all. True for slack, teams and telegram. False for discord, honestly: that ingress is guild-scoped slash commands — an interaction without a guild id is refused at the endpoint — so nothing ever arrives classified as a DM, no reply route is ever learned for one, and a send addressed at a Discord DM is refused 409. */
     @SerializedName("dm")
     val dm: kotlin.Boolean? = null,
 
@@ -47,7 +47,7 @@ data class Capabilities (
     @SerializedName("media")
     val media: kotlin.Boolean? = null,
 
-    /* Thread is whether a reply can be threaded UNDER a specific message. True for slack alone: it is the only transport whose ingress reports a thread (thread_ts, published as the envelope's replyTo) and whose door posts back into it. Discord's replyTo makes an inline reply rather than a thread, Telegram's answers one message id, and Teams carries no reply target at all — a replyTo sent to it is ignored. */
+    /* Thread is whether a reply can be threaded UNDER a specific message. True for slack alone: it is the only transport whose ingress reports a thread (thread_ts, published as the envelope's replyTo) and whose send posts back into it. Discord's replyTo makes an inline reply rather than a thread, Telegram's answers one message id, and Teams carries no reply target at all — a replyTo sent to it is ignored. */
     @SerializedName("thread")
     val thread: kotlin.Boolean? = null
 

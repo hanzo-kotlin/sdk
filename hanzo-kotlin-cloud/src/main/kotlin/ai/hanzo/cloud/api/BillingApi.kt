@@ -2956,7 +2956,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * POST /v1/billing/topup
      * Charges a card the caller already saved and credits the balance.
-     * Charges a card the caller already saved and credits the balance. Same receipt and the same retry safety as the token door; the only difference is which card, so a caller topping up from a saved method never re-enters one.
+     * Charges a card the caller already saved and credits the balance. Same receipt and the same retry safety as the token endpoint; the only difference is which card, so a caller topping up from a saved method never re-enters one.
      * @param topupIn 
      * @param xIdempotencyKey  (optional)
      * @return Charged
@@ -2989,7 +2989,7 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * POST /v1/billing/topup
      * Charges a card the caller already saved and credits the balance.
-     * Charges a card the caller already saved and credits the balance. Same receipt and the same retry safety as the token door; the only difference is which card, so a caller topping up from a saved method never re-enters one.
+     * Charges a card the caller already saved and credits the balance. Same receipt and the same retry safety as the token endpoint; the only difference is which card, so a caller topping up from a saved method never re-enters one.
      * @param topupIn 
      * @param xIdempotencyKey  (optional)
      * @return ApiResponse<Charged?>

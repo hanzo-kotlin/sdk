@@ -22,7 +22,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param name Name is the subsystem, as the manifest names it.
- * @param served Served reports that THIS process mounted it, so its tools are on this process's door rather than behind a sibling this process only knows the name of.
+ * @param served Served reports that THIS process mounted it, so its tools are on this process's MCP server rather than behind a sibling this process only knows the name of.
  */
 
 
@@ -32,7 +32,7 @@ data class AiMCPApp (
     @SerializedName("name")
     val name: kotlin.String? = null,
 
-    /* Served reports that THIS process mounted it, so its tools are on this process's door rather than behind a sibling this process only knows the name of. */
+    /* Served reports that THIS process mounted it, so its tools are on this process's MCP server rather than behind a sibling this process only knows the name of. */
     @SerializedName("served")
     val served: kotlin.Boolean? = null
 

@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
  * @param age Age is how long ago that was.
  * @param asOf AsOf is when the OLDEST contributing publisher was current, RFC 3339. The oldest and not the newest: a set is exactly as fresh as its weakest source.
  * @param propertyKeys Keys is how many members the baseline carries.
- * @param kind Kind is how the baseline comes to exist: fetch (downloaded from a publisher), local (computed here), attest (held by the component that screens against it, freshness reported), or client (declared and NOT held, because the source needs a licence we do not have).
+ * @param kind Kind is how the baseline comes to exist: fetch (downloaded from a publisher), local (computed here), attest (held by the component that screens against it, freshness reported), or gap (declared and NOT held, because the source needs a licence we do not have).
  * @param match Match is how a key is tested: exact, domain, net, digits, pattern or range.
  * @param maxAge MaxAge is how old this set may be before it is stale.
  * @param overrides Overrides is how many entries YOUR org has laid over this baseline.
@@ -52,7 +52,7 @@ data class ReferenceSet (
     @SerializedName("keys")
     val propertyKeys: kotlin.Int? = null,
 
-    /* Kind is how the baseline comes to exist: fetch (downloaded from a publisher), local (computed here), attest (held by the component that screens against it, freshness reported), or client (declared and NOT held, because the source needs a licence we do not have). */
+    /* Kind is how the baseline comes to exist: fetch (downloaded from a publisher), local (computed here), attest (held by the component that screens against it, freshness reported), or gap (declared and NOT held, because the source needs a licence we do not have). */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 

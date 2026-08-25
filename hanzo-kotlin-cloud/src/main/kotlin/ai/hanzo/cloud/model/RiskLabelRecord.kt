@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
  * @param by By is the identity that asserted, stamped server-side at the write.
  * @param confidence Confidence is the filer's own confidence in [0,1] — 1 for a processor chargeback, less for an analyst's hunch. Zero is the ordinary value for a filer that stated none, and it means the weakest tie-break there is rather than \"unknown\". It breaks a tie only WITHIN one precedence rank and can never lift a weak source above a strong one.
  * @param disposition Disposition is what was concluded, from the closed set: `productive` — the event led somewhere, escalated, reported or charged back; `unproductive` — judged not suspicious; or the empty string for an explicit UNJUDGED, which is a real assertion (\"we looked and could not say\") and not the absence of one.
- * @param evidence Evidence is the pointer to the record this conclusion came from: a dispute id, a case id, a decision id. At most 512 bytes, required at the write, and opaque to this plane — stored and returned verbatim, never resolved. It is what an adverse action is defended with, which is why an assertion carrying none is refused at the door.
+ * @param evidence Evidence is the pointer to the record this conclusion came from: a dispute id, a case id, a decision id. At most 512 bytes, required at the write, and opaque to this plane — stored and returned verbatim, never resolved. It is what an adverse action is defended with, which is why an assertion carrying none is refused at the endpoint.
  * @param hold Hold is true while a litigation hold is on this record: retention will not dispose of it, at any age. False — and it is omitted then — leaves the record disposable once it is older than the boundary a sweep names. It is a fact about the RECORD and not about the world, so it is not folded into ID, no write path can set it, and the hold op is the one way it moves in either direction.
  * @param id ID is the assertion's content digest — SHA-256 over every semantic field, rendered hex — computed server-side and never supplied. It is the key a redelivery collapses onto, and it is the id the hold op names.
  * @param kind Kind is what the subject IS, from the closed set: account, agent, merchant, payout, person, session or transaction. With Subject and At it is the IDENTITY of the judged event — the triple a resolve names and the triple assertions are grouped by, so a typo in it would file a label against an event nobody asks about.
@@ -55,7 +55,7 @@ data class RiskLabelRecord (
     @SerializedName("disposition")
     val disposition: kotlin.String? = null,
 
-    /* Evidence is the pointer to the record this conclusion came from: a dispute id, a case id, a decision id. At most 512 bytes, required at the write, and opaque to this plane — stored and returned verbatim, never resolved. It is what an adverse action is defended with, which is why an assertion carrying none is refused at the door. */
+    /* Evidence is the pointer to the record this conclusion came from: a dispute id, a case id, a decision id. At most 512 bytes, required at the write, and opaque to this plane — stored and returned verbatim, never resolved. It is what an adverse action is defended with, which is why an assertion carrying none is refused at the endpoint. */
     @SerializedName("evidence")
     val evidence: kotlin.String? = null,
 

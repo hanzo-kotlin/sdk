@@ -1715,10 +1715,10 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/cloudflare/d1/databases/{database}/query
-     * Run a SQL statement against a D1 database
-     * Executes a statement on one D1 database on the org&#39;s OWN Cloudflare account and relays D1&#39;s result set. &#x60;sql&#x60; is required and &#x60;params&#x60; carries the bound values in placeholder order — use them rather than interpolating values into the statement.  The body is checked for a non-empty &#x60;sql&#x60; and then forwarded VERBATIM, so every field D1 accepts reaches D1 even though only two are named here; the declared schema is open for that reason. That verbatim forward is why this is not a typed op — decoding and re-encoding the body would drop &#x60;params&#x60;, where the query&#39;s bound values live. Requires ORG ADMIN (403 otherwise); a malformed body or missing &#x60;sql&#x60; is 400; 503 if the org has never connected a Cloudflare token.
+     * Runs one SQL statement against a D1 database.
+     * Runs one SQL statement against a D1 database. It executes on the org&#39;s OWN Cloudflare account and relays D1&#39;s result set. The body is checked for a non-empty &#x60;sql&#x60; and then forwarded VERBATIM, so every field D1 accepts reaches D1 even though only two are named here.  Requires ORG ADMIN — a statement may INSERT, UPDATE or DROP, so a query takes the write gate rather than the read one — and a caller who is only an org member is refused 403. A missing &#x60;sql&#x60; is 400; 503 if the org has never connected a Cloudflare token.
      * @param database 
-     * @param d1Query  (optional)
+     * @param d1Query 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1728,7 +1728,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCloudflareD1DatabasesByDatabaseQuery(database: kotlin.String, d1Query: D1Query? = null) : kotlin.Any {
+    fun postCloudflareD1DatabasesByDatabaseQuery(database: kotlin.String, d1Query: D1Query) : kotlin.Any {
         val localVarResponse = postCloudflareD1DatabasesByDatabaseQueryWithHttpInfo(database = database, d1Query = d1Query)
 
         return when (localVarResponse.responseType) {
@@ -1748,17 +1748,17 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/cloudflare/d1/databases/{database}/query
-     * Run a SQL statement against a D1 database
-     * Executes a statement on one D1 database on the org&#39;s OWN Cloudflare account and relays D1&#39;s result set. &#x60;sql&#x60; is required and &#x60;params&#x60; carries the bound values in placeholder order — use them rather than interpolating values into the statement.  The body is checked for a non-empty &#x60;sql&#x60; and then forwarded VERBATIM, so every field D1 accepts reaches D1 even though only two are named here; the declared schema is open for that reason. That verbatim forward is why this is not a typed op — decoding and re-encoding the body would drop &#x60;params&#x60;, where the query&#39;s bound values live. Requires ORG ADMIN (403 otherwise); a malformed body or missing &#x60;sql&#x60; is 400; 503 if the org has never connected a Cloudflare token.
+     * Runs one SQL statement against a D1 database.
+     * Runs one SQL statement against a D1 database. It executes on the org&#39;s OWN Cloudflare account and relays D1&#39;s result set. The body is checked for a non-empty &#x60;sql&#x60; and then forwarded VERBATIM, so every field D1 accepts reaches D1 even though only two are named here.  Requires ORG ADMIN — a statement may INSERT, UPDATE or DROP, so a query takes the write gate rather than the read one — and a caller who is only an org member is refused 403. A missing &#x60;sql&#x60; is 400; 503 if the org has never connected a Cloudflare token.
      * @param database 
-     * @param d1Query  (optional)
+     * @param d1Query 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCloudflareD1DatabasesByDatabaseQueryWithHttpInfo(database: kotlin.String, d1Query: D1Query?) : ApiResponse<kotlin.Any?> {
+    fun postCloudflareD1DatabasesByDatabaseQueryWithHttpInfo(database: kotlin.String, d1Query: D1Query) : ApiResponse<kotlin.Any?> {
         val localVariableConfig = postCloudflareD1DatabasesByDatabaseQueryRequestConfig(database = database, d1Query = d1Query)
 
         return request<D1Query, kotlin.Any>(
@@ -1770,10 +1770,10 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * To obtain the request config of the operation postCloudflareD1DatabasesByDatabaseQuery
      *
      * @param database 
-     * @param d1Query  (optional)
+     * @param d1Query 
      * @return RequestConfig
      */
-    fun postCloudflareD1DatabasesByDatabaseQueryRequestConfig(database: kotlin.String, d1Query: D1Query?) : RequestConfig<D1Query> {
+    fun postCloudflareD1DatabasesByDatabaseQueryRequestConfig(database: kotlin.String, d1Query: D1Query) : RequestConfig<D1Query> {
         val localVariableBody = d1Query
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2472,10 +2472,10 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * PUT /v1/cloudflare/workers/scripts/{script}
-     * Upload or replace a module Worker script
-     * Publishes a module Worker to the org&#39;s OWN Cloudflare account under the name in the path, replacing whatever was there, and relays Cloudflare&#39;s result. &#x60;script&#x60; carries the module SOURCE; the optional compatibility date, compatibility flags and bindings are packed into the multipart upload Cloudflare expects.  The path names the script and the body field named &#x60;script&#x60; is its source — two different things that share a name, which is exactly why this cannot be a typed op: a binder that gives the URL the last word would overwrite the source with the script&#39;s name. Requires ORG ADMIN (403 otherwise); an unparseable body or empty source is 400; 503 if the org has never connected a Cloudflare token.
-     * @param script 
-     * @param workerScriptPut  (optional)
+     * Uploads or replaces a module Worker script.
+     * Uploads or replaces a module Worker script. It publishes to the org&#39;s OWN Cloudflare account under the name in the path, replacing whatever was there, and relays Cloudflare&#39;s result. The compatibility date, compatibility flags and bindings are packed into the multipart upload Cloudflare expects, beside the module source.  Requires ORG ADMIN — a Worker is arbitrary code on the org&#39;s own account and domains — so a caller who is only an org member is refused 403. An empty source is 400, as is a &#x60;mainModule&#x60; that is not a plain file name; 503 if the org has never connected a Cloudflare token.
+     * @param script Script means two things on this route, and the document says so in both places it appears: the PATH segment names the Worker to publish, and the BODY field carries that Worker&#39;s ES-module source — the code itself, never a name or a URL. A blank or absent source is refused; there is no empty Worker.
+     * @param workerScriptPut 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2485,7 +2485,7 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun putCloudflareWorkersScriptsByScript(script: kotlin.String, workerScriptPut: WorkerScriptPut? = null) : kotlin.Any {
+    fun putCloudflareWorkersScriptsByScript(script: kotlin.String, workerScriptPut: WorkerScriptPut) : kotlin.Any {
         val localVarResponse = putCloudflareWorkersScriptsByScriptWithHttpInfo(script = script, workerScriptPut = workerScriptPut)
 
         return when (localVarResponse.responseType) {
@@ -2505,17 +2505,17 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * PUT /v1/cloudflare/workers/scripts/{script}
-     * Upload or replace a module Worker script
-     * Publishes a module Worker to the org&#39;s OWN Cloudflare account under the name in the path, replacing whatever was there, and relays Cloudflare&#39;s result. &#x60;script&#x60; carries the module SOURCE; the optional compatibility date, compatibility flags and bindings are packed into the multipart upload Cloudflare expects.  The path names the script and the body field named &#x60;script&#x60; is its source — two different things that share a name, which is exactly why this cannot be a typed op: a binder that gives the URL the last word would overwrite the source with the script&#39;s name. Requires ORG ADMIN (403 otherwise); an unparseable body or empty source is 400; 503 if the org has never connected a Cloudflare token.
-     * @param script 
-     * @param workerScriptPut  (optional)
+     * Uploads or replaces a module Worker script.
+     * Uploads or replaces a module Worker script. It publishes to the org&#39;s OWN Cloudflare account under the name in the path, replacing whatever was there, and relays Cloudflare&#39;s result. The compatibility date, compatibility flags and bindings are packed into the multipart upload Cloudflare expects, beside the module source.  Requires ORG ADMIN — a Worker is arbitrary code on the org&#39;s own account and domains — so a caller who is only an org member is refused 403. An empty source is 400, as is a &#x60;mainModule&#x60; that is not a plain file name; 503 if the org has never connected a Cloudflare token.
+     * @param script Script means two things on this route, and the document says so in both places it appears: the PATH segment names the Worker to publish, and the BODY field carries that Worker&#39;s ES-module source — the code itself, never a name or a URL. A blank or absent source is refused; there is no empty Worker.
+     * @param workerScriptPut 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun putCloudflareWorkersScriptsByScriptWithHttpInfo(script: kotlin.String, workerScriptPut: WorkerScriptPut?) : ApiResponse<kotlin.Any?> {
+    fun putCloudflareWorkersScriptsByScriptWithHttpInfo(script: kotlin.String, workerScriptPut: WorkerScriptPut) : ApiResponse<kotlin.Any?> {
         val localVariableConfig = putCloudflareWorkersScriptsByScriptRequestConfig(script = script, workerScriptPut = workerScriptPut)
 
         return request<WorkerScriptPut, kotlin.Any>(
@@ -2526,11 +2526,11 @@ class CloudflareApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     /**
      * To obtain the request config of the operation putCloudflareWorkersScriptsByScript
      *
-     * @param script 
-     * @param workerScriptPut  (optional)
+     * @param script Script means two things on this route, and the document says so in both places it appears: the PATH segment names the Worker to publish, and the BODY field carries that Worker&#39;s ES-module source — the code itself, never a name or a URL. A blank or absent source is refused; there is no empty Worker.
+     * @param workerScriptPut 
      * @return RequestConfig
      */
-    fun putCloudflareWorkersScriptsByScriptRequestConfig(script: kotlin.String, workerScriptPut: WorkerScriptPut?) : RequestConfig<WorkerScriptPut> {
+    fun putCloudflareWorkersScriptsByScriptRequestConfig(script: kotlin.String, workerScriptPut: WorkerScriptPut) : RequestConfig<WorkerScriptPut> {
         val localVariableBody = workerScriptPut
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

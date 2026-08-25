@@ -47,9 +47,9 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/ai/mcp/tools
-     * Tools reports what THIS PROCESS&#39;s MCP door carries: how many tools its own registry projects, optionally their names, and which subsystems this process composed.
-     * Tools reports what THIS PROCESS&#39;s MCP door carries: how many tools its own registry projects, optionally their names, and which subsystems this process composed. It is the answer to \&quot;is this door up and does it have anything behind it\&quot; — a question a status code cannot answer, since an empty door and a full one are both 200. What the FLEET&#39;s door carries is the fleet door&#39;s own answer: POST /v1/mcp, tools/list, which asks every subsystem and names the ones that did not reply.
-     * @param names Names asks for this process&#39;s tool NAMES and not only how many there are. Off by default: a list of names is a page, and the question this op exists to answer (\&quot;is the door up and does it have anything behind it\&quot;) is answered by the count. (optional)
+     * Tools reports what THIS PROCESS&#39;s MCP server carries: how many tools its own registry projects, optionally their names, and which subsystems this process composed.
+     * Tools reports what THIS PROCESS&#39;s MCP server carries: how many tools its own registry projects, optionally their names, and which subsystems this process composed. It is the answer to \&quot;is this MCP server up and does it have anything behind it\&quot; — a question a status code cannot answer, since an empty server and a full one are both 200. What the FLEET&#39;s server carries is the fleet server&#39;s own answer: POST /v1/mcp, tools/list, which asks every subsystem and names the ones that did not reply.
+     * @param names Names asks for this process&#39;s tool NAMES and not only how many there are. Off by default: a list of names is a page, and the question this op exists to answer (\&quot;is the MCP server up and does it have anything behind it\&quot;) is answered by the count. (optional)
      * @return AiMCPSurface
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -79,9 +79,9 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/ai/mcp/tools
-     * Tools reports what THIS PROCESS&#39;s MCP door carries: how many tools its own registry projects, optionally their names, and which subsystems this process composed.
-     * Tools reports what THIS PROCESS&#39;s MCP door carries: how many tools its own registry projects, optionally their names, and which subsystems this process composed. It is the answer to \&quot;is this door up and does it have anything behind it\&quot; — a question a status code cannot answer, since an empty door and a full one are both 200. What the FLEET&#39;s door carries is the fleet door&#39;s own answer: POST /v1/mcp, tools/list, which asks every subsystem and names the ones that did not reply.
-     * @param names Names asks for this process&#39;s tool NAMES and not only how many there are. Off by default: a list of names is a page, and the question this op exists to answer (\&quot;is the door up and does it have anything behind it\&quot;) is answered by the count. (optional)
+     * Tools reports what THIS PROCESS&#39;s MCP server carries: how many tools its own registry projects, optionally their names, and which subsystems this process composed.
+     * Tools reports what THIS PROCESS&#39;s MCP server carries: how many tools its own registry projects, optionally their names, and which subsystems this process composed. It is the answer to \&quot;is this MCP server up and does it have anything behind it\&quot; — a question a status code cannot answer, since an empty server and a full one are both 200. What the FLEET&#39;s server carries is the fleet server&#39;s own answer: POST /v1/mcp, tools/list, which asks every subsystem and names the ones that did not reply.
+     * @param names Names asks for this process&#39;s tool NAMES and not only how many there are. Off by default: a list of names is a page, and the question this op exists to answer (\&quot;is the MCP server up and does it have anything behind it\&quot;) is answered by the count. (optional)
      * @return ApiResponse<AiMCPSurface?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -99,7 +99,7 @@ class AiApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     /**
      * To obtain the request config of the operation aiMCPTools
      *
-     * @param names Names asks for this process&#39;s tool NAMES and not only how many there are. Off by default: a list of names is a page, and the question this op exists to answer (\&quot;is the door up and does it have anything behind it\&quot;) is answered by the count. (optional)
+     * @param names Names asks for this process&#39;s tool NAMES and not only how many there are. Off by default: a list of names is a page, and the question this op exists to answer (\&quot;is the MCP server up and does it have anything behind it\&quot;) is answered by the count. (optional)
      * @return RequestConfig
      */
     fun aiMCPToolsRequestConfig(names: kotlin.Boolean?) : RequestConfig<Unit> {

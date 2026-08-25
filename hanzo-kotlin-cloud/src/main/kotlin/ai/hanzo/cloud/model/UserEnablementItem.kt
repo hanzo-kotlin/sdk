@@ -21,36 +21,38 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param canOptIn beta && not yet opted in
- * @param effective visible to the caller's org
- * @param id 
- * @param kind 
- * @param optedIn caller's org on the beta list
- * @param state off|beta|ga
+ * @param canOptIn CanOptIn is whether POST /v1/pricing/enablement/optin would do anything here: the item is in beta and this org is not on its list yet. False for a caller with no validated org, who has no org to enrol.
+ * @param effective Effective is whether the caller's org may use the item right now, which is the field to branch on: true for any ga item, for a beta this org holds, and never for an off one.
+ * @param id ID is the item within that namespace — a model id, a provider name, or a feature key.
+ * @param kind Kind is the namespace the id lives in: \"model\", \"provider\" or \"feature\".
+ * @param optedIn OptedIn is whether the caller's org is on this item's beta grant list. It can be true on an \"off\" item — the list survives the kill switch and is simply ignored while it is thrown — so it does not imply Effective.
+ * @param state State is the item's GLOBAL availability — \"off\", \"beta\" or \"ga\" — which is the operator's setting and not this caller's answer. Effective is that.
  */
 
 
 data class UserEnablementItem (
 
-    /* beta && not yet opted in */
+    /* CanOptIn is whether POST /v1/pricing/enablement/optin would do anything here: the item is in beta and this org is not on its list yet. False for a caller with no validated org, who has no org to enrol. */
     @SerializedName("canOptIn")
     val canOptIn: kotlin.Boolean? = null,
 
-    /* visible to the caller's org */
+    /* Effective is whether the caller's org may use the item right now, which is the field to branch on: true for any ga item, for a beta this org holds, and never for an off one. */
     @SerializedName("effective")
     val effective: kotlin.Boolean? = null,
 
+    /* ID is the item within that namespace — a model id, a provider name, or a feature key. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
+    /* Kind is the namespace the id lives in: \"model\", \"provider\" or \"feature\". */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
-    /* caller's org on the beta list */
+    /* OptedIn is whether the caller's org is on this item's beta grant list. It can be true on an \"off\" item — the list survives the kill switch and is simply ignored while it is thrown — so it does not imply Effective. */
     @SerializedName("optedIn")
     val optedIn: kotlin.Boolean? = null,
 
-    /* off|beta|ga */
+    /* State is the item's GLOBAL availability — \"off\", \"beta\" or \"ga\" — which is the operator's setting and not this caller's answer. Effective is that. */
     @SerializedName("state")
     val state: kotlin.String? = null
 

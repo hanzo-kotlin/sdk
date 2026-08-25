@@ -22,7 +22,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param expiresIn seconds until the URL expires
- * @param key 
+ * @param key Key is the object key the URL was signed for, relative to the bucket root and path-cleaned — so it is what the store will actually read or write, which is not always the string the caller sent. The signature covers this one bucket and this one key: a URL minted here reaches nothing else.
  * @param method \"PUT\" (upload) or \"GET\" (download)
  * @param url presigned URL the browser follows directly
  */
@@ -34,6 +34,7 @@ data class PresignResponse (
     @SerializedName("expiresIn")
     val expiresIn: kotlin.Int? = null,
 
+    /* Key is the object key the URL was signed for, relative to the bucket root and path-cleaned — so it is what the store will actually read or write, which is not always the string the caller sent. The signature covers this one bucket and this one key: a URL minted here reaches nothing else. */
     @SerializedName("key")
     val key: kotlin.String? = null,
 

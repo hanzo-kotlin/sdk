@@ -22,10 +22,10 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param bindings 
- * @param compatibilityDate 
- * @param compatibilityFlags 
- * @param mainModule 
- * @param script 
+ * @param compatibilityDate CompatibilityDate pins which Workers runtime behaviour the script runs under, as a plain calendar date (\"2024-01-01\"). Absent leaves the account's own default in force.
+ * @param compatibilityFlags CompatibilityFlags turn individual runtime behaviours on or off around that date (\"nodejs_compat\"), in Cloudflare's own flag vocabulary. Absent means the date alone decides.
+ * @param mainModule MainModule is the module file the runtime starts at. Absent means \"worker.js\".
+ * @param script Script means two things on this route, and the document says so in both places it appears: the PATH segment names the Worker to publish, and the BODY field carries that Worker's ES-module source — the code itself, never a name or a URL. A blank or absent source is refused; there is no empty Worker.
  */
 
 
@@ -34,15 +34,19 @@ data class WorkerScriptPut (
     @SerializedName("bindings")
     val bindings: kotlin.Any? = null,
 
+    /* CompatibilityDate pins which Workers runtime behaviour the script runs under, as a plain calendar date (\"2024-01-01\"). Absent leaves the account's own default in force. */
     @SerializedName("compatibilityDate")
     val compatibilityDate: kotlin.String? = null,
 
+    /* CompatibilityFlags turn individual runtime behaviours on or off around that date (\"nodejs_compat\"), in Cloudflare's own flag vocabulary. Absent means the date alone decides. */
     @SerializedName("compatibilityFlags")
     val compatibilityFlags: kotlin.collections.List<kotlin.String>? = null,
 
+    /* MainModule is the module file the runtime starts at. Absent means \"worker.js\". */
     @SerializedName("mainModule")
     val mainModule: kotlin.String? = null,
 
+    /* Script means two things on this route, and the document says so in both places it appears: the PATH segment names the Worker to publish, and the BODY field carries that Worker's ES-module source — the code itself, never a name or a URL. A blank or absent source is refused; there is no empty Worker. */
     @SerializedName("script")
     val script: kotlin.String? = null
 

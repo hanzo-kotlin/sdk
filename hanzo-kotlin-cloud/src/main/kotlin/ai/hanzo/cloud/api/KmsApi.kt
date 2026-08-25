@@ -195,10 +195,10 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/kms/secrets
      * Lists the secrets your org holds, without their values.
      * Lists the secrets your org holds, without their values.  Returns the METADATA of the caller&#39;s own secrets: each one&#39;s name, path, environment and sealing scheme. No value and no ciphertext is included — this operation exists to enumerate what is held, and reading a value is a separate, per-secret call.  Scoped to the caller&#39;s own org and nothing else, structurally: there is no org in the path, the store root is derived from the validated org claim, and a caller therefore has no way to name another tenant&#39;s namespace. &#x60;path&#x60; narrows to a subpath and &#x60;env&#x60; selects the environment; both are also accepted under the operator&#39;s spellings, &#x60;secretPath&#x60; and &#x60;environment&#x60;. An omitted &#x60;env&#x60; means every environment and an omitted &#x60;path&#x60; means the whole org, because a default here reported a populated store as empty.  Admission is fail-closed and in order: a validated member, an org that is a DNS-1123 label, and a store holding a master key — 403, 400 and 503 respectively, all decided before any record is touched.
-     * @param env  (optional)
-     * @param environment  (optional)
-     * @param path  (optional)
-     * @param secretPath  (optional)
+     * @param env Env selects the environment, which is part of a secret&#39;s storage key. OMITTED means EVERY environment — this is the enumeration surface, so it must be able to answer \&quot;what is in here\&quot; without being told where to look. (optional)
+     * @param environment Environment is the KMS operator&#39;s spelling of Env, accepted so one caller need not learn the other&#39;s vocabulary. Env wins when both are sent. (optional)
+     * @param path Path narrows the listing to one subtree beneath the caller&#39;s org root, as a &#x60;/&#x60;-separated path such as &#x60;/ci&#x60;. OMITTED means the whole org. (optional)
+     * @param secretPath SecretPath is the KMS operator&#39;s spelling of Path. Path wins when both are sent. (optional)
      * @return KmsSecrets
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -230,10 +230,10 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/kms/secrets
      * Lists the secrets your org holds, without their values.
      * Lists the secrets your org holds, without their values.  Returns the METADATA of the caller&#39;s own secrets: each one&#39;s name, path, environment and sealing scheme. No value and no ciphertext is included — this operation exists to enumerate what is held, and reading a value is a separate, per-secret call.  Scoped to the caller&#39;s own org and nothing else, structurally: there is no org in the path, the store root is derived from the validated org claim, and a caller therefore has no way to name another tenant&#39;s namespace. &#x60;path&#x60; narrows to a subpath and &#x60;env&#x60; selects the environment; both are also accepted under the operator&#39;s spellings, &#x60;secretPath&#x60; and &#x60;environment&#x60;. An omitted &#x60;env&#x60; means every environment and an omitted &#x60;path&#x60; means the whole org, because a default here reported a populated store as empty.  Admission is fail-closed and in order: a validated member, an org that is a DNS-1123 label, and a store holding a master key — 403, 400 and 503 respectively, all decided before any record is touched.
-     * @param env  (optional)
-     * @param environment  (optional)
-     * @param path  (optional)
-     * @param secretPath  (optional)
+     * @param env Env selects the environment, which is part of a secret&#39;s storage key. OMITTED means EVERY environment — this is the enumeration surface, so it must be able to answer \&quot;what is in here\&quot; without being told where to look. (optional)
+     * @param environment Environment is the KMS operator&#39;s spelling of Env, accepted so one caller need not learn the other&#39;s vocabulary. Env wins when both are sent. (optional)
+     * @param path Path narrows the listing to one subtree beneath the caller&#39;s org root, as a &#x60;/&#x60;-separated path such as &#x60;/ci&#x60;. OMITTED means the whole org. (optional)
+     * @param secretPath SecretPath is the KMS operator&#39;s spelling of Path. Path wins when both are sent. (optional)
      * @return ApiResponse<KmsSecrets?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -251,10 +251,10 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation getKmsSecrets
      *
-     * @param env  (optional)
-     * @param environment  (optional)
-     * @param path  (optional)
-     * @param secretPath  (optional)
+     * @param env Env selects the environment, which is part of a secret&#39;s storage key. OMITTED means EVERY environment — this is the enumeration surface, so it must be able to answer \&quot;what is in here\&quot; without being told where to look. (optional)
+     * @param environment Environment is the KMS operator&#39;s spelling of Env, accepted so one caller need not learn the other&#39;s vocabulary. Env wins when both are sent. (optional)
+     * @param path Path narrows the listing to one subtree beneath the caller&#39;s org root, as a &#x60;/&#x60;-separated path such as &#x60;/ci&#x60;. OMITTED means the whole org. (optional)
+     * @param secretPath SecretPath is the KMS operator&#39;s spelling of Path. Path wins when both are sent. (optional)
      * @return RequestConfig
      */
     fun getKmsSecretsRequestConfig(env: kotlin.String?, environment: kotlin.String?, path: kotlin.String?, secretPath: kotlin.String?) : RequestConfig<Unit> {
@@ -290,7 +290,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/kms/auth/login
      * Exchanges a machine credential for an IAM bearer token.
-     * Exchanges a machine credential for an IAM bearer token.  Takes a tenant&#39;s machine credential — a client id and client secret — and returns an owner-scoped IAM access token with its lifetime, which is the bearer the caller then carries on the org-scoped secret operations.  It is deliberately public and unauthenticated, because it IS the credential exchange and runs before any principal exists. That makes it the one route in this subsystem rate-limited PER SOURCE IP, keyed on the real TCP peer rather than on any caller-supplied header, and body-capped at the same door.  The submitted secret is never logged and never echoed, and failures collapse to one clean status with no upstream detail: 401 when the credential does not authenticate, 502 when the identity provider is unreachable, 503 when no issuer is configured. That is on purpose — a richer error would be a validity oracle for guessed credentials.
+     * Exchanges a machine credential for an IAM bearer token.  Takes a tenant&#39;s machine credential — a client id and client secret — and returns an owner-scoped IAM access token with its lifetime, which is the bearer the caller then carries on the org-scoped secret operations.  It is deliberately public and unauthenticated, because it IS the credential exchange and runs before any principal exists. That makes it the one route in this subsystem rate-limited PER SOURCE IP, keyed on the real TCP peer rather than on any caller-supplied header, and body-capped in the same place.  The submitted secret is never logged and never echoed, and failures collapse to one clean status with no upstream detail: 401 when the credential does not authenticate, 502 when the identity provider is unreachable, 503 when no issuer is configured. That is on purpose — a richer error would be a validity oracle for guessed credentials.
      * @param kmsLogin 
      * @return KmsToken
      * @throws IllegalStateException If the request is not correctly configured
@@ -322,7 +322,7 @@ class KmsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * POST /v1/kms/auth/login
      * Exchanges a machine credential for an IAM bearer token.
-     * Exchanges a machine credential for an IAM bearer token.  Takes a tenant&#39;s machine credential — a client id and client secret — and returns an owner-scoped IAM access token with its lifetime, which is the bearer the caller then carries on the org-scoped secret operations.  It is deliberately public and unauthenticated, because it IS the credential exchange and runs before any principal exists. That makes it the one route in this subsystem rate-limited PER SOURCE IP, keyed on the real TCP peer rather than on any caller-supplied header, and body-capped at the same door.  The submitted secret is never logged and never echoed, and failures collapse to one clean status with no upstream detail: 401 when the credential does not authenticate, 502 when the identity provider is unreachable, 503 when no issuer is configured. That is on purpose — a richer error would be a validity oracle for guessed credentials.
+     * Exchanges a machine credential for an IAM bearer token.  Takes a tenant&#39;s machine credential — a client id and client secret — and returns an owner-scoped IAM access token with its lifetime, which is the bearer the caller then carries on the org-scoped secret operations.  It is deliberately public and unauthenticated, because it IS the credential exchange and runs before any principal exists. That makes it the one route in this subsystem rate-limited PER SOURCE IP, keyed on the real TCP peer rather than on any caller-supplied header, and body-capped in the same place.  The submitted secret is never logged and never echoed, and failures collapse to one clean status with no upstream detail: 401 when the credential does not authenticate, 502 when the identity provider is unreachable, 503 when no issuer is configured. That is on purpose — a richer error would be a validity oracle for guessed credentials.
      * @param kmsLogin 
      * @return ApiResponse<KmsToken?>
      * @throws IllegalStateException If the request is not correctly configured

@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param params 
- * @param sql 
+ * @param params Params are the statement's bound values, in the order its `?` placeholders appear — a string, a number, a boolean or null, whatever the column takes. Absent means the statement carries no placeholders; bind values here rather than interpolating them into the statement.
+ * @param sql SQL is the statement to run. Blank (or absent) is refused before anything reaches D1.
  */
 
 
 data class D1Query (
 
+    /* Params are the statement's bound values, in the order its `?` placeholders appear — a string, a number, a boolean or null, whatever the column takes. Absent means the statement carries no placeholders; bind values here rather than interpolating them into the statement. */
     @SerializedName("params")
     val params: kotlin.collections.List<kotlin.Any>? = null,
 
+    /* SQL is the statement to run. Blank (or absent) is refused before anything reaches D1. */
     @SerializedName("sql")
     val sql: kotlin.String? = null
 

@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param product Product is the product's name as customers know it.
  * @param summary Summary is one sentence naming what this surface serves.
- * @param wires Wires is every protocol door onto World, REST first. It is deliberately NOT a list of REST operations: GET /v1/openapi.json is the one enumeration of those, and a second copy here would be a second thing to keep true.
+ * @param wires Wires is every protocol entry point onto World, REST first. It is deliberately NOT a list of REST operations: GET /v1/openapi.json is the one enumeration of those, and a second copy here would be a second thing to keep true.
  */
 
 
@@ -38,7 +38,7 @@ data class WorldIndex (
     @SerializedName("summary")
     val summary: kotlin.String? = null,
 
-    /* Wires is every protocol door onto World, REST first. It is deliberately NOT a list of REST operations: GET /v1/openapi.json is the one enumeration of those, and a second copy here would be a second thing to keep true. */
+    /* Wires is every protocol entry point onto World, REST first. It is deliberately NOT a list of REST operations: GET /v1/openapi.json is the one enumeration of those, and a second copy here would be a second thing to keep true. */
     @SerializedName("wires")
     val wires: kotlin.collections.List<WorldWire>? = null
 

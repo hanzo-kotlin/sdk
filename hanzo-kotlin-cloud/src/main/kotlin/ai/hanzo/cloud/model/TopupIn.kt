@@ -23,8 +23,8 @@ import com.google.gson.annotations.SerializedName
  *
  * @param amountCents AmountCents is how much to charge, in cents of Currency. Required.
  * @param currency Currency is the ISO-4217 code to charge in. Empty takes the deployment's own default.
- * @param paymentMethodId MethodID names a card the subject already saved, for the saved-card door.
- * @param sourceId SourceID is a single-use card token from the payment form, for the token door. It is vaulted as part of the charge, so a caller never holds card numbers and this service never sees one.
+ * @param paymentMethodId MethodID names a card the subject already saved, for the saved-card endpoint.
+ * @param sourceId SourceID is a single-use card token from the payment form, for the token endpoint. It is vaulted as part of the charge, so a caller never holds card numbers and this service never sees one.
  */
 
 
@@ -38,11 +38,11 @@ data class TopupIn (
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
-    /* MethodID names a card the subject already saved, for the saved-card door. */
+    /* MethodID names a card the subject already saved, for the saved-card endpoint. */
     @SerializedName("paymentMethodId")
     val paymentMethodId: kotlin.String? = null,
 
-    /* SourceID is a single-use card token from the payment form, for the token door. It is vaulted as part of the charge, so a caller never holds card numbers and this service never sees one. */
+    /* SourceID is a single-use card token from the payment form, for the token endpoint. It is vaulted as part of the charge, so a caller never holds card numbers and this service never sees one. */
     @SerializedName("sourceId")
     val sourceId: kotlin.String? = null
 

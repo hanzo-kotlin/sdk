@@ -1014,7 +1014,7 @@ class SandboxApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * POST /v1/sandbox/{id}/screen/ticket
      * Mints a short-lived grant to open the screen of a desktop sandbox.
-     * Mints a short-lived grant to open the screen of a desktop sandbox. Same properties as the terminal ticket, for the other door.
+     * Mints a short-lived grant to open the screen of a desktop sandbox. Same properties as the terminal ticket, for the other endpoint.
      * @param id ID is the sandbox to address, from the path.
      * @return TicketGrant
      * @throws IllegalStateException If the request is not correctly configured
@@ -1046,7 +1046,7 @@ class SandboxApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * POST /v1/sandbox/{id}/screen/ticket
      * Mints a short-lived grant to open the screen of a desktop sandbox.
-     * Mints a short-lived grant to open the screen of a desktop sandbox. Same properties as the terminal ticket, for the other door.
+     * Mints a short-lived grant to open the screen of a desktop sandbox. Same properties as the terminal ticket, for the other endpoint.
      * @param id ID is the sandbox to address, from the path.
      * @return ApiResponse<TicketGrant?>
      * @throws IllegalStateException If the request is not correctly configured

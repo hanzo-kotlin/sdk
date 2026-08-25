@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param apps Apps is one row per subsystem this deployment composes, in manifest order.
  * @param names Names are this process's own tool names, present only when the query asked for them.
- * @param tools Tools is how many tools THIS PROCESS's door carries: its own typed-op registry, projected. It is the only number a subsystem can state honestly — what the FLEET's door carries is a question only the host can ask, and it asks it by asking every subsystem (POST /v1/mcp, tools/list).
+ * @param tools Tools is how many tools THIS PROCESS's MCP server carries: its own typed-op registry, projected. It is the only number a subsystem can state honestly — what the FLEET's server carries is a question only the host can ask, and it asks it by asking every subsystem (POST /v1/mcp, tools/list).
  */
 
 
@@ -38,7 +38,7 @@ data class AiMCPSurface (
     @SerializedName("names")
     val names: kotlin.collections.List<kotlin.String>? = null,
 
-    /* Tools is how many tools THIS PROCESS's door carries: its own typed-op registry, projected. It is the only number a subsystem can state honestly — what the FLEET's door carries is a question only the host can ask, and it asks it by asking every subsystem (POST /v1/mcp, tools/list). */
+    /* Tools is how many tools THIS PROCESS's MCP server carries: its own typed-op registry, projected. It is the only number a subsystem can state honestly — what the FLEET's server carries is a question only the host can ask, and it asks it by asking every subsystem (POST /v1/mcp, tools/list). */
     @SerializedName("tools")
     val tools: kotlin.Int? = null
 

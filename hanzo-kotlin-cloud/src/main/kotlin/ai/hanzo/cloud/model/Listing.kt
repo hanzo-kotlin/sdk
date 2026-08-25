@@ -21,16 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param lastModified 
- * @param name 
+ * @param lastModified LastModified is when the BYTES last changed, as RFC 3339 in UTC to the second — `2026-01-02T03:04:05Z`, the sandbox's own `date -u -r` on the file. It is an mtime and not a creation time, so a file a later run overwrote carries that run's clock. Never empty: a row exists only because `find` stat-ed the file.
+ * @param name Name is the file's IDENTIFIER, `{session_id}/{fileId}` whole — never the bare filename, and never URL-escaped. It is exactly what GET /v1/exec/download takes after its prefix, and hanzo.chat matches it as a PREFIX (`name.startsWith(session + \"/\")`) to decide which rows belong to a session it is holding. `fileId` is the path RELATIVE to the session's artifact directory, so it carries `/` for anything the run wrote in a sub-directory.
  */
 
 
 data class Listing (
 
+    /* LastModified is when the BYTES last changed, as RFC 3339 in UTC to the second — `2026-01-02T03:04:05Z`, the sandbox's own `date -u -r` on the file. It is an mtime and not a creation time, so a file a later run overwrote carries that run's clock. Never empty: a row exists only because `find` stat-ed the file. */
     @SerializedName("lastModified")
     val lastModified: kotlin.String? = null,
 
+    /* Name is the file's IDENTIFIER, `{session_id}/{fileId}` whole — never the bare filename, and never URL-escaped. It is exactly what GET /v1/exec/download takes after its prefix, and hanzo.chat matches it as a PREFIX (`name.startsWith(session + \"/\")`) to decide which rows belong to a session it is holding. `fileId` is the path RELATIVE to the session's artifact directory, so it carries `/` for anything the run wrote in a sub-directory. */
     @SerializedName("name")
     val name: kotlin.String? = null
 

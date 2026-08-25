@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
  * @param name Name is the agent's org-unique handle and the only required field. It must match ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$, and a name already taken in this org is a 409 rather than an overwrite. It is permanent: no update route moves it.
  * @param schedule Schedule is the 5-field cron a long-running agent fires on, parsed here so a bad expression is a 400 and not an agent that silently never runs. Required with long-running; DISCARDED for one-shot rather than stored unused.
  * @param serviceAccountId ServiceAccountID optionally names the IAM agent service account (<org>-<agent>) a scheduled run should be billed AS, so an autonomous run is attributable to a principal rather than only to the org. Same 256-character bound, also unresolved here.
- * @param tools Tools are the tool names this agent may call. Omitted or empty grants NONE — that default is the agent's authority and is not widened anywhere. The single entry \"*\" means whatever the fleet's tool door serves at the time of each run.
+ * @param tools Tools are the tool names this agent may call. Omitted or empty grants NONE — that default is the agent's authority and is not widened anywhere. The single entry \"*\" means whatever the fleet's MCP server serves at the time of each run.
  */
 
 
@@ -67,7 +67,7 @@ data class CreateAgentIn (
     @SerializedName("serviceAccountId")
     val serviceAccountId: kotlin.String? = null,
 
-    /* Tools are the tool names this agent may call. Omitted or empty grants NONE — that default is the agent's authority and is not widened anywhere. The single entry \"*\" means whatever the fleet's tool door serves at the time of each run. */
+    /* Tools are the tool names this agent may call. Omitted or empty grants NONE — that default is the agent's authority and is not widened anywhere. The single entry \"*\" means whatever the fleet's MCP server serves at the time of each run. */
     @SerializedName("tools")
     val tools: kotlin.collections.List<kotlin.String>? = null
 

@@ -35,7 +35,7 @@ import com.google.gson.annotations.SerializedName
  * @param ref Ref is the git ref to build when no SHA is given.
  * @param repo Repo is the repository clone URL to build. Required on the image lane.
  * @param sha SHA is the commit to pin; it wins over Ref and Branch.
- * @param tag Tag is the publish path segment, so both front doors write ONE index at ONE URL. It defaults to the pinned ref, and must be named explicitly for a branch.
+ * @param tag Tag is the publish path segment, so both entry points write ONE index at ONE URL. It defaults to the pinned ref, and must be named explicitly for a branch.
  */
 
 
@@ -93,7 +93,7 @@ data class RunnerBuildReq (
     @SerializedName("sha")
     val sha: kotlin.String? = null,
 
-    /* Tag is the publish path segment, so both front doors write ONE index at ONE URL. It defaults to the pinned ref, and must be named explicitly for a branch. */
+    /* Tag is the publish path segment, so both entry points write ONE index at ONE URL. It defaults to the pinned ref, and must be named explicitly for a branch. */
     @SerializedName("tag")
     val tag: kotlin.String? = null
 

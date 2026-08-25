@@ -423,7 +423,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * GET /v1/esign/o/{org}/sign/{token}
      * Opens a document you were asked to sign, using your signing link.
-     * Opens a document you were asked to sign, using your signing link.  It answers the document, the recipient the link identifies, the fields THAT recipient must fill, and the PDF to display. The first open also marks the recipient as having opened it and records that on the audit trail, so this read has a side effect by design.  This door takes NO account: the signing token is the entire credential, and it names the recipient, so a signer sees only their own fields and never the other recipients&#39; tokens. The token resolves to its owning tenant FIRST, before any per-tenant store is opened, and the org segment is only checked against that answer. An unknown or wrong-org token is one and the same 404, never a hint that some other document exists.
+     * Opens a document you were asked to sign, using your signing link.  It answers the document, the recipient the link identifies, the fields THAT recipient must fill, and the PDF to display. The first open also marks the recipient as having opened it and records that on the audit trail, so this read has a side effect by design.  This surface takes NO account: the signing token is the entire credential, and it names the recipient, so a signer sees only their own fields and never the other recipients&#39; tokens. The token resolves to its owning tenant FIRST, before any per-tenant store is opened, and the org segment is only checked against that answer. An unknown or wrong-org token is one and the same 404, never a hint that some other document exists.
      * @param org 
      * @param token 
      * @return EsignSession
@@ -456,7 +456,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * GET /v1/esign/o/{org}/sign/{token}
      * Opens a document you were asked to sign, using your signing link.
-     * Opens a document you were asked to sign, using your signing link.  It answers the document, the recipient the link identifies, the fields THAT recipient must fill, and the PDF to display. The first open also marks the recipient as having opened it and records that on the audit trail, so this read has a side effect by design.  This door takes NO account: the signing token is the entire credential, and it names the recipient, so a signer sees only their own fields and never the other recipients&#39; tokens. The token resolves to its owning tenant FIRST, before any per-tenant store is opened, and the org segment is only checked against that answer. An unknown or wrong-org token is one and the same 404, never a hint that some other document exists.
+     * Opens a document you were asked to sign, using your signing link.  It answers the document, the recipient the link identifies, the fields THAT recipient must fill, and the PDF to display. The first open also marks the recipient as having opened it and records that on the audit trail, so this read has a side effect by design.  This surface takes NO account: the signing token is the entire credential, and it names the recipient, so a signer sees only their own fields and never the other recipients&#39; tokens. The token resolves to its owning tenant FIRST, before any per-tenant store is opened, and the org segment is only checked against that answer. An unknown or wrong-org token is one and the same 404, never a hint that some other document exists.
      * @param org 
      * @param token 
      * @return ApiResponse<EsignSession?>
@@ -499,7 +499,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * POST /v1/esign/documents
      * Uploads a PDF and opens a draft ready for recipients and fields.
-     * Uploads a PDF and opens a draft ready for recipients and fields.  It answers 201 with the document in DRAFT — the state where recipients and fields may still be added, and the only state they may. The bytes go to object storage rather than into the tenant database, and the original is kept under its own key so it survives sealing untouched: a completed document can always be compared against what was uploaded. Creation is recorded on the audit trail.  This is the sender&#39;s door: a validated principal is required, and the document lands in that principal&#39;s OWN org. Isolation is physical rather than a filter — each tenant has its own store — so another org&#39;s document id is simply not there. A body over 32 MiB is refused with 413.
+     * Uploads a PDF and opens a draft ready for recipients and fields.  It answers 201 with the document in DRAFT — the state where recipients and fields may still be added, and the only state they may. The bytes go to object storage rather than into the tenant database, and the original is kept under its own key so it survives sealing untouched: a completed document can always be compared against what was uploaded. Creation is recorded on the audit trail.  This is the sender&#39;s surface: a validated principal is required, and the document lands in that principal&#39;s OWN org. Isolation is physical rather than a filter — each tenant has its own store — so another org&#39;s document id is simply not there. A body over 32 MiB is refused with 413.
      * @param esignUploadIn 
      * @return EsignDocument
      * @throws IllegalStateException If the request is not correctly configured
@@ -531,7 +531,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * POST /v1/esign/documents
      * Uploads a PDF and opens a draft ready for recipients and fields.
-     * Uploads a PDF and opens a draft ready for recipients and fields.  It answers 201 with the document in DRAFT — the state where recipients and fields may still be added, and the only state they may. The bytes go to object storage rather than into the tenant database, and the original is kept under its own key so it survives sealing untouched: a completed document can always be compared against what was uploaded. Creation is recorded on the audit trail.  This is the sender&#39;s door: a validated principal is required, and the document lands in that principal&#39;s OWN org. Isolation is physical rather than a filter — each tenant has its own store — so another org&#39;s document id is simply not there. A body over 32 MiB is refused with 413.
+     * Uploads a PDF and opens a draft ready for recipients and fields.  It answers 201 with the document in DRAFT — the state where recipients and fields may still be added, and the only state they may. The bytes go to object storage rather than into the tenant database, and the original is kept under its own key so it survives sealing untouched: a completed document can always be compared against what was uploaded. Creation is recorded on the audit trail.  This is the sender&#39;s surface: a validated principal is required, and the document lands in that principal&#39;s OWN org. Isolation is physical rather than a filter — each tenant has its own store — so another org&#39;s document id is simply not there. A body over 32 MiB is refused with 413.
      * @param esignUploadIn 
      * @return ApiResponse<EsignDocument?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -650,7 +650,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * POST /v1/esign/documents/{id}/recipients
      * Adds someone to a draft and mints their signing token.
-     * Adds someone to a draft and mints their signing token.  It answers 201 with the recipient&#39;s id and their signing TOKEN — the crypto-random capability that is the only credential the signer&#39;s door accepts — so this response is where the signing link is built from. A CC recipient is recorded as already complete, because they are never asked to sign.  Only while DRAFT: adding a recipient to a document already sent is a 409, because the field layout and the turn order were fixed when it went out. An unknown document is a 404. The addition is recorded on the audit trail.
+     * Adds someone to a draft and mints their signing token.  It answers 201 with the recipient&#39;s id and their signing TOKEN — the crypto-random capability that is the only credential the signer&#39;s surface accepts — so this response is where the signing link is built from. A CC recipient is recorded as already complete, because they are never asked to sign.  Only while DRAFT: adding a recipient to a document already sent is a 409, because the field layout and the turn order were fixed when it went out. An unknown document is a 404. The addition is recorded on the audit trail.
      * @param id 
      * @param esignRecipientIn 
      * @return EsignInvite
@@ -683,7 +683,7 @@ class EsignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * POST /v1/esign/documents/{id}/recipients
      * Adds someone to a draft and mints their signing token.
-     * Adds someone to a draft and mints their signing token.  It answers 201 with the recipient&#39;s id and their signing TOKEN — the crypto-random capability that is the only credential the signer&#39;s door accepts — so this response is where the signing link is built from. A CC recipient is recorded as already complete, because they are never asked to sign.  Only while DRAFT: adding a recipient to a document already sent is a 409, because the field layout and the turn order were fixed when it went out. An unknown document is a 404. The addition is recorded on the audit trail.
+     * Adds someone to a draft and mints their signing token.  It answers 201 with the recipient&#39;s id and their signing TOKEN — the crypto-random capability that is the only credential the signer&#39;s surface accepts — so this response is where the signing link is built from. A CC recipient is recorded as already complete, because they are never asked to sign.  Only while DRAFT: adding a recipient to a document already sent is a 409, because the field layout and the turn order were fixed when it went out. An unknown document is a 404. The addition is recorded on the audit trail.
      * @param id 
      * @param esignRecipientIn 
      * @return ApiResponse<EsignInvite?>

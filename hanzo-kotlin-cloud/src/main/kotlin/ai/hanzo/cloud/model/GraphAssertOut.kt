@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
  * @param duplicate Duplicate is how many members this plane already held. A redelivery collides on its content address and is counted here, not refused: it is the success a retrying caller depends on.
  * @param reasons Reasons names why each refused member was refused, in the order sent.
  * @param recorded Recorded is how many members became new rows.
- * @param refused Refused is how many members were turned away at the door, before the store was touched — a missing entity, a timestamp that is not RFC 3339, a confidence outside [0,1]. The rest of the batch was still recorded.
+ * @param refused Refused is how many members were turned away on arrival, before the store was touched — a missing entity, a timestamp that is not RFC 3339, a confidence outside [0,1]. The rest of the batch was still recorded.
  */
 
 
@@ -42,7 +42,7 @@ data class GraphAssertOut (
     @SerializedName("recorded")
     val recorded: kotlin.Int? = null,
 
-    /* Refused is how many members were turned away at the door, before the store was touched — a missing entity, a timestamp that is not RFC 3339, a confidence outside [0,1]. The rest of the batch was still recorded. */
+    /* Refused is how many members were turned away on arrival, before the store was touched — a missing entity, a timestamp that is not RFC 3339, a confidence outside [0,1]. The rest of the batch was still recorded. */
     @SerializedName("refused")
     val refused: kotlin.Int? = null
 

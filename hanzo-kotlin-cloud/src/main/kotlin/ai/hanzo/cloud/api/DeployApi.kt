@@ -29,6 +29,8 @@ import ai.hanzo.cloud.model.ArgoTree
 import ai.hanzo.cloud.model.ConsoleSettings
 import ai.hanzo.cloud.model.DeployHealth
 import ai.hanzo.cloud.model.GitOpsPlane
+import ai.hanzo.cloud.model.ReconcileReport
+import ai.hanzo.cloud.model.SessionEnded
 import ai.hanzo.cloud.model.SessionUser
 import ai.hanzo.cloud.model.VersionMessage
 
@@ -1184,22 +1186,23 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/applications/{name}/rollback
-     * The console&#39;s rollback control — today it requests a reconcile, nothing more
-     * Performs exactly what the sync action performs: it stamps the sync-requested timestamp onto the application&#39;s App CR and answers the application re-projected. It does NOT select, pin or revert to a prior image tag, and that is the one thing to know before wiring anything to it — the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release client, which this address does not call yet.  SuperAdmin-only and fail-closed, reading no request body, with an unknown application name a 404 and no cluster client a 503 — the same gate and the same failures as the sync it shares a handler with.
-     * @param name 
-     * @return void
+     * Serves the console&#39;s rollback control, and today it requests a reconcile and nothing more.
+     * Serves the console&#39;s rollback control, and today it requests a reconcile and nothing more.  The opening verb is not style. zipdoc drops a leading CamelCase symbol only when a plain verb follows it and never before a copula (internal/zipdoc/ extract.go:811-824, \&quot;CompleteDeployment IS the CI completion hook\&quot; would otherwise become \&quot;Is the CI completion hook\&quot;) — so \&quot;RollbackDeployApplication is …\&quot; would publish a Go symbol no caller can see into the summary an SDK docstring, an MCP tool list and a CLI help line all show.  It performs exactly what the sync action performs — the same stamp on the same App CR, the same application re-projected — and it does NOT select, pin or revert to a prior image tag. That is the one thing to know before wiring anything to it: the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release client, which this address does not call yet.  Same gate, same refusals and the same absent request body as the sync it shares a core with.
+     * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
+     * @return ArgoApp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postDeployApplicationsByNameRollback(name: kotlin.String) : Unit {
+    fun postDeployApplicationsByNameRollback(name: kotlin.String) : ArgoApp {
         val localVarResponse = postDeployApplicationsByNameRollbackWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoApp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1215,18 +1218,19 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/applications/{name}/rollback
-     * The console&#39;s rollback control — today it requests a reconcile, nothing more
-     * Performs exactly what the sync action performs: it stamps the sync-requested timestamp onto the application&#39;s App CR and answers the application re-projected. It does NOT select, pin or revert to a prior image tag, and that is the one thing to know before wiring anything to it — the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release client, which this address does not call yet.  SuperAdmin-only and fail-closed, reading no request body, with an unknown application name a 404 and no cluster client a 503 — the same gate and the same failures as the sync it shares a handler with.
-     * @param name 
-     * @return ApiResponse<Unit?>
+     * Serves the console&#39;s rollback control, and today it requests a reconcile and nothing more.
+     * Serves the console&#39;s rollback control, and today it requests a reconcile and nothing more.  The opening verb is not style. zipdoc drops a leading CamelCase symbol only when a plain verb follows it and never before a copula (internal/zipdoc/ extract.go:811-824, \&quot;CompleteDeployment IS the CI completion hook\&quot; would otherwise become \&quot;Is the CI completion hook\&quot;) — so \&quot;RollbackDeployApplication is …\&quot; would publish a Go symbol no caller can see into the summary an SDK docstring, an MCP tool list and a CLI help line all show.  It performs exactly what the sync action performs — the same stamp on the same App CR, the same application re-projected — and it does NOT select, pin or revert to a prior image tag. That is the one thing to know before wiring anything to it: the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release client, which this address does not call yet.  Same gate, same refusals and the same absent request body as the sync it shares a core with.
+     * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
+     * @return ApiResponse<ArgoApp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postDeployApplicationsByNameRollbackWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+    fun postDeployApplicationsByNameRollbackWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoApp?> {
         val localVariableConfig = postDeployApplicationsByNameRollbackRequestConfig(name = name)
 
-        return request<Unit, Unit>(
+        return request<Unit, ArgoApp>(
             localVariableConfig
         )
     }
@@ -1234,14 +1238,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postDeployApplicationsByNameRollback
      *
-     * @param name 
+     * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
      * @return RequestConfig
      */
     fun postDeployApplicationsByNameRollbackRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/deploy/applications/{name}/rollback".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
@@ -1254,22 +1259,23 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/applications/{name}/sync
-     * Ask the operator to reconcile one application now
-     * Requests an immediate reconcile of one application by stamping a sync-requested timestamp onto its App CR, which the operator&#39;s watch observes, and answers the application re-projected. It ASKS, it does not apply: the operator performs the reconcile on its own clock, so a 200 means the request landed, not that the rollout finished — the returned row&#39;s running version still lags until it does. The CR is the desired source today, so this is a nudge; when git becomes the source the same address becomes apply-from-git.  SuperAdmin-only and fail-closed — a non-SuperAdmin is refused before any cluster object is read or patched, and the write surface stays admin-only while the tenant surface is read-only reflection. It reads no request body. An unknown application name is a 404; no cluster client configured is a 503.
-     * @param name 
-     * @return void
+     * Asks the operator to reconcile ONE application now.
+     * Asks the operator to reconcile ONE application now.  It stamps a sync-requested timestamp onto the application&#39;s App CR, which the operator&#39;s watch observes, and answers the application re-projected. It ASKS, it does not apply: the operator reconciles on its own clock, so a 200 means the request landed, not that the rollout finished — the returned row&#39;s running version still lags until it does.  SuperAdmin-only and fail-closed, and the gate is INSIDE the op rather than in middleware wrapped around the route. That is a correctness requirement, not a preference: this op is also reached by POST /mcp and by the by-name call plane, neither of which runs route middleware, so a gate that only the REST projection runs would publish an unguarded alias of a fleet-mutating write. It reads no request body — the URL names the application and nothing else does. An unknown name is a 404 (never a 403, which would confirm the application exists), a name that is not a DNS-1123 label is a 400, and no cluster client is a 503.
+     * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
+     * @return ArgoApp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postDeployApplicationsByNameSync(name: kotlin.String) : Unit {
+    fun postDeployApplicationsByNameSync(name: kotlin.String) : ArgoApp {
         val localVarResponse = postDeployApplicationsByNameSyncWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoApp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1285,18 +1291,19 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/applications/{name}/sync
-     * Ask the operator to reconcile one application now
-     * Requests an immediate reconcile of one application by stamping a sync-requested timestamp onto its App CR, which the operator&#39;s watch observes, and answers the application re-projected. It ASKS, it does not apply: the operator performs the reconcile on its own clock, so a 200 means the request landed, not that the rollout finished — the returned row&#39;s running version still lags until it does. The CR is the desired source today, so this is a nudge; when git becomes the source the same address becomes apply-from-git.  SuperAdmin-only and fail-closed — a non-SuperAdmin is refused before any cluster object is read or patched, and the write surface stays admin-only while the tenant surface is read-only reflection. It reads no request body. An unknown application name is a 404; no cluster client configured is a 503.
-     * @param name 
-     * @return ApiResponse<Unit?>
+     * Asks the operator to reconcile ONE application now.
+     * Asks the operator to reconcile ONE application now.  It stamps a sync-requested timestamp onto the application&#39;s App CR, which the operator&#39;s watch observes, and answers the application re-projected. It ASKS, it does not apply: the operator reconciles on its own clock, so a 200 means the request landed, not that the rollout finished — the returned row&#39;s running version still lags until it does.  SuperAdmin-only and fail-closed, and the gate is INSIDE the op rather than in middleware wrapped around the route. That is a correctness requirement, not a preference: this op is also reached by POST /mcp and by the by-name call plane, neither of which runs route middleware, so a gate that only the REST projection runs would publish an unguarded alias of a fleet-mutating write. It reads no request body — the URL names the application and nothing else does. An unknown name is a 404 (never a 403, which would confirm the application exists), a name that is not a DNS-1123 label is a 400, and no cluster client is a 503.
+     * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
+     * @return ApiResponse<ArgoApp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postDeployApplicationsByNameSyncWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+    fun postDeployApplicationsByNameSyncWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoApp?> {
         val localVariableConfig = postDeployApplicationsByNameSyncRequestConfig(name = name)
 
-        return request<Unit, Unit>(
+        return request<Unit, ArgoApp>(
             localVariableConfig
         )
     }
@@ -1304,14 +1311,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * To obtain the request config of the operation postDeployApplicationsByNameSync
      *
-     * @param name 
+     * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
      * @return RequestConfig
      */
     fun postDeployApplicationsByNameSyncRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/deploy/applications/{name}/sync".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
@@ -1324,21 +1332,22 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/logout
-     * End the console session on this host
-     * Clears this console&#39;s session cookie and answers the signed-out state with the sign-in URL to start again. IAM&#39;s own session is untouched — this ends the console session only, so signing back in may not prompt for credentials.  It is a POST because it changes state. As a GET it was reachable by a cross-site top-level navigation, which a SameSite&#x3D;Lax cookie still rides, so any page could sign a SuperAdmin out; a POST is not carried cross-site by that cookie.
-     * @return void
+     * Ends the console session on this host.
+     * Ends the console session on this host.  It clears this console&#39;s session cookie and answers the signed-out state with the sign-in URL to start again. IAM&#39;s own session is untouched — this ends the console session only, so signing back in may not prompt for credentials.  It is a POST because it CHANGES STATE. As a GET it was reachable by a cross-site top-level navigation, which a SameSite&#x3D;Lax cookie still rides, so any page could sign a SuperAdmin out; a POST is not carried cross-site by that cookie. It reads no request body and takes no argument: the session it ends is the one the request already carries.
+     * @return SessionEnded
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postDeployLogout() : Unit {
+    fun postDeployLogout() : SessionEnded {
         val localVarResponse = postDeployLogoutWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SessionEnded
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1354,17 +1363,18 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/logout
-     * End the console session on this host
-     * Clears this console&#39;s session cookie and answers the signed-out state with the sign-in URL to start again. IAM&#39;s own session is untouched — this ends the console session only, so signing back in may not prompt for credentials.  It is a POST because it changes state. As a GET it was reachable by a cross-site top-level navigation, which a SameSite&#x3D;Lax cookie still rides, so any page could sign a SuperAdmin out; a POST is not carried cross-site by that cookie.
-     * @return ApiResponse<Unit?>
+     * Ends the console session on this host.
+     * Ends the console session on this host.  It clears this console&#39;s session cookie and answers the signed-out state with the sign-in URL to start again. IAM&#39;s own session is untouched — this ends the console session only, so signing back in may not prompt for credentials.  It is a POST because it CHANGES STATE. As a GET it was reachable by a cross-site top-level navigation, which a SameSite&#x3D;Lax cookie still rides, so any page could sign a SuperAdmin out; a POST is not carried cross-site by that cookie. It reads no request body and takes no argument: the session it ends is the one the request already carries.
+     * @return ApiResponse<SessionEnded?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postDeployLogoutWithHttpInfo() : ApiResponse<Unit?> {
+    fun postDeployLogoutWithHttpInfo() : ApiResponse<SessionEnded?> {
         val localVariableConfig = postDeployLogoutRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, SessionEnded>(
             localVariableConfig
         )
     }
@@ -1378,7 +1388,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/deploy/logout",
@@ -1391,21 +1402,22 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/reconcile
-     * Render the configured git source and apply it to the cluster, once
-     * Runs one full GitOps sync through the embedded engine — render the configured repo, ref and path, then three-way server-side apply with scoped prune — and answers the revision it applied, the source it came from, the declared/synced/pruned/failed counts and a per-resource result. This is the WRITE half of the plane: it mutates live cluster objects and, with prune enabled, deletes objects the source no longer declares.  SuperAdmin-only and fail-closed — a non-SuperAdmin is refused before any cluster object is read or touched. The git source is read AS THE CALLER, so the source plane scopes the answer itself rather than trusting this one to have scoped it. It reads no request body; the source is configuration, not a parameter. A deployment with the engine switched off, or with no usable cluster config, answers 503; a failure to start, render or sync is a 502.
-     * @return void
+     * Renders the configured git source and applies it to the cluster, once.
+     * Renders the configured git source and applies it to the cluster, once.  It runs one full GitOps sync through the embedded engine — render the configured repo, ref and path, then three-way server-side apply with scoped prune — and answers the revision it applied, the source it came from, the declared/synced/pruned/failed counts and a per-resource result. This is the WRITE half of the plane: it mutates live cluster objects and, with prune enabled, deletes objects the source no longer declares.  SuperAdmin-only and fail-closed, with the gate INSIDE the op because a typed op is also reached by POST /mcp and by the by-name call plane, where no route middleware runs. The git source is read AS THE PLATFORM, not as the caller: the coordinate is this deployment&#39;s own configuration and never a parameter, which is why the op reads no request body at all. A deployment with the engine switched off, or with no usable cluster config, answers 503; a failure to start, render or sync is a 502.
+     * @return ReconcileReport
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postDeployReconcile() : Unit {
+    fun postDeployReconcile() : ReconcileReport {
         val localVarResponse = postDeployReconcileWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReconcileReport
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1421,17 +1433,18 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/reconcile
-     * Render the configured git source and apply it to the cluster, once
-     * Runs one full GitOps sync through the embedded engine — render the configured repo, ref and path, then three-way server-side apply with scoped prune — and answers the revision it applied, the source it came from, the declared/synced/pruned/failed counts and a per-resource result. This is the WRITE half of the plane: it mutates live cluster objects and, with prune enabled, deletes objects the source no longer declares.  SuperAdmin-only and fail-closed — a non-SuperAdmin is refused before any cluster object is read or touched. The git source is read AS THE CALLER, so the source plane scopes the answer itself rather than trusting this one to have scoped it. It reads no request body; the source is configuration, not a parameter. A deployment with the engine switched off, or with no usable cluster config, answers 503; a failure to start, render or sync is a 502.
-     * @return ApiResponse<Unit?>
+     * Renders the configured git source and applies it to the cluster, once.
+     * Renders the configured git source and applies it to the cluster, once.  It runs one full GitOps sync through the embedded engine — render the configured repo, ref and path, then three-way server-side apply with scoped prune — and answers the revision it applied, the source it came from, the declared/synced/pruned/failed counts and a per-resource result. This is the WRITE half of the plane: it mutates live cluster objects and, with prune enabled, deletes objects the source no longer declares.  SuperAdmin-only and fail-closed, with the gate INSIDE the op because a typed op is also reached by POST /mcp and by the by-name call plane, where no route middleware runs. The git source is read AS THE PLATFORM, not as the caller: the coordinate is this deployment&#39;s own configuration and never a parameter, which is why the op reads no request body at all. A deployment with the engine switched off, or with no usable cluster config, answers 503; a failure to start, render or sync is a 502.
+     * @return ApiResponse<ReconcileReport?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postDeployReconcileWithHttpInfo() : ApiResponse<Unit?> {
+    fun postDeployReconcileWithHttpInfo() : ApiResponse<ReconcileReport?> {
         val localVariableConfig = postDeployReconcileRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, ReconcileReport>(
             localVariableConfig
         )
     }
@@ -1445,7 +1458,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/deploy/reconcile",

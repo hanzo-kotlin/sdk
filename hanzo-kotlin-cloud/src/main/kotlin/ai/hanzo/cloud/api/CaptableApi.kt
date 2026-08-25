@@ -21,20 +21,33 @@ import okhttp3.HttpUrl
 
 import ai.hanzo.cloud.model.CaptableCompany
 import ai.hanzo.cloud.model.CaptableCompanyUpdate
+import ai.hanzo.cloud.model.CaptableConvertibleIn
+import ai.hanzo.cloud.model.CaptableCreated
 import ai.hanzo.cloud.model.CaptableDeleted
+import ai.hanzo.cloud.model.CaptableEquityPlanIn
 import ai.hanzo.cloud.model.CaptableEquityPlans
+import ai.hanzo.cloud.model.CaptableInvested
+import ai.hanzo.cloud.model.CaptableInvestmentIn
 import ai.hanzo.cloud.model.CaptableInvestments
 import ai.hanzo.cloud.model.CaptableNotes
+import ai.hanzo.cloud.model.CaptableOptionIn
 import ai.hanzo.cloud.model.CaptableOptions
 import ai.hanzo.cloud.model.CaptableRoundCloseRequest
 import ai.hanzo.cloud.model.CaptableRoundDetail
+import ai.hanzo.cloud.model.CaptableRoundIn
 import ai.hanzo.cloud.model.CaptableRounds
+import ai.hanzo.cloud.model.CaptableSafeIn
 import ai.hanzo.cloud.model.CaptableSafes
 import ai.hanzo.cloud.model.CaptableShareClass
+import ai.hanzo.cloud.model.CaptableShareClassAmend
+import ai.hanzo.cloud.model.CaptableShareClassIn
+import ai.hanzo.cloud.model.CaptableShareIn
+import ai.hanzo.cloud.model.CaptableShareTransfer
 import ai.hanzo.cloud.model.CaptableShares
 import ai.hanzo.cloud.model.CaptableStakeholder
 import ai.hanzo.cloud.model.CaptableStakeholderPatch
 import ai.hanzo.cloud.model.CaptableSummary
+import ai.hanzo.cloud.model.CaptableTransferred
 import ai.hanzo.cloud.model.CaptableUpdated
 
 import com.google.gson.annotations.SerializedName
@@ -1271,22 +1284,24 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * PATCH /v1/captable/classes/{id}
-     * Amend a share class
-     * Rewrites one share class — the amendment path for a class whose authorized count, price, seniority or preference terms have changed.  It REPLACES the class rather than merging into it: every field is taken from this body, so an omitted field resets to the create-time default instead of keeping its current value. Send the full class. The index and the derived prefix are unchanged by an amendment. An id that is not this company&#39;s is not found.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @param id 
-     * @return void
+     * Replaces one share class&#39;s terms.
+     * Replaces one share class&#39;s terms.  It is a full REPLACE and not a merge, despite the PATCH: every field is written as sent, so a field omitted is written empty rather than left alone. Send the whole class. The method is PATCH because the resource is addressed by id, not because the body is partial — and getting that backwards silently blanks terms every later issuance prices against.
+     * @param id ID addresses the resource. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which row is written whatever a body claims.
+     * @param captableShareClassAmend 
+     * @return CaptableUpdated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun patchCaptableClassesById(id: kotlin.String) : Unit {
-        val localVarResponse = patchCaptableClassesByIdWithHttpInfo(id = id)
+    fun patchCaptableClassesById(id: kotlin.String, captableShareClassAmend: CaptableShareClassAmend) : CaptableUpdated {
+        val localVarResponse = patchCaptableClassesByIdWithHttpInfo(id = id, captableShareClassAmend = captableShareClassAmend)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableUpdated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1302,18 +1317,20 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * PATCH /v1/captable/classes/{id}
-     * Amend a share class
-     * Rewrites one share class — the amendment path for a class whose authorized count, price, seniority or preference terms have changed.  It REPLACES the class rather than merging into it: every field is taken from this body, so an omitted field resets to the create-time default instead of keeping its current value. Send the full class. The index and the derived prefix are unchanged by an amendment. An id that is not this company&#39;s is not found.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Replaces one share class&#39;s terms.
+     * Replaces one share class&#39;s terms.  It is a full REPLACE and not a merge, despite the PATCH: every field is written as sent, so a field omitted is written empty rather than left alone. Send the whole class. The method is PATCH because the resource is addressed by id, not because the body is partial — and getting that backwards silently blanks terms every later issuance prices against.
+     * @param id ID addresses the resource. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which row is written whatever a body claims.
+     * @param captableShareClassAmend 
+     * @return ApiResponse<CaptableUpdated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun patchCaptableClassesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = patchCaptableClassesByIdRequestConfig(id = id)
+    fun patchCaptableClassesByIdWithHttpInfo(id: kotlin.String, captableShareClassAmend: CaptableShareClassAmend) : ApiResponse<CaptableUpdated?> {
+        val localVariableConfig = patchCaptableClassesByIdRequestConfig(id = id, captableShareClassAmend = captableShareClassAmend)
 
-        return request<Unit, Unit>(
+        return request<CaptableShareClassAmend, CaptableUpdated>(
             localVariableConfig
         )
     }
@@ -1321,14 +1338,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation patchCaptableClassesById
      *
-     * @param id 
+     * @param id ID addresses the resource. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which row is written whatever a body claims.
+     * @param captableShareClassAmend 
      * @return RequestConfig
      */
-    fun patchCaptableClassesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun patchCaptableClassesByIdRequestConfig(id: kotlin.String, captableShareClassAmend: CaptableShareClassAmend) : RequestConfig<CaptableShareClassAmend> {
+        val localVariableBody = captableShareClassAmend
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.PATCH,
             path = "/v1/captable/classes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -1418,21 +1438,23 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/classes
-     * Define a share class
-     * Creates a class of stock — its authorized share count, votes per share, par and issue price, seniority, conversion rights and liquidation/participation multiples — which is what shares, priced rounds and equity plans are then issued against.  Two fields are the company&#39;s to assign, not the caller&#39;s: the class index auto-increments per company, and the certificate prefix is DERIVED from the class type (CS for COMMON, PS for anything else), so a prefix in the body is ignored.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return void
+     * Defines a new class of shares.
+     * Defines a new class of shares.  Every field but convertsToShareClassId is required — a class is the instrument every later issuance prices against, so a partially-specified one would silently mis-value every share issued into it. &#x60;seniority&#x60; orders liquidation preference with LOWER first.
+     * @param captableShareClassIn 
+     * @return CaptableCreated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptableClasses() : Unit {
-        val localVarResponse = postCaptableClassesWithHttpInfo()
+    fun postCaptableClasses(captableShareClassIn: CaptableShareClassIn) : CaptableCreated {
+        val localVarResponse = postCaptableClassesWithHttpInfo(captableShareClassIn = captableShareClassIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCreated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1448,17 +1470,19 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/classes
-     * Define a share class
-     * Creates a class of stock — its authorized share count, votes per share, par and issue price, seniority, conversion rights and liquidation/participation multiples — which is what shares, priced rounds and equity plans are then issued against.  Two fields are the company&#39;s to assign, not the caller&#39;s: the class index auto-increments per company, and the certificate prefix is DERIVED from the class type (CS for COMMON, PS for anything else), so a prefix in the body is ignored.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return ApiResponse<Unit?>
+     * Defines a new class of shares.
+     * Defines a new class of shares.  Every field but convertsToShareClassId is required — a class is the instrument every later issuance prices against, so a partially-specified one would silently mis-value every share issued into it. &#x60;seniority&#x60; orders liquidation preference with LOWER first.
+     * @param captableShareClassIn 
+     * @return ApiResponse<CaptableCreated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptableClassesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptableClassesRequestConfig()
+    fun postCaptableClassesWithHttpInfo(captableShareClassIn: CaptableShareClassIn) : ApiResponse<CaptableCreated?> {
+        val localVariableConfig = postCaptableClassesRequestConfig(captableShareClassIn = captableShareClassIn)
 
-        return request<Unit, Unit>(
+        return request<CaptableShareClassIn, CaptableCreated>(
             localVariableConfig
         )
     }
@@ -1466,13 +1490,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptableClasses
      *
+     * @param captableShareClassIn 
      * @return RequestConfig
      */
-    fun postCaptableClassesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptableClassesRequestConfig(captableShareClassIn: CaptableShareClassIn) : RequestConfig<CaptableShareClassIn> {
+        val localVariableBody = captableShareClassIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/classes",
@@ -1485,21 +1512,23 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/convertibles
-     * Record a convertible note
-     * Records a convertible note held by a stakeholder: the principal, the conversion cap, discount and interest rate, MFN, and the issue and board-approval dates.  The stakeholder must already exist in this company, and the note&#39;s public id must be unused there — a reused id is a conflict rather than an overwrite. Like a SAFE, this records the instrument only; conversion is not performed here.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return void
+     * Records a convertible note.
+     * Records a convertible note.
+     * @param captableConvertibleIn 
+     * @return CaptableCreated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptableConvertibles() : Unit {
-        val localVarResponse = postCaptableConvertiblesWithHttpInfo()
+    fun postCaptableConvertibles(captableConvertibleIn: CaptableConvertibleIn) : CaptableCreated {
+        val localVarResponse = postCaptableConvertiblesWithHttpInfo(captableConvertibleIn = captableConvertibleIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCreated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1515,17 +1544,19 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/convertibles
-     * Record a convertible note
-     * Records a convertible note held by a stakeholder: the principal, the conversion cap, discount and interest rate, MFN, and the issue and board-approval dates.  The stakeholder must already exist in this company, and the note&#39;s public id must be unused there — a reused id is a conflict rather than an overwrite. Like a SAFE, this records the instrument only; conversion is not performed here.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return ApiResponse<Unit?>
+     * Records a convertible note.
+     * Records a convertible note.
+     * @param captableConvertibleIn 
+     * @return ApiResponse<CaptableCreated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptableConvertiblesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptableConvertiblesRequestConfig()
+    fun postCaptableConvertiblesWithHttpInfo(captableConvertibleIn: CaptableConvertibleIn) : ApiResponse<CaptableCreated?> {
+        val localVariableConfig = postCaptableConvertiblesRequestConfig(captableConvertibleIn = captableConvertibleIn)
 
-        return request<Unit, Unit>(
+        return request<CaptableConvertibleIn, CaptableCreated>(
             localVariableConfig
         )
     }
@@ -1533,13 +1564,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptableConvertibles
      *
+     * @param captableConvertibleIn 
      * @return RequestConfig
      */
-    fun postCaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptableConvertiblesRequestConfig(captableConvertibleIn: CaptableConvertibleIn) : RequestConfig<CaptableConvertibleIn> {
+        val localVariableBody = captableConvertibleIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/convertibles",
@@ -1552,21 +1586,23 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/options
-     * Grant options from an equity plan
-     * Records an option grant to a stakeholder under an equity plan — quantity, exercise price, ISO/NSO type, cliff and vesting years, and the issue, expiration, vesting-start, board-approval and Rule 144 dates.  The stakeholder and the equity plan must both already exist in this company, and the grant id must be unused there — a reused grant id is a conflict, so a grant can never be overwritten by a later one carrying the same number.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return void
+     * Grants options to a stakeholder from an equity plan.
+     * Grants options to a stakeholder from an equity plan.
+     * @param captableOptionIn 
+     * @return CaptableCreated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptableOptions() : Unit {
-        val localVarResponse = postCaptableOptionsWithHttpInfo()
+    fun postCaptableOptions(captableOptionIn: CaptableOptionIn) : CaptableCreated {
+        val localVarResponse = postCaptableOptionsWithHttpInfo(captableOptionIn = captableOptionIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCreated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1582,17 +1618,19 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/options
-     * Grant options from an equity plan
-     * Records an option grant to a stakeholder under an equity plan — quantity, exercise price, ISO/NSO type, cliff and vesting years, and the issue, expiration, vesting-start, board-approval and Rule 144 dates.  The stakeholder and the equity plan must both already exist in this company, and the grant id must be unused there — a reused grant id is a conflict, so a grant can never be overwritten by a later one carrying the same number.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return ApiResponse<Unit?>
+     * Grants options to a stakeholder from an equity plan.
+     * Grants options to a stakeholder from an equity plan.
+     * @param captableOptionIn 
+     * @return ApiResponse<CaptableCreated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptableOptionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptableOptionsRequestConfig()
+    fun postCaptableOptionsWithHttpInfo(captableOptionIn: CaptableOptionIn) : ApiResponse<CaptableCreated?> {
+        val localVariableConfig = postCaptableOptionsRequestConfig(captableOptionIn = captableOptionIn)
 
-        return request<Unit, Unit>(
+        return request<CaptableOptionIn, CaptableCreated>(
             localVariableConfig
         )
     }
@@ -1600,13 +1638,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptableOptions
      *
+     * @param captableOptionIn 
      * @return RequestConfig
      */
-    fun postCaptableOptionsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptableOptionsRequestConfig(captableOptionIn: CaptableOptionIn) : RequestConfig<CaptableOptionIn> {
+        val localVariableBody = captableOptionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/options",
@@ -1619,21 +1660,23 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/plans
-     * Open an equity incentive plan
-     * Reserves a pool of shares out of a share class for option grants, with the board approval and effective dates and what happens to cancelled options.  The share class must already exist in this company — a plan cannot reserve out of nothing. Note the field name the bundle reads for the cancellation behaviour is &#x60;defaultCancellatonBehavior&#x60;; that spelling is the wire, and a correctly spelled key is simply not seen.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return void
+     * Opens an equity plan that options are granted from.
+     * Opens an equity plan that options are granted from.
+     * @param captableEquityPlanIn 
+     * @return CaptableCreated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptablePlans() : Unit {
-        val localVarResponse = postCaptablePlansWithHttpInfo()
+    fun postCaptablePlans(captableEquityPlanIn: CaptableEquityPlanIn) : CaptableCreated {
+        val localVarResponse = postCaptablePlansWithHttpInfo(captableEquityPlanIn = captableEquityPlanIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCreated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1649,17 +1692,19 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/plans
-     * Open an equity incentive plan
-     * Reserves a pool of shares out of a share class for option grants, with the board approval and effective dates and what happens to cancelled options.  The share class must already exist in this company — a plan cannot reserve out of nothing. Note the field name the bundle reads for the cancellation behaviour is &#x60;defaultCancellatonBehavior&#x60;; that spelling is the wire, and a correctly spelled key is simply not seen.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return ApiResponse<Unit?>
+     * Opens an equity plan that options are granted from.
+     * Opens an equity plan that options are granted from.
+     * @param captableEquityPlanIn 
+     * @return ApiResponse<CaptableCreated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptablePlansWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptablePlansRequestConfig()
+    fun postCaptablePlansWithHttpInfo(captableEquityPlanIn: CaptableEquityPlanIn) : ApiResponse<CaptableCreated?> {
+        val localVariableConfig = postCaptablePlansRequestConfig(captableEquityPlanIn = captableEquityPlanIn)
 
-        return request<Unit, Unit>(
+        return request<CaptableEquityPlanIn, CaptableCreated>(
             localVariableConfig
         )
     }
@@ -1667,13 +1712,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptablePlans
      *
+     * @param captableEquityPlanIn 
      * @return RequestConfig
      */
-    fun postCaptablePlansRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptablePlansRequestConfig(captableEquityPlanIn: CaptableEquityPlanIn) : RequestConfig<CaptableEquityPlanIn> {
+        val localVariableBody = captableEquityPlanIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/plans",
@@ -1686,21 +1734,23 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/rounds
-     * Open a funding round
-     * Opens a round with its name, type and target amount. It starts OPEN with nothing raised; investments are then added to it, and closing it is its own call.  A PRICED round is the constrained case: it requires a share class that exists in this company and a price per share above zero, because that price is what converts each investment into issued shares. Its pre-money valuation is optional. A non-priced round carries none of the three.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return void
+     * Opens a priced round that investments can be added to.
+     * Opens a priced round that investments can be added to.  The round opens OPEN; investing into a closed one is refused.
+     * @param captableRoundIn 
+     * @return CaptableCreated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptableRounds() : Unit {
-        val localVarResponse = postCaptableRoundsWithHttpInfo()
+    fun postCaptableRounds(captableRoundIn: CaptableRoundIn) : CaptableCreated {
+        val localVarResponse = postCaptableRoundsWithHttpInfo(captableRoundIn = captableRoundIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCreated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1716,17 +1766,19 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/rounds
-     * Open a funding round
-     * Opens a round with its name, type and target amount. It starts OPEN with nothing raised; investments are then added to it, and closing it is its own call.  A PRICED round is the constrained case: it requires a share class that exists in this company and a price per share above zero, because that price is what converts each investment into issued shares. Its pre-money valuation is optional. A non-priced round carries none of the three.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return ApiResponse<Unit?>
+     * Opens a priced round that investments can be added to.
+     * Opens a priced round that investments can be added to.  The round opens OPEN; investing into a closed one is refused.
+     * @param captableRoundIn 
+     * @return ApiResponse<CaptableCreated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptableRoundsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptableRoundsRequestConfig()
+    fun postCaptableRoundsWithHttpInfo(captableRoundIn: CaptableRoundIn) : ApiResponse<CaptableCreated?> {
+        val localVariableConfig = postCaptableRoundsRequestConfig(captableRoundIn = captableRoundIn)
 
-        return request<Unit, Unit>(
+        return request<CaptableRoundIn, CaptableCreated>(
             localVariableConfig
         )
     }
@@ -1734,13 +1786,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptableRounds
      *
+     * @param captableRoundIn 
      * @return RequestConfig
      */
-    fun postCaptableRoundsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptableRoundsRequestConfig(captableRoundIn: CaptableRoundIn) : RequestConfig<CaptableRoundIn> {
+        val localVariableBody = captableRoundIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/rounds",
@@ -1830,22 +1885,24 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/rounds/{id}/investments
-     * Record an investment into a round
-     * Records what a stakeholder put into a round and adds it to the round&#39;s raised total.  On a PRICED round this ISSUES SHARES as well as recording the money: the amount is divided by the round&#39;s price per share, rounded DOWN to whole shares, and a new certificate for them is issued to the investor in the round&#39;s share class — so an amount too small to buy one whole share is refused rather than recorded as a zero-share investment. On a non-priced round the money is recorded and no shares are issued.  The round must exist in this company and still be OPEN — a closed round refuses further investment — and the investor must already be a stakeholder here. The date defaults to today when omitted.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @param id 
-     * @return void
+     * Records one investor&#39;s money into an open round.
+     * Records one investor&#39;s money into an open round.  The round must be OPEN; investing into a closed one is refused. Where the round carries a price per share, the investment also issues the shares it buys and the answer names them.
+     * @param id ID is the round to invest in. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which round is written whatever a body claims.
+     * @param captableInvestmentIn 
+     * @return CaptableInvested
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptableRoundsByIdInvestments(id: kotlin.String) : Unit {
-        val localVarResponse = postCaptableRoundsByIdInvestmentsWithHttpInfo(id = id)
+    fun postCaptableRoundsByIdInvestments(id: kotlin.String, captableInvestmentIn: CaptableInvestmentIn) : CaptableInvested {
+        val localVarResponse = postCaptableRoundsByIdInvestmentsWithHttpInfo(id = id, captableInvestmentIn = captableInvestmentIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableInvested
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1861,18 +1918,20 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/rounds/{id}/investments
-     * Record an investment into a round
-     * Records what a stakeholder put into a round and adds it to the round&#39;s raised total.  On a PRICED round this ISSUES SHARES as well as recording the money: the amount is divided by the round&#39;s price per share, rounded DOWN to whole shares, and a new certificate for them is issued to the investor in the round&#39;s share class — so an amount too small to buy one whole share is refused rather than recorded as a zero-share investment. On a non-priced round the money is recorded and no shares are issued.  The round must exist in this company and still be OPEN — a closed round refuses further investment — and the investor must already be a stakeholder here. The date defaults to today when omitted.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Records one investor&#39;s money into an open round.
+     * Records one investor&#39;s money into an open round.  The round must be OPEN; investing into a closed one is refused. Where the round carries a price per share, the investment also issues the shares it buys and the answer names them.
+     * @param id ID is the round to invest in. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which round is written whatever a body claims.
+     * @param captableInvestmentIn 
+     * @return ApiResponse<CaptableInvested?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptableRoundsByIdInvestmentsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptableRoundsByIdInvestmentsRequestConfig(id = id)
+    fun postCaptableRoundsByIdInvestmentsWithHttpInfo(id: kotlin.String, captableInvestmentIn: CaptableInvestmentIn) : ApiResponse<CaptableInvested?> {
+        val localVariableConfig = postCaptableRoundsByIdInvestmentsRequestConfig(id = id, captableInvestmentIn = captableInvestmentIn)
 
-        return request<Unit, Unit>(
+        return request<CaptableInvestmentIn, CaptableInvested>(
             localVariableConfig
         )
     }
@@ -1880,14 +1939,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptableRoundsByIdInvestments
      *
-     * @param id 
+     * @param id ID is the round to invest in. The URL is the addressing authority — a path segment binds after the body and after the query — so the address decides which round is written whatever a body claims.
+     * @param captableInvestmentIn 
      * @return RequestConfig
      */
-    fun postCaptableRoundsByIdInvestmentsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptableRoundsByIdInvestmentsRequestConfig(id: kotlin.String, captableInvestmentIn: CaptableInvestmentIn) : RequestConfig<CaptableInvestmentIn> {
+        val localVariableBody = captableInvestmentIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/rounds/{id}/investments".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
@@ -1900,21 +1962,23 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/safes
-     * Record a SAFE
-     * Records a Simple Agreement for Future Equity held by a stakeholder: the capital in, the valuation cap and discount, MFN and pro-rata rights, pre- or post-money type, and the issue and board-approval dates.  The stakeholder must already exist in this company, and the SAFE&#39;s public id must be unused there — a reused id is a conflict rather than an overwrite. This records the instrument; it does not convert it, so nothing is issued against a share class until a round does that.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return void
+     * Records a SAFE — a simple agreement for future equity.
+     * Records a SAFE — a simple agreement for future equity.
+     * @param captableSafeIn 
+     * @return CaptableCreated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptableSafes() : Unit {
-        val localVarResponse = postCaptableSafesWithHttpInfo()
+    fun postCaptableSafes(captableSafeIn: CaptableSafeIn) : CaptableCreated {
+        val localVarResponse = postCaptableSafesWithHttpInfo(captableSafeIn = captableSafeIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCreated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1930,17 +1994,19 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/safes
-     * Record a SAFE
-     * Records a Simple Agreement for Future Equity held by a stakeholder: the capital in, the valuation cap and discount, MFN and pro-rata rights, pre- or post-money type, and the issue and board-approval dates.  The stakeholder must already exist in this company, and the SAFE&#39;s public id must be unused there — a reused id is a conflict rather than an overwrite. This records the instrument; it does not convert it, so nothing is issued against a share class until a round does that.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return ApiResponse<Unit?>
+     * Records a SAFE — a simple agreement for future equity.
+     * Records a SAFE — a simple agreement for future equity.
+     * @param captableSafeIn 
+     * @return ApiResponse<CaptableCreated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptableSafesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptableSafesRequestConfig()
+    fun postCaptableSafesWithHttpInfo(captableSafeIn: CaptableSafeIn) : ApiResponse<CaptableCreated?> {
+        val localVariableConfig = postCaptableSafesRequestConfig(captableSafeIn = captableSafeIn)
 
-        return request<Unit, Unit>(
+        return request<CaptableSafeIn, CaptableCreated>(
             localVariableConfig
         )
     }
@@ -1948,13 +2014,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptableSafes
      *
+     * @param captableSafeIn 
      * @return RequestConfig
      */
-    fun postCaptableSafesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptableSafesRequestConfig(captableSafeIn: CaptableSafeIn) : RequestConfig<CaptableSafeIn> {
+        val localVariableBody = captableSafeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/safes",
@@ -1967,21 +2036,23 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/shares
-     * Issue a share certificate
-     * Issues shares of a class to a stakeholder as a certificate: quantity, price and capital contributed, the vesting cliff and term, the legends on the certificate, and the issue, Rule 144, vesting-start and board-approval dates.  Both the stakeholder and the share class must already exist in this company, and the certificate id must be unused there — a reused id is a conflict, never a silent overwrite of an existing certificate.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return void
+     * Issues a share certificate to a stakeholder.
+     * Issues a share certificate to a stakeholder.  The certificate id must be UNIQUE within the company — a duplicate is refused 409, not silently merged — and both the stakeholder and the share class must belong to this company, so an id from another tenant is a 400 rather than a cross-company issuance.
+     * @param captableShareIn 
+     * @return CaptableCreated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptableShares() : Unit {
-        val localVarResponse = postCaptableSharesWithHttpInfo()
+    fun postCaptableShares(captableShareIn: CaptableShareIn) : CaptableCreated {
+        val localVarResponse = postCaptableSharesWithHttpInfo(captableShareIn = captableShareIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCreated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1997,17 +2068,19 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/shares
-     * Issue a share certificate
-     * Issues shares of a class to a stakeholder as a certificate: quantity, price and capital contributed, the vesting cliff and term, the legends on the certificate, and the issue, Rule 144, vesting-start and board-approval dates.  Both the stakeholder and the share class must already exist in this company, and the certificate id must be unused there — a reused id is a conflict, never a silent overwrite of an existing certificate.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return ApiResponse<Unit?>
+     * Issues a share certificate to a stakeholder.
+     * Issues a share certificate to a stakeholder.  The certificate id must be UNIQUE within the company — a duplicate is refused 409, not silently merged — and both the stakeholder and the share class must belong to this company, so an id from another tenant is a 400 rather than a cross-company issuance.
+     * @param captableShareIn 
+     * @return ApiResponse<CaptableCreated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptableSharesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptableSharesRequestConfig()
+    fun postCaptableSharesWithHttpInfo(captableShareIn: CaptableShareIn) : ApiResponse<CaptableCreated?> {
+        val localVariableConfig = postCaptableSharesRequestConfig(captableShareIn = captableShareIn)
 
-        return request<Unit, Unit>(
+        return request<CaptableShareIn, CaptableCreated>(
             localVariableConfig
         )
     }
@@ -2015,13 +2088,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptableShares
      *
+     * @param captableShareIn 
      * @return RequestConfig
      */
-    fun postCaptableSharesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptableSharesRequestConfig(captableShareIn: CaptableShareIn) : RequestConfig<CaptableShareIn> {
+        val localVariableBody = captableShareIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/shares",
@@ -2034,21 +2110,23 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/shares/transfer
-     * Transfer shares to another stakeholder
-     * Moves shares from one certificate to another stakeholder, in one atomic step.  OMITTING &#x60;quantity&#x60; transfers the WHOLE certificate, which simply reassigns it and answers newShareId null — that is the difference between a full and a partial transfer, and it is why quantity is absent rather than zero. A partial transfer shrinks the source certificate and issues a NEW one to the recipient, so it requires a &#x60;certificateId&#x60; for that new certificate and refuses a reused one. The quantity must be between 1 and what the source certificate actually holds; the recipient must be a stakeholder of this same company.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return void
+     * Moves shares from one stakeholder to another.
+     * Moves shares from one stakeholder to another.  Omit &#x60;quantity&#x60; to transfer the whole certificate, which REASSIGNS it and mints no new share. Send a quantity below the amount held to SPLIT it — the source certificate keeps the remainder, and a split additionally requires &#x60;certificateId&#x60; for the new certificate, which must be unique in the company. A quantity outside 1..held is refused, so a transfer can never over-issue.  Both outcomes answer 200: a transfer records a movement between holders and mints no security of its own, which is why this is not a 201 the way an investment is.
+     * @param captableShareTransfer 
+     * @return CaptableTransferred
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCaptableSharesTransfer() : Unit {
-        val localVarResponse = postCaptableSharesTransferWithHttpInfo()
+    fun postCaptableSharesTransfer(captableShareTransfer: CaptableShareTransfer) : CaptableTransferred {
+        val localVarResponse = postCaptableSharesTransferWithHttpInfo(captableShareTransfer = captableShareTransfer)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableTransferred
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2064,17 +2142,19 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/shares/transfer
-     * Transfer shares to another stakeholder
-     * Moves shares from one certificate to another stakeholder, in one atomic step.  OMITTING &#x60;quantity&#x60; transfers the WHOLE certificate, which simply reassigns it and answers newShareId null — that is the difference between a full and a partial transfer, and it is why quantity is absent rather than zero. A partial transfer shrinks the source certificate and issues a NEW one to the recipient, so it requires a &#x60;certificateId&#x60; for that new certificate and refuses a reused one. The quantity must be between 1 and what the source certificate actually holds; the recipient must be a stakeholder of this same company.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
-     * @return ApiResponse<Unit?>
+     * Moves shares from one stakeholder to another.
+     * Moves shares from one stakeholder to another.  Omit &#x60;quantity&#x60; to transfer the whole certificate, which REASSIGNS it and mints no new share. Send a quantity below the amount held to SPLIT it — the source certificate keeps the remainder, and a split additionally requires &#x60;certificateId&#x60; for the new certificate, which must be unique in the company. A quantity outside 1..held is refused, so a transfer can never over-issue.  Both outcomes answer 200: a transfer records a movement between holders and mints no security of its own, which is why this is not a 201 the way an investment is.
+     * @param captableShareTransfer 
+     * @return ApiResponse<CaptableTransferred?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCaptableSharesTransferWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = postCaptableSharesTransferRequestConfig()
+    fun postCaptableSharesTransferWithHttpInfo(captableShareTransfer: CaptableShareTransfer) : ApiResponse<CaptableTransferred?> {
+        val localVariableConfig = postCaptableSharesTransferRequestConfig(captableShareTransfer = captableShareTransfer)
 
-        return request<Unit, Unit>(
+        return request<CaptableShareTransfer, CaptableTransferred>(
             localVariableConfig
         )
     }
@@ -2082,13 +2162,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation postCaptableSharesTransfer
      *
+     * @param captableShareTransfer 
      * @return RequestConfig
      */
-    fun postCaptableSharesTransferRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postCaptableSharesTransferRequestConfig(captableShareTransfer: CaptableShareTransfer) : RequestConfig<CaptableShareTransfer> {
+        val localVariableBody = captableShareTransfer
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/captable/shares/transfer",

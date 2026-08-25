@@ -22,7 +22,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param displayName DisplayName is the human label for the sign-in button; this deployment sends \"Hanzo\". Omitted from the body when empty.
- * @param name Name is the provider id, and it is the value that goes back in the URL to start a login: GET /v1/team/account/auth/{provider}. This deployment surfaces exactly one, \"openid\" — the hanzo.id door.
+ * @param name Name is the provider id, and it is the value that goes back in the URL to start a login: GET /v1/team/account/auth/{provider}. This deployment surfaces exactly one, \"openid\" — the hanzo.id provider.
  */
 
 
@@ -32,7 +32,7 @@ data class ProviderInfo (
     @SerializedName("displayName")
     val displayName: kotlin.String? = null,
 
-    /* Name is the provider id, and it is the value that goes back in the URL to start a login: GET /v1/team/account/auth/{provider}. This deployment surfaces exactly one, \"openid\" — the hanzo.id door. */
+    /* Name is the provider id, and it is the value that goes back in the URL to start a login: GET /v1/team/account/auth/{provider}. This deployment surfaces exactly one, \"openid\" — the hanzo.id provider. */
     @SerializedName("name")
     val name: kotlin.String? = null
 
