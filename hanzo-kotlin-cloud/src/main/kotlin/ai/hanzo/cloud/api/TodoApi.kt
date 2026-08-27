@@ -24,6 +24,7 @@ import ai.hanzo.cloud.model.IssueHit
 import ai.hanzo.cloud.model.IssueHits
 import ai.hanzo.cloud.model.IssueView
 import ai.hanzo.cloud.model.NewIssue
+import ai.hanzo.cloud.model.RoomWork
 import ai.hanzo.cloud.model.TodoProject
 
 import com.google.gson.annotations.SerializedName
@@ -243,6 +244,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
      * @param kind Kind keeps one shape: issue, pr, epic. (optional)
      * @param repo Repo keeps issues bound to one git repository. (optional)
+     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
      * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
      * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
      * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
@@ -255,8 +257,8 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getTodoIssues(q: kotlin.String? = null, project: kotlin.String? = null, status: kotlin.String? = null, kind: kotlin.String? = null, repo: kotlin.String? = null, source: kotlin.String? = null, assignee: kotlin.String? = null, limit: kotlin.Int? = null) : IssueHits {
-        val localVarResponse = getTodoIssuesWithHttpInfo(q = q, project = project, status = status, kind = kind, repo = repo, source = source, assignee = assignee, limit = limit)
+    fun getTodoIssues(q: kotlin.String? = null, project: kotlin.String? = null, status: kotlin.String? = null, kind: kotlin.String? = null, repo: kotlin.String? = null, room: kotlin.String? = null, source: kotlin.String? = null, assignee: kotlin.String? = null, limit: kotlin.Int? = null) : IssueHits {
+        val localVarResponse = getTodoIssuesWithHttpInfo(q = q, project = project, status = status, kind = kind, repo = repo, room = room, source = source, assignee = assignee, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IssueHits
@@ -282,6 +284,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
      * @param kind Kind keeps one shape: issue, pr, epic. (optional)
      * @param repo Repo keeps issues bound to one git repository. (optional)
+     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
      * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
      * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
      * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
@@ -291,8 +294,8 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getTodoIssuesWithHttpInfo(q: kotlin.String?, project: kotlin.String?, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, source: kotlin.String?, assignee: kotlin.String?, limit: kotlin.Int?) : ApiResponse<IssueHits?> {
-        val localVariableConfig = getTodoIssuesRequestConfig(q = q, project = project, status = status, kind = kind, repo = repo, source = source, assignee = assignee, limit = limit)
+    fun getTodoIssuesWithHttpInfo(q: kotlin.String?, project: kotlin.String?, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, room: kotlin.String?, source: kotlin.String?, assignee: kotlin.String?, limit: kotlin.Int?) : ApiResponse<IssueHits?> {
+        val localVariableConfig = getTodoIssuesRequestConfig(q = q, project = project, status = status, kind = kind, repo = repo, room = room, source = source, assignee = assignee, limit = limit)
 
         return request<Unit, IssueHits>(
             localVariableConfig
@@ -307,12 +310,13 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
      * @param kind Kind keeps one shape: issue, pr, epic. (optional)
      * @param repo Repo keeps issues bound to one git repository. (optional)
+     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
      * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
      * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
      * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
      * @return RequestConfig
      */
-    fun getTodoIssuesRequestConfig(q: kotlin.String?, project: kotlin.String?, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, source: kotlin.String?, assignee: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getTodoIssuesRequestConfig(q: kotlin.String?, project: kotlin.String?, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, room: kotlin.String?, source: kotlin.String?, assignee: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -330,6 +334,9 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
                 }
                 if (repo != null) {
                     put("repo", listOf(repo.toString()))
+                }
+                if (room != null) {
+                    put("room", listOf(room.toString()))
                 }
                 if (source != null) {
                     put("source", listOf(source.toString()))
@@ -677,6 +684,79 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/todo/projects/{key}/issues/{num}".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/todo/rooms/{room}
+     * Summarises one room&#39;s work.
+     * Summarises one room&#39;s work.  The room is opaque here and is deliberately not resolved: this package cannot say whether a room exists — apps/team owns that document — so an unknown room answers an EMPTY board rather than a 404. That is the honest answer and the useful one: a channel that has never had an item filed in it and a channel id that was mistyped both have no work, and inventing a distinction would require this surface to hold a second copy of the room list (HIP-0523 §2 forbids it, and it would drift the first time a room was renamed).  Tenancy is the validated principal&#39;s org and nothing else, so a caller cannot read another tenant&#39;s channel by naming its room.
+     * @param room Room is the room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
+     * @return RoomWork
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getTodoRoomsByRoom(room: kotlin.String) : RoomWork {
+        val localVarResponse = getTodoRoomsByRoomWithHttpInfo(room = room)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RoomWork
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/todo/rooms/{room}
+     * Summarises one room&#39;s work.
+     * Summarises one room&#39;s work.  The room is opaque here and is deliberately not resolved: this package cannot say whether a room exists — apps/team owns that document — so an unknown room answers an EMPTY board rather than a 404. That is the honest answer and the useful one: a channel that has never had an item filed in it and a channel id that was mistyped both have no work, and inventing a distinction would require this surface to hold a second copy of the room list (HIP-0523 §2 forbids it, and it would drift the first time a room was renamed).  Tenancy is the validated principal&#39;s org and nothing else, so a caller cannot read another tenant&#39;s channel by naming its room.
+     * @param room Room is the room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
+     * @return ApiResponse<RoomWork?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getTodoRoomsByRoomWithHttpInfo(room: kotlin.String) : ApiResponse<RoomWork?> {
+        val localVariableConfig = getTodoRoomsByRoomRequestConfig(room = room)
+
+        return request<Unit, RoomWork>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getTodoRoomsByRoom
+     *
+     * @param room Room is the room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
+     * @return RequestConfig
+     */
+    fun getTodoRoomsByRoomRequestConfig(room: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/todo/rooms/{room}".replace("{"+"room"+"}", encodeURIComponent(room.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

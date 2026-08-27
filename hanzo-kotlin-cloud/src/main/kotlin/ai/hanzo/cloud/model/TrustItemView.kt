@@ -27,8 +27,8 @@ import com.google.gson.annotations.SerializedName
  * @param document Document is the data-room document holding its bytes, empty when it has none.
  * @param framework Framework is the standard it speaks to, when it speaks to one.
  * @param id ID addresses the item.
- * @param kind Kind is what it is.
- * @param name Name is its title.
+ * @param kind Kind is one of report, letter, policy, questionnaire, subprocessor, article or update — the closed set the public centre knows how to draw.
+ * @param name Name is the label the centre lists it under.
  * @param retired Retired is whether it has been withdrawn. A retired item is absent from the public centre and cannot be granted; it is kept because a grant already made over it is part of the record.
  * @param summary Summary is a line about it.
  * @param tier Tier is public or gated. Gated is the default and an auditor-signed item can only ever be gated.
@@ -62,11 +62,11 @@ data class TrustItemView (
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* Kind is what it is. */
+    /* Kind is one of report, letter, policy, questionnaire, subprocessor, article or update — the closed set the public centre knows how to draw. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
-    /* Name is its title. */
+    /* Name is the label the centre lists it under. */
     @SerializedName("name")
     val name: kotlin.String? = null,
 

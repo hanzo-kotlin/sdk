@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param asOf AsOf is when the oldest of them was current, RFC 3339.
  * @param refusal Refusal is why it could not be consulted, when it could not.
- * @param set Set is the set.
+ * @param set Set is the name the consulted set is addressed by.
  * @param stale Stale is whether it is past its freshness bound.
  * @param version Version is every contributing publisher and its content digest.
  */
@@ -39,7 +39,7 @@ data class ReferenceVersion (
     @SerializedName("refusal")
     val refusal: kotlin.String? = null,
 
-    /* Set is the set. */
+    /* Set is the name the consulted set is addressed by. */
     @SerializedName("set")
     val set: kotlin.String? = null,
 

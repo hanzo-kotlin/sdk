@@ -43,6 +43,7 @@ import com.google.gson.annotations.SerializedName
  * @param published 
  * @param recentEvents RecentEvents is the 50 most recent turns, OLDEST of those first — a transcript to read down, not a feed. The promoted `events` integer says how many the log holds in total; page the rest from a seq.
  * @param repo 
+ * @param room 
  * @param rootSessionId 
  * @param startedAt 
  * @param status 
@@ -115,6 +116,9 @@ data class SessionDetail (
 
     @SerializedName("repo")
     val repo: kotlin.String? = null,
+
+    @SerializedName("room")
+    val room: kotlin.String? = null,
 
     @SerializedName("rootSessionId")
     val rootSessionId: kotlin.String? = null,

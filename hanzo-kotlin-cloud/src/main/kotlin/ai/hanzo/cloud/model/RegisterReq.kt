@@ -31,6 +31,7 @@ import com.google.gson.annotations.SerializedName
  * @param provider Account tag — the linked AI account this session ran under (login manager).
  * @param published Published opens this session's story to the public build route. It is refused without a Project, because that route is keyed on (org, project) — a build with no product is not a story anyone can open. False keeps it org-only.
  * @param repo Repo is the code being worked on, up to 512 characters. A label the surface states; nothing resolves it against the forge.
+ * @param room Room is the collaborative room this run was started in (HIP-0523), so a workspace view can list the sessions of one room. It is PROVENANCE and is set only here: there is deliberately no way to move a session to another room, so it is absent from the patch input and from UpdateSession's SET list.
  * @param status Status opens the session in one of running, paused, done or error. Empty means running. A TERMINAL status here (done, error) records a session that has already finished — its end time is stamped now — and nothing can move it afterwards.
  * @param target Target names a run-target the org has registered. Unlike Host and Repo it IS resolved: a target that does not exist in this org is a 400, so a session can never claim to run on another tenant's machine. Empty names no machine.
  * @param taskRunId TaskRunID is that workflow's particular run, same bound. Recorded, not resolved: this surface does not check the workflow exists.
@@ -81,6 +82,10 @@ data class RegisterReq (
     /* Repo is the code being worked on, up to 512 characters. A label the surface states; nothing resolves it against the forge. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
+
+    /* Room is the collaborative room this run was started in (HIP-0523), so a workspace view can list the sessions of one room. It is PROVENANCE and is set only here: there is deliberately no way to move a session to another room, so it is absent from the patch input and from UpdateSession's SET list. */
+    @SerializedName("room")
+    val room: kotlin.String? = null,
 
     /* Status opens the session in one of running, paused, done or error. Empty means running. A TERMINAL status here (done, error) records a session that has already finished — its end time is stamped now — and nothing can move it afterwards. */
     @SerializedName("status")

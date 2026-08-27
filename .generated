@@ -31,6 +31,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/api/DataroomApi.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/api/DatasetApi.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/api/DeployApi.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/api/DestinationApi.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/api/DnsApi.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/api/DomainApi.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/api/EngineApi.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/api/EntitlementApi.kt
@@ -300,6 +301,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ByoGPU.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ByoWorker.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CDApp.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CalendarPost.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Call.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CallInput.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CallList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Campaign.kt
@@ -2131,6 +2133,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RollbackReq.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Rollup.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RollupAllotment.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RollupBalance.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RoomWork.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Root.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RoundInput.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RoundOut.kt
@@ -2332,6 +2335,9 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TariffIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Taxon.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TaxonIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Taxonomy.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TeamRoom.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TeamRoomBind.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TeamRooms.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TemplateCatalog.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TemplateOverride.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/TemplateReply.kt

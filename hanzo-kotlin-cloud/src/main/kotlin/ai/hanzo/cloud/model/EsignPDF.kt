@@ -22,7 +22,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param filename Filename is the name to save it under, built from the title and marked _signed once it is sealed.
- * @param id ID is the document.
+ * @param id ID is the document this PDF was rendered from.
  * @param pdfBase64 PdfBase64 is the PDF itself, base64-encoded. There is one field either way, so Sealed is what tells you which artifact you are holding.
  * @param `sealed` Sealed is whether this is the SEALED artifact — the field values rendered onto the page and a real x509 PKCS#7 signature applied — rather than the original upload.
  * @param status Status is the document's state at the moment it was read.
@@ -35,7 +35,7 @@ data class EsignPDF (
     @SerializedName("filename")
     val filename: kotlin.String? = null,
 
-    /* ID is the document. */
+    /* ID is the document this PDF was rendered from. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 

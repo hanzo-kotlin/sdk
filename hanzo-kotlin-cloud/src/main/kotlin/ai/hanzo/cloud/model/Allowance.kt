@@ -23,9 +23,10 @@ import com.google.gson.annotations.SerializedName
  *
  * @param limit calls the plan allows per period; 0 = unbounded
  * @param plan the tier the limit came from
- * @param resets unix seconds; when the count starts again
+ * @param resets unix seconds; when THAT window starts again
  * @param spent the subject is at the limit
  * @param used Used is how many zero-priced calls this subject has been SERVED in the period ending at Resets — the UTC calendar day. Only a served call counts, so an admission check, a refusal, or a vendor that never answered leaves it where it stood. It stops AT Limit rather than climbing past it, so Limit-Used is what remains and never goes negative.
+ * @param window Window is which ceiling these numbers describe — \"hour\" or \"day\" — because a caller is held to both and only one of them is the answer. It is the window that REFUSED where one did, and otherwise the one with least left, so Limit-Used is always the number that will actually stop them next. Empty where no window bounds the subject at all.
  */
 
 
@@ -39,7 +40,7 @@ data class Allowance (
     @SerializedName("plan")
     val plan: kotlin.String? = null,
 
-    /* unix seconds; when the count starts again */
+    /* unix seconds; when THAT window starts again */
     @SerializedName("resets")
     val resets: kotlin.Int? = null,
 
@@ -49,7 +50,11 @@ data class Allowance (
 
     /* Used is how many zero-priced calls this subject has been SERVED in the period ending at Resets — the UTC calendar day. Only a served call counts, so an admission check, a refusal, or a vendor that never answered leaves it where it stood. It stops AT Limit rather than climbing past it, so Limit-Used is what remains and never goes negative. */
     @SerializedName("used")
-    val used: kotlin.Int? = null
+    val used: kotlin.Int? = null,
+
+    /* Window is which ceiling these numbers describe — \"hour\" or \"day\" — because a caller is held to both and only one of them is the answer. It is the window that REFUSED where one did, and otherwise the one with least left, so Limit-Used is always the number that will actually stop them next. Empty where no window bounds the subject at all. */
+    @SerializedName("window")
+    val window: kotlin.String? = null
 
 ) {
 

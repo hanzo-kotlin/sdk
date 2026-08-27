@@ -22,13 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param document Document is the document itself.
+ * @param document Document is the requested document's METADATA. Its bytes are a separate read, GET /v1/dataroom/documents/{id}/file.
  */
 
 
 data class DataroomDocumentOne (
 
-    /* Document is the document itself. */
+    /* Document is the requested document's METADATA. Its bytes are a separate read, GET /v1/dataroom/documents/{id}/file. */
     @SerializedName("document")
     val document: DataroomDocument? = null
 

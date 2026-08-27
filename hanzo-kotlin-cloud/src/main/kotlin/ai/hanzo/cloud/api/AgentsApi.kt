@@ -1041,6 +1041,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
      * @param status Status filters to running, paused, done or error. (optional)
      * @param project Project filters to the sessions tagged with one product slug. (optional)
+     * @param room Room filters to the sessions started in one collaborative room — the query a workspace view runs to show what has been run in it. (optional)
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return SessionList
      * @throws IllegalStateException If the request is not correctly configured
@@ -1051,8 +1052,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getAgentsSessions(root: kotlin.String? = null, parent: kotlin.String? = null, status: kotlin.String? = null, project: kotlin.String? = null, limit: kotlin.Int? = null) : SessionList {
-        val localVarResponse = getAgentsSessionsWithHttpInfo(root = root, parent = parent, status = status, project = project, limit = limit)
+    fun getAgentsSessions(root: kotlin.String? = null, parent: kotlin.String? = null, status: kotlin.String? = null, project: kotlin.String? = null, room: kotlin.String? = null, limit: kotlin.Int? = null) : SessionList {
+        val localVarResponse = getAgentsSessionsWithHttpInfo(root = root, parent = parent, status = status, project = project, room = room, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SessionList
@@ -1077,6 +1078,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
      * @param status Status filters to running, paused, done or error. (optional)
      * @param project Project filters to the sessions tagged with one product slug. (optional)
+     * @param room Room filters to the sessions started in one collaborative room — the query a workspace view runs to show what has been run in it. (optional)
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return ApiResponse<SessionList?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1084,8 +1086,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getAgentsSessionsWithHttpInfo(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : ApiResponse<SessionList?> {
-        val localVariableConfig = getAgentsSessionsRequestConfig(root = root, parent = parent, status = status, project = project, limit = limit)
+    fun getAgentsSessionsWithHttpInfo(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, room: kotlin.String?, limit: kotlin.Int?) : ApiResponse<SessionList?> {
+        val localVariableConfig = getAgentsSessionsRequestConfig(root = root, parent = parent, status = status, project = project, room = room, limit = limit)
 
         return request<Unit, SessionList>(
             localVariableConfig
@@ -1099,10 +1101,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
      * @param status Status filters to running, paused, done or error. (optional)
      * @param project Project filters to the sessions tagged with one product slug. (optional)
+     * @param room Room filters to the sessions started in one collaborative room — the query a workspace view runs to show what has been run in it. (optional)
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return RequestConfig
      */
-    fun getAgentsSessionsRequestConfig(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getAgentsSessionsRequestConfig(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, room: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1117,6 +1120,9 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
                 }
                 if (project != null) {
                     put("project", listOf(project.toString()))
+                }
+                if (room != null) {
+                    put("room", listOf(room.toString()))
                 }
                 if (limit != null) {
                     put("limit", listOf(limit.toString()))

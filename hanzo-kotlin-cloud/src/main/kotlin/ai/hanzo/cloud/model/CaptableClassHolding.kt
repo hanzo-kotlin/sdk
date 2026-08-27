@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
  * @param classType ClassType is COMMON or PREFERRED.
  * @param issued Issued is how many shares of the class have been issued.
  * @param name Name is the class name.
- * @param shareClassId ShareClassID is the share class.
+ * @param shareClassId ShareClassID addresses the class this position is for.
  */
 
 
@@ -47,7 +47,7 @@ data class CaptableClassHolding (
     @SerializedName("name")
     val name: kotlin.String? = null,
 
-    /* ShareClassID is the share class. */
+    /* ShareClassID addresses the class this position is for. */
     @SerializedName("shareClassId")
     val shareClassId: kotlin.String? = null
 

@@ -27,6 +27,9 @@ import ai.hanzo.cloud.model.CookieAck
 import ai.hanzo.cloud.model.PlanInfo
 import ai.hanzo.cloud.model.ProviderInfo
 import ai.hanzo.cloud.model.StatsOut
+import ai.hanzo.cloud.model.TeamRoom
+import ai.hanzo.cloud.model.TeamRoomBind
+import ai.hanzo.cloud.model.TeamRooms
 
 import com.google.gson.annotations.SerializedName
 
@@ -766,6 +769,76 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
+     * GET /v1/team/rooms
+     * Returns every room of the caller&#39;s org, across the workspaces it owns, with the work facet each carries.
+     * Returns every room of the caller&#39;s org, across the workspaces it owns, with the work facet each carries.  It reads the SAME Chunter documents the transactor serves, so a room opened in the Team client appears here with no sync, and a facet written here is read by anything holding the document. Direct messages are included: a room between two people is a room with no name, not a different kind of thing.
+     * @return TeamRooms
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getTeamRooms() : TeamRooms {
+        val localVarResponse = getTeamRoomsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TeamRooms
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/team/rooms
+     * Returns every room of the caller&#39;s org, across the workspaces it owns, with the work facet each carries.
+     * Returns every room of the caller&#39;s org, across the workspaces it owns, with the work facet each carries.  It reads the SAME Chunter documents the transactor serves, so a room opened in the Team client appears here with no sync, and a facet written here is read by anything holding the document. Direct messages are included: a room between two people is a room with no name, not a different kind of thing.
+     * @return ApiResponse<TeamRooms?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getTeamRoomsWithHttpInfo() : ApiResponse<TeamRooms?> {
+        val localVariableConfig = getTeamRoomsRequestConfig()
+
+        return request<Unit, TeamRooms>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getTeamRooms
+     *
+     * @return RequestConfig
+     */
+    fun getTeamRoomsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/team/rooms",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/team/transactor/api/v1/statistics
      * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
      * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. &#x60;token&#x60; carries the same two lanes the socket&#39;s path segment does: a workspace UUID names the workspace and is authorized against the membership rows, an HS256 workspace token names it in its signed claims. activeSessions carries ONLY that one workspace, never another tenant&#39;s sessions. An unverifiable credential, or one the caller is no member under, is 401.
@@ -1345,6 +1418,83 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
         return RequestConfig(
             method = RequestMethod.PUT,
             path = "/v1/team/account/cookie",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/team/rooms/{id}
+     * States what a room is for: its lifecycle intent, and what it is about.
+     * States what a room is for: its lifecycle intent, and what it is about. It answers the room as it now stands.  The write is a platform MIXIN on the room document, applied through the SAME applyTx path the Team client&#39;s own writes take and broadcast to every connected client — so a room bound here updates live in an open workspace rather than on the next reload.
+     * @param id ID is the room to bind, from the path. The URL is the authority; a body carrying another id cannot redirect the write.
+     * @param teamRoomBind 
+     * @return TeamRoom
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putTeamRoomsById(id: kotlin.String, teamRoomBind: TeamRoomBind) : TeamRoom {
+        val localVarResponse = putTeamRoomsByIdWithHttpInfo(id = id, teamRoomBind = teamRoomBind)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TeamRoom
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/team/rooms/{id}
+     * States what a room is for: its lifecycle intent, and what it is about.
+     * States what a room is for: its lifecycle intent, and what it is about. It answers the room as it now stands.  The write is a platform MIXIN on the room document, applied through the SAME applyTx path the Team client&#39;s own writes take and broadcast to every connected client — so a room bound here updates live in an open workspace rather than on the next reload.
+     * @param id ID is the room to bind, from the path. The URL is the authority; a body carrying another id cannot redirect the write.
+     * @param teamRoomBind 
+     * @return ApiResponse<TeamRoom?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putTeamRoomsByIdWithHttpInfo(id: kotlin.String, teamRoomBind: TeamRoomBind) : ApiResponse<TeamRoom?> {
+        val localVariableConfig = putTeamRoomsByIdRequestConfig(id = id, teamRoomBind = teamRoomBind)
+
+        return request<TeamRoomBind, TeamRoom>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putTeamRoomsById
+     *
+     * @param id ID is the room to bind, from the path. The URL is the authority; a body carrying another id cannot redirect the write.
+     * @param teamRoomBind 
+     * @return RequestConfig
+     */
+    fun putTeamRoomsByIdRequestConfig(id: kotlin.String, teamRoomBind: TeamRoomBind) : RequestConfig<TeamRoomBind> {
+        val localVariableBody = teamRoomBind
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/team/rooms/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

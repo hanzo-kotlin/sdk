@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
  * @param key Key is the board — the repository name, from the path.
  * @param priority Priority is one of none, urgent, high, medium or low.
  * @param status Status is the board column to open into: backlog, todo, in_progress, done or canceled. Empty opens into backlog.
- * @param title Title is required.
+ * @param title Title is the one line the card is read by on the board. Blank or whitespace is refused — an untitled card cannot be told apart from any other.
  */
 
 
@@ -47,7 +47,7 @@ data class NewIssue (
     @SerializedName("status")
     val status: kotlin.String? = null,
 
-    /* Title is required. */
+    /* Title is the one line the card is read by on the board. Blank or whitespace is refused — an untitled card cannot be told apart from any other. */
     @SerializedName("title")
     val title: kotlin.String? = null
 

@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param investments Investments is every investment into this round, oldest first.
- * @param round Round is the round itself.
+ * @param round Round is the round's own terms — name, type, valuation, target and status — as against the investments beside it.
  */
 
 
@@ -34,7 +34,7 @@ data class CaptableRoundDetail (
     @SerializedName("investments")
     val investments: kotlin.collections.List<CaptableRoundInvestment>? = null,
 
-    /* Round is the round itself. */
+    /* Round is the round's own terms — name, type, valuation, target and status — as against the investments beside it. */
     @SerializedName("round")
     val round: CaptableRound? = null
 

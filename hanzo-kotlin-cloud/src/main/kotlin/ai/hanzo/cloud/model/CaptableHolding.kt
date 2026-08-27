@@ -26,7 +26,7 @@ import com.google.gson.annotations.SerializedName
  * @param options Options is the shares under this stakeholder's non-terminal option grants.
  * @param ownershipPct OwnershipPct is fullyDiluted as a percentage of the company's fullyDilutedShares, rounded to two decimals; 0 when nothing is issued.
  * @param shares Shares is the shares this stakeholder holds by certificate.
- * @param stakeholderId StakeholderID is the stakeholder.
+ * @param stakeholderId StakeholderID addresses the stakeholder these totals are for.
  */
 
 
@@ -52,7 +52,7 @@ data class CaptableHolding (
     @SerializedName("shares")
     val shares: kotlin.Int? = null,
 
-    /* StakeholderID is the stakeholder. */
+    /* StakeholderID addresses the stakeholder these totals are for. */
     @SerializedName("stakeholderId")
     val stakeholderId: kotlin.String? = null
 

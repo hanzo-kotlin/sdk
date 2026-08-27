@@ -27,6 +27,7 @@ import com.google.gson.annotations.SerializedName
  * @param priority Priority is urgent, high, medium, low or none. Never empty — an unset priority is the value \"none\".
  * @param project Project is the board key the issue is on. It and Number are the issue's address in every other route on this surface, which is why a hit carries it.
  * @param repo Repo is the git repository the issue is bound to, empty when it is not repo-bound.
+ * @param room Room is the collaboration room the issue belongs to, spelled \"<workspace>_<room>\" — empty when it is not room-bound, which is most of them. It is here so an org-wide search says which channel each item came from without a second read.
  * @param source Source is which surface opened it: team, git, crm, helpdesk, cms or agent. \"git\" is how the mirrored forge and GitHub rows are spelled.
  * @param status Status is the board column: backlog, todo, in_progress, done or canceled. Claiming moves backlog and todo to in_progress and leaves the other three where they are.
  * @param title Title is the issue's one-line summary — what the q filter matched, along with the description.
@@ -59,6 +60,10 @@ data class IssueHit (
     /* Repo is the git repository the issue is bound to, empty when it is not repo-bound. */
     @SerializedName("repo")
     val repo: kotlin.String? = null,
+
+    /* Room is the collaboration room the issue belongs to, spelled \"<workspace>_<room>\" — empty when it is not room-bound, which is most of them. It is here so an org-wide search says which channel each item came from without a second read. */
+    @SerializedName("room")
+    val room: kotlin.String? = null,
 
     /* Source is which surface opened it: team, git, crm, helpdesk, cms or agent. \"git\" is how the mirrored forge and GitHub rows are spelled. */
     @SerializedName("source")

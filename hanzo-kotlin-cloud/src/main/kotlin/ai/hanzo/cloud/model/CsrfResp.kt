@@ -21,18 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param csrfToken Token is the value to send back in the X-CSRF-Token header. It is bound to the caller's identity, so it authorizes writes as them and as nobody else.
- * @param expiresIn ExpiresIn is the token's lifetime in seconds. Fetch a new one when it lapses; a write with an expired token is refused.
+ * @param csrfToken Token is the value to send back in the X-CSRF-Token header. It is bound to the caller's identity, so it authorizes changes as them and as nobody else.
+ * @param expiresIn ExpiresIn is the token's lifetime in seconds. Fetch a new one when it lapses; a change with an expired token is refused.
  */
 
 
 data class CsrfResp (
 
-    /* Token is the value to send back in the X-CSRF-Token header. It is bound to the caller's identity, so it authorizes writes as them and as nobody else. */
+    /* Token is the value to send back in the X-CSRF-Token header. It is bound to the caller's identity, so it authorizes changes as them and as nobody else. */
     @SerializedName("csrfToken")
     val csrfToken: kotlin.String? = null,
 
-    /* ExpiresIn is the token's lifetime in seconds. Fetch a new one when it lapses; a write with an expired token is refused. */
+    /* ExpiresIn is the token's lifetime in seconds. Fetch a new one when it lapses; a change with an expired token is refused. */
     @SerializedName("expiresIn")
     val expiresIn: kotlin.Int? = null
 

@@ -19,6 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.Call
 import ai.hanzo.cloud.model.MeetHealth
 import ai.hanzo.cloud.model.RecordIn
 import ai.hanzo.cloud.model.Recording
@@ -177,6 +178,86 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/meet/session",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/meet/call
+     * Where a room&#39;s call happens
+     * Answers where a room&#39;s call happens, for a caller who may join it.  It is the \&quot;resolved at render\&quot; half of HIP-0523 §12: a surface showing a channel asks for the room&#39;s call at the moment it draws one, rather than reading a media room name someone stored on the room. Nothing here is persisted and nothing is created — a media room begins existing when the first participant connects and stops when the last leaves, so there is no call to create and none to clean up.  AUTHORIZATION IS THE JOIN DECISION, unchanged and shared. It delegates to state.admits, the same function POST /v1/meet/getToken and all three recording operations admit on, so a caller who is told where a call is, is a caller who could have joined it. Answering the address to someone who cannot join would make this a workspace-membership oracle for anyone who can guess a room id.  It deliberately does NOT report whether a call is in progress. That is a fact the media server holds and this binary would have to ask for it over the network, which is a different decision with a different failure mode — and reporting \&quot;nobody is in this call\&quot; when the question could not be asked would be exactly the unknown-rendered-as-zero this surface refuses elsewhere.
+     * @param workspace Workspace is the workspace uuid holding the room, as GET /v1/team/rooms reports it. It is the segment the caller&#39;s membership is checked against.
+     * @param room Room is the room&#39;s own id within that workspace, as GET /v1/team/rooms reports it. It is opaque here: meet keeps no rooms and cannot say whether one exists, only whether this caller may be seated in the workspace holding it.
+     * @return Call
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun meetCall(workspace: kotlin.String, room: kotlin.String) : Call {
+        val localVarResponse = meetCallWithHttpInfo(workspace = workspace, room = room)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Call
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/meet/call
+     * Where a room&#39;s call happens
+     * Answers where a room&#39;s call happens, for a caller who may join it.  It is the \&quot;resolved at render\&quot; half of HIP-0523 §12: a surface showing a channel asks for the room&#39;s call at the moment it draws one, rather than reading a media room name someone stored on the room. Nothing here is persisted and nothing is created — a media room begins existing when the first participant connects and stops when the last leaves, so there is no call to create and none to clean up.  AUTHORIZATION IS THE JOIN DECISION, unchanged and shared. It delegates to state.admits, the same function POST /v1/meet/getToken and all three recording operations admit on, so a caller who is told where a call is, is a caller who could have joined it. Answering the address to someone who cannot join would make this a workspace-membership oracle for anyone who can guess a room id.  It deliberately does NOT report whether a call is in progress. That is a fact the media server holds and this binary would have to ask for it over the network, which is a different decision with a different failure mode — and reporting \&quot;nobody is in this call\&quot; when the question could not be asked would be exactly the unknown-rendered-as-zero this surface refuses elsewhere.
+     * @param workspace Workspace is the workspace uuid holding the room, as GET /v1/team/rooms reports it. It is the segment the caller&#39;s membership is checked against.
+     * @param room Room is the room&#39;s own id within that workspace, as GET /v1/team/rooms reports it. It is opaque here: meet keeps no rooms and cannot say whether one exists, only whether this caller may be seated in the workspace holding it.
+     * @return ApiResponse<Call?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun meetCallWithHttpInfo(workspace: kotlin.String, room: kotlin.String) : ApiResponse<Call?> {
+        val localVariableConfig = meetCallRequestConfig(workspace = workspace, room = room)
+
+        return request<Unit, Call>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation meetCall
+     *
+     * @param workspace Workspace is the workspace uuid holding the room, as GET /v1/team/rooms reports it. It is the segment the caller&#39;s membership is checked against.
+     * @param room Room is the room&#39;s own id within that workspace, as GET /v1/team/rooms reports it. It is opaque here: meet keeps no rooms and cannot say whether one exists, only whether this caller may be seated in the workspace holding it.
+     * @return RequestConfig
+     */
+    fun meetCallRequestConfig(workspace: kotlin.String, room: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("workspace", listOf(workspace.toString()))
+                put("room", listOf(room.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/meet/call",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

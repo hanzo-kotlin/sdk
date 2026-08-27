@@ -27,7 +27,7 @@ import com.google.gson.annotations.SerializedName
  * @param publisher Publisher is who publishes it.
  * @param total Total is how many clauses the standard publishes.
  * @param unit Unit is what one clause is; Units is its plural.
- * @param units Units is the plural of Unit.
+ * @param units Units is Unit's plural, carried so a caller renders \"12 controls\" without having to pluralise a word it does not know.
  */
 
 
@@ -57,7 +57,7 @@ data class FrameworkRow (
     @SerializedName("unit")
     val unit: kotlin.String? = null,
 
-    /* Units is the plural of Unit. */
+    /* Units is Unit's plural, carried so a caller renders \"12 controls\" without having to pluralise a word it does not know. */
     @SerializedName("units")
     val units: kotlin.String? = null
 

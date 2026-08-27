@@ -15,21 +15,22 @@
 
 package ai.hanzo.cloud.model
 
+import ai.hanzo.cloud.model.TeamRoom
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param policies Policies is the organization's published policy documents, each as the centre holds it.
+ * @param rooms Rooms is every room of every workspace the caller's org owns, each with the work facet it carries.
  */
 
 
-data class PolicyList (
+data class TeamRooms (
 
-    /* Policies is the organization's published policy documents, each as the centre holds it. */
-    @SerializedName("policies")
-    val policies: kotlin.collections.List<kotlin.Any>? = null
+    /* Rooms is every room of every workspace the caller's org owns, each with the work facet it carries. */
+    @SerializedName("rooms")
+    val rooms: kotlin.collections.List<TeamRoom>? = null
 
 ) {
 
