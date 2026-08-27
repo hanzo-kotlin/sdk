@@ -44,6 +44,7 @@ import ai.hanzo.cloud.model.RoutedRunOut
 import ai.hanzo.cloud.model.RunList
 import ai.hanzo.cloud.model.SessionDetail
 import ai.hanzo.cloud.model.SessionList
+import ai.hanzo.cloud.model.SessionProgress
 import ai.hanzo.cloud.model.SessionView
 import ai.hanzo.cloud.model.TargetDeleted
 import ai.hanzo.cloud.model.TargetList
@@ -1288,6 +1289,79 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/agents/sessions/{id}/control".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/agents/sessions/{id}/progress
+     * Returns how far along one run is: the share of its goal that is done, whether it is running, blocked or finished, and a line saying what it is doing right now.
+     * Returns how far along one run is: the share of its goal that is done, whether it is running, blocked or finished, and a line saying what it is doing right now.  It is a MODEL ESTIMATE read off the run&#39;s own transcript, not a measurement — &#x60;estimated&#x60; says so on every answer, and a run whose progress cannot be told reports phase \&quot;unknown\&quot; with no percentage rather than a zero it does not mean. A session that has already finished answers from its own status instead, and is marked not estimated.  The list and detail reads carry the same value; this address is the one that WAITS. Where the stored estimate has gone stale it is remade before answering, so a human deciding whether to step into a run gets a current reading rather than the last poll&#39;s — which costs one small completion, charged to the same wallet the session already names, at most once every thirty seconds per run.
+     * @param id ID is the session to act on, from the path.
+     * @return SessionProgress
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getAgentsSessionsByIdProgress(id: kotlin.String) : SessionProgress {
+        val localVarResponse = getAgentsSessionsByIdProgressWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SessionProgress
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/agents/sessions/{id}/progress
+     * Returns how far along one run is: the share of its goal that is done, whether it is running, blocked or finished, and a line saying what it is doing right now.
+     * Returns how far along one run is: the share of its goal that is done, whether it is running, blocked or finished, and a line saying what it is doing right now.  It is a MODEL ESTIMATE read off the run&#39;s own transcript, not a measurement — &#x60;estimated&#x60; says so on every answer, and a run whose progress cannot be told reports phase \&quot;unknown\&quot; with no percentage rather than a zero it does not mean. A session that has already finished answers from its own status instead, and is marked not estimated.  The list and detail reads carry the same value; this address is the one that WAITS. Where the stored estimate has gone stale it is remade before answering, so a human deciding whether to step into a run gets a current reading rather than the last poll&#39;s — which costs one small completion, charged to the same wallet the session already names, at most once every thirty seconds per run.
+     * @param id ID is the session to act on, from the path.
+     * @return ApiResponse<SessionProgress?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getAgentsSessionsByIdProgressWithHttpInfo(id: kotlin.String) : ApiResponse<SessionProgress?> {
+        val localVariableConfig = getAgentsSessionsByIdProgressRequestConfig(id = id)
+
+        return request<Unit, SessionProgress>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getAgentsSessionsByIdProgress
+     *
+     * @param id ID is the session to act on, from the path.
+     * @return RequestConfig
+     */
+    fun getAgentsSessionsByIdProgressRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/agents/sessions/{id}/progress".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

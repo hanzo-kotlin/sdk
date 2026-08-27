@@ -16,6 +16,7 @@
 package ai.hanzo.cloud.model
 
 import ai.hanzo.cloud.model.LastEventView
+import ai.hanzo.cloud.model.SessionProgress
 
 import com.google.gson.annotations.SerializedName
 
@@ -35,6 +36,7 @@ import com.google.gson.annotations.SerializedName
  * @param lastEvent LastEvent is the compact latest-activity line for the list projection (nil in register/patch/tree responses; set by list + detail). It lets a swipe card show a live one-line preview without fetching full detail.
  * @param org Org is the caller's OWN tenant, echoed so a client can build the public build URL (/builds/:org/:project) without a second call or a guess. It is never another tenant's — every read is org-scoped before it gets here.
  * @param parentSessionId ParentSessionID is the session that spawned this one, making this a subagent of it. Empty means this session is a root — a flow of its own. A parent always belongs to the same org, so a tree never crosses a tenant.
+ * @param progress Progress is how far along this run is — a share of its goal, a phase, and a line saying what it is doing. Always present, so a board never branches on whether it is there; `phase` says \"unknown\" when nothing has estimated it. It is a MODEL ESTIMATE wherever `estimated` is true, and the row's own word where it is false. See progress.go.
  * @param project The readable build: the product this session built and whether its story is public (provenance.go).
  * @param provider Provider is the linked AI account's provider (claude | codex | hanzo | …) that served this run. Empty when the surface did not say.
  * @param published Published is the author's decision to let anyone read this session's story at the public build route. It only ever widens READ access to a session that already exists and grants nothing else; false, an unpublished session is invisible there no matter who asks. It cannot be true without a Project, because that route is keyed on (org, project).
@@ -105,6 +107,10 @@ data class SessionView (
     /* ParentSessionID is the session that spawned this one, making this a subagent of it. Empty means this session is a root — a flow of its own. A parent always belongs to the same org, so a tree never crosses a tenant. */
     @SerializedName("parentSessionId")
     val parentSessionId: kotlin.String? = null,
+
+    /* Progress is how far along this run is — a share of its goal, a phase, and a line saying what it is doing. Always present, so a board never branches on whether it is there; `phase` says \"unknown\" when nothing has estimated it. It is a MODEL ESTIMATE wherever `estimated` is true, and the row's own word where it is false. See progress.go. */
+    @SerializedName("progress")
+    val progress: SessionProgress? = null,
 
     /* The readable build: the product this session built and whether its story is public (provenance.go). */
     @SerializedName("project")

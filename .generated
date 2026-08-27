@@ -2232,6 +2232,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/SeriesPoint.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/SessionDetail.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/SessionEnded.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/SessionList.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/SessionProgress.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/SessionUser.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/SessionView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/SetEnvReq.kt

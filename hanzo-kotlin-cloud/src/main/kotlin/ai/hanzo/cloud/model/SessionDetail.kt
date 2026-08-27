@@ -17,6 +17,7 @@ package ai.hanzo.cloud.model
 
 import ai.hanzo.cloud.model.EventView
 import ai.hanzo.cloud.model.LastEventView
+import ai.hanzo.cloud.model.SessionProgress
 import ai.hanzo.cloud.model.SessionView
 
 import com.google.gson.annotations.SerializedName
@@ -38,6 +39,7 @@ import com.google.gson.annotations.SerializedName
  * @param lastEvent 
  * @param org 
  * @param parentSessionId 
+ * @param progress 
  * @param project 
  * @param provider 
  * @param published 
@@ -100,6 +102,9 @@ data class SessionDetail (
 
     @SerializedName("parentSessionId")
     val parentSessionId: kotlin.String? = null,
+
+    @SerializedName("progress")
+    val progress: SessionProgress? = null,
 
     @SerializedName("project")
     val project: kotlin.String? = null,
