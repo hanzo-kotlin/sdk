@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param actor Actor is who produced the turn. Empty takes the validated caller, which is what an agent writing its own transcript wants; naming one is for a surface recording on somebody else's behalf.
  * @param id ID is the session to append to, from the path.
- * @param kind Kind is what this turn IS: message, tool-call, spawn, log, status or control. Anything else is refused — the vocabulary is closed so a reader can branch on it.
+ * @param kind Kind is what this turn IS: message, tool-call, spawn, log, status, control or progress. Anything else is refused — the vocabulary is closed so a reader can branch on it.
  * @param payload 
  */
 
@@ -38,7 +38,7 @@ data class EventIn (
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* Kind is what this turn IS: message, tool-call, spawn, log, status or control. Anything else is refused — the vocabulary is closed so a reader can branch on it. */
+    /* Kind is what this turn IS: message, tool-call, spawn, log, status, control or progress. Anything else is refused — the vocabulary is closed so a reader can branch on it. */
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
