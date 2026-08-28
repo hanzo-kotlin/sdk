@@ -32,7 +32,6 @@ import ai.hanzo.cloud.model.IndexStats
 import ai.hanzo.cloud.model.IndexTask
 import ai.hanzo.cloud.model.IndexVersion
 import ai.hanzo.cloud.model.IndexView
-import ai.hanzo.cloud.model.PostIndexIndexesByUidDocumentsDeleteBatchRequest
 
 import com.google.gson.annotations.SerializedName
 
@@ -1102,7 +1101,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Delete many documents by primary key in one call
      * Removes every named document from the caller&#39;s own index. The body is the dialect&#39;s own: a bare array of primary keys, which may be strings or numbers. A key that is not there is not an error, so a client reconciling its own corpus can send one list rather than checking each key first.  The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header. Without a validated principal the answer is 403 carrying the dialect&#39;s &#x60;invalid_api_key&#x60; body.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the documents are already gone when this answers.
      * @param uid 
-     * @param postIndexIndexesByUidDocumentsDeleteBatchRequest  (optional)
+     * @param requestBody  (optional)
      * @return IndexEnqueued
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1112,8 +1111,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postIndexIndexesByUidDocumentsDeleteBatch(uid: kotlin.String, postIndexIndexesByUidDocumentsDeleteBatchRequest: PostIndexIndexesByUidDocumentsDeleteBatchRequest? = null) : IndexEnqueued {
-        val localVarResponse = postIndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid = uid, postIndexIndexesByUidDocumentsDeleteBatchRequest = postIndexIndexesByUidDocumentsDeleteBatchRequest)
+    fun postIndexIndexesByUidDocumentsDeleteBatch(uid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>? = null) : IndexEnqueued {
+        val localVarResponse = postIndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid = uid, requestBody = requestBody)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as IndexEnqueued
@@ -1135,17 +1134,17 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Delete many documents by primary key in one call
      * Removes every named document from the caller&#39;s own index. The body is the dialect&#39;s own: a bare array of primary keys, which may be strings or numbers. A key that is not there is not an error, so a client reconciling its own corpus can send one list rather than checking each key first.  The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header. Without a validated principal the answer is 403 carrying the dialect&#39;s &#x60;invalid_api_key&#x60; body.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the documents are already gone when this answers.
      * @param uid 
-     * @param postIndexIndexesByUidDocumentsDeleteBatchRequest  (optional)
+     * @param requestBody  (optional)
      * @return ApiResponse<IndexEnqueued?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postIndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid: kotlin.String, postIndexIndexesByUidDocumentsDeleteBatchRequest: PostIndexIndexesByUidDocumentsDeleteBatchRequest?) : ApiResponse<IndexEnqueued?> {
-        val localVariableConfig = postIndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid = uid, postIndexIndexesByUidDocumentsDeleteBatchRequest = postIndexIndexesByUidDocumentsDeleteBatchRequest)
+    fun postIndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>?) : ApiResponse<IndexEnqueued?> {
+        val localVariableConfig = postIndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid = uid, requestBody = requestBody)
 
-        return request<PostIndexIndexesByUidDocumentsDeleteBatchRequest, IndexEnqueued>(
+        return request<kotlin.collections.List<kotlin.Any>, IndexEnqueued>(
             localVariableConfig
         )
     }
@@ -1154,11 +1153,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * To obtain the request config of the operation postIndexIndexesByUidDocumentsDeleteBatch
      *
      * @param uid 
-     * @param postIndexIndexesByUidDocumentsDeleteBatchRequest  (optional)
+     * @param requestBody  (optional)
      * @return RequestConfig
      */
-    fun postIndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid: kotlin.String, postIndexIndexesByUidDocumentsDeleteBatchRequest: PostIndexIndexesByUidDocumentsDeleteBatchRequest?) : RequestConfig<PostIndexIndexesByUidDocumentsDeleteBatchRequest> {
-        val localVariableBody = postIndexIndexesByUidDocumentsDeleteBatchRequest
+    fun postIndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>?) : RequestConfig<kotlin.collections.List<kotlin.Any>> {
+        val localVariableBody = requestBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"

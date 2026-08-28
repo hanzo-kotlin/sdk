@@ -1903,7 +1903,6 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PoolScale.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PopulatedFlow.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Position.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PostEventRequest.kt
-hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PostIndexIndexesByUidDocumentsDeleteBatchRequest.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PostList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PrefsView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Preset.kt
