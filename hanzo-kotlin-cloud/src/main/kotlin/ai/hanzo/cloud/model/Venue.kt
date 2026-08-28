@@ -27,7 +27,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class Call (
+data class Venue (
 
     /* Name is the media room to join: the value POST /v1/meet/getToken takes as roomName, and the value the media server keys participants on. */
     @SerializedName("name")

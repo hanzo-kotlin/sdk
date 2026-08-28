@@ -301,7 +301,6 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ByoGPU.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ByoWorker.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CDApp.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CalendarPost.kt
-hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Call.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CallInput.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/CallList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Campaign.kt
@@ -2427,6 +2426,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ValidatorList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Variant.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/VendorRow.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/VendorsOut.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Venue.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Verdict.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/VerificationDecision.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/VerificationReq.kt
