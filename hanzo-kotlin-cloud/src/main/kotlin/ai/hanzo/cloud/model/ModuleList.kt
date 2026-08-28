@@ -15,22 +15,22 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.ModuleInfo
+import ai.hanzo.cloud.model.Module
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param `data` Data is every module compiled into this binary, with the DocTypes it installs.
+ * @param `data` Data is every module compiled into this binary, with the DocTypes it installs and whether the caller's org has turned it on.
  */
 
 
 data class ModuleList (
 
-    /* Data is every module compiled into this binary, with the DocTypes it installs. */
+    /* Data is every module compiled into this binary, with the DocTypes it installs and whether the caller's org has turned it on. */
     @SerializedName("data")
-    val `data`: kotlin.collections.List<ModuleInfo>? = null
+    val `data`: kotlin.collections.List<Module>? = null
 
 ) {
 
