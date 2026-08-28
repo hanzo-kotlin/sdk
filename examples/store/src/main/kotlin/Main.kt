@@ -15,27 +15,27 @@
 //
 //   HANZO_API_KEY=sk-... HANZO_ORG_ID=my-org ./gradlew :examples:store:run
 import ai.hanzo.Hanzo
-import ai.hanzo.cloud.api.KvApi
+import ai.hanzo.cloud.api.ProvisioningApi
 import ai.hanzo.cloud.model.ProvisionRequest
 
 fun main() {
     val hanzo = Hanzo()
     require(hanzo.orgId != null) { "HANZO_ORG_ID is required: /v1/kv answers 403 without X-Org-Id" }
-    val kv = hanzo.api(::KvApi)
+    val kv = hanzo.api(::ProvisioningApi)
 
     // Names are org-unique, so a hardcoded one collides with the last run.
     val name = "sdk-example-${System.nanoTime().toString(36)}"
 
-    val created = kv.postKv(ProvisionRequest(name = name))
+    val created = kv.postProvisioningKv(ProvisionRequest(name = name))
     println("created  ${created.name} (${created.id}) status=${created.status}")
 
     try {
-        val store = kv.getKvByName(name)
+        val store = kv.getProvisioningKvByName(name)
         println("read     ${store.name} kind=${store.kind} at ${store.host}:${store.port}")
     } finally {
         // In a `finally`, so a failed read still cleans up instead of leaving
         // the store behind for the next run to collide with.
-        kv.deleteKvByName(name)
+        kv.deleteProvisioningKvByName(name)
         println("deleted  $name")
     }
 }

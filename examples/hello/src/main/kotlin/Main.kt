@@ -18,8 +18,8 @@
 //   ./gradlew :examples:hello:run                    # open call only
 //   HANZO_API_KEY=sk-... ./gradlew :examples:hello:run
 import ai.hanzo.Hanzo
-import ai.hanzo.cloud.api.KeysApi
-import ai.hanzo.cloud.api.ModelsApi
+import ai.hanzo.cloud.api.AccountApi
+import ai.hanzo.cloud.api.AiApi
 import ai.hanzo.cloud.infrastructure.ClientException
 
 fun main() {
@@ -30,7 +30,7 @@ fun main() {
     // off `...WithHttpInfo` is the typed way; parsing the body here would be
     // this client inventing a shape the document does not state.
     println(
-        "gateway  ${hanzo.baseUrl}  HTTP ${hanzo.api(::ModelsApi).getModelsWithHttpInfo().statusCode}"
+        "gateway  ${hanzo.baseUrl}  HTTP ${hanzo.api(::AiApi).getModelsWithHttpInfo().statusCode}"
     )
 
     // `propertyKeys`, not `keys`: the wire name is `keys`, which is on the
@@ -38,7 +38,7 @@ fun main() {
     // `class`), and @SerializedName still sends the original.
     val keys =
         try {
-            hanzo.api(::KeysApi).getKeys().propertyKeys.orEmpty()
+            hanzo.api(::AccountApi).getAccountKeys().propertyKeys.orEmpty()
         } catch (refused: ClientException) {
             // The refusal is the other half of the flow, so it is caught rather
             // than thrown at the terminal as a stack trace. Every generated call

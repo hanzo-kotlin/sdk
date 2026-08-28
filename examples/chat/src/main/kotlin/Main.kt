@@ -19,10 +19,10 @@
 //
 //   HANZO_API_KEY=sk-... ./gradlew :examples:chat:run
 import ai.hanzo.Hanzo
-import ai.hanzo.cloud.api.ChatApi
+import ai.hanzo.cloud.api.AiApi
 
 fun main() {
-    val chat = Hanzo().api(::ChatApi)
+    val chat = Hanzo().api(::AiApi)
 
     println("completion  HTTP ${chat.postChatCompletionsWithHttpInfo().statusCode}")
 }
