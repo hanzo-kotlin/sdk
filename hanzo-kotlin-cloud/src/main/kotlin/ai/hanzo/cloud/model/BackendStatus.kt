@@ -22,7 +22,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param error Error is the failure text from a leg whose status is degraded — the reason a configured backend could not answer. Absent otherwise.
- * @param hits Hits is how many results this leg returned, counted BEFORE fusion, so it is not the number that survived into Response.Hits — fusion merges what both legs found and the caller's limit and offset then page it. 0 for a leg that did not run.
+ * @param hits Hits is how many results this leg returned, counted BEFORE fusion, so it is not the number that survived into Fusion.Hits — fusion merges what both legs found and the caller's limit and offset then page it. 0 for a leg that did not run.
  * @param name Name is which leg this reports: \"index\", the lexical store, \"vector\", the semantic one, or \"code\", the org's own repositories. Match.Backend uses the same three names.
  * @param status Status is one of ok, degraded, disabled, skipped — four distinct operational facts that are never collapsed. It ran and answered; it is configured and FAILED (Error says how, and only this one is a fault); this deployment never provisioned it; or the request's mode excluded it.
  * @param tookMs TookMS is how long this leg took, in milliseconds, timed around its own call and excluding fusion. 0 for a leg that was skipped or is disabled, since nothing was called.
@@ -35,7 +35,7 @@ data class BackendStatus (
     @SerializedName("error")
     val error: kotlin.String? = null,
 
-    /* Hits is how many results this leg returned, counted BEFORE fusion, so it is not the number that survived into Response.Hits — fusion merges what both legs found and the caller's limit and offset then page it. 0 for a leg that did not run. */
+    /* Hits is how many results this leg returned, counted BEFORE fusion, so it is not the number that survived into Fusion.Hits — fusion merges what both legs found and the caller's limit and offset then page it. 0 for a leg that did not run. */
     @SerializedName("hits")
     val hits: kotlin.Int? = null,
 

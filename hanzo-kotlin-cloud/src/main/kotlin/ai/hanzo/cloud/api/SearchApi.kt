@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.Fusion
 import ai.hanzo.cloud.model.Request
-import ai.hanzo.cloud.model.Response
 
 import com.google.gson.annotations.SerializedName
 
@@ -51,7 +51,7 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * Hybrid search over the org&#39;s own corpora
      * Is the typed op behind POST /v1/search. It does exactly two things the in-process entry point must not do: resolve the tenant from the validated principal, and refuse when there is none. Everything else is ForOrg.
      * @param request 
-     * @return Response
+     * @return Fusion
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +60,11 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun search(request: Request) : Response {
+    fun search(request: Request) : Fusion {
         val localVarResponse = searchWithHttpInfo(request = request)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Fusion
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -83,16 +83,16 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * Hybrid search over the org&#39;s own corpora
      * Is the typed op behind POST /v1/search. It does exactly two things the in-process entry point must not do: resolve the tenant from the validated principal, and refuse when there is none. Everything else is ForOrg.
      * @param request 
-     * @return ApiResponse<Response?>
+     * @return ApiResponse<Fusion?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchWithHttpInfo(request: Request) : ApiResponse<Response?> {
+    fun searchWithHttpInfo(request: Request) : ApiResponse<Fusion?> {
         val localVariableConfig = searchRequestConfig(request = request)
 
-        return request<Request, Response>(
+        return request<Request, Fusion>(
             localVariableConfig
         )
     }

@@ -31,7 +31,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class Response (
+data class Fusion (
 
     /* Backends is the per-leg report. Always populated. */
     @SerializedName("backends")

@@ -679,6 +679,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/FrameworkRow.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/FunctionDetail.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/FunctionView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Funnel.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Fusion.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/GLRow.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/GPU.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/GcOut.kt
@@ -990,7 +991,6 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/MachineView.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/MakeIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/MarketCatalog.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/MarketItem.kt
-hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Match.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/McpCatalog.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/McpCatalogSync.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/McpServerList.kt
@@ -1961,6 +1961,7 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PromptList.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PromptMeta.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PromptReq.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/PropSpec.kt
+hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Provenance.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProviderBreakdown.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProviderInfo.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ProviderRow.kt
@@ -2066,7 +2067,6 @@ hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Request.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ResolveReferenceIn.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ResolveReferenceOut.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/ResourceUsage.kt
-hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Response.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Responsible.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/RestartRef.kt
 hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud/model/Restarted.kt
