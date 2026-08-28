@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param accessGroups AccessGroups is the org's named sender sets, as group name -> channel -> member entries, held once for the whole org. A DM or Group entry written `accessGroup:<name>` admits any sender listed under that name for THIS channel, or under the channel `*`, which is how one set covers all four transports. Replaced wholesale by the PUT.
+ * @param accessGroups AccessGroups is the org's named sender sets, as group name -> channel -> member entries, held once for the whole org. A DM or Group entry written `accessGroup:<name>` admits any sender listed under that name for THIS channel, or under the channel `*`, which is how one set covers every transport at once. Replaced wholesale by the PUT.
  * @param dm DM is the CONFIG-managed DM allow entries — the list PUT /v1/channels/allowlist owns and replaces wholesale. An entry matches a sender either EXACTLY, as the transport-native id inbox messages carry, or as `accessGroup:<name>` resolved through AccessGroups. A bare `*` admits everyone, but only while DMPolicy is \"open\": it is gate syntax, not an identity, so under \"allowlist\" it matches nobody.
  * @param dmPolicy DMPolicy decides every inbound DIRECT message, defaulting to \"pairing\" when the org has never set one. \"pairing\": a sender with no entry is sent a pairing code and the message is DROPPED — it never reaches the inbox — and they are admitted only once an admin approves. \"allowlist\": only DM admits, and Paired senders are suspended, since a pairing grant counts under \"pairing\" alone. \"open\" is not unconditional either — it still requires `*` or a matching entry in DM.
  * @param group Group is the CONFIG-managed group allow entries, consulted only while GroupPolicy is \"allowlist\". Entries match the same two ways as DM, and here a bare `*` admits every sender in the room.
@@ -32,7 +32,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AllowlistView (
 
-    /* AccessGroups is the org's named sender sets, as group name -> channel -> member entries, held once for the whole org. A DM or Group entry written `accessGroup:<name>` admits any sender listed under that name for THIS channel, or under the channel `*`, which is how one set covers all four transports. Replaced wholesale by the PUT. */
+    /* AccessGroups is the org's named sender sets, as group name -> channel -> member entries, held once for the whole org. A DM or Group entry written `accessGroup:<name>` admits any sender listed under that name for THIS channel, or under the channel `*`, which is how one set covers every transport at once. Replaced wholesale by the PUT. */
     @SerializedName("accessGroups")
     val accessGroups: kotlin.collections.Map<kotlin.String, kotlin.collections.Map<kotlin.String, kotlin.collections.List<kotlin.String>>>? = null,
 

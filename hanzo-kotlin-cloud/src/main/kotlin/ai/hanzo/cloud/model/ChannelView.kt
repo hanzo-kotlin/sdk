@@ -28,7 +28,7 @@ import com.google.gson.annotations.SerializedName
  * @param connected Connected is whether integrations holds a connection for (this org, this transport) — whether someone finished its connect flow. False leaves Account and AccountLabel empty, and a send is then refused downstream rather than here: by the transport's own binding check (403 for a Telegram chat this org has not bound, 409 for a Discord or Teams room with no inbound-learned route), or on Slack by the absent per-org bot token, which surfaces as 502.
  * @param dmPolicy DMPolicy is how this org admits direct messages here: \"pairing\", \"allowlist\" or \"open\", defaulting to \"pairing\" when the org has never set one.
  * @param groupPolicy GroupPolicy is how this org admits group and thread rooms here: \"open\", \"allowlist\" or \"disabled\", defaulting to \"open\". Both policy fields come back EMPTY — rather than the listing failing — when the policy cannot be read; GET /v1/channels/allowlist carries the same two with the entries they consult.
- * @param id ID is the fixed transport identifier — discord, slack, teams or telegram — and the value every route on this surface names a channel by, including the `:channel` segment of the send path. The listing is always in that order.
+ * @param id ID is the fixed transport identifier — discord, slack, teams, telegram or whatsapp — and the value every route on this surface names a channel by, including the `:channel` segment of the send path. The listing is always in that order.
  * @param pendingPairing PendingPairing counts the org's UNEXPIRED pairing requests on this channel: exactly the rows GET /v1/channels/pairing returns for it, one per person waiting on an admin. It never exceeds three — the pending cap per (org, channel) — and expired requests are not counted.
  */
 
@@ -59,7 +59,7 @@ data class ChannelView (
     @SerializedName("groupPolicy")
     val groupPolicy: kotlin.String? = null,
 
-    /* ID is the fixed transport identifier — discord, slack, teams or telegram — and the value every route on this surface names a channel by, including the `:channel` segment of the send path. The listing is always in that order. */
+    /* ID is the fixed transport identifier — discord, slack, teams, telegram or whatsapp — and the value every route on this surface names a channel by, including the `:channel` segment of the send path. The listing is always in that order. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 

@@ -21,14 +21,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param channel Channel is the transport the request came in on: discord, slack, teams or telegram.
+ * @param channel Channel is the transport the request came in on: discord, slack, teams, telegram or whatsapp.
  * @param code Code is the pairing code from GET /v1/channels/pairing. It is a capability: holding it is what authorises the approval, alongside org admin.
  */
 
 
 data class ApprovePairingIn (
 
-    /* Channel is the transport the request came in on: discord, slack, teams or telegram. */
+    /* Channel is the transport the request came in on: discord, slack, teams, telegram or whatsapp. */
     @SerializedName("channel")
     val channel: kotlin.String? = null,
 
