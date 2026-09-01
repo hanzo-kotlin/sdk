@@ -22,13 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param rooms Rooms is every room of every workspace the caller's org owns, each with the work facet it carries.
+ * @param rooms Rooms is every room of every space the caller's org owns, each with the work facet it carries.
  */
 
 
 data class TeamRooms (
 
-    /* Rooms is every room of every workspace the caller's org owns, each with the work facet it carries. */
+    /* Rooms is every room of every space the caller's org owns, each with the work facet it carries. */
     @SerializedName("rooms")
     val rooms: kotlin.collections.List<TeamRoom>? = null
 

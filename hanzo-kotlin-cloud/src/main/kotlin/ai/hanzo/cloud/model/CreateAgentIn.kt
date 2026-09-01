@@ -21,8 +21,10 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param avatar Avatar and Emoji are how the agent APPEARS. An image wins when both are given — it is the thing somebody made — and both empty leaves the agent drawn as its initial. Validated by iam/pkg/schema, the same rule a person's avatar passes, so the 96 KiB bound and the accepted URL forms are stated once for every subject that has a face.
  * @param computeRef ComputeRef optionally binds this bot to a visor machine. Opaque here, bounded at 256 characters, and not resolved — this package stores the reference and the binding's lifecycle belongs elsewhere.
  * @param description Description is the one line published as the description of the `agent_<name>` tool, which is how another agent decides whether to call this one. Optional, and worth writing for exactly that reason.
+ * @param emoji Emoji is the single glyph shown when there is no image. An image WINS when both are given — it is the thing somebody made — and both empty leaves the agent drawn as its initial.
  * @param executionMode ExecutionMode is one-shot or long-running. Empty takes one-shot, which runs only when something POSTs to it. long-running additionally requires Schedule, and counts against a per-org cap that answers 409 when it is full.
  * @param instructions Instructions is the system prompt, up to 32 KiB, stored verbatim. This is what the model reads; Description is what other CALLERS read.
  * @param model Model names the model to run on. Omit it to take the deployment's configured default; name one and it is checked against the gateway's served catalogue here, so a model this deployment cannot serve is refused now rather than at the first run. Stored under our own name for it, whatever spelling arrives.
@@ -35,6 +37,10 @@ import com.google.gson.annotations.SerializedName
 
 data class CreateAgentIn (
 
+    /* Avatar and Emoji are how the agent APPEARS. An image wins when both are given — it is the thing somebody made — and both empty leaves the agent drawn as its initial. Validated by iam/pkg/schema, the same rule a person's avatar passes, so the 96 KiB bound and the accepted URL forms are stated once for every subject that has a face. */
+    @SerializedName("avatar")
+    val avatar: kotlin.String? = null,
+
     /* ComputeRef optionally binds this bot to a visor machine. Opaque here, bounded at 256 characters, and not resolved — this package stores the reference and the binding's lifecycle belongs elsewhere. */
     @SerializedName("computeRef")
     val computeRef: kotlin.String? = null,
@@ -42,6 +48,10 @@ data class CreateAgentIn (
     /* Description is the one line published as the description of the `agent_<name>` tool, which is how another agent decides whether to call this one. Optional, and worth writing for exactly that reason. */
     @SerializedName("description")
     val description: kotlin.String? = null,
+
+    /* Emoji is the single glyph shown when there is no image. An image WINS when both are given — it is the thing somebody made — and both empty leaves the agent drawn as its initial. */
+    @SerializedName("emoji")
+    val emoji: kotlin.String? = null,
 
     /* ExecutionMode is one-shot or long-running. Empty takes one-shot, which runs only when something POSTs to it. long-running additionally requires Schedule, and counts against a per-org cap that answers 409 when it is full. */
     @SerializedName("executionMode")

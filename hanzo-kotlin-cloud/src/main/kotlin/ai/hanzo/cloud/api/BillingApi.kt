@@ -23,6 +23,8 @@ import ai.hanzo.cloud.model.Accounts
 import ai.hanzo.cloud.model.Alert
 import ai.hanzo.cloud.model.AlertPatch
 import ai.hanzo.cloud.model.AlertSpec
+import ai.hanzo.cloud.model.AutoRecharge
+import ai.hanzo.cloud.model.AutoRechargeEdit
 import ai.hanzo.cloud.model.BillingAccount
 import ai.hanzo.cloud.model.CapVerdict
 import ai.hanzo.cloud.model.Charged
@@ -49,6 +51,7 @@ import ai.hanzo.cloud.model.SubscriptionRef
 import ai.hanzo.cloud.model.Subscriptions
 import ai.hanzo.cloud.model.Tier
 import ai.hanzo.cloud.model.TopupIn
+import ai.hanzo.cloud.model.Transaction
 import ai.hanzo.cloud.model.Transactions
 import ai.hanzo.cloud.model.WireInstructions
 
@@ -1661,6 +1664,76 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
+     * GET /v1/billing/recharge
+     * Reads the caller&#39;s auto-reload rule: top the balance up by &#x60;amountCents&#x60; whenever it falls below &#x60;thresholdCents&#x60;, charging the card on file off-session.
+     * Reads the caller&#39;s auto-reload rule: top the balance up by &#x60;amountCents&#x60; whenever it falls below &#x60;thresholdCents&#x60;, charging the card on file off-session. It is the same setting every prepaid AI account calls auto-reload.  An org that has never set one reads as disabled with zeroes rather than as an error — \&quot;no rule\&quot; answers the question — and &#x60;stored&#x60; is how a caller tells never-configured from deliberately-off.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @return AutoRecharge
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getBillingRecharge() : AutoRecharge {
+        val localVarResponse = getBillingRechargeWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AutoRecharge
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/recharge
+     * Reads the caller&#39;s auto-reload rule: top the balance up by &#x60;amountCents&#x60; whenever it falls below &#x60;thresholdCents&#x60;, charging the card on file off-session.
+     * Reads the caller&#39;s auto-reload rule: top the balance up by &#x60;amountCents&#x60; whenever it falls below &#x60;thresholdCents&#x60;, charging the card on file off-session. It is the same setting every prepaid AI account calls auto-reload.  An org that has never set one reads as disabled with zeroes rather than as an error — \&quot;no rule\&quot; answers the question — and &#x60;stored&#x60; is how a caller tells never-configured from deliberately-off.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @return ApiResponse<AutoRecharge?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getBillingRechargeWithHttpInfo() : ApiResponse<AutoRecharge?> {
+        val localVariableConfig = getBillingRechargeRequestConfig()
+
+        return request<Unit, AutoRecharge>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getBillingRecharge
+     *
+     * @return RequestConfig
+     */
+    fun getBillingRechargeRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/recharge",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/billing/settings
      * Answers the PUBLIC half of this org&#39;s processor configuration — the ids a browser needs to tokenize a card, and the environment it must tokenize against.
      * Answers the PUBLIC half of this org&#39;s processor configuration — the ids a browser needs to tokenize a card, and the environment it must tokenize against.  It carries no secret: an application id is published to every checkout page by design. What matters is that it names the SAME processor account the charge will be made on, because a card vaulted against one account and charged against another is a card that saves and then cannot be used.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
@@ -1953,6 +2026,79 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/billing/transactions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/transactions/{id}
+     * Reads one ledger entry by its id.
+     * Reads one ledger entry by its id.  It is the MEMBER of the collection beside it rather than a second way to ask — the same rows GET /v1/billing/transactions lists, addressed one at a time. A top-up receipt is read here, because a receipt IS a ledger entry: the id this takes is the &#x60;transactionId&#x60; a top-up hands back.  The read is narrower than the list: commerce&#39;s core loads the row and refuses anything that is not a deposit, so a row that exists but is not a top-up answers 404. That asymmetry is stated rather than closed, because widening a money read to make two shapes match is not a change worth making for symmetry.  The books are the caller&#39;s own and cannot be named, so a guessed id misses rather than reaching another tenant&#39;s ledger.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id 
+     * @return Transaction
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getBillingTransactionsById(id: kotlin.String) : Transaction {
+        val localVarResponse = getBillingTransactionsByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Transaction
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/transactions/{id}
+     * Reads one ledger entry by its id.
+     * Reads one ledger entry by its id.  It is the MEMBER of the collection beside it rather than a second way to ask — the same rows GET /v1/billing/transactions lists, addressed one at a time. A top-up receipt is read here, because a receipt IS a ledger entry: the id this takes is the &#x60;transactionId&#x60; a top-up hands back.  The read is narrower than the list: commerce&#39;s core loads the row and refuses anything that is not a deposit, so a row that exists but is not a top-up answers 404. That asymmetry is stated rather than closed, because widening a money read to make two shapes match is not a change worth making for symmetry.  The books are the caller&#39;s own and cannot be named, so a guessed id misses rather than reaching another tenant&#39;s ledger.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id 
+     * @return ApiResponse<Transaction?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getBillingTransactionsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Transaction?> {
+        val localVariableConfig = getBillingTransactionsByIdRequestConfig(id = id)
+
+        return request<Unit, Transaction>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getBillingTransactionsById
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun getBillingTransactionsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/transactions/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -3102,6 +3248,80 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/billing/topup/token",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/billing/recharge
+     * Sets the caller&#39;s auto-reload rule, and answers with the rule as stored.
+     * Sets the caller&#39;s auto-reload rule, and answers with the rule as stored.  ENABLING REQUIRES A CARD ON FILE (400), because the sweep charges off-session: a rule naming no chargeable method is a promise the schedule cannot keep. A non-positive amount and a negative threshold are refused the same way, each naming the field that was wrong.  The rule is the caller&#39;s OWN. The org comes from the validated principal and the body names none, so there is no field a write could be steered through onto another tenant&#39;s schedule.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param autoRechargeEdit 
+     * @return AutoRecharge
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putBillingRecharge(autoRechargeEdit: AutoRechargeEdit) : AutoRecharge {
+        val localVarResponse = putBillingRechargeWithHttpInfo(autoRechargeEdit = autoRechargeEdit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AutoRecharge
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/billing/recharge
+     * Sets the caller&#39;s auto-reload rule, and answers with the rule as stored.
+     * Sets the caller&#39;s auto-reload rule, and answers with the rule as stored.  ENABLING REQUIRES A CARD ON FILE (400), because the sweep charges off-session: a rule naming no chargeable method is a promise the schedule cannot keep. A non-positive amount and a negative threshold are refused the same way, each naming the field that was wrong.  The rule is the caller&#39;s OWN. The org comes from the validated principal and the body names none, so there is no field a write could be steered through onto another tenant&#39;s schedule.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param autoRechargeEdit 
+     * @return ApiResponse<AutoRecharge?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putBillingRechargeWithHttpInfo(autoRechargeEdit: AutoRechargeEdit) : ApiResponse<AutoRecharge?> {
+        val localVariableConfig = putBillingRechargeRequestConfig(autoRechargeEdit = autoRechargeEdit)
+
+        return request<AutoRechargeEdit, AutoRecharge>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putBillingRecharge
+     *
+     * @param autoRechargeEdit 
+     * @return RequestConfig
+     */
+    fun putBillingRechargeRequestConfig(autoRechargeEdit: AutoRechargeEdit) : RequestConfig<AutoRechargeEdit> {
+        val localVariableBody = autoRechargeEdit
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/billing/recharge",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

@@ -21,8 +21,10 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param avatar Avatar and Emoji re-draw the agent. Sending either replaces the pair, so setting an image clears a glyph and \"\" for both goes back to the initial — there is no state where a row holds two answers.
  * @param computeRef ComputeRef re-binds (or, with \"\", unbinds) the visor machine. Opaque here.
  * @param description Description replaces the line other agents read in the tool catalogue.
+ * @param emoji Emoji re-draws the agent as a glyph. Sending either of the pair replaces BOTH, so setting a glyph clears an image and \"\" for both goes back to the initial — there is no state where a row holds two answers.
  * @param executionMode ExecutionMode switches between one-shot and long-running. The RESULTING mode+schedule are validated together, so switching to long-running without a stored or supplied cron is refused rather than accepted into an agent the scheduler would skip forever. A switch INTO long-running counts against the per-org cap and can be a 409.
  * @param instructions Instructions replaces the system prompt whole, up to 32 KiB. There is no append: a prompt is one text, and sending \"\" clears it.
  * @param model Model re-points the agent at another model, checked against the gateway's served catalogue exactly as create checks it. Empty STRING is refused — say nothing to keep the current one. Past runs keep the model that served them.
@@ -35,6 +37,10 @@ import com.google.gson.annotations.SerializedName
 
 data class UpdateAgentIn (
 
+    /* Avatar and Emoji re-draw the agent. Sending either replaces the pair, so setting an image clears a glyph and \"\" for both goes back to the initial — there is no state where a row holds two answers. */
+    @SerializedName("avatar")
+    val avatar: kotlin.String? = null,
+
     /* ComputeRef re-binds (or, with \"\", unbinds) the visor machine. Opaque here. */
     @SerializedName("computeRef")
     val computeRef: kotlin.String? = null,
@@ -42,6 +48,10 @@ data class UpdateAgentIn (
     /* Description replaces the line other agents read in the tool catalogue. */
     @SerializedName("description")
     val description: kotlin.String? = null,
+
+    /* Emoji re-draws the agent as a glyph. Sending either of the pair replaces BOTH, so setting a glyph clears an image and \"\" for both goes back to the initial — there is no state where a row holds two answers. */
+    @SerializedName("emoji")
+    val emoji: kotlin.String? = null,
 
     /* ExecutionMode switches between one-shot and long-running. The RESULTING mode+schedule are validated together, so switching to long-running without a stored or supplied cron is refused rather than accepted into an agent the scheduler would skip forever. A switch INTO long-running counts against the per-org cap and can be a 409. */
     @SerializedName("executionMode")

@@ -25,8 +25,6 @@ import ai.hanzo.cloud.model.DocumentList
 import ai.hanzo.cloud.model.Install
 import ai.hanzo.cloud.model.ModuleList
 import ai.hanzo.cloud.model.ModuleState
-import ai.hanzo.cloud.model.RoleAssignment
-import ai.hanzo.cloud.model.RoleList
 import ai.hanzo.cloud.model.SummaryView
 
 import com.google.gson.annotations.SerializedName
@@ -57,7 +55,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * DELETE /v1/framework/{doctype}/{name}
      * Removes one document, after its on_trash hooks agree.
      * Removes one document, after its on_trash hooks agree. A SUBMITTED document cannot be deleted — cancel it first. Answers 204.
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -89,7 +87,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * DELETE /v1/framework/{doctype}/{name}
      * Removes one document, after its on_trash hooks agree.
      * Removes one document, after its on_trash hooks agree. A SUBMITTED document cannot be deleted — cancel it first. Answers 204.
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -107,7 +105,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * To obtain the request config of the operation deleteFrameworkByDoctypeByName
      *
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
@@ -130,7 +128,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * DELETE /v1/framework/doctypes/{name}
      * Removes a DocType and every document stored under it.
      * Removes a DocType and every document stored under it. The definition and its data go together — a document with no schema can be neither validated nor read back — so there is no undo. Manager-only. Answers 204.
-     * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
+     * @param name Name is the DocType&#39;s ADDRESS — \&quot;module.name\&quot;, e.g. \&quot;kb.page\&quot;. A name containing a space (\&quot;erp.Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -161,7 +159,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * DELETE /v1/framework/doctypes/{name}
      * Removes a DocType and every document stored under it.
      * Removes a DocType and every document stored under it. The definition and its data go together — a document with no schema can be neither validated nor read back — so there is no undo. Manager-only. Answers 204.
-     * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
+     * @param name Name is the DocType&#39;s ADDRESS — \&quot;module.name\&quot;, e.g. \&quot;kb.page\&quot;. A name containing a space (\&quot;erp.Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -178,7 +176,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * To obtain the request config of the operation deleteFrameworkDoctypesByName
      *
-     * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
+     * @param name Name is the DocType&#39;s ADDRESS — \&quot;module.name\&quot;, e.g. \&quot;kb.page\&quot;. A name containing a space (\&quot;erp.Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
     fun deleteFrameworkDoctypesByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
@@ -197,83 +195,10 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * DELETE /v1/framework/roles/{user}/{role}
-     * Removes one (user, role) grant in the caller&#39;s org.
-     * Removes one (user, role) grant in the caller&#39;s org. Manager-only. Answers 204; a grant that does not exist is not found.
-     * @param user User is the assignee whose grant is being revoked, from the path.
-     * @param role Role is the role to revoke, from the path. A role name containing a space (\&quot;System Manager\&quot;) arrives percent-encoded and is decoded before it is matched against the stored assignment.
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun deleteFrameworkRolesByUserByRole(user: kotlin.String, role: kotlin.String) : Unit {
-        val localVarResponse = deleteFrameworkRolesByUserByRoleWithHttpInfo(user = user, role = role)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/framework/roles/{user}/{role}
-     * Removes one (user, role) grant in the caller&#39;s org.
-     * Removes one (user, role) grant in the caller&#39;s org. Manager-only. Answers 204; a grant that does not exist is not found.
-     * @param user User is the assignee whose grant is being revoked, from the path.
-     * @param role Role is the role to revoke, from the path. A role name containing a space (\&quot;System Manager\&quot;) arrives percent-encoded and is decoded before it is matched against the stored assignment.
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun deleteFrameworkRolesByUserByRoleWithHttpInfo(user: kotlin.String, role: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = deleteFrameworkRolesByUserByRoleRequestConfig(user = user, role = role)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation deleteFrameworkRolesByUserByRole
-     *
-     * @param user User is the assignee whose grant is being revoked, from the path.
-     * @param role Role is the role to revoke, from the path. A role name containing a space (\&quot;System Manager\&quot;) arrives percent-encoded and is decoded before it is matched against the stored assignment.
-     * @return RequestConfig
-     */
-    fun deleteFrameworkRolesByUserByRoleRequestConfig(user: kotlin.String, role: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/framework/roles/{user}/{role}".replace("{"+"user"+"}", encodeURIComponent(user.toString())).replace("{"+"role"+"}", encodeURIComponent(role.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/framework/{doctype}
      * Returns the caller org&#39;s documents of one DocType, filtered, ordered and projected by the query.
      * Returns the caller org&#39;s documents of one DocType, filtered, ordered and projected by the query. The DocType is resolved FIRST — through the same permission gate the list itself uses — because the query is validated against its schema: a filter, sort or field name the DocType does not declare is refused rather than reaching the store.
-     * @param doctype DocType is the DocType to list, from the path.
+     * @param doctype DocType is the DocType to list, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param filters Filters is a JSON object of equality matches, e.g. {\&quot;priority\&quot;:\&quot;High\&quot;}. Every key must be a field the DocType declares (or the managed name / docstatus); an undeclared one is refused rather than silently ignored. (optional)
      * @param fields Fields projects the response to a subset — a JSON array [\&quot;a\&quot;,\&quot;b\&quot;] or a comma list \&quot;a,b\&quot;. The envelope keys are always returned. (optional)
      * @param orderBy OrderBy is \&quot;&lt;field&gt; [asc|desc]\&quot;. Empty means most-recently-updated first. (optional)
@@ -309,7 +234,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/{doctype}
      * Returns the caller org&#39;s documents of one DocType, filtered, ordered and projected by the query.
      * Returns the caller org&#39;s documents of one DocType, filtered, ordered and projected by the query. The DocType is resolved FIRST — through the same permission gate the list itself uses — because the query is validated against its schema: a filter, sort or field name the DocType does not declare is refused rather than reaching the store.
-     * @param doctype DocType is the DocType to list, from the path.
+     * @param doctype DocType is the DocType to list, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param filters Filters is a JSON object of equality matches, e.g. {\&quot;priority\&quot;:\&quot;High\&quot;}. Every key must be a field the DocType declares (or the managed name / docstatus); an undeclared one is refused rather than silently ignored. (optional)
      * @param fields Fields projects the response to a subset — a JSON array [\&quot;a\&quot;,\&quot;b\&quot;] or a comma list \&quot;a,b\&quot;. The envelope keys are always returned. (optional)
      * @param orderBy OrderBy is \&quot;&lt;field&gt; [asc|desc]\&quot;. Empty means most-recently-updated first. (optional)
@@ -331,7 +256,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * To obtain the request config of the operation getFrameworkByDoctype
      *
-     * @param doctype DocType is the DocType to list, from the path.
+     * @param doctype DocType is the DocType to list, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param filters Filters is a JSON object of equality matches, e.g. {\&quot;priority\&quot;:\&quot;High\&quot;}. Every key must be a field the DocType declares (or the managed name / docstatus); an undeclared one is refused rather than silently ignored. (optional)
      * @param fields Fields projects the response to a subset — a JSON array [\&quot;a\&quot;,\&quot;b\&quot;] or a comma list \&quot;a,b\&quot;. The envelope keys are always returned. (optional)
      * @param orderBy OrderBy is \&quot;&lt;field&gt; [asc|desc]\&quot;. Empty means most-recently-updated first. (optional)
@@ -372,7 +297,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/{doctype}/{name}
      * Returns one document by name, with Password fields redacted.
      * Returns one document by name, with Password fields redacted.
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
@@ -405,7 +330,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/{doctype}/{name}
      * Returns one document by name, with Password fields redacted.
      * Returns one document by name, with Password fields redacted.
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -424,7 +349,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * To obtain the request config of the operation getFrameworkByDoctypeByName
      *
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
@@ -518,7 +443,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/doctypes/{name}
      * Returns one DocType definition — its fields, naming rule, permissions and lifecycle flags.
      * Returns one DocType definition — its fields, naming rule, permissions and lifecycle flags. Scoped to the caller&#39;s org, so another tenant&#39;s DocType of the same name is simply not found.
-     * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
+     * @param name Name is the DocType&#39;s ADDRESS — \&quot;module.name\&quot;, e.g. \&quot;kb.page\&quot;. A name containing a space (\&quot;erp.Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return DocType
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -550,7 +475,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/doctypes/{name}
      * Returns one DocType definition — its fields, naming rule, permissions and lifecycle flags.
      * Returns one DocType definition — its fields, naming rule, permissions and lifecycle flags. Scoped to the caller&#39;s org, so another tenant&#39;s DocType of the same name is simply not found.
-     * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
+     * @param name Name is the DocType&#39;s ADDRESS — \&quot;module.name\&quot;, e.g. \&quot;kb.page\&quot;. A name containing a space (\&quot;erp.Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return ApiResponse<DocType?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -568,7 +493,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * To obtain the request config of the operation getFrameworkDoctypesByName
      *
-     * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
+     * @param name Name is the DocType&#39;s ADDRESS — \&quot;module.name\&quot;, e.g. \&quot;kb.page\&quot;. A name containing a space (\&quot;erp.Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
     fun getFrameworkDoctypesByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
@@ -731,76 +656,6 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * GET /v1/framework/roles
-     * Returns every (user, role) assignment in the caller&#39;s org.
-     * Returns every (user, role) assignment in the caller&#39;s org. Roles are what DocType permissions are written against, so this is the grant table the permission calculus resolves a member&#39;s rights from.
-     * @return RoleList
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getFrameworkRoles() : RoleList {
-        val localVarResponse = getFrameworkRolesWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as RoleList
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/framework/roles
-     * Returns every (user, role) assignment in the caller&#39;s org.
-     * Returns every (user, role) assignment in the caller&#39;s org. Roles are what DocType permissions are written against, so this is the grant table the permission calculus resolves a member&#39;s rights from.
-     * @return ApiResponse<RoleList?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getFrameworkRolesWithHttpInfo() : ApiResponse<RoleList?> {
-        val localVariableConfig = getFrameworkRolesRequestConfig()
-
-        return request<Unit, RoleList>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getFrameworkRoles
-     *
-     * @return RequestConfig
-     */
-    fun getFrameworkRolesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/framework/roles",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/framework/summary
      * Reports how much of the DocType surface the caller&#39;s org uses: how many DocTypes it has defined, and how many documents exist across them.
      * Reports how much of the DocType surface the caller&#39;s org uses: how many DocTypes it has defined, and how many documents exist across them.
@@ -944,7 +799,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/framework/{doctype}/{name}/cancel
      * Moves a submitted document to cancelled (docstatus 1 → 2) after its on_cancel hooks agree.
      * Moves a submitted document to cancelled (docstatus 1 → 2) after its on_cancel hooks agree. Cancelling is terminal — a cancelled document cannot be re-submitted — but it CAN then be deleted.
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
@@ -977,7 +832,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/framework/{doctype}/{name}/cancel
      * Moves a submitted document to cancelled (docstatus 1 → 2) after its on_cancel hooks agree.
      * Moves a submitted document to cancelled (docstatus 1 → 2) after its on_cancel hooks agree. Cancelling is terminal — a cancelled document cannot be re-submitted — but it CAN then be deleted.
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -996,7 +851,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * To obtain the request config of the operation postFrameworkByDoctypeByNameCancel
      *
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
@@ -1020,7 +875,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/framework/{doctype}/{name}/submit
      * Moves a draft to submitted (docstatus 0 → 1) after its on_submit hooks agree.
      * Moves a draft to submitted (docstatus 0 → 1) after its on_submit hooks agree. A submitted document is IMMUTABLE: further writes and deletes are refused until it is cancelled. Only a submittable DocType has this lifecycle; any other docstatus is an illegal transition.
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1053,7 +908,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/framework/{doctype}/{name}/submit
      * Moves a draft to submitted (docstatus 0 → 1) after its on_submit hooks agree.
      * Moves a draft to submitted (docstatus 0 → 1) after its on_submit hooks agree. A submitted document is IMMUTABLE: further writes and deletes are refused until it is cancelled. Only a submittable DocType has this lifecycle; any other docstatus is an illegal transition.
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1072,7 +927,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * To obtain the request config of the operation postFrameworkByDoctypeByNameSubmit
      *
-     * @param doctype DocType is the document&#39;s DocType, from the path.
+     * @param doctype DocType is the document&#39;s DocType, by ADDRESS — \&quot;module.name\&quot;, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
@@ -1232,80 +1087,6 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/framework/modules/{module}/install".replace("{"+"module"+"}", encodeURIComponent(module.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/framework/roles
-     * Grants one user one role in the caller&#39;s org — how a member gains rights on a DocType, since permissions name roles and never users.
-     * Grants one user one role in the caller&#39;s org — how a member gains rights on a DocType, since permissions name roles and never users. Manager-only. Answers 201.
-     * @param roleAssignment 
-     * @return RoleAssignment
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postFrameworkRoles(roleAssignment: RoleAssignment) : RoleAssignment {
-        val localVarResponse = postFrameworkRolesWithHttpInfo(roleAssignment = roleAssignment)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as RoleAssignment
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/framework/roles
-     * Grants one user one role in the caller&#39;s org — how a member gains rights on a DocType, since permissions name roles and never users.
-     * Grants one user one role in the caller&#39;s org — how a member gains rights on a DocType, since permissions name roles and never users. Manager-only. Answers 201.
-     * @param roleAssignment 
-     * @return ApiResponse<RoleAssignment?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun postFrameworkRolesWithHttpInfo(roleAssignment: RoleAssignment) : ApiResponse<RoleAssignment?> {
-        val localVariableConfig = postFrameworkRolesRequestConfig(roleAssignment = roleAssignment)
-
-        return request<RoleAssignment, RoleAssignment>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation postFrameworkRoles
-     *
-     * @param roleAssignment 
-     * @return RequestConfig
-     */
-    fun postFrameworkRolesRequestConfig(roleAssignment: RoleAssignment) : RequestConfig<RoleAssignment> {
-        val localVariableBody = roleAssignment
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/framework/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

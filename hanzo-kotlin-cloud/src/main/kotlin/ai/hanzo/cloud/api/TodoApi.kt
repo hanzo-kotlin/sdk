@@ -244,7 +244,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
      * @param kind Kind keeps one shape: issue, pr, epic. (optional)
      * @param repo Repo keeps issues bound to one git repository. (optional)
-     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
+     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;space&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
      * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
      * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
      * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
@@ -284,7 +284,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
      * @param kind Kind keeps one shape: issue, pr, epic. (optional)
      * @param repo Repo keeps issues bound to one git repository. (optional)
-     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
+     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;space&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
      * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
      * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
      * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
@@ -310,7 +310,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
      * @param kind Kind keeps one shape: issue, pr, epic. (optional)
      * @param repo Repo keeps issues bound to one git repository. (optional)
-     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
+     * @param room Room keeps issues bound to one collaboration room, spelled \&quot;&lt;space&gt;_&lt;room&gt;\&quot; — the exact value GET /v1/meet/call answers with, so a channel&#39;s call and its todo list name the room the same way. This is the read a channel view runs to draw its own list; it spans every board of the org, because the work a channel is about is not confined to one board. (optional)
      * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
      * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
      * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
@@ -695,7 +695,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/todo/rooms/{room}
      * Summarises one room&#39;s work.
      * Summarises one room&#39;s work.  The room is opaque here and is deliberately not resolved: this package cannot say whether a room exists — apps/team owns that document — so an unknown room answers an EMPTY board rather than a 404. That is the honest answer and the useful one: a channel that has never had an item filed in it and a channel id that was mistyped both have no work, and inventing a distinction would require this surface to hold a second copy of the room list (HIP-0523 §2 forbids it, and it would drift the first time a room was renamed).  Tenancy is the validated principal&#39;s org and nothing else, so a caller cannot read another tenant&#39;s channel by naming its room.
-     * @param room Room is the room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
+     * @param room Room is the room, spelled \&quot;&lt;space&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
      * @return RoomWork
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -727,7 +727,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/todo/rooms/{room}
      * Summarises one room&#39;s work.
      * Summarises one room&#39;s work.  The room is opaque here and is deliberately not resolved: this package cannot say whether a room exists — apps/team owns that document — so an unknown room answers an EMPTY board rather than a 404. That is the honest answer and the useful one: a channel that has never had an item filed in it and a channel id that was mistyped both have no work, and inventing a distinction would require this surface to hold a second copy of the room list (HIP-0523 §2 forbids it, and it would drift the first time a room was renamed).  Tenancy is the validated principal&#39;s org and nothing else, so a caller cannot read another tenant&#39;s channel by naming its room.
-     * @param room Room is the room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
+     * @param room Room is the room, spelled \&quot;&lt;space&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
      * @return ApiResponse<RoomWork?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -745,7 +745,7 @@ class TodoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     /**
      * To obtain the request config of the operation getTodoRoomsByRoom
      *
-     * @param room Room is the room, spelled \&quot;&lt;workspace&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
+     * @param room Room is the room, spelled \&quot;&lt;space&gt;_&lt;room&gt;\&quot; — the same value GET /v1/meet/call answers with, so a channel&#39;s call and its work name the room identically. From the path.
      * @return RequestConfig
      */
     fun getTodoRoomsByRoomRequestConfig(room: kotlin.String) : RequestConfig<Unit> {

@@ -22,13 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param bots Bots is every agent of the caller's org, projected as a workspace member.
+ * @param bots Bots is every agent of the caller's org, projected as a space member.
  */
 
 
 data class BotRoster (
 
-    /* Bots is every agent of the caller's org, projected as a workspace member. */
+    /* Bots is every agent of the caller's org, projected as a space member. */
     @SerializedName("bots")
     val bots: kotlin.collections.List<BotMember>? = null
 

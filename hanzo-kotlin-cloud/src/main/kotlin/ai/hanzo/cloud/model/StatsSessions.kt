@@ -22,13 +22,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param activeSessions ActiveSessions maps a workspace uuid to its connected sessions. It carries only the token's OWN workspace, and is empty for a token that names none.
+ * @param activeSessions ActiveSessions maps a space uuid to its connected sessions. It carries only the token's OWN space, and is empty for a token that names none.
  */
 
 
 data class StatsSessions (
 
-    /* ActiveSessions maps a workspace uuid to its connected sessions. It carries only the token's OWN workspace, and is empty for a token that names none. */
+    /* ActiveSessions maps a space uuid to its connected sessions. It carries only the token's OWN space, and is empty for a token that names none. */
     @SerializedName("activeSessions")
     val activeSessions: kotlin.collections.Map<kotlin.String, kotlin.collections.List<StatsUser>>? = null
 

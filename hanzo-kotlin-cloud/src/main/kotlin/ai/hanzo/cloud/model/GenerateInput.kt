@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
  * @param brief the brief/goal driving copy generation
  * @param channels target channels (SocialPost)
  * @param design studio design slug (asset source)
- * @param doctype Campaign | SocialPost | Asset
+ * @param doctype marketing.Campaign | marketing.SocialPost | marketing.Asset
  * @param kind asset kind: ecom|product|lifestyle|hover|hero
  * @param model optional zen model override (copy)
  * @param product commerce product handle (copy context)
@@ -50,7 +50,7 @@ data class GenerateInput (
     @SerializedName("design")
     val design: kotlin.String? = null,
 
-    /* Campaign | SocialPost | Asset */
+    /* marketing.Campaign | marketing.SocialPost | marketing.Asset */
     @SerializedName("doctype")
     val doctype: kotlin.String? = null,
 

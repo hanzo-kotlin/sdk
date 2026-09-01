@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param doctype DocType is which kind of knowledge matched: kb-page (a wiki page), kb-memory (a unit of agent memory) or kb-source (a document a connector ingested). Those three are the whole indexed set, and searchIn.DocTypes filters on them.
+ * @param doctype DocType is which kind of knowledge matched, by address: kb.page (a wiki page), kb.memory (a unit of agent memory) or kb.source (a document a connector ingested). Those three are the whole indexed set, and searchIn.DocTypes filters on them.
  * @param name Name is the document's name in the framework store — the id to read or open it with. Unique per (org, doctype), so it identifies the document with DocType and not alone.
  * @param project Project is the project scope the document was saved under. Absent for a document saved with none, which is also why a project-scoped query cannot reach it.
  * @param provider Provider is the connector that ingested the document — github, slack, google or notion. Absent for a page or memory written in the product, which came from no connector.
@@ -33,7 +33,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Hit (
 
-    /* DocType is which kind of knowledge matched: kb-page (a wiki page), kb-memory (a unit of agent memory) or kb-source (a document a connector ingested). Those three are the whole indexed set, and searchIn.DocTypes filters on them. */
+    /* DocType is which kind of knowledge matched, by address: kb.page (a wiki page), kb.memory (a unit of agent memory) or kb.source (a document a connector ingested). Those three are the whole indexed set, and searchIn.DocTypes filters on them. */
     @SerializedName("doctype")
     val doctype: kotlin.String? = null,
 

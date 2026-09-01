@@ -50,6 +50,12 @@ import ai.hanzo.cloud.model.GithubReposOut
 import ai.hanzo.cloud.model.GithubSearchOut
 import ai.hanzo.cloud.model.GithubSearchReq
 import ai.hanzo.cloud.model.GitlabProjectsOut
+import ai.hanzo.cloud.model.LinearBackfillIn
+import ai.hanzo.cloud.model.LinearBackfillResult
+import ai.hanzo.cloud.model.LinearClaimIn
+import ai.hanzo.cloud.model.LinearClaimOut
+import ai.hanzo.cloud.model.LinearCommentIn
+import ai.hanzo.cloud.model.LinearCommentOut
 import ai.hanzo.cloud.model.ListOut
 import ai.hanzo.cloud.model.ProviderView
 import ai.hanzo.cloud.model.RefreshOut
@@ -3045,6 +3051,295 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/integrations/github/webhook",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/linear/claim
+     * Binds the caller&#39;s Linear organization to the org and seals the webhook secret.
+     * Binds the caller&#39;s Linear organization to the org and seals the webhook secret. The organization is READ from the caller&#39;s own key, never taken from the body: a person can only bind an organization they are a member of. An organization another org already holds is refused.
+     * @param linearClaimIn 
+     * @return LinearClaimOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsLinearClaim(linearClaimIn: LinearClaimIn) : LinearClaimOut {
+        val localVarResponse = postIntegrationsLinearClaimWithHttpInfo(linearClaimIn = linearClaimIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LinearClaimOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/linear/claim
+     * Binds the caller&#39;s Linear organization to the org and seals the webhook secret.
+     * Binds the caller&#39;s Linear organization to the org and seals the webhook secret. The organization is READ from the caller&#39;s own key, never taken from the body: a person can only bind an organization they are a member of. An organization another org already holds is refused.
+     * @param linearClaimIn 
+     * @return ApiResponse<LinearClaimOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsLinearClaimWithHttpInfo(linearClaimIn: LinearClaimIn) : ApiResponse<LinearClaimOut?> {
+        val localVariableConfig = postIntegrationsLinearClaimRequestConfig(linearClaimIn = linearClaimIn)
+
+        return request<LinearClaimIn, LinearClaimOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsLinearClaim
+     *
+     * @param linearClaimIn 
+     * @return RequestConfig
+     */
+    fun postIntegrationsLinearClaimRequestConfig(linearClaimIn: LinearClaimIn) : RequestConfig<LinearClaimIn> {
+        val localVariableBody = linearClaimIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/linear/claim",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/linear/comments
+     * Posts a comment on a Linear issue with the caller&#39;s own key, so it carries their name.
+     * Posts a comment on a Linear issue with the caller&#39;s own key, so it carries their name. This is the op an agent is offered when it should answer in Linear rather than in chat.
+     * @param linearCommentIn 
+     * @return LinearCommentOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsLinearComments(linearCommentIn: LinearCommentIn) : LinearCommentOut {
+        val localVarResponse = postIntegrationsLinearCommentsWithHttpInfo(linearCommentIn = linearCommentIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LinearCommentOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/linear/comments
+     * Posts a comment on a Linear issue with the caller&#39;s own key, so it carries their name.
+     * Posts a comment on a Linear issue with the caller&#39;s own key, so it carries their name. This is the op an agent is offered when it should answer in Linear rather than in chat.
+     * @param linearCommentIn 
+     * @return ApiResponse<LinearCommentOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsLinearCommentsWithHttpInfo(linearCommentIn: LinearCommentIn) : ApiResponse<LinearCommentOut?> {
+        val localVariableConfig = postIntegrationsLinearCommentsRequestConfig(linearCommentIn = linearCommentIn)
+
+        return request<LinearCommentIn, LinearCommentOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsLinearComments
+     *
+     * @param linearCommentIn 
+     * @return RequestConfig
+     */
+    fun postIntegrationsLinearCommentsRequestConfig(linearCommentIn: LinearCommentIn) : RequestConfig<LinearCommentIn> {
+        val localVariableBody = linearCommentIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/linear/comments",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/linear/issues/backfill
+     * Seeds the native todo with the EXISTING Linear issues the caller&#39;s key can see (default state&#x3D;open); the webhook keeps them live thereafter.
+     * Seeds the native todo with the EXISTING Linear issues the caller&#39;s key can see (default state&#x3D;open); the webhook keeps them live thereafter. Synchronous and bounded, idempotent by ExtRef.
+     * @param linearBackfillIn 
+     * @return LinearBackfillResult
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsLinearIssuesBackfill(linearBackfillIn: LinearBackfillIn) : LinearBackfillResult {
+        val localVarResponse = postIntegrationsLinearIssuesBackfillWithHttpInfo(linearBackfillIn = linearBackfillIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LinearBackfillResult
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/linear/issues/backfill
+     * Seeds the native todo with the EXISTING Linear issues the caller&#39;s key can see (default state&#x3D;open); the webhook keeps them live thereafter.
+     * Seeds the native todo with the EXISTING Linear issues the caller&#39;s key can see (default state&#x3D;open); the webhook keeps them live thereafter. Synchronous and bounded, idempotent by ExtRef.
+     * @param linearBackfillIn 
+     * @return ApiResponse<LinearBackfillResult?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsLinearIssuesBackfillWithHttpInfo(linearBackfillIn: LinearBackfillIn) : ApiResponse<LinearBackfillResult?> {
+        val localVariableConfig = postIntegrationsLinearIssuesBackfillRequestConfig(linearBackfillIn = linearBackfillIn)
+
+        return request<LinearBackfillIn, LinearBackfillResult>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsLinearIssuesBackfill
+     *
+     * @param linearBackfillIn 
+     * @return RequestConfig
+     */
+    fun postIntegrationsLinearIssuesBackfillRequestConfig(linearBackfillIn: LinearBackfillIn) : RequestConfig<LinearBackfillIn> {
+        val localVariableBody = linearBackfillIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/linear/issues/backfill",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/linear/webhook
+     * Linear webhook
+     * The address Linear delivers Issue and Comment events to. An issue event is mirrored into the native todo — idempotently by identifier, so ENG-123 is one row however many times it is edited, moved or closed — and every issue and comment event is handed to the automations engine as a verified trigger, which is how an org runs an agent when an issue is assigned to it or a comment mentions it. A remove is never propagated: the native side is canonical.  It answers a benign 200 for what it does not act on — an unknown organization, other event types — so Linear does not retry-storm. A bad signature and a delivery older than a minute are 401; only a sink failure is 502.  The delivery names its Linear organization; that organization&#39;s own webhook secret — sealed at /v1/integrations/linear/claim — verifies the HMAC over the raw body, so the tenant is the organization the signature proves, never a header.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIntegrationsLinearWebhook() : Unit {
+        val localVarResponse = postIntegrationsLinearWebhookWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/linear/webhook
+     * Linear webhook
+     * The address Linear delivers Issue and Comment events to. An issue event is mirrored into the native todo — idempotently by identifier, so ENG-123 is one row however many times it is edited, moved or closed — and every issue and comment event is handed to the automations engine as a verified trigger, which is how an org runs an agent when an issue is assigned to it or a comment mentions it. A remove is never propagated: the native side is canonical.  It answers a benign 200 for what it does not act on — an unknown organization, other event types — so Linear does not retry-storm. A bad signature and a delivery older than a minute are 401; only a sink failure is 502.  The delivery names its Linear organization; that organization&#39;s own webhook secret — sealed at /v1/integrations/linear/claim — verifies the HMAC over the raw body, so the tenant is the organization the signature proves, never a header.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIntegrationsLinearWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postIntegrationsLinearWebhookRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIntegrationsLinearWebhook
+     *
+     * @return RequestConfig
+     */
+    fun postIntegrationsLinearWebhookRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/linear/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

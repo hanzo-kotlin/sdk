@@ -22,9 +22,11 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param avatar 
  * @param computeRef 
  * @param createdAt 
  * @param description 
+ * @param emoji 
  * @param executionMode 
  * @param id 
  * @param instructions Instructions is the agent's system prompt, verbatim, up to 32 KiB. It is the one field the list read withholds, because it is the agent's whole behaviour and a page of them would be a page of prompts.
@@ -42,6 +44,9 @@ import com.google.gson.annotations.SerializedName
 
 data class AgentDetail (
 
+    @SerializedName("avatar")
+    val avatar: kotlin.String? = null,
+
     @SerializedName("computeRef")
     val computeRef: kotlin.String? = null,
 
@@ -50,6 +55,9 @@ data class AgentDetail (
 
     @SerializedName("description")
     val description: kotlin.String? = null,
+
+    @SerializedName("emoji")
+    val emoji: kotlin.String? = null,
 
     @SerializedName("executionMode")
     val executionMode: kotlin.String? = null,

@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
  * @param name the document name (empty for synthetic nodes)
  * @param project Project is the project scope the underlying document was saved under. Absent for a document saved with none, and for the synthetic nodes — unresolved link targets and connectors belong to no project. When ?project= narrows the graph, every page, memory and source node carries that value.
  * @param title display label
- * @param type kb-page | kb-memory | kb-source | kb-connector | unresolved
+ * @param type kb.page | kb.memory | kb.source | kb.connector | unresolved
  */
 
 
@@ -47,7 +47,7 @@ data class GraphNode (
     @SerializedName("title")
     val title: kotlin.String? = null,
 
-    /* kb-page | kb-memory | kb-source | kb-connector | unresolved */
+    /* kb.page | kb.memory | kb.source | kb.connector | unresolved */
     @SerializedName("type")
     val type: kotlin.String? = null
 

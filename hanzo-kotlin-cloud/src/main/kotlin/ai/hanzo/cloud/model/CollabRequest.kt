@@ -22,7 +22,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param documentId DocumentID addresses the document field, as \"<workspaceUuid>|<objectClass>|<objectId>|<objectAttr>\" — the collaborator-client encodeDocumentId shape, from the path.
+ * @param documentId DocumentID addresses the document field, as \"<spaceUuid>|<objectClass>|<objectId>|<objectAttr>\" — the collaborator-client encodeDocumentId shape, from the path.
  * @param method Method is the verb: createContent, updateContent or getContent.
  * @param payload Payload is the verb's argument.
  */
@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CollabRequest (
 
-    /* DocumentID addresses the document field, as \"<workspaceUuid>|<objectClass>|<objectId>|<objectAttr>\" — the collaborator-client encodeDocumentId shape, from the path. */
+    /* DocumentID addresses the document field, as \"<spaceUuid>|<objectClass>|<objectId>|<objectAttr>\" — the collaborator-client encodeDocumentId shape, from the path. */
     @SerializedName("documentId")
     val documentId: kotlin.String? = null,
 

@@ -15,26 +15,25 @@
 
 package ai.hanzo.cloud.model
 
+import ai.hanzo.cloud.model.IamTeam
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param role Role is the granted role's name.
- * @param user User is the member the role is granted to.
+ * @param teams 
+ * @param total 
  */
 
 
-data class RoleAssignment (
+data class IamteamsListOutput (
 
-    /* Role is the granted role's name. */
-    @SerializedName("role")
-    val role: kotlin.String? = null,
+    @SerializedName("teams")
+    val teams: kotlin.collections.List<IamTeam>? = null,
 
-    /* User is the member the role is granted to. */
-    @SerializedName("user")
-    val user: kotlin.String? = null
+    @SerializedName("total")
+    val total: kotlin.Int? = null
 
 ) {
 

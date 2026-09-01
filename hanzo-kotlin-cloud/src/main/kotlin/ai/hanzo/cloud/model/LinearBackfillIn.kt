@@ -15,22 +15,21 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.RoleAssignment
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param `data` Data is every (user, role) assignment in the caller's org.
+ * @param state State is the set of issues to walk: \"open\" (the default), \"closed\" or \"all\".
  */
 
 
-data class RoleList (
+data class LinearBackfillIn (
 
-    /* Data is every (user, role) assignment in the caller's org. */
-    @SerializedName("data")
-    val `data`: kotlin.collections.List<RoleAssignment>? = null
+    /* State is the set of issues to walk: \"open\" (the default), \"closed\" or \"all\". */
+    @SerializedName("state")
+    val state: kotlin.String? = null
 
 ) {
 

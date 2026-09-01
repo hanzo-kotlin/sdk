@@ -22,6 +22,8 @@ import okhttp3.HttpUrl
 import ai.hanzo.cloud.model.AllowlistPutIn
 import ai.hanzo.cloud.model.AllowlistView
 import ai.hanzo.cloud.model.ApprovePairingIn
+import ai.hanzo.cloud.model.ChannelAgents
+import ai.hanzo.cloud.model.ChannelAgentsPut
 import ai.hanzo.cloud.model.ChatChannels
 import ai.hanzo.cloud.model.InboxPage
 import ai.hanzo.cloud.model.PairingApproved
@@ -122,10 +124,88 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
+     * GET /v1/channels/agent
+     * Returns which agent answers the caller org&#39;s channel: the default and every room bound to another agent.
+     * Returns which agent answers the caller org&#39;s channel: the default and every room bound to another agent.
+     * @param channel Channel is the transport: discord, github, linear, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
+     * @return ChannelAgents
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getChannelsAgent(channel: kotlin.String? = null) : ChannelAgents {
+        val localVarResponse = getChannelsAgentWithHttpInfo(channel = channel)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ChannelAgents
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/channels/agent
+     * Returns which agent answers the caller org&#39;s channel: the default and every room bound to another agent.
+     * Returns which agent answers the caller org&#39;s channel: the default and every room bound to another agent.
+     * @param channel Channel is the transport: discord, github, linear, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
+     * @return ApiResponse<ChannelAgents?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getChannelsAgentWithHttpInfo(channel: kotlin.String?) : ApiResponse<ChannelAgents?> {
+        val localVariableConfig = getChannelsAgentRequestConfig(channel = channel)
+
+        return request<Unit, ChannelAgents>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getChannelsAgent
+     *
+     * @param channel Channel is the transport: discord, github, linear, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
+     * @return RequestConfig
+     */
+    fun getChannelsAgentRequestConfig(channel: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (channel != null) {
+                    put("channel", listOf(channel.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/channels/agent",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/channels/allowlist
      * Returns the caller org&#39;s access policy for one channel: whether DMs are pairing-gated, allowlisted or open, whether group rooms are open, allowlisted or disabled, the config-managed DM and group allow entries, the senders approved through PAIRING (read-only here), and the org&#39;s named access groups.
      * Returns the caller org&#39;s access policy for one channel: whether DMs are pairing-gated, allowlisted or open, whether group rooms are open, allowlisted or disabled, the config-managed DM and group allow entries, the senders approved through PAIRING (read-only here), and the org&#39;s named access groups. An unknown channel is a 404.
-     * @param channel Channel is the transport to read: discord, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
+     * @param channel Channel is the transport to read: discord, github, linear, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
      * @return AllowlistView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -157,7 +237,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/channels/allowlist
      * Returns the caller org&#39;s access policy for one channel: whether DMs are pairing-gated, allowlisted or open, whether group rooms are open, allowlisted or disabled, the config-managed DM and group allow entries, the senders approved through PAIRING (read-only here), and the org&#39;s named access groups.
      * Returns the caller org&#39;s access policy for one channel: whether DMs are pairing-gated, allowlisted or open, whether group rooms are open, allowlisted or disabled, the config-managed DM and group allow entries, the senders approved through PAIRING (read-only here), and the org&#39;s named access groups. An unknown channel is a 404.
-     * @param channel Channel is the transport to read: discord, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
+     * @param channel Channel is the transport to read: discord, github, linear, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
      * @return ApiResponse<AllowlistView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -175,7 +255,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * To obtain the request config of the operation getChannelsAllowlist
      *
-     * @param channel Channel is the transport to read: discord, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
+     * @param channel Channel is the transport to read: discord, github, linear, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. (optional)
      * @return RequestConfig
      */
     fun getChannelsAllowlistRequestConfig(channel: kotlin.String?) : RequestConfig<Unit> {
@@ -356,7 +436,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /v1/channels/{channel}/send
      * Send a message from your org&#39;s bot to one chat room
-     * Delivers text, attachments and actions to one room on a connected chat transport — discord, slack, teams, telegram or whatsapp — and answers that transport&#39;s own receipt, the &#x60;messageId&#x60; it assigned and the Unix second it landed. An unknown channel is a 404.  The body is the envelope&#39;s NARROW outbound projection: &#x60;room&#x60;, &#x60;text&#x60;, &#x60;attachments&#x60;, &#x60;actions&#x60;, &#x60;replyTo&#x60; and &#x60;idempotency&#x60;, and nothing else. Identity is not a field — the channel is the path segment and the sender is the caller&#39;s validated org — so a body carrying &#x60;sender&#x60;, &#x60;account&#x60; or &#x60;channel&#x60; is refused with 400 rather than having it silently dropped. &#x60;room.id&#x60; is required, and so is something to say: text, or at least one attachment.  Requires a validated principal; 403 without one. The room must already belong to the caller&#39;s org — each transport verifies the binding itself, so a room this org has not bound is 403 and a room whose route the bot has never learned is 409, meaning someone has to message the bot there first. A route learned only so a pairing reply could be delivered lasts exactly as long as that pairing request does, so a room whose sender was never approved goes back to 409 within the hour. A transport that fails answers 502 carrying status and shape only, never a token.  Sending is at-most-once only if you ask for it: pass an &#x60;idempotency&#x60; string and a replay answers 200 with the PRIOR receipt instead of sending twice, while a send that fails releases the key so the caller can re-attempt. Bodies over 1 MiB are refused. Every transport currently renders text only, so attachments and actions are flattened deterministically to one line each after the text rather than dropped.
+     * Delivers text, attachments and actions to one room on a connected chat transport — discord, github, linear, slack, teams, telegram or whatsapp — and answers that transport&#39;s own receipt, the &#x60;messageId&#x60; it assigned and the Unix second it landed. An unknown channel is a 404.  The body is the envelope&#39;s NARROW outbound projection: &#x60;room&#x60;, &#x60;text&#x60;, &#x60;attachments&#x60;, &#x60;actions&#x60;, &#x60;replyTo&#x60; and &#x60;idempotency&#x60;, and nothing else. Identity is not a field — the channel is the path segment and the sender is the caller&#39;s validated org — so a body carrying &#x60;sender&#x60;, &#x60;account&#x60; or &#x60;channel&#x60; is refused with 400 rather than having it silently dropped. &#x60;room.id&#x60; is required, and so is something to say: text, or at least one attachment.  Requires a validated principal; 403 without one. The room must already belong to the caller&#39;s org — each transport verifies the binding itself, so a room this org has not bound is 403 and a room whose route the bot has never learned is 409, meaning someone has to message the bot there first. A route learned only so a pairing reply could be delivered lasts exactly as long as that pairing request does, so a room whose sender was never approved goes back to 409 within the hour. A transport that fails answers 502 carrying status and shape only, never a token.  Sending is at-most-once only if you ask for it: pass an &#x60;idempotency&#x60; string and a replay answers 200 with the PRIOR receipt instead of sending twice, while a send that fails releases the key so the caller can re-attempt. Bodies over 1 MiB are refused. Every transport currently renders text only, so attachments and actions are flattened deterministically to one line each after the text rather than dropped.
      * @param channel 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -387,7 +467,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /v1/channels/{channel}/send
      * Send a message from your org&#39;s bot to one chat room
-     * Delivers text, attachments and actions to one room on a connected chat transport — discord, slack, teams, telegram or whatsapp — and answers that transport&#39;s own receipt, the &#x60;messageId&#x60; it assigned and the Unix second it landed. An unknown channel is a 404.  The body is the envelope&#39;s NARROW outbound projection: &#x60;room&#x60;, &#x60;text&#x60;, &#x60;attachments&#x60;, &#x60;actions&#x60;, &#x60;replyTo&#x60; and &#x60;idempotency&#x60;, and nothing else. Identity is not a field — the channel is the path segment and the sender is the caller&#39;s validated org — so a body carrying &#x60;sender&#x60;, &#x60;account&#x60; or &#x60;channel&#x60; is refused with 400 rather than having it silently dropped. &#x60;room.id&#x60; is required, and so is something to say: text, or at least one attachment.  Requires a validated principal; 403 without one. The room must already belong to the caller&#39;s org — each transport verifies the binding itself, so a room this org has not bound is 403 and a room whose route the bot has never learned is 409, meaning someone has to message the bot there first. A route learned only so a pairing reply could be delivered lasts exactly as long as that pairing request does, so a room whose sender was never approved goes back to 409 within the hour. A transport that fails answers 502 carrying status and shape only, never a token.  Sending is at-most-once only if you ask for it: pass an &#x60;idempotency&#x60; string and a replay answers 200 with the PRIOR receipt instead of sending twice, while a send that fails releases the key so the caller can re-attempt. Bodies over 1 MiB are refused. Every transport currently renders text only, so attachments and actions are flattened deterministically to one line each after the text rather than dropped.
+     * Delivers text, attachments and actions to one room on a connected chat transport — discord, github, linear, slack, teams, telegram or whatsapp — and answers that transport&#39;s own receipt, the &#x60;messageId&#x60; it assigned and the Unix second it landed. An unknown channel is a 404.  The body is the envelope&#39;s NARROW outbound projection: &#x60;room&#x60;, &#x60;text&#x60;, &#x60;attachments&#x60;, &#x60;actions&#x60;, &#x60;replyTo&#x60; and &#x60;idempotency&#x60;, and nothing else. Identity is not a field — the channel is the path segment and the sender is the caller&#39;s validated org — so a body carrying &#x60;sender&#x60;, &#x60;account&#x60; or &#x60;channel&#x60; is refused with 400 rather than having it silently dropped. &#x60;room.id&#x60; is required, and so is something to say: text, or at least one attachment.  Requires a validated principal; 403 without one. The room must already belong to the caller&#39;s org — each transport verifies the binding itself, so a room this org has not bound is 403 and a room whose route the bot has never learned is 409, meaning someone has to message the bot there first. A route learned only so a pairing reply could be delivered lasts exactly as long as that pairing request does, so a room whose sender was never approved goes back to 409 within the hour. A transport that fails answers 502 carrying status and shape only, never a token.  Sending is at-most-once only if you ask for it: pass an &#x60;idempotency&#x60; string and a replay answers 200 with the PRIOR receipt instead of sending twice, while a send that fails releases the key so the caller can re-attempt. Bodies over 1 MiB are refused. Every transport currently renders text only, so attachments and actions are flattened deterministically to one line each after the text rather than dropped.
      * @param channel 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -490,6 +570,80 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/channels/pairing/approve",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/channels/agent
+     * Binds agents to the caller org&#39;s channel and answers the bindings as GET would.
+     * Binds agents to the caller org&#39;s channel and answers the bindings as GET would. It requires ORG ADMIN. The agent is named by its ref — the name an org gave it at POST /v1/agents, or a built-in such as dev, des or vi.
+     * @param channelAgentsPut 
+     * @return ChannelAgents
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putChannelsAgent(channelAgentsPut: ChannelAgentsPut) : ChannelAgents {
+        val localVarResponse = putChannelsAgentWithHttpInfo(channelAgentsPut = channelAgentsPut)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ChannelAgents
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/channels/agent
+     * Binds agents to the caller org&#39;s channel and answers the bindings as GET would.
+     * Binds agents to the caller org&#39;s channel and answers the bindings as GET would. It requires ORG ADMIN. The agent is named by its ref — the name an org gave it at POST /v1/agents, or a built-in such as dev, des or vi.
+     * @param channelAgentsPut 
+     * @return ApiResponse<ChannelAgents?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putChannelsAgentWithHttpInfo(channelAgentsPut: ChannelAgentsPut) : ApiResponse<ChannelAgents?> {
+        val localVariableConfig = putChannelsAgentRequestConfig(channelAgentsPut = channelAgentsPut)
+
+        return request<ChannelAgentsPut, ChannelAgents>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putChannelsAgent
+     *
+     * @param channelAgentsPut 
+     * @return RequestConfig
+     */
+    fun putChannelsAgentRequestConfig(channelAgentsPut: ChannelAgentsPut) : RequestConfig<ChannelAgentsPut> {
+        val localVariableBody = channelAgentsPut
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/channels/agent",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

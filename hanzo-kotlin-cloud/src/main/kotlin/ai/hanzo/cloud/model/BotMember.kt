@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param active Active is whether the agent projects as a LIVE workspace member, derived from its registry status: empty, \"active\" and \"ready\" are live, anything else (archived/retired) is not. An inactive bot drops out of the Team list while its past authorship survives.
+ * @param active Active is whether the agent projects as a LIVE space member, derived from its registry status: empty, \"active\" and \"ready\" are live, anything else (archived/retired) is not. An inactive bot drops out of the Team list while its past authorship survives.
  * @param id the agent id
  * @param name display name
  * @param personRef the projected Person _id
@@ -31,7 +31,7 @@ import com.google.gson.annotations.SerializedName
 
 data class BotMember (
 
-    /* Active is whether the agent projects as a LIVE workspace member, derived from its registry status: empty, \"active\" and \"ready\" are live, anything else (archived/retired) is not. An inactive bot drops out of the Team list while its past authorship survives. */
+    /* Active is whether the agent projects as a LIVE space member, derived from its registry status: empty, \"active\" and \"ready\" are live, anything else (archived/retired) is not. An inactive bot drops out of the Team list while its past authorship survives. */
     @SerializedName("active")
     val active: kotlin.Boolean? = null,
 

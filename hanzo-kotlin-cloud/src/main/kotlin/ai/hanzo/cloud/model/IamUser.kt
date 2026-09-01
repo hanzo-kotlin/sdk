@@ -23,15 +23,13 @@ import ai.hanzo.cloud.model.IamManagedAccount
 import ai.hanzo.cloud.model.IamMfaAccount
 import ai.hanzo.cloud.model.IamMfaItem
 import ai.hanzo.cloud.model.IamMfaProps
-import ai.hanzo.cloud.model.IamPermission
-import ai.hanzo.cloud.model.IamRole
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param accessKey API credentials. AccessSecret / AccessSecretHash / the OAuth tokens are bearer material. AccessSecretHash MUST persist (orm stores via JSON; a json:\"-\" field is never saved), so it carries a real json tag and the handler's redact() strips it (and AccessSecret + the token fields) before responding.
+ * @param accessKey API credentials. AccessSecret / AccessSecretHash / the OAuth tokens are bearer material, so Mask blanks them and the handler's redact() strips them before responding. They carry real json tags because a field orm never saves is a field that silently vanishes.  A presented secret is resolved through Key.AccessSecretDigest and nowhere else, so no credential is ISSUED into these columns: they hold what older rows left behind, and every writer that touches them clears them.
  * @param accessSecret 
  * @param accessSecretHash 
  * @param accessToken 
@@ -100,7 +98,6 @@ import com.google.gson.annotations.SerializedName
  * @param github Linked federated-identity subjects, one column per connector (v1 parity).
  * @param gitlab 
  * @param google 
- * @param groups 
  * @param hash 
  * @param heroku 
  * @param homepage 
@@ -169,7 +166,6 @@ import com.google.gson.annotations.SerializedName
  * @param patreon 
  * @param paypal 
  * @param permanentAvatar 
- * @param permissions 
  * @param phone 
  * @param preHash 
  * @param preferredMfaType 
@@ -181,7 +177,6 @@ import com.google.gson.annotations.SerializedName
  * @param region 
  * @param registerSource 
  * @param registerType 
- * @param roles Authorization attachments. Roles and Permissions are computed on read from the authz store and carried here for API parity with v1.
  * @param salesforce 
  * @param score 
  * @param shopify 
@@ -223,7 +218,7 @@ import com.google.gson.annotations.SerializedName
 
 data class IamUser (
 
-    /* API credentials. AccessSecret / AccessSecretHash / the OAuth tokens are bearer material. AccessSecretHash MUST persist (orm stores via JSON; a json:\"-\" field is never saved), so it carries a real json tag and the handler's redact() strips it (and AccessSecret + the token fields) before responding. */
+    /* API credentials. AccessSecret / AccessSecretHash / the OAuth tokens are bearer material, so Mask blanks them and the handler's redact() strips them before responding. They carry real json tags because a field orm never saves is a field that silently vanishes.  A presented secret is resolved through Key.AccessSecretDigest and nowhere else, so no credential is ISSUED into these columns: they hold what older rows left behind, and every writer that touches them clears them. */
     @SerializedName("accessKey")
     val accessKey: kotlin.String? = null,
 
@@ -435,9 +430,6 @@ data class IamUser (
     @SerializedName("google")
     val google: kotlin.String? = null,
 
-    @SerializedName("groups")
-    val groups: kotlin.collections.List<kotlin.String>? = null,
-
     @SerializedName("hash")
     val hash: kotlin.String? = null,
 
@@ -647,9 +639,6 @@ data class IamUser (
     @SerializedName("permanentAvatar")
     val permanentAvatar: kotlin.String? = null,
 
-    @SerializedName("permissions")
-    val permissions: kotlin.collections.List<IamPermission>? = null,
-
     @SerializedName("phone")
     val phone: kotlin.String? = null,
 
@@ -682,10 +671,6 @@ data class IamUser (
 
     @SerializedName("registerType")
     val registerType: kotlin.String? = null,
-
-    /* Authorization attachments. Roles and Permissions are computed on read from the authz store and carried here for API parity with v1. */
-    @SerializedName("roles")
-    val roles: kotlin.collections.List<IamRole>? = null,
 
     @SerializedName("salesforce")
     val salesforce: kotlin.String? = null,

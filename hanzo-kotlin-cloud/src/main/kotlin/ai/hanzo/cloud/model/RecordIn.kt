@@ -21,13 +21,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param room Room is the LiveKit room, named the way the office client names one (`<workspace>_<name>_<id>`). Its leading segment is what binds the room to a tenant, and it is the segment the caller's membership is checked against.
+ * @param room Room is the LiveKit room, named the way the office client names one (`<space>_<name>_<id>`). Its leading segment is what binds the room to a tenant, and it is the segment the caller's membership is checked against.
  */
 
 
 data class RecordIn (
 
-    /* Room is the LiveKit room, named the way the office client names one (`<workspace>_<name>_<id>`). Its leading segment is what binds the room to a tenant, and it is the segment the caller's membership is checked against. */
+    /* Room is the LiveKit room, named the way the office client names one (`<space>_<name>_<id>`). Its leading segment is what binds the room to a tenant, and it is the segment the caller's membership is checked against. */
     @SerializedName("room")
     val room: kotlin.String
 

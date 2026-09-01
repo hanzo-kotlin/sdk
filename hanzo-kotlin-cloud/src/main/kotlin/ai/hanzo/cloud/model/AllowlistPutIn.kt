@@ -22,7 +22,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param accessGroups AccessGroups REPLACES the org's named access groups, as group name -> channel -> entries. Absent or null leaves them alone.
- * @param channel Channel is the transport to edit: discord, slack, teams, telegram or whatsapp. Required; an unknown value is a 404.
+ * @param channel Channel is the transport to edit: discord, github, linear, slack, teams, telegram or whatsapp. Required; an unknown value is a 404.
  * @param dm DM REPLACES the config-managed DM allow entries. Absent or null leaves them alone; an empty list clears them. It never touches senders approved through pairing — a policy edit cannot revoke an approved pairing.
  * @param dmPolicy DMPolicy sets how direct messages are admitted: \"pairing\" (a person must be approved first), \"allowlist\" (only listed senders) or \"open\". Empty leaves it unchanged.
  * @param group Group REPLACES the config-managed group allow entries. Absent or null leaves them alone; an empty list clears them.
@@ -36,7 +36,7 @@ data class AllowlistPutIn (
     @SerializedName("accessGroups")
     val accessGroups: kotlin.collections.Map<kotlin.String, kotlin.collections.Map<kotlin.String, kotlin.collections.List<kotlin.String>>>? = null,
 
-    /* Channel is the transport to edit: discord, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. */
+    /* Channel is the transport to edit: discord, github, linear, slack, teams, telegram or whatsapp. Required; an unknown value is a 404. */
     @SerializedName("channel")
     val channel: kotlin.String? = null,
 

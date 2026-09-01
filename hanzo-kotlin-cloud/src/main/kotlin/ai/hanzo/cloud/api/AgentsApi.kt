@@ -1042,7 +1042,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
      * @param status Status filters to running, paused, done or error. (optional)
      * @param project Project filters to the sessions tagged with one product slug. (optional)
-     * @param room Room filters to the sessions started in one collaborative room — the query a workspace view runs to show what has been run in it. (optional)
+     * @param room Room filters to the sessions started in one collaborative room — the query a space view runs to show what has been run in it. (optional)
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return SessionList
      * @throws IllegalStateException If the request is not correctly configured
@@ -1079,7 +1079,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
      * @param status Status filters to running, paused, done or error. (optional)
      * @param project Project filters to the sessions tagged with one product slug. (optional)
-     * @param room Room filters to the sessions started in one collaborative room — the query a workspace view runs to show what has been run in it. (optional)
+     * @param room Room filters to the sessions started in one collaborative room — the query a space view runs to show what has been run in it. (optional)
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return ApiResponse<SessionList?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1102,7 +1102,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
      * @param status Status filters to running, paused, done or error. (optional)
      * @param project Project filters to the sessions tagged with one product slug. (optional)
-     * @param room Room filters to the sessions started in one collaborative room — the query a workspace view runs to show what has been run in it. (optional)
+     * @param room Room filters to the sessions started in one collaborative room — the query a space view runs to show what has been run in it. (optional)
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return RequestConfig
      */
@@ -2087,6 +2087,73 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/agents/chat",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/agents/chat/conversations
+     * Record turns in a conversation
+     * Writes turns to the caller&#39;s thread store without running a completion, and answers the &#x60;conversationId&#x60; they were written under. An absent &#x60;conversationId&#x60; opens a new thread; supplying one appends to it.  This is for a client that streams its own turn through /v1/chat/completions and still wants the conversation in its history — the round records what IT answers, and is otherwise the only writer. It takes the same store, the same per-org isolation and the same notion of a thread: what is recorded here reads back through the two GETs beside it and the round can continue it by id. A validated principal with a non-empty org is required; 403 without one.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postAgentsChatConversations() : Unit {
+        val localVarResponse = postAgentsChatConversationsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/agents/chat/conversations
+     * Record turns in a conversation
+     * Writes turns to the caller&#39;s thread store without running a completion, and answers the &#x60;conversationId&#x60; they were written under. An absent &#x60;conversationId&#x60; opens a new thread; supplying one appends to it.  This is for a client that streams its own turn through /v1/chat/completions and still wants the conversation in its history — the round records what IT answers, and is otherwise the only writer. It takes the same store, the same per-org isolation and the same notion of a thread: what is recorded here reads back through the two GETs beside it and the round can continue it by id. A validated principal with a non-empty org is required; 403 without one.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postAgentsChatConversationsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postAgentsChatConversationsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postAgentsChatConversations
+     *
+     * @return RequestConfig
+     */
+    fun postAgentsChatConversationsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/agents/chat/conversations",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

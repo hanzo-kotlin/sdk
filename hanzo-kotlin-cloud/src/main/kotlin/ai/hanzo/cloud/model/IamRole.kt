@@ -27,12 +27,12 @@ import com.google.gson.annotations.SerializedName
  * @param description 
  * @param displayName 
  * @param domains 
- * @param groups 
  * @param id 
  * @param isEnabled 
  * @param name 
  * @param owner 
  * @param roles 
+ * @param teams 
  * @param updatedAt 
  * @param users 
  */
@@ -58,9 +58,6 @@ data class IamRole (
     @SerializedName("domains")
     val domains: kotlin.collections.List<kotlin.String>? = null,
 
-    @SerializedName("groups")
-    val groups: kotlin.collections.List<kotlin.String>? = null,
-
     @SerializedName("id")
     val id: kotlin.String? = null,
 
@@ -75,6 +72,9 @@ data class IamRole (
 
     @SerializedName("roles")
     val roles: kotlin.collections.List<kotlin.String>? = null,
+
+    @SerializedName("teams")
+    val teams: kotlin.collections.List<kotlin.String>? = null,
 
     @SerializedName("updatedAt")
     val updatedAt: java.time.OffsetDateTime? = null,

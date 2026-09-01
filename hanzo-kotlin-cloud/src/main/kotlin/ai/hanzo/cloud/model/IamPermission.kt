@@ -32,7 +32,6 @@ import com.google.gson.annotations.SerializedName
  * @param displayName 
  * @param domains 
  * @param effect 
- * @param groups 
  * @param id 
  * @param isEnabled 
  * @param model Authorization model, targets, and decision. AuthzModel carries the v1 `model` column (the named authz model); it is not the Go identifier `Model` because that name is taken by the embedded orm.Model[Permission] mixin. The HTTP contract is unchanged — json:\"model\".
@@ -43,6 +42,7 @@ import com.google.gson.annotations.SerializedName
  * @param roles 
  * @param state 
  * @param submitter Submission / approval workflow.
+ * @param teams 
  * @param updatedAt 
  * @param users Subjects the grant is evaluated for.
  */
@@ -84,9 +84,6 @@ data class IamPermission (
     @SerializedName("effect")
     val effect: kotlin.String? = null,
 
-    @SerializedName("groups")
-    val groups: kotlin.collections.List<kotlin.String>? = null,
-
     @SerializedName("id")
     val id: kotlin.String? = null,
 
@@ -119,6 +116,9 @@ data class IamPermission (
     /* Submission / approval workflow. */
     @SerializedName("submitter")
     val submitter: kotlin.String? = null,
+
+    @SerializedName("teams")
+    val teams: kotlin.collections.List<kotlin.String>? = null,
 
     @SerializedName("updatedAt")
     val updatedAt: java.time.OffsetDateTime? = null,

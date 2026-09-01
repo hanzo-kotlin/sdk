@@ -21,15 +21,15 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param from From is the id of the node the edge starts at: the child page for a parent edge, the page holding the wikilink for a link edge, the kb-source for a provenance edge. Always one of Nodes.
+ * @param from From is the id of the node the edge starts at: the child page for a parent edge, the page holding the wikilink for a link edge, the kb.source for a provenance edge. Always one of Nodes.
  * @param kind parent | link | provenance
- * @param to To is the id of the node the edge points at: the parent page, the linked page, the kb-connector. Always one of Nodes — a wikilink matching no page points at a synthetic \"unresolved:<lowercased title>\" node rather than dangling.
+ * @param to To is the id of the node the edge points at: the parent page, the linked page, the kb.connector. Always one of Nodes — a wikilink matching no page points at a synthetic \"unresolved:<lowercased title>\" node rather than dangling.
  */
 
 
 data class GraphEdge (
 
-    /* From is the id of the node the edge starts at: the child page for a parent edge, the page holding the wikilink for a link edge, the kb-source for a provenance edge. Always one of Nodes. */
+    /* From is the id of the node the edge starts at: the child page for a parent edge, the page holding the wikilink for a link edge, the kb.source for a provenance edge. Always one of Nodes. */
     @SerializedName("from")
     val from: kotlin.String? = null,
 
@@ -37,7 +37,7 @@ data class GraphEdge (
     @SerializedName("kind")
     val kind: kotlin.String? = null,
 
-    /* To is the id of the node the edge points at: the parent page, the linked page, the kb-connector. Always one of Nodes — a wikilink matching no page points at a synthetic \"unresolved:<lowercased title>\" node rather than dangling. */
+    /* To is the id of the node the edge points at: the parent page, the linked page, the kb.connector. Always one of Nodes — a wikilink matching no page points at a synthetic \"unresolved:<lowercased title>\" node rather than dangling. */
     @SerializedName("to")
     val to: kotlin.String? = null
 

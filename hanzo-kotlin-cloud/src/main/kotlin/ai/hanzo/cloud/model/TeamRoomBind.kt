@@ -24,7 +24,7 @@ import com.google.gson.annotations.SerializedName
  * @param bindings Bindings REPLACES what the room is about, wholly. It is a replace and not a merge because a caller that cannot remove a binding would have no way to correct a wrong one, and an empty list sent explicitly is how a room is unbound. Absent (null) leaves the existing list alone.
  * @param id ID is the room to bind, from the path. The URL is the authority; a body carrying another id cannot redirect the write.
  * @param life Life sets the lifecycle intent: \"standing\" or \"bound\". Any other value is refused rather than stored, so a reader never has to interpret a third one. Empty leaves the current intent unchanged.
- * @param workspace Workspace names the workspace holding the room. It is required, because a room id is unique only within one and searching every workspace for a matching id would make the write's target depend on iteration order.
+ * @param space Space names the space holding the room. It is required, because a room id is unique only within one and searching every space for a matching id would make the write's target depend on iteration order.
  */
 
 
@@ -42,9 +42,9 @@ data class TeamRoomBind (
     @SerializedName("life")
     val life: kotlin.String? = null,
 
-    /* Workspace names the workspace holding the room. It is required, because a room id is unique only within one and searching every workspace for a matching id would make the write's target depend on iteration order. */
-    @SerializedName("workspace")
-    val workspace: kotlin.String? = null
+    /* Space names the space holding the room. It is required, because a room id is unique only within one and searching every space for a matching id would make the write's target depend on iteration order. */
+    @SerializedName("space")
+    val space: kotlin.String? = null
 
 ) {
 

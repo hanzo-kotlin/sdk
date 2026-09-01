@@ -46,6 +46,8 @@ import ai.hanzo.cloud.model.IamProvider
 import ai.hanzo.cloud.model.IamRole
 import ai.hanzo.cloud.model.IamSession
 import ai.hanzo.cloud.model.IamSetAvatarInput
+import ai.hanzo.cloud.model.IamSetProfileInput
+import ai.hanzo.cloud.model.IamTeam
 import ai.hanzo.cloud.model.IamToken
 import ai.hanzo.cloud.model.IamUpdateInput
 import ai.hanzo.cloud.model.IamUpdateOrganizationInput
@@ -79,6 +81,9 @@ import ai.hanzo.cloud.model.Iamreply
 import ai.hanzo.cloud.model.IamrolesDeleteOutput
 import ai.hanzo.cloud.model.IamrolesInput
 import ai.hanzo.cloud.model.IamrolesListOutput
+import ai.hanzo.cloud.model.IamteamsDeleteOutput
+import ai.hanzo.cloud.model.IamteamsInput
+import ai.hanzo.cloud.model.IamteamsListOutput
 import ai.hanzo.cloud.model.IamtokenMutation
 import ai.hanzo.cloud.model.IamtokenResult
 import ai.hanzo.cloud.model.IamusersDeleteOutput
@@ -411,8 +416,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/iam/sessions
-     * Records a sign-in.
-     * Records a sign-in. Signing in again from another browser adds to the session rather than replacing it, so one person can be signed in from a laptop and a phone at once.  Ask for an exclusive sign-in and the opposite holds: the new sign-in is the only one left and every other browser is signed out. That is the setting to use when one person may hold only one live session at a time.
+     * Records a sign-in and answers with the cookie id it minted.
+     * Records a sign-in and answers with the cookie id it minted. Signing in again from another browser adds to the session rather than replacing it, so one person can be signed in from a laptop and a phone at once.  Ask for an exclusive sign-in and the opposite holds: the new sign-in is the only one left and every other browser is signed out. That is the setting to use when one person may hold only one live session at a time.
      * @param iamCreateSessionIn 
      * @return IamSession
      * @throws IllegalStateException If the request is not correctly configured
@@ -443,8 +448,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/iam/sessions
-     * Records a sign-in.
-     * Records a sign-in. Signing in again from another browser adds to the session rather than replacing it, so one person can be signed in from a laptop and a phone at once.  Ask for an exclusive sign-in and the opposite holds: the new sign-in is the only one left and every other browser is signed out. That is the setting to use when one person may hold only one live session at a time.
+     * Records a sign-in and answers with the cookie id it minted.
+     * Records a sign-in and answers with the cookie id it minted. Signing in again from another browser adds to the session rather than replacing it, so one person can be signed in from a laptop and a phone at once.  Ask for an exclusive sign-in and the opposite holds: the new sign-in is the only one left and every other browser is signed out. That is the setting to use when one person may hold only one live session at a time.
      * @param iamCreateSessionIn 
      * @return ApiResponse<IamSession?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1294,6 +1299,79 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/iam/service-accounts/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/iam/teams/{name}
+     * Removes a team.
+     * Removes a team. Everyone in it loses the access it carried; their accounts, and any other team they are in, are untouched.
+     * @param name 
+     * @return IamteamsDeleteOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteIamTeamsByName(name: kotlin.String) : IamteamsDeleteOutput {
+        val localVarResponse = deleteIamTeamsByNameWithHttpInfo(name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamteamsDeleteOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/iam/teams/{name}
+     * Removes a team.
+     * Removes a team. Everyone in it loses the access it carried; their accounts, and any other team they are in, are untouched.
+     * @param name 
+     * @return ApiResponse<IamteamsDeleteOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteIamTeamsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<IamteamsDeleteOutput?> {
+        val localVariableConfig = deleteIamTeamsByNameRequestConfig(name = name)
+
+        return request<Unit, IamteamsDeleteOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteIamTeamsByName
+     *
+     * @param name 
+     * @return RequestConfig
+     */
+    fun deleteIamTeamsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/iam/teams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -2821,8 +2899,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/keys
-     * Returns your organization&#39;s API keys, newest first — what each is called, what it may reach, and its publishable half.
-     * Returns your organization&#39;s API keys, newest first — what each is called, what it may reach, and its publishable half. Secret halves are never listed.
+     * Returns an organization&#39;s API keys, newest first — what each is called, what it may reach, and its publishable half.
+     * Returns an organization&#39;s API keys, newest first — what each is called, what it may reach, and its publishable half. Secret halves are never listed.  Which organization comes from your credentials, not from the request: you read your own and no one else&#39;s. The capability that admits a confidential client to this collection does not itself name a tenant, so the tenant is decided here.
      * @param owner  (optional)
      * @return IamKeyList
      * @throws IllegalStateException If the request is not correctly configured
@@ -2853,8 +2931,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/keys
-     * Returns your organization&#39;s API keys, newest first — what each is called, what it may reach, and its publishable half.
-     * Returns your organization&#39;s API keys, newest first — what each is called, what it may reach, and its publishable half. Secret halves are never listed.
+     * Returns an organization&#39;s API keys, newest first — what each is called, what it may reach, and its publishable half.
+     * Returns an organization&#39;s API keys, newest first — what each is called, what it may reach, and its publishable half. Secret halves are never listed.  Which organization comes from your credentials, not from the request: you read your own and no one else&#39;s. The capability that admits a confidential client to this collection does not itself name a tenant, so the tenant is decided here.
      * @param owner  (optional)
      * @return ApiResponse<IamKeyList?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -3177,7 +3255,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * GET /v1/iam/memberships
      * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.
-     * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.  Both are org-scoped: a non-SuperAdmin may ask about ITS OWN org&#39;s roster, or about a user whose home org is its own, and nothing else. The bound comes from the verified credential via authz.Scope, so a request parameter can never widen it — a membership row names who may act and spend in an org, so a cross-tenant read is a customer roster leak.
+     * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.  Both are org-scoped: a non-SuperAdmin may ask about ITS OWN org&#39;s roster, or about a user whose home org is its own, and nothing else. The bound comes from the verified credential via principal.Scope, so a request parameter can never widen it — a membership row names who may act and spend in an org, so a cross-tenant read is a customer roster leak.
      * @param user User is \&quot;&lt;homeOrg&gt;/&lt;username&gt;\&quot; — which organizations that identity may act in. (optional)
      * @param org Org is an organization — who may act in it. (optional)
      * @return IamAnswer
@@ -3210,7 +3288,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * GET /v1/iam/memberships
      * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.
-     * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.  Both are org-scoped: a non-SuperAdmin may ask about ITS OWN org&#39;s roster, or about a user whose home org is its own, and nothing else. The bound comes from the verified credential via authz.Scope, so a request parameter can never widen it — a membership row names who may act and spend in an org, so a cross-tenant read is a customer roster leak.
+     * Answers either question about who belongs where: which organizations one person can act in, or who can act in one organization.  Both are org-scoped: a non-SuperAdmin may ask about ITS OWN org&#39;s roster, or about a user whose home org is its own, and nothing else. The bound comes from the verified credential via principal.Scope, so a request parameter can never widen it — a membership row names who may act and spend in an org, so a cross-tenant read is a customer roster leak.
      * @param user User is \&quot;&lt;homeOrg&gt;/&lt;username&gt;\&quot; — which organizations that identity may act in. (optional)
      * @param org Org is an organization — who may act in it. (optional)
      * @return ApiResponse<IamAnswer?>
@@ -4709,10 +4787,153 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
+     * GET /v1/iam/teams
+     * Returns your organization&#39;s teams, newest first — each a named set of people that roles and permissions are granted to.
+     * Returns your organization&#39;s teams, newest first — each a named set of people that roles and permissions are granted to.  You see your own organization&#39;s teams and no one else&#39;s; which organization that is comes from your credentials, not from the request.
+     * @return IamteamsListOutput
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamTeams() : IamteamsListOutput {
+        val localVarResponse = getIamTeamsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamteamsListOutput
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/teams
+     * Returns your organization&#39;s teams, newest first — each a named set of people that roles and permissions are granted to.
+     * Returns your organization&#39;s teams, newest first — each a named set of people that roles and permissions are granted to.  You see your own organization&#39;s teams and no one else&#39;s; which organization that is comes from your credentials, not from the request.
+     * @return ApiResponse<IamteamsListOutput?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamTeamsWithHttpInfo() : ApiResponse<IamteamsListOutput?> {
+        val localVariableConfig = getIamTeamsRequestConfig()
+
+        return request<Unit, IamteamsListOutput>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamTeams
+     *
+     * @return RequestConfig
+     */
+    fun getIamTeamsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/teams",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/iam/teams/{name}
+     * Returns one team: who is in it.
+     * Returns one team: who is in it.
+     * @param name 
+     * @return IamTeam
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getIamTeamsByName(name: kotlin.String) : IamTeam {
+        val localVarResponse = getIamTeamsByNameWithHttpInfo(name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamTeam
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/iam/teams/{name}
+     * Returns one team: who is in it.
+     * Returns one team: who is in it.
+     * @param name 
+     * @return ApiResponse<IamTeam?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getIamTeamsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<IamTeam?> {
+        val localVariableConfig = getIamTeamsByNameRequestConfig(name = name)
+
+        return request<Unit, IamTeam>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getIamTeamsByName
+     *
+     * @param name 
+     * @return RequestConfig
+     */
+    fun getIamTeamsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/iam/teams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /v1/iam/users
-     * Returns a page of the people in your organization, with the total so you can page through the rest.
-     * Returns a page of the people in your organization, with the total so you can page through the rest. Passwords, API secrets and MFA material are stripped from every entry.
-     * @param owner 
+     * Returns a page of the people in an organization, with the total so you can page through the rest.
+     * Returns a page of the people in an organization, with the total so you can page through the rest. Passwords, API secrets and MFA material are stripped from every entry.  Which organization comes from your credentials, not from the request: you read your own and no one else&#39;s, and a credential whose scope spans tenants reads the tenant it names — or, naming none, every one of them.
+     * @param owner  (optional)
      * @param email Email narrows the page to the accounts carrying one address. Looking a person up by their address is a QUERY over the collection, not an item read: an address is not the natural key, two rows in one org can carry one, and a caller that gets a page SEES both — where a single-item read would have to choose, and choosing is how somebody joins a team under a colleague&#39;s identity. (optional)
      * @param limit  (optional)
      * @param offset  (optional)
@@ -4725,7 +4946,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getIamUsers(owner: kotlin.String, email: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : IamusersListOutput {
+    fun getIamUsers(owner: kotlin.String? = null, email: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : IamusersListOutput {
         val localVarResponse = getIamUsersWithHttpInfo(owner = owner, email = email, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
@@ -4745,9 +4966,9 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/users
-     * Returns a page of the people in your organization, with the total so you can page through the rest.
-     * Returns a page of the people in your organization, with the total so you can page through the rest. Passwords, API secrets and MFA material are stripped from every entry.
-     * @param owner 
+     * Returns a page of the people in an organization, with the total so you can page through the rest.
+     * Returns a page of the people in an organization, with the total so you can page through the rest. Passwords, API secrets and MFA material are stripped from every entry.  Which organization comes from your credentials, not from the request: you read your own and no one else&#39;s, and a credential whose scope spans tenants reads the tenant it names — or, naming none, every one of them.
+     * @param owner  (optional)
      * @param email Email narrows the page to the accounts carrying one address. Looking a person up by their address is a QUERY over the collection, not an item read: an address is not the natural key, two rows in one org can carry one, and a caller that gets a page SEES both — where a single-item read would have to choose, and choosing is how somebody joins a team under a colleague&#39;s identity. (optional)
      * @param limit  (optional)
      * @param offset  (optional)
@@ -4757,7 +4978,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getIamUsersWithHttpInfo(owner: kotlin.String, email: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<IamusersListOutput?> {
+    fun getIamUsersWithHttpInfo(owner: kotlin.String?, email: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<IamusersListOutput?> {
         val localVariableConfig = getIamUsersRequestConfig(owner = owner, email = email, limit = limit, offset = offset)
 
         return request<Unit, IamusersListOutput>(
@@ -4768,17 +4989,19 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation getIamUsers
      *
-     * @param owner 
+     * @param owner  (optional)
      * @param email Email narrows the page to the accounts carrying one address. Looking a person up by their address is a QUERY over the collection, not an item read: an address is not the natural key, two rows in one org can carry one, and a caller that gets a page SEES both — where a single-item read would have to choose, and choosing is how somebody joins a team under a colleague&#39;s identity. (optional)
      * @param limit  (optional)
      * @param offset  (optional)
      * @return RequestConfig
      */
-    fun getIamUsersRequestConfig(owner: kotlin.String, email: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getIamUsersRequestConfig(owner: kotlin.String?, email: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
-                put("owner", listOf(owner.toString()))
+                if (owner != null) {
+                    put("owner", listOf(owner.toString()))
+                }
                 if (email != null) {
                     put("email", listOf(email.toString()))
                 }
@@ -6066,9 +6289,9 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/sessions
-     * Returns who is currently signed in to your organization, newest first, and can be narrowed to one person or one application.
-     * Returns who is currently signed in to your organization, newest first, and can be narrowed to one person or one application. It is what you read before signing someone out.
-     * @param owner 
+     * Returns who is currently signed in to an organization, newest first, and can be narrowed to one person or one application.
+     * Returns who is currently signed in to an organization, newest first, and can be narrowed to one person or one application. It is what you read before signing someone out.  Which organization comes from your credentials, not from the request: you read your own and no one else&#39;s. A session row names a live account and the applications it is signed in to, so the tenant is decided here rather than taken from the query.
+     * @param owner  (optional)
      * @param name  (optional)
      * @param application  (optional)
      * @return IamListSessionsOut
@@ -6080,7 +6303,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun listSessions(owner: kotlin.String, name: kotlin.String? = null, application: kotlin.String? = null) : IamListSessionsOut {
+    fun listSessions(owner: kotlin.String? = null, name: kotlin.String? = null, application: kotlin.String? = null) : IamListSessionsOut {
         val localVarResponse = listSessionsWithHttpInfo(owner = owner, name = name, application = application)
 
         return when (localVarResponse.responseType) {
@@ -6100,9 +6323,9 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/iam/sessions
-     * Returns who is currently signed in to your organization, newest first, and can be narrowed to one person or one application.
-     * Returns who is currently signed in to your organization, newest first, and can be narrowed to one person or one application. It is what you read before signing someone out.
-     * @param owner 
+     * Returns who is currently signed in to an organization, newest first, and can be narrowed to one person or one application.
+     * Returns who is currently signed in to an organization, newest first, and can be narrowed to one person or one application. It is what you read before signing someone out.  Which organization comes from your credentials, not from the request: you read your own and no one else&#39;s. A session row names a live account and the applications it is signed in to, so the tenant is decided here rather than taken from the query.
+     * @param owner  (optional)
      * @param name  (optional)
      * @param application  (optional)
      * @return ApiResponse<IamListSessionsOut?>
@@ -6111,7 +6334,7 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun listSessionsWithHttpInfo(owner: kotlin.String, name: kotlin.String?, application: kotlin.String?) : ApiResponse<IamListSessionsOut?> {
+    fun listSessionsWithHttpInfo(owner: kotlin.String?, name: kotlin.String?, application: kotlin.String?) : ApiResponse<IamListSessionsOut?> {
         val localVariableConfig = listSessionsRequestConfig(owner = owner, name = name, application = application)
 
         return request<Unit, IamListSessionsOut>(
@@ -6122,16 +6345,18 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     /**
      * To obtain the request config of the operation listSessions
      *
-     * @param owner 
+     * @param owner  (optional)
      * @param name  (optional)
      * @param application  (optional)
      * @return RequestConfig
      */
-    fun listSessionsRequestConfig(owner: kotlin.String, name: kotlin.String?, application: kotlin.String?) : RequestConfig<Unit> {
+    fun listSessionsRequestConfig(owner: kotlin.String?, name: kotlin.String?, application: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
-                put("owner", listOf(owner.toString()))
+                if (owner != null) {
+                    put("owner", listOf(owner.toString()))
+                }
                 if (name != null) {
                     put("name", listOf(name.toString()))
                 }
@@ -8822,6 +9047,80 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
+     * POST /v1/iam/teams
+     * Makes a team — a named set of people that roles and permissions grant to.
+     * Makes a team — a named set of people that roles and permissions grant to. Granting to a team rather than to each person keeps access correct as people come and go: add someone and they inherit what the team can do. A name already used in your organization is refused.
+     * @param iamteamsInput 
+     * @return IamTeam
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postIamTeams(iamteamsInput: IamteamsInput) : IamTeam {
+        val localVarResponse = postIamTeamsWithHttpInfo(iamteamsInput = iamteamsInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamTeam
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/iam/teams
+     * Makes a team — a named set of people that roles and permissions grant to.
+     * Makes a team — a named set of people that roles and permissions grant to. Granting to a team rather than to each person keeps access correct as people come and go: add someone and they inherit what the team can do. A name already used in your organization is refused.
+     * @param iamteamsInput 
+     * @return ApiResponse<IamTeam?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postIamTeamsWithHttpInfo(iamteamsInput: IamteamsInput) : ApiResponse<IamTeam?> {
+        val localVariableConfig = postIamTeamsRequestConfig(iamteamsInput = iamteamsInput)
+
+        return request<IamteamsInput, IamTeam>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postIamTeams
+     *
+     * @param iamteamsInput 
+     * @return RequestConfig
+     */
+    fun postIamTeamsRequestConfig(iamteamsInput: IamteamsInput) : RequestConfig<IamteamsInput> {
+        val localVariableBody = iamteamsInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/iam/teams",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * POST /v1/iam/tokens/issue
      * Mints an access token for the &#x60;?id&#x3D;&lt;owner&gt;/&lt;name&gt;&#x60; target user (optional &#x60;?aud&#x3D;&#x60; resource, RFC 8707), issued by the authenticated + allow-listed confidential client.
      * Mints an access token for the &#x60;?id&#x3D;&lt;owner&gt;/&lt;name&gt;&#x60; target user (optional &#x60;?aud&#x3D;&#x60; resource, RFC 8707), issued by the authenticated + allow-listed confidential client. The token&#39;s subject + owner are the TARGET USER&#39;s, so a resource server scopes on the validated owner claim to the user&#39;s tenant — indistinguishable from a token the user obtained directly. Response is the camelCase &#x60;{accessToken, expiresIn}&#x60; body identity.ts consumes. Equivalent to the RFC 8693 token-exchange grant, minus the subject_token proof (the console has the user&#39;s id, not a token) — the reason this compat shim exists.
@@ -10389,6 +10688,83 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
+     * PUT /v1/iam/teams/{name}
+     * Changes who is in a team.
+     * Changes who is in a team. Access changes for everyone in it as soon as the write lands. The name and the created stamp do not change.
+     * @param name Name addresses the team on update and names it on create; every other field is content and binds from the BODY, never the URL.
+     * @param iamteamsInput 
+     * @return IamTeam
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putIamTeamsByName(name: kotlin.String, iamteamsInput: IamteamsInput) : IamTeam {
+        val localVarResponse = putIamTeamsByNameWithHttpInfo(name = name, iamteamsInput = iamteamsInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamTeam
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/iam/teams/{name}
+     * Changes who is in a team.
+     * Changes who is in a team. Access changes for everyone in it as soon as the write lands. The name and the created stamp do not change.
+     * @param name Name addresses the team on update and names it on create; every other field is content and binds from the BODY, never the URL.
+     * @param iamteamsInput 
+     * @return ApiResponse<IamTeam?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putIamTeamsByNameWithHttpInfo(name: kotlin.String, iamteamsInput: IamteamsInput) : ApiResponse<IamTeam?> {
+        val localVariableConfig = putIamTeamsByNameRequestConfig(name = name, iamteamsInput = iamteamsInput)
+
+        return request<IamteamsInput, IamTeam>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putIamTeamsByName
+     *
+     * @param name Name addresses the team on update and names it on create; every other field is content and binds from the BODY, never the URL.
+     * @param iamteamsInput 
+     * @return RequestConfig
+     */
+    fun putIamTeamsByNameRequestConfig(name: kotlin.String, iamteamsInput: IamteamsInput) : RequestConfig<IamteamsInput> {
+        val localVariableBody = iamteamsInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/iam/teams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * PUT /v1/iam/users/{owner}/{name}
      * Changes a person&#39;s profile, their roles, or the credentials they sign in with.
      * Changes a person&#39;s profile, their roles, or the credentials they sign in with. Send a password to reset it; leave it out and their current one keeps working.  Who they are does not change: their organization, username and the identifier their existing sessions are keyed on all survive the write, so an update never signs anyone out.
@@ -10623,6 +10999,80 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
+     * POST /v1/iam/organizations/profile
+     * Changes how an organization reads: its display name, its website and its favicon.
+     * Changes how an organization reads: its display name, its website and its favicon.  IT EXISTS FOR THE REASON SetAvatar DOES, and the reason is worth stating because the obvious alternative is a trap. Update REPLACES the whole record, so a caller that wants to change one field has to send every other field back — and a record read back first arrives MASKED, so the read half of that read-modify-write hands you \&quot;***\&quot; for the master password and the salt, and the write half stores it. Renaming an organization through Update therefore costs it its credential settings; sending only the new name costs it everything else. Neither is a rename.  So this writes the fields it names and touches nothing else. A nil pointer is not sent and not changed; an empty string is sent and clears the field.
+     * @param iamSetProfileInput 
+     * @return IamOrganization
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun setOrganizationProfile(iamSetProfileInput: IamSetProfileInput) : IamOrganization {
+        val localVarResponse = setOrganizationProfileWithHttpInfo(iamSetProfileInput = iamSetProfileInput)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamOrganization
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/iam/organizations/profile
+     * Changes how an organization reads: its display name, its website and its favicon.
+     * Changes how an organization reads: its display name, its website and its favicon.  IT EXISTS FOR THE REASON SetAvatar DOES, and the reason is worth stating because the obvious alternative is a trap. Update REPLACES the whole record, so a caller that wants to change one field has to send every other field back — and a record read back first arrives MASKED, so the read half of that read-modify-write hands you \&quot;***\&quot; for the master password and the salt, and the write half stores it. Renaming an organization through Update therefore costs it its credential settings; sending only the new name costs it everything else. Neither is a rename.  So this writes the fields it names and touches nothing else. A nil pointer is not sent and not changed; an empty string is sent and clears the field.
+     * @param iamSetProfileInput 
+     * @return ApiResponse<IamOrganization?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun setOrganizationProfileWithHttpInfo(iamSetProfileInput: IamSetProfileInput) : ApiResponse<IamOrganization?> {
+        val localVariableConfig = setOrganizationProfileRequestConfig(iamSetProfileInput = iamSetProfileInput)
+
+        return request<IamSetProfileInput, IamOrganization>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation setOrganizationProfile
+     *
+     * @param iamSetProfileInput 
+     * @return RequestConfig
+     */
+    fun setOrganizationProfileRequestConfig(iamSetProfileInput: IamSetProfileInput) : RequestConfig<IamSetProfileInput> {
+        val localVariableBody = iamSetProfileInput
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/iam/organizations/profile",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * PUT /v1/iam/organizations/{owner}/{name}
      * Changes an organization&#39;s display, its defaults and the sign-in rules everyone in it inherits.
      * Changes an organization&#39;s display, its defaults and the sign-in rules everyone in it inherits. Which organization it is does not change, and neither does when it was created.
@@ -10784,8 +11234,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PUT /v1/iam/sessions/{owner}/{name}/{application}
-     * Replaces the set of browsers a session covers — signing out the ones you leave off while the session itself stays live.
-     * Replaces the set of browsers a session covers — signing out the ones you leave off while the session itself stays live. A session that does not exist is reported as missing rather than created.
+     * Names the browsers a session keeps — signing out the ones you leave off while the session itself stays live.
+     * Names the browsers a session keeps — signing out the ones you leave off while the session itself stays live. A session that does not exist is reported as missing rather than created.
      * @param owner 
      * @param name 
      * @param application 
@@ -10819,8 +11269,8 @@ class IamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PUT /v1/iam/sessions/{owner}/{name}/{application}
-     * Replaces the set of browsers a session covers — signing out the ones you leave off while the session itself stays live.
-     * Replaces the set of browsers a session covers — signing out the ones you leave off while the session itself stays live. A session that does not exist is reported as missing rather than created.
+     * Names the browsers a session keeps — signing out the ones you leave off while the session itself stays live.
+     * Names the browsers a session keeps — signing out the ones you leave off while the session itself stays live. A session that does not exist is reported as missing rather than created.
      * @param owner 
      * @param name 
      * @param application 

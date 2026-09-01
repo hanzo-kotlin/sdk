@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param doctypes DocTypes restricts retrieval to a subset of the indexed knowledge doctypes (kb-page, kb-memory, kb-source). An empty or foreign list reads all of them.
+ * @param doctypes DocTypes restricts retrieval to a subset of the indexed knowledge doctypes (kb.page, kb.memory, kb.source). An empty or foreign list reads all of them.
  * @param limit Limit bounds the hits returned. Default 10, maximum 50.
  * @param project Project narrows retrieval to one project scope.
  * @param query Query is the natural-language question. Required.
@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
 
 data class SearchIn (
 
-    /* DocTypes restricts retrieval to a subset of the indexed knowledge doctypes (kb-page, kb-memory, kb-source). An empty or foreign list reads all of them. */
+    /* DocTypes restricts retrieval to a subset of the indexed knowledge doctypes (kb.page, kb.memory, kb.source). An empty or foreign list reads all of them. */
     @SerializedName("doctypes")
     val doctypes: kotlin.collections.List<kotlin.String>? = null,
 

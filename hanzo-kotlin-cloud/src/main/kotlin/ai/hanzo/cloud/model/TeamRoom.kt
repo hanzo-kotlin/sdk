@@ -24,13 +24,13 @@ import com.google.gson.annotations.SerializedName
  * @param archived Archived reports that the room has been closed. It is the platform's own Space attribute — the same one the Team client writes — and NOT a field of the work facet, so there is exactly one answer to \"is this room open\".
  * @param bindings Bindings are what this room is ABOUT, each a \"<kind>:<ref>\" string — \"project:acme/web\", \"repo:hanzoai/cloud\", \"issue:1010\". One list rather than one field per kind, because the next thing a room can be about should not be a schema change; and a bound value is opaque here on purpose, since the app that owns a project is the app that can resolve one. HIP-0523 §2: a binding is a REFERENCE, never a copy — a room holding an issue's title or status would be the parallel work-item store HIP-1160 §1 forbids.
  * @param direct Direct reports that this is a room between people rather than a named room. It is derived from the document's class, so it cannot disagree with what the client will render.
- * @param id ID is the room document's own id, and the value the bind op addresses. It is unique within a workspace, not across the org.
+ * @param id ID is the room document's own id, and the value the bind op addresses. It is unique within a space, not across the org.
  * @param life Life is the room's lifecycle INTENT — \"standing\" or \"bound\" (HIP-0523 §2). Absent on the document it reads \"standing\": a room nobody classified is one that persists.
- * @param members Members are the account uuids in the room, agents included: an agent projects as a workspace member under a uuid derived from its id, so a caller comparing this against GET /v1/team/bots learns which rooms an agent is in.
+ * @param members Members are the account uuids in the room, agents included: an agent projects as a space member under a uuid derived from its id, so a caller comparing this against GET /v1/team/bots learns which rooms an agent is in.
  * @param name Name is what a person sees in a sidebar. A direct message carries none, so this is empty for one — the members are its name.
  * @param `private` Private reports that the room is restricted to its members.
+ * @param space Space is the space uuid holding this room. It is part of the room's address: two spaces of one org may each hold a room with the same name, and only the pair identifies one.
  * @param topic Topic is the room's own one-line subject, as the Team client sets it.
- * @param workspace Workspace is the workspace uuid holding this room. It is part of the room's address: two workspaces of one org may each hold a room with the same name, and only the pair identifies one.
  */
 
 
@@ -48,7 +48,7 @@ data class TeamRoom (
     @SerializedName("direct")
     val direct: kotlin.Boolean? = null,
 
-    /* ID is the room document's own id, and the value the bind op addresses. It is unique within a workspace, not across the org. */
+    /* ID is the room document's own id, and the value the bind op addresses. It is unique within a space, not across the org. */
     @SerializedName("id")
     val id: kotlin.String? = null,
 
@@ -56,7 +56,7 @@ data class TeamRoom (
     @SerializedName("life")
     val life: kotlin.String? = null,
 
-    /* Members are the account uuids in the room, agents included: an agent projects as a workspace member under a uuid derived from its id, so a caller comparing this against GET /v1/team/bots learns which rooms an agent is in. */
+    /* Members are the account uuids in the room, agents included: an agent projects as a space member under a uuid derived from its id, so a caller comparing this against GET /v1/team/bots learns which rooms an agent is in. */
     @SerializedName("members")
     val members: kotlin.collections.List<kotlin.String>? = null,
 
@@ -68,13 +68,13 @@ data class TeamRoom (
     @SerializedName("private")
     val `private`: kotlin.Boolean? = null,
 
+    /* Space is the space uuid holding this room. It is part of the room's address: two spaces of one org may each hold a room with the same name, and only the pair identifies one. */
+    @SerializedName("space")
+    val space: kotlin.String? = null,
+
     /* Topic is the room's own one-line subject, as the Team client sets it. */
     @SerializedName("topic")
-    val topic: kotlin.String? = null,
-
-    /* Workspace is the workspace uuid holding this room. It is part of the room's address: two workspaces of one org may each hold a room with the same name, and only the pair identifies one. */
-    @SerializedName("workspace")
-    val workspace: kotlin.String? = null
+    val topic: kotlin.String? = null
 
 ) {
 

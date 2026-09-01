@@ -25,11 +25,11 @@ import com.google.gson.annotations.SerializedName
  * @param description 
  * @param displayName 
  * @param domains 
- * @param groups 
  * @param isEnabled 
  * @param name 
  * @param owner 
  * @param roles 
+ * @param teams 
  * @param users 
  */
 
@@ -48,9 +48,6 @@ data class IamrolesInput (
     @SerializedName("domains")
     val domains: kotlin.collections.List<kotlin.String>? = null,
 
-    @SerializedName("groups")
-    val groups: kotlin.collections.List<kotlin.String>? = null,
-
     @SerializedName("isEnabled")
     val isEnabled: kotlin.Boolean? = null,
 
@@ -62,6 +59,9 @@ data class IamrolesInput (
 
     @SerializedName("roles")
     val roles: kotlin.collections.List<kotlin.String>? = null,
+
+    @SerializedName("teams")
+    val teams: kotlin.collections.List<kotlin.String>? = null,
 
     @SerializedName("users")
     val users: kotlin.collections.List<kotlin.String>? = null
